@@ -1,0 +1,14 @@
+citHeader("To cite the package 'ArchaeoPhases' in publications use:")
+
+	 citation(auto = meta)
+
+	 bibentry(bibtype = "Article",
+			    title = "Analysis of Archaeological Phases using the CRAN Package 'ArchaeoPhases'",
+				   author = "Anne Philippe, Marie-Anne Vibet",
+				year = "2017",
+				journal = "HAL")
+
+
+
+
+
