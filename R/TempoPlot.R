@@ -60,6 +60,7 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
         data <- data - data[,elapsed.origin.position]
       }
     }
+    
     groupOfDates = matrix(ncol = L, nrow = nrow(data))
     for (i in 1:L) {
       groupOfDates[, i] = data[, position[i]]
@@ -67,27 +68,29 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
     min = min(apply(groupOfDates, 2, min))
     max = max(apply(groupOfDates, 2, max))
 
-    t = seq(min, max, length.out = 50 * ncol(groupOfDates))
+    sequence = seq(min, max, length.out = 50 * ncol(groupOfDates))
     f = function(x) {
       g = ecdf(x)
-      y = g(t)
+      y = g(sequence)
       if (count)
         y = y * ncol(groupOfDates)
       y
     }
     F = t(apply(groupOfDates, 1, f))
+    # mean estimate
     moy = apply(F, 2, mean)
+    # standard deviation
     ec = apply(F, 2, sd)
-    qu = cbind(apply(F, 2, quantile, probs = (1 - level)/2, type = 8),
-               apply(F, 2, quantile, probs = 1 - ((1 - level)/2), type = 8))
-    quG = cbind(moy + qnorm(1 - (1 - level)/2) * ec, moy - qnorm(1 -
-                                                                   (1 - level)/2) * ec)
+    # Credible intervals
+    qu = t(apply(F, 2, CredibleInterval)[-1,]) 
+    # Gaussian credible intervals
+    quG = cbind(moy + qnorm(1 - (1 - level)/2) * ec, moy - qnorm(1 -(1 - level)/2) * ec)
  
     if (x.scale == "BP") {
-      result = list(t = 1950 - t, moy = (moy), qu = qu, quG = quG)
+      result = list(t = 1950 - sequence, moy = (moy), qu = qu, quG = quG)
     }
     else {
-      result = list(t = t, moy = moy, qu = qu, quG = quG)
+      result = list(t = sequence, moy = moy, qu = qu, quG = quG)
     }
   }
   else
