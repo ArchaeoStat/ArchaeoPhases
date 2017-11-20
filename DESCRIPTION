@@ -2,8 +2,8 @@ Package: ArchaeoPhases
 Type: Package
 Title: Post-Processing of the Markov Chain Simulated by 'ChronoModel',
         'Oxcal' or 'BCal'
-Version: 1.3
-Date: 2017-09-28
+Version: 1.4
+Date: 2017-11-21
 Author: Anne Philippe [aut, cre],
     Marie-Anne Vibet [aut],
     Thomas S. Dye [ctb]
