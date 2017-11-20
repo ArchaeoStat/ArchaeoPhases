@@ -17,7 +17,8 @@
 #' @return a plot of all densities + CI + mean + HDR
 #' @export
 
-MultiPhasePlot <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95, title = "Characterisation of several groups",
+MultiPhasePlot <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95, 
+                           title = "Characterisation of several groups",
                            colors = NULL, exportFile = NULL, exportFormat = "PNG"){
   
   if (length(position_minimum)!= length(position_maximum)) {

@@ -6,15 +6,14 @@
 #'
 #' Plots the density of a_chain + statistics (mean, CI, HPDR)
 #'
-#' @param data dataframe containing the output of the MCMC algorithm
-#' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
+#' @param a_chain numeric vector containing the output of the MCMC algorithm for the parameter a
 #' @param level probability corresponding to the level of confidence
 #' @param GridLength length of the grid used to estimate the density
 #' @param title title of the graph
 #' @param subtitle subtitle of the graph
 #' @param caption caption of the graph
-#' @param labelXaxis label of the x-axis
-#' @param labelYaxis label of the y-axis
+#' @param x.label label of the x-axis
+#' @param y.label label of the y-axis
 #' @param width width size in units
 #' @param height height size in units
 #' @param units a string recognized by the ggsave function, one of "in", "cm", "mm"
@@ -28,15 +27,11 @@
 #' @return a plot
 #' @export
 #' 
-MarginalPlot <- function(a_chain, level=0.95, title="Characteristics of a date", subtitle = NULL,
-                          GridLength=1024,
-                          caption = "ArchaeoPhases",
-                          x.label = "Calendar year",y.label = NULL,
-                          x.scale = "calendar", elapsed.origin.position = NULL,
-                          x.min = NULL, x.max = NULL, 
-                          y.grid = TRUE,
-                          height = 7, width = 7, units = "in",
-                          file = NULL, newWindow=TRUE){
+MarginalPlot <- function(a_chain, level=0.95, GridLength=1024, 
+                  title="Characteristics of a date", subtitle = NULL,caption = "ArchaeoPhases",
+                  x.label = "Calendar year",y.label = NULL,y.grid = TRUE,
+                  x.scale = "calendar", elapsed.origin.position = NULL,x.min = NULL, x.max = NULL, 
+                  height = 7, width = 7, units = "in",file = NULL, newWindow=TRUE){
   
   # x.scale can either be "calendar", "BP" or "elapsed" if any other origin that 0 and 1950
   if (x.scale == "BP") {

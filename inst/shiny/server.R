@@ -35,9 +35,9 @@ shinyServer(function(input, output, clientData, session) {
     input$file11
   })
   
-  output$table11 <- renderDataTable({
+  output$table11 <- DT::renderDataTable({
     if(is.null(dataInput())){return()}
-    datatable(dataInput(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+    DT::datatable(dataInput(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
   
   output$AfficheTableLue11 <- renderUI({
@@ -90,9 +90,9 @@ shinyServer(function(input, output, clientData, session) {
     input$file12
   })
   
-  output$table12 <- renderDataTable({
+  output$table12 <- DT::renderDataTable({
     if(is.null(dataInput12())){return()}
-    datatable(dataInput12(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+    DT::datatable(dataInput12(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
   
   output$AfficheTableLue12 <- renderUI({
@@ -134,9 +134,9 @@ shinyServer(function(input, output, clientData, session) {
   })
   
   # affichage table de donnees
-  output$DatasetG <- renderDataTable({
+  output$DatasetG <- DT::renderDataTable({
     if(is.null(selectDataG())){return( )}
-    datatable(selectDataG(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+    DT::datatable(selectDataG(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
   
   ## CreateMinMaxGroup
@@ -162,9 +162,9 @@ shinyServer(function(input, output, clientData, session) {
     valuesG$dataGroup <- NULL
   })
   
-  output$tableGroup <- renderDataTable({
+  output$tableGroup <- DT::renderDataTable({
     if(is.null(valuesG$dataGroup)){return()}
-    datatable(valuesG$dataGroup, options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+    DT::datatable(valuesG$dataGroup, options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
 
   output$result13 <- renderUI({
@@ -283,7 +283,7 @@ shinyServer(function(input, output, clientData, session) {
     })
   
   output$MarginalPlot <- renderPlot({
-    MarginalPlot(selectChain(), level = input$level, title = input$titlePlot, colors=input$color )
+    MarginalPlot(selectChain(), level = input$level, title = input$titlePlot, newWindow=FALSE)
   })
   
 
@@ -352,9 +352,9 @@ shinyServer(function(input, output, clientData, session) {
   })
   
   # affichage table de donnees  
-  output$DatasetCI <- renderDataTable({
+  output$DatasetCI <- DT::renderDataTable({
     if(is.null(selectData())){return( )}
-    datatable(selectData(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+    DT::datatable(selectData(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
   
   # calcul des IC
@@ -538,10 +538,10 @@ shinyServer(function(input, output, clientData, session) {
     dataInput()[,c(input$variableTest1a, input$variableTest1b), drop = FALSE]
   })
   
-  output$DataSelectedTests <- renderDataTable({
+  output$DataSelectedTests <- DT::renderDataTable({
     if(is.null(selectChainTests())) { return( h5("")) }
     else
-      datatable(selectChainTests(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+      DT::datatable(selectChainTests(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
   
   MarginalProbaText <- renderText({
@@ -607,10 +607,10 @@ shinyServer(function(input, output, clientData, session) {
     if( sum(ifelse(dataGroup2()[,1] < dataGroup2()[,2], 1, 0)) == length(dataGroup2()[,1])) {return(1)}
   })
 
-  output$selectedTable2 <- renderDataTable({
+  output$selectedTable2 <- DT::renderDataTable({
     if(is.null(selectChain2())) { return( h5("")) }
     else
-    datatable(selectChain2(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+      DT::datatable(selectChain2(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
 
   PhaseStatisticsText <- reactive({
@@ -721,9 +721,9 @@ shinyServer(function(input, output, clientData, session) {
   })
   
   # affichage table de donnees  
-  output$DatasetPhases32 <- renderDataTable({
+  output$DatasetPhases32 <- DT::renderDataTable({
     if(is.null(selectData32())){return()}
-    datatable(selectData32(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+    DT::datatable(selectData32(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
   
   Position_beginning32 <- reactive({
@@ -811,9 +811,9 @@ shinyServer(function(input, output, clientData, session) {
   })
   
   # affichage table de donnees  
-  output$DatasetPhases <- renderDataTable({
+  output$DatasetPhases <- DT::renderDataTable({
     if(is.null(selectData4())){return()}
-    datatable(selectData4(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
+    DT::datatable(selectData4(), options = list(pageLength = 5, dom = 'tip'), rownames=FALSE)
   })
 
   
