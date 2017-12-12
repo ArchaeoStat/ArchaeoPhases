@@ -46,6 +46,7 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
   # Mean 
   Mean = mean(a_chain)
   # new dataframe
+  data = data.frame("a_chain" = as.vector(a_chain))
   dataCR = data.frame("Inf" = CR[2], "Sup" = CR[3], "y"=0,"yend"=0, "Mean"=Mean)
   
   h <- ggplot2::ggplot(data = data, ggplot2::aes(x=a_chain))

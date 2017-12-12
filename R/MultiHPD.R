@@ -11,10 +11,11 @@
 #' @param data dataframe containing the output of the MCMC algorithm 
 #' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
 #' @param level probability corresponding to the level of confidence used for the HPD region
+#' @param roundingOfValue interger indicating the number of decimal places to be used
 #' @return The endpoints of the HPD region
 #' @export
 #'
-MultiHPD <- function(data, position, level=0.95){
+MultiHPD <- function(data, position, level=0.95, roundingOfValue = roundingOfValue){
   # An HPD region may be a union of several intervals
   
   # matrix of results for the first date
@@ -30,7 +31,7 @@ MultiHPD <- function(data, position, level=0.95){
     for (i in 2:length(position)) {
       
       hdr = hdr(data[,position[i]], prob = c(level * 100))$hdr
-      HPDR = round(hdr, digits = 0) 
+      HPDR = round(hdr, digits = roundingOfValue) 
       res = c(level, HPDR)
       
       # comparison of the size of the current result, res, and the nomber of columns of the matrix, result

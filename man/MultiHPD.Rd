@@ -4,12 +4,14 @@
 \alias{MultiHPD}
 \title{Bayesian highest posterior density regions for a series of MCMC chains}
 \usage{
-MultiHPD(data, position, level=0.95)
+MultiHPD(data, position, level=0.95, roundingOfValue=0)
 }
 \arguments{
   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
   \item{position}{numeric vector containing the position of the column corresponding to the MCMC chains of interest}
   \item{level}{probability corresponding to the level of confidence}
+   \item{roundingOfValue}{interger indicating the number of decimal places to be used}
+
 }
 \value{
 Returns a matrix of values containing the level of confidence and the endpoints of each interval for each variable of the MCMC chain. 

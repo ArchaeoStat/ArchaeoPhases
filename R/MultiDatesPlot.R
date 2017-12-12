@@ -9,6 +9,7 @@
 #' @param data dataframe containing the output of the MCMC algorithm
 #' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
 #' @param level probability corresponding to the level of confidence
+#' @param roundingOfValue interger indicating the number of decimal places to be used
 #' @param intervals one of "CI" for credible intervals, or "HPD" for highest posterior density intervals
 #' @param order the order of the dates. If "default" then the order of the csv file is followed, if "increasing" dates are ordered by the HPDInf of the first region or the CIInf. 
 #' @param title title of the graph
@@ -33,7 +34,8 @@
 #' @return a plot of the endpoints of the credible intervals of a series of dates
 #' @export
 
-MultiDatesPlot <- function (data, position, level = 0.95, intervals = "CI", order ="default", 
+MultiDatesPlot <- function (data, position, level = 0.95, roundingOfValue = 0,
+                            intervals = "CI", order ="default", 
                             title = "Plot of intervals",
                             subtitle = NULL,
                             caption = "ArchaeoPhases",
@@ -56,13 +58,13 @@ MultiDatesPlot <- function (data, position, level = 0.95, intervals = "CI", orde
     }
   }
   if (intervals == "CI") {
-    Bornes = MultiCredibleInterval(data, position, level = level)
+    Bornes = MultiCredibleInterval(data, position, level = level, roundingOfValue = roundingOfValue)
     Ordered = Bornes
     Ordered.df <- as.data.frame(Ordered)
     Ordered.df$y.labs <- factor(rownames(Ordered), levels = rownames(Ordered))
   }
   else if (intervals == "HPD") {
-    Bornes = MultiHPD(data, position, level = level)
+    Bornes = MultiHPD(data, position, level = level, roundingOfValue = roundingOfValue)
 
     Ordered.df <- as.data.frame(Bornes)
     Ordered.df$y.labs <- factor(rownames(Bornes), levels = rownames(Bornes))

@@ -2,7 +2,8 @@
 \alias{MultiDatesPlot}
 \title{ Plot of the endpoints of credible intervals or HPD intervals of a series of dates}
 \usage{
-MultiDatesPlot(data, position, level = 0.95, intervals = "CI", order ="default", 
+MultiDatesPlot(data, position, level = 0.95, roundingOfValue=0, 
+                            intervals = "CI", order ="default", 
                             title = "Plot of intervals",
                             subtitle = NULL,
                             caption = "ArchaeoPhases",
@@ -20,6 +21,7 @@ MultiDatesPlot(data, position, level = 0.95, intervals = "CI", order ="default",
   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
   \item{position}{numeric vector containing the position of the column corresponding to the MCMC chains of interest}
   \item{level}{probability corresponding to the level of confidence used to estimate the credible interval}
+  \item{roundingOfValue}{interger indicating the number of decimal places to be used}
   \item{intervals}{"CI" corresponds to the credible intervals, "HPD" to the highest density regions}
   \item{order}{"default" the y axis follows the order of the csv file. "increasing" the y axis is ordered according to the values of the interval (CI or the first HPD interval)}
   \item{title}{title of the graph}

@@ -1,14 +1,16 @@
 NEWS 
 
 ==============
-ArchaeoPhases 1.4 (Release date: 2017-11-)
+ArchaeoPhases 1.4 (Release date: 2017-12-12)
 ==============
 
 * Includes an update of the TempoPlot -> Optimisation of the credible intervals as already done in OccurrencePlot
 
 * Includes a minor update of the vignettes 
 
-* Includes an update of the function MarginalPlot and adds a new function :MultiMarginalPlot()
+* Includes an update of the function MarginalPlot and adds a new function : MultiMarginalPlot()
+
+* Includes an update of the function MarginalStatistics and adds a new function : MultiMarginalMarginalStatistics()
 
 * Includes an update of the shiny web application (called by function app_ArchaeoPhases()) that did not work in the previous version
 

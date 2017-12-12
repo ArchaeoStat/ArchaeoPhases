@@ -11,10 +11,11 @@
 #' The 100*level % credible interval is the shortest of all those intervals.
 #' @param a_chain numeric vector containing the output of the MCMC algorithm for the parameter a
 #' @param level probability corresponding to the level of confidence used for the credible interval and the highest density region
+#' @param roundingOfValue interger indicating the number of decimal places to be used
 #' @return The endpoints of the shortest credible interval
 #' @export
 #'
-CredibleInterval <- function(a_chain, level=0.95){
+CredibleInterval <- function(a_chain, level=0.95, roundingOfValue=0){
   
   sorted_sample <- sort(a_chain)     # ordering the sample
   N = length(a_chain)                # calculation of the sample size
@@ -25,6 +26,6 @@ CredibleInterval <- function(a_chain, level=0.95){
   l = I[,2]-I[,1]   # length of intervals
   i <- which.min(l) # look for the shortest interval
   
-  round(c(level = level, CredibleIntervalInf=I[i,1],CredibleIntervalSup=I[i,2]), 2) # returns the level and the endpoints rounded
+  return( c( "level" = level, "CredibleIntervalInf"= round( CredibleIntervalInf=I[i,1], digits = roundingOfValue), "CredibleIntervalSup"=round(CredibleIntervalSup=I[i,2], digits = roundingOfValue )) ) # returns the level and the endpoints rounded
   
 }

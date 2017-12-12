@@ -78,7 +78,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
   groupOfEvents <- sort.rows(groupOfDates)
   
   if (intervals == "CI") {
-    Bornes = MultiCredibleInterval(groupOfEvents, 1:ncol(groupOfEvents), level = level)
+    Bornes = MultiCredibleInterval(groupOfEvents, 1:ncol(groupOfEvents), level = level, roundingOfValue = 0)
     Ordered.df <- as.data.frame(Bornes)
     Ordered.df$y.labs <- paste(sapply(as.integer(rownames(Bornes)), toOrdinal, language = language), occurrence, sep= " ")
     

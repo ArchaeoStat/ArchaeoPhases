@@ -4,12 +4,13 @@
 \alias{MarginalStatistics}
 \title{Marginal summary statistics}
 \usage{
-MarginalStatistics(a_chain, level = 0.95)
+MarginalStatistics(a_chain, level = 0.95, roundingOfValue=0)
 }
 \arguments{
 \item{a_chain}{numeric vector containing the output of the MCMC algorithm for a one-parameter. The MCMC samples should be in calendar year (BC/AD). }
 
 \item{level}{probability corresponding to the level of confidence used for the credible interval and the highest density region}
+\item{roundingOfValue}{interger indicating the number of decimal places to be used}
 }
 \value{
 A matrix of values corresponding to the following summary statistics

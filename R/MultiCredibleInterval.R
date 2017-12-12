@@ -13,15 +13,16 @@
 #' @param data dataframe containing the output of the MCMC algorithm 
 #' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
 #' @param level probability corresponding to the level of confidence used for the credible interval
+#' @param roundingOfValue interger indicating the number of decimal places to be used
 #' @return The endpoints of the shortest credible interval
 #' @export
 #'
-MultiCredibleInterval <- function(data, position, level=0.95){
+MultiCredibleInterval <- function(data, position, level=0.95, roundingOfValue=0){
   
   # number of chains
   L = length(position)
   
-  # matrix of results for each pair of phases
+  # matrix of results for each chain
   result = matrix(nrow=L, ncol=3)
   
   colnames(result) <- c("Level","CredibleIntervalInf", "CredibleIntervalSup")
@@ -40,7 +41,7 @@ MultiCredibleInterval <- function(data, position, level=0.95){
     l = I[,2]-I[,1]   # length of intervals
     j <- which.min(l) # look for the shortest interval
     
-    result[i,] =   c(level, round(I[j,1], digits = 0) , round(I[j,2],digits = 0) )   # returns the level and the endpoints
+    result[i,] =   c(level, round(I[j,1], digits = roundingOfValue), round(I[j,2],digits = roundingOfValue) )   # returns the level and the endpoints
     
   }
   return(result)

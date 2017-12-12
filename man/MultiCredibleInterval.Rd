@@ -4,12 +4,13 @@
 \alias{MultiCredibleInterval}
 \title{Bayesian credible intervals for a series of dates}
 \usage{
-MultiCredibleInterval(data, position, level = 0.95)
+MultiCredibleInterval(data, position, level = 0.95, roundingOfValue=0)
 }
 \arguments{
   \item{data}{dataframe containing the output of the MCMC algorithm. The MCMC samples should be in calendar year (BC/AD). }
   \item{position}{numeric vector containing the position of the column corresponding to the MCMC chains of interest}
   \item{level}{probability corresponding to the level of confidence used to estimate the credible interval}
+  \item{roundingOfValue}{interger indicating the number of decimal places to be used}
 }
 \value{
 Returns a matrix of values containing the level of confidence and the endpoints of the shortest credible interval for each variable of the MCMC chain. The name of the resulting rows are the positions of the corresponding columns in the CSV file. The result is given in calendar year (in format BC/AD).
