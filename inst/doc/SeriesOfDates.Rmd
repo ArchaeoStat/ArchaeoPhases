@@ -11,7 +11,7 @@ output:
       smooth_scroll: false
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{ArchaeoPhases}
+  %\VignetteIndexEntry{2.ArchaeoPhases : Analysis of a series of dates}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

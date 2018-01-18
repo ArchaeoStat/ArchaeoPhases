@@ -86,7 +86,8 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
     t = seq(min, max, length.out = 50 * ncol(groupOfDates))
     f = function(x) {
       g = ecdf(x)
-      y = g(t)* ncol(groupOfDates)
+      y = g(t)
+      #y = g(t)* ncol(groupOfDates)
     }
     F = t(apply(groupOfDates, 1, f))
     moy = apply(F, 2, mean)

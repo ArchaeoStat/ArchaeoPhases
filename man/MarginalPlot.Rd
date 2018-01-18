@@ -2,10 +2,11 @@
 \alias{MarginalPlot}
 \title{Plot of a marginal posterior density}
 \usage{
-MarginalPlot(a_chain, level = 0.95, GridLength = 1024, title = "Characteristics of a date", subtitle = NULL,
-                caption = "ArchaeoPhases", x.label = "Calendar year", y.label = NULL, y.grid = TRUE,
-                x.scale = "calendar", elapsed.origin.position = NULL, x.min = NULL, x.max = NULL, 
-                height = 7, width = 7, units = "in", file = NULL, newWindow=TRUE)
+MarginalPlot(a_chain, level = 0.95, GridLength = 1024, 
+    title = "Characteristics of a date", subtitle = NULL,
+    caption = "ArchaeoPhases", x.label = "Calendar year", y.label = NULL, 
+    y.grid = TRUE,x.scale = "calendar", elapsed.origin.position = NULL, x.min = NULL, 
+    x.max = NULL, height = 7, width = 7, units = "in", file = NULL, newWindow=TRUE)
 }
 \arguments{
   \item{a_chain}{numeric vector containing the output of the MCMC algorithm for a one-parameter. The MCMC samples should be in calendar year (BC/AD).}
@@ -42,12 +43,8 @@ The density is estimated using density() function with n=GridLength.
   Marie-Anne Vibet <Marie-Anne.Vibet@univ-nantes.fr>
 }
 \examples{
-  data(Events); attach(Events)
-
-  MarginalPlot(a_chain = Event.1, level = 0.95)
-  MarginalPlot(Event.1, level = 0.50, y.grid = FALSE)
-
-  MarginalPlot(Event.2, level = 0.95, title="Characteristics of Event 2")
+  data(Events); 
+  MarginalPlot(a_chain = Events$Event.1, level = 0.95)
 }
 \keyword{ marginal posterior density }
 \keyword{ credible interval }

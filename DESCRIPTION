@@ -3,7 +3,7 @@ Type: Package
 Title: Post-Processing of the Markov Chain Simulated by 'ChronoModel',
         'Oxcal' or 'BCal'
 Version: 1.4
-Date: 2017-11-21
+Date: 2018-01-20
 Author: Anne Philippe [aut, cre],
     Marie-Anne Vibet [aut],
     Thomas S. Dye [ctb]
@@ -23,4 +23,4 @@ VignetteBuilder: knitr
 BugReports: https://github.com/marieannevibet/ArchaeoPhases/issues
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2017-09-28 14:27:04 UTC; vibet
+Packaged: 2018-01-18 10:58:11 UTC; vibet

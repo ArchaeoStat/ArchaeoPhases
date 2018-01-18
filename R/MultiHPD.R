@@ -15,7 +15,7 @@
 #' @return The endpoints of the HPD region
 #' @export
 #'
-MultiHPD <- function(data, position, level=0.95, roundingOfValue = roundingOfValue){
+MultiHPD <- function(data, position, level=0.95, roundingOfValue = 0){
   # An HPD region may be a union of several intervals
   
   # matrix of results for the first date

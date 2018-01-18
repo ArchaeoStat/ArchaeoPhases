@@ -41,7 +41,7 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
     a_chain <- elapsed.origin.position-a_chain
   }
   # credible interval
-  CR <- CredibleInterval(a_chain, level=level)
+  CR <- CredibleInterval(a_chain, level=level, roundingOfValue=4)
   CR <- c(CR,"y"=0,"yend"=0)
   # Mean 
   Mean = mean(a_chain)

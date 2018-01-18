@@ -32,7 +32,7 @@ MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
                               x.scale = rep("calendar", length(position)), elapsed.origin = NULL,
                               title="Characteristics of several dates", subtitle = NULL,caption = "ArchaeoPhases",
                               x.label = "Calendar year",y.label = NULL,y.grid = TRUE,x.min = NULL, x.max = NULL, 
-                              height = 7, width = 7, units = "in",file = NULL, newWindow=TRUE){
+                              legend.title = "Legend", height = 7, width = 7, units = "in",file = NULL, newWindow=TRUE){
   
   if ((length(position) <2)==TRUE) stop("Vector of position should be of length 2 at least")
 
@@ -51,7 +51,7 @@ MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
   colnames(Newdata) <- names
   Newdata <- cbind(Newdata, iter=1:dim(Newdata)[1])
   Newdata = as.data.frame(Newdata)
-  Newdata_long <- melt(Newdata, id="iter") 
+  Newdata_long <- reshape2::melt(Newdata, id="iter") 
 
   ###   Defining the abscisse axis    ####
   L = length(position)
@@ -76,19 +76,13 @@ MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
     }
   }
 
-  h <- ggplot2::ggplot(data = Newdata_long, ggplot2::aes(x=value, colour = variable))
+  h <- ggplot2::ggplot(data = Newdata_long, ggplot2::aes(x=Newdata_long$value, colour = Newdata_long$variable))
   h <- h + ggplot2::geom_density(n = GridLength, data = Newdata_long)
   h <- h + ggplot2::labs(x = x.label, y = y.label, title = title, subtitle = subtitle, caption = caption)
+  h <- h + ggplot2::guides(colour = ggplot2::guide_legend(title = legend.title))
   
   if (y.grid==FALSE) {
     h <- h + ggplot2::theme(panel.grid.major.y=ggplot2::element_blank())
-  }
-  # x abscisses
-  if (is.null(x.min) ) {
-    x.min <- min(density(a_chain, n=GridLength)$x)
-  }
-  if (is.null(x.max)) {
-    x.max <- max(density(a_chain, n=GridLength)$x)
   }
   h <- h + ggplot2::xlim(x.min, x.max)
   

@@ -26,6 +26,6 @@ CredibleInterval <- function(a_chain, level=0.95, roundingOfValue=0){
   l = I[,2]-I[,1]   # length of intervals
   i <- which.min(l) # look for the shortest interval
   
-  return( c( "level" = level, "CredibleIntervalInf"= round( CredibleIntervalInf=I[i,1], digits = roundingOfValue), "CredibleIntervalSup"=round(CredibleIntervalSup=I[i,2], digits = roundingOfValue )) ) # returns the level and the endpoints rounded
+  return( c( "level" = level, "CredibleIntervalInf"= round(I[i,1], digits = roundingOfValue), "CredibleIntervalSup"=round(I[i,2], digits = roundingOfValue )) ) # returns the level and the endpoints rounded
   
 }
