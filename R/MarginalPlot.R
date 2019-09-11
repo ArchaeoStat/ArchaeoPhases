@@ -24,15 +24,15 @@
 #' @param y.grid switch for horizontal grid lines
 #' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
 #' @param newWindow whether the plot is drawn within a new window or not
-#' @return a plot
+#' @return NULL, called for its side effects
 #' @export
-#' 
-MarginalPlot <- function(a_chain, level=0.95, GridLength=1024, 
+#'
+MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
                   title="Characteristics of a date", subtitle = NULL,caption = "ArchaeoPhases",
                   x.label = "Calendar year",y.label = NULL,y.grid = TRUE,
-                  x.scale = "calendar", elapsed.origin.position = NULL,x.min = NULL, x.max = NULL, 
+                  x.scale = "calendar", elapsed.origin.position = NULL,x.min = NULL, x.max = NULL,
                   height = 7, width = 7, units = "in",file = NULL, newWindow=TRUE){
-  
+
   # x.scale can either be "calendar", "BP" or "elapsed" if any other origin that 0 and 1950
   if (x.scale == "BP") {
     a_chain <- 1950-a_chain
@@ -43,19 +43,19 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
   # credible interval
   CR <- CredibleInterval(a_chain, level=level, roundingOfValue=4)
   CR <- c(CR,"y"=0,"yend"=0)
-  # Mean 
+  # Mean
   Mean = mean(a_chain)
   # new dataframe
   data = data.frame("a_chain" = as.vector(a_chain))
   dataCR = data.frame("Inf" = CR[2], "Sup" = CR[3], "y"=0,"yend"=0, "Mean"=Mean)
-  
+
   h <- ggplot2::ggplot(data = data, ggplot2::aes(x=a_chain))
   h <- h + ggplot2::geom_density(n = GridLength)
-  h <- h + ggplot2::geom_segment(data = dataCR, ggplot2::aes(x=dataCR[1,1], xend=dataCR[1,2], y = dataCR[1,3], yend = dataCR[1,4], colour="steelblue"), size=3.5, show.legend=F) 
+  h <- h + ggplot2::geom_segment(data = dataCR, ggplot2::aes(x=dataCR[1,1], xend=dataCR[1,2], y = dataCR[1,3], yend = dataCR[1,4], colour="steelblue"), size=3.5, show.legend=F)
   h <- h + ggplot2::geom_point(data = dataCR, ggplot2::aes(x=Mean, y = dataCR[1,3]), size = 2)
   #h <- h + ggplot2::scale_color_manual(values =c('#56B4E9', '#FC4EO7'))
   h <- h + ggplot2::labs(x = x.label, y = y.label, title = title, subtitle = subtitle, caption = caption)
-  
+
   if (y.grid==FALSE) {
     h <- h + ggplot2::theme(panel.grid.major.y=ggplot2::element_blank())
   }
@@ -67,7 +67,7 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
     x.max <- max(density(a_chain, n=GridLength)$x)
   }
   h <- h + ggplot2::xlim(x.min, x.max)
-  
+
   # export file
   if (!is.null(file)) {
     ggplot2::ggsave(filename = file, plot = h, height = height,width = width, units = units)
@@ -76,5 +76,5 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
     dev.new(height = height, width = width)
   }
   print(h)
-  
+
 }

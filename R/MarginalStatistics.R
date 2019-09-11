@@ -8,7 +8,7 @@
 #' @param a_chain numeric vector containing the output of the MCMC algorithm for the parameter a
 #' @param level probability corresponding to the level of confidence used for the credible interval and the highest density region
 #' @param roundingOfValue interger indicating the number of decimal places to be used
-#' @return A list of values corresponding to all the following statistics
+#' @return A named matrix of values corresponding to all the following statistics
 #' @export
 MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){
 

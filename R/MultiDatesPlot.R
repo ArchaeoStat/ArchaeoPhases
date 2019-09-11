@@ -11,7 +11,7 @@
 #' @param level probability corresponding to the level of confidence
 #' @param roundingOfValue interger indicating the number of decimal places to be used
 #' @param intervals one of "CI" for credible intervals, or "HPD" for highest posterior density intervals
-#' @param order the order of the dates. If "default" then the order of the csv file is followed, if "increasing" dates are ordered by the HPDInf of the first region or the CIInf. 
+#' @param order the order of the dates. If "default" then the order of the csv file is followed, if "increasing" dates are ordered by the HPDInf of the first region or the CIInf.
 #' @param title title of the graph
 #' @param subtitle subtitle of the graph
 #' @param caption caption of the graph
@@ -31,11 +31,11 @@
 #' @param file the name of the file to be saved. If NULL then no graph is saved.
 #' @param newWindow whether the plot is drawn within a new window or not
 #' @param print.data.result If TRUE, the list containing the data to plot will be given
-#' @return a plot of the endpoints of the credible intervals of a series of dates
+#' @return NULL, called for its side effects
 #' @export
 
 MultiDatesPlot <- function (data, position, level = 0.95, roundingOfValue = 0,
-                            intervals = "CI", order ="default", 
+                            intervals = "CI", order ="default",
                             title = "Plot of intervals",
                             subtitle = NULL,
                             caption = "ArchaeoPhases",
@@ -68,9 +68,9 @@ MultiDatesPlot <- function (data, position, level = 0.95, roundingOfValue = 0,
 
     Ordered.df <- as.data.frame(Bornes)
     Ordered.df$y.labs <- factor(rownames(Bornes), levels = rownames(Bornes))
-    
+
     # In the case of (multiple) two intervals
-    x = (dim(Bornes)[2] - 1) /2 
+    x = (dim(Bornes)[2] - 1) /2
     if ( x > 1 ){
       data = NULL
       for(j in 1:x){
@@ -82,23 +82,23 @@ MultiDatesPlot <- function (data, position, level = 0.95, roundingOfValue = 0,
       Ordered.df <- as.data.frame(data)
       Ordered.df$y.labs <- factor(rownames(data))
     }
-   
+
   }
-  
+
   if (x.scale == "BP") {
     Ordered.df[,2] <- 1950-Ordered.df[,2]
     Ordered.df[,3] <- 1950-Ordered.df[,3]
   }
-  
+
   if(order == "increasing"){
     h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y = reorder(Ordered.df$y.labs, Ordered.df[,2]), x=Ordered.df[,2], xend=Ordered.df[,3]))
   } else if (order == "default") {
     h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y = Ordered.df$y.labs, x=Ordered.df[,2], xend=Ordered.df[,3]))
   }
-  
+
   h <- h + ggplot2::labs(x = labelXaxis, y = labelYaxis, title = title,subtitle = subtitle, caption = caption)
   h <- h + ggalt::geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide,dot_guide_size = dot.guide.size)
-  
+
   if (!y.grid) {
     h <- h + ggplot2::theme(panel.grid.major.y=ggplot2::element_blank())
   }
@@ -113,10 +113,9 @@ MultiDatesPlot <- function (data, position, level = 0.95, roundingOfValue = 0,
   dev.new(height = height, width = width)
   }
   print(h)
-  
+
   ## If the result is desired
   if (print.data.result == TRUE){
     Bornes
   }
 }
-
