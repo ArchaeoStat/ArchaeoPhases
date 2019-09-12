@@ -4,19 +4,30 @@
 #         Estimation of Credible interval           #
 #####################################################
 
-#' Bayesian credible interval for a series of MCMC chains
+#' Bayesian credible interval for a series of dates
 #'
-#' Estimation of the shorest credible interval of the output of the MCMC algorithm for the parameter a
+#' Estimation of the shortest credible interval for each variable of a simulated Markov chain
 #'
-#' @details A 100*level % credible interval is an interval that keeps N*(1-level) elements of the sample outside the interval
-#' The 100*level % credible interval is the shortest of all those intervals.
-#' @param data dataframe containing the output of the MCMC algorithm
+#' @details A \eqn{(100 * level)}\% credible interval is an interval that keeps \eqn{N * (1 -level)} elements of the sample outside the interval.
+#' The \eqn{(100*level)}\% credible interval is the shortest of the intervals
+#' @param data data frame containing the output of the MCMC algorithm
 #' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
 #' @param level probability corresponding to the level of confidence used for the credible interval
-#' @param roundingOfValue interger indicating the number of decimal places to be used
-#' @return A matrix with the endpoints of the shortest credible intervals
-#' @export
+#' @param roundingOfValue integer indicating the number of decimal places
+#' @return Returns a matrix of values containing the level of confidence and the endpoints of
+#' the shortest credible interval for each variable of the MCMC chain. The name of the
+#' resulting rows are the positions of the corresponding columns in the CSV file. The
+#' result is given in calendar year (in format BC/AD).
 #'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
+#'
+#' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @examples
+#'   data(Events)
+#'   MultiCredibleInterval(Events, c(2,4,3), 0.95)
+#' @keywords credible interval
+#' @export
 MultiCredibleInterval <- function(data, position, level=0.95, roundingOfValue=0){
 
   # number of chains

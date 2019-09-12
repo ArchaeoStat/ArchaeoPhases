@@ -2,9 +2,10 @@
 #          Marginal posterior Density               #
 #       NEW version in ArchaeoPhases 1.4            #
 #####################################################
-#' Marginal posterior Density
+#' Plot a marginal posterior density
 #'
-#' Plots the density of a_chain + statistics (mean, CI, HPDR)
+#' Draws a plot of the estimated marginal posterior density for the one-parameter and adds the mean
+#' and the credible interval at the desired level
 #'
 #' @param a_chain numeric vector containing the output of the MCMC algorithm for the parameter a
 #' @param level probability corresponding to the level of confidence
@@ -20,11 +21,27 @@
 #' @param x.min minimum x axis value
 #' @param x.max maximum x axis value
 #' @param x.scale one of "calendar" for calendar years, "BP" for years before present, or "elapsed" for time elapsed from a specified origin
+#'
 #' @param elapsed.origin.position position of the column to use as the origin for elapsed time calculations
 #' @param y.grid switch for horizontal grid lines
-#' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
+#' @param file the name of the graph (+ extension) that will be saved if chosen, default = \code{NULL}
 #' @param newWindow whether the plot is drawn within a new window or not
-#' @return NULL, called for its side effects
+#'
+#' @return \code{NULL}, called for its side effects
+#'
+#' @details The density is estimated using \code{density()} function with \code{n = GridLength}.
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
+#'
+#' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @examples
+#'   data(Events);
+#'   MarginalPlot(a_chain = Events$Event.1, level = 0.95)
+#'
+#' @keywords mean
+#' @keywords credible interval
+#' @keywords marginal posterior density
 #' @export
 #'
 MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,

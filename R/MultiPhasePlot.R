@@ -4,19 +4,42 @@
 
 #' Several Phases Density Plots
 #'
-#' Plot of the densities of several groups + statistics (mean, CI, HPDR)
+#' Plot of the marginal posterior densities of several groups
 #'
-#' @param data dataframe containing the output of the MCMC algorithm
+#' Draws a plot with the marginal posterior densities of the minimum
+#' and the maximum of the dates included in each group. No temporal
+#' order between phases is required. The result is given in calendar
+#' years (BC/AD).
+#'
+#' @param data data frame containing the output of the MCMC algorithm
 #' @param position_minimum numeric vector containing the column number corresponding to the minimum of the events included in each group
 #' @param position_maximum numeric vector containing the column number corresponding to the end of the groups set in the same order as in position_minimum
 #' @param level probability corresponding to the level of confidence
 #' @param title title of the graph
-#' @param colors vector of colors corresponding to each group of dates
-#' @param exportFile the name of the file to be saved. If NULL then no graph is saved.
-#' @param exportFormat the format of the export file : PNG or SVG.
-#' @return NULL, called for its side effects
+#' @param colors numeric vector of colors for each group of dates
+#' @param exportFile the name of the file to be saved. If \code{NULL} then no graph is saved.
+#' @param exportFormat the format of the export file, one of "PNG" or "SVG."
+#' @return \code{NULL}, called for its side effects
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
+#'
+#' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @keywords phase time range
+#' @keywords marginal posterior density
+#'
+#' @examples
+#'   # Data extracted from ChronoModel software
+#'   data(Phases)
+#'   # List of the name of the groups
+#'   names(Phases)
+#'   # Stipulating position_maximum
+#'   MultiPhasePlot(Phases, c(4,2), c(5,3), title = "Succession of phase 1 and phase 2")
+#'   # In this case, equivalent to
+#'   MultiPhasePlot(Phases, c(4,2), title = "Succession of phase 1 and phase 2", colors = c(3,4))
+#'   # Export
+#'   MultiPhasePlot(Phases, c(4,2), exportFile = "MultiPhasePlot", exportFormat = "PNG")
 #' @export
-
 MultiPhasePlot <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95,
                            title = "Characterisation of several groups",
                            colors = NULL, exportFile = NULL, exportFormat = "PNG"){

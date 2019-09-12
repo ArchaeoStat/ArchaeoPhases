@@ -4,14 +4,19 @@
 #####################################################
 #' Marginal posterior Densities of several dates
 #'
-#' Plots the densities of several chains + statistics (mean, CI, HPDR)
+#' Draws a plot of the estimated marginal posterior density for a parameter
+#' and adds the mean and the credible interval at the desired level
 #'
-#' @param data dataframe containing the output of the MCMC algorithm
+#' @param data data frame containing the output of the MCMC algorithm
 #' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
 #' @param level probability corresponding to the level of confidence
-#' @param GridLength length of the grid used to estimate the density
-#' @param x.scale vector of one of "calendar" for calendar years, "BP" for years before present, or "elapsed" for time elapsed from a specified origin
-#' @param elapsed.origin.position position of the column to use as the origin for elapsed time calculations
+#' @param GridLength the number of equally spaced points at which the
+#' density is to be estimated (for \code{density()} function)
+#' @param x.scale vector of one of "calendar" for calendar years,
+#' "BP" for years before present,
+#' or "elapsed" for time elapsed from a specified origin
+#' @param elapsed.origin.position position of the column to use
+#' as the origin for elapsed time calculations
 #' @param title title of the graph
 #' @param subtitle subtitle of the graph
 #' @param caption caption of the graph
@@ -19,15 +24,32 @@
 #' @param y.label label of the y-axis
 #' @param width width size in units
 #' @param height height size in units
-#' @param units a string recognized by the ggsave function, one of "in", "cm", "mm"
+#' @param units a string recognized by the \code{ggsave()} function, one of "in", "cm", "mm"
 #' @param x.min minimum x axis value
 #' @param x.max maximum x axis value
 #' @param y.grid switch for horizontal grid lines
-#' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
+#' @param file the name of the graph (+ extension) that will be saved if chosen,
+#' default = \code{NULL}
 #' @param newWindow whether the plot is drawn within a new window or not
-#' @return NULL, called for its side effects
-#' @export
 #'
+#' @details
+#' The density is estimated using \code{density()} function with
+#' n = \code{GridLength.} The input MCMC chains should either be in
+#' calendar years or converted to calendar years using \code{x.scale} vector or
+#' \code{elapsed.origin}.
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
+#'
+#' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @return \code{NULL}, called for its side effects
+#' @examples
+#'   data(Events);
+#'   MultiMarginalPlot(Events, position = c(2,3,4), level = 0.95)
+#'
+#' @keywords marginal posterior density
+#' @keywords credible interval
+#' @keywords mean
+#' @export
 MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
                               x.scale = rep("calendar", length(position)), elapsed.origin = NULL,
                               title="Characteristics of several dates", subtitle = NULL,caption = "ArchaeoPhases",

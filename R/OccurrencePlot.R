@@ -1,10 +1,10 @@
-
 ###################################
-###       Occurrence plot ## NEW 2017/08      ###
-
-
-# Occurrence plot 
-# A statistical graphic designed for the archaeological study of rhythms of the long term that embodies a theory of archaeological evidence for the occurrence of events
+### Occurrence plot ## NEW 2017/08      ###
+#' Plot occurrences
+#'
+#' A statistical graphic designed for the archaeological study of when
+#' events of a specified kind occurred
+#'
 #' @param data dataframe containing the output of the MCMC algorithm
 #' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
 #' @param level probability corresponding to the level of confidence
@@ -30,9 +30,28 @@
 #' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
 #' @param newWindow whether the plot is drawn within a new window or not
 #' @param print.data.result If TRUE, the list containing the data to plot will be given
-#' @return a plot
+#'
+#' @details
+#' If we have k events, then we can estimate the calendar date t corresponding to the
+#' smallest date such that the number of events observed before t is equal to k.
+#' The \code{OccurrencePlot()} estimates these occurrences and gives the credible
+#' interval or the highest posterior density (HPD) region with a desired level of confidence.
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr},
+#' @author Thomas S. Dye, \email{tsd@@tsdye.online}, and
+#' @author Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @return \code{NULL}, called for its side effects. It may also return
+#' a list containing the data to plot (if \code{print.data.result = TRUE}).
+#'
+#' @examples
+#'   data(Events);
+#'   OccurrencePlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
+#' @keywords tempo plot
+#' @keywords credible interval
+#' @keywords mean
+#'
 #' @export
-
 OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, intervals = "CI",
                            title = "Occurrence plot",
                            subtitle = NULL,
@@ -76,20 +95,20 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
   }
   groupOfDates <- group.dates(data, position)
   groupOfEvents <- sort.rows(groupOfDates)
-  
+
   if (intervals == "CI") {
     Bornes = MultiCredibleInterval(groupOfEvents, 1:ncol(groupOfEvents), level = level, roundingOfValue = 0)
     Ordered.df <- as.data.frame(Bornes)
     Ordered.df$y.labs <- paste(sapply(as.integer(rownames(Bornes)), toOrdinal, language = language), occurrence, sep= " ")
-    
+
   }
   else if (intervals == "HPD") {
     Bornes = MultiHPD(groupOfEvents, 1:ncol(groupOfEvents), level = level)
     Ordered.df <- as.data.frame(Bornes)
     Ordered.df$y.labs <- paste(sapply(as.integer(rownames(Bornes)), toOrdinal, language = language), occurrence, sep= " ")
-    
+
     # In the case of (multiple) two intervals
-    x = (dim(Bornes)[2] - 1) /2 
+    x = (dim(Bornes)[2] - 1) /2
     if ( x > 1 ){
       data = NULL
       for(j in 1:x){
@@ -100,18 +119,18 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
       Ordered.df <- as.data.frame(data)
       Ordered.df$y.labs <- paste(sapply(as.integer(rownames(data)), toOrdinal, language = language), occurrence, sep= " ")
     }
-    
+
   }
-  
+
   if (x.scale == "BP") {
     Ordered.df[,2] <- 1950-Ordered.df[,2]
     Ordered.df[,3] <- 1950-Ordered.df[,3]
   }
 
-  h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y=factor(Ordered.df$y.labs, levels=unique(Ordered.df$y.labs), ordered=TRUE), x=Ordered.df[,2], xend=Ordered.df[,3])) 
-  h <- h + ggalt::geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide, dot_guide_size = dot.guide.size) 
+  h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y=factor(Ordered.df$y.labs, levels=unique(Ordered.df$y.labs), ordered=TRUE), x=Ordered.df[,2], xend=Ordered.df[,3]))
+  h <- h + ggalt::geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide, dot_guide_size = dot.guide.size)
   h <- h + ggplot2::labs(x = labelXaxis, y = labelYaxis, title = title,subtitle = subtitle, caption = caption)
-  
+
   if (!y.grid) {
     h <- h + ggplot2::theme(panel.grid.major.y=ggplot2::element_blank())
   }
@@ -125,7 +144,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
     dev.new(height = height, width = width)
   }
   print(h)
-  
+
   ## If the result is desired
   if (print.data.result == TRUE){
     Bornes

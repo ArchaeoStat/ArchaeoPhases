@@ -1,14 +1,24 @@
-
 #####################################################
 #          Hiatus between two dates                 #
 #####################################################
-#'  Test of the hiatus between two dates
-#' Finds if it exists a gap between two dates that is the longest interval that satisfies : P(a_chain < IntervalInf < IntervalSup < b_chain | M) = level
+#'  Test for the existence of a hiatus between two parameters
 #'
-#' @param a_chain : numeric vector containing the output of the MCMC algorithm for the parameter a
-#' @param b_chain : numeric vector containing the output of the MCMC algorithm for the parameter b
-#' @param level probability corresponding to the level of confidence
-#' @return A named vector with the level and the endpoints of the longest gap
+#' Finds if a gap exists between two dates and returns the longest interval that satisfies: \eqn{P(a_chain < IntervalInf < IntervalSup < b_chain | M) = level}
+#'
+#' @param a_chain : numeric vector containing the output of the MCMC algorithm for the first parameter
+#' @param b_chain : numeric vector containing the output of the MCMC algorithm for the second parameter
+#' @param level probability corresponding to the confidence level of the interval
+#' @return A named vector with the level and the endpoints of the gap in calendar years (AD/BC)
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
+#'
+#' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @examples
+#'   data(Events); attach(Events)
+#'   DatesHiatus(Event.1, Event.12)
+#'   DatesHiatus(Event.1, Event.12, level = 0.5)
+#'
+#' @keywords hiatus
 #' @export
 DatesHiatus <- function(a_chain, b_chain, level=0.95){
 

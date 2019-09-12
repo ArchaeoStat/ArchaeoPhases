@@ -5,14 +5,36 @@
 
 #' Bayesian HPD regions for a series of MCMC chains
 #'
-#' Estimation of the HPD region of the output of the MCMC algorithm for the parameter a
+#' Estimation of the highest posterior density regions for each variable of a
+#' simulated Markov chain. This function uses the \code{hdr()} function
+#' included in the \pkg{hdrcde} package. An HPD region may be a union of
+#' several intervals.
 #'
-#' @details Highest posterior density function region using the function 'hdr' from the package 'hdrcde'
-#' @param data dataframe containing the output of the MCMC algorithm
-#' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
-#' @param level probability corresponding to the level of confidence used for the HPD region
-#' @param roundingOfValue interger indicating the number of decimal places to be used
-#' @return matrix with the endpoints of the HPD regions
+#' @details Highest posterior density function region using the function
+#' \code{hdr()} from the \pkg{hdrcd} package
+#'
+#' @param data data frame containing the output of the MCMC algorithm
+#' @param position numeric vector containing the position of the column
+#' corresponding to the MCMC chains of interest
+#' @param level probability corresponding to the level of confidence
+#' @param roundingOfValue integer indicating the number of decimal places
+#'
+#' @return Returns a matrix of values containing the level of confidence
+#' and the endpoints of each interval for each variable of the MCMC chain.
+#' The name of the resulting rows are the positions of the corresponding
+#' columns in the CSV file. The result is given in calendar years (BC/AD).
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
+#'
+#' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @references
+#' Hyndman, R.J. (1996) Computing and graphing highest density regions.
+#' American Statistician, 50, 120-126.
+#' @examples
+#'   data(Events)
+#'   MultiHPD(Events, c(2,4,3), 0.95)
+#' @keywords highest posterior density
 #' @export
 #'
 MultiHPD <- function(data, position, level=0.95, roundingOfValue = 0){
