@@ -2,25 +2,26 @@
 #             Succession Plot                  #
 #####################################################
 
-#' Density Plots of two successive groups (for groups in temporal order constraint)
+#' Density plots of two successive groups (for groups in temporal order constraint)
 #'
 #' Plot of the densities of the minimum and the maximum of the events included
 #' in each group, with summary statistics including the mean, credible interval,
 #' and highest posterior density. The result is given in calendar years (BC/AD).
 #'
-#' @param Phase1Min_chain numeric vector containing the output of the MCMC
-#' algorithm for the minimum of the events included in the oldest phase
-#' @param Phase1Max_chain numeric vector containing the output of the MCMC
-#' algorithm for the maximum of the events included in the oldest phase
-#' @param Phase2Min_chain numeric vector containing the output of the MCMC
-#' algorithm for the minimum of the events included in the youngest phase
-#' @param Phase2Max_chain numeric vector containing the output of the MCMC
-#' algorithm for the maximum of the events included in the youngest phase
-#' @param level probability corresponding to the level of confidence
-#' @param title title of the graph
-#' @param exportFile the name of the file to be saved, if \code{NULL} then no graph is saved
-#' @param exportFormat the format of the export file, either "PNG" or "SVG"
-#' @param GridLength length of the grid used to estimate the density
+#' @param Phase1Min_chain Numeric vector containing the output of the MCMC
+#' algorithm for the minimum of the events included in the oldest phase.
+#' @param Phase1Max_chain Numeric vector containing the output of the MCMC
+#' algorithm for the maximum of the events included in the oldest phase.
+#' @param Phase2Min_chain Numeric vector containing the output of the MCMC
+#' algorithm for the minimum of the events included in the youngest phase.
+#' @param Phase2Max_chain Numeric vector containing the output of the MCMC
+#' algorithm for the maximum of the events included in the youngest phase.
+#' @param level Probability corresponding to the level of confidence.
+#' @param title Title of the plot.
+#' @param exportFile Name of the file to be saved.
+#' If \code{NULL} then no plot is saved.
+#' @param exportFormat Format of the export file, either "PNG" or "SVG".
+#' @param GridLength Length of the grid used to estimate the density.
 #'
 #' @details
 #' Curves represent the density of the minimum (oldest event) and the maximum

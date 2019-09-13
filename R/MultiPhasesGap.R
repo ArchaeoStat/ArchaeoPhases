@@ -8,13 +8,16 @@
 #' is the longest interval that satisfies
 #' \eqn{P(Phase1Max < IntervalInf < IntervalSup < Phase2Min | M) = level}
 #'
-#' @param data dataframe containing the output of the MCMC algorithm
-#' @param position_minimum numeric vector containing the column number
-#' corresponding to the minimum of the events included in each group
-#' @param position_maximum numeric vector containing the column number
-#' corresponding to the end of the phases set in the same order as in \code{position_minimum}
-#' @param level probability corresponding to the level of confidence
-#' @return Returns a matrix of values containing the level of confidence
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position_minimum Numeric vector containing the column number
+#' corresponding to the minimum of the events included in each group.
+#' @param position_maximum Numeric vector containing the column number
+#' corresponding to the end of the phases set in the same order
+#' as in \code{position_minimum}.
+#' @param level Probability corresponding to the level of confidence.
+#'
+#' @return
+#' Returns a matrix of values containing the level of confidence
 #' and the endpoints of the gap for each pair of successive groups. The
 #' result is given in calendar years (BC/AD).
 #' @details
@@ -23,6 +26,7 @@
 #' its maximum \code{position_maximum[i]}. The default value of
 #' \code{position_maximum} corresponds to CSV files exported from
 #' \href{https://chronomodel.com/}{ChronoModel} software.
+#'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
 #'
 #' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}

@@ -7,13 +7,14 @@
 #' Finds, if it exists, the shortest interval that satisfies
 #' \eqn{P(TransitionRangeInf < Phase1Max < Phase2Min < TransitionRangeSup | M) = level}
 #'
-#' @param data data frame containing the output of the MCMC algorithm
-#' @param position_minimum numeric vector containing the column number
-#' corresponding to the minimum of the events included in each group
-#' @param position_maximum numeric vector containing the column number
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position_minimum Numeric vector containing the column number
+#' corresponding to the minimum of the events included in each group.
+#' @param position_maximum Numeric vector containing the column number
 #' corresponding to the end of the groups set in the same order as in
-#'code{position_minimum}
-#' @param level probability corresponding to the level of confidence
+#'code{position_minimum}.
+#' @param level Probability corresponding to the level of confidence.
+#'
 #' @return A matrix of values containing the level of confidence and
 #' the endpoints of the transition interval for each pair of successive
 #' groups. The result is given in calendar years (BC/AD).

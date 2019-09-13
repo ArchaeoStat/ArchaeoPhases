@@ -12,8 +12,10 @@
 #' of the event 'a' < 'b' by the relative frequency of the event "the value of event 'a'
 #' is less than the value of event 'b'" in the simulated Markov chain.
 #'
-#' @param a_chain : numeric vector containing the output of the MCMC algorithm for the parameter a
-#' @param b_chain : numeric vector containing the output of the MCMC algorithm for the parameter b
+#' @param a_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the first parameter.
+#' @param b_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the second parameter.
 #'
 #' @return An unnamed vector with the posterior probability of the assumption:
 #' "event a is older than event b"

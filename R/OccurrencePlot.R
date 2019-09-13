@@ -5,31 +5,40 @@
 #' A statistical graphic designed for the archaeological study of when
 #' events of a specified kind occurred
 #'
-#' @param data dataframe containing the output of the MCMC algorithm
-#' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
-#' @param level probability corresponding to the level of confidence
-#' @param intervals one of "CI" for credible intervals or "HPD" for highest posterior density intervals
-#' @param title title of the graph
-#' @param subtitle subtitle of the graph
-#' @param caption caption of the graph
-#' @param labelXaxis label of the x-axis
-#' @param labelYaxis label of the y-axis
-#' @param language a string indicating a language recognized by the toOrdinal library
-#' @param occurrence a string to append to each y axis tic label
-#' @param width width size in units
-#' @param height height size in units
-#' @param units a string recognized by the ggsave function, one of "in", "cm", "mm"
-#' @param x.min minimum x axis value
-#' @param x.max maximum x axis value
-#' @param x.scale one of "calendar" for calendar years, "BP" for years before present, or "elapsed" for time elapsed from a specified origin
-#' @param elapsed.origin.position position of the column to use as the origin for elapsed time calculations
-#' @param dumbbell.size size of the plot symbol
-#' @param dot.guide switch for a horizontal guide from the y axis
-#' @param dot.guide.size size of the dot guide
-#' @param y.grid switch for horizontal grid lines
-#' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
-#' @param newWindow whether the plot is drawn within a new window or not
-#' @param print.data.result If TRUE, the list containing the data to plot will be given
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position Numeric vector containing the position of the column
+#' corresponding to the MCMC chains of interest.
+#' @param level Probability corresponding to the level of confidence.
+#' @param intervals One of "CI" for credible intervals or
+#' "HPD" for highest posterior density intervals.
+#' @param title Title of the plot.
+#' @param subtitle Subtitle of the plot.
+#' @param caption Caption of the plot.
+#' @param labelXaxis Label of the x-axis.
+#' @param labelYaxis Label of the y-axis.
+#' @param language String indicating a language recognized by the
+#' \pkg{}toOrdinal} package.
+#' @param occurrence String to append to each y-axis tic label.
+#' @param width Plot width in \code{units}.
+#' @param height Plot height in \code{units}.
+#' @param units String recognized by the \code{ggsave()} function,
+#' one of "in", "cm", "mm".
+#' @param x.min Minimum x-axis value.
+#' @param x.max Maximum x-axis value.
+#' @param x.scale One of "calendar" for calendar years,
+#' "BP" for years before present,
+#' or "elapsed" for time elapsed from a specified origin.
+#' @param elapsed.origin.position Position of the column to use
+#' as the origin for elapsed time calculations.
+#' @param dumbbell.size Size of the plot symbol.
+#' @param dot.guide Switch for a horizontal guide from the y axis.
+#' @param dot.guide.size Size of the dot guide.
+#' @param y.grid Switch for horizontal grid lines.
+#' @param file Name of the file that will be saved if specified.
+#' If \code{NULL} no plot will be saved.
+#' @param newWindow Whether or not the plot is drawn within a new window.
+#' @param print.data.result If \code{TRUE}, the list containing the data
+#' to plot will be returned.
 #'
 #' @details
 #' If we have k events, then we can estimate the calendar date t corresponding to the

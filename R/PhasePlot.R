@@ -9,18 +9,18 @@
 #' summary statistics including mean, credible interval, and time range.
 #' The result is given in calendar years (BC/AD).
 #'
-#' @param PhaseMin_chain numeric vector containing the output of the
-#' MCMC algorithm for the minimum of the events included in the phase
-#' @param PhaseMax_chain numeric vector containing the output of the
-#' MCMC algorithm for the maximum of the events included in the phase
-#' @param level probability corresponding to the level of confidence
-#' used for the credible interval and the time range
-#' @param title The title of the graph
-#' @param colors if \code{TRUE}, then use of colors in the graph,
-#' otherwise plot the graph in black and white
-#' @param GridLength length of the grid used to estimate the density
-#' @param exportFile the name of the file to be saved. If \code{NULL}, then no graph is saved
-#' @param exportFormat the format of the export file, either "PNG" or "SVG"
+#' @param PhaseMin_chain Numeric vector containing the output of the
+#' MCMC algorithm for the minimum of the events included in the phase.
+#' @param PhaseMax_chain Numeric vector containing the output of the
+#' MCMC algorithm for the maximum of the events included in the phase.
+#' @param level Probability corresponding to the level of confidence
+#' used for the credible interval and the time range.
+#' @param title The title of the plot
+#' @param colors If \code{TRUE}, then use of colors in the plot,
+#' otherwise draw the plot in black and white.
+#' @param GridLength Length of the grid used to estimate the density.
+#' @param exportFile Name of the file to be saved. If \code{NULL}, then no plot is saved.
+#' @param exportFormat Format of the export file, either "PNG" or "SVG".
 #'
 #' @return \code{NULL}, called for its side effects
 #'

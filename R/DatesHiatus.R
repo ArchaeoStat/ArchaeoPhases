@@ -5,10 +5,14 @@
 #'
 #' Finds if a gap exists between two dates and returns the longest interval that satisfies: \eqn{P(a_chain < IntervalInf < IntervalSup < b_chain | M) = level}
 #'
-#' @param a_chain : numeric vector containing the output of the MCMC algorithm for the first parameter
-#' @param b_chain : numeric vector containing the output of the MCMC algorithm for the second parameter
-#' @param level probability corresponding to the confidence level of the interval
+#' @param a_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the first parameter.
+#' @param b_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the second parameter.
+#' @param level Probability corresponding to the confidence level of the interval.
+#'
 #' @return A named vector with the level and the endpoints of the gap in calendar years (AD/BC)
+#'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
 #'
 #' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}

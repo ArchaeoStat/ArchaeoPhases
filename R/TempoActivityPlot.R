@@ -5,31 +5,33 @@
 #' A statistical graphic designed for the archaeological study of rhythms of
 #' the long term that embodies a theory of archaeological evidence for the
 #' occurrence of events
-#' @param data data frame containing the output of the MCMC algorithm
-#' @param position numeric vector containing the position of the column
-#' corresponding to the MCMC chains of interest
-#' @param plot.result a list containing the data to plot, typically the
-#' result of a previous run of \code{TempoActivityPlot()}
-#' @param level probability corresponding to the level of confidence
-#' @param title title of the graph
-#' @param subtitle subtitle of the graph
-#' @param caption caption of the graph
-#' @param x.label label of the x-axis
-#' @param y.label label of the y-axis
-#' @param line.types type of the lines drawn on the graph
-#' @param width width of the plot in \code{units}
-#' @param height height of the plot in \code{units}
-#' @param units units used to specify \code{width} and \code{height}, one of "in" (default),
-#' "cm", or "mm"
-#' @param x.min minimum value for x axis
-#' @param x.max maximum value for x axis
-#' @param file the name of the file to be saved if chosen, if \code{Null}, then no file is saved.
-#' @param x.scale one of "calendar", "bp", or "elapsed"
-#' @param elapsed.origin.position if \code{x.scale} is "elapsed", the position
-#' of the column corresponding to the event from which elapsed time is calculated
-#' @param newWindow whether the plot is drawn within a new window or not
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position Numeric vector containing the position of the column
+#' corresponding to the MCMC chains of interest.
+#' @param plot.result List containing the data to plot, typically the
+#' result of a previous run of \code{TempoActivityPlot()}.
+#' @param level Probability corresponding to the level of confidence.
+#' @param title Title of the plot.
+#' @param subtitle Subtitle of the plot.
+#' @param caption Caption of the plot.
+#' @param x.label Label of the x-axis.
+#' @param y.label Label of the y-axis.
+#' @param line.types Type of the lines drawn on the plot.
+#' @param width Width of the plot in \code{units}.
+#' @param height Height of the plot in \code{units}.
+#' @param units Units used to specify \code{width} and \code{height},
+#' one of "in" (default),"cm", or "mm".
+#' @param x.min Minimum value for x-axis.
+#' @param x.max Maximum value for x-axis.
+#' @param file Name of the file to be saved if specified.
+#' If \code{Null}, then no file is saved.
+#' @param x.scale One of "calendar", "bp", or "elapsed".
+#' @param elapsed.origin.position If \code{x.scale} is "elapsed", the position
+#' of the column corresponding to the event from which elapsed time is calculated.
+#' @param newWindow Whether or not the plot is drawn within a new window .
 #' @param print.data.result If \code{TRUE}, the list containing the data to plot
-#' is returned
+#' is returned.
+#'
 #' @return \code{NULL}, called for its side effects.  It may also return a list
 #' containing the data to plot (if \code{print.data.result = TRUE}). The result
 #' is given in calendar years (BC/AD).

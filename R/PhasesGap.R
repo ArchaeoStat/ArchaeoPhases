@@ -7,16 +7,15 @@
 #' This gap or hiatus is the longest interval that satisfies
 #' \eqn{P(Phase1Max_chain < IntervalInf < IntervalSup < Phase2Min_chain | M) = level}
 #'
-#' @param Phase1Max_chain numeric vector containing the output of the MCMC
-#' algorithm for the maximum of the events included in the oldest phase
-#' @param Phase2Min_chain numeric vector containing the output of the MCMC
-#' algorithm for the minimum of the events included in the following phase
-#' @param level probability corresponding to the level of confidence
+#' @param Phase1Max_chain Numeric vector containing the output of the MCMC
+#' algorithm for the maximum of the events included in the oldest phase.
+#' @param Phase2Min_chain Numeric vector containing the output of the MCMC
+#' algorithm for the minimum of the events included in the following phase.
+#' @param level Probability corresponding to the level of confidence.
 #'
 #' @return Returns a vector of values containing the level of confidence and
 #' the endpoints of the gap between the successive phases. The result is
 #' given in calendar years (BC/AD).
-#'
 #'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
 #'

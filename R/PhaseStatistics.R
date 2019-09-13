@@ -13,12 +13,12 @@
 #' The time range is given by \code{PhaseTimeRange()} function.  The duration is computed
 #' as follows: \eqn{duration = maximum - minimum} at each iteration of the MCMC output.
 #'
-#' @param PhaseMin_chain numeric vector containing the output of the MCMC
-#' algorithm for the minimum of the dates included in the phase
-#' @param PhaseMax_chain numeric vector containing the output of the MCMC
-#' algorithm for the maximum of the dates included in the phase
-#' @param level probability corresponding to the level of confidence used
-#' for the credible interval and the highest density region
+#' @param PhaseMin_chain Numeric vector containing the output of the MCMC
+#' algorithm for the minimum of the dates included in the phase.
+#' @param PhaseMax_chain Numeric vector containing the output of the MCMC
+#' algorithm for the maximum of the dates included in the phase.
+#' @param level Probability corresponding to the level of confidence used
+#' for the credible interval and the highest density region.
 #' @return
 #' A matrix of values corresponding to the summary statistics:
 #' \describe{

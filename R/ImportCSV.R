@@ -14,15 +14,22 @@
 #' should be withdrawn using the \code{rowToWithdraw} parameter.
 #' Otherwise, the functions of \pkg{ArchaeoPhases} will not work properly.
 #'
-#' @param file the name of the CSV file containing the output of the MCMC algorithm
-#' @param dec the character used in the file for decimal points for the use of \code{read.csv()}
-#' @param sep the field separator character for the use of \code{read.csv()}
-#' @param comment.char a character vector of length one containing a single character or an empty string for the use of \code{read.csv()}
-#' @param header a logical value indicating whether the file contains the names of the variables as its first line
-#' @param iterationColumn the column number corresponding to the iteration values, default = \code{NULL}
-#' @param referenceYear the year of reference for MCMC in date format other than BC/AD, default = \code{NULL}
-#' @param rowToWithdraw the number of the row to be withdrawn or "last" for the last row of the data frame, default = \code{NULL}
-#' @param bin.width The bin width specified in a BCal project (note that \code{bin.width} does not have to be set if the BCal default bin width of 1 is used)
+#' @param file Name of the CSV file containing the output of the MCMC algorithm.
+#' @param dec Character used in the file for decimal points for the use of \code{read.csv()}.
+#' @param sep Field separator character for the use of \code{read.csv()}.
+#' @param comment.char Character vector of length one containing a single
+#' character or an empty string for the use of \code{read.csv()}.
+#' @param header Logical value indicating whether the file contains the names
+#' of the variables as its first line.
+#' @param iterationColumn Column number corresponding to the iteration values,
+#' default = \code{NULL}.
+#' @param referenceYear Year of reference for MCMC in date format other than
+#' BC/AD, default = \code{NULL}.
+#' @param rowToWithdraw Number of the row to be withdrawn or "last" for the
+#' last row of the data frame, default = \code{NULL}.
+#' @param bin.width Bin width specified in a BCal project (note that \code{bin.width}
+#' does not have to be set if the BCal default bin width of 1 is used).
+#'
 #' @return A data frame containing a representation of the data in the file.
 #'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr},

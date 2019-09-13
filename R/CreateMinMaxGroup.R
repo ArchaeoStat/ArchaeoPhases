@@ -7,11 +7,14 @@
 #' Constructs a data frame containing the output of the MCMC algorithm corresponding to
 #' the minimum and maximum of a group of events
 #'
-#' @param data data frame containing the output of the MCMC algorithm
-#' @param position numeric vector containing the position of the column corresponding to the MCMC chains of all dates included in the phase of interest
-#' @param name name of the current group of dates or phase
-#' @param add the name of the data frame in which the current minimum and maximum should be added, default = \code{NULL}
-#' @param exportFile the name of the final file that will be saved if chosen, default = \code{NULL}
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position Numeric vector containing the position of the column
+#' corresponding to the MCMC chains of all dates included in the phase of interest.
+#' @param name Name of the current group of dates or phase.
+#' @param add Name of the data frame in which the current minimum and maximum
+#' should be added, default = \code{NULL}.
+#' @param exportFile Name of the final file that will be saved if chosen,
+#' default = \code{NULL}.
 #'
 #' @return A data frame containing the minimum and maximum of the group of dates included
 #' in the phase of interest. These values may be appended to a data frame \code{add} if given.

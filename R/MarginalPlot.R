@@ -7,25 +7,29 @@
 #' Draws a plot of the estimated marginal posterior density for the one-parameter and adds the mean
 #' and the credible interval at the desired level
 #'
-#' @param a_chain numeric vector containing the output of the MCMC algorithm for the parameter a
-#' @param level probability corresponding to the level of confidence
-#' @param GridLength length of the grid used to estimate the density
-#' @param title title of the graph
-#' @param subtitle subtitle of the graph
-#' @param caption caption of the graph
-#' @param x.label label of the x-axis
-#' @param y.label label of the y-axis
-#' @param width width size in units
-#' @param height height size in units
-#' @param units a string recognized by the ggsave function, one of "in", "cm", "mm"
-#' @param x.min minimum x axis value
-#' @param x.max maximum x axis value
-#' @param x.scale one of "calendar" for calendar years, "BP" for years before present, or "elapsed" for time elapsed from a specified origin
-#'
-#' @param elapsed.origin.position position of the column to use as the origin for elapsed time calculations
-#' @param y.grid switch for horizontal grid lines
-#' @param file the name of the graph (+ extension) that will be saved if chosen, default = \code{NULL}
-#' @param newWindow whether the plot is drawn within a new window or not
+#' @param a_chain Numeric vector containing the output of the MCMC algorithm
+#' for the parameter.
+#' @param level Probability corresponding to the level of confidence.
+#' @param GridLength Length of the grid used to estimate the density.
+#' @param title Title of the graph.
+#' @param subtitle Subtitle of the graph.
+#' @param caption Caption of the graph.
+#' @param x.label Label of the x-axis.
+#' @param y.label Label of the y-axis.
+#' @param width Plot width in \code{units}.
+#' @param height Plot height in \code{}units}.
+#' @param units String recognized by the \code{ggsave()} function,
+#' one of "in", "cm", "mm".
+#' @param x.min Minimum x axis value.
+#' @param x.max Maximum x axis value.
+#' @param x.scale One of "calendar" for calendar years,
+#' "BP" for years before present,
+#' or "elapsed" for time elapsed from a specified origin.
+#' @param elapsed.origin.position Position of the column to use as the
+#' origin for elapsed time calculations.
+#' @param y.grid Switch for horizontal grid lines.
+#' @param file Name of the file that will be saved if chosen, default = \code{NULL}.
+#' @param newWindow Whether or not the plot is drawn within a new window.
 #'
 #' @return \code{NULL}, called for its side effects
 #'

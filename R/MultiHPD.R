@@ -13,11 +13,11 @@
 #' @details Highest posterior density function region using the function
 #' \code{hdr()} from the \pkg{hdrcd} package
 #'
-#' @param data data frame containing the output of the MCMC algorithm
-#' @param position numeric vector containing the position of the column
-#' corresponding to the MCMC chains of interest
-#' @param level probability corresponding to the level of confidence
-#' @param roundingOfValue integer indicating the number of decimal places
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position Numeric vector containing the position of the column
+#' corresponding to the MCMC chains of interest.
+#' @param level Probability corresponding to the level of confidence.
+#' @param roundingOfValue Integer indicating the number of decimal places.
 #'
 #' @return Returns a matrix of values containing the level of confidence
 #' and the endpoints of each interval for each variable of the MCMC chain.

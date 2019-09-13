@@ -7,9 +7,12 @@
 #'
 #' The \eqn{(100 * level)}\% highest posterior density region is estimated using \code{hdr()} function from \pkg{hdrcde} package.
 #'
-#' @param a_chain numeric vector containing the output of the MCMC algorithm for the parameter
-#' @param level probability corresponding to the level of confidence used for the credible interval and the highest posterior density region
-#' @param roundingOfValue integer indicating the number of decimal places
+#' @param a_chain Numeric vector containing the output of the MCMC
+#' algorithm for the parameter.
+#' @param level Probability corresponding to the level of confidence
+#' used for the credible interval and the highest posterior density region.
+#' @param roundingOfValue Integer indicating the number of decimal places.
+#'
 #' @return A named matrix of values corresponding to all the following statistics:
 #' \describe{
 #' \item{title}{The title of the summary statistics}
@@ -24,6 +27,7 @@
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
 #'
 #' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
 #'@references
 #' Hyndman, R. J. (1996) Computing and graphing highest density regions. American Statistician, 50, 120-126.
 #'

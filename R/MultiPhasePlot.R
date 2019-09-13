@@ -2,7 +2,7 @@
 #           Multiple Phase Plot  #
 #####################################################
 
-#' Several Phases Density Plots
+#' Several phase density plots
 #'
 #' Plot of the marginal posterior densities of several groups
 #'
@@ -11,14 +11,19 @@
 #' order between phases is required. The result is given in calendar
 #' years (BC/AD).
 #'
-#' @param data data frame containing the output of the MCMC algorithm
-#' @param position_minimum numeric vector containing the column number corresponding to the minimum of the events included in each group
-#' @param position_maximum numeric vector containing the column number corresponding to the end of the groups set in the same order as in position_minimum
-#' @param level probability corresponding to the level of confidence
-#' @param title title of the graph
-#' @param colors numeric vector of colors for each group of dates
-#' @param exportFile the name of the file to be saved. If \code{NULL} then no graph is saved.
-#' @param exportFormat the format of the export file, one of "PNG" or "SVG."
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position_minimum Numeric vector containing the column number
+#' corresponding to the minimum of the events included in each group.
+#' @param position_maximum Numeric vector containing the column number
+#' corresponding to the end of the groups set in the same order as in
+#' \code{position_minimum}.
+#' @param level Probability corresponding to the level of confidence.
+#' @param title Title of the plot.
+#' @param colors Numeric vector of colors for each group of dates.
+#' @param exportFile Name of the file to be saved. If \code{NULL} then
+#' no plot is saved.
+#' @param exportFormat Format of the export file, one of "PNG" or "SVG".
+#'
 #' @return \code{NULL}, called for its side effects
 #'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and

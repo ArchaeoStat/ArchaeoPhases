@@ -9,9 +9,11 @@
 #' @details A \eqn{(100 * level)}\% credible interval is an interval that keeps \eqn{N * (1 - level)}
 #' elements of the sample outside the interval.
 #' The \eqn{(100 * level)}\% credible interval is the shortest of all those intervals.
-#' @param a_chain numeric vector containing the output of the MCMC algorithm for the parameter
-#' @param level probability corresponding to the level of confidence used for the credible interval, default = 0.95
-#' @param roundingOfValue integer indicating the number of decimal places to be used, default = 0
+#' @param a_chain Numeric vector containing the output of the MCMC algorithm
+#' for the parameter.
+#' @param level Probability corresponding to the level of confidence used for the
+#' credible interval, default = 0.95.
+#' @param roundingOfValue Integer indicating the number of decimal places to be used, default = 0.
 #' @return A named vector of values containing the confidence level and the endpoints of the shortest
 #' credible interval in calendar years (BC/AD).
 #' @examples

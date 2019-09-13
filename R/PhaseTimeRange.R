@@ -7,11 +7,11 @@
 #' Computes the shortest interval  [IntervalInf ; IntervalSup] that satisfies
 #' \eqn{P(PhaseMin_chain =< IntervalInf < IntervalSup =< PhaseMax_chain | M) = level}
 #'
-#' @param PhaseMin_chain : numeric vector containing the output of the MCMC
-#' algorithm for the minimum of the events included in the phase
-#' @param PhaseMax_chain : numeric vector containing the output of the MCMC
-#' algorithm for the maximum of the events included in the phase
-#' @param level probability corresponding to the desired level of confidence
+#' @param PhaseMin_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the minimum of the events included in the phase.
+#' @param PhaseMax_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the maximum of the events included in the phase.
+#' @param level Probability corresponding to the desired level of confidence.
 #'
 #' @return A vector of values containing the desired level of confidence
 #' and the endpoints of the shortest time range associated with this desired level.

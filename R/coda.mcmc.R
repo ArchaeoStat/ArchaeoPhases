@@ -7,11 +7,11 @@
 #' This wrapper function extracts parallel chains from a data frame to create an \code{mcmc.list}
 #' object for use with \pkg{coda} diagnostic tools
 #'
-#' @param data data frame containing the output of the MCMC algorithm
+#' @param data Data frame containing the output of the MCMC algorithm.
 #'
-#' @param numberChains number of parallel chains, default = 1
+#' @param numberChains Number of parallel chains, default = 1.
 #'
-#' @param iterationColumn column number corresponding to the iteration values, default = \code{NULL}
+#' @param iterationColumn Column number corresponding to the iteration values, default = \code{NULL}.
 #'
 #' @return  An \code{mcmc.list} object
 #'

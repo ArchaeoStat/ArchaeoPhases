@@ -7,13 +7,13 @@
 #' \eqn{P(PhaseMin < IntervalInf < IntervalSup < PhaseMax | M) = level}
 #' for each phase
 #'
-#' @param data data frame containing the output of the MCMC algorithm
-#' @param position_minimum numeric vector containing the column number
-#' corresponding to the minimum of the events included in each phase
-#' @param position_maximum numeric vector containing the column number
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position_minimum Numeric vector containing the column number
+#' corresponding to the minimum of the events included in each phase.
+#' @param position_maximum Numeric vector containing the column number
 #' corresponding to the maximum of the phases set in the same order as
-#' in \code{position_minimum}
-#' @param level probability corresponding to the desired level of confidence
+#' in \code{position_minimum}.
+#' @param level Probability corresponding to the desired level of confidence.
 #'
 #' @details
 #' For each \code{i}, \code{MultiPhasesTimeRange()} computes the time range interval
@@ -21,6 +21,7 @@
 #' its maximum \code{position_maximum[i]}. The default value of
 #' \code{position_maximum} corresponds to CSV files exported from
 #' \href{https://chronomodel.com/}{ChronoModel} software.
+#'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
 #'
 #' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
