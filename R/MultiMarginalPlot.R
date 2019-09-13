@@ -46,9 +46,6 @@
 #'   data(Events);
 #'   MultiMarginalPlot(Events, position = c(2,3,4), level = 0.95)
 #'
-#' @keywords marginal posterior density
-#' @keywords credible interval
-#' @keywords mean
 #' @export
 MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
                               x.scale = rep("calendar", length(position)), elapsed.origin = NULL,

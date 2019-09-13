@@ -19,7 +19,6 @@
 #'   CredibleInterval(Event.1)
 #'   CredibleInterval(Event.12, 0.50)
 #'
-#' @keywords credible interval
 #' @export
 CredibleInterval <- function(a_chain, level=0.95, roundingOfValue=0){
 

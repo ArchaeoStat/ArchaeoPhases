@@ -39,9 +39,6 @@
 #'   data(Events);
 #'   MarginalPlot(a_chain = Events$Event.1, level = 0.95)
 #'
-#' @keywords mean
-#' @keywords credible interval
-#' @keywords marginal posterior density
 #' @export
 #'
 MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,

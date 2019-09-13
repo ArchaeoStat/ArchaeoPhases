@@ -47,9 +47,6 @@
 #' @examples
 #'   data(Events);
 #'   OccurrencePlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
-#' @keywords tempo plot
-#' @keywords credible interval
-#' @keywords mean
 #'
 #' @export
 OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, intervals = "CI",

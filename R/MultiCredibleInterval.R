@@ -26,7 +26,7 @@
 #' @examples
 #'   data(Events)
 #'   MultiCredibleInterval(Events, c(2,4,3), 0.95)
-#' @keywords credible interval
+#'
 #' @export
 MultiCredibleInterval <- function(data, position, level=0.95, roundingOfValue=0){
 

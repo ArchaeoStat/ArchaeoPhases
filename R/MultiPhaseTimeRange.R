@@ -35,9 +35,6 @@
 #'   # In this case, equivalent to
 #'   MultiPhasesTimeRange(Phases, position_minimum = c(4,2))
 #'
-#' @keywords Bayesian statistics
-#' @keywords phase time range
-#'
 #' @return
 #' A matrix of values containing the level of confidence and the endpoints
 #' of the shortest time range associated with the desired \code{level}. The result

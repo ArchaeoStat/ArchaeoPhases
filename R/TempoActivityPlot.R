@@ -47,9 +47,6 @@
 #'   TempoActivityPlot(Events[1:1000,], c(2:5), print.data.result=FALSE)
 #'   TempoActivityPlot(Events[1:1000,], c(2:5), print.data.result=FALSE)
 #'
-#' @keywords tempo activity plot
-#' mean
-#'
 #' @export
 TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
                                title = "Activity plot",

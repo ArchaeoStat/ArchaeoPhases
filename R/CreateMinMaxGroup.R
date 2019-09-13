@@ -25,7 +25,6 @@
 #'   Temp = CreateMinMaxGroup(Events, c(2,4), name = "Phase2")
 #'   Temp = CreateMinMaxGroup(Events, c(3,5), name = "Phase1", add=Temp,
 #'                            exportFile = "MinMaxPhases.csv")
-#' @keywords minimum maximum
 #' @export
 #'
 CreateMinMaxGroup <- function(data, position, name ="Phase", add=NULL, exportFile=NULL){

@@ -47,12 +47,6 @@
 #'   # export
 #'   MultiSuccessionPlot(Phases, c(4,2), exportFile = "MultiSuccessionPlot", exportFormat = "SVG")
 #'
-#' @keywords marginal posterior density
-#' @keywords gap between two phases
-#' @keywords transition between two phases
-#' @keywords phase time range
-#' @keywords temporal order
-#' @keywords succession of phases
 #' @export
 MultiSuccessionPlot <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95, title = "Characterisation of a succession of groups",
                                 colors = NULL, exportFile = NULL, exportFormat = "PNG"){

@@ -37,13 +37,6 @@
 #'   data(Phases); attach(Phases)
 #'   PhaseStatistics(Phase.1.alpha, Phase.1.beta, 0.95)
 #'   PhaseStatistics(Phase.2.alpha, Phase.2.beta, 0.95)
-#' @keywords mean
-#' @keywords maximum a posteriori
-#' @keywords credible interval
-#' @keywords highest posterior density
-#' @keywords phase time range
-#' @keywords summary statistics
-#' @keywords individual phase
 #'
 #' @export
 PhaseStatistics <- function(PhaseMin_chain, PhaseMax_chain, level=0.95){

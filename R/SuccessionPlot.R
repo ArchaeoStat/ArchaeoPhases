@@ -41,12 +41,6 @@
 #'   SuccessionPlot(Phase.1.alpha, Phase.1.beta, Phase.2.alpha, Phase.2.beta, level = 0.95)
 #'   SuccessionPlot(Phase.1.alpha, Phase.1.beta, Phase.2.alpha, Phase.2.beta,
 #'                  exportFile = "Succession", exportFormat = "PNG")
-#' @keywords gap between two groups
-#' transition between two groups
-#' phase time range
-#' temporal order
-#' marginal posterior density
-#' succession of phases
 #'
 #' @return \code{NULL}, called for its side effects
 #' @export

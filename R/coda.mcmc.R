@@ -30,8 +30,6 @@
 #'
 #' @seealso \code{\link{coda}}
 #'
-#' @keywords MCMC diagnostic
-#'
 #' @export
 
 coda.mcmc <- function(data, numberChains = 1, iterationColumn = NULL){

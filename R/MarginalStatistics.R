@@ -32,11 +32,6 @@
 #'   MarginalStatistics(Event.1)
 #'   MarginalStatistics(Event.2, level = 0.90)
 #'
-#' @keywords summary statistics
-#' @keywords credible interval
-#' @keywords maximum a posteriori
-#' @keywords mean
-#' @keywords highest posterior density
 #' @export
 MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){
 

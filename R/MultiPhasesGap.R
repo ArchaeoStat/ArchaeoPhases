@@ -37,10 +37,6 @@
 #'   # In this case, equivalent to
 #'   MultiPhasesGap(Phases, position_minimum = c(4,2))
 #'
-#' @keywords Bayesian statistics
-#' @keywords gap between two phases
-#' @keywords temporal order
-#' @keywords succession of phases
 #' @export
 MultiPhasesGap <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95){
 

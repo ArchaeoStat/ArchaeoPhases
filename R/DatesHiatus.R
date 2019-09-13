@@ -18,7 +18,6 @@
 #'   DatesHiatus(Event.1, Event.12)
 #'   DatesHiatus(Event.1, Event.12, level = 0.5)
 #'
-#' @keywords hiatus
 #' @export
 DatesHiatus <- function(a_chain, b_chain, level=0.95){
 

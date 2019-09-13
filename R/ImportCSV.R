@@ -43,7 +43,7 @@
 #'   #                       iterationColumn = 1, referenceYear = 1950, rowToWithdraw = "last")
 #'
 #' @seealso \code{\link{ImportCSV.BCal}}
-#' @keywords CSV
+#'
 #' @export
 #'
 ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',

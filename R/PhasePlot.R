@@ -34,13 +34,6 @@
 #'   PhasePlot(Phase.2.alpha, Phase.2.beta, level = 0.95, title = "Densities of Phase 2",
 #'             colors = FALSE, exportFile = "CharacteristicsOfPhase", exportFormat = "SVG")
 #'
-#' @keywords Bayesian statistics
-#' @keywords highest posterior density
-#' @keywords credible interval
-#' @keywords mean
-#' @keywords marginal posterior density
-#' @keywords individual phase
-#'
 #' @export
 PhasePlot <- function(PhaseMin_chain, PhaseMax_chain, level=0.95, title = "Characterisation of a group of dates", colors = TRUE, exportFile = NULL, exportFormat = "PNG", GridLength=1024){
 

@@ -34,7 +34,7 @@
 #' @examples
 #'   data(Events)
 #'   MultiHPD(Events, c(2,4,3), 0.95)
-#' @keywords highest posterior density
+#'
 #' @export
 #'
 MultiHPD <- function(data, position, level=0.95, roundingOfValue = 0){

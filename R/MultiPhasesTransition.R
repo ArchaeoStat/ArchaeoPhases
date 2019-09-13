@@ -39,10 +39,6 @@
 #'   # In this case, equivalent to
 #'   MultiPhasesTransition(Phases, position_minimum = c(4,2))
 #'
-#' @keywords Bayesian statistics
-#' @keywords transition between two phases
-#' @keywords temporal order
-#' @keywords succession of phases
 #' @export
 MultiPhasesTransition <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95){
 

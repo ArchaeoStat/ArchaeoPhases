@@ -26,9 +26,6 @@
 #'   data(Phases); attach(Phases)
 #'   PhasesGap(Phase.1.beta, Phase.2.alpha, 0.95)
 #'   PhasesGap(Phase.1.beta, Phase.2.alpha, 0.50)
-#' @keywords gap between two phases
-#' @keywords temporal order
-#' @keywords succession of phases
 #'
 #' @export
 PhasesGap <- function(Phase1Max_chain, Phase2Min_chain, level=0.95){

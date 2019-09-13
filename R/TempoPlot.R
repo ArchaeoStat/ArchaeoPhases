@@ -62,10 +62,6 @@
 #'   data(Events);
 #'   TempoPlot(Events[1:1000,], c(2:5), print.data.result = FALSE)
 #'   TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = FALSE)
-#' @keywords
-#' tempo plot
-#' credible interval
-#' mean
 #'
 #' @export
 TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,

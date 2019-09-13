@@ -25,9 +25,6 @@
 #'
 #' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
 #'
-#' @keywords phase time range
-#' @keywords marginal posterior density
-#'
 #' @examples
 #'   # Data extracted from ChronoModel software
 #'   data(Phases)
