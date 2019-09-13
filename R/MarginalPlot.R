@@ -17,7 +17,7 @@
 #' @param x.label Label of the x-axis.
 #' @param y.label Label of the y-axis.
 #' @param width Plot width in \code{units}.
-#' @param height Plot height in \code{}units}.
+#' @param height Plot height in \code{units}.
 #' @param units String recognized by the \code{ggsave()} function,
 #' one of "in", "cm", "mm".
 #' @param x.min Minimum x axis value.

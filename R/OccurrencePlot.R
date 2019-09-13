@@ -17,7 +17,7 @@
 #' @param labelXaxis Label of the x-axis.
 #' @param labelYaxis Label of the y-axis.
 #' @param language String indicating a language recognized by the
-#' \pkg{}toOrdinal} package.
+#' \pkg{toOrdinal} package.
 #' @param occurrence String to append to each y-axis tic label.
 #' @param width Plot width in \code{units}.
 #' @param height Plot height in \code{units}.
