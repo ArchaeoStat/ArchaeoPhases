@@ -1,0 +1,56 @@
+
+test_that("multiplication works", {
+  expect_equal(2 * 2, 4)
+})
+
+test_that("OxCal import works", {
+    oxcal <- ImportCSV("test-data/oxcal-ap-test.csv")
+    expect_match(names(oxcal)[3], "foo.late")
+    expect_equal(dim(oxcal), c(1000, 4))
+    expect_equal(oxcal[1,1], 0)
+    expect_equal(oxcal[1,2], 1026.41)
+    expect_equal(oxcal[1,3], 1048.33)
+    expect_equal(oxcal[1000, 1], 19980)
+    expect_equal(oxcal[1000, 2], 1135.31)
+    expect_equal(oxcal[1000, 3], 1167.27)
+})
+
+test_that("BCal import works with default bin width", {
+    bcal <- ImportCSV.BCal("test-data/bcal-ap-test-bin-width-1.csv")
+    expect_match(names(bcal)[3], "theta.1..test.")
+    expect_equal(dim(bcal), c(294246, 5))
+    expect_equal(bcal[1, 1], 1228)
+    expect_equal(bcal[1, 2], 1164)
+    expect_equal(bcal[1, 3], 1002)
+    expect_equal(bcal[1, 4], 979)
+    expect_equal(bcal[294246, 1], 1097)
+    expect_equal(bcal[294246, 2], 1087)
+    expect_equal(bcal[294246, 3], 1004)
+    expect_equal(bcal[294246, 4], 864)
+})
+
+test_that("BCal import works with custom bin width", {
+    bcal <- ImportCSV.BCal("test-data/bcal-ap-test-bin-width-17.csv", bin.width = 17)
+    expect_match(names(bcal)[3], "theta.1..test.")
+    expect_equal(dim(bcal), c(295941, 5))
+    expect_equal(bcal[1, 1], 1491)
+    expect_equal(bcal[1, 2], 1168)
+    expect_equal(bcal[1, 3], 1100)
+    expect_equal(bcal[1, 4], 216)
+    expect_equal(bcal[295941, 1], 1219)
+    expect_equal(bcal[295941, 2], 1083)
+    expect_equal(bcal[295941, 3], 1015)
+    expect_equal(bcal[295941, 4], 879)
+})
+
+test_that("ChronoModel import works", {
+    chronomodel <- ImportCSV("test-data/chronomodel-ap-test.csv/Chain_all_Events.csv")
+    expect_match(names(chronomodel)[3], "foo.early")
+    expect_equal(dim(chronomodel), c(30000, 3))
+    expect_equal(chronomodel[1, 1], 7001)
+    expect_equal(chronomodel[1, 2], 1073.91, tolerance = 0.001)
+    expect_equal(chronomodel[1, 3], 969.5635, tolerance = 0.00001)
+    expect_equal(chronomodel[30000, 1], 50002)
+    expect_equal(chronomodel[30000, 2], 1107.239, tolerance = 0.0001)
+    expect_equal(chronomodel[30000, 3], 984.2023, tolerance = 0.00001)
+})
