@@ -1,30 +1,55 @@
 ####################################
 ###   Tempo Activity plot   NEW Version 2017/08   ###
-
-#' @param data data frame containing the output of the MCMC algorithm
-#' @param position numeric vector containing the position of the column corresponding to the MCMC chains of interest
-#' @param plot.result a list containing the data to plot, typically the result of a previous run of TempoPlot()
-#' @param level probability corresponding to the level of confidence
-#' @param title title of the graph
-#' @param subtitle subtitle of the graph
-#' @param caption caption of the graph
-#' @param x.label label of the x-axis
-#' @param y.label label of the y-axis
-#' @param line.types type of the lines drawn on the graph in the order of legend.labels
-#' @param width width of the plot in units
-#' @param height height of the plot in units
-#' @param units units used to specify width and height.  One of "in", "cm", or "mm".  Default = "in".
-#' @param x.min minimum value for x axis
-#' @param x.max maximum value for x axis
-#' @param file the name of the graph (+ extension) that will be saved if chosen. Null by default.
-#' @param x.scale one of "calendar", "bp", or "elapsed"
-#' @param elapsed.origin.position if x.scale is "elapsed", the position of the column corresponding to the occurrence from which elapsed time is calculated
-#' @param newWindow whether the plot is drawn within a new window or not
-#' @param print.data.result If TRUE, the list containing the data to plot will be given
-#' @return a list containing the data to plot
+#' Plot the derivative of the tempo plot Bayesian estimate
+#'
+#' A statistical graphic designed for the archaeological study of rhythms of
+#' the long term that embodies a theory of archaeological evidence for the
+#' occurrence of events
+#' @param data Data frame containing the output of the MCMC algorithm.
+#' @param position Numeric vector containing the position of the column
+#' corresponding to the MCMC chains of interest.
+#' @param plot.result List containing the data to plot, typically the
+#' result of a previous run of \code{TempoActivityPlot()}.
+#' @param level Probability corresponding to the level of confidence.
+#' @param title Title of the plot.
+#' @param subtitle Subtitle of the plot.
+#' @param caption Caption of the plot.
+#' @param x.label Label of the x-axis.
+#' @param y.label Label of the y-axis.
+#' @param line.types Type of the lines drawn on the plot.
+#' @param width Width of the plot in \code{units}.
+#' @param height Height of the plot in \code{units}.
+#' @param units Units used to specify \code{width} and \code{height},
+#' one of "in" (default),"cm", or "mm".
+#' @param x.min Minimum value for x-axis.
+#' @param x.max Maximum value for x-axis.
+#' @param file Name of the file to be saved if specified.
+#' If \code{Null}, then no file is saved.
+#' @param x.scale One of "calendar", "bp", or "elapsed".
+#' @param elapsed.origin.position If \code{x.scale} is "elapsed", the position
+#' of the column corresponding to the event from which elapsed time is calculated.
+#' @param newWindow Whether or not the plot is drawn within a new window .
+#' @param print.data.result If \code{TRUE}, the list containing the data to plot
+#' is returned.
+#'
+#' @return \code{NULL}, called for its side effects.  It may also return a list
+#' containing the data to plot (if \code{print.data.result = TRUE}). The result
+#' is given in calendar years (BC/AD).
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
+#'
+#' @author  Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}
+#'
+#' @references
+#' Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratification.
+#' Journal of Archaeological Science, 71, 1--9.
+#'
+#' @examples
+#'   data(Events);
+#'   TempoActivityPlot(Events[1:1000,], c(2:5), print.data.result=FALSE)
+#'   TempoActivityPlot(Events[1:1000,], c(2:5), print.data.result=FALSE)
+#'
 #' @export
-#' 
-
 TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
                                title = "Activity plot",
                                subtitle = NULL, caption = "ArcheoPhases",
@@ -32,9 +57,9 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
                                y.label = "Activity",
                                line.types = c("solid"),
                                width = 7, height = 7, units = "in",
-                               x.min = NULL, x.max = NULL, 
+                               x.min = NULL, x.max = NULL,
                                file = NULL, x.scale = "calendar",
-                               elapsed.origin.position = NULL, 
+                               elapsed.origin.position = NULL,
                                newWindow=TRUE, print.data.result = FALSE)
 {
   if (is.null(plot.result))
@@ -93,7 +118,7 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
     moy = apply(F, 2, mean)
     x<-t[-1]
     y<-diff(moy)/diff(t)
-    
+
     if (x.scale == "bp") {
       result = list(t = 1950 - x, y = y)
     }
@@ -107,7 +132,7 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
   }
   result.mat <- cbind(t=x, y=y)
   plot.result <- as.data.frame(result.mat)
-  
+
   h <- ggplot2::ggplot(data = plot.result, ggplot2::aes(x = t, y = y))
   h <- h + ggplot2::scale_linetype_manual(values = line.types)
   h <- h + ggplot2::geom_line()
@@ -128,7 +153,7 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
     dev.new(height = height, width = width)
   }
   print(h)
-  
+
   ## If the result is desired
   if (print.data.result == TRUE){
     result

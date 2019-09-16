@@ -7,10 +7,10 @@ Date: 2018-01-20
 Author: Anne Philippe [aut, cre],
     Marie-Anne Vibet [aut],
     Thomas S. Dye [ctb]
-Authors@R: c( 
+Authors@R: c(
               person("Anne", "Philippe", role = c("aut", "cre"), email = "anne.philippe@univ-nantes.fr"),
               person("Marie-Anne", "Vibet", role = c("aut")),
-              person("Thomas S.", "Dye", role = c("ctb")) 
+              person("Thomas S.", "Dye", role = c("ctb"))
               )
 Maintainer: Anne Philippe <anne.philippe@univ-nantes.fr>
 Description: Provides a list of functions for the statistical analysis of archaeological dates and groups of dates. It is based on the post-processing of the Markov Chains whose stationary distribution is the posterior distribution of a series of dates. Such output can be simulated by different applications as for instance 'ChronoModel' (see <http://www.chronomodel.fr>), 'Oxcal' (see <https://c14.arch.ox.ac.uk/oxcal.html>) or 'BCal' (see <http://bcal.shef.ac.uk/>). The only requirement is to have a csv file containing a sample from the posterior distribution.
@@ -18,9 +18,13 @@ License: GPL-3
 Depends: R (>= 2.10), coda, hdrcde
 Imports: stats, utils, graphics, grDevices, shiny, shinythemes, DT,
         readr, ggthemes, toOrdinal, ggplot2, ggalt, reshape2
-Suggests: knitr, rmarkdown
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 2.1.0)
 VignetteBuilder: knitr
 BugReports: https://github.com/marieannevibet/ArchaeoPhases/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
 NeedsCompilation: no
+Encoding: UTF-8
 Packaged: 2018-01-18 10:58:11 UTC; vibet
