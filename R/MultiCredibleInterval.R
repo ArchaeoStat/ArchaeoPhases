@@ -10,7 +10,7 @@
 #'
 #' @details A \eqn{(100 * level)}\% credible interval is an interval that keeps \eqn{N * (1 -level)} elements of the sample outside the interval.
 #' The \eqn{(100*level)}\% credible interval is the shortest of the intervals
-#' @param Data data frame containing the output of the MCMC algorithm.
+#' @param data data frame containing the output of the MCMC algorithm.
 #' @param position Numeric vector containing the position of the column
 #' corresponding to the MCMC chains of interest.
 #' @param level Probability corresponding to the level of confidence used

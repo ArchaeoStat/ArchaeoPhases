@@ -16,11 +16,12 @@
 #' @param x.scale One of "calendar" for calendar years,
 #' "BP" for years before present,
 #' or "elapsed" for time elapsed from a specified origin.
-#' @param elapsed.origin.position Position of the column to use
+#' @param elapsed.origin Position of the column to use
 #' as the origin for elapsed time calculations.
 #' @param title Title of the plot.
 #' @param subtitle Subtitle of the plot.
 #' @param caption Caption of the plot.
+#' @param legend.title Title for the legend.
 #' @param x.label Label of the x-axis.
 #' @param y.label Label of the y-axis.
 #' @param width Plot width in \code{units}.
@@ -49,6 +50,9 @@
 #' @examples
 #'   data(Events);
 #'   MultiMarginalPlot(Events, position = c(2,3,4), level = 0.95)
+#'
+#' @importFrom stats density
+#' @importFrom grDevices dev.new
 #'
 #' @export
 MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,

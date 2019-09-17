@@ -13,8 +13,6 @@
 #' corresponding to the MCMC chains of interest.
 #' @param plot.result List containing the data to plot,
 #' typically the result of a previous run of \code{TempoPlot()}.
-#' @param print.data.result If \code{TRUE}, a list containing the data to plot
-#' will be returned.
 #' @param level Probability corresponding to the level of confidence.
 #' @param count If \code{TRUE} the counting process is a number,
 #' otherwise it is a probability.
@@ -69,6 +67,9 @@
 #'   data(Events);
 #'   TempoPlot(Events[1:1000,], c(2:5), print.data.result = FALSE)
 #'   TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = FALSE)
+#'
+#' @importFrom stats ecdf sd qnorm
+#' @importFrom grDevices dev.new
 #'
 #' @export
 TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
