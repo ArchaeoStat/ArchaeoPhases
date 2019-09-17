@@ -44,6 +44,11 @@
 #'                  exportFile = "Succession", exportFormat = "PNG")
 #'
 #' @return \code{NULL}, called for its side effects
+#'
+#' @importFrom stats density
+#' @importFrom grDevices png svg dev.off
+#' @importFrom graphics par plot lines axis segments text points
+#'
 #' @export
 
 SuccessionPlot <- function(Phase1Min_chain, Phase1Max_chain, Phase2Min_chain, Phase2Max_chain, level=0.95,  title = "Characterisation of a succession of groups",

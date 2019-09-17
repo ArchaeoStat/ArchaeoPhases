@@ -16,7 +16,7 @@
 #' @param level Probability corresponding to the desired level of confidence.
 #'
 #' @details
-#' For each \code{i}, \code{MultiPhasesTimeRange()} computes the time range interval
+#' For each \code{i}, \code{MultiPhaseTimeRange()} computes the time range interval
 #' for the phase defined by its minimum \code{position_minimum[i]} and
 #' its maximum \code{position_maximum[i]}. The default value of
 #' \code{position_maximum} corresponds to CSV files exported from
@@ -32,9 +32,9 @@
 #'   # List of the name of the groups
 #'   names(Phases)
 #'   # Stipulating position_maximum
-#'   MultiPhasesTimeRange(Phases, position_minimum = c(4,2), position_maximum = c(5,3))
+#'   MultiPhaseTimeRange(Phases, position_minimum = c(4,2), position_maximum = c(5,3))
 #'   # In this case, equivalent to
-#'   MultiPhasesTimeRange(Phases, position_minimum = c(4,2))
+#'   MultiPhaseTimeRange(Phases, position_minimum = c(4,2))
 #'
 #' @return
 #' A matrix of values containing the level of confidence and the endpoints

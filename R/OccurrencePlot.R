@@ -8,6 +8,8 @@
 #' @param data Data frame containing the output of the MCMC algorithm.
 #' @param position Numeric vector containing the position of the column
 #' corresponding to the MCMC chains of interest.
+#' @param plot.result If \code{TRUE}, then draw a plot on the display,
+#' else suppress drawing.
 #' @param level Probability corresponding to the level of confidence.
 #' @param intervals One of "CI" for credible intervals or
 #' "HPD" for highest posterior density intervals.
@@ -56,6 +58,9 @@
 #' @examples
 #'   data(Events);
 #'   OccurrencePlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
+#'
+#' @import toOrdinal
+#' @importFrom grDevices dev.new
 #'
 #' @export
 OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, intervals = "CI",

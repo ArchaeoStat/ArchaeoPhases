@@ -27,6 +27,9 @@ density is to be estimated (for \code{density()} function).}
 "BP" for years before present,
 or "elapsed" for time elapsed from a specified origin.}
 
+\item{elapsed.origin}{Position of the column to use
+as the origin for elapsed time calculations.}
+
 \item{title}{Title of the plot.}
 
 \item{subtitle}{Subtitle of the plot.}
@@ -43,6 +46,8 @@ or "elapsed" for time elapsed from a specified origin.}
 
 \item{x.max}{Maximum x-axis value.}
 
+\item{legend.title}{Title for the legend.}
+
 \item{height}{Plot height in \code{units}.}
 
 \item{width}{Plot width in \code{units}.}
@@ -54,9 +59,6 @@ one of "in", "cm", "mm".}
 default = \code{NULL}.}
 
 \item{newWindow}{Whether or not the plot is drawn within a new window.}
-
-\item{elapsed.origin.position}{Position of the column to use
-as the origin for elapsed time calculations.}
 }
 \value{
 \code{NULL}, called for its side effects

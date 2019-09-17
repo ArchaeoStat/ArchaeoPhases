@@ -8,6 +8,8 @@ MultiCredibleInterval(data, position, level = 0.95,
   roundingOfValue = 0)
 }
 \arguments{
+\item{data}{data frame containing the output of the MCMC algorithm.}
+
 \item{position}{Numeric vector containing the position of the column
 corresponding to the MCMC chains of interest.}
 
@@ -15,8 +17,6 @@ corresponding to the MCMC chains of interest.}
 for the credible interval.}
 
 \item{roundingOfValue}{Integer indicating the number of decimal places.}
-
-\item{Data}{data frame containing the output of the MCMC algorithm.}
 }
 \value{
 Returns a matrix of values containing the level of confidence and the endpoints of

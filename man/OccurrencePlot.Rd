@@ -20,6 +20,9 @@ OccurrencePlot(data, position, plot.result = NULL, level = 0.95,
 \item{position}{Numeric vector containing the position of the column
 corresponding to the MCMC chains of interest.}
 
+\item{plot.result}{If \code{TRUE}, then draw a plot on the display,
+else suppress drawing.}
+
 \item{level}{Probability corresponding to the level of confidence.}
 
 \item{intervals}{One of "CI" for credible intervals or

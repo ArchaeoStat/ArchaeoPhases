@@ -35,6 +35,8 @@
 #'   data(Events)
 #'   MultiHPD(Events, c(2,4,3), 0.95)
 #'
+#' @importFrom hdrcde hdr
+#'
 #' @export
 #'
 MultiHPD <- function(data, position, level=0.95, roundingOfValue = 0){

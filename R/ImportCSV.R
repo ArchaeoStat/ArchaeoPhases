@@ -51,6 +51,8 @@
 #'
 #' @seealso \code{\link{ImportCSV.BCal}}
 #'
+#' @importFrom utils read.csv
+#'
 #' @export
 #'
 ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',

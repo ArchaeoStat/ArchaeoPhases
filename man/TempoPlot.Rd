@@ -77,9 +77,6 @@ calculated.}
 
 \item{print.data.result}{If \code{TRUE}, a list containing the data to plot
 will be returned.}
-
-\item{print.data.result}{If \code{TRUE}, a list containing the data to plot
-will be returned.}
 }
 \value{
 \code{NULL}, called for its side effects.  It may also return a list containing the

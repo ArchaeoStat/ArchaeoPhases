@@ -4,16 +4,18 @@
 
 #' Create an \code{mcmc.list} object for \pkg{coda} users
 #'
-#' This wrapper function extracts parallel chains from a data frame to create an \code{mcmc.list}
+#' This wrapper function extracts parallel chains from a data frame to
+#' create an \code{mcmc.list}
 #' object for use with \pkg{coda} diagnostic tools
 #'
 #' @param data Data frame containing the output of the MCMC algorithm.
 #'
 #' @param numberChains Number of parallel chains, default = 1.
 #'
-#' @param iterationColumn Column number corresponding to the iteration values, default = \code{NULL}.
+#' @param iterationColumn Column number corresponding to the iteration values,
+#' default = \code{NULL}.
 #'
-#' @return  An \code{mcmc.list} object
+#' @return  An \code{mcmc.list} object.
 #'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr} and
 #'
@@ -28,7 +30,10 @@
 #'   # contains only one date. This induces colinearity problems.
 #'   gelman.diag(mcmcList, multivariate=FALSE)
 #'
-#' @seealso \code{\link{coda}}
+#' @seealso \code{\link[coda]{mcmc}}
+#' @seealso \code{\link[coda]{mcmc.list}}
+#'
+#' @importFrom coda mcmc.list mcmc
 #'
 #' @export
 

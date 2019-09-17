@@ -37,6 +37,10 @@
 #'   PhaseDurationPlot(Phase.1.alpha, Phase.1.beta, 0.95, "Duration of Phase 1")
 #'   PhaseDurationPlot(Phase.2.alpha, Phase.2.beta, 0.95, "Duration of Phase 2", colors = FALSE)
 #'
+#' @importFrom stats density
+#' @importFrom grDevices dev.off png svg
+#' @importFrom graphics par plot axis segments points legend
+#'
 #' @export
 PhaseDurationPlot <- function(PhaseMin_chain, PhaseMax_chain, level=0.95, title = "Duration of a group of dates", colors = TRUE, exportFile = NULL, exportFormat = "PNG", GridLength=1024){
 
