@@ -145,7 +145,7 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #' \dontrun{
 #'   # Import of MCMC output from OxCal
 #'   data(Events)
-#'   write.csv(Events, "events.csv", row.names=FALSE)
+#'   write.csv(Events, "events.csv", row.names = FALSE)
 #'   fishpond <- read_oxcal("events.csv")
 #'
 #'   # Read from connection

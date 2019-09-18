@@ -23,12 +23,12 @@
 #'
 #' @examples
 #'   data(Events)
-#'   mcmcList = coda.mcmc(data = Events, numberChains = 3, iterationColumn=1)
+#'   mcmcList = coda.mcmc(data = Events, numberChains = 3, iterationColumn = 1)
 #'   plot(mcmcList)
 #'   gelman.diag(mcmcList)
 #'   # The multivariate criterion can not be evaluated when a phase
 #'   # contains only one date. This induces colinearity problems.
-#'   gelman.diag(mcmcList, multivariate=FALSE)
+#'   gelman.diag(mcmcList, multivariate = FALSE)
 #'
 #' @seealso \code{\link[coda]{mcmc}}
 #' @seealso \code{\link[coda]{mcmc.list}}

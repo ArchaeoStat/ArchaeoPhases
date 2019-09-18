@@ -57,7 +57,7 @@
 #'
 #' @examples
 #'   data(Events);
-#'   OccurrencePlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
+#'   OccurrencePlot(Events[1:1000, ], c(2:5),  print.data.result = FALSE)
 #'
 #' @import toOrdinal
 #' @importFrom grDevices dev.new

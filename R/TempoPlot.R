@@ -65,8 +65,8 @@
 #'
 #' @examples
 #'   data(Events);
-#'   TempoPlot(Events[1:1000,], c(2:5), print.data.result = FALSE)
-#'   TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = FALSE)
+#'   TempoPlot(Events[1:1000, ], c(2:5), print.data.result = FALSE)
+#'   TempoPlot(Events[1:1000, ], c(2:5), count = TRUE,  print.data.result = FALSE)
 #'
 #' @importFrom stats ecdf sd qnorm
 #' @importFrom grDevices dev.new

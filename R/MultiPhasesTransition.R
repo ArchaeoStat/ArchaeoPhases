@@ -36,9 +36,9 @@
 #'   # List of the name of the groups
 #'   names(Phases)
 #'   # Stipulating position_maximum
-#'   MultiPhasesTransition(Phases, position_minimum = c(4,2), position_maximum = c(5,3))
+#'   MultiPhasesTransition(Phases, position_minimum = c(4, 2), position_maximum = c(5, 3))
 #'   # In this case, equivalent to
-#'   MultiPhasesTransition(Phases, position_minimum = c(4,2))
+#'   MultiPhasesTransition(Phases, position_minimum = c(4, 2))
 #'
 #' @export
 MultiPhasesTransition <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95){
