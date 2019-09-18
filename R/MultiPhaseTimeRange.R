@@ -32,9 +32,9 @@
 #'   # List of the name of the groups
 #'   names(Phases)
 #'   # Stipulating position_maximum
-#'   MultiPhaseTimeRange(Phases, position_minimum = c(4,2), position_maximum = c(5,3))
+#'   MultiPhaseTimeRange(Phases, position_minimum = c(4, 2), position_maximum = c(5, 3))
 #'   # In this case, equivalent to
-#'   MultiPhaseTimeRange(Phases, position_minimum = c(4,2))
+#'   MultiPhaseTimeRange(Phases, position_minimum = c(4, 2))
 #'
 #' @return
 #' A matrix of values containing the level of confidence and the endpoints

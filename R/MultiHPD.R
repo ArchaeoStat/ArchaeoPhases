@@ -31,9 +31,10 @@
 #' @references
 #' Hyndman, R.J. (1996) Computing and graphing highest density regions.
 #' American Statistician, 50, 120-126.
+#'
 #' @examples
 #'   data(Events)
-#'   MultiHPD(Events, c(2,4,3), 0.95)
+#'   MultiHPD(Events, c(2, 4, 3), 0.95)
 #'
 #' @importFrom hdrcde hdr
 #'

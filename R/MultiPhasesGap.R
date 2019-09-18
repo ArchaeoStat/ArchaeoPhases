@@ -37,9 +37,9 @@
 #'   # List of the name of the groups
 #'   names(Phases)
 #'   # Stipulating position_maximum
-#'   MultiPhasesGap(Phases, position_minimum = c(4,2), position_maximum = c(5,3))
+#'   MultiPhasesGap(Phases, position_minimum = c(4, 2), position_maximum = c(5, 3))
 #'   # In this case, equivalent to
-#'   MultiPhasesGap(Phases, position_minimum = c(4,2))
+#'   MultiPhasesGap(Phases, position_minimum = c(4, 2))
 #'
 #' @export
 MultiPhasesGap <- function(data, position_minimum, position_maximum = position_minimum+1, level=0.95){

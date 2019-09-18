@@ -49,7 +49,7 @@
 #'
 #' @examples
 #'   data(Events);
-#'   MultiMarginalPlot(Events, position = c(2,3,4), level = 0.95)
+#'   MultiMarginalPlot(Events, position = c(2, 3, 4), level = 0.95)
 #'
 #' @importFrom stats density
 #' @importFrom grDevices dev.new
