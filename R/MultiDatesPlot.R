@@ -51,6 +51,9 @@
 #'   MultiDatesPlot(Events, c(2,4,3), level = 0.95, intervals ="HPD", title = "Plot of HPD intervals")
 #'   MultiDatesPlot(Events, c(2,4,3), level = 0.95, intervals ="HPD", , order="increasing")
 #'
+#' @importFrom grDevices dev.new
+#' @importFrom stats reorder
+#'
 #' @export
 MultiDatesPlot <- function (data, position, level = 0.95, roundingOfValue = 0,
                             intervals = "CI", order ="default",

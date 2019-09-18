@@ -1,56 +1,70 @@
 
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
-})
-
-test_that("OxCal import works", {
-    oxcal <- ImportCSV("test-data/oxcal-ap-test.csv")
-    expect_match(names(oxcal)[3], "foo.late")
+test_that("ImportCSV works with OxCal", {
+    oxcal <- ImportCSV("test-data/oxcal.csv")
     expect_equal(dim(oxcal), c(1000, 4))
-    expect_equal(oxcal[1,1], 0)
-    expect_equal(oxcal[1,2], 1026.41)
-    expect_equal(oxcal[1,3], 1048.33)
-    expect_equal(oxcal[1000, 1], 19980)
-    expect_equal(oxcal[1000, 2], 1135.31)
-    expect_equal(oxcal[1000, 3], 1167.27)
+    expect_equivalent(names(oxcal),
+                      c("Pass", "foo.early", "foo.late", "X"))
+    expect_equivalent(oxcal[1, 1:3], c(0, 1026.41, 1048.33),
+                      tolerance = 0.01)
+    expect_equivalent(oxcal[1000, 1:3], c(19980, 1135.31, 1167.27),
+                      tolerance = 0.01)
 })
 
-test_that("BCal import works with default bin width", {
-    bcal <- ImportCSV.BCal("test-data/bcal-ap-test-bin-width-1.csv")
-    expect_match(names(bcal)[3], "theta.1..test.")
+test_that("read_oxcal works", {
+    oxcal <- read_oxcal("test-data/oxcal.csv")
+    expect_equal(dim(oxcal), c(1000, 2))
+    expect_equivalent(names(oxcal), c("foo-early", "foo-late"))
+    expect_equivalent(as.data.frame(oxcal)[1, ], c(1026.41, 1048.33),
+                      tolerance = 0.01)
+    expect_equivalent(as.data.frame(oxcal)[1000, ], c(1135.31, 1167.27),
+                      tolerance = 0.01)
+})
+
+test_that("ImportCSV works with BCal default bin width", {
+    bcal <- ImportCSV.BCal("test-data/bcal-1.csv")
     expect_equal(dim(bcal), c(294246, 5))
-    expect_equal(bcal[1, 1], 1228)
-    expect_equal(bcal[1, 2], 1164)
-    expect_equal(bcal[1, 3], 1002)
-    expect_equal(bcal[1, 4], 979)
-    expect_equal(bcal[294246, 1], 1097)
-    expect_equal(bcal[294246, 2], 1087)
-    expect_equal(bcal[294246, 3], 1004)
-    expect_equal(bcal[294246, 4], 864)
+    expect_equivalent(names(bcal), c("beta.1..test.", "theta.2..test.",
+                                     "theta.1..test.", "alpha.1..test.", "X"))
+    expect_equivalent(bcal[1, 1:4], c(1228, 1164, 1002, 979))
+    expect_equivalent(bcal[294246, 1:4], c(1097, 1087, 1004, 864))
 })
 
-test_that("BCal import works with custom bin width", {
-    bcal <- ImportCSV.BCal("test-data/bcal-ap-test-bin-width-17.csv", bin.width = 17)
-    expect_match(names(bcal)[3], "theta.1..test.")
+## This won't work with malformed csv files
+## test_that("read_bcal works with default bin width", {
+##     bcal <- read_bcal("test-data/bcal-1.csv")
+##     expect_equal(dim(bcal), c(294246, 4))
+##     expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
+##                                         "theta 1 (test)", "alpha 1 (test)"))
+##     expect_equivalent(as.data.frame(bcal)[1, ], c(1228, 1164, 1002, 979))
+##     expect_equivalent(as.data.frame(bcal)[294246, ], c(1097, 1087, 1004, 864))
+## })
+
+test_that("ImportCSV works with BCal custom bin width", {
+    bcal <- ImportCSV.BCal("test-data/bcal-17.csv",
+                           bin.width = 17)
     expect_equal(dim(bcal), c(295941, 5))
-    expect_equal(bcal[1, 1], 1491)
-    expect_equal(bcal[1, 2], 1168)
-    expect_equal(bcal[1, 3], 1100)
-    expect_equal(bcal[1, 4], 216)
-    expect_equal(bcal[295941, 1], 1219)
-    expect_equal(bcal[295941, 2], 1083)
-    expect_equal(bcal[295941, 3], 1015)
-    expect_equal(bcal[295941, 4], 879)
+    expect_equivalent(names(bcal), c("beta.1..test.", "theta.2..test.",
+                                     "theta.1..test.", "alpha.1..test.", "X"))
+    expect_equivalent(bcal[1, 1:4], c(1491, 1168, 1100, 216))
+    expect_equivalent(bcal[295941, 1:4], c(1219, 1083, 1015, 879))
 })
 
-test_that("ChronoModel import works", {
-    chronomodel <- ImportCSV("test-data/chronomodel-ap-test.csv/Chain_all_Events.csv")
-    expect_match(names(chronomodel)[3], "foo.early")
+test_that("ImportCSV works with ChronoModel", {
+    chronomodel <- ImportCSV("test-data/cm/Chain_all_Events.csv")
     expect_equal(dim(chronomodel), c(30000, 3))
-    expect_equal(chronomodel[1, 1], 7001)
-    expect_equal(chronomodel[1, 2], 1073.91, tolerance = 0.001)
-    expect_equal(chronomodel[1, 3], 969.5635, tolerance = 0.00001)
-    expect_equal(chronomodel[30000, 1], 50002)
-    expect_equal(chronomodel[30000, 2], 1107.239, tolerance = 0.0001)
-    expect_equal(chronomodel[30000, 3], 984.2023, tolerance = 0.00001)
+    expect_equivalent(names(chronomodel), c("iter", "foo.late", "foo.early"))
+    expect_equivalent(as.vector(chronomodel[1, ]),
+                 c(7001, 1073.91, 969.5635), tolerance = 0.001)
+    expect_equivalent(as.vector(chronomodel[30000, ]), c(50002, 1107.239, 984.2023),
+                 tolerance = 0.001)
+})
+
+test_that("read_chronomodel works", {
+    cm <- read_chronomodel("test-data/cm/Chain_all_Events.csv")
+    expect_equal(dim(cm), c(30000, 2))
+    expect_equivalent(names(cm), c("foo-late", "foo-early"))
+    expect_equivalent(as.data.frame(cm)[1, ],
+                      c(1073.91, 969.5635), tolerance = 0.001)
+    expect_equivalent(as.data.frame(cm)[30000, ], c(1107.239, 984.2023),
+                      tolerance = 0.001)
 })

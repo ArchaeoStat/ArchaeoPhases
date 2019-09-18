@@ -30,6 +30,8 @@
 #'                            exportFile = "MinMaxPhases.csv")
 #' @export
 #'
+#' @importFrom utils write.csv
+#'
 CreateMinMaxGroup <- function(data, position, name ="Phase", add=NULL, exportFile=NULL){
 
   # importing the CSV file

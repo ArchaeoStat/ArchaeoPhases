@@ -11,13 +11,15 @@ coda.mcmc(data, numberChains = 1, iterationColumn = NULL)
 
 \item{numberChains}{Number of parallel chains, default = 1.}
 
-\item{iterationColumn}{Column number corresponding to the iteration values, default = \code{NULL}.}
+\item{iterationColumn}{Column number corresponding to the iteration values,
+default = \code{NULL}.}
 }
 \value{
-An \code{mcmc.list} object
+An \code{mcmc.list} object.
 }
 \description{
-This wrapper function extracts parallel chains from a data frame to create an \code{mcmc.list}
+This wrapper function extracts parallel chains from a data frame to
+create an \code{mcmc.list}
 object for use with \pkg{coda} diagnostic tools
 }
 \examples{
@@ -31,7 +33,9 @@ object for use with \pkg{coda} diagnostic tools
 
 }
 \seealso{
-\code{\link{coda}}
+\code{\link[coda]{mcmc}}
+
+\code{\link[coda]{mcmc.list}}
 }
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr} and

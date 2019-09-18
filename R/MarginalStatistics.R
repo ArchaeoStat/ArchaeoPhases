@@ -18,8 +18,8 @@
 #' \item{title}{The title of the summary statistics}
 #' \item{mean}{The mean of the MCMC chain. Use of \code{mean()} function.}
 #' \item{map }{The maximum a posteriori of the MCMC chain. Use of \code{hdr()} function.}
-#' \item{sd}{The standard deviation of the MCMC chain. Use of \code{sd()} function.
-#' \item{Q1, median, Q3 }{The quantiles of the MCMC chain corresponding to 0.25, 0.50 and 0.75. Use of \code{quantile} function.}}
+#' \item{sd}{The standard deviation of the MCMC chain. Use of \code{sd()} function.}
+#' \item{Q1, median, Q3 }{The quantiles of the MCMC chain corresponding to 0.25, 0.50 and 0.75. Use of \code{quantile} function.}
 #' \item{CI}{The credible interval corresponding to the desired level. Use of \code{CredibleInterval()} function.}
 #' \item{HPDR}{The highest posterior density regions corresponding to the desired level. Use of \code{hdr()} function.}
 #' }
@@ -35,6 +35,9 @@
 #'   data(Events); attach(Events)
 #'   MarginalStatistics(Event.1)
 #'   MarginalStatistics(Event.2, level = 0.90)
+#'
+#' @importFrom stats quantile
+#' @importFrom hdrcde hdr
 #'
 #' @export
 MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){

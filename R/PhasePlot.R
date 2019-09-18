@@ -34,6 +34,10 @@
 #'   PhasePlot(Phase.2.alpha, Phase.2.beta, level = 0.95, title = "Densities of Phase 2",
 #'             colors = FALSE, exportFile = "CharacteristicsOfPhase", exportFormat = "SVG")
 #'
+#' @importFrom stats density
+#' @importFrom grDevices png svg dev.off
+#' @importFrom graphics par plot lines axis segments points legend
+#'
 #' @export
 PhasePlot <- function(PhaseMin_chain, PhaseMax_chain, level=0.95, title = "Characterisation of a group of dates", colors = TRUE, exportFile = NULL, exportFormat = "PNG", GridLength=1024){
 

@@ -42,7 +42,7 @@ TempoPlot(KADatesChronoModel, c(2:17), level = 0.95, newWindow= FALSE)
 From these graphs, we can see that the highest part of the sampled activity is dated between -45 000 to -35 000 but two dates are younger, at about -32 000 and -28 000.
 
 ### Tempo Activity Plot
-The activity plot displays the derivative of the Bayes estimate of the Tempo plot. 
+The activity plot displays the derivative of the Bayes estimate of the Tempo plot.
 It is an other way to see changes over time.
 
 The code is the following (Warning : be patient. The execution time depends on the number of dates included.)
@@ -54,7 +54,6 @@ TempoActivityPlot(KADatesChronoModel, c(2:17), level = 0.95, newWindow= FALSE)
 ### Occurrence Plot
 The Occurrence plot calculates the calendar date t corresponding to the smallest date such that the number of events observed before t is equal to k, for k =[(1, 16)].
 The Occurrence plot draws the credible intervals or the highest posterior density (HPD) region of those dates associated to a desired level of confidence.
-
 ```{r,fig.align='center',fig.width=6,fig.height=5}
 data("KADatesChronoModel")
 OccurrencePlot(KADatesChronoModel, c(2:17), level = 0.95, newWindow= FALSE)
@@ -62,8 +61,8 @@ OccurrencePlot(KADatesChronoModel, c(2:17), level = 0.95, newWindow= FALSE)
 
 ## References
 
-For a description of the statiscal aspects of the functions implemented in ArchaeoPhases version 1.0 :  
-Anne Philippe, Marie-Anne Vibet. (2017). Analysis of Archaeological Phases using the CRAN Package 'ArchaeoPhases'. HAL, hal-01347895, version 3. 
+For a description of the statiscal aspects of the functions implemented in ArchaeoPhases version 1.0 :
+Anne Philippe, Marie-Anne Vibet. (2017). Analysis of Archaeological Phases using the CRAN Package 'ArchaeoPhases'. HAL, hal-01347895, version 3.
 
 For a use of the tempo plot defined by Dye :
 Dye, T.S. (2016). Long-term rhythms in the development of Hawaiian social stratification. Journal of Archaeological Science, 71, 1--9
