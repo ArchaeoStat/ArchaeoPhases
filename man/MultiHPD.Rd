@@ -34,7 +34,7 @@ Highest posterior density function region using the function
 }
 \examples{
   data(Events)
-  MultiHPD(Events, c(2,4,3), 0.95)
+  MultiHPD(Events, c(2, 4, 3), 0.95)
 
 }
 \references{

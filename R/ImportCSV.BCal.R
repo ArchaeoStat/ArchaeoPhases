@@ -17,10 +17,10 @@
 #'   write.csv(Fishpond, "fishpond_MCMC.csv", row.names = FALSE)
 #'   Fishpond = ImportCSV.BCal("fishpond_MCMC.csv", bin.width = 1)
 #'
-#' \dontrun {
+#' \dontrun{
 #'   # equivalent call
 #'   Fishpond2 = ImportCSV("fishpond_MCMC.csv", dec = '.', sep=',', referenceYear = 1950,
-                                        #rowToWithdraw = "last", bin.width = 1)
+#'                         rowToWithdraw = "last", bin.width = 1)
 #' }
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr},
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}, and

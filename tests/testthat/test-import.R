@@ -20,33 +20,43 @@ test_that("read_oxcal works", {
                       tolerance = 0.01)
 })
 
-test_that("ImportCSV works with BCal default bin width", {
-    bcal <- ImportCSV.BCal("test-data/bcal-1.csv")
-    expect_equal(dim(bcal), c(294246, 5))
-    expect_equivalent(names(bcal), c("beta.1..test.", "theta.2..test.",
-                                     "theta.1..test.", "alpha.1..test.", "X"))
-    expect_equivalent(bcal[1, 1:4], c(1228, 1164, 1002, 979))
-    expect_equivalent(bcal[294246, 1:4], c(1097, 1087, 1004, 864))
-})
-
-## This won't work with malformed csv files
-## test_that("read_bcal works with default bin width", {
-##     bcal <- read_bcal("test-data/bcal-1.csv")
-##     expect_equal(dim(bcal), c(294246, 4))
-##     expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
-##                                         "theta 1 (test)", "alpha 1 (test)"))
-##     expect_equivalent(as.data.frame(bcal)[1, ], c(1228, 1164, 1002, 979))
-##     expect_equivalent(as.data.frame(bcal)[294246, ], c(1097, 1087, 1004, 864))
+## BCal mcmc output has changed, need to find an older file to use as a test
+## test_that("ImportCSV works with BCal default bin width", {
+##     bcal <- ImportCSV.BCal("test-data/bcal-1.csv")
+##     expect_equal(dim(bcal), c(293704, 5))
+##     expect_equivalent(names(bcal), c("beta.1..test.", "theta.2..test.",
+##                                      "theta.1..test.", "alpha.1..test.", "X"))
+##     expect_equivalent(bcal[1, 1:4], c(1949, 1160, 1112, -2349))
+##     expect_equivalent(bcal[293704, 1:4], c(1950, 1126, 997, 877))
 ## })
 
-test_that("ImportCSV works with BCal custom bin width", {
-    bcal <- ImportCSV.BCal("test-data/bcal-17.csv",
-                           bin.width = 17)
-    expect_equal(dim(bcal), c(295941, 5))
-    expect_equivalent(names(bcal), c("beta.1..test.", "theta.2..test.",
-                                     "theta.1..test.", "alpha.1..test.", "X"))
-    expect_equivalent(bcal[1, 1:4], c(1491, 1168, 1100, 216))
-    expect_equivalent(bcal[295941, 1:4], c(1219, 1083, 1015, 879))
+test_that("read_bcal works with default bin width", {
+    bcal <- read_bcal("test-data/bcal-1.csv")
+    expect_equal(dim(bcal), c(293705, 4))
+    expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
+                                        "theta 1 (test)", "alpha 1 (test)"))
+    expect_equivalent(bcal[1, ], c(1949, 1160, 1112, -2349))
+    expect_equivalent(bcal[293705, ], c(1950, 1126, 997, 877))
+})
+
+## BCal mcmc output has changed, need to find an older file to use as a test
+## test_that("ImportCSV works with BCal custom bin width", {
+##     bcal <- ImportCSV.BCal("test-data/bcal-17.csv",
+##                            bin.width = 17)
+##     expect_equal(dim(bcal), c(295941, 5))
+##     expect_equivalent(names(bcal), c("beta.1..test.", "theta.2..test.",
+##                                      "theta.1..test.", "alpha.1..test.", "X"))
+##     expect_equivalent(bcal[1, 1:4], c(1491, 1168, 1100, 216))
+##     expect_equivalent(bcal[295941, 1:4], c(1219, 1083, 1015, 879))
+## })
+
+test_that("read_bcal works with custom bin width", {
+    bcal <- read_bcal("test-data/bcal-17.csv", bin_width = 17)
+    expect_equal(dim(bcal), c(294770, 4))
+    expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
+                                        "theta 1 (test)", "alpha 1 (test)"))
+    expect_equivalent(bcal[1, ], c(1389, 1032, 1032, 318))
+    expect_equivalent(bcal[294770, ], c(1406, 1168, 1100, 1032))
 })
 
 test_that("ImportCSV works with ChronoModel", {

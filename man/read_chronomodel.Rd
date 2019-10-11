@@ -20,8 +20,9 @@ the two choices offered by
 in the CSV \code{file}.  Defaults to ",".}
 }
 \value{
-A data frame or a tibble with the marginal posterior(s)
-from \code{file}.
+A data frame containing the marginal posterior(s)
+from \code{file}, with an attribute, "plain names", that holds
+column names that haven't been modified by R.
 }
 \description{
 Import a CSV file containing the output of the MCMC algorithm produced

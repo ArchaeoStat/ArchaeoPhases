@@ -13,8 +13,9 @@ The CSV \code{file} can be compressed or plain.
 See \code{\link[readr]{read_csv}} for details.}
 }
 \value{
-A data frame or a tibble with the marginal posterior(s)
-from \code{file}.
+A data frame containing the marginal posterior(s)
+from \code{file}, with an attribute, "plain names", that holds
+column names that haven't been modified by R.
 }
 \description{
 Import a CSV file containing the output of the MCMC algorithm produced
@@ -31,7 +32,7 @@ as is an empty last column.
 \dontrun{
   # Import of MCMC output from OxCal
   data(Events)
-  write.csv(Events, "events.csv", row.names=FALSE)
+  write.csv(Events, "events.csv", row.names = FALSE)
   fishpond <- read_oxcal("events.csv")
 
   # Read from connection

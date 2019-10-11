@@ -33,7 +33,7 @@ The \eqn{(100*level)}\% credible interval is the shortest of the intervals
 }
 \examples{
   data(Events)
-  MultiCredibleInterval(Events, c(2,4,3), 0.95)
+  MultiCredibleInterval(Events, c(2, 4, 3), 0.95)
 
 }
 \author{

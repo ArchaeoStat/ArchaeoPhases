@@ -184,3 +184,123 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
   }
 
 }
+
+tempo_plot <- function(data, position, level = 0.95,
+                       count = TRUE, Gauss = FALSE, title = "Tempo plot",
+                       subtitle = NULL, caption = "ArcheoPhases",
+                       legend_title = "Legend",
+                       legend_labels = c("Bayes estimate",
+                                         "Credible interval, low",
+                                         "Credible interval, high",
+                                         "Gaussian approx., high",
+                                         "Gaussian approx., low"),
+                       x_label = "Calendar year",
+                       y_label = "Cumulative events",
+                       line.types = c("solid", "12", "11", "28", "28"),
+                       width = 7, height = 7, units = "in",
+                       x_min = NULL, x_max = NULL, colors = TRUE,
+                       file = NULL, x_scale = "calendar",
+                       elapsed_origin_position = NULL, new_window=TRUE)
+{
+
+    if(!is.list(data)) stop("Data format not recognized.")
+
+    if(is.data.frame(data))
+    {
+        data <- data[, position]
+        plot_names <- names(data)
+        if (x_scale == "elapsed") {
+            if (is.null(elapsed_origin_position)) {
+                stop("Elapsed origin not specified")
+            }
+            else {
+                data <- data - data[, elapsed_origin_position]
+            }
+        }
+        data_min <- min(data)
+        data_max <- max(data)
+        data_cols <- ncols(data)
+        data_seq <- seq(min, max, length.out = 50 * data_cols)
+        doubt <- 1 - level
+
+        f = function(x, sequence, count, cols) {
+            g = ecdf(x)
+            y = g(sequence)
+            if (count)
+                y = y * cols
+            y
+        }
+
+        F = t(apply(X = data, MARGIN = 1, FUN = f, sequence = data_seq,
+                    count = count, cols = data_cols))
+                                        # mean estimate
+        moy = apply(F, 2, mean)
+                                        # standard deviation
+        ec = apply(F, 2, sd)
+                                        # Credible intervals
+        qu = t(apply(F, 2, CredibleInterval)[-1,])
+                                        # Gaussian credible intervals
+        quG = cbind(moy + qnorm(1 - doubt / 2) * ec, moy - qnorm(1 - doubt / 2) * ec)
+
+        if (x_scale == "BP") {
+            plot_data = list(t = 1950 - sequence, moy = (moy), qu = qu, quG = quG)
+        }
+        else {
+            plot_data = list(t = sequence, moy = moy, qu = qu, quG = quG)
+        }
+    }
+    else {
+        plot_data <- data$plot_data
+        plot_names <- data$plot_names
+    }
+
+  ## Graphical part
+  if (Gauss) {
+    result_mat <- cbind(result$moy, result$qu, result$quG)
+    colnames(result_mat) <- legend_labels
+  }
+  else {
+    result_mat <- cbind(result$moy, result$qu)
+    colnames(result_mat) <- legend_labels[1:3]
+  }
+  plot_result <- as.data.frame.table(result_mat)
+  colnames(plot_result) <- c("Var1", "Legend", "Count")
+  plot_result$Year <- plot_data$t
+  if (colors) {
+      h <- ggplot2::ggplot(plot_result, ggplot2::aes(x = plot_result$Year,
+                                                     y = plot_result$Count,
+                                                     colour = plot_result$Legend))
+    h <- h + ggplot2::guides(colour = ggplot2::guide_legend(title = legend_title))
+  }
+  else {
+      h <- ggplot2::ggplot(plot_result, ggplot2::aes(x = plot_result$Year,
+                                                     y = plot_result$Count,
+                                                     linetype = plot_result$Legend))
+      h <- h + ggplot2::scale_linetype_manual(values = line.types,
+                                              guide = ggplot2::guide_legend(title = legend_title))
+  }
+  h <- h + ggplot2::geom_line()
+  h <- h + ggplot2::scale_y_continuous(breaks = pretty(x = plot_result$Count))
+  h <- h + ggplot2::labs(x = x_label,
+                y = y_label,
+                title = title,
+                subtitle = subtitle,
+                caption = caption)
+  if (!is.null(x_min) & !is.null(x_max)) {
+    h <- h + ggplot2::xlim(x_min, x_max)
+  }
+
+  if (!is.null(file)) {
+    ggplot2::ggsave(filename = file, plot = h, height = height,
+           width = width, units = units)
+  }
+
+  if(new_window == TRUE) {
+    dev.new(height = height, width = width)
+  }
+
+    print(h)
+
+    list(plot_data = plot_data, plot_object = h,
+         plot_names = plot_names)
+}

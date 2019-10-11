@@ -135,8 +135,9 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #' The CSV \code{file} can be compressed or plain.
 #' See \code{\link[readr]{read_csv}} for details.
 #'
-#' @return A data frame or a tibble with the marginal posterior(s)
-#' from \code{file}.
+#' @return A data frame containing the marginal posterior(s)
+#' from \code{file}, with an attribute, "plain names", that holds
+#' column names that haven't been modified by R.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -170,7 +171,8 @@ read_oxcal <- function(file)
     ## which is empty
     if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
         data <- data[, -ncol(data)]
-    data
+    ## Coerce to data frame
+    as.data.frame(data)
 }
 
 #' Read MCMC output from ChronoModel
@@ -192,8 +194,9 @@ read_oxcal <- function(file)
 #' @param separator The character used to separate fields
 #' in the CSV \code{file}.  Defaults to ",".
 #'
-#' @return A data frame or a tibble with the marginal posterior(s)
-#' from \code{file}.
+#' @return A data frame containing the marginal posterior(s)
+#' from \code{file}, with an attribute, "plain names", that holds
+#' column names that haven't been modified by R.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -223,7 +226,8 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
                        delim = separator, comment = "#")
     ## Remove the iteration column
     data <- data[, -1]
-    data
+    ## Coerce to data frame
+    as.data.frame(data)
 }
 
 #' Read MCMC output from BCal
@@ -244,8 +248,9 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
 #' \href{https://bcal.shef.ac.uk/}{BCal} calibration.
 #' Defaults to the \href{https://bcal.shef.ac.uk/}{BCal} default of 1.
 #'
-#' @return A data frame or a tibble with the marginal posterior(s)
-#' from \code{file}.
+#' @return A data frame containing the marginal posterior(s)
+#' from \code{file}, with an attribute, "plain names", that holds
+#' column names that haven't been modified by R.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -257,7 +262,7 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
 #'   write.csv(Fishpond, "fishpond_MCMC.csv", row.names=FALSE)
 #'   fishpond <- read_bcal("fishpond_MCMC.csv")
 #'
-                                        #' # Read from connection
+#' # Read from connection
 #'   bc_1 <- read_bcal("http://tsdye.online/AP/bc-1.csv")
 #'   bc_17 <- read_bcal("http://tsdye.online/AP/bc-17.csv", bin_width = 17)
 #'}
@@ -268,24 +273,24 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
 #' @importFrom readr read_csv
 #' @importFrom dplyr %>% summarise_all
 #'
-# Don't export yet, can't read malformed csv file
+#' @export
 read_bcal <- function(file, bin_width = 1)
 {
     ## BCal uses English locale csv conventions
     data <- read_csv(file)
     ## Remove the iteration column
     data <- data[, -1]
-    ## BCal adds a superfluous comma at the end of the first line
-    ## This might change in the future
+    ## Remove an empty last column, if present
     if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
         data <- data[, -ncol(data)]
-    ## BCal adds an empty row at the end, check if empty and remove
+    ## BCal used to add an empty row at the end, check if empty and remove
     if (is.na(data[nrow(data), ]))
         data <- data[-nrow(data), ]
-    ## Convert from BP to BC/AD
-    data <- sapply(data, FUN = function(x) 1950 - x)
     ## Take bin width into account, if necessary
     if (bin_width != 1)
-        data <- sapply(data, FUN = function(x) bin_width * x)
-    data
+        data <- bin_width * data
+    ## Convert from BP to BC/AD
+    data <- 1950 - data
+    ## Coerce to data frame
+    as.data.frame(data)
 }

@@ -93,7 +93,7 @@ interval or the highest posterior density (HPD) region with a desired level of c
 }
 \examples{
   data(Events);
-  OccurrencePlot(Events[1:1000,], c(2:5),  print.data.result = FALSE)
+  OccurrencePlot(Events[1:1000, ], c(2:5),  print.data.result = FALSE)
 
 }
 \author{

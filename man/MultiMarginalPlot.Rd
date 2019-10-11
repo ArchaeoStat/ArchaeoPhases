@@ -75,7 +75,7 @@ calendar years or converted to calendar years using \code{x.scale} vector or
 }
 \examples{
   data(Events);
-  MultiMarginalPlot(Events, position = c(2,3,4), level = 0.95)
+  MultiMarginalPlot(Events, position = c(2, 3, 4), level = 0.95)
 
 }
 \author{

@@ -43,11 +43,16 @@
 #'   # List of the name of the groups
 #'   names(Phases)
 #'   # Stipulating position_end
-#'   MultiSuccessionPlot(Phases, c(4, 2), c(5, 3), title = "Succession of phase 1 and phase 2")
+#'   MultiSuccessionPlot(Phases, c(4, 2), c(5, 3),
+#'                       title = "Succession of phase 1 and phase 2")
 #'   # In this case, equivalent to
-#'   MultiSuccessionPlot(Phases, c(4, 2), title = "Succession of phase 1 and phase 2", colors = c(3, 4))
+#'   MultiSuccessionPlot(Phases, c(4, 2),
+#'                       title = "Succession of phase 1 and phase 2",
+#'                       colors = c(3, 4))
 #'   # export
-#'   MultiSuccessionPlot(Phases, c(4, 2), exportFile = "MultiSuccessionPlot", exportFormat = "SVG")
+#'   MultiSuccessionPlot(Phases, c(4, 2),
+#'                       exportFile = "MultiSuccessionPlot",
+#'                       exportFormat = "SVG")
 #'
 #' @importFrom stats density
 #' @importFrom grDevices png rainbow svg dev.off
