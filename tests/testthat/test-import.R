@@ -1,3 +1,5 @@
+context("Data import")
+library(ArchaeoPhases)
 
 test_that("ImportCSV works with OxCal", {
     oxcal <- ImportCSV("test-data/oxcal.csv")
@@ -18,6 +20,8 @@ test_that("read_oxcal works", {
                       tolerance = 0.01)
     expect_equivalent(as.data.frame(oxcal)[1000, ], c(1135.31, 1167.27),
                       tolerance = 0.01)
+    expect_is(oxcal, "archaeophases_mcmc")
+    expect_is(oxcal, "data.frame")
 })
 
 ## BCal mcmc output has changed, need to find an older file to use as a test
@@ -37,6 +41,8 @@ test_that("read_bcal works with default bin width", {
                                         "theta 1 (test)", "alpha 1 (test)"))
     expect_equivalent(bcal[1, ], c(1949, 1160, 1112, -2349))
     expect_equivalent(bcal[293705, ], c(1950, 1126, 997, 877))
+    expect_is(bcal, "archaeophases_mcmc")
+    expect_is(bcal, "data.frame")
 })
 
 ## BCal mcmc output has changed, need to find an older file to use as a test
@@ -57,6 +63,8 @@ test_that("read_bcal works with custom bin width", {
                                         "theta 1 (test)", "alpha 1 (test)"))
     expect_equivalent(bcal[1, ], c(1389, 1032, 1032, 318))
     expect_equivalent(bcal[294770, ], c(1406, 1168, 1100, 1032))
+    expect_is(bcal, "archaeophases_mcmc")
+    expect_is(bcal, "data.frame")
 })
 
 test_that("ImportCSV works with ChronoModel", {
@@ -77,4 +85,6 @@ test_that("read_chronomodel works", {
                       c(1073.91, 969.5635), tolerance = 0.001)
     expect_equivalent(as.data.frame(cm)[30000, ], c(1107.239, 984.2023),
                       tolerance = 0.001)
+    expect_is(cm, "archaeophases_mcmc")
+    expect_is(cm, "data.frame")
 })

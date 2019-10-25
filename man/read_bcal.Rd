@@ -9,7 +9,7 @@ read_bcal(file, bin_width = 1)
 \arguments{
 \item{file}{Either a path to a CSV file, a connection,
 or the value \code{clipboard()} to read from the system clipboard.
-The CSV \code{file} can be compressed or plain.
+The CSV file can be compressed or plain.
 See \code{\link[readr]{read_csv}} for details.}
 
 \item{bin_width}{The bin width specified for the
@@ -17,9 +17,8 @@ See \code{\link[readr]{read_csv}} for details.}
 Defaults to the \href{https://bcal.shef.ac.uk/}{BCal} default of 1.}
 }
 \value{
-A data frame containing the marginal posterior(s)
-from \code{file}, with an attribute, "plain names", that holds
-column names that haven't been modified by R.
+An \code{archaeophases_mcmc} object containing the marginal
+posterior(s) as a data frame.
 }
 \description{
 Import a CSV file containing the output of the MCMC algorithm produced
@@ -28,7 +27,7 @@ by \href{https://bcal.shef.ac.uk/}{BCal}.
 \details{
 The \code{read_bcal} function is built on \code{\link[readr]{read_csv}}.
 It aims to be fast and simple, and to return the marginal posteriors free
-of extraneous artifacts.  The iteration column in \code{file} is discarded,
+of extraneous artifacts.  The iteration column in the CSV file is discarded,
 as are an empty last column and an empty last row.
 }
 \examples{
@@ -49,6 +48,8 @@ as are an empty last column and an empty last row.
 \code{\link[readr]{read_csv}}
 
 \code{\link{ImportCSV}}
+
+\code{\link{new_archaeophases_mcmc}}
 }
 \author{
 Thomas S. Dye, \email{tsd@tsdye.online}

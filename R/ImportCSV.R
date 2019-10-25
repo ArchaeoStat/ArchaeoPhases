@@ -127,17 +127,16 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #'
 #' The \code{read_oxcal} function is built on \code{\link[readr]{read_csv}}.
 #' It aims to be fast and simple, and to return the marginal posteriors free
-#' of extraneous artifacts.  The iteration column in \code{file} is discarded,
+#' of extraneous artifacts.  The iteration column in the CSV file is discarded,
 #' as is an empty last column.
 #'
 #' @param file Either a path to a CSV file, a connection,
 #' or the value \code{clipboard()} to read from the system clipboard.
-#' The CSV \code{file} can be compressed or plain.
+#' The CSV file can be compressed or plain.
 #' See \code{\link[readr]{read_csv}} for details.
 #'
-#' @return A data frame containing the marginal posterior(s)
-#' from \code{file}, with an attribute, "plain names", that holds
-#' column names that haven't been modified by R.
+#' @return An \code{archaeophases_mcmc} object containing the marginal
+#' posterior(s) as a data frame.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -150,7 +149,7 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #'   fishpond <- read_oxcal("events.csv")
 #'
 #'   # Read from connection
-#'   rem <- read_oxcal("http://tsdye.online/AP/ox.csv")
+#'   oxc <- read_oxcal("http://tsdye.online/AP/ox.csv")
 #' }
 #'
 #' @seealso \code{\link[readr]{read_csv}}
@@ -158,21 +157,34 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #'
 #' @importFrom readr read_csv
 #' @importFrom dplyr %>% summarise_all
+#' @importFrom digest digest
 #'
 #' @export
 read_oxcal <- function(file)
 {
     ## OxCal hard codes csv file conventions, per C. Bronk Ramsey
     ## These match the R defaults
-    data <- read_csv(file)
+    data <- suppressWarnings(read_csv(file))
+    ## Calculate hash, if connection, save temp file
+    if(!file_test("-f", file)) {
+        temp_file <- tempfile(pattern = "", fileext = "csv")
+        write(file, temp_file)
+        file_hash <- digest(file = temp_file, algo = "sha256")
+        unlink(temp_file)
+   }
+    else {
+        file_hash <- digest(file = file, algo = "sha256")
+    }
     ## Remove the iteration column
     data <- data[, -1]
     ## OxCal uses trailing commas in MCMC output, so trim the last column,
     ## which is empty
     if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
         data <- data[, -ncol(data)]
-    ## Coerce to data frame
-    as.data.frame(data)
+    ## Return archaeophases_mcmc object
+    new_archaeophases_mcmc(x = as.data.frame(data),
+                           call = match.call(),
+                           hash = file_hash)
 }
 
 #' Read MCMC output from ChronoModel
@@ -180,23 +192,24 @@ read_oxcal <- function(file)
 #' Import a CSV file containing the output of the MCMC algorithm produced
 #' by \href{https://chronomodel.com/}{ChronoModel}.
 #'
-#' The \code{read_chronomodel} function is built on \code{\link[readr]{read_delim}}.
-#' It aims to be fast and simple, and to return the marginal posteriors free
-#' of extraneous artifacts.  The iteration column in \code{file} is discarded.
+#' The \code{read_chronomodel} function is built on
+#' \code{\link[readr]{read_delim}}.
+#' It aims to be fast and simple, and to return the marginal posteriors
+#' free of extraneous artifacts.  The iteration column in the CSV file is
+#' discarded.
 #'
 #' @param file Either a path to a CSV file, a connection,
 #' or the value \code{clipboard()} to read from the system clipboard.
-#' The CSV \code{file} can be compressed or plain.
+#' The CSV file can be compressed or plain.
 #' See \code{\link[readr]{read_delim}} for details.
 #' @param decimal Either "." (default) or ",",
 #' the two choices offered by
 #' \href{https://chronomodel.com/}{ChronoModel}.
 #' @param separator The character used to separate fields
-#' in the CSV \code{file}.  Defaults to ",".
+#' in the CSV file.  Defaults to ",".
 #'
-#' @return A data frame containing the marginal posterior(s)
-#' from \code{file}, with an attribute, "plain names", that holds
-#' column names that haven't been modified by R.
+#' @return An \code{archaeophases_mcmc} object containing the marginal
+#' posterior(s) from file.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -214,8 +227,10 @@ read_oxcal <- function(file)
 #'
 #' @seealso \code{\link[readr]{read_delim}}
 #' @seealso \code{\link{ImportCSV}}
+#' @seealso \code{\link{new_archaeophases_mcmc}}
 #'
 #' @importFrom readr read_delim locale
+#' @importFrom digest digest
 #'
 #' @export
 read_chronomodel <- function(file, decimal = ".", separator = ",")
@@ -224,10 +239,22 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
     ## and either a period or comma for decimals
     data <- read_delim(file, locale = locale("en", decimal_mark = decimal),
                        delim = separator, comment = "#")
+    ## Calculate hash, if connection, save temp file
+    if(!file_test("-f", file)) {
+        temp_file <- tempfile(pattern = "", fileext = "csv")
+        write(file, temp_file)
+        file_hash <- digest(file = temp_file, algo = "sha256")
+        unlink(temp_file)
+    }
+    else {
+        file_hash <- digest(file = file, algo = "sha256")
+    }
     ## Remove the iteration column
     data <- data[, -1]
-    ## Coerce to data frame
-    as.data.frame(data)
+    ## Return archaeophases_mcmc object
+    new_archaeophases_mcmc(x = as.data.frame(data),
+                           call = match.call(),
+                           hash = file_hash)
 }
 
 #' Read MCMC output from BCal
@@ -237,20 +264,19 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
 #'
 #' The \code{read_bcal} function is built on \code{\link[readr]{read_csv}}.
 #' It aims to be fast and simple, and to return the marginal posteriors free
-#' of extraneous artifacts.  The iteration column in \code{file} is discarded,
+#' of extraneous artifacts.  The iteration column in the CSV file is discarded,
 #' as are an empty last column and an empty last row.
 #'
 #' @param file Either a path to a CSV file, a connection,
 #' or the value \code{clipboard()} to read from the system clipboard.
-#' The CSV \code{file} can be compressed or plain.
+#' The CSV file can be compressed or plain.
 #' See \code{\link[readr]{read_csv}} for details.
 #' @param bin_width The bin width specified for the
 #' \href{https://bcal.shef.ac.uk/}{BCal} calibration.
 #' Defaults to the \href{https://bcal.shef.ac.uk/}{BCal} default of 1.
 #'
-#' @return A data frame containing the marginal posterior(s)
-#' from \code{file}, with an attribute, "plain names", that holds
-#' column names that haven't been modified by R.
+#' @return An \code{archaeophases_mcmc} object containing the marginal
+#' posterior(s) as a data frame.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -269,28 +295,42 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
 #'
 #' @seealso \code{\link[readr]{read_csv}}
 #' @seealso \code{\link{ImportCSV}}
+#' @seealso \code{\link{new_archaeophases_mcmc}}
 #'
 #' @importFrom readr read_csv
 #' @importFrom dplyr %>% summarise_all
+#' @importFrom digest digest
 #'
 #' @export
 read_bcal <- function(file, bin_width = 1)
 {
     ## BCal uses English locale csv conventions
-    data <- read_csv(file)
+    data <- suppressWarnings(read_csv(file))
+    ## Calculate hash, if connection, save temp file
+    if(!file_test("-f", file)) {
+        temp_file <- tempfile(pattern = "", fileext = "csv")
+        write(file, temp_file)
+        file_hash <- digest(file = temp_file, algo = "sha256")
+        unlink(temp_file)
+    }
+    else {
+        file_hash <- digest(file = file, algo = "sha256")
+    }
     ## Remove the iteration column
     data <- data[, -1]
     ## Remove an empty last column, if present
     if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
         data <- data[, -ncol(data)]
     ## BCal used to add an empty row at the end, check if empty and remove
-    if (is.na(data[nrow(data), ]))
-        data <- data[-nrow(data), ]
+    suppressWarnings(if (is.na(data[nrow(data), ]))
+        data <- data[-nrow(data), ])
     ## Take bin width into account, if necessary
     if (bin_width != 1)
         data <- bin_width * data
     ## Convert from BP to BC/AD
     data <- 1950 - data
-    ## Coerce to data frame
-    as.data.frame(data)
+    ## Return archaeophases_mcmc object
+    new_archaeophases_mcmc(x = as.data.frame(data),
+                           call = match.call(),
+                           hash = file_hash)
 }

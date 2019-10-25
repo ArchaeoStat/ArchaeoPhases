@@ -104,6 +104,9 @@ change, the plot is horizontal. When change is instantaneous, the plot is vertic
 Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratification.
 Journal of Archaeological Science, 71, 1--9
 }
+\seealso{
+\code{\link{tempo_plot}}
+}
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr},
 
