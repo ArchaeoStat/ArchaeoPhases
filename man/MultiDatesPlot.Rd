@@ -83,9 +83,12 @@ Plot of credible intervals or HPD regions of a series of events
 }
 \examples{
   data(Events)
-  MultiDatesPlot(Events, c(2,4,3), level = 0.95, intervals ="CI", title = "Plot of CI intervals")
-  MultiDatesPlot(Events, c(2,4,3), level = 0.95, intervals ="HPD", title = "Plot of HPD intervals")
-  MultiDatesPlot(Events, c(2,4,3), level = 0.95, intervals ="HPD", , order="increasing")
+  MultiDatesPlot(Events, c(2, 4, 3), level = 0.95, intervals = "CI",
+                 title = "Plot of CI intervals")
+  MultiDatesPlot(Events, c(2, 4, 3), level = 0.95, intervals = "HPD",
+                 title = "Plot of HPD intervals")
+  MultiDatesPlot(Events, c(2, 4, 3), level = 0.95, intervals = "HPD",
+                 order = "increasing")
 
 }
 \author{

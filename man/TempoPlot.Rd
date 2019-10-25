@@ -96,13 +96,16 @@ change, the plot is horizontal. When change is instantaneous, the plot is vertic
 }
 \examples{
   data(Events);
-  TempoPlot(Events[1:1000,], c(2:5), print.data.result = FALSE)
-  TempoPlot(Events[1:1000,], c(2:5), count = TRUE,  print.data.result = FALSE)
+  TempoPlot(Events[1:1000, ], c(2:5), print.data.result = FALSE)
+  TempoPlot(Events[1:1000, ], c(2:5), count = TRUE,  print.data.result = FALSE)
 
 }
 \references{
 Dye, T.S. (2016) Long-term rhythms in the development of Hawaiian social stratification.
 Journal of Archaeological Science, 71, 1--9
+}
+\seealso{
+\code{\link{tempo_plot}}
 }
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr},

@@ -48,11 +48,11 @@ years (BC/AD).
   # List of the name of the groups
   names(Phases)
   # Stipulating position_maximum
-  MultiPhasePlot(Phases, c(4,2), c(5,3), title = "Succession of phase 1 and phase 2")
+  MultiPhasePlot(Phases, c(4, 2), c(5, 3), title = "Succession of phase 1 and phase 2")
   # In this case, equivalent to
-  MultiPhasePlot(Phases, c(4,2), title = "Succession of phase 1 and phase 2", colors = c(3,4))
+  MultiPhasePlot(Phases, c(4, 2), title = "Succession of phase 1 and phase 2", colors = c(3, 4))
   # Export
-  MultiPhasePlot(Phases, c(4,2), exportFile = "MultiPhasePlot", exportFormat = "PNG")
+  MultiPhasePlot(Phases, c(4, 2), exportFile = "MultiPhasePlot", exportFormat = "PNG")
 
 }
 \author{

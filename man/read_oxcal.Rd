@@ -9,12 +9,12 @@ read_oxcal(file)
 \arguments{
 \item{file}{Either a path to a CSV file, a connection,
 or the value \code{clipboard()} to read from the system clipboard.
-The CSV \code{file} can be compressed or plain.
+The CSV file can be compressed or plain.
 See \code{\link[readr]{read_csv}} for details.}
 }
 \value{
-A data frame or a tibble with the marginal posterior(s)
-from \code{file}.
+An \code{archaeophases_mcmc} object containing the marginal
+posterior(s) as a data frame.
 }
 \description{
 Import a CSV file containing the output of the MCMC algorithm produced
@@ -23,7 +23,7 @@ by \href{https://c14.arch.ox.ac.uk/oxcal.html}{OxCal}.
 \details{
 The \code{read_oxcal} function is built on \code{\link[readr]{read_csv}}.
 It aims to be fast and simple, and to return the marginal posteriors free
-of extraneous artifacts.  The iteration column in \code{file} is discarded,
+of extraneous artifacts.  The iteration column in the CSV file is discarded,
 as is an empty last column.
 }
 \examples{
@@ -31,11 +31,11 @@ as is an empty last column.
 \dontrun{
   # Import of MCMC output from OxCal
   data(Events)
-  write.csv(Events, "events.csv", row.names=FALSE)
+  write.csv(Events, "events.csv", row.names = FALSE)
   fishpond <- read_oxcal("events.csv")
 
   # Read from connection
-  rem <- read_oxcal("http://tsdye.online/AP/ox.csv")
+  oxc <- read_oxcal("http://tsdye.online/AP/ox.csv")
 }
 
 }

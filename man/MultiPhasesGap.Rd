@@ -42,9 +42,9 @@ its maximum \code{position_maximum[i]}. The default value of
   # List of the name of the groups
   names(Phases)
   # Stipulating position_maximum
-  MultiPhasesGap(Phases, position_minimum = c(4,2), position_maximum = c(5,3))
+  MultiPhasesGap(Phases, position_minimum = c(4, 2), position_maximum = c(5, 3))
   # In this case, equivalent to
-  MultiPhasesGap(Phases, position_minimum = c(4,2))
+  MultiPhasesGap(Phases, position_minimum = c(4, 2))
 
 }
 \author{

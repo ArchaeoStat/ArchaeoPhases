@@ -9,7 +9,7 @@ read_chronomodel(file, decimal = ".", separator = ",")
 \arguments{
 \item{file}{Either a path to a CSV file, a connection,
 or the value \code{clipboard()} to read from the system clipboard.
-The CSV \code{file} can be compressed or plain.
+The CSV file can be compressed or plain.
 See \code{\link[readr]{read_delim}} for details.}
 
 \item{decimal}{Either "." (default) or ",",
@@ -17,20 +17,22 @@ the two choices offered by
 \href{https://chronomodel.com/}{ChronoModel}.}
 
 \item{separator}{The character used to separate fields
-in the CSV \code{file}.  Defaults to ",".}
+in the CSV file.  Defaults to ",".}
 }
 \value{
-A data frame or a tibble with the marginal posterior(s)
-from \code{file}.
+An \code{archaeophases_mcmc} object containing the marginal
+posterior(s) from file.
 }
 \description{
 Import a CSV file containing the output of the MCMC algorithm produced
 by \href{https://chronomodel.com/}{ChronoModel}.
 }
 \details{
-The \code{read_chronomodel} function is built on \code{\link[readr]{read_delim}}.
-It aims to be fast and simple, and to return the marginal posteriors free
-of extraneous artifacts.  The iteration column in \code{file} is discarded.
+The \code{read_chronomodel} function is built on
+\code{\link[readr]{read_delim}}.
+It aims to be fast and simple, and to return the marginal posteriors
+free of extraneous artifacts.  The iteration column in the CSV file is
+discarded.
 }
 \examples{
 
@@ -49,6 +51,8 @@ of extraneous artifacts.  The iteration column in \code{file} is discarded.
 \code{\link[readr]{read_delim}}
 
 \code{\link{ImportCSV}}
+
+\code{\link{new_archaeophases_mcmc}}
 }
 \author{
 Thomas S. Dye, \email{tsd@tsdye.online}
