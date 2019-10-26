@@ -169,8 +169,9 @@ MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
 #' @param ci_linetype A line type specification for the credible interval
 #' lines.
 #' @param ci_size A size specification of the credible interval lines.
-#' @param palette A vector of colors for qualitative data.
+#' @param fill_palette A vector of colors for qualitative data.
 #' @param colors A vector of indices into palette keyed by position.
+#' @param color_legend_name A label for the legend.
 #'
 #' @details
 #' The density is estimated using \code{density()} function with
@@ -192,6 +193,7 @@ MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
 #' @importFrom stats density
 #' @importFrom grDevices dev.new
 #' @importFrom ggplot2 ggplot guides theme xlim ggsave element_blank
+#' geom_density geom_segment facet_grid scale_fill_manual
 #' @importFrom reshape2 melt
 #' @importFrom magrittr %>%
 #' @importFrom dplyr group_by summarize mutate if_else
@@ -242,7 +244,7 @@ multi_marginal_plot <- function(data,
         if ((length(position) < 2) == TRUE)
             stop("Length position vector must be 2 or more.")
 
-        new_data = data[ ,position]
+        new_data = data[, position]
 
         if (x_scale == "BP") {
             new_data <- 1950 - new_data
@@ -256,7 +258,7 @@ multi_marginal_plot <- function(data,
     melted_data <- melt(new_data, id.vars = NULL)
 
     if (!is.null(colors)){
-        data_names <- names(data)[position]
+        data_names <- names(data[, position])
         melted_data <- melted_data %>%
             mutate(dens_fill = colors[match(variable, data_names)])
     }

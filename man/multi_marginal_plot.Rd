@@ -88,9 +88,11 @@ default = \code{NULL}.}
 \item{plot_result}{If \code{TRUE}, then draw a plot on the display,
 else suppress drawing.}
 
+\item{fill_palette}{A vector of colors for qualitative data.}
+
 \item{colors}{A vector of indices into palette keyed by position.}
 
-\item{palette}{A vector of colors for qualitative data.}
+\item{color_legend_name}{A label for the legend.}
 }
 \value{
 An \code{archaeophases_plot} object with the data and metadata
