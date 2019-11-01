@@ -197,6 +197,7 @@ MultiMarginalPlot <- function(data, position, level=0.95, GridLength = 1024,
 #' @importFrom reshape2 melt
 #' @importFrom magrittr %>%
 #' @importFrom dplyr group_by summarize mutate if_else
+#' @importFrom gplots col2hex
 #'
 #' @export
 multi_marginal_plot <- function(data,
@@ -262,8 +263,12 @@ multi_marginal_plot <- function(data,
         melted_data <- melted_data %>%
             mutate(dens_fill = colors[match(variable, data_names)])
     }
+    else {
+        melted_data <- melted_data %>%
+            mutate(dens_fill = density_fill)
+    }
 
-        summary <- melted_data %>%
+    summary <- melted_data %>%
         group_by(variable) %>%
         summarize(xbar = round(mean(value, na.rm = TRUE), 0),
                   dens_xbar = approx(density(value, n = grid_length),
@@ -275,28 +280,12 @@ multi_marginal_plot <- function(data,
                   dens_high = approx(density(value, n = grid_length),
                                      xout = c_i_high)$y)
 
-    if (!is.null(fill_palette) & !is.null(density_fill)) {
-        geom_density_fill <- fill_palette[density_fill]
-    }
-    else {
-        geom_density_fill <- density_fill
-    }
-
     h <- ggplot(data = melted_data, mapping = aes(x = value))
 
-    if (!is.null(colors)) {
-        h <- h + geom_density(color = density_color,
-                              alpha = density_alpha,
-                              mapping = aes(fill = dens_fill, y = ..density..),
-                              n = grid_length)
-    }
-    else {
-        h <- h + geom_density(color = density_color,
-                              alpha = density_alpha,
-                              mapping = aes(y = ..density..),
-                              fill = geom_density_fill,
-                              n = grid_length)
-    }
+    h <- h + geom_density(color = density_color,
+                          alpha = density_alpha,
+                          mapping = aes(fill = dens_fill, y = ..density..),
+                          n = grid_length)
 
     h <- h + geom_segment(data = summary,
                           mapping = aes(x = xbar, xend = xbar,
@@ -325,9 +314,17 @@ multi_marginal_plot <- function(data,
                   subtitle = subtitle,
                   caption = caption)
 
-    if(!is.null(fill_palette)) {
+    if (!is.null(fill_palette)) {
+        if (is.null(colors)) {
+            h + scale_fill_manual(values = unname(fill_palette[density_fill]))
+        }
+        else {
         h <- h + scale_fill_manual(values = unname(fill_palette),
                                    name = color_legend_name)
+        }
+    }
+    else {
+        h <- h + scale_fill_manual(values = col2hex(density_fill))
     }
 
     if (is.null(colors)) {
