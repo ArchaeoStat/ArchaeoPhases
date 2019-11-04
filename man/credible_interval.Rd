@@ -10,18 +10,24 @@ credible_interval(data, level = 0.95, round_to = 0)
 \item{data}{Numeric vector containing the output of the MCMC algorithm
 for the parameter.}
 
-\item{level}{Probability corresponding to the level of confidence used for the
-credible interval, default = 0.95.}
+\item{level}{Probability corresponding to the level of confidence used
+for the credible interval, default = 0.95.}
 
-\item{round_to}{Integer indicating the number of decimal places to be used, default = 0.}
+\item{round_to}{Integer indicating the number of decimal places to be used,
+default = 0.}
 }
 \value{
-A list of values: \code{level} = confidence level; \code{inf} lower endpoint
-of the shortest credible interval as a calendar year; and \code{sup} upper endpoint
-of the shortest credible interval as a calendar year.
+A list with the following components:
+\describe{
+\item{ci}{Named vector of length 2, with \code{inf} the
+lower endpoint of the shortest credible interval as a calendar
+year; and \code{sup} the upper endpoint of the shortest credible
+interval as a calendar year, and}
+\item{level}{Confidence level for the credible intervals.}
+}
 }
 \description{
-Computes the shortest credible interval for a single parameter
+Computes the shortest credible interval for a single parameter.
 }
 \details{
 A \eqn{(100 * level)}\% credible interval is an interval

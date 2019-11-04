@@ -226,18 +226,18 @@ marginal_plot <- function(data,
     }
 
     ## credible interval
-    c_i <- credible_interval(a_chain$x, level = level, round_to = 4)
+    c_i <- credible_interval(a_chain$x, level = level, round_to = 4)$ci
 
     ## mean
     chain_mean = mean(a_chain$x)
 
     chain_density <- density(a_chain$x, n = grid_length) %$%
         data.frame(x = x, y = y) %>%
-        mutate(mid = (x > c_i$inf & x < c_i$sup))
+        mutate(mid = (x > c_i["inf"] & x < c_i["sup"]))
 
     dens_mean <- approx(chain_density, xout = chain_mean)
-    dens_low <- approx(chain_density, xout = c_i$inf)
-    dens_high <- approx(chain_density, xout = c_i$sup)
+    dens_low <- approx(chain_density, xout = c_i["inf"])
+    dens_high <- approx(chain_density, xout = c_i["sup"])
 
     if (!is.null(fill_palette)) {
         fill_color <- unname(fill_palette[density_color])

@@ -168,7 +168,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #' events of a specified kind occurred
 #'
 #' @param data Data frame containing the output of the MCMC algorithm.
-#' @param position Numeric vector containing the position of the column
+#' @param position Numeric vector containing the positions of the columns
 #' corresponding to the MCMC chains of interest, or a vector of column
 #' names.
 #' @param plot_result If \code{TRUE}, then draw a plot on the display,

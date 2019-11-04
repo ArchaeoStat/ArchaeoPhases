@@ -72,3 +72,80 @@ PhasesGap <- function(Phase1Max_chain, Phase2Min_chain, level=0.95){
   } # if(length(Phase1Max_chain) != length(Phase2Min_chain)) {
 
 }
+
+#'  Gap or hiatus between two successive phases (for phases in temporal order constraint)
+#'
+#' This function finds, if it exists, a gap or hiatus between two successive phases.
+#' This gap or hiatus is the longest interval that satisfies
+#' \eqn{P(Phase1Max_chain < IntervalInf < IntervalSup < Phase2Min_chain | M) = level}
+#'
+#' @param a_chain Numeric vector containing the output of the MCMC
+#' algorithm for the upper boundary of the older phase.
+#' @param b_chain Numeric vector containing the output of the MCMC
+#' algorithm for the lower boundary of the younger phase.
+#' @param level Probability corresponding to the level of confidence.
+#'
+#' @return A list with the following components:
+#' \describe{
+#' \item{hiatus}{A named vector where \code{inf} is the lower endpoint of the
+#' hiatus as a calendar year (AD/BC) or \code{NA} if there is no hiatus at
+#' \code{level}, and \code{sup} is the upper endpoint of the gap as a calendar
+#' year (AD/BC), or \code{NA} if there is no hiatus at \code{level}.}
+#' \item{level}{Probability corresponding to the confidence level of the
+#' interval.}
+#' \item{call}{The function call.}
+#' }
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr},
+#' @author Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}, and
+#' @author Thomas S. Dye, \email{tsd@@tsdye.online}
+#'
+#' @examples
+#'   data(Phases); attach(Phases)
+#'   phases_gap(Phase.1.beta, Phase.2.alpha, 0.95)
+#'   phases_gap(Phase.1.beta, Phase.2.alpha, 0.50)
+#'
+#' @importFrom stats quantile
+#'
+#' @export
+phases_gap <- function(a_chain, b_chain, level = 0.95) {
+
+    chain_len <- length(a_chain)
+
+    if (chain_len != length(b_chain))
+        stop('Chains are not the same length')
+
+    if (sum(a_chain <= b_chain) != chain_len)
+        stop("One chain should be strictly older than the other")
+
+    no_hiatus <- list(hiatus = c(inf = 'NA', sup = 'NA'),
+                      duration = 'NA',
+                      level = level)
+
+    interval <- function(epsilon, p1, p2, level) {
+        prob <- 1 - epsilon
+        q1 <- quantile(p1, probs = prob)
+        ind <- (p1 < q1)
+        q2 <- quantile(p2[ind], probs = (prob - level) / prob)
+        c(q1, q2)
+    }
+    hia = Vectorize(interval, "epsilon")
+
+    epsilon = seq(0, 1 - level, .001)
+    p = hia(epsilon, a_chain, b_chain, level)
+    d <- p[2, ] - p[1, ]
+    dd <- d[d > 0]
+
+    if (length(dd) < 1) return(no_hiatus)
+
+    i <- which(d == max(dd))
+    i2 = round(p[, i], 0)
+
+    if (p[2, i] == p[1, i]) return(no_hiatus)
+
+    inf <- unname(i2[1])
+    sup <- unname(i2[2])
+    list(hiatus = c(inf = inf, sup = sup),
+         level = level,
+         call = match.call())
+}

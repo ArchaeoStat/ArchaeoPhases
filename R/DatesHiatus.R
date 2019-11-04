@@ -65,6 +65,85 @@ DatesHiatus <- function(a_chain, b_chain, level=0.95){
       }#end if (length(DD) > 0)
 
     } # end if( sum(ifelse(PhaseBeginning < PhaseEnd, 1, 0) == length(PhaseBeginning) ) ) {  # test for Beginning < End
+}
 
+#'  Test for the existence of a hiatus between two MCMC chains.
+#'
+#' Determines whether there is a hiatus between two MCMC chains and returns
+#' the longest interval that satisfies:
+#' \eqn{P(a_chain < IntervalInf < IntervalSup < b_chain | M) = level}
+#'
+#' @param a_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the first parameter.
+#' @param b_chain : Numeric vector containing the output of the MCMC
+#' algorithm for the second parameter.
+#' @param level Probability corresponding to the confidence level of the
+#' interval.
+#'
+#' @return A list with the following components:
+#' \describe{
+#' \item{hiatus}{A named vector where \code{inf} is the lower endpoint of the
+#' hiatus as a calendar year (AD/BC) or \code{NA} if there is no hiatus at
+#' \code{level}, and \code{sup} is the upper endpoint of the gap as a calendar
+#' year (AD/BC), or \code{NA} if there is no hiatus at \code{level}.}
+#' \item{duration}{The duration of the hiatus at \code{level}.}
+#' \item{level}{Probability corresponding to the confidence level of the
+#' interval.}
+#' \item{call}{The function call.}
+#' }
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr},
+#' @author Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}, and
+#' @author Thomas S. Dye, \email{tsd@tsdye.online}
+#'
+#' @examples
+#'   data(Events); attach(Events)
+#'   dates_hiatus(Event.1, Event.12)
+#'   dates_hiatus(Event.1, Event.12, level = 0.5)
+#'
+#' @importFrom stats quantile
+#'
+#' @export
+dates_hiatus <- function(a_chain, b_chain, level = 0.95) {
 
+    ## test for the length of both chains
+    if (length(a_chain) != length(b_chain)) {
+        stop('Error : the parameters do not have the same length')
+    }
+
+    no_hiatus <- list(hiatus = c(inf = 'NA', sup = 'NA'),
+                      duration = 'NA',
+                      level = level)
+    gamma <- mean(a_chain < b_chain)
+
+    if (gamma < level) return(no_hiatus)
+
+    interval <- function(epsilon, p1, p2, level) {
+        prob <- 1 - epsilon
+        q1 <- quantile(p1, probs = prob)
+        ind <- (p1 < q1)
+        q2 <- quantile(p2[ind], probs = (prob - level) / prob)
+        c(q1, q2)
+    }
+    hia = Vectorize(interval, "epsilon")
+
+    ind = which(a_chain < b_chain)
+    epsilon = seq(0, 1 - level, gamma)
+    p = hia(epsilon, a_chain[ind], b_chain[ind], level / gamma)
+    d <- p[2, ] - p[1, ]
+    dd <- d[d > 0]
+
+    if (length(dd) < 1) return(no_hiatus)
+
+    i <- which(d == max(dd))
+    i2 = round(p[, i], 0)
+
+    if (p[2, i] == p[1, i]) return(no_hiatus)
+
+    inf <- unname(i2[1])
+    sup <- unname(i2[2])
+    list(hiatus = c(inf = inf, sup = sup),
+         duration = sup - inf,
+         level = level,
+         call = match.call())
 }

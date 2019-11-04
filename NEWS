@@ -1,4 +1,26 @@
-NEWS 
+NEWS
+
+==============
+ArchaeoPhases 1.x (Release date: )
+==============
+
+* New read functions for MCMC data: read_bcal(), read_oxcal(), read_chronomodel().
+  * The new read functions return S3 objects that can identify the file that produced them.
+  * The new read functions are built on read_csv(), which can read data from a file, connection, or the clipboard.
+
+* New plot functions: multi_dates_plot(), tempo_activity_plot(), tempo_plot(), marginal_plot(), multi_marginal_plot(), and occurrence_plot().
+  * The new plot functions are functional replacements for the originals with camelCase names, e.g., TempoPlot() -> tempo_plot().
+  * The new plot functions return S3 objects with plot() and reproduce() methods.
+  * The S3 objects inherit from data frame and can be passed to appropriate statistical functions to summarize the data in the plot.
+
+* New statistical functions: credible_interval(), multi_credible_interval(), multi_hpd(), dates_hiatus(), phases_gap(), marginal_statistics(), and phase_statistics().
+  * The new statistical functions are functional replacements for the originals with camelCase names, e.g., CredibleInterval() -> credible_interval().
+  * The new statistical functions return lists in canonical R fashion.
+  * The phase_statistics() function is augmented with a round_to parameter.
+
+* Fixed a bug in MultiHPD() that ignored the roundingOfValue parameter.
+
+* New function multi_marginal_statistics().
 
 ==============
 ArchaeoPhases 1.4 (Release date: 2017-12-12)
@@ -6,7 +28,7 @@ ArchaeoPhases 1.4 (Release date: 2017-12-12)
 
 * Includes an update of the TempoPlot -> Optimisation of the credible intervals as already done in OccurrencePlot
 
-* Includes a minor update of the vignettes 
+* Includes a minor update of the vignettes
 
 * Includes an update of the function MarginalPlot and adds a new function : MultiMarginalPlot()
 
@@ -56,7 +78,7 @@ ArchaeoPhases 1.1 (Release date: 2017-03-28)
 
 * Includes an update of the TempoPlot function using the package 'ggplot2'
 
-* Includes an update of all graphic functions : it is now possible to export all graphics and to choose the colors associated to the characteristics of groups of dates. 
+* Includes an update of all graphic functions : it is now possible to export all graphics and to choose the colors associated to the characteristics of groups of dates.
 
 * Includes an update of the shiny web application (called by function app_ArchaeoPhases())
 
