@@ -60,3 +60,57 @@ MultiCredibleInterval <- function(data, position, level=0.95, roundingOfValue=0)
   }
   return(result)
 }
+
+#' Bayesian credible interval for a series of dates
+#'
+#' Estimate the shortest credible interval for each of several
+#' MCMC chains.
+#'
+#' @details A \eqn{(100 * level)}\% credible interval is an interval
+#' that keeps \eqn{N * (1 -level)} elements of the sample outside the interval.
+#' The \eqn{(100*level)}\% credible interval is the shortest of the intervals.
+#'
+#' @param data data frame containing the output of the MCMC algorithm.
+#' @param position Numeric vector containing the position of the column
+#' corresponding to the MCMC chains of interest, or a list of column names.
+#' @param level Probability corresponding to the level of confidence used
+#' for the credible interval.
+#' @param round_to Integer indicating the number of decimal places.
+#'
+#' @return Returns a list with the following components:
+#'
+#' \describe{
+#' \item{ci}{A data frame with a row for each column in \code{data} and two
+#' columns: \code{inf}, the lower credible interval in calendar years (BC/AD);
+#' and \code{sup}, the upper credible interval in calendar years (BC/AD).}
+#'
+#' \item{level}{Probability corresponding to the level of confidence used
+#' for the credible interval.}
+#' \item{call}{The function call.}
+#' }
+#'
+#' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr},
+#'
+#' @author Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}, and
+#'
+#' @author Thomas S. Dye, \email{tsd@@tsdye.online}.
+#'
+#' @examples
+#'   data(Events)
+#'   multi_credible_interval(Events, c(2, 4, 3), 0.95)
+#'   # round to decade
+#'   multi_credible_interval(Events, c(2, 4, 3), 0.95, -1)
+#'
+#' @export
+multi_credible_interval <- function(data,
+                                    position,
+                                    level = 0.95,
+                                    round_to = 0) {
+    res <- apply(X = data[, position],
+                 MARGIN = 2,
+                 FUN = function(x, l = level, r = round_to) {
+                     ret <- credible_interval(x, l, r)
+                     ret$ci
+                 })
+    list(ci = t(res), level = level, call = match.call())
+}

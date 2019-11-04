@@ -37,8 +37,7 @@
 #'   MarginalProba(Phase.1.alpha, Phase.1.beta)
 #'
 #' @export
-MarginalProba <- function(a_chain,b_chain){
-
-  mean(ifelse(a_chain < b_chain, 1, 0))   ## bayesion test : a < b
-
+MarginalProba <- function(a_chain, b_chain) {
+    ## bayesion test : a < b
+    mean(ifelse(a_chain < b_chain, 1, 0))
 }

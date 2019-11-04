@@ -17,7 +17,7 @@ occurrence_plot(data, position = 1:ncol(data), level = 0.95,
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}
 
-\item{position}{Numeric vector containing the position of the column
+\item{position}{Numeric vector containing the positions of the columns
 corresponding to the MCMC chains of interest, or a vector of column
 names.}
 
