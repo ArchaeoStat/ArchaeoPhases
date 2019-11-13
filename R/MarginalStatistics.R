@@ -123,15 +123,19 @@ MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){
 #'
 #' @importFrom stats quantile
 #' @importFrom hdrcde hdr
+#' @importFrom tibble is_tibble
 #'
 #' @export
 marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
+
+    if (is_tibble(a_chain)) a_chain <- unlist(a_chain)
+
     ## Position
     mean <- round(mean(a_chain), round_to)
     hdr <- hdr(a_chain, prob = level * 100)
     map <- round(hdr$mode, round_to)
     quantiles <- round(quantile(a_chain), round_to)
-    names(quantiles) <- c("min", "q1", "median", "q2", "max")
+    names(quantiles) <- c("min", "q1", "median", "q3", "max")
     ## Dispersion
     sd <- round(sd(a_chain), round_to)
     ci <- credible_interval(a_chain, level, round_to = round_to)$ci
@@ -206,6 +210,7 @@ marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
 #'
 #' @importFrom stats quantile
 #' @importFrom hdrcde hdr
+#' @importFrom tibble as_tibble
 #'
 #' @export
 
@@ -217,20 +222,25 @@ multi_marginal_statistics <- function(data,
     if(!is.data.frame(data)) stop("Data format not recognized.")
 
     data_set <- data[, position]
+    data_names <- names(data_set)
 
     stats <- apply(X = data_set,
                    MARGIN = 2,
                    FUN = function(x, l = level, r = round_to)
                        unlist(marginal_statistics(x, l, r)))
     ## apply returns a list when the marginal statistics have different lengths
+    ## in this case, pad with NAs so all are the same length
     if(is.list(stats)) {
         stats <- lapply(X = stats,
                         FUN = "length<-",
                         max(lengths(stats)))
     }
-    stats.df <- data.frame(stats)
-    stats.df <- stats.df[-which(rownames(stats.df) == "level"), ]
-    rownames(stats.df)[4:8] <- c("min", "q1", "median", "q2", "max")
-    list(statistics = t(stats.df), level = level, call = match.call())
 
+    stats.df <- as.data.frame(stats)
+    stats.df <- stats.df[-which(rownames(stats.df) == "level"), ]
+    rownames(stats.df)[4:8] <- c("min", "q1", "median", "q3", "max")
+    stats.tibble <- as_tibble(stats.df, rownames = NA)
+    names(stats.tibble) <- data_names
+
+    list(statistics = t(stats.tibble), level = level, call = match.call())
 }
