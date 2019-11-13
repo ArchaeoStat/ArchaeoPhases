@@ -182,7 +182,7 @@ read_oxcal <- function(file)
     if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
         data <- data[, -ncol(data)]
     ## Return archaeophases_mcmc object
-    new_archaeophases_mcmc(x = as.data.frame(data),
+    new_archaeophases_mcmc(x = data,
                            call = match.call(),
                            hash = file_hash)
 }
@@ -252,7 +252,7 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
     ## Remove the iteration column
     data <- data[, -1]
     ## Return archaeophases_mcmc object
-    new_archaeophases_mcmc(x = as.data.frame(data),
+    new_archaeophases_mcmc(x = data,
                            call = match.call(),
                            hash = file_hash)
 }
@@ -330,7 +330,7 @@ read_bcal <- function(file, bin_width = 1)
     ## Convert from BP to BC/AD
     data <- 1950 - data
     ## Return archaeophases_mcmc object
-    new_archaeophases_mcmc(x = as.data.frame(data),
+    new_archaeophases_mcmc(x = data,
                            call = match.call(),
                            hash = file_hash)
 }

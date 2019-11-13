@@ -65,8 +65,12 @@ CredibleInterval <- function(a_chain, level=0.95, roundingOfValue=0){
 #'   credible_interval(Event.1)
 #'   credible_interval(Event.12, 0.50)
 #'
+#' @importFrom tibble is_tibble
+#'
 #' @export
-credible_interval <- function(data, level = 0.95, round_to = 0){
+credible_interval <- function(data, level = 0.95, round_to = 0) {
+
+    if (is_tibble(data)) data <- unlist(data)
 
     if (!is.vector(data) || !is.numeric(data))
         stop("Data format not recognized.")
@@ -80,5 +84,6 @@ credible_interval <- function(data, level = 0.95, round_to = 0){
     res <- round(c(sorted[inf][ind], sorted[sup][ind]), digits = round_to)
     names(res) <- c("inf", "sup")
     list(ci = res,
-         level = level)
+         level = level,
+         call = match.call())
 }

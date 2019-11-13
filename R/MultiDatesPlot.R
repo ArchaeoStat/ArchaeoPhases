@@ -233,7 +233,7 @@ multi_dates_plot <- function (data,
     if(!is.data.frame(data)) stop("Data format not recognized.")
 
     if (is.element("archaeophases_plot", class(data))) {
-        plot_data <- data
+        data_tibble <- data
     }
     else {
         if (x_scale == "elapsed") {
@@ -245,17 +245,18 @@ multi_dates_plot <- function (data,
             }
         }
 
-        plot_data <- data[, position]
+        data_tibble <- data[, position]
     }
+
+    plot_data <- as.data.frame(data_tibble)
 
     if (intervals == "CI") {
         Bornes = MultiCredibleInterval(plot_data, 1:ncol(plot_data),
                                        level = level,
                                        roundingOfValue = round)
-        Ordered = Bornes
-        Ordered.df <- as.data.frame(Ordered)
-        Ordered.df$y.labs <- factor(rownames(Ordered),
-                                    levels = rownames(Ordered))
+        Ordered.df <- as.data.frame(Bornes)
+        Ordered.df$y.labs <- factor(rownames(Bornes),
+                                    levels = rownames(Bornes))
     }
     else if (intervals == "HPD") {
         Bornes = MultiHPD(plot_data, 1:ncol(plot_data),
@@ -327,7 +328,7 @@ multi_dates_plot <- function (data,
         print(h)
     }
 
-    new_archaeophases_plot(x = plot_data,
+    new_archaeophases_plot(x = data_tibble,
                            mcmc = data,
                            call = match.call())
 }

@@ -8,7 +8,7 @@
 #' @param mcmc_source The Bayesian calibration application responsible
 #' for the csv file, one of "bcal", "oxcal", "chronomodel".
 #'
-#' @return An \code{archaeophases_mcmc} object that inherits from \code{data.frame}.
+#' @return An \code{archaeophases_mcmc} object that inherits from \code{tbl_df}.
 #'
 #' @details
 #' The SHA256 hash should be secure against intentional and unintentional
@@ -26,7 +26,7 @@ new_archaeophases_mcmc <- function(x = list(),
 
     stopifnot(is.list(x))
     structure(x,
-              class = c("archaeophases_mcmc", "data.frame"),
+              class = c("archaeophases_mcmc", "tbl_df", "tbl", "data.frame"),
               mcmc = call,
               hash = hash)
 }
@@ -58,7 +58,7 @@ new_archaeophases_plot <- function(x = list(),
         attr_list <- as.list(attributes(mcmc))
         }
     structure(x,
-              class = c("archaeophases_plot", "archaeophases_mcmc", "data.frame"),
+              class = c("archaeophases_plot", "archaeophases_mcmc", "tbl_df", "tbl", "data.frame"),
               mcmc = attr_list[match(mcmc_attrs, names(attr_list))],
               call = call)
 }

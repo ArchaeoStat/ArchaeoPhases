@@ -18,7 +18,7 @@ new_archaeophases_mcmc(x = list(), call = language(),
 for the csv file, one of "bcal", "oxcal", "chronomodel".}
 }
 \value{
-An \code{archaeophases_mcmc} object that inherits from \code{data.frame}.
+An \code{archaeophases_mcmc} object that inherits from \code{tbl_df}.
 }
 \description{
 Object to be returned by functions that read MCMC data from csv files.

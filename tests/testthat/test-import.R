@@ -14,7 +14,7 @@ test_that("ImportCSV works with OxCal", {
 
 test_that("read_oxcal works", {
     oxcal <- read_oxcal("test-data/oxcal.csv")
-    expect_equal(dim(oxcal), c(1000, 2))
+    expect_equal(c(1000, 2), dim(oxcal))
     expect_equivalent(names(oxcal), c("foo-early", "foo-late"))
     expect_equivalent(as.data.frame(oxcal)[1, ], c(1026.41, 1048.33),
                       tolerance = 0.01)
@@ -39,8 +39,8 @@ test_that("read_bcal works with default bin width", {
     expect_equal(dim(bcal), c(293705, 4))
     expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
                                         "theta 1 (test)", "alpha 1 (test)"))
-    expect_equivalent(bcal[1, ], c(1949, 1160, 1112, -2349))
-    expect_equivalent(bcal[293705, ], c(1950, 1126, 997, 877))
+    expect_equivalent(unlist(bcal[1, ]), (c(1949, 1160, 1112, -2349)))
+    expect_equivalent(unlist(bcal[293705, ]), c(1950, 1126, 997, 877))
     expect_is(bcal, "archaeophases_mcmc")
     expect_is(bcal, "data.frame")
 })
@@ -61,8 +61,8 @@ test_that("read_bcal works with custom bin width", {
     expect_equal(dim(bcal), c(294770, 4))
     expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
                                         "theta 1 (test)", "alpha 1 (test)"))
-    expect_equivalent(bcal[1, ], c(1389, 1032, 1032, 318))
-    expect_equivalent(bcal[294770, ], c(1406, 1168, 1100, 1032))
+    expect_equivalent(unlist(bcal[1, ]), c(1389, 1032, 1032, 318))
+    expect_equivalent(unlist(bcal[294770, ]), c(1406, 1168, 1100, 1032))
     expect_is(bcal, "archaeophases_mcmc")
     expect_is(bcal, "data.frame")
 })

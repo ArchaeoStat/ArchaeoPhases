@@ -214,24 +214,28 @@ marginal_plot <- function(data,
         a_chain <- data
     }
     else {
-        a_chain <- data.frame(x = as.vector(data[, position]))
+        a_chain <- data[, position]
+
+        ## if(is_tibble(data)) a_chain <- unlist(a_chain)
 
         if (x_scale == "BP") {
-            a_chain$x <- 1950 - a_chain$x
+            a_chain <- 1950 - a_chain
         }
 
         if (x_scale == "elapsed") {
-            a_chain$x <- data[, elapsed_origin_position] - a_chain$x
+            elapsed_origin <- data[, elapsed_origin_position]
+            if(is_tibble(data)) elapsed_origin <- unlist(elapsed_origin)
+            a_chain <- a_chain - elapsed_origin
         }
     }
 
     ## credible interval
-    c_i <- credible_interval(a_chain$x, level = level, round_to = 4)$ci
+    c_i <- credible_interval(a_chain, level = level, round_to = 4)$ci
 
     ## mean
-    chain_mean = mean(a_chain$x)
+    chain_mean = mean(unlist(a_chain))
 
-    chain_density <- density(a_chain$x, n = grid_length) %$%
+    chain_density <- density(unlist(a_chain), n = grid_length) %$%
         data.frame(x = x, y = y) %>%
         mutate(mid = (x > c_i["inf"] & x < c_i["sup"]))
 
@@ -246,6 +250,9 @@ marginal_plot <- function(data,
         fill_color <- density_color
     }
 
+    original_name <- names(a_chain)
+    names(a_chain) <- "x"
+
     h <- ggplot(data = a_chain,
                 mapping = aes(x = x))
 
@@ -256,37 +263,26 @@ marginal_plot <- function(data,
                           fill = fill_color,
                           n = grid_length)
 
-    ## if (shade == TRUE) {
-    ##     h <- h + geom_ribbon(data = chain_density[chain_density$mid,],
-    ##                          show.legend = FALSE,
-    ##                          fill = shade_color)
-    ## }
-
-    h <- h + geom_segment(mapping = aes(x = c_i$inf,
-                                        xend = c_i$inf,
+    h <- h + geom_segment(mapping = aes(x = c_i[["inf"]],
+                                        xend = c_i[["inf"]],
                                         y = 0,
-                                        yend = dens_low$y),
+                                        yend = dens_low[["y"]]),
                           linetype = ci_linetype,
                           color = ci_color,
                           size = ci_size)
 
-    h <- h + geom_segment(mapping = aes(x = c_i$sup,
-                                        xend = c_i$sup,
+    h <- h + geom_segment(mapping = aes(x = c_i[["sup"]],
+                                        xend = c_i[["sup"]],
                                         y = 0,
-                                        yend = dens_high$y),
+                                        yend = dens_high[["y"]]),
                           linetype = ci_linetype,
                           color = ci_color,
                           size = ci_size)
-
-    ## h <- h + geom_line(mapping = aes(y = y),
-    ##                    linetype = line_linetype,
-    ##                    color = line_color,
-    ##                    size = line_size)
 
     h <- h + geom_segment(mapping = aes(x = chain_mean,
                                         xend = chain_mean,
                                         y = 0,
-                                        yend = dens_mean$y),
+                                        yend = dens_mean[["y"]]),
                           linetype = mean_linetype,
                           color = mean_color,
                           size = mean_size)
@@ -301,11 +297,11 @@ marginal_plot <- function(data,
 
     ## x abscisses
     if (is.null(x_min) ) {
-        x_min <- min(density(a_chain$x, n = grid_length)$x)
+        x_min <- min(density(unlist(a_chain), n = grid_length)$x)
     }
 
     if (is.null(x_max)) {
-        x_max <- max(density(a_chain$x, n = grid_length)$x)
+        x_max <- max(density(unlist(a_chain), n = grid_length)$x)
     }
 
     h <- h + xlim(x_min, x_max)
@@ -322,9 +318,8 @@ marginal_plot <- function(data,
         }
         print(h)
     }
-
+    names(a_chain) <- original_name
     new_archaeophases_plot(x = a_chain,
                            mcmc = data,
                            call = match.call())
-
 }
