@@ -4,10 +4,17 @@
 \alias{SuccessionPlot}
 \title{Density plots of two successive groups (for groups in temporal order constraint)}
 \usage{
-SuccessionPlot(Phase1Min_chain, Phase1Max_chain, Phase2Min_chain,
-  Phase2Max_chain, level = 0.95,
+SuccessionPlot(
+  Phase1Min_chain,
+  Phase1Max_chain,
+  Phase2Min_chain,
+  Phase2Max_chain,
+  level = 0.95,
   title = "Characterisation of a succession of groups",
-  exportFile = NULL, exportFormat = "PNG", GridLength = 1024)
+  exportFile = NULL,
+  exportFormat = "PNG",
+  GridLength = 1024
+)
 }
 \arguments{
 \item{Phase1Min_chain}{Numeric vector containing the output of the MCMC

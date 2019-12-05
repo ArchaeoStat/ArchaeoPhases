@@ -4,9 +4,16 @@
 \alias{PhaseDurationPlot}
 \title{Plot the duration of a group}
 \usage{
-PhaseDurationPlot(PhaseMin_chain, PhaseMax_chain, level = 0.95,
-  title = "Duration of a group of dates", colors = TRUE,
-  exportFile = NULL, exportFormat = "PNG", GridLength = 1024)
+PhaseDurationPlot(
+  PhaseMin_chain,
+  PhaseMax_chain,
+  level = 0.95,
+  title = "Duration of a group of dates",
+  colors = TRUE,
+  exportFile = NULL,
+  exportFormat = "PNG",
+  GridLength = 1024
+)
 }
 \arguments{
 \item{PhaseMin_chain}{Numeric vector containing the output of the MCMC

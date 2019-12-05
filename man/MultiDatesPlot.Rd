@@ -4,15 +4,33 @@
 \alias{MultiDatesPlot}
 \title{Plot of credible intervals or HPD regions of a series of events}
 \usage{
-MultiDatesPlot(data, position, level = 0.95, roundingOfValue = 0,
-  intervals = "CI", order = "default", title = "Plot of intervals",
-  subtitle = NULL, caption = "ArchaeoPhases",
-  labelXaxis = "Calendar Year", labelYaxis = NULL, height = 7,
-  width = 7, units = "in", x.min = NULL, x.max = NULL,
-  x.scale = "calendar", elapsed.origin.position = NULL,
-  dumbbell.size = 3, dot.guide = FALSE, dot.guide.size = 0.25,
-  y.grid = FALSE, file = NULL, newWindow = TRUE,
-  print.data.result = FALSE)
+MultiDatesPlot(
+  data,
+  position,
+  level = 0.95,
+  roundingOfValue = 0,
+  intervals = "CI",
+  order = "default",
+  title = "Plot of intervals",
+  subtitle = NULL,
+  caption = "ArchaeoPhases",
+  labelXaxis = "Calendar Year",
+  labelYaxis = NULL,
+  height = 7,
+  width = 7,
+  units = "in",
+  x.min = NULL,
+  x.max = NULL,
+  x.scale = "calendar",
+  elapsed.origin.position = NULL,
+  dumbbell.size = 3,
+  dot.guide = FALSE,
+  dot.guide.size = 0.25,
+  y.grid = FALSE,
+  file = NULL,
+  newWindow = TRUE,
+  print.data.result = FALSE
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

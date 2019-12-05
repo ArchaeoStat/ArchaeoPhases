@@ -4,13 +4,28 @@
 \alias{TempoActivityPlot}
 \title{Plot the derivative of the tempo plot Bayesian estimate}
 \usage{
-TempoActivityPlot(data, position, plot.result = NULL, level = 0.95,
-  title = "Activity plot", subtitle = NULL, caption = "ArcheoPhases",
-  x.label = "Calendar year", y.label = "Activity",
-  line.types = c("solid"), width = 7, height = 7, units = "in",
-  x.min = NULL, x.max = NULL, file = NULL, x.scale = "calendar",
-  elapsed.origin.position = NULL, newWindow = TRUE,
-  print.data.result = FALSE)
+TempoActivityPlot(
+  data,
+  position,
+  plot.result = NULL,
+  level = 0.95,
+  title = "Activity plot",
+  subtitle = NULL,
+  caption = "ArcheoPhases",
+  x.label = "Calendar year",
+  y.label = "Activity",
+  line.types = c("solid"),
+  width = 7,
+  height = 7,
+  units = "in",
+  x.min = NULL,
+  x.max = NULL,
+  file = NULL,
+  x.scale = "calendar",
+  elapsed.origin.position = NULL,
+  newWindow = TRUE,
+  print.data.result = FALSE
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

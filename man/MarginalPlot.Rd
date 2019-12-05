@@ -4,13 +4,26 @@
 \alias{MarginalPlot}
 \title{Plot a marginal posterior density}
 \usage{
-MarginalPlot(a_chain, level = 0.95, GridLength = 1024,
-  title = "Characteristics of a date", subtitle = NULL,
-  caption = "ArchaeoPhases", x.label = "Calendar year",
-  y.label = NULL, y.grid = TRUE, x.scale = "calendar",
-  elapsed.origin.position = NULL, x.min = NULL, x.max = NULL,
-  height = 7, width = 7, units = "in", file = NULL,
-  newWindow = TRUE)
+MarginalPlot(
+  a_chain,
+  level = 0.95,
+  GridLength = 1024,
+  title = "Characteristics of a date",
+  subtitle = NULL,
+  caption = "ArchaeoPhases",
+  x.label = "Calendar year",
+  y.label = NULL,
+  y.grid = TRUE,
+  x.scale = "calendar",
+  elapsed.origin.position = NULL,
+  x.min = NULL,
+  x.max = NULL,
+  height = 7,
+  width = 7,
+  units = "in",
+  file = NULL,
+  newWindow = TRUE
+)
 }
 \arguments{
 \item{a_chain}{Numeric vector containing the output of the MCMC algorithm

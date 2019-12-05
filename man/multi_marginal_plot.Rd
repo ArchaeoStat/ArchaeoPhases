@@ -4,19 +4,40 @@
 \alias{multi_marginal_plot}
 \title{Marginal posterior densities of several events}
 \usage{
-multi_marginal_plot(data, position = 1:ncol(data), level = 0.95,
-  grid_length = 1024, x_scale = "calendar",
+multi_marginal_plot(
+  data,
+  position = 1:ncol(data),
+  level = 0.95,
+  grid_length = 1024,
+  x_scale = "calendar",
   elapsed_origin_position = NULL,
   title = "Characteristics of several dates",
-  subtitle = "Marginal densities", caption = paste(level * 100,
-  "\% credible interval", sep = ""), x_label = "Calendar year",
-  y_label = NULL, density_fill = "gray30", density_color = "black",
-  density_alpha = 1, mean_color = "white", mean_linetype = "dashed",
-  mean_size = 0.5, ci_color = mean_color, ci_linetype = "dotted",
-  ci_size = mean_size, y_grid = TRUE, x_min = NULL, x_max = NULL,
-  height = 7, width = 7, units = "in", file = NULL,
-  new_window = TRUE, plot_result = TRUE, fill_palette = NULL,
-  colors = NULL, color_legend_name = "Legend")
+  subtitle = "Marginal densities",
+  caption = paste(level * 100, "\% credible interval", sep = ""),
+  x_label = "Calendar year",
+  y_label = NULL,
+  density_fill = "gray30",
+  density_color = "black",
+  density_alpha = 1,
+  mean_color = "white",
+  mean_linetype = "dashed",
+  mean_size = 0.5,
+  ci_color = mean_color,
+  ci_linetype = "dotted",
+  ci_size = mean_size,
+  y_grid = TRUE,
+  x_min = NULL,
+  x_max = NULL,
+  height = 7,
+  width = 7,
+  units = "in",
+  file = NULL,
+  new_window = TRUE,
+  plot_result = TRUE,
+  fill_palette = NULL,
+  colors = NULL,
+  color_legend_name = "Legend"
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

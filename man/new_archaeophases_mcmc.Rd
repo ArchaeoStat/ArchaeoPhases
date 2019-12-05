@@ -4,8 +4,7 @@
 \alias{new_archaeophases_mcmc}
 \title{Constructor for \code{archaeophases_mcmc} object}
 \usage{
-new_archaeophases_mcmc(x = list(), call = language(),
-  hash = character())
+new_archaeophases_mcmc(x = list(), call = language(), hash = character())
 }
 \arguments{
 \item{x}{A data frame with the data from the csv file.}

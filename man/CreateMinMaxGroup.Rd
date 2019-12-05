@@ -4,8 +4,13 @@
 \alias{CreateMinMaxGroup}
 \title{Construct the minimum and maximum for a group of events (phase)}
 \usage{
-CreateMinMaxGroup(data, position, name = "Phase", add = NULL,
-  exportFile = NULL)
+CreateMinMaxGroup(
+  data,
+  position,
+  name = "Phase",
+  add = NULL,
+  exportFile = NULL
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

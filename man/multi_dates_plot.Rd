@@ -4,15 +4,33 @@
 \alias{multi_dates_plot}
 \title{Plot of credible intervals or HPD regions of a series of events}
 \usage{
-multi_dates_plot(data, position = 1:ncol(data), level = 0.95,
-  plot_result = TRUE, round = 0, intervals = "CI",
-  order = "default", title = "Plot of intervals", subtitle = NULL,
-  caption = "ArchaeoPhases", x_label = "Calendar Year",
-  y_label = NULL, height = 7, width = 7, units = "in",
-  x_min = NULL, x_max = NULL, x_scale = "calendar",
-  elapsed_origin_position = NULL, dumbbell_size = 1,
-  dot_guide = FALSE, dot_guide_size = 0.25, y_grid = FALSE,
-  file = NULL, new_window = TRUE)
+multi_dates_plot(
+  data,
+  position = 1:ncol(data),
+  level = 0.95,
+  plot_result = TRUE,
+  round = 0,
+  intervals = "CI",
+  order = "default",
+  title = "Plot of intervals",
+  subtitle = NULL,
+  caption = "ArchaeoPhases",
+  x_label = "Calendar Year",
+  y_label = NULL,
+  height = 7,
+  width = 7,
+  units = "in",
+  x_min = NULL,
+  x_max = NULL,
+  x_scale = "calendar",
+  elapsed_origin_position = NULL,
+  dumbbell_size = 1,
+  dot_guide = FALSE,
+  dot_guide_size = 0.25,
+  y_grid = FALSE,
+  file = NULL,
+  new_window = TRUE
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}
@@ -74,9 +92,6 @@ to the origin for elapsed time calculations.}
 \item{file}{Name of the file to be saved. If \code{NULL} then no plot is saved.}
 
 \item{new_window}{Whether the plot is drawn within a new window or not.}
-
-\item{plot_result}{If \code{TRUE}, then draw a plot on the display,
-else suppress drawing.}
 }
 \value{
 An \code{archaeophases_plot} object with the data and metadata

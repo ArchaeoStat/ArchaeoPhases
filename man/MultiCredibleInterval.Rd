@@ -4,8 +4,7 @@
 \alias{MultiCredibleInterval}
 \title{Bayesian credible interval for a series of dates}
 \usage{
-MultiCredibleInterval(data, position, level = 0.95,
-  roundingOfValue = 0)
+MultiCredibleInterval(data, position, level = 0.95, roundingOfValue = 0)
 }
 \arguments{
 \item{data}{data frame containing the output of the MCMC algorithm.}

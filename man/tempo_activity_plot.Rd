@@ -4,13 +4,26 @@
 \alias{tempo_activity_plot}
 \title{Plot the derivative of the tempo plot Bayesian estimate}
 \usage{
-tempo_activity_plot(data, position = 1:ncol(data),
-  title = "Tempo Activity Plot", subtitle = NULL,
-  caption = "ArcheoPhases", x_label = "Calendar year",
-  y_label = "Activity", line_types = c("solid"), width = 7,
-  height = 7, units = "in", x_min = NULL, x_max = NULL,
-  file = NULL, x_scale = "calendar", elapsed_origin_position = NULL,
-  new_window = TRUE, plot_result = TRUE)
+tempo_activity_plot(
+  data,
+  position = 1:ncol(data),
+  title = "Tempo Activity Plot",
+  subtitle = NULL,
+  caption = "ArcheoPhases",
+  x_label = "Calendar year",
+  y_label = "Activity",
+  line_types = c("solid"),
+  width = 7,
+  height = 7,
+  units = "in",
+  x_min = NULL,
+  x_max = NULL,
+  file = NULL,
+  x_scale = "calendar",
+  elapsed_origin_position = NULL,
+  new_window = TRUE,
+  plot_result = TRUE
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}
@@ -55,9 +68,6 @@ of the column corresponding to the event from which elapsed time is calculated.}
 else suppress drawing.}
 
 \item{level}{Probability corresponding to the level of confidence.}
-
-\item{plot_result}{If \code{TRUE}, then draw a plot on the display,
-else suppress drawing.}
 }
 \value{
 An \code{archaeophases_plot} object with the data and metadata

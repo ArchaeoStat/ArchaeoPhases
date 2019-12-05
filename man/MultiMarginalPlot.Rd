@@ -4,13 +4,28 @@
 \alias{MultiMarginalPlot}
 \title{Marginal posterior densities of several events}
 \usage{
-MultiMarginalPlot(data, position, level = 0.95, GridLength = 1024,
-  x.scale = rep("calendar", length(position)), elapsed.origin = NULL,
-  title = "Characteristics of several dates", subtitle = NULL,
-  caption = "ArchaeoPhases", x.label = "Calendar year",
-  y.label = NULL, y.grid = TRUE, x.min = NULL, x.max = NULL,
-  legend.title = "Legend", height = 7, width = 7, units = "in",
-  file = NULL, newWindow = TRUE)
+MultiMarginalPlot(
+  data,
+  position,
+  level = 0.95,
+  GridLength = 1024,
+  x.scale = rep("calendar", length(position)),
+  elapsed.origin = NULL,
+  title = "Characteristics of several dates",
+  subtitle = NULL,
+  caption = "ArchaeoPhases",
+  x.label = "Calendar year",
+  y.label = NULL,
+  y.grid = TRUE,
+  x.min = NULL,
+  x.max = NULL,
+  legend.title = "Legend",
+  height = 7,
+  width = 7,
+  units = "in",
+  file = NULL,
+  newWindow = TRUE
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}
