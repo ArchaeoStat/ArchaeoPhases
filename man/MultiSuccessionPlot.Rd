@@ -4,10 +4,16 @@
 \alias{MultiSuccessionPlot}
 \title{Successive Phases Density Plots (for phases in temporal order constraint)}
 \usage{
-MultiSuccessionPlot(data, position_minimum,
-  position_maximum = position_minimum + 1, level = 0.95,
-  title = "Characterisation of a succession of groups", colors = NULL,
-  exportFile = NULL, exportFormat = "PNG")
+MultiSuccessionPlot(
+  data,
+  position_minimum,
+  position_maximum = position_minimum + 1,
+  level = 0.95,
+  title = "Characterisation of a succession of groups",
+  colors = NULL,
+  exportFile = NULL,
+  exportFormat = "PNG"
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

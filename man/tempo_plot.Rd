@@ -4,17 +4,35 @@
 \alias{tempo_plot}
 \title{Tempo plot}
 \usage{
-tempo_plot(data, position = 1:ncol(data), level = 0.95, count = TRUE,
-  Gauss = FALSE, title = NULL, subtitle = NULL, caption = NULL,
-  legend_title = NULL, legend_position = "bottom",
-  legend_labels = c("Bayes estimate", "Credible interval high",
-  "Credible interval low"), x_label = "Calendar year",
-  y_label = "Cumulative events", line_types = c("solid", "dotted",
-  "dotted"), line_sizes = c(1.2, 0.8, 0.8), line_colors = c("black",
-  "grey50", "grey50"), width = 7, height = 7, units = "in",
-  x_min = NULL, x_max = NULL, color_palette = NULL, file = NULL,
-  x_scale = "calendar", elapsed_origin_position = NULL,
-  new_window = TRUE, plot_result = TRUE)
+tempo_plot(
+  data,
+  position = 1:ncol(data),
+  level = 0.95,
+  count = TRUE,
+  Gauss = FALSE,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  legend_title = NULL,
+  legend_position = "bottom",
+  legend_labels = c("Bayes estimate", "Credible interval high", "Credible interval low"),
+  x_label = "Calendar year",
+  y_label = "Cumulative events",
+  line_types = c("solid", "dotted", "dotted"),
+  line_sizes = c(1.2, 0.8, 0.8),
+  line_colors = c("black", "grey50", "grey50"),
+  width = 7,
+  height = 7,
+  units = "in",
+  x_min = NULL,
+  x_max = NULL,
+  color_palette = NULL,
+  file = NULL,
+  x_scale = "calendar",
+  elapsed_origin_position = NULL,
+  new_window = TRUE,
+  plot_result = TRUE
+)
 }
 \arguments{
 \item{data}{Data frame or \code{archaeophases_mcmc} object containing

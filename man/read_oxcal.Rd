@@ -4,13 +4,17 @@
 \alias{read_oxcal}
 \title{Read MCMC output from OxCal}
 \usage{
-read_oxcal(file)
+read_oxcal(file, quiet = "no")
 }
 \arguments{
 \item{file}{Either a path to a CSV file, a connection,
 or the value \code{clipboard()} to read from the system clipboard.
 The CSV file can be compressed or plain.
 See \code{\link[readr]{read_csv}} for details.}
+
+\item{quiet}{One of "no" (default) to allow messages and warnings, "partial"
+to suppress messages and allow warnings, or "yes" to suppress messages
+and warnings.}
 }
 \value{
 An \code{archaeophases_mcmc} object containing the marginal

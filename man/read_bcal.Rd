@@ -4,7 +4,7 @@
 \alias{read_bcal}
 \title{Read MCMC output from BCal}
 \usage{
-read_bcal(file, bin_width = 1)
+read_bcal(file, bin_width = 1, quiet = "no")
 }
 \arguments{
 \item{file}{Either a path to a CSV file, a connection,
@@ -15,6 +15,10 @@ See \code{\link[readr]{read_csv}} for details.}
 \item{bin_width}{The bin width specified for the
 \href{https://bcal.shef.ac.uk/}{BCal} calibration.
 Defaults to the \href{https://bcal.shef.ac.uk/}{BCal} default of 1.}
+
+\item{quiet}{One of "no" (default) to allow messages and warnings, "partial"
+to suppress messages and allow warnings, or "yes" to suppress messages
+and warnings.}
 }
 \value{
 An \code{archaeophases_mcmc} object containing the marginal

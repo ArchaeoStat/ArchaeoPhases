@@ -4,10 +4,16 @@
 \alias{MultiPhasePlot}
 \title{Several phase density plots}
 \usage{
-MultiPhasePlot(data, position_minimum,
-  position_maximum = position_minimum + 1, level = 0.95,
-  title = "Characterisation of several groups", colors = NULL,
-  exportFile = NULL, exportFormat = "PNG")
+MultiPhasePlot(
+  data,
+  position_minimum,
+  position_maximum = position_minimum + 1,
+  level = 0.95,
+  title = "Characterisation of several groups",
+  colors = NULL,
+  exportFile = NULL,
+  exportFormat = "PNG"
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

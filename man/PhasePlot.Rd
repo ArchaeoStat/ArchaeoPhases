@@ -4,9 +4,16 @@
 \alias{PhasePlot}
 \title{Plot the characteristics of a group of events}
 \usage{
-PhasePlot(PhaseMin_chain, PhaseMax_chain, level = 0.95,
-  title = "Characterisation of a group of dates", colors = TRUE,
-  exportFile = NULL, exportFormat = "PNG", GridLength = 1024)
+PhasePlot(
+  PhaseMin_chain,
+  PhaseMax_chain,
+  level = 0.95,
+  title = "Characterisation of a group of dates",
+  colors = TRUE,
+  exportFile = NULL,
+  exportFormat = "PNG",
+  GridLength = 1024
+)
 }
 \arguments{
 \item{PhaseMin_chain}{Numeric vector containing the output of the

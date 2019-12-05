@@ -4,17 +4,34 @@
 \alias{TempoPlot}
 \title{Tempo plot}
 \usage{
-TempoPlot(data, position, plot.result = NULL, level = 0.95,
-  count = TRUE, Gauss = FALSE, title = "Tempo plot",
-  subtitle = NULL, caption = "ArcheoPhases", legend.title = "Legend",
+TempoPlot(
+  data,
+  position,
+  plot.result = NULL,
+  level = 0.95,
+  count = TRUE,
+  Gauss = FALSE,
+  title = "Tempo plot",
+  subtitle = NULL,
+  caption = "ArcheoPhases",
+  legend.title = "Legend",
   legend.labels = c("Bayes estimate", "Credible interval, low",
-  "Credible interval, high", "Gaussian approx., high",
-  "Gaussian approx., low"), x.label = "Calendar year",
-  y.label = "Cumulative events", line.types = c("solid", "12", "11",
-  "28", "28"), width = 7, height = 7, units = "in", x.min = NULL,
-  x.max = NULL, colors = TRUE, file = NULL, x.scale = "calendar",
-  elapsed.origin.position = NULL, newWindow = TRUE,
-  print.data.result = FALSE)
+    "Credible interval, high", "Gaussian approx., high", "Gaussian approx., low"),
+  x.label = "Calendar year",
+  y.label = "Cumulative events",
+  line.types = c("solid", "12", "11", "28", "28"),
+  width = 7,
+  height = 7,
+  units = "in",
+  x.min = NULL,
+  x.max = NULL,
+  colors = TRUE,
+  file = NULL,
+  x.scale = "calendar",
+  elapsed.origin.position = NULL,
+  newWindow = TRUE,
+  print.data.result = FALSE
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

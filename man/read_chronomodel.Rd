@@ -4,7 +4,7 @@
 \alias{read_chronomodel}
 \title{Read MCMC output from ChronoModel}
 \usage{
-read_chronomodel(file, decimal = ".", separator = ",")
+read_chronomodel(file, decimal = ".", separator = ",", quiet = "no")
 }
 \arguments{
 \item{file}{Either a path to a CSV file, a connection,
@@ -18,6 +18,10 @@ the two choices offered by
 
 \item{separator}{The character used to separate fields
 in the CSV file.  Defaults to ",".}
+
+\item{quiet}{One of "no" (default) to allow messages and warnings, "partial"
+to suppress messages and allow warnings, or "yes" to suppress messages
+and warnings.}
 }
 \value{
 An \code{archaeophases_mcmc} object containing the marginal

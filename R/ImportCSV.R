@@ -135,6 +135,10 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #' The CSV file can be compressed or plain.
 #' See \code{\link[readr]{read_csv}} for details.
 #'
+#' @param quiet One of "no" (default) to allow messages and warnings, "partial"
+#' to suppress messages and allow warnings, or "yes" to suppress messages
+#' and warnings.
+#'
 #' @return An \code{archaeophases_mcmc} object containing the marginal
 #' posterior(s) as a data frame.
 #'
@@ -160,11 +164,15 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #' @importFrom digest digest
 #'
 #' @export
-read_oxcal <- function(file)
+read_oxcal <- function(file, quiet="no")
 {
     ## OxCal hard codes csv file conventions, per C. Bronk Ramsey
     ## These match the R defaults
-    data <- suppressWarnings(read_csv(file))
+    data <- switch(quiet,
+                   "no" = read_csv(file),
+                   "partial" = suppressMessages(read_csv(file)),
+                   "yes" = suppressWarnings(suppressMessages(read_csv(file))),
+                   read_csv(file))
     ## Calculate hash, if connection, save temp file
     if(!file_test("-f", file)) {
         temp_file <- tempfile(pattern = "", fileext = "csv")
@@ -207,6 +215,9 @@ read_oxcal <- function(file)
 #' \href{https://chronomodel.com/}{ChronoModel}.
 #' @param separator The character used to separate fields
 #' in the CSV file.  Defaults to ",".
+#' @param quiet One of "no" (default) to allow messages and warnings, "partial"
+#' to suppress messages and allow warnings, or "yes" to suppress messages
+#' and warnings.
 #'
 #' @return An \code{archaeophases_mcmc} object containing the marginal
 #' posterior(s) from file.
@@ -233,12 +244,25 @@ read_oxcal <- function(file)
 #' @importFrom digest digest
 #'
 #' @export
-read_chronomodel <- function(file, decimal = ".", separator = ",")
+read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
 {
     ## ChronoModel allows the user to choose any separator
     ## and either a period or comma for decimals
-    data <- read_delim(file, locale = locale("en", decimal_mark = decimal),
-                       delim = separator, comment = "#")
+    data <- switch(quiet,
+                   "no" = read_delim(file,
+                                     locale = locale("en", decimal_mark = decimal),
+                                     delim = separator, comment = "#"),
+                   "partial" = suppressMessages(
+                       read_delim(file,
+                                  locale = locale("en", decimal_mark = decimal),
+                                  delim = separator, comment = "#")),
+                   "yes" = suppressWarnings(
+                       suppressMessages(read_delim(file,
+                                                   locale = locale("en", decimal_mark = decimal),
+                                                   delim = separator, comment = "#"))),
+                   read_delim(file,
+                              locale = locale("en", decimal_mark = decimal),
+                              delim = separator, comment = "#"))
     ## Calculate hash, if connection, save temp file
     if(!file_test("-f", file)) {
         temp_file <- tempfile(pattern = "", fileext = "csv")
@@ -274,6 +298,9 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
 #' @param bin_width The bin width specified for the
 #' \href{https://bcal.shef.ac.uk/}{BCal} calibration.
 #' Defaults to the \href{https://bcal.shef.ac.uk/}{BCal} default of 1.
+#' @param quiet One of "no" (default) to allow messages and warnings, "partial"
+#' to suppress messages and allow warnings, or "yes" to suppress messages
+#' and warnings.
 #'
 #' @return An \code{archaeophases_mcmc} object containing the marginal
 #' posterior(s) as a data frame.
@@ -302,10 +329,14 @@ read_chronomodel <- function(file, decimal = ".", separator = ",")
 #' @importFrom digest digest
 #'
 #' @export
-read_bcal <- function(file, bin_width = 1)
+read_bcal <- function(file, bin_width = 1, quiet = "no")
 {
     ## BCal uses English locale csv conventions
-    data <- suppressWarnings(read_csv(file))
+    data <- switch(quiet,
+                   "no" = read_csv(file),
+                   "partial" = suppressMessages(read_csv(file)),
+                   "yes" = suppressMessages(suppressWarnings(read_csv(file))),
+                   read_csv(file))
     ## Calculate hash, if connection, save temp file
     if(!file_test("-f", file)) {
         temp_file <- tempfile(pattern = "", fileext = "csv")

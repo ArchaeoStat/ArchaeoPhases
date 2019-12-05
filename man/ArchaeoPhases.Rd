@@ -3,7 +3,6 @@
 \docType{package}
 \name{ArchaeoPhases}
 \alias{ArchaeoPhases}
-\alias{ArchaeoPhases-package}
 \title{ArchaeoPhases: Post-Processing of the Markov Chain Simulated by 'Chronomodel',
 'OxCal', or 'BCal'.}
 \description{

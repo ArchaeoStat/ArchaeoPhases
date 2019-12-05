@@ -4,8 +4,12 @@
 \alias{multi_marginal_statistics}
 \title{Marginal summary statistics for multiple MCMC chains}
 \usage{
-multi_marginal_statistics(data, position = 1:ncol(data), level = 0.95,
-  round_to = 0)
+multi_marginal_statistics(
+  data,
+  position = 1:ncol(data),
+  level = 0.95,
+  round_to = 0
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

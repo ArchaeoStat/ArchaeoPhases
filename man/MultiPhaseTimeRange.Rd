@@ -4,8 +4,12 @@
 \alias{MultiPhaseTimeRange}
 \title{Phase time range for multiple groups}
 \usage{
-MultiPhaseTimeRange(data, position_minimum,
-  position_maximum = position_minimum + 1, level = 0.95)
+MultiPhaseTimeRange(
+  data,
+  position_minimum,
+  position_maximum = position_minimum + 1,
+  level = 0.95
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

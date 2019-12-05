@@ -5,8 +5,12 @@
 \title{Transition range for a succession of groups
 (for groups in temporal order constraint)}
 \usage{
-MultiPhasesTransition(data, position_minimum,
-  position_maximum = position_minimum + 1, level = 0.95)
+MultiPhasesTransition(
+  data,
+  position_minimum,
+  position_maximum = position_minimum + 1,
+  level = 0.95
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

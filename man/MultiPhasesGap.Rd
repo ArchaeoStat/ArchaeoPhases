@@ -4,8 +4,12 @@
 \alias{MultiPhasesGap}
 \title{Gap or hiatus between a succession of groups (for groups in temporal order constraint)}
 \usage{
-MultiPhasesGap(data, position_minimum,
-  position_maximum = position_minimum + 1, level = 0.95)
+MultiPhasesGap(
+  data,
+  position_minimum,
+  position_maximum = position_minimum + 1,
+  level = 0.95
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

@@ -4,9 +4,17 @@
 \alias{ImportCSV}
 \title{Importing a CSV file}
 \usage{
-ImportCSV(file, dec = ".", sep = ",", comment.char = "#",
-  header = TRUE, iterationColumn = NULL, referenceYear = NULL,
-  rowToWithdraw = NULL, bin.width = NULL)
+ImportCSV(
+  file,
+  dec = ".",
+  sep = ",",
+  comment.char = "#",
+  header = TRUE,
+  iterationColumn = NULL,
+  referenceYear = NULL,
+  rowToWithdraw = NULL,
+  bin.width = NULL
+)
 }
 \arguments{
 \item{file}{Name of the CSV file containing the output of the MCMC algorithm.}

@@ -4,15 +4,34 @@
 \alias{OccurrencePlot}
 \title{Plot occurrences}
 \usage{
-OccurrencePlot(data, position, plot.result = NULL, level = 0.95,
-  intervals = "CI", title = "Occurrence plot", subtitle = NULL,
-  caption = "ArchaeoPhases", labelXaxis = "Calendar year",
-  labelYaxis = NULL, language = "English", occurrence = "occurrence",
-  height = 7, width = 7, units = "in", x.min = NULL,
-  x.max = NULL, x.scale = "calendar", elapsed.origin.position = NULL,
-  dumbbell.size = 1, dot.guide = FALSE, dot.guide.size = 0.25,
-  y.grid = FALSE, file = NULL, newWindow = TRUE,
-  print.data.result = FALSE)
+OccurrencePlot(
+  data,
+  position,
+  plot.result = NULL,
+  level = 0.95,
+  intervals = "CI",
+  title = "Occurrence plot",
+  subtitle = NULL,
+  caption = "ArchaeoPhases",
+  labelXaxis = "Calendar year",
+  labelYaxis = NULL,
+  language = "English",
+  occurrence = "occurrence",
+  height = 7,
+  width = 7,
+  units = "in",
+  x.min = NULL,
+  x.max = NULL,
+  x.scale = "calendar",
+  elapsed.origin.position = NULL,
+  dumbbell.size = 1,
+  dot.guide = FALSE,
+  dot.guide.size = 0.25,
+  y.grid = FALSE,
+  file = NULL,
+  newWindow = TRUE,
+  print.data.result = FALSE
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}

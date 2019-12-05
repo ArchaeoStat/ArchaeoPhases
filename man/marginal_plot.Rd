@@ -4,18 +4,39 @@
 \alias{marginal_plot}
 \title{Plot a marginal posterior density}
 \usage{
-marginal_plot(data, position = 1, level = 0.95, grid_length = 1024,
+marginal_plot(
+  data,
+  position = 1,
+  level = 0.95,
+  grid_length = 1024,
   title = if (is.numeric(position)) names(data)[position] else position,
-  subtitle = "Marginal posterior density", caption = paste(level * 100,
-  "\% credible interval", sep = ""), x_label = "Calendar year",
-  y_label = "Density", y_grid = TRUE, x_scale = "calendar",
-  elapsed_origin_position = NULL, x_min = NULL, x_max = NULL,
-  height = 7, width = 7, units = "in", file = NULL,
-  new_window = TRUE, plot_result = TRUE, mean_linetype = "dashed",
-  mean_color = "white", mean_size = 0.5, ci_linetype = "dotted",
-  ci_color = mean_color, ci_size = mean_size,
-  line_linetype = "solid", line_color = "black", line_size = 1,
-  density_color = "gray30", fill_palette = NULL)
+  subtitle = "Marginal posterior density",
+  caption = paste(level * 100, "\% credible interval", sep = ""),
+  x_label = "Calendar year",
+  y_label = "Density",
+  y_grid = TRUE,
+  x_scale = "calendar",
+  elapsed_origin_position = NULL,
+  x_min = NULL,
+  x_max = NULL,
+  height = 7,
+  width = 7,
+  units = "in",
+  file = NULL,
+  new_window = TRUE,
+  plot_result = TRUE,
+  mean_linetype = "dashed",
+  mean_color = "white",
+  mean_size = 0.5,
+  ci_linetype = "dotted",
+  ci_color = mean_color,
+  ci_size = mean_size,
+  line_linetype = "solid",
+  line_color = "black",
+  line_size = 1,
+  density_color = "gray30",
+  fill_palette = NULL
+)
 }
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}
