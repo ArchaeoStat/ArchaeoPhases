@@ -33,7 +33,7 @@ columns to the following statistics:
 \item{min}{Minimum value of the MCMC chain;}
 \item{q1}{First quantile of the MCMC chain;}
 \item{median}{Median of the MCMC chain;}
-\item{q2}{Second quantile of the MCMC chain; and}
+\item{q3}{Third quantile of the MCMC chain; and}
 \item{max}{Maximum value of the MCMC chain.}
 \item{level}{Confidence level for the credible interval
 and highest posterior density.}
