@@ -162,6 +162,7 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #' @importFrom readr read_csv
 #' @importFrom dplyr %>% summarise_all
 #' @importFrom digest digest
+#' @importFrom utils file_test
 #'
 #' @export
 read_oxcal <- function(file, quiet="no")
@@ -190,7 +191,7 @@ read_oxcal <- function(file, quiet="no")
     if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
         data <- data[, -ncol(data)]
     ## Return archaeophases_mcmc object
-    new_archaeophases_mcmc(x = data,
+    new_archaeophases_mcmc(x = as.data.frame(data),
                            call = match.call(),
                            hash = file_hash)
 }
@@ -242,6 +243,7 @@ read_oxcal <- function(file, quiet="no")
 #'
 #' @importFrom readr read_delim locale
 #' @importFrom digest digest
+#' @importFrom utils file_test
 #'
 #' @export
 read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
@@ -276,7 +278,7 @@ read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
     ## Remove the iteration column
     data <- data[, -1]
     ## Return archaeophases_mcmc object
-    new_archaeophases_mcmc(x = data,
+    new_archaeophases_mcmc(x = as.data.frame(data),
                            call = match.call(),
                            hash = file_hash)
 }
@@ -327,6 +329,7 @@ read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
 #' @importFrom readr read_csv
 #' @importFrom dplyr %>% summarise_all
 #' @importFrom digest digest
+#' @importFrom utils file_test
 #'
 #' @export
 read_bcal <- function(file, bin_width = 1, quiet = "no")
@@ -361,7 +364,7 @@ read_bcal <- function(file, bin_width = 1, quiet = "no")
     ## Convert from BP to BC/AD
     data <- 1950 - data
     ## Return archaeophases_mcmc object
-    new_archaeophases_mcmc(x = data,
+    new_archaeophases_mcmc(x = as.data.frame(data),
                            call = match.call(),
                            hash = file_hash)
 }

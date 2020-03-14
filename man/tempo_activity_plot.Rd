@@ -66,8 +66,6 @@ of the column corresponding to the event from which elapsed time is calculated.}
 
 \item{plot_result}{If \code{TRUE}, then draw a plot on the display,
 else suppress drawing.}
-
-\item{level}{Probability corresponding to the level of confidence.}
 }
 \value{
 An \code{archaeophases_plot} object with the data and metadata

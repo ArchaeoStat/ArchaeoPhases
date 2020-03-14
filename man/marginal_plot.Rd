@@ -23,7 +23,6 @@ marginal_plot(
   width = 7,
   units = "in",
   file = NULL,
-  new_window = TRUE,
   plot_result = TRUE,
   mean_linetype = "dashed",
   mean_color = "white",
@@ -85,8 +84,6 @@ display plot.}
 \item{file}{Name of the file that will be saved if chosen,
 default = \code{NULL}.}
 
-\item{new_window}{Whether or not the plot is drawn within a new window.}
-
 \item{plot_result}{If \code{TRUE}, then draw a plot on the display,
 else suppress drawing.}
 
@@ -111,8 +108,9 @@ intervals.}
 
 \item{line_size}{The width of the line used to indicate the density.}
 
-\item{shade}{Switch for shading the area under the density within the
-credible interval.}
+\item{density_color}{Color to use if fill_palette is not specified.}
+
+\item{fill_palette}{Palette to use for fills.}
 }
 \value{
 An \code{archaeophases_plot} object with the data and metadata

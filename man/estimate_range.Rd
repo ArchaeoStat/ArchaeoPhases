@@ -11,8 +11,8 @@ estimate_range(
   estimates = c("mean", "q1", "median", "q3", "ci.inf", "ci.sup"),
   quiet = "partial",
   bin_width = 1,
-  dec = ".",
-  sep = ","
+  decimal = ".",
+  separator = ","
 )
 }
 \arguments{

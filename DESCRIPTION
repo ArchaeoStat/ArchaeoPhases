@@ -17,7 +17,8 @@ Description: Provides a list of functions for the statistical analysis of archae
 License: GPL-3
 Depends: R (>= 2.10), coda, hdrcde
 Imports: stats, utils, graphics, grDevices, shiny, shinythemes, DT,
-        readr, ggthemes, toOrdinal, ggplot2, ggalt, reshape2, dplyr, digest
+        readr, ggthemes, toOrdinal, ggplot2, ggalt, reshape2, dplyr, digest,
+        gplots, magrittr, tibble
 Suggests:
     knitr,
     rmarkdown,

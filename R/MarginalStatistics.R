@@ -43,15 +43,22 @@
 MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){
 
   # Position
-  mean = round(mean(a_chain), roundingOfValue)
-  hdr = hdr(a_chain, prob = c(level * 100))
-  map = round(hdr$mode, roundingOfValue)
+    mean = round(mean(a_chain), roundingOfValue)
+    if(length(unique(a_chain)) == 1L) {
+        single_year <- round(unique(a_chain), roundingOfValue)
+        map <- single_year
+        HPDR <- c(single_year, single_year)
+    }
+    else {
+        hdr = hdr(a_chain, prob = c(level * 100))
+        map = round(hdr$mode, roundingOfValue)
+        HPDR = round(hdr$hdr, roundingOfValue)              # Highest posterior density function region using the function 'hdr' from the package 'hdrcde'
+    }
   quantiles = round(quantile(a_chain, c(0.25,0.5,0.75)), roundingOfValue)
 
   # Dispersion
   sd = round(sd(a_chain), roundingOfValue)            # standard deviation using the 'sd' function
   CI = c( CredibleInterval(a_chain, level, roundingOfValue=roundingOfValue)[2], CredibleInterval(a_chain, level, roundingOfValue=roundingOfValue)[3])           # Credible Interval using the function 'CredibleInterval' from the package 'Rchronomodel'
-  HPDR = round(hdr$hdr, roundingOfValue)              # Highest posterior density function region using the function 'hdr' from the package 'hdrcde'
 
   # Resulted
   res = c(mean, map, sd, quantiles[1], quantiles[2], quantiles[3], level, CI[1], CI[2], HPDR)
@@ -132,23 +139,30 @@ marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
 
     ## Position
     mean <- round(mean(a_chain), round_to)
-    hdr <- hdr(a_chain, prob = level * 100)
-    map <- round(hdr$mode, round_to)
+    if(length(unique(a_chain)) == 1L) {
+        single_year <-unique(a_chain)
+        map <- single_year
+        hpdr <- c(inf = single_year, sup = single_year)
+    }
+    else {
+        hdr <- hdr(a_chain, prob = level * 100)
+        map <- round(hdr$mode, round_to)
+        hpdr <- round(hdr$hdr, round_to)
+        hpdr <- as.vector(hpdr)
+        names(hpdr) <- names(hdr$hdr)
+        i <- 0
+        for( k in (1:(length(hpdr)/2))) {
+            i <- i + 1
+            names(hpdr)[i] <- paste("inf", k, sep = "_")
+            i <- i + 1
+            names(hpdr)[i] <- paste("sup", k, sep = "_")
+        }
+    }
     quantiles <- round(quantile(a_chain), round_to)
     names(quantiles) <- c("min", "q1", "median", "q3", "max")
     ## Dispersion
     sd <- round(sd(a_chain), round_to)
     ci <- credible_interval(a_chain, level, round_to = round_to)$ci
-    hpdr <- round(hdr$hdr, round_to)
-    hpdr <- as.vector(hpdr)
-    names(hpdr) <- names(hdr$hdr)
-    i <- 0
-    for( k in (1:(length(hpdr)/2))) {
-        i <- i + 1
-        names(hpdr)[i] <- paste("inf", k, sep = "_")
-        i <- i + 1
-        names(hpdr)[i] <- paste("sup", k, sep = "_")
-    }
 
     ## Results
     list(mean = mean, map = map, sd = sd, quantiles = quantiles,

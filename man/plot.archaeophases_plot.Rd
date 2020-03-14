@@ -4,7 +4,12 @@
 \alias{plot.archaeophases_plot}
 \title{Recreate a graphical plot}
 \usage{
-\method{plot}{archaeophases_plot}(x)
+\method{plot}{archaeophases_plot}(x, ...)
+}
+\arguments{
+\item{x}{An \code{archaeophases_plot} object.}
+
+\item{...}{Other parameters.}
 }
 \description{
 Recreates a graphic from data and metadata held in a

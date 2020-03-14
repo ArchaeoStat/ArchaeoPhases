@@ -8,6 +8,10 @@ new_archaeophases_plot(x = list(), mcmc = list(), call = language())
 }
 \arguments{
 \item{x}{A data frame with the plot data.}
+
+\item{mcmc}{An \code{archaeophases_mcmc} object.}
+
+\item{call}{How the function was called.}
 }
 \value{
 An \code{archaeophases_plot} object that inherits from
