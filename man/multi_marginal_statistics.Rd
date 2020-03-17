@@ -42,10 +42,6 @@ columns to the following statistics:
 Calculates summary statistics of the output of the MCMC algorithm for
 multiple parameters. Results are given in calendar years (BC/AD).
 }
-\details{
-The \eqn{(100 * level)}\% highest posterior density region is estimated
-using \code{hdr()} function from \pkg{hdrcde} package.
-}
 \examples{
   data(Events)
   multi_marginal_statistics(Events, 2:5)
@@ -53,10 +49,6 @@ using \code{hdr()} function from \pkg{hdrcde} package.
   ## round to decades
   multi_marginal_statistics(Events, 2:5, round_to = -1)
 
-}
-\references{
-Hyndman, R. J. (1996) Computing and graphing highest density regions.
-American Statistician, 50, 120-126.
 }
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr},

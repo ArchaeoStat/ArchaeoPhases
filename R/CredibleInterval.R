@@ -56,8 +56,9 @@ CredibleInterval <- function(a_chain, level=0.95, roundingOfValue=0){
 #' \item{ci}{Named vector of length 2, with \code{inf} the
 #' lower endpoint of the shortest credible interval as a calendar
 #' year; and \code{sup} the upper endpoint of the shortest credible
-#' interval as a calendar year, and}
-#' \item{level}{Confidence level for the credible intervals.}
+#' interval as a calendar year;}
+#' \item{level}{Confidence level for the credible intervals; and}
+#' \item{call}{Function call.}
 #'}
 #'
 #' @examples
@@ -65,12 +66,8 @@ CredibleInterval <- function(a_chain, level=0.95, roundingOfValue=0){
 #'   credible_interval(Event.1)
 #'   credible_interval(Event.12, 0.50)
 #'
-#' @importFrom tibble is_tibble
-#'
 #' @export
 credible_interval <- function(data, level = 0.95, round_to = 0) {
-
-    if (is_tibble(data)) data <- unlist(data)
 
     if (!is.vector(data) || !is.numeric(data))
         stop("Data format not recognized.")

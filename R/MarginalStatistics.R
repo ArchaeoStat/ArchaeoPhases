@@ -130,12 +130,9 @@ MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){
 #'
 #' @importFrom stats quantile
 #' @importFrom hdrcde hdr
-#' @importFrom tibble is_tibble
 #'
 #' @export
 marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
-
-    if (is_tibble(a_chain)) a_chain <- unlist(a_chain)
 
     ## Position
     mean <- round(mean(a_chain), round_to)

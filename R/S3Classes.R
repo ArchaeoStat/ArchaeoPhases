@@ -24,7 +24,7 @@ new_archaeophases_mcmc <- function(x = list(),
 
     stopifnot(is.list(x))
     structure(x,
-              class = c("archaeophases_mcmc", "tbl_df", "tbl", "data.frame"),
+              class = c("archaeophases_mcmc", "data.frame"),
               mcmc = call,
               hash = hash)
 }
@@ -58,7 +58,7 @@ new_archaeophases_plot <- function(x = list(),
         attr_list <- as.list(attributes(mcmc))
         }
     structure(x,
-              class = c("archaeophases_plot", "archaeophases_mcmc", "tbl_df", "tbl", "data.frame"),
+              class = c("archaeophases_plot", "archaeophases_mcmc", "data.frame"),
               mcmc = attr_list[match(mcmc_attrs, names(attr_list))],
               call = call)
 }

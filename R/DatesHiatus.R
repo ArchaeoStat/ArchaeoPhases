@@ -102,14 +102,9 @@ DatesHiatus <- function(a_chain, b_chain, level=0.95){
 #'   dates_hiatus(Event.1, Event.12, level = 0.5)
 #'
 #' @importFrom stats quantile
-#' @importFrom tibble is_tibble
 #'
 #' @export
 dates_hiatus <- function(a_chain, b_chain, level = 0.95) {
-
-    # coerce tibbles to vectors, if need be
-    if (is_tibble(a_chain)) a_chain <- unlist(a_chain)
-    if (is_tibble(b_chain)) b_chain <- unlist(b_chain)
 
     ## test for the length of both chains
     if (length(a_chain) != length(b_chain)) {

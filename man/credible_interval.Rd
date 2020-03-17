@@ -22,8 +22,9 @@ A list with the following components:
 \item{ci}{Named vector of length 2, with \code{inf} the
 lower endpoint of the shortest credible interval as a calendar
 year; and \code{sup} the upper endpoint of the shortest credible
-interval as a calendar year, and}
-\item{level}{Confidence level for the credible intervals.}
+interval as a calendar year;}
+\item{level}{Confidence level for the credible intervals; and}
+\item{call}{Function call.}
 }
 }
 \description{

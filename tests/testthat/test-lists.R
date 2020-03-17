@@ -2,7 +2,7 @@ context("Non-graphical functions return lists")
 library(ArchaeoPhases)
 
 test_that("DatesHiatus and dates_hiatus return equivalent results", {
-    oxcal <- read_oxcal("test-data/oxcal.csv")
+    oxcal <- read_oxcal("test-data/oxcal.csv", quiet = "yes")
     original <- DatesHiatus(unlist(oxcal[, 1]), unlist(oxcal[, 2]))
     new <- dates_hiatus(oxcal[, 1], oxcal[, 2])
     expect_equivalent(original[c(2, 3)], new$hiatus)
@@ -16,8 +16,8 @@ test_that("PhasesGap and phases_gap return equivalent results", {
 })
 
 test_that("MarginalStatistics and marginal_statistics are equivalent", {
-    oxcal <- read_oxcal("test-data/oxcal.csv")
-    original <- MarginalStatistics(unlist(oxcal[, 1]))
+    oxcal <- read_oxcal("test-data/oxcal.csv", quiet = "yes")
+    original <- MarginalStatistics(oxcal[, 1])
     new <- marginal_statistics(oxcal[, 1])
     new <- unlist(new)
     expect_equivalent(original["mean", 1], new["mean"])
@@ -36,7 +36,7 @@ test_that("MarginalStatistics and marginal_statistics are equivalent", {
 })
 
 test_that("MultiCredibleInterval and multi_credible_interval are equivalent", {
-    oxcal <- read_oxcal("test-data/oxcal.csv")
+    oxcal <- read_oxcal("test-data/oxcal.csv", quiet = "yes")
     original <- MultiCredibleInterval(as.data.frame(oxcal), c(1,2))
     new <- multi_credible_interval(oxcal, c(1, 2))
     expect_equivalent(original["foo-early", ][c(2, 3)], unlist(new$ci["foo-early",]))
@@ -44,14 +44,14 @@ test_that("MultiCredibleInterval and multi_credible_interval are equivalent", {
 })
 
 test_that("CredibleInterval and credible_interval are equivalent", {
-    oxcal <- read_oxcal("test-data/oxcal.csv")
+    oxcal <- read_oxcal("test-data/oxcal.csv", quiet = "yes")
     original <- CredibleInterval(as.data.frame(oxcal)[, 1])
     new <- credible_interval(oxcal[, 1])
     expect_equivalent(original[c(2, 3)], new$ci)
 })
 
 test_that("MultiHPD and multi_hpd are equivalent", {
-    oxcal <- read_oxcal("test-data/oxcal.csv")
+    oxcal <- read_oxcal("test-data/oxcal.csv", quiet = "yes")
     original <- MultiHPD(as.data.frame(oxcal), c(1, 2), roundingOfValue = -1)
     new <- multi_hpd(oxcal, c(1, 2), round_to = -1)
     expect_equivalent(original[, c(2, 3)], new$results[, c(1, 2)], tolerance = 10)

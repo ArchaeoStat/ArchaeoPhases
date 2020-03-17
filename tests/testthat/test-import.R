@@ -13,7 +13,7 @@ test_that("ImportCSV works with OxCal", {
 })
 
 test_that("read_oxcal works", {
-    oxcal <- read_oxcal("test-data/oxcal.csv")
+    oxcal <- read_oxcal("test-data/oxcal.csv", quiet = "yes")
     expect_equal(c(1000, 2), dim(oxcal))
     expect_equivalent(names(oxcal), c("foo-early", "foo-late"))
     expect_equivalent(as.data.frame(oxcal)[1, ], c(1026.41, 1048.33),
@@ -35,7 +35,7 @@ test_that("read_oxcal works", {
 ## })
 
 test_that("read_bcal works with default bin width", {
-    bcal <- read_bcal("test-data/bcal-1.csv")
+    bcal <- read_bcal("test-data/bcal-1.csv", quiet = "yes")
     expect_equal(dim(bcal), c(293705, 4))
     expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
                                         "theta 1 (test)", "alpha 1 (test)"))
@@ -57,7 +57,7 @@ test_that("read_bcal works with default bin width", {
 ## })
 
 test_that("read_bcal works with custom bin width", {
-    bcal <- read_bcal("test-data/bcal-17.csv", bin_width = 17)
+    bcal <- read_bcal("test-data/bcal-17.csv", bin_width = 17, quiet = "yes")
     expect_equal(dim(bcal), c(294770, 4))
     expect_equivalent(colnames(bcal), c("beta 1 (test)", "theta 2 (test)",
                                         "theta 1 (test)", "alpha 1 (test)"))
