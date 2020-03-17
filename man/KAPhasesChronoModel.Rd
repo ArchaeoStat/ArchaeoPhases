@@ -4,7 +4,8 @@
 \name{KAPhasesChronoModel}
 \alias{KAPhasesChronoModel}
 \title{Ksar Akil phases calibrated by ChronoModel}
-\format{A data frame with 30,000 rows and 9 variables:
+\format{
+A data frame with 30,000 rows and 9 variables:
 \describe{
  \item{iter}{iteration of the MCMC algorithm}
  \item{EPI.alpha}{start date of EPI}
@@ -15,7 +16,8 @@
  \item{Ahmarian.beta}{end date of Ahmarian}
  \item{IUP.alpha}{start date of IUP}
  \item{IUP.beta}{end date of IUP}
-}}
+}
+}
 \usage{
 KAPhasesChronoModel
 }

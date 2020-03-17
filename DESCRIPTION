@@ -25,7 +25,7 @@ Suggests:
     testthat (>= 2.1.0)
 VignetteBuilder: knitr
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 NeedsCompilation: no
 Encoding: UTF-8
 LazyData: true

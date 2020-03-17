@@ -4,7 +4,8 @@
 \name{KADatesChronoModel}
 \alias{KADatesChronoModel}
 \title{Ksar Akil dates calibrated by ChronoModel}
-\format{A data frame with 30,000 rows and 17 variables:
+\format{
+A data frame with 30,000 rows and 17 variables:
 \describe{
  \item{iter}{iteration of the MCMC algorithm}
  \item{Layer.V}{Layer V}
@@ -23,7 +24,8 @@
  \item{Layer.XIX}{Layer XIX}
  \item{Layer.XX}{Layer XX}
  \item{Layer.XXII}{Layer XXII}
-}}
+}
+}
 \usage{
 KADatesChronoModel
 }

@@ -4,14 +4,16 @@
 \name{Events}
 \alias{Events}
 \title{Events}
-\format{A data frame with 30,000 rows and 5 variables:
+\format{
+A data frame with 30,000 rows and 5 variables:
 \describe{
  \item{iter}{iteration of the MCMC algorithm}
  \item{Event.2}{information on event 2}
  \item{Event.1}{information on event 1}
  \item{Event.22}{information on event 22}
  \item{Event.12}{information on event 12}
-}}
+}
+}
 \usage{
 Events
 }
