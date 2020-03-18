@@ -19,7 +19,7 @@
 #' @seealso \code{\link{read_oxcal}}
 #'
 new_archaeophases_mcmc <- function(x = list(),
-                                   call = language(),
+                                   call = match.call(),
                                    hash = character()) {
 
     stopifnot(is.list(x))
@@ -47,7 +47,7 @@ new_archaeophases_mcmc <- function(x = list(),
 #' @seealso \code{\link{read_oxcal}}
 new_archaeophases_plot <- function(x = list(),
                                    mcmc = list(),
-                                   call = language()) {
+                                   call = match.call()) {
 
     stopifnot(is.list(x))
     mcmc_attrs <- c("class", "mcmc", "hash")

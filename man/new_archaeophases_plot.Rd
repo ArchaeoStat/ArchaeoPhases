@@ -4,7 +4,7 @@
 \alias{new_archaeophases_plot}
 \title{Constructor for \code{archaeophases_plot} object}
 \usage{
-new_archaeophases_plot(x = list(), mcmc = list(), call = language())
+new_archaeophases_plot(x = list(), mcmc = list(), call = match.call())
 }
 \arguments{
 \item{x}{A data frame with the plot data.}
