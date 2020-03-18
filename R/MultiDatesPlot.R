@@ -232,7 +232,7 @@ multi_dates_plot <- function (data,
 {
     if(!is.data.frame(data)) stop("Data format not recognized.")
 
-    if (!is.element("archaeophases_plot", class(data))) {
+    if (is.element("archaeophases_plot", class(data))) {
         plot_data <- data
     }
     else {
