@@ -1,8 +1,12 @@
 NEWS
 
 ==============
-ArchaeoPhases 1.x (Release date: )
+ArchaeoPhases 1.5 (Release date: )
 ==============
+
+* Fixed a bug in MultiHPD() that ignored the roundingOfValue parameter.
+
+* Fixed a bug in MarginalStatistics() that triggered an error if the function was passed a constant MCMC chain.
 
 * New read functions for MCMC data: read_bcal(), read_oxcal(), read_chronomodel().
   * The new read functions return S3 objects that can identify the file that produced them.
@@ -18,9 +22,9 @@ ArchaeoPhases 1.x (Release date: )
   * The new statistical functions return lists in canonical R fashion.
   * The phase_statistics() function is augmented with a round_to parameter.
 
-* Fixed a bug in MultiHPD() that ignored the roundingOfValue parameter.
+* New statistical function multi_marginal_statistics().
 
-* New function multi_marginal_statistics().
+* New statistical function estimate_ranges() that can be used to estimate the sensitivity of calibration results to different model parameters.
 
 ==============
 ArchaeoPhases 1.4 (Release date: 2017-12-12)

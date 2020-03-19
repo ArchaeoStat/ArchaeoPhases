@@ -174,7 +174,6 @@ TempoActivityPlot <- function (data, position, plot.result = NULL, level = 0.95,
 #' corresponding to the MCMC chains of interest, or a vector of column names.
 #' @param plot_result If \code{TRUE}, then draw a plot on the display,
 #' else suppress drawing.
-#' @param level Probability corresponding to the level of confidence.
 #' @param title Title of the plot.
 #' @param subtitle Subtitle of the plot.
 #' @param caption Caption of the plot.

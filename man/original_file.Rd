@@ -9,7 +9,7 @@ original_file(x, ...)
 \arguments{
 \item{x}{An \code{archaeophases_mcmc} object.}
 
-\item{file}{Either a path to a CSV file, a connection,
+\item{...}{Either a path to a CSV file, a connection,
 or the value \code{clipboard()} to read from the system clipboard.
 The CSV \code{file} can be compressed or plain.}
 }

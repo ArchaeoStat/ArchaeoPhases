@@ -49,13 +49,15 @@
 #' sum(res$range_table)
 #' }
 #'
+#' @importFrom stats median
 #' @export
 estimate_range <- function(mcmc, position, app = "bcal",
                            estimates = c("mean", "q1", "median",
                                          "q3", "ci.inf", "ci.sup"),
                            quiet = "partial",
                            bin_width = 1,
-                           dec = ".", sep = ",") {
+                           decimal = ".",
+                           separator = ",") {
   if (length(mcmc) < 2)
     stop("Two or more MCMC files required.")
   if (is.null(position))
@@ -71,8 +73,8 @@ estimate_range <- function(mcmc, position, app = "bcal",
                                  oxcal = read_oxcal(file = x,
                                                     quiet = quiet),
                                  chronomodel = read_chronomodel(file = x,
-                                                                decimal = dec,
-                                                                separator = sep,
+                                                                decimal = decimal,
+                                                                separator = separator,
                                                                 quiet = quiet)))
   data_list <- lapply(X = mcmc_list,
                       FUN = function(x) x[, position])

@@ -43,15 +43,22 @@
 MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){
 
   # Position
-  mean = round(mean(a_chain), roundingOfValue)
-  hdr = hdr(a_chain, prob = c(level * 100))
-  map = round(hdr$mode, roundingOfValue)
+    mean = round(mean(a_chain), roundingOfValue)
+    if(length(unique(a_chain)) == 1L) {
+        single_year <- round(unique(a_chain), roundingOfValue)
+        map <- single_year
+        HPDR <- c(single_year, single_year)
+    }
+    else {
+        hdr = hdr(a_chain, prob = c(level * 100))
+        map = round(hdr$mode, roundingOfValue)
+        HPDR = round(hdr$hdr, roundingOfValue)              # Highest posterior density function region using the function 'hdr' from the package 'hdrcde'
+    }
   quantiles = round(quantile(a_chain, c(0.25,0.5,0.75)), roundingOfValue)
 
   # Dispersion
   sd = round(sd(a_chain), roundingOfValue)            # standard deviation using the 'sd' function
   CI = c( CredibleInterval(a_chain, level, roundingOfValue=roundingOfValue)[2], CredibleInterval(a_chain, level, roundingOfValue=roundingOfValue)[3])           # Credible Interval using the function 'CredibleInterval' from the package 'Rchronomodel'
-  HPDR = round(hdr$hdr, roundingOfValue)              # Highest posterior density function region using the function 'hdr' from the package 'hdrcde'
 
   # Resulted
   res = c(mean, map, sd, quantiles[1], quantiles[2], quantiles[3], level, CI[1], CI[2], HPDR)
@@ -123,32 +130,36 @@ MarginalStatistics <- function(a_chain, level=0.95, roundingOfValue = 0){
 #'
 #' @importFrom stats quantile
 #' @importFrom hdrcde hdr
-#' @importFrom tibble is_tibble
 #'
 #' @export
 marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
 
-    if (is_tibble(a_chain)) a_chain <- unlist(a_chain)
-
     ## Position
     mean <- round(mean(a_chain), round_to)
-    hdr <- hdr(a_chain, prob = level * 100)
-    map <- round(hdr$mode, round_to)
+    if(length(unique(a_chain)) == 1L) {
+        single_year <-unique(a_chain)
+        map <- single_year
+        hpdr <- c(inf = single_year, sup = single_year)
+    }
+    else {
+        hdr <- hdr(a_chain, prob = level * 100)
+        map <- round(hdr$mode, round_to)
+        hpdr <- round(hdr$hdr, round_to)
+        hpdr <- as.vector(hpdr)
+        names(hpdr) <- names(hdr$hdr)
+        i <- 0
+        for( k in (1:(length(hpdr)/2))) {
+            i <- i + 1
+            names(hpdr)[i] <- paste("inf", k, sep = "_")
+            i <- i + 1
+            names(hpdr)[i] <- paste("sup", k, sep = "_")
+        }
+    }
     quantiles <- round(quantile(a_chain), round_to)
     names(quantiles) <- c("min", "q1", "median", "q3", "max")
     ## Dispersion
     sd <- round(sd(a_chain), round_to)
     ci <- credible_interval(a_chain, level, round_to = round_to)$ci
-    hpdr <- round(hdr$hdr, round_to)
-    hpdr <- as.vector(hpdr)
-    names(hpdr) <- names(hdr$hdr)
-    i <- 0
-    for( k in (1:(length(hpdr)/2))) {
-        i <- i + 1
-        names(hpdr)[i] <- paste("inf", k, sep = "_")
-        i <- i + 1
-        names(hpdr)[i] <- paste("sup", k, sep = "_")
-    }
 
     ## Results
     list(mean = mean, map = map, sd = sd, quantiles = quantiles,
@@ -160,9 +171,6 @@ marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
 #'
 #' Calculates summary statistics of the output of the MCMC algorithm for
 #' multiple parameters. Results are given in calendar years (BC/AD).
-#'
-#' The \eqn{(100 * level)}\% highest posterior density region is estimated
-#' using \code{hdr()} function from \pkg{hdrcde} package.
 #'
 #' @param data Data frame containing the output of the MCMC algorithm.
 #' @param position Numeric vector containing the positions of the columns
@@ -176,30 +184,19 @@ marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
 #' columns to the following statistics:
 #' \describe{
 #' \item{mean}{The mean of the MCMC chain.}
-#' \item{map}{The maximum a posteriori of the MCMC chain.}
 #' \item{sd}{The standard deviation of the MCMC chain.}
 #' \item{min}{Minimum value of the MCMC chain;}
 #' \item{q1}{First quantile of the MCMC chain;}
 #' \item{median}{Median of the MCMC chain;}
 #' \item{q3}{Third quantile of the MCMC chain; and}
 #' \item{max}{Maximum value of the MCMC chain.}
-#' \item{level}{Confidence level for the credible interval
-#' and highest posterior density.}
 #' \item{ci.inf}{Lower credible interval of the MCMC chain at \code{level}.}
 #' \item{ci.sup}{Upper credible interval of the MCMC chain at \code{level}.}
-#' \item{hpdr}{Two or more columns with the lower and upper highest
-#' posterior density regions of the MCMC chain at \code{level}.  Columns
-#' are named \code{hpdr.inf_n} and \code{hpdr.sup_n} for n = 1 to the
-#' number of highest posterior density regions.}
 #' }
 #'
 #' @author Anne Philippe, \email{Anne.Philippe@@univ-nantes.fr},
 #' @author Marie-Anne Vibet, \email{Marie-Anne.Vibet@@univ-nantes.fr}, and
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
-#'
-#'@references
-#' Hyndman, R. J. (1996) Computing and graphing highest density regions.
-#' American Statistician, 50, 120-126.
 #'
 #' @examples
 #'   data(Events)
@@ -207,10 +204,6 @@ marginal_statistics <- function(a_chain, level = 0.95, round_to = 0) {
 #'   multi_marginal_statistics(Events, 2:5, level = 0.90)
 #'   ## round to decades
 #'   multi_marginal_statistics(Events, 2:5, round_to = -1)
-#'
-#' @importFrom stats quantile
-#' @importFrom hdrcde hdr
-#' @importFrom tibble as_tibble
 #'
 #' @export
 
@@ -223,24 +216,21 @@ multi_marginal_statistics <- function(data,
 
     data_set <- data[, position]
     data_names <- names(data_set)
+    summaries <- c("mean", "sd", "quantiles.min", "quantiles.q1",
+                   "quantiles.median", "quantiles.q3", "quantiles.max",
+                   "ci.inf", "ci.sup")
+    stat_names <- c("mean", "sd", "min", "q1", "median", "q3",
+                    "max", "ci.inf", "ci.sup")
 
     stats <- apply(X = data_set,
                    MARGIN = 2,
-                   FUN = function(x, l = level, r = round_to)
-                       unlist(marginal_statistics(x, l, r)))
-    ## apply returns a list when the marginal statistics have different lengths
-    ## in this case, pad with NAs so all are the same length
-    if(is.list(stats)) {
-        stats <- lapply(X = stats,
-                        FUN = "length<-",
-                        max(lengths(stats)))
-    }
+                   FUN = function(x, l = level, r = round_to, s = summaries) {
+                       unlist(marginal_statistics(x, l, r))[s]
+                   })
 
     stats.df <- as.data.frame(stats)
-    stats.df <- stats.df[-which(rownames(stats.df) == "level"), ]
-    rownames(stats.df)[4:8] <- c("min", "q1", "median", "q3", "max")
-    stats.tibble <- as_tibble(stats.df, rownames = NA)
-    names(stats.tibble) <- data_names
+    names(stats.df) <- data_names
+    row.names(stats.df) <- stat_names
 
-    list(statistics = t(stats.tibble), level = level, call = match.call())
+    list(statistics = t(stats.df), level = level, call = match.call())
 }

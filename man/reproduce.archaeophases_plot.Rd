@@ -4,10 +4,14 @@
 \alias{reproduce.archaeophases_plot}
 \title{Reproduce an ArchaeoPhases plot}
 \usage{
-\method{reproduce}{archaeophases_plot}(x, file = NULL)
+\method{reproduce}{archaeophases_plot}(x, file = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{archaeophases_plot} object.}
+
+\item{file}{Path to the original MCMC csv file, or a copy of the file.}
+
+\item{...}{Other parameters.}
 }
 \description{
 Reproduces a plot from metadata held in an \code{archaeophases_plot}

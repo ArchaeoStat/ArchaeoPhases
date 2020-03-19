@@ -28,30 +28,19 @@ A data frame where the rows correspond to the chains of interest and
 columns to the following statistics:
 \describe{
 \item{mean}{The mean of the MCMC chain.}
-\item{map}{The maximum a posteriori of the MCMC chain.}
 \item{sd}{The standard deviation of the MCMC chain.}
 \item{min}{Minimum value of the MCMC chain;}
 \item{q1}{First quantile of the MCMC chain;}
 \item{median}{Median of the MCMC chain;}
 \item{q3}{Third quantile of the MCMC chain; and}
 \item{max}{Maximum value of the MCMC chain.}
-\item{level}{Confidence level for the credible interval
-and highest posterior density.}
 \item{ci.inf}{Lower credible interval of the MCMC chain at \code{level}.}
 \item{ci.sup}{Upper credible interval of the MCMC chain at \code{level}.}
-\item{hpdr}{Two or more columns with the lower and upper highest
-posterior density regions of the MCMC chain at \code{level}.  Columns
-are named \code{hpdr.inf_n} and \code{hpdr.sup_n} for n = 1 to the
-number of highest posterior density regions.}
 }
 }
 \description{
 Calculates summary statistics of the output of the MCMC algorithm for
 multiple parameters. Results are given in calendar years (BC/AD).
-}
-\details{
-The \eqn{(100 * level)}\% highest posterior density region is estimated
-using \code{hdr()} function from \pkg{hdrcde} package.
 }
 \examples{
   data(Events)
@@ -60,10 +49,6 @@ using \code{hdr()} function from \pkg{hdrcde} package.
   ## round to decades
   multi_marginal_statistics(Events, 2:5, round_to = -1)
 
-}
-\references{
-Hyndman, R. J. (1996) Computing and graphing highest density regions.
-American Statistician, 50, 120-126.
 }
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr},

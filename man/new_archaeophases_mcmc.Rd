@@ -4,17 +4,14 @@
 \alias{new_archaeophases_mcmc}
 \title{Constructor for \code{archaeophases_mcmc} object}
 \usage{
-new_archaeophases_mcmc(x = list(), call = language(), hash = character())
+new_archaeophases_mcmc(x = list(), call = match.call(), hash = character())
 }
 \arguments{
 \item{x}{A data frame with the data from the csv file.}
 
-\item{mcmc_file_path}{A path to the csv file.}
+\item{call}{How the function was called.}
 
-\item{mcmc_file_hash}{A SHA256 hash of the csv file.}
-
-\item{mcmc_source}{The Bayesian calibration application responsible
-for the csv file, one of "bcal", "oxcal", "chronomodel".}
+\item{hash}{A SHA256 hash of the csv file.}
 }
 \value{
 An \code{archaeophases_mcmc} object that inherits from \code{tbl_df}.

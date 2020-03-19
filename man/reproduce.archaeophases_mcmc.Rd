@@ -4,10 +4,14 @@
 \alias{reproduce.archaeophases_mcmc}
 \title{Reproduce an MCMC data frame}
 \usage{
-\method{reproduce}{archaeophases_mcmc}(x, file = NULL)
+\method{reproduce}{archaeophases_mcmc}(x, file = NULL, ...)
 }
 \arguments{
 \item{x}{An \code{archaeophases_mcmc} object.}
+
+\item{file}{A path to the original MCMC csv file, or a copy of the file.}
+
+\item{...}{Other parameters.}
 }
 \description{
 Reproduces a data frame from metadata held in an \code{archaeophases_mcmc}

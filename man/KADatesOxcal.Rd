@@ -4,7 +4,8 @@
 \name{KADatesOxcal}
 \alias{KADatesOxcal}
 \title{Ksar Akil dates calibrated by OxCal}
-\format{A data frame with 10,000 rows and 27 variables:
+\format{
+A data frame with 10,000 rows and 27 variables:
 \describe{
  \item{Pass}{iteration of the MCMC algorithm}
  \item{Ethelruda}{Ethelruda}
@@ -33,7 +34,8 @@
  \item{start.EPI}{start EPI}
  \item{GrA.53005}{GrA 53005}
  \item{end.EPI}{end EPI}
-}}
+}
+}
 \usage{
 KADatesOxcal
 }

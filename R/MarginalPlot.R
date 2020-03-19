@@ -137,11 +137,9 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
 #' @param y_grid Switch for horizontal grid lines.
 #' @param file Name of the file that will be saved if chosen,
 #' default = \code{NULL}.
-#' @param new_window Whether or not the plot is drawn within a new window.
+## ' @param new_window Whether or not the plot is drawn within a new window.
 #' @param plot_result If \code{TRUE}, then draw a plot on the display,
 #' else suppress drawing.
-#' @param shade Switch for shading the area under the density within the
-#' credible interval.
 #' @param mean_linetype The \code{linetype} used to indicate the mean density.
 #' @param mean_color The color of the line used to indicate mean density.
 #' @param mean_size The width of the line used to indicate the mean density.
@@ -154,6 +152,8 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
 #' @param line_linetype The \code{linetype} used to indicate the density.
 #' @param line_color The color of the line used to indicate the density.
 #' @param line_size The width of the line used to indicate the density.
+#' @param density_color Color to use if fill_palette is not specified.
+#' @param fill_palette Palette to use for fills.
 #'
 #' @return An \code{archaeophases_plot} object with the data and metadata
 #' needed to reproduce the plot.
@@ -168,10 +168,10 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
 #'   ## View data and metadata
 #'   str(mp)
 #'
-#' @importFrom stats density
+#' @importFrom stats density approx
 #' @importFrom grDevices dev.new
 #' @importFrom ggplot2 ggplot aes geom_ribbon geom_segment geom_line labs theme xlim ggsave
-#'
+#' @importFrom magrittr %$%
 #' @export
 #'
 marginal_plot <- function(data,
@@ -190,9 +190,8 @@ marginal_plot <- function(data,
                           height = 7, width = 7,
                           units = "in",
                           file = NULL,
-                          new_window = TRUE,
+                          ## new_window = TRUE,
                           plot_result = TRUE,
-                          ## shade = FALSE,
                           mean_linetype = "dashed",
                           mean_color = "white",
                           mean_size = 0.5,
@@ -210,13 +209,12 @@ marginal_plot <- function(data,
 
     if (length(position) > 1) stop("Expected one marginal posterior.")
 
+    ## a_chain variable is a vector
     if (is.element("archaeophases_plot", class(data))) {
-        a_chain <- data
+        a_chain <- as.vector(unlist(data[, 1]))
     }
     else {
-        a_chain <- data[, position]
-
-        ## if(is_tibble(data)) a_chain <- unlist(a_chain)
+        a_chain <- as.vector(unlist(data[, position]))
 
         if (x_scale == "BP") {
             a_chain <- 1950 - a_chain
@@ -224,7 +222,6 @@ marginal_plot <- function(data,
 
         if (x_scale == "elapsed") {
             elapsed_origin <- data[, elapsed_origin_position]
-            if(is_tibble(data)) elapsed_origin <- unlist(elapsed_origin)
             a_chain <- a_chain - elapsed_origin
         }
     }
@@ -233,9 +230,9 @@ marginal_plot <- function(data,
     c_i <- credible_interval(a_chain, level = level, round_to = 4)$ci
 
     ## mean
-    chain_mean = mean(unlist(a_chain))
+    chain_mean = mean(a_chain)
 
-    chain_density <- density(unlist(a_chain), n = grid_length) %$%
+    chain_density <- density(a_chain, n = grid_length) %$%
         data.frame(x = x, y = y) %>%
         mutate(mid = (x > c_i["inf"] & x < c_i["sup"]))
 
@@ -250,10 +247,10 @@ marginal_plot <- function(data,
         fill_color <- density_color
     }
 
-    original_name <- names(a_chain)
-    names(a_chain) <- "x"
+    a_chain_df <- as.data.frame(a_chain)
+    names(a_chain_df) <- "x"
 
-    h <- ggplot(data = a_chain,
+    h <- ggplot(data = a_chain_df,
                 mapping = aes(x = x))
 
     h <- h + geom_density(mapping = aes(y = ..density..),
@@ -313,13 +310,12 @@ marginal_plot <- function(data,
     }
 
     if (plot_result == TRUE) {
-        if(new_window == TRUE) {
-            dev.new(height = height, width = width)
-        }
+        ## if(new_window == TRUE) {
+        ##     dev.new(height = height, width = width)
+        ## }
         print(h)
     }
-    names(a_chain) <- original_name
-    new_archaeophases_plot(x = a_chain,
+    new_archaeophases_plot(x = a_chain_df,
                            mcmc = data,
                            call = match.call())
 }

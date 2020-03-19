@@ -3,10 +3,8 @@
 #' Object to be returned by functions that read MCMC data from csv files.
 #'
 #' @param x A data frame with the data from the csv file.
-#' @param mcmc_file_path A path to the csv file.
-#' @param mcmc_file_hash A SHA256 hash of the csv file.
-#' @param mcmc_source The Bayesian calibration application responsible
-#' for the csv file, one of "bcal", "oxcal", "chronomodel".
+#' @param call How the function was called.
+#' @param hash A SHA256 hash of the csv file.
 #'
 #' @return An \code{archaeophases_mcmc} object that inherits from \code{tbl_df}.
 #'
@@ -21,12 +19,12 @@
 #' @seealso \code{\link{read_oxcal}}
 #'
 new_archaeophases_mcmc <- function(x = list(),
-                                   call = language(),
+                                   call = match.call(),
                                    hash = character()) {
 
     stopifnot(is.list(x))
     structure(x,
-              class = c("archaeophases_mcmc", "tbl_df", "tbl", "data.frame"),
+              class = c("archaeophases_mcmc", "data.frame"),
               mcmc = call,
               hash = hash)
 }
@@ -36,6 +34,8 @@ new_archaeophases_mcmc <- function(x = list(),
 #' Objects returned by ArchaeoPhases plot functions.
 #'
 #' @param x A data frame with the plot data.
+#' @param mcmc An \code{archaeophases_mcmc} object.
+#' @param call How the function was called.
 #'
 #' @return An \code{archaeophases_plot} object that inherits from
 #' \code{archaeophases_mcmc}.
@@ -47,7 +47,7 @@ new_archaeophases_mcmc <- function(x = list(),
 #' @seealso \code{\link{read_oxcal}}
 new_archaeophases_plot <- function(x = list(),
                                    mcmc = list(),
-                                   call = language()) {
+                                   call = match.call()) {
 
     stopifnot(is.list(x))
     mcmc_attrs <- c("class", "mcmc", "hash")
@@ -58,7 +58,7 @@ new_archaeophases_plot <- function(x = list(),
         attr_list <- as.list(attributes(mcmc))
         }
     structure(x,
-              class = c("archaeophases_plot", "archaeophases_mcmc", "tbl_df", "tbl", "data.frame"),
+              class = c("archaeophases_plot", "archaeophases_mcmc", "data.frame"),
               mcmc = attr_list[match(mcmc_attrs, names(attr_list))],
               call = call)
 }
@@ -70,7 +70,7 @@ new_archaeophases_plot <- function(x = list(),
 #'
 #' @param x An \code{archaeophases_mcmc} object.
 #'
-#' @param file Either a path to a CSV file, a connection,
+#' @param ... Either a path to a CSV file, a connection,
 #' or the value \code{clipboard()} to read from the system clipboard.
 #' The CSV \code{file} can be compressed or plain.
 #'
@@ -99,6 +99,7 @@ original_file <- function(x, ...) {
 #' @param file Either a path to a CSV file, a connection,
 #' or the value \code{clipboard()} to read from the system clipboard.
 #' The CSV \code{file} can be compressed or plain.
+#' @param ... Other parameters.
 #'
 #' @details
 #' If called with a single argument, checks the file indicated by
@@ -110,9 +111,10 @@ original_file <- function(x, ...) {
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
 #' @importFrom digest digest
+#' @importFrom utils file_test
 #'
 #' @export
-original_file.archaeophases_mcmc <- function(x, file = NULL) {
+original_file.archaeophases_mcmc <- function(x, file = NULL, ...) {
     ## Calculate hash, if connection, save temp file
     if(is.null(file))
         file <- as.list(attr(x, "mcmc"))$file
@@ -128,14 +130,31 @@ original_file.archaeophases_mcmc <- function(x, file = NULL) {
     file_hash == attr(x, "hash")
 }
 
-original_file.archaeophases_plot <- function(x, file = NULL) {
-    ## Calculate hash, if connection, save temp file
-    ## if (is.element("archaeophases_plot", class(x))) {
-    ##     m <- as.list(attr(x, "mcmc")$mcmc)
-    ## }
-    ## else {
-        m <- as.list(attr(x, "mcmc"))
-    ## }
+#' Check for an original \code{archaeophases_plot} file
+#'
+#' Checks whether or not a file is identical to the one used to create
+#' an \code{archaeophases_plot} object.
+#'
+#' @param x An \code{archaeophases_plot} object.
+#' @param file Either a path to a plot file, a connection,
+#' or the value \code{clipboard()} to read from the system clipboard.
+#' @param ... Other parameters.
+#'
+#' @details
+#' If called with a single argument, checks the file indicated by
+#' the \code{file_path} attribute.
+#'
+#' @return A boolean, \code{TRUE} if the files match, \code{FALSE}
+#' otherwise.
+#'
+#' @author Thomas S. Dye, \email{tsd@@tsdye.online}
+#'
+#' @importFrom digest digest
+#' @importFrom utils file_test
+#'
+#' @export
+original_file.archaeophases_plot <- function(x, file = NULL, ...) {
+    m <- as.list(attr(x, "mcmc"))
     if(is.null(file))
         file <- m$mcmc$file
     if(!file_test("-f", file)) {
@@ -160,6 +179,8 @@ reproduce <- function(x, ...) {
 #' object.
 #'
 #' @param x An \code{archaeophases_mcmc} object.
+#' @param file A path to the original MCMC csv file, or a copy of the file.
+#' @param ... Other parameters.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -174,7 +195,7 @@ reproduce <- function(x, ...) {
 #' @seealso \code{\link{original_file}}
 #'
 #' @export
-reproduce.archaeophases_mcmc <- function(x, file = NULL) {
+reproduce.archaeophases_mcmc <- function(x, file = NULL, ...) {
     if (!original_file(x, file))
         stop("Not the original file.")
     eval(attr(x, "mcmc"))
@@ -186,6 +207,8 @@ reproduce.archaeophases_mcmc <- function(x, file = NULL) {
 #' object.
 #'
 #' @param x An \code{archaeophases_plot} object.
+#' @param file Path to the original MCMC csv file, or a copy of the file.
+#' @param ... Other parameters.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -204,7 +227,7 @@ reproduce.archaeophases_mcmc <- function(x, file = NULL) {
 #' @seealso \code{\link{original_file}}
 #'
 #' @export
-reproduce.archaeophases_plot <- function(x, file = NULL) {
+reproduce.archaeophases_plot <- function(x, file = NULL, ...) {
     if (!original_file(x, file))
         stop("Not the original file.")
     eval(attr(x, "call"))
@@ -219,6 +242,9 @@ reproduce.archaeophases_plot <- function(x, file = NULL) {
 #' Uses data stored in the \code{archaeophases_plot} object, along with
 #' metadata from the call of the plotting function, to recreate the original
 #' graphic on the display.
+#'
+#' @param x An \code{archaeophases_plot} object.
+#' @param ... Other parameters.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -239,7 +265,7 @@ reproduce.archaeophases_plot <- function(x, file = NULL) {
 #'   plot(tp_1)
 #' }
 #' @export
-plot.archaeophases_plot <- function(x) {
+plot.archaeophases_plot <- function(x, ...) {
     foo <- as.list(attr(x, "call"))
     foo$data <- as.name(deparse(substitute(x)))
     foo$position <- NULL

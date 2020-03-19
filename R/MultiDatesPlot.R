@@ -233,7 +233,7 @@ multi_dates_plot <- function (data,
     if(!is.data.frame(data)) stop("Data format not recognized.")
 
     if (is.element("archaeophases_plot", class(data))) {
-        data_tibble <- data
+        plot_data <- data
     }
     else {
         if (x_scale == "elapsed") {
@@ -244,11 +244,8 @@ multi_dates_plot <- function (data,
                 data <- data - data[, elapsed_origin_position]
             }
         }
-
-        data_tibble <- data[, position]
+        plot_data <- data[, position]
     }
-
-    plot_data <- as.data.frame(data_tibble)
 
     if (intervals == "CI") {
         Bornes = MultiCredibleInterval(plot_data, 1:ncol(plot_data),
@@ -328,7 +325,7 @@ multi_dates_plot <- function (data,
         print(h)
     }
 
-    new_archaeophases_plot(x = data_tibble,
+    new_archaeophases_plot(x = plot_data,
                            mcmc = data,
                            call = match.call())
 }
