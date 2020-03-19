@@ -1,8 +1,10 @@
 ## Test environments
- * Pop!_OS (Ubuntu 18.04), R 3.63
+* local OS X install, R 3.6.3
+* Pop!_OS (Ubuntu 18.04), R 3.6.3
+* win-builder (devel and release)
 
 ## R CMD check results
 
-## Downstream dependencies
+0 errors | 1 warnings | 1 note
 
-There are currently no downstream dependencies for this package.
+* This is a revised release.
