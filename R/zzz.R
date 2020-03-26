@@ -5,10 +5,10 @@
 }
 .onAttach <- function(libname, pkgname) {
     if (!.pkgenv$has_data) {
-        msg <- paste("To use this package, you must install the",
+        msg <- paste("To produce graphics for the package vignettes, you must install the",
                      "ArchaeoPhases.dataset package. To install that ",
                      "package, run `install.packages('ArchaeoPhases.dataset',",
-                     "repos='https://XXX.github.io/drat/', type='source')`.")
+                     "repos='https://tsdye.github.io/drat/', type='source')`.")
         msg <- paste(strwrap(msg), collapse="\n")
         packageStartupMessage(msg)
     }
