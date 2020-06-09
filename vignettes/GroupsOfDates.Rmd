@@ -33,6 +33,8 @@ if (!hasData) {
 knitr::opts_chunk$set(comment = "")
 options(width = 120, max.print = 5)
 library(ArchaeoPhases)
+library(ArchaeoPhases.dataset)
+
 ```
 
 ## Groups of dates
