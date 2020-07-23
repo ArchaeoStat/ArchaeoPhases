@@ -343,8 +343,8 @@ tempo_plot <- function(data,
             }
         }
 
-        data_min <- min(data_subset)
-        data_max <- max(data_subset)
+        data_min <- min(apply(data_subset, 2, min))
+        data_max <- max(apply(data_subset, 2, max))
         data_cols <- ncol(data_subset)
         data_seq <- seq(data_min, data_max, length.out = 50 * data_cols)
         doubt <- 1 - level
