@@ -4,7 +4,7 @@
 \alias{PhaseTimeRange}
 \title{Phase time range}
 \usage{
-PhaseTimeRange(PhaseMin_chain, PhaseMax_chain, level = 0.95)
+PhaseTimeRange(PhaseMin_chain, PhaseMax_chain, level = 0.95, round_to = O)
 }
 \arguments{
 \item{PhaseMin_chain}{: Numeric vector containing the output of the MCMC
@@ -14,6 +14,8 @@ algorithm for the minimum of the events included in the phase.}
 algorithm for the maximum of the events included in the phase.}
 
 \item{level}{Probability corresponding to the desired level of confidence.}
+
+\item{round_to}{Integer indicating the number of decimal places.}
 }
 \value{
 A vector of values containing the desired level of confidence
