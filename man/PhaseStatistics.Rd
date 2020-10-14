@@ -4,37 +4,36 @@
 \alias{PhaseStatistics}
 \title{Summary statistics of a phase}
 \usage{
-PhaseStatistics(
-  PhaseMin_chain,
-  PhaseMax_chain,
-  level = 0.95,
-  roundingOfValue = 0
-)
+PhaseStatistics(min_chain, max_chain, level = 0.95, round_to = 0)
 }
 \arguments{
-\item{PhaseMin_chain}{Numeric vector containing the output of the MCMC
-algorithm for the minimum of the dates included in the phase.}
+\item{min_chain}{Numeric vector containing the output of the MCMC
+algorithm for the start of the phase.}
 
-\item{PhaseMax_chain}{Numeric vector containing the output of the MCMC
-algorithm for the maximum of the dates included in the phase.}
+\item{max_chain}{Numeric vector containing the output of the MCMC
+algorithm for the end of the phase.}
 
 \item{level}{Probability corresponding to the level of confidence used
 for the credible interval and the highest density region.}
 
-\item{roundingOfValue}{Integer indicating the number of decimal places.}
+\item{round_to}{Integer indicating the number of decimal places.}
 }
 \value{
-A matrix of values corresponding to the summary statistics:
+A list with the following components:
 \describe{
-\item{1}{Statistics of the minimum of the dates included in the phase}
-\item{2}{Statistics of the maximum of the dates included in the phase}
-\item{3}{Statistics of the duration of the dates included in the phase}
+\item{statistics}{A data frame where the rows correspond to the
+summary statistics and the columns include: \code{start}, the
+start of the phase in calendar years (BC/AD); \code{end} the end
+of the phase in calendar years (BC/AD); and \code{duration} the
+duration of the phase in years.}
+\item{level}{Probability corresponding to the level of confidence used
+for the credible interval and the highest density region.}
+\item{call}{The function call.}
 }
-The results are given in calendar year (in format BC/AD).
 }
 \description{
-Estimation of summary statistics, including the beginning and end
-of a phase, and the duration of the phase
+Estimation of summary statistics for the beginning, end,
+and duration of a phase.
 }
 \details{
 The summary statistics are those given by the \code{MarginalStatistics()} function.
@@ -43,12 +42,16 @@ as follows: \eqn{duration = maximum - minimum} at each iteration of the MCMC out
 }
 \examples{
   data(Phases); attach(Phases)
-  PhaseStatistics(Phase.1.alpha, Phase.1.beta, 0.95)
-  PhaseStatistics(Phase.2.alpha, Phase.2.beta, 0.95)
+  phase_statistics(Phase.1.alpha, Phase.1.beta, 0.95)
+  phase_statistics(Phase.2.alpha, Phase.2.beta, 0.95)
+  ## round to decade
+  phase_statistics(Phase.2.alpha, Phase.2.beta, 0.95, -1)
 
 }
 \author{
-Anne Philippe, \email{Anne.Philippe@univ-nantes.fr} and
+Anne Philippe, \email{Anne.Philippe@univ-nantes.fr},
 
-Marie-Anne Vibet, \email{Marie-Anne.Vibet@univ-nantes.fr}
+Marie-Anne Vibet, \email{Marie-Anne.Vibet@univ-nantes.fr}, and
+
+Thomas S. Dye, \email{tsd@tsdye.online}
 }
