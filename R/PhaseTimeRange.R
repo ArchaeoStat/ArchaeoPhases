@@ -30,7 +30,7 @@
 #' @importFrom stats quantile
 #'
 #' @export
-PhaseTimeRange <- function(PhaseMin_chain, PhaseMax_chain, level=0.95,round_to=O){
+PhaseTimeRange <- function(PhaseMin_chain, PhaseMax_chain, level=0.95,round_to=0){
 
   if(length(PhaseMax_chain) != length(PhaseMin_chain)) { print('Error : the parameters do not have the same length')}   # test the length of both chains
   else{

@@ -4,7 +4,7 @@
 \alias{PhaseTimeRange}
 \title{Phase time range}
 \usage{
-PhaseTimeRange(PhaseMin_chain, PhaseMax_chain, level = 0.95, round_to = O)
+PhaseTimeRange(PhaseMin_chain, PhaseMax_chain, level = 0.95, round_to = 0)
 }
 \arguments{
 \item{PhaseMin_chain}{: Numeric vector containing the output of the MCMC
