@@ -44,7 +44,7 @@ Calculates summary statistics of the output of the MCMC algorithm for a
 single parameter. Results are given in calendar years (BC/AD).
 }
 \details{
-The \eqn{(100 * level)}\% highest posterior density region is estimated
+The \eqn{(100 * level)}\\% highest posterior density region is estimated
 using \code{hdr()} function from \pkg{hdrcde} package.
 }
 \examples{

@@ -37,9 +37,8 @@ the minimum and maximum of a group of events
 \examples{
   data(Events)
   Temp = CreateMinMaxGroup(Events, c(2,4), name = "Phase2")
- # with the arguments to export the generated datasets
- # Temp = CreateMinMaxGroup(Events, c(3,5), name = "Phase1", add=Temp,
- #                          exportFile = "MinMaxPhases.csv")
+  Temp = CreateMinMaxGroup(Events, c(3,5), name = "Phase1", add=Temp,
+                           exportFile = "MinMaxPhases.csv")
 }
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr} and
