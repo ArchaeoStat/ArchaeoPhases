@@ -61,8 +61,9 @@ instead of a segment.
 \examples{
   data(Phases); attach(Phases)
   SuccessionPlot(Phase.1.alpha, Phase.1.beta, Phase.2.alpha, Phase.2.beta, level = 0.95)
-  SuccessionPlot(Phase.1.alpha, Phase.1.beta, Phase.2.alpha, Phase.2.beta,
+ \dontrun{ SuccessionPlot(Phase.1.alpha, Phase.1.beta, Phase.2.alpha, Phase.2.beta,
                  exportFile = "Succession", exportFormat = "PNG")
+                 }
 
 }
 \author{

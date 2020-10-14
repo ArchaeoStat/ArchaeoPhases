@@ -69,10 +69,10 @@ between the successive groups does not exist, a cross is drawn instead of a segm
                       title = "Succession of phase 1 and phase 2",
                       colors = c(3, 4))
   # export
-  MultiSuccessionPlot(Phases, c(4, 2),
+  \dontrun{MultiSuccessionPlot(Phases, c(4, 2),
                       exportFile = "MultiSuccessionPlot",
                       exportFormat = "SVG")
-
+}
 }
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr} and

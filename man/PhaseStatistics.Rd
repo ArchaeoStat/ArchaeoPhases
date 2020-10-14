@@ -4,7 +4,7 @@
 \alias{PhaseStatistics}
 \title{Summary statistics of a phase}
 \usage{
-PhaseStatistics(PhaseMin_chain, PhaseMax_chain, level = 0.95)
+PhaseStatistics(PhaseMin_chain, PhaseMax_chain, level = 0.95, roundingOfValue=0)
 }
 \arguments{
 \item{PhaseMin_chain}{Numeric vector containing the output of the MCMC
@@ -15,6 +15,9 @@ algorithm for the maximum of the dates included in the phase.}
 
 \item{level}{Probability corresponding to the level of confidence used
 for the credible interval and the highest density region.}
+
+\item{roundingOfValue}{Integer indicating the number of decimal places.}
+
 }
 \value{
 A matrix of values corresponding to the summary statistics:
@@ -37,7 +40,7 @@ as follows: \eqn{duration = maximum - minimum} at each iteration of the MCMC out
 \examples{
   data(Phases); attach(Phases)
   PhaseStatistics(Phase.1.alpha, Phase.1.beta, 0.95)
-  PhaseStatistics(Phase.2.alpha, Phase.2.beta, 0.95)
+  PhaseStatistics(Phase.2.alpha, Phase.2.beta, 0.95,roundingOfValue=2)
 
 }
 \author{

@@ -40,16 +40,13 @@ discarded.
 }
 \examples{
 
+ \dontrun{ 
   data(Events)
   write.csv(Events, "events.csv", row.names=FALSE)
   events = read_chronomodel("events.csv", decimal = ".", separator = ",")
   # equivalent
   events = read_chronomodel("events.csv")
-
-\dontrun{
-   rem <- read_chronomodel("http://tsdye.online/AP/cm/Chain_all_Events.csv")
- }
-
+  }
 }
 \seealso{
 \code{\link[readr]{read_delim}}

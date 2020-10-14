@@ -58,7 +58,7 @@ years (BC/AD).
   # In this case, equivalent to
   MultiPhasePlot(Phases, c(4, 2), title = "Succession of phase 1 and phase 2", colors = c(3, 4))
   # Export
-  MultiPhasePlot(Phases, c(4, 2), exportFile = "MultiPhasePlot", exportFormat = "PNG")
+  # MultiPhasePlot(Phases, c(4, 2), exportFile = "MultiPhasePlot", exportFormat = "PNG")
 
 }
 \author{

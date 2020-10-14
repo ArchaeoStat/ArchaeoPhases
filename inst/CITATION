@@ -1,14 +1,18 @@
-citHeader("To cite the package 'ArchaeoPhases' in publications use:")
+bibentry(bibtype = "Article",
+  title        = "Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}",
+  author       = c(person(given = "Anne",
+                          family = "Philippe",
+                          email = "anne.philippe@univ-nantes.fr"),
+                   person(given = "Marie-Anne",
+                          family = "Vibet",
+                          email = "marie-anne.vibet@univ-nantes.fr")),
+  journal      = "Journal of Statistical Software, Code Snippets",
+  year         = "2020",
+  volume       = "93",
+  number       = "1",
+  pages        = "1--25",
+  doi          = "10.18637/jss.v093.c01",
 
-	 citation(auto = meta)
-
-	 bibentry(bibtype = "Article",
-			    title = "Analysis of Archaeological Phases using the CRAN Package 'ArchaeoPhases'",
-				   author = "Anne Philippe, Marie-Anne Vibet",
-				year = "2017",
-				journal = "HAL")
-
-
-
-
+  header       = "To cite ArchaeoPhases in publications use:"
+)
 
