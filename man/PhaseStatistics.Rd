@@ -42,10 +42,10 @@ as follows: \eqn{duration = maximum - minimum} at each iteration of the MCMC out
 }
 \examples{
   data(Phases); attach(Phases)
-  phase_statistics(Phase.1.alpha, Phase.1.beta, 0.95)
-  phase_statistics(Phase.2.alpha, Phase.2.beta, 0.95)
+  PhaseStatistics(Phase.1.alpha, Phase.1.beta, 0.95)
+  PhaseStatistics(Phase.2.alpha, Phase.2.beta, 0.95)
   ## round to decade
-  phase_statistics(Phase.2.alpha, Phase.2.beta, 0.95, -1)
+  PhaseStatistics(Phase.2.alpha, Phase.2.beta, 0.95, -1)
 
 }
 \author{
