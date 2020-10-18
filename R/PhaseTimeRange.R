@@ -12,8 +12,7 @@
 #' @param PhaseMax_chain : Numeric vector containing the output of the MCMC
 #' algorithm for the maximum of the events included in the phase.
 #' @param level Probability corresponding to the desired level of confidence.
-#' @param round_to Integer indicating the number of decimal places.
-
+#'
 #' @return A vector of values containing the desired level of confidence
 #' and the endpoints of the shortest time range associated with this desired level.
 #' The result is given in calendar years (BC/AD).
@@ -30,7 +29,7 @@
 #' @importFrom stats quantile
 #'
 #' @export
-PhaseTimeRange <- function(PhaseMin_chain, PhaseMax_chain, level=0.95,round_to=0){
+PhaseTimeRange <- function(PhaseMin_chain, PhaseMax_chain, level=0.95){
 
   if(length(PhaseMax_chain) != length(PhaseMin_chain)) { print('Error : the parameters do not have the same length')}   # test the length of both chains
   else{
@@ -53,7 +52,7 @@ PhaseTimeRange <- function(PhaseMin_chain, PhaseMax_chain, level=0.95,round_to=0
 
       D<- p[2,]-p[1,]     # computes the length of all intervals
       I = which.min(D)    # finds the shortest interval
-      range = round(p[,I], round_to)
+      range = round(p[,I], 0)
       c(level=level, range[1], range[2]) # returns the endpoints of the shortest interval
 
     }
