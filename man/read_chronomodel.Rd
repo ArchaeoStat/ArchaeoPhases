@@ -41,12 +41,13 @@ discarded.
 \examples{
 
   data(Events)
+\dontrun{
   write.csv(Events, "events.csv", row.names=FALSE)
   events = read_chronomodel("events.csv", decimal = ".", separator = ",")
   # equivalent
   events = read_chronomodel("events.csv")
 
-\dontrun{
+
    rem <- read_chronomodel("http://tsdye.online/AP/cm/Chain_all_Events.csv")
  }
 

@@ -51,9 +51,9 @@
 #'   write.csv(Fishpond, "fishpond_MCMC.csv", row.names=FALSE)
 #'   Fishpond = ImportCSV("fishpond_MCMC.csv", dec = '.', sep=',',
 #'                        header = TRUE, iterationColumn = 1,
-#'                        referenceYear = 1950, rowToWithdraw = "last")
+#'                        referenceYear = 1950, rowToWithdraw = "last")}
 #' }
-#' }
+#'
 #'
 #' @seealso \code{\link{ImportCSV.BCal}}
 #' @seealso \code{\link{read_chronomodel}}
@@ -231,12 +231,13 @@ read_oxcal <- function(file, quiet="no")
 #' @examples
 #'
 #'   data(Events)
+#' \dontrun{
 #'   write.csv(Events, "events.csv", row.names=FALSE)
 #'   events = read_chronomodel("events.csv", decimal = ".", separator = ",")
 #'   # equivalent
 #'   events = read_chronomodel("events.csv")
 #'
-#' \dontrun{
+#'
 #'    rem <- read_chronomodel("http://tsdye.online/AP/cm/Chain_all_Events.csv")
 #'  }
 #'

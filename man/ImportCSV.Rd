@@ -72,9 +72,9 @@ Otherwise, the functions of \pkg{ArchaeoPhases} will not work properly.
   write.csv(Fishpond, "fishpond_MCMC.csv", row.names=FALSE)
   Fishpond = ImportCSV("fishpond_MCMC.csv", dec = '.', sep=',',
                        header = TRUE, iterationColumn = 1,
-                       referenceYear = 1950, rowToWithdraw = "last")
+                       referenceYear = 1950, rowToWithdraw = "last")}
 }
-}
+
 
 }
 \seealso{
