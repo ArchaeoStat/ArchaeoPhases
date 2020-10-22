@@ -21,7 +21,7 @@ and the endpoints of the shortest time range associated with this desired level.
 The result is given in calendar years (BC/AD).
 }
 \description{
-Computes the shortest interval  \link{IntervalInf ; IntervalSup} that satisfies
+Computes the shortest interval that satisfies
 \eqn{P(PhaseMin_chain =< IntervalInf < IntervalSup =< PhaseMax_chain | M) = level}
 }
 \examples{
