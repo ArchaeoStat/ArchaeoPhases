@@ -3,7 +3,7 @@ Type: Package
 Title: Post-Processing of the Markov Chain Simulated by 'ChronoModel',
         'Oxcal' or 'BCal'
 Version: 1.5
-Date: 2020-10-10
+Date: 2020-11-26
 Author: Anne Philippe [aut, cre],
     Marie-Anne Vibet [aut],
     Thomas S. Dye [ctb]

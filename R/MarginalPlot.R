@@ -53,7 +53,6 @@ MarginalPlot <- function(a_chain, level=0.95, GridLength=1024,
                   x.label = "Calendar year",y.label = NULL,y.grid = TRUE,
                   x.scale = "calendar", elapsed.origin.position = NULL,x.min = NULL, x.max = NULL,
                   height = 7, width = 7, units = "in",file = NULL, newWindow=TRUE){
-
   # x.scale can either be "calendar", "BP" or "elapsed" if any other origin that 0 and 1950
   if (x.scale == "BP") {
     a_chain <- 1950-a_chain
