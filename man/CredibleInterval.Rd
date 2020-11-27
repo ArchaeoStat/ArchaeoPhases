@@ -23,9 +23,9 @@ credible interval in calendar years (BC/AD).
 Computes the shortest credible interval of the output of the MCMC algorithm for a single parameter
 }
 \details{
-A \eqn{(100 * level)}\% credible interval is an interval that keeps \eqn{N * (1 - level)}
+A \eqn{(100 * level)}\\% credible interval is an interval that keeps \eqn{N * (1 - level)}
 elements of the sample outside the interval.
-The \eqn{(100 * level)}\% credible interval is the shortest of all those intervals.
+The \eqn{(100 * level)}\\% credible interval is the shortest of all those intervals.
 }
 \examples{
   data(Events); attach(Events)

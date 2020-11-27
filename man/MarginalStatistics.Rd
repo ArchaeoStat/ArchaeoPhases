@@ -31,7 +31,7 @@ A named matrix of values corresponding to all the following statistics:
 Calculates summary statistics of the output of the MCMC algorithm for a one-parameter. Results are given in calendar years (BC/AD).
 }
 \details{
-The \eqn{(100 * level)}\% highest posterior density region is estimated using \code{hdr()} function from \pkg{hdrcde} package.
+The \eqn{(100 * level)}\\% highest posterior density region is estimated using \code{hdr()} function from \pkg{hdrcde} package.
 }
 \examples{
   data(Events); attach(Events)

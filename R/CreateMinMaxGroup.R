@@ -26,8 +26,10 @@
 #' @examples
 #'   data(Events)
 #'   Temp = CreateMinMaxGroup(Events, c(2,4), name = "Phase2")
+#' \dontrun{
+#'   #To do for saving the new variables in csv file
 #'   Temp = CreateMinMaxGroup(Events, c(3,5), name = "Phase1", add=Temp,
-#'                            exportFile = "MinMaxPhases.csv")
+#'  }                          exportFile = "MinMaxPhases.csv")
 #' @export
 #'
 #' @importFrom utils write.csv

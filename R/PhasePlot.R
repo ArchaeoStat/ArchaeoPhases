@@ -30,13 +30,8 @@
 #'
 #' @examples
 #'   data(Phases); attach(Phases)
+#'    PhasePlot(Phase.1.alpha, Phase.1.beta, level = 0.95, title = "Densities of Phase 1")
 #'
-#' \dontrun{
-#'   # PhasePlot(Phase.1.alpha, Phase.1.beta, level = 0.95, title = "Densities of Phase 1")
-#' }
-#'
-#'   PhasePlot(Phase.2.alpha, Phase.2.beta, level = 0.95, title = "Densities of Phase 2",
-#'             colors = FALSE, exportFile = "CharacteristicsOfPhase", exportFormat = "SVG")
 #'
 #' @importFrom stats density
 #' @importFrom grDevices png svg dev.off

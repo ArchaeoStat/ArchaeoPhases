@@ -4,7 +4,7 @@
 
 #' Phase time range
 #'
-#' Computes the shortest interval  [IntervalInf ; IntervalSup] that satisfies
+#' Computes the shortest interval that satisfies
 #' \eqn{P(PhaseMin_chain =< IntervalInf < IntervalSup =< PhaseMax_chain | M) = level}
 #'
 #' @param PhaseMin_chain : Numeric vector containing the output of the MCMC

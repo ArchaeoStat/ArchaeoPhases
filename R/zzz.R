@@ -7,7 +7,8 @@
     if (!.pkgenv$has_data) {
         msg <- paste("To produce graphics for the package vignettes, you must install the",
                      "ArchaeoPhases.dataset package. To install that ",
-                     "package, run `install.packages('ArchaeoPhases.dataset')'.")
+                     "package, run `install.packages('ArchaeoPhases.dataset',",
+                     "repos='https://tsdye.github.io/drat/', type='source')`.")
         msg <- paste(strwrap(msg), collapse="\n")
         packageStartupMessage(msg)
     }

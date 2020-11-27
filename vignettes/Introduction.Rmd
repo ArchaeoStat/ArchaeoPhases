@@ -145,14 +145,13 @@ The autocorrelation plots show that each of these three chains are not significa
 
 We can also check whether the chains reached equilibrium. For example, let's consider the first date of the dataset.
 ```{r,fig.align='center',fig.width=6,fig.height=5}
-plot(mcmcList[,1,])
+plot(mcmcList[,1,][[1]][1:1000], type="l")
 ```
 The plot shows that the three chains corresponding to the first date reached the same stationnary process.
 
 We can test the Gelman-Rubin criterion. The expected value to confirm that all of the Markov chains reached equilibrium is 1.
 ```{r,fig.align='center',fig.width=6,fig.height=5}
 gelman.diag(mcmcList)
-gelman.plot(mcmcList[,1,])
 ```
 The Gelman-Rubin criterion confirms that all of the Markov chains reached equilibrium.
 We can also test the Geweke criterion. The expected value to confirm that all of the Markov chains reached equilibrium is strickly less than 1.

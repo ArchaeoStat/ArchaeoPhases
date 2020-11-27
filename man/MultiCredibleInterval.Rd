@@ -27,8 +27,8 @@ result is given in calendar years (BC/AD).
 Estimation of the shortest credible interval for each variable of a simulated Markov chain
 }
 \details{
-A \eqn{(100 * level)}\% credible interval is an interval that keeps \eqn{N * (1 -level)} elements of the sample outside the interval.
-The \eqn{(100*level)}\% credible interval is the shortest of the intervals
+A \eqn{(100 * level)}\\% credible interval is an interval that keeps \eqn{N * (1 -level)} elements of the sample outside the interval.
+The \eqn{(100*level)}\\% credible interval is the shortest of the intervals
 }
 \examples{
   data(Events)

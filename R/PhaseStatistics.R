@@ -19,6 +19,8 @@
 #' algorithm for the maximum of the dates included in the phase.
 #' @param level Probability corresponding to the level of confidence used
 #' for the credible interval and the highest density region.
+#' @param roundingOfValue Integer indicating the number of decimal places.
+
 #' @return
 #' A matrix of values corresponding to the summary statistics:
 #' \describe{
@@ -39,16 +41,16 @@
 #'   PhaseStatistics(Phase.2.alpha, Phase.2.beta, 0.95)
 #'
 #' @export
-PhaseStatistics <- function(PhaseMin_chain, PhaseMax_chain, level=0.95){
+PhaseStatistics <- function(PhaseMin_chain, PhaseMax_chain, level=0.95, roundingOfValue = 0){
 
   #Statistics according to PhaseMin_chain
-  MinStat = MarginalStatistics(PhaseMin_chain, level)
+  MinStat = MarginalStatistics(PhaseMin_chain, level,roundingOfValue)
 
   #Statistics according to PhaseMax_chain parameter
-  MaxStat = MarginalStatistics(PhaseMax_chain, level)
+  MaxStat = MarginalStatistics(PhaseMax_chain, level,roundingOfValue)
 
   #Statistics according to the duration
-  DurationStat = MarginalStatistics(PhaseMax_chain-PhaseMin_chain, level)
+  DurationStat = MarginalStatistics(PhaseMax_chain-PhaseMin_chain, level,roundingOfValue)
 
   # Resulted List
 
@@ -103,7 +105,8 @@ PhaseStatistics <- function(PhaseMin_chain, PhaseMax_chain, level=0.95){
 #' algorithm for the end of the phase.
 #' @param level Probability corresponding to the level of confidence used
 #' for the credible interval and the highest density region.
-#' @param round_to Integer indicating the number of decimal places.
+#'@param round_to Integer indicating the number of decimal places.
+
 #' @return
 #' A list with the following components:
 #' \describe{
