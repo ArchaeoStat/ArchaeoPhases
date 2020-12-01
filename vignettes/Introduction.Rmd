@@ -40,7 +40,7 @@ library(ArchaeoPhases.dataset)
 
 ## Introduction
 
-ArchaeoPhases provides a list of functions for the statistical analysis of archaeological dates and groups of dates. It is based on the post-processing of the Markov Chains whose stationary distribution is the posterior distribution of a series of dates. Such MCMC output can be simulated by different applications as for instance 'ChronoModel' (see <http://www.chronomodel.fr>), 'Oxcal' (see <https://c14.arch.ox.ac.uk/oxcal.html>) or BCal (see http://bcal.shef.ac.uk/).
+ArchaeoPhases provides a list of functions for the statistical analysis of archaeological dates and groups of dates. It is based on the post-processing of the Markov Chains whose stationary distribution is the posterior distribution of a series of dates. Such MCMC output can be simulated by different applications as for instance 'ChronoModel' (see  <https://chronomodel.com/>), 'Oxcal' (see <https://c14.arch.ox.ac.uk/oxcal.html>) or BCal (see  <https://bcal.shef.ac.uk/>).
 The only requirement is to have a CSV file containing a sample from the posterior distribution.
 
 
@@ -52,7 +52,7 @@ For the others, a Graphical User Interface is available. Click [here](https://ar
 
 ## Installing 'ArchaeoPhases' package
 
-To install ArchaeoPhases you first need to install [R](https://www.r-project.org) and  [Rstudio](http://www.rstudio.com) that has a nice desktop environment for using R. Once in R (or in RStudio) you can type:
+To install ArchaeoPhases you first need to install [R](https://www.r-project.org/) and  [Rstudio](https://rstudio.com/)  that has a nice desktop environment for using R. Once in R (or in RStudio) you can type:
 
 ```{r,eval=FALSE}
 install.packages('ArchaeoPhases')
