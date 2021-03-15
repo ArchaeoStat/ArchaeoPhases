@@ -27,7 +27,7 @@ Description: Provides a list of functions for the statistical analysis of
     <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'
     <https://bcal.shef.ac.uk/>. The only requirement is to have a csv file
     containing a sample from the posterior distribution.
-License: GPL-3
+License: GPL (>= 3)
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
 Depends: 
     R (>= 3.5.0)
