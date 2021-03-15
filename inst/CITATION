@@ -1,18 +1,19 @@
-bibentry(bibtype = "Article",
+citHeader("To cite ArchaeoPhases in publications use:")
+
+citEntry(entry = "Article",
   title        = "Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}",
-  author       = c(person(given = "Anne",
-                          family = "Philippe",
-                          email = "anne.philippe@univ-nantes.fr"),
-                   person(given = "Marie-Anne",
-                          family = "Vibet",
-                          email = "marie-anne.vibet@univ-nantes.fr")),
-  journal      = "Journal of Statistical Software, Code Snippets",
+  author       = c(person(given = "Anne", family = "Philippe", role = "aut"),
+                   person(given = "Marie-Anne", family = "Vibet", role = "aut")),
   year         = "2020",
+  journal      = "Journal of Statistical Software, Code Snippets",
   volume       = "93",
   number       = "1",
-  pages        = "1--25",
+  page         = "1--25",
   doi          = "10.18637/jss.v093.c01",
 
-  header       = "To cite ArchaeoPhases in publications use:"
+  textVersion  =
+  paste("Philippe, Anne & Vibet, Marie-Anne (2020).",
+        "Analysis of Archaeological Phases Using the R Package ArchaeoPhases.",
+        "Journal of Statistical Software, Code Snippets, 93(1), 1--25.",
+        "DOI 10.18637/jss.v093.c01.")
 )
-

@@ -1,9 +1,8 @@
 Type: Package
 Package: ArchaeoPhases
-Title: Post-Processing of the Markov Chain Simulated by
-    'ChronoModel', 'Oxcal' or 'BCal'
-Version: 1.5
-Date: 2020-11-26
+Title: Post-Processing of the Markov Chain Simulated by 'ChronoModel',
+    'Oxcal' or 'BCal'
+Version: 1.5.0.9000
 Authors@R: 
     c(person(given = "Anne",
              family = "Philippe",
@@ -19,53 +18,56 @@ Authors@R:
              role = "ctb",
              comment = c(ORCID = "0000-0001-8116-782X")))
 Maintainer: Anne Philippe <anne.philippe@univ-nantes.fr>
-Description: Provides a list of functions for the statistical
-    analysis of archaeological dates and groups of dates. It is based on
-    the post-processing of the Markov Chains whose stationary distribution
-    is the posterior distribution of a series of dates. Such output can be
-    simulated by different applications as for instance 'ChronoModel' (see
-    <https://chronomodel.com/>), 'Oxcal' (see
-    <https://c14.arch.ox.ac.uk/oxcal.html>) or 'BCal' (see
-    <https://bcal.shef.ac.uk/>). The only requirement is to have a csv
-    file containing a sample from the posterior distribution.  Note that
-    this package interacts with data available through the
-    'ArchaeoPhases.dataset' package which is available in a separate
-    repository.  The size of the 'ArchaeoPhases.dataset' package is
-    approximately 4 MB.
+Description: Provides a list of functions for the statistical analysis of
+    archaeological dates and groups of dates. It is based on the
+    post-processing of the Markov Chains whose stationary distribution is
+    the posterior distribution of a series of dates. Such output can be
+    simulated by different applications such as 'ChronoModel'
+    <https://chronomodel.com/>, 'Oxcal'
+    <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'
+    <https://bcal.shef.ac.uk/>. The only requirement is to have a csv file
+    containing a sample from the posterior distribution.
 License: GPL-3
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
 Depends: 
-    coda,
-    hdrcde,
     R (>= 3.5.0)
 Imports: 
+    coda,
     digest,
-    dplyr,
-    DT,
-    ggalt,
     ggplot2,
-    ggthemes,
-    gplots,
-    graphics,
-    grDevices,
-    magrittr,
-    readr,
-    reshape2,
-    shiny,
-    shinythemes,
+    hdrcde,
+    methods,
+    rlang,
     stats,
-    tibble,
-    toOrdinal,
     utils
 Suggests: 
-    ArchaeoPhases.dataset (>= 0.1.0),
     knitr,
+    magrittr,
     rmarkdown,
-    testthat (>= 2.1.0)
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 LazyData: true
-NeedsCompilation: no
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Collate: 
+    'AllClasses.R'
+    'AllGenerics.R'
+    'ArchaeoPhases-package.R'
+    'activity.R'
+    'coerce.R'
+    'data.R'
+    'dates.R'
+    'interval.R'
+    'mutators.R'
+    'occurrence.R'
+    'phases.R'
+    'plot.R'
+    'read.R'
+    'subset.R'
+    'summary.R'
+    'tempo.R'
+    'test.R'
+    'time.R'
+    'utilities.R'

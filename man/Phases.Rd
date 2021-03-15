@@ -5,7 +5,7 @@
 \alias{Phases}
 \title{Phases}
 \format{
-A data frame with 30,000 rows and 5 variables:
+A \code{\link{data.frame}} with 30,000 rows and 5 variables:
 \describe{
 \item{iter}{iteration of the MCMC algorithm}
 \item{Phase.2.alpha}{start date of Phase 2}

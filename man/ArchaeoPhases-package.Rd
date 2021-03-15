@@ -5,22 +5,18 @@
 \alias{ArchaeoPhases-package}
 \alias{_PACKAGE}
 \alias{ArchaeoPhases}
-\title{ArchaeoPhases: Post-Processing of the Markov Chain Simulated by
-    'ChronoModel', 'Oxcal' or 'BCal'}
+\title{ArchaeoPhases: Post-Processing of the Markov Chain Simulated by 'ChronoModel',
+    'Oxcal' or 'BCal'}
 \description{
-Provides a list of functions for the statistical
-    analysis of archaeological dates and groups of dates. It is based on
-    the post-processing of the Markov Chains whose stationary distribution
-    is the posterior distribution of a series of dates. Such output can be
-    simulated by different applications as for instance 'ChronoModel' (see
-    <https://chronomodel.com/>), 'Oxcal' (see
-    <https://c14.arch.ox.ac.uk/oxcal.html>) or 'BCal' (see
-    <https://bcal.shef.ac.uk/>). The only requirement is to have a csv
-    file containing a sample from the posterior distribution.  Note that
-    this package interacts with data available through the
-    'ArchaeoPhases.dataset' package which is available in a separate
-    repository.  The size of the 'ArchaeoPhases.dataset' package is
-    approximately 4 MB.
+Provides a list of functions for the statistical analysis of
+    archaeological dates and groups of dates. It is based on the
+    post-processing of the Markov Chains whose stationary distribution is
+    the posterior distribution of a series of dates. Such output can be
+    simulated by different applications such as 'ChronoModel'
+    <https://chronomodel.com/>, 'Oxcal'
+    <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'
+    <https://bcal.shef.ac.uk/>. The only requirement is to have a csv file
+    containing a sample from the posterior distribution.
 }
 \seealso{
 Useful links:
@@ -34,6 +30,7 @@ Useful links:
 
 \tabular{ll}{
 Thomas S. Dye \tab \emph{University of Hawai'i at Manoa, USA} \cr
+Nicolas Frerebeau \tab \emph{Université Bordeaux Montaigne, France} \cr
 Anne Philippe \tab \emph{Université de Nantes, France} \cr
 Marie-Anne Vibet \tab \emph{Université de Nantes, France} \cr
 }

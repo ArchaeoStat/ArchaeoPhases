@@ -1,3 +1,32 @@
 url: https://ArchaeoStat.github.io/ArchaeoPhases
 development:
   mode: auto
+
+reference:
+- title: Data input/output
+  contents:
+  - has_concept("read")
+- title: Rhythms
+  contents:
+  - has_concept("events")
+- title: Phases
+  contents:
+  - has_concept("phases")
+- title: Visualization
+  contents:
+  - has_concept("plot")
+- title: Statistics
+  contents:
+  - has_concept("statistics")
+- title: Tests
+  contents:
+  - has_concept("tests")
+- title: Calendar
+  contents:
+  - has_concept("time scale")
+- title: Getters and Setters
+  contents:
+  - has_concept("mutator")
+- title: Classes
+  contents:
+  - has_concept("class")

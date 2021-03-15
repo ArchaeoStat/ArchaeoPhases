@@ -5,7 +5,7 @@
 \alias{Events}
 \title{Events}
 \format{
-A data frame with 30,000 rows and 5 variables:
+A \code{\link{data.frame}} with 30,000 rows and 5 variables:
 \describe{
 \item{iter}{iteration of the MCMC algorithm}
 \item{Event.2}{information on event 2}
