@@ -12,23 +12,20 @@ package](https://github.com/ArchaeoStat/ArchaeoPhases).**
 
 ## Overview
 
-Tools for the post-processing of the Markov Chain simulated by any
-software used for the construction of archeological chronologies.
-
-**ArchaeoPhases** provides functions for the statistical analysis of
-archaeological dates and groups of dates. It is based on the
-post-processing of the Markov Chains whose stationary distribution is
-the posterior distribution of a series of dates. Such MCMC output can be
-simulated by different applications as for instance
-[ChronoModel](https://chronomodel.com/),
-[Oxcal](https://c14.arch.ox.ac.uk/oxcal.html), or
-[BCal](https://bcal.shef.ac.uk/).
+Statistical analysis of archaeological dates and groups of dates.
+**ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC)
+simulations from [ChronoModel](https://chronomodel.com),
+[Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) or
+[BCal](https://bcal.shef.ac.uk). It provides functions for the
+estimation and visualization of time ranges from the posterior
+distribution of a series of dates (e.g. transition and hiatus between
+successive phases).
 
 To cite **ArchaeoPhases** in publications please use:
 
-> Philippe, Anne & Vibet, Marie-Anne (2020). Analysis of Archaeological
-> Phases Using the R Package ArchaeoPhases. *Journal of Statistical
-> Software, Code Snippets*, 93(1), 1-25. DOI
+> Philippe, A. & Vibet, M.-A. (2020). Analysis of Archaeological Phases
+> Using the R Package ArchaeoPhases. *Journal of Statistical Software,
+> Code Snippets*, 93(1), 1-25. DOI
 > [10.18637/jss.v093.c01](https://doi.org/10.18637/jss.v093.c01).
 
 ## Installation
@@ -57,8 +54,7 @@ library(ggplot2)
 library(magrittr)
 ```
 
-The only requirement is to have a CSV file containing a sample from the
-posterior distribution.
+Import a CSV file containing a sample from the posterior distribution:
 
 ``` r
 ## Read output from ChronoModel
@@ -85,16 +81,14 @@ plot(chrono_events) +
 
 ``` r
 ## Tempo plot
-chrono_events %>% 
-  tempo(level = 0.95) %>% 
-  plot() +
+tp <- tempo(chrono_events, level = 0.95)
+plot(tp) +
   ggplot2::theme_bw() +
   ggplot2::theme(legend.position = "bottom")
 
 ## Activity plot
-chrono_events %>% 
-  activity() %>% 
-  plot() +
+ac <- activity(chrono_events)
+plot(ac) +
   ggplot2::theme_bw()
 ```
 

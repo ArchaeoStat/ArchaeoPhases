@@ -57,7 +57,7 @@ or "\code{BP}". Any unambiguous substring can be given.}
 \description{
 A statistical graphic designed for the archaeological study of rhythms of the
 long term that embodies a theory of archaeological evidence for the
-occurrence of events
+occurrence of events.
 }
 \details{
 The tempo plot is one way to measure change over time: it estimates the

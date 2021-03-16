@@ -1,6 +1,35 @@
 # ArchaeoPhases v1.5.0.9000
 
+## Breaking changes
 * Full rewrite in S4.
+
+| Old | New |
+|:----|:----|
+| `CreateMinMaxGroup()` | `phase()` |
+| `CredibleInterval()`, `credible_interval()` | `interval_credible(<numeric>, <numeric>)` |
+| `DatesHiatus()`, `dates_hiatus()` | `lapse(<numeric>, <numeric>)` |
+| `MarginalPlot()`, `marginal_plot()` | `plot(<MCMC>)` |
+| `MarginalProba()` | `test_older(<numeric>, <numeric>)` |
+| `MarginalStatistics()`, `marginal_statistics()`, `multi_marginal_statistics()` | `summary(<MCMC>)` |
+| `MultiCredibleInterval()`, `multi_credible_interval()` | `interval_credible(<MCMC>)` |
+| `MultiDatesPlot()`, `multi_dates_plot()` | `plot(<MCMC>)` |
+| `MultiHPD()`, `multi_hpd()` | `interval_hpd(<MCMC>)` |
+| `MultiMarginalPlot()`, `multi_marginal_plot()` | `plot(<MCMC>)` |
+| `MultiPhasePlot()` | `plot(<PhasesMCMC>)` |
+| `MultiPhaseTimeRange()` | `boundaries(<PhasesMCMC>)` |
+| `MultiPhasesGap()` | `hiatus(<PhasesMCMC>)` |
+| `MultiPhasesTransition()` | `transition(<PhasesMCMC>)` |
+| `MultiSuccessionPlot()` | `plot(<PhasesMCMC>)` |
+| `OccurrencePlot()`, `occurrence_plot()` | `occurrence(<MCMC>)` + `plot(<OccurrenceEvents>)` |
+| `PhaseDurationPlot()` | `duration(<PhasesMCMC>)` + `plot(<MCMC>)` |
+| `PhasePlot()` | `plot(<PhasesMCMC>)` |
+| `PhaseStatistics()` | `summary(<PhasesMCMC>)` |
+| `PhaseTimeRange()` | `boundaries(<numeric>, <numeric>)` |
+| `PhasesGap()`, `phases_gap()` | `hiatus(<numeric>, <numeric>)` |
+| `PhasesTransition()` | `transition(<numeric>, <numeric>)` |
+| `SuccessionPlot()` | `plot(<PhasesMCMC>)` |
+| `TempoActivityPlot()`, `tempo_activity_plot()` | `activity(<MCMC>)` + `plot(<ActivityEvents>)` |
+| `TempoPlot()`, `tempo_plot()` | `tempo(<MCMC>)` + `plot(<CumulativeEvents>)` |
 
 # ArchaeoPhases v1.5
 

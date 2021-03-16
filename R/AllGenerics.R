@@ -170,7 +170,7 @@ setGeneric(
 #'
 #' A statistical graphic designed for the archaeological study of rhythms of the
 #' long term that embodies a theory of archaeological evidence for the
-#' occurrence of events
+#' occurrence of events.
 #' @param object An [`MCMC-class`] or [`CumulativeEvents-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number

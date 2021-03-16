@@ -5,18 +5,17 @@
 \alias{ArchaeoPhases-package}
 \alias{_PACKAGE}
 \alias{ArchaeoPhases}
-\title{ArchaeoPhases: Post-Processing of the Markov Chain Simulated by 'ChronoModel',
-    'Oxcal' or 'BCal'}
+\title{ArchaeoPhases: Post-processing of Markov Chain Monte Carlo Simulations for
+    Chronological Modelling}
 \description{
-Provides a list of functions for the statistical analysis of
-    archaeological dates and groups of dates. It is based on the
-    post-processing of the Markov Chains whose stationary distribution is
-    the posterior distribution of a series of dates. Such output can be
-    simulated by different applications such as 'ChronoModel'
-    <https://chronomodel.com/>, 'Oxcal'
+Statistical analysis of archaeological dates and groups of
+    dates. This package allows to post-process Markov Chain Monte Carlo
+    (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>, 'Oxcal'
     <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'
-    <https://bcal.shef.ac.uk/>. The only requirement is to have a csv file
-    containing a sample from the posterior distribution.
+    <https://bcal.shef.ac.uk/>. It provides functions for the estimation
+    and visualization of time ranges from the posterior distribution of a
+    series of dates (e.g. transition and hiatus between successive
+    phases).
 }
 \seealso{
 Useful links:
