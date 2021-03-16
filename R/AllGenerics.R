@@ -122,6 +122,7 @@ setGeneric(
 #' @param drop A [`logical`] scalar: should the result be coerced to
 #'  the lowest possible dimension? This only works for extracting elements,
 #'  not for the replacement.
+#' @param value A possible value for the element(s) of `x`.
 #' @param ... Currently not used.
 #' @return
 #'  A subsetted object.
@@ -182,7 +183,8 @@ setGeneric(
 #'  Only used if `elapsed` is `TRUE`.
 #' @param time A length-two [`numeric`] vector giving the earliest and latest
 #'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
-#' @param n An [`integer`] giving the number of grid points.
+#' @param n An [`integer`] specifying the number of equally spaced points at
+#'  which the cumulative distribution is to be estimated.
 #' @param x A [`CumulativeEvents-class`] object.
 #' @param calendar A [`character`] string specifying whether the dates
 #'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
@@ -226,7 +228,8 @@ setGeneric(
 #'  Only used if `elapsed` is `TRUE`.
 #' @param time A length-two [`numeric`] vector giving the earliest and latest
 #'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
-#' @param n An [`integer`] giving the number of grid points.
+#' @param n An [`integer`] specifying the number of equally spaced points at
+#'  which the density is to be estimated.
 #' @param x An [`ActivityEvents-class`] object.
 #' @param calendar A [`character`] string specifying whether the dates
 #'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
@@ -369,21 +372,20 @@ setGeneric(
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param ... Currently not used.
 #' @details
-#'  `date_hiatus()` finds if a gap exists between two dates and returns the
-#'  longest interval that satisfies:
-#'  \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
+#'  Finds if a gap exists between two dates and returns the longest interval
+#'  that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family dates
 #' @docType methods
-#' @name gap
-#' @rdname gap
+#' @name lapse
+#' @rdname lapse
 NULL
 
-#' @rdname gap
-#' @aliases date_hiatus-method
+#' @rdname lapse
+#' @aliases lapse-method
 setGeneric(
-  name = "date_hiatus",
-  def = function(x, y, ...) standardGeneric("date_hiatus")
+  name = "lapse",
+  def = function(x, y, ...) standardGeneric("lapse")
 )
 
 ## Anteriority -----------------------------------------------------------------
@@ -500,16 +502,36 @@ setGeneric(
   def = function(x, y, ...) standardGeneric("boundaries")
 )
 
+## Duration --------------------------------------------------------------------
+#' Phase Duration
+#'
+#' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
+#'  [`PhasesMCMC-class`] object.
+#' @param ... Currently not used.
+#' @example inst/examples/ex-phase.R
+#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
+#' @family phases
+#' @docType methods
+#' @rdname duration
+#' @aliases duration-method
+setGeneric(
+  name = "duration",
+  def = function(x, y, ...) standardGeneric("duration")
+)
+
 ## Transition ------------------------------------------------------------------
 #' Transition Range Between Successive Phases
 #'
-#' Finds, if it exists, the shortest interval that satisfies
-#' \eqn{P(TransitionInf < Phase1Max < Phase2Min < TransitionSup | M) = level}.
-#' This assumes that phases are in temporal order constraint.
+#' Estimates the transition endpoints between two phases.
 #' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
 #'  [`PhasesMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param ... Currently not used.
+#' @details
+#'  The transition is the shortest interval that satisfies
+#'  \eqn{P(IntervalInf < Phase1Max < Phase2Min < IntervalSup | M) = level}.
+#'
+#'  This assumes that the phases are in temporal order constraint.
 #' @return
 #'  A [`data.frame`] containing the endpoints (in years BC/AD) of the
 #'  transition interval for each pair of successive phases (at a given `level`).
@@ -525,15 +547,18 @@ setGeneric(
 )
 
 ## Hiatus ----------------------------------------------------------------------
-#' Gap or Hiatus Between Successive Phases
+#' Hiatus Between Successive Phases
 #'
-#' Finds, if it exists, a gap or hiatus between two successive phases.
-#' This gap or hiatus is the longest interval that satisfies
-#' \eqn{P(Phase1Max < IntervalInf < IntervalSup < Phase2Min | M) = level}
+#' Finds, if it exists, a hiatus between two successive phases.
 #' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
 #'  [`PhasesMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param ... Currently not used.
+#' @details
+#'  The hiatus is the longest interval that satisfies
+#'  \eqn{P(Phase1Max < IntervalInf < IntervalSup < Phase2Min | M) = level}
+#'
+#'  This assumes that the phases are in temporal order constraint.
 #' @return
 #'  A [`data.frame`] containing the endpoints (in years BC/AD) of the hiatus
 #'  between each pair of successive phases (at a given `level`).
@@ -556,9 +581,9 @@ setGeneric(
 #'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
 #'  or "`BP`". Any unambiguous substring can be given.
 #' @param density A [`logical`] scalar: should estimated density be plotted?
-#' @param n An [`integer`] specifying the number of equally spaced points at which
-#'  the density is to be estimated (should be a power of two). Only used if
-#'  `density` is `TRUE`.
+#' @param n An [`integer`] specifying the number of equally spaced points at
+#'  which the density is to be estimated (should be a power of two). Only used
+#'  if `density` is `TRUE`.
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`ci`" (credible interval; the default)
 #'  or "`hpdi`" (highest posterior density interval). Any unambiguous substring

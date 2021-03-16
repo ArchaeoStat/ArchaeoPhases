@@ -68,11 +68,17 @@ setMethod(
       gg_x_scale <- ggplot2::scale_x_continuous(name = "Elapsed years")
     } else {
       if (calendar == "BCAD") {
-        if (get_calendar(x) == "BP") data$year <- BP_to_BCAD(data$year)
+        if (get_calendar(x) == "BP") {
+          data$lower <- BP_to_BCAD(data$lower)
+          data$upper <- BP_to_BCAD(data$upper)
+        }
         gg_x_scale <- ggplot2::scale_x_continuous(name = "Years BC/AD")
       }
       if (calendar == "BP") {
-        if (get_calendar(x) == "BCAD") data$year <- BCAD_to_BP(data$year)
+        if (get_calendar(x) == "BCAD") {
+          data$lower <- BCAD_to_BP(data$lower)
+          data$upper <- BCAD_to_BP(data$upper)
+        }
         gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
       }
     }

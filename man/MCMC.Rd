@@ -8,20 +8,24 @@
 \alias{PhasesMCMC-class}
 \alias{.PhasesMCMC}
 \title{MCMC}
-\arguments{
-\item{start}{An \code{\link{integer}} vector containing the column number
-corresponding to the minimum of the events included in each phase.}
-
-\item{end}{An \code{\link{integer}} vector containing the column number
-corresponding to the maximum of the phases set in the same order as
-in \code{start}.}
-}
 \description{
 S4 classes to represent the output of a MCMC algorithm.
 }
 \section{Slots}{
 
 \describe{
+\item{\code{start}}{An \code{\link{integer}} vector containing the column number
+corresponding to the minimum of the events included in each phase.}
+
+\item{\code{end}}{An \code{\link{integer}} vector containing the column number
+corresponding to the maximum of the phases set in the same order as
+in \code{start}.}
+
+\item{\code{ordered}}{A \code{\link{logical}} scalar: should the phases be regarded as ordered
+(in the order given in \code{phases})?}
+
+\item{\code{phases}}{A \code{\link{character}} vector specifying the name of the phases.}
+
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{BCAD}").}
 

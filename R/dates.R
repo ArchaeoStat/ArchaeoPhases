@@ -4,10 +4,10 @@ NULL
 
 # Hiatus =======================================================================
 #' @export
-#' @rdname gap
-#' @aliases date_hiatus,numeric,numeric-method
+#' @rdname lapse
+#' @aliases lapse,numeric,numeric-method
 setMethod(
-  f = "date_hiatus",
+  f = "lapse",
   signature = c(x = "numeric", y = "numeric"),
   definition = function(x, y, level = 0.95) {
     ## Validation
@@ -16,11 +16,7 @@ setMethod(
                    sQuote("x"), sQuote("y")), call. = FALSE)
     }
 
-    no_hiatus <- list(
-      hiatus = c(lower = NA, upper = NA),
-      duration = NA,
-      level = level
-    )
+    no_hiatus <- c(lower = NA, upper = NA, duration = NA)
 
     gamma <- mean(x < y)
     if (gamma < level) return(no_hiatus)
@@ -35,16 +31,25 @@ setMethod(
     if (length(dd) < 1) return(no_hiatus)
 
     i <- which(d == max(dd))
-    i2 <- round(p[, i], 0)
+    endpoints <- round(p[, i], 0)
 
     if (p[2, i] == p[1, i]) return(no_hiatus)
 
-    inf <- unname(i2[1])
-    sup <- unname(i2[2])
-    list(
-      hiatus = c(lower = inf, upper = sup),
-      duration = sup - inf,
-      level = level
-    )
+    inf <- endpoints[[1]]
+    sup <- endpoints[[2]]
+    c(lower = inf, upper = sup, duration = sup - inf)
+  }
+)
+
+# Older ========================================================================
+#' @export
+#' @rdname older
+#' @aliases test_older,MCMC-method
+setMethod(
+  f = "test_older",
+  signature = c(x = "numeric", y = "numeric"),
+  definition = function(x, y, ...) {
+    ## Bayesian test : x < y
+    mean(x < y)
   }
 )

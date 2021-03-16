@@ -3,7 +3,8 @@
 NULL
 
 #' @export
-#' @describeIn plot Plots of credible intervals or HPD regions of a series of events.
+#' @describeIn plot Plots of credible intervals or HPD regions of a series of
+#' events.
 #' @aliases plot,MCMC,missing-method
 setMethod(
   f = "plot",
@@ -28,6 +29,7 @@ setMethod(
       }
       if (calendar == "BP") {
         if (get_calendar(x) == "BCAD") x <- BCAD_to_BP(x)
+        decreasing <- !decreasing
         gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
       }
     }
@@ -42,16 +44,18 @@ setMethod(
     inter <- fun(x, level = level)
 
     ## Bind results in case of multiple intervals
+    rank_i <- ifelse(calendar == "BP", 2, 1) # Ranking column
     if (interval == "hpdi") {
-      n <- vapply(X = inter, FUN = nrow, FUN.VALUE = integer(1))
-      low <- vapply(X = inter, FUN = function(x) min(x[, 1]), FUN.VALUE = numeric(1))
+      k <- vapply(X = inter, FUN = nrow, FUN.VALUE = integer(1))
+      low <- vapply(X = inter, FUN = function(x, i) min(x[, i]),
+                    FUN.VALUE = numeric(1), i = rank_i)
       ord <- rank(low)
-      ord <- rep(ord, times = n)
-      id <- rep(names(inter), times = n)
+      ord <- rep(ord, times = k)
+      id <- rep(names(inter), times = k)
 
       inter <- do.call(rbind, inter)
     } else {
-      ord <- rank(inter[, 1])
+      ord <- rank(inter[, rank_i])
       id <- rownames(inter)
     }
 
@@ -59,6 +63,7 @@ setMethod(
     inter <- as.data.frame(inter)
     inter$rank <- if (decreasing) -ord else ord
     inter$Event <- id
+    inter$Interval <- toupper(interval)
 
     ## Density
     gg_dens <- NULL
@@ -96,7 +101,8 @@ setMethod(
           y = .data$rank + 0.1,
           xend = .data$upper,
           yend = .data$rank + 0.1,
-          color = .data$Event
+          color = .data$Event,
+          linetype = .data$Interval
         ),
         data = inter,
         size = 2
@@ -107,7 +113,7 @@ setMethod(
 )
 
 #' @export
-#' @describeIn plot Plots the characteristics of a group of events.
+#' @describeIn plot Plots the characteristics of a group of events (phase).
 #' @aliases plot,PhasesMCMC,missing-method
 setMethod(
   f = "plot",
@@ -131,6 +137,7 @@ setMethod(
       }
       if (calendar == "BP") {
         if (get_calendar(x) == "BCAD") x <- BCAD_to_BP(x)
+        decreasing <- !decreasing
         gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
       }
     }

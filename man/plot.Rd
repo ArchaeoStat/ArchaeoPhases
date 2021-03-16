@@ -42,9 +42,9 @@ or "\code{BP}". Any unambiguous substring can be given.}
 
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 
-\item{n}{An \code{\link{integer}} specifying the number of equally spaced points at which
-the density is to be estimated (should be a power of two). Only used if
-\code{density} is \code{TRUE}.}
+\item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
+which the density is to be estimated (should be a power of two). Only used
+if \code{density} is \code{TRUE}.}
 
 \item{interval}{A \code{\link{character}} string specifying the confidence interval to
 be drawn. It must be one of "\code{ci}" (credible interval; the default)
@@ -71,9 +71,10 @@ Plot
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{x = MCMC,y = missing}: Plots of credible intervals or HPD regions of a series of events.
+\item \code{x = MCMC,y = missing}: Plots of credible intervals or HPD regions of a series of
+events.
 
-\item \code{x = PhasesMCMC,y = missing}: Plots the characteristics of a group of events.
+\item \code{x = PhasesMCMC,y = missing}: Plots the characteristics of a group of events (phase).
 }}
 
 \examples{
@@ -82,15 +83,16 @@ events <- as_mcmc(Events, iteration = 1)
 summary(events)
 
 ## Plot events
-plot(events, interval = "ci")
-plot(events, interval = "hpdi")
+plot(events, interval = "ci", calendar = "BCAD")
+plot(events, interval = "hpdi", calendar = "BC")
 
 ## Compute phases
-phases <- phase(events, groups = list(A = c(1, 3), B = c(2, 4)))
+phases <- phase(events, groups = list(A = c(2, 4), B = c(1, 3)), ordered = TRUE)
 summary(phases)
 
 ## Plot phases
-plot(phases)
+plot(phases, succession = FALSE, calendar = "BCAD")
+plot(phases, succession = TRUE, calendar = "BP")
 }
 \seealso{
 \code{\link[stats:density]{stats::density()}}

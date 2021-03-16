@@ -45,7 +45,8 @@ Only used if \code{elapsed} is \code{TRUE}.}
 \item{time}{A length-two \code{\link{numeric}} vector giving the earliest and latest
 date to estimate for, in BC/AD years. Ignored if \code{elapsed} is \code{TRUE}.}
 
-\item{n}{An \code{\link{integer}} giving the number of grid points.}
+\item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
+which the cumulative distribution is to be estimated.}
 
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
 

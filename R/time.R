@@ -30,6 +30,7 @@ setMethod(
   definition = function(object){
     tmp <- methods::callGeneric(object = as.vector(object))
     dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
     tmp
   }
 )
@@ -44,7 +45,7 @@ setMethod(
     ## Check current scale
     if (get_calendar(object) == "BCAD") return(object)
     tmp <- methods::callNextMethod(object)
-    methods::initialize(tmp, calendar = "BCAD")
+    methods::initialize(object, tmp, calendar = "BCAD")
   }
 )
 
@@ -78,6 +79,7 @@ setMethod(
   definition = function(object) {
     tmp <- methods::callGeneric(object = as.vector(object))
     dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
     tmp
   }
 )
@@ -91,7 +93,7 @@ setMethod(
   definition = function(object){
     ## Check current scale
     if (get_calendar(object) == "BP") return(object)
-    tmp <- methods::callNextMethod(object)
-    methods::initialize(tmp, calendar = "BP")
+    tmp <- methods::callNextMethod(object = object)
+    methods::initialize(object, tmp, calendar = "BP")
   }
 )

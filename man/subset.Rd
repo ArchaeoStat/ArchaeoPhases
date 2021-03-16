@@ -6,6 +6,7 @@
 \alias{[,MCMC-method}
 \alias{[[,MCMC,ANY,missing-method}
 \alias{[[,PhasesMCMC,ANY,missing-method}
+\alias{[<-,MCMC-method}
 \title{Extract or Replace Parts of an Object}
 \usage{
 \S4method{[}{MCMC}(x, i, j, ..., drop = TRUE)
@@ -13,6 +14,8 @@
 \S4method{[[}{MCMC,ANY,missing}(x, i)
 
 \S4method{[[}{PhasesMCMC,ANY,missing}(x, i)
+
+\S4method{[}{MCMC}(x, i, j, ...) <- value
 }
 \arguments{
 \item{x}{An object from which to extract element(s) or in which to replace
@@ -25,6 +28,8 @@ element(s).}
 \item{drop}{A \code{\link{logical}} scalar: should the result be coerced to
 the lowest possible dimension? This only works for extracting elements,
 not for the replacement.}
+
+\item{value}{A possible value for the element(s) of \code{x}.}
 }
 \value{
 A subsetted object.

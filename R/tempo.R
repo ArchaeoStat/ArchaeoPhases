@@ -25,16 +25,24 @@ setMethod(
     distr <- apply(
       X = object,
       MARGIN = 1,
-      FUN = function(x, sequence, count, cols) {
+      FUN = function(x, sequence) {
         g <- stats::ecdf(x) # Returns a function
-        y <- g(sequence)
-        if (count) y <- y * cols
-        y
+        g(sequence)
       },
-      sequence = data_seq,
-      count = count,
-      cols = ncol(object)
+      sequence = data_seq
     )
+    if (count) distr <- distr * ncol(object)
+
+    # cl <- snow::makeCluster(cores)
+    # doSNOW::registerDoSNOW(cl)
+    #
+    # distr <- foreach::foreach(i = 1:nrow(object), .combine = cbind,
+    #                           .packages = "stats") %dopar% {
+    #   g <- stats::ecdf(object[i, ]) # Returns a function
+    #   g(data_seq)
+    # }
+    #
+    # snow::stopCluster(cl)
 
     ## Mean estimate
     moy <- apply(X = distr, MARGIN = 1, FUN = mean)

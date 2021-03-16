@@ -90,10 +90,15 @@ transition(phases)
 
 ## Compute phase hiatus
 hiatus(phases)
+
+## Compute phase duration
+d <- duration(phases)
+summary(d)
 }
 \seealso{
 Other phases: 
 \code{\link{boundaries}()},
+\code{\link{duration}()},
 \code{\link{hiatus}()},
 \code{\link{transition}()}
 }

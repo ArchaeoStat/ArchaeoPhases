@@ -6,7 +6,7 @@
 \alias{hiatus-method}
 \alias{hiatus,numeric,numeric-method}
 \alias{hiatus,PhasesMCMC,missing-method}
-\title{Gap or Hiatus Between Successive Phases}
+\title{Hiatus Between Successive Phases}
 \usage{
 hiatus(x, y, ...)
 
@@ -27,9 +27,13 @@ A \code{\link{data.frame}} containing the endpoints (in years BC/AD) of the hiat
 between each pair of successive phases (at a given \code{level}).
 }
 \description{
-Finds, if it exists, a gap or hiatus between two successive phases.
-This gap or hiatus is the longest interval that satisfies
+Finds, if it exists, a hiatus between two successive phases.
+}
+\details{
+The hiatus is the longest interval that satisfies
 \eqn{P(Phase1Max < IntervalInf < IntervalSup < Phase2Min | M) = level}
+
+This assumes that the phases are in temporal order constraint.
 }
 \examples{
 ## Coerce to MCMC
@@ -60,10 +64,15 @@ transition(phases)
 
 ## Compute phase hiatus
 hiatus(phases)
+
+## Compute phase duration
+d <- duration(phases)
+summary(d)
 }
 \seealso{
 Other phases: 
 \code{\link{boundaries}()},
+\code{\link{duration}()},
 \code{\link{phase}()},
 \code{\link{transition}()}
 }

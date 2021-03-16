@@ -45,3 +45,18 @@ setMethod(
     x[, c(a, b)]
   }
 )
+
+# Replace ======================================================================
+## [<- -------------------------------------------------------------------------
+#' @export
+#' @rdname subset
+#' @aliases [<-,MCMC-method
+setMethod(
+  f = "[<-",
+  signature = c(x = "MCMC"),
+  function(x, i, j, ..., value) {
+    z <- methods::callNextMethod()
+    methods::validObject(z)
+    z
+  }
+)

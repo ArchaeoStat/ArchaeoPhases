@@ -5,11 +5,14 @@ NULL
 #' MCMC
 #'
 #' S4 classes to represent the output of a MCMC algorithm.
-#' @param start An [`integer`] vector containing the column number
+#' @slot start An [`integer`] vector containing the column number
 #' corresponding to the minimum of the events included in each phase.
-#' @param end An [`integer`] vector containing the column number
+#' @slot end An [`integer`] vector containing the column number
 #' corresponding to the maximum of the phases set in the same order as
 #' in `start`.
+#' @slot ordered A [`logical`] scalar: should the phases be regarded as ordered
+#'  (in the order given in `phases`)?
+#' @slot phases A [`character`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
 #' @slot hash A [`character`] string specifying the SHA256 hash of the csv file.
