@@ -30,6 +30,7 @@
   elapsed = FALSE,
   origin = 1,
   succession = is_ordered(x),
+  facet = TRUE,
   ...
 )
 }
@@ -65,6 +66,9 @@ Only used if \code{elapsed} is \code{TRUE}.}
 
 \item{succession}{A \code{\link{logical}} scalar: should time ranges be plotted instead
 of densities?}
+
+\item{facet}{A \code{\link{logical}} scalar: should a matrix of panels defined by phase
+be drawn?}
 }
 \description{
 Plot

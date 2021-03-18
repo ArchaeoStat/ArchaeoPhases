@@ -596,6 +596,8 @@ setGeneric(
 #'  Only used if `elapsed` is `TRUE`.
 #' @param succession A [`logical`] scalar: should time ranges be plotted instead
 #'  of densities?
+#' @param facet A [`logical`] scalar: should a matrix of panels defined by phase
+#'  be drawn?
 #' @param ... Extra parameters to be passed to [`stats::density()`].
 #' @example inst/examples/ex-summary.R
 #' @seealso [`stats::density()`]

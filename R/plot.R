@@ -120,7 +120,7 @@ setMethod(
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, calendar = c("BCAD", "BP"), level = 0.95, n = 512,
                         decreasing = TRUE, elapsed = FALSE, origin = 1,
-                        succession = is_ordered(x), ...) {
+                        succession = is_ordered(x), facet = TRUE, ...) {
     ## Validation
     calendar <- match.arg(calendar, several.ok = FALSE)
 
@@ -145,7 +145,7 @@ setMethod(
     if (succession) {
       gg_phases <- plot_succession(x, level = level, decreasing = decreasing)
     } else {
-      gg_phases <- plot_density(x, n = n, ...)
+      gg_phases <- plot_density(x, n = n, ..., facet = facet)
     }
 
     ## ggplot2
@@ -234,7 +234,8 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
 #' @param x A [`PhasesMCMC`] object.
 #' @return A \pkg{ggplot2} layer.
 #' @noRd
-plot_density <- function(x, n = 512, ..., alpha = 0.5) {
+plot_density <- function(x, n = 512, ..., facet = TRUE,
+                         color = "black", alpha = 0.5) {
   ## Density
   phases <- get_phases(x)
   dens <- lapply(
@@ -242,20 +243,37 @@ plot_density <- function(x, n = 512, ..., alpha = 0.5) {
     FUN = function(x, n, ...) {
       a <- stats::density(x[, 1], n = n, ...)
       b <- stats::density(x[, 2], n = n, ...)
-      data.frame(x = c(a$x, b$x), y = c(a$y, b$y))
+      data.frame(
+        x = c(a$x, b$x),
+        y = c(a$y, b$y),
+        z = rep(c("alpha", "beta"), each = n)
+      )
     },
     n = n, ...
   )
   dens <- do.call(rbind, dens)
   dens$Phase <- rep(get_order(x), each = 2 * n)
+  dens$Boundary <- factor(dens$z, levels = c("alpha", "beta"), ordered = TRUE)
 
   ## Layer
   gg_aes <- ggplot2::aes(
     x = .data$x,
-    y = .data$y,
-    fill = .data$Phase
+    ymin = 0,
+    ymax = .data$y,
+    fill = .data$Phase,
+    linetype = .data$Boundary
   )
-  gg_layer <- ggplot2::geom_area(mapping = gg_aes, data = dens, alpha = alpha)
+  gg_facet <- NULL
+  if (facet) {
+    alpha <- 1 # Override transparency value
+    gg_facet <- ggplot2::facet_grid(rows = ggplot2::vars(.data$Phase))
+  }
+  gg_layer <- ggplot2::geom_ribbon(
+    mapping = gg_aes,
+    data = dens,
+    color = color,
+    alpha = alpha
+  )
   gg_y_scale <- ggplot2::scale_y_continuous(name = "Density")
-  list(gg_layer, gg_y_scale)
+  list(gg_layer, gg_facet, gg_y_scale)
 }
