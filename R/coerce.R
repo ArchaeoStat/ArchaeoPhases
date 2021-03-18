@@ -98,12 +98,13 @@ setMethod(
     if (BP)
       from <- BP_to_BCAD(from)
 
+    grp <- paste0("phase_", seq_along(start))
+    grp <- factor(grp, levels = grp)
     .PhasesMCMC(
       from,
       start = as.integer(start),
       end = as.integer(end),
-      ordered = FALSE,
-      phases = paste0("phase_", seq_along(start)),
+      phases = grp,
       calendar = "BCAD"
     )
   }

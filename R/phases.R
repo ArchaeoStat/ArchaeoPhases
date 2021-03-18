@@ -41,11 +41,11 @@ setMethod(
     colnames(min_max) <- paste0(rep(grp, each = 2), c("_start", "_end"))
 
     start <- seq(from = 1L, to = ncol(min_max), by = 2L)
+    grp <- factor(grp, levels = grp, ordered = ordered)
     .PhasesMCMC(
       min_max,
       start = start,
       end = start + 1L,
-      ordered = ordered,
       phases = grp,
       calendar = get_calendar(x),
       hash = get_hash(x)
@@ -55,16 +55,16 @@ setMethod(
 
 #' @export
 #' @rdname phase
-#' @aliases get_phases,MCMC-method
+#' @aliases get_phases,PhasesMCMC-method
 setMethod(
   f = "get_phases",
-  signature = c(x = "MCMC"),
+  signature = c(x = "PhasesMCMC"),
   definition = function(x) {
     ord <- get_order(x)
 
     phases <- vector(mode = "list", length = length(ord))
     names(phases) <- as.character(ord)
-    k <- as.integer(ord)
+    k <- seq_along(ord)
     for (i in k) {
       phases[[i]] <- x[[i]]
     }
@@ -75,16 +75,16 @@ setMethod(
 # Phase order ==================================================================
 #' @export
 #' @rdname phase
-#' @aliases set_order,MCMC,character-method
+#' @aliases set_order,PhasesMCMC,character-method
 setMethod(
   f = "set_order<-",
-  signature = c(x = "MCMC", value = "character"),
+  signature = c(x = "PhasesMCMC", value = "character"),
   definition = function(x, value) {
+    pha <- x@phases
     if (is.null(value)) {
-      x@ordered <- FALSE
+      value <- factor(pha, levels = pha, ordered = FALSE)
     } else {
-      phases <- x@phases
-      index <- match(value, phases)
+      index <- match(value, pha)
 
       ## Validation
       if (anyNA(index)) {
@@ -93,9 +93,9 @@ setMethod(
 
       x@start <- x@start[index]
       x@end <- x@end[index]
-      x@ordered <- TRUE
-      x@phases <- value
+      value <- factor(value, levels = value, ordered = TRUE)
     }
+    x@phases <- value
     methods::validObject(x)
     x
   }
@@ -103,22 +103,34 @@ setMethod(
 
 #' @export
 #' @rdname phase
-#' @aliases get_order,MCMC-method
+#' @aliases get_order,PhasesMCMC-method
 setMethod(
   f = "get_order",
-  signature = c(x = "MCMC"),
+  signature = c(x = "PhasesMCMC"),
+  definition = function(x) x@phases
+)
+
+#' @export
+#' @rdname phase
+#' @aliases as_ordered,PhasesMCMC-method
+setMethod(
+  f = "as_ordered",
+  signature = c(x = "PhasesMCMC"),
   definition = function(x) {
-    factor(x@phases, levels = x@phases, ordered = x@ordered)
+    pha <- x@phases
+    x@phases <- factor(pha, levels = pha, ordered = TRUE)
+    methods::validObject(x)
+    x
   }
 )
 
 #' @export
 #' @rdname phase
-#' @aliases is_ordered,MCMC-method
+#' @aliases is_ordered,PhasesMCMC-method
 setMethod(
   f = "is_ordered",
-  signature = c(x = "MCMC"),
-  definition = function(x) x@ordered
+  signature = c(x = "PhasesMCMC"),
+  definition = function(x) is.ordered(x@phases)
 )
 
 # Time range ===================================================================

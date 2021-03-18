@@ -5,7 +5,8 @@
 \alias{subset}
 \alias{[,MCMC-method}
 \alias{[[,MCMC,ANY,missing-method}
-\alias{[[,PhasesMCMC,ANY,missing-method}
+\alias{[[,PhasesMCMC,numeric,missing-method}
+\alias{[[,PhasesMCMC,character,missing-method}
 \alias{[<-,MCMC-method}
 \title{Extract or Replace Parts of an Object}
 \usage{
@@ -13,7 +14,9 @@
 
 \S4method{[[}{MCMC,ANY,missing}(x, i)
 
-\S4method{[[}{PhasesMCMC,ANY,missing}(x, i)
+\S4method{[[}{PhasesMCMC,numeric,missing}(x, i)
+
+\S4method{[[}{PhasesMCMC,character,missing}(x, i)
 
 \S4method{[}{MCMC}(x, i, j, ...) <- value
 }

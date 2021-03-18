@@ -472,6 +472,13 @@ setGeneric(
 )
 
 #' @rdname phase
+#' @aliases as_ordered-method
+setGeneric(
+  name = "as_ordered",
+  def = function(x) standardGeneric("as_ordered")
+)
+
+#' @rdname phase
 #' @aliases is_ordered-method
 setGeneric(
   name = "is_ordered",

@@ -69,6 +69,7 @@ Collate:
     'phases.R'
     'plot.R'
     'read.R'
+    'show.R'
     'subset.R'
     'summary.R'
     'tempo.R'

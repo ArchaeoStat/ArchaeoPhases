@@ -38,14 +38,12 @@ events <- events[1:10000, ]
 
 ## Compute min-max range for all chains
 all <- phase(events)
-head(all)
+all
 
 ## Compute min-max range by group
-phases <- phase(events, groups = list(A = c(1, 3), B = c(2, 4)))
-head(phases)
-
 ## Unless otherwise specified, the phases are assumed to be unordered
-get_order(phases)
+phases <- phase(events, groups = list(A = c(1, 3), B = c(2, 4)))
+phases
 
 ## Set chronological order
 ## (from the older to the youngest phase)

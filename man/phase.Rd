@@ -10,15 +10,18 @@
 \alias{get_order-method}
 \alias{set_order<-}
 \alias{set_order-method}
+\alias{as_ordered}
+\alias{as_ordered-method}
 \alias{is_ordered}
 \alias{is_ordered-method}
 \alias{phase,MCMC,missing-method}
 \alias{phase,MCMC,list-method}
-\alias{get_phases,MCMC-method}
-\alias{set_order<-,MCMC,character-method}
-\alias{set_order,MCMC,character-method}
-\alias{get_order,MCMC-method}
-\alias{is_ordered,MCMC-method}
+\alias{get_phases,PhasesMCMC-method}
+\alias{set_order<-,PhasesMCMC,character-method}
+\alias{set_order,PhasesMCMC,character-method}
+\alias{get_order,PhasesMCMC-method}
+\alias{as_ordered,PhasesMCMC-method}
+\alias{is_ordered,PhasesMCMC-method}
 \title{Phase}
 \usage{
 phase(x, groups, ...)
@@ -29,19 +32,23 @@ get_order(x, value)
 
 set_order(x) <- value
 
+as_ordered(x)
+
 is_ordered(x)
 
 \S4method{phase}{MCMC,missing}(x)
 
 \S4method{phase}{MCMC,list}(x, groups, ordered = FALSE)
 
-\S4method{get_phases}{MCMC}(x)
+\S4method{get_phases}{PhasesMCMC}(x)
 
-\S4method{set_order}{MCMC,character}(x) <- value
+\S4method{set_order}{PhasesMCMC,character}(x) <- value
 
-\S4method{get_order}{MCMC}(x)
+\S4method{get_order}{PhasesMCMC}(x)
 
-\S4method{is_ordered}{MCMC}(x)
+\S4method{as_ordered}{PhasesMCMC}(x)
+
+\S4method{is_ordered}{PhasesMCMC}(x)
 }
 \arguments{
 \item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
@@ -68,14 +75,12 @@ events <- events[1:10000, ]
 
 ## Compute min-max range for all chains
 all <- phase(events)
-head(all)
+all
 
 ## Compute min-max range by group
-phases <- phase(events, groups = list(A = c(1, 3), B = c(2, 4)))
-head(phases)
-
 ## Unless otherwise specified, the phases are assumed to be unordered
-get_order(phases)
+phases <- phase(events, groups = list(A = c(1, 3), B = c(2, 4)))
+phases
 
 ## Set chronological order
 ## (from the older to the youngest phase)

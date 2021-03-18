@@ -47,14 +47,12 @@ NULL
   slots = c(
     start = "integer",
     end = "integer",
-    ordered = "logical",
-    phases = "character"
+    phases = "factor"
   ),
   prototype = methods::prototype(
     start = integer(0),
     end = integer(0),
-    ordered = FALSE,
-    phases = character(0)
+    phases = factor()
   ),
   contains = "MCMC"
 )

@@ -18,7 +18,7 @@ setMethod(
   f = "names<-",
   signature = "PhasesMCMC",
   definition = function(x, value) {
-    x@phases <- value
+    x@phases <- factor(value, levels = value, ordered = FALSE)
     methods::validObject(x)
     x
   }

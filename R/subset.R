@@ -35,14 +35,34 @@ setMethod(
 
 #' @export
 #' @rdname subset
-#' @aliases [[,PhasesMCMC,ANY,missing-method
+#' @aliases [[,PhasesMCMC,numeric,missing-method
 setMethod(
   f = "[[",
-  signature = c(x = "PhasesMCMC", i = "ANY", j = "missing"),
+  signature = c(x = "PhasesMCMC", i = "numeric", j = "missing"),
   definition = function(x, i) {
     a <- x@start[[i]]
     b <- x@end[[i]]
-    x[, c(a, b)]
+    z <- x@phases[[i]]
+    tmp <- x[, c(a, b)]
+    tmp <- methods::as(tmp, "matrix")
+    methods::initialize(x, tmp, start = 1L, end = 2L, phases = z)
+  }
+)
+
+#' @export
+#' @rdname subset
+#' @aliases [[,PhasesMCMC,character,missing-method
+setMethod(
+  f = "[[",
+  signature = c(x = "PhasesMCMC", i = "character", j = "missing"),
+  definition = function(x, i) {
+    k <- which(levels(x@phases) == i)
+    a <- x@start[[k]]
+    b <- x@end[[k]]
+    z <- x@phases[[k]]
+    tmp <- x[, c(a, b)]
+    tmp <- methods::as(tmp, "matrix")
+    methods::initialize(x, tmp, start = 1L, end = 2L, phases = z)
   }
 )
 
