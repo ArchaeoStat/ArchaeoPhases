@@ -17,6 +17,15 @@ Statistical analysis of archaeological dates and groups of
     series of dates (e.g. transition and hiatus between successive
     phases).
 }
+\section{Package options}{
+
+\code{ArchaeoPhases} uses the following \code{\link[=options]{options()}} to configure behaviour:
+\itemize{
+\item \code{ArchaeoPhases.precision}: an \code{\link{integer}} indicating the number of decimal
+places (defaults to \eqn{0}).
+}
+}
+
 \seealso{
 Useful links:
 \itemize{

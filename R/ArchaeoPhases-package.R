@@ -1,3 +1,8 @@
+#' @section Package options:
+#'  `ArchaeoPhases` uses the following [options()] to configure behaviour:
+#'  * `ArchaeoPhases.precision`: an [`integer`] indicating the number of decimal
+#'    places (defaults to \eqn{0}).
+#'
 #' @author
 #'  **Full list of authors and contributors** (alphabetic order)
 #'

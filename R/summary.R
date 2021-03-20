@@ -49,5 +49,6 @@ stats_marginal <- function(x, level = 0.95) {
   ci <- interval_credible(x, level = level)
   names(ci) <- c("CI_lower", "CI_upper")
   ## Results
-  c(mean = moy, sd = ec, quant, ci)
+  tmp <- c(mean = moy, sd = ec, quant, ci)
+  round(tmp, digits = getOption("ArchaeoPhases.precision"))
 }
