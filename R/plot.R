@@ -246,14 +246,14 @@ plot_density <- function(x, n = 512, ..., facet = TRUE,
       data.frame(
         x = c(a$x, b$x),
         y = c(a$y, b$y),
-        z = rep(c("alpha", "beta"), each = n)
+        z = rep(c("Begin", "End"), each = n)
       )
     },
     n = n, ...
   )
   dens <- do.call(rbind, dens)
   dens$Phase <- rep(get_order(x), each = 2 * n)
-  dens$Boundary <- factor(dens$z, levels = c("alpha", "beta"), ordered = TRUE)
+  dens$Boundary <- factor(dens$z, levels = c("Begin", "End"), ordered = TRUE)
 
   ## Layer
   gg_aes <- ggplot2::aes(

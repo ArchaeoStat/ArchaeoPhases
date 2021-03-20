@@ -41,6 +41,13 @@ NULL
 )
 
 #' @rdname MCMC
+#' @aliases EventsMCMC-class
+.EventsMCMC <- setClass(
+  Class = "EventsMCMC",
+  contains = "MCMC"
+)
+
+#' @rdname MCMC
 #' @aliases PhasesMCMC-class
 .PhasesMCMC <- setClass(
   Class = "PhasesMCMC",

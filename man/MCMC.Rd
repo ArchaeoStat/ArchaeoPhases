@@ -5,6 +5,8 @@
 \alias{MCMC}
 \alias{MCMC-class}
 \alias{.MCMC}
+\alias{EventsMCMC-class}
+\alias{.EventsMCMC}
 \alias{PhasesMCMC-class}
 \alias{.PhasesMCMC}
 \title{MCMC}

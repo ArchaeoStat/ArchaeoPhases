@@ -78,7 +78,7 @@ setMethod(
     ## Convert from BP to BC/AD
     data <- BP_to_BCAD(data)
 
-    ## Return BCalMCM object
+    ## Return an MCM object
     .MCMC(as.matrix(data), calendar = "BCAD", hash = file_hash)
   }
 )
@@ -89,7 +89,8 @@ setMethod(
 setMethod(
   f = "read_chronomodel",
   signature = "character",
-  definition = function(file, BP = FALSE, sep = ",", dec = ".") {
+  definition = function(file, BP = FALSE, phases = FALSE,
+                        sep = ",", dec = ".") {
     ## ChronoModel allows the user to choose any separator
     ## and either a period or comma for decimals
     data <- utils::read.table(file = file, header = TRUE, sep = sep,
@@ -105,7 +106,23 @@ setMethod(
     if (BP)
       data <- BP_to_BCAD(data)
 
-    ## Return ChronoModelMCMC object
-    .MCMC(as.matrix(data), calendar = "BCAD", hash = file_hash)
+    ## Return an MCMC object
+    mtx <- as.matrix(data)
+    if (phases) {
+      ## Get phase names
+      pattern <- ".(alpha|beta|Begin|End)"
+      pha <- unique(trimws(sub(pattern, "", colnames(mtx))))
+      start <- seq(from = 1L, to = ncol(mtx), by = 2L)
+      .PhasesMCMC(
+        mtx,
+        start = start,
+        end = start + 1L,
+        phases = factor(pha, levels = pha, ordered = FALSE),
+        calendar = "BCAD",
+        hash = file_hash
+      )
+    } else {
+      .EventsMCMC(mtx, calendar = "BCAD", hash = file_hash)
+    }
   }
 )

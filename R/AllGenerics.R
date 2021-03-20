@@ -630,6 +630,7 @@ setGeneric(
 #' @param BP A [`logical`] scalar: should the data be converted from BP to
 #'  BC/AD? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
+#' @param phases A [`logical`] scalar: should the data be imported as phases?
 #' @param bin_width The bin width specified for the
 #'  '\href{https://bcal.shef.ac.uk/}{BCal}' calibration. Defaults to the 'BCal'
 #'  default of 1.
@@ -643,9 +644,9 @@ setGeneric(
 #'  radiocarbon calibration tool. *Internet Archaeology*, 7.
 #'  \doi{10.11141/ia.7.1}.
 #'
-#'  Lanos, Ph., Philippe, A., Lanos, H. & Dufresne, Ph. (2015). Chronomodel:
+#'  Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
 #'  Chronological Modeling of Archaeological Data using Bayesian Statistics.
-#'  Version 2.0.18. URL: \url{https://www.chronomodel.fr}.
+#'  URL: \url{https://www.chronomodel.fr}.
 #' @example inst/examples/ex-read.R
 #' @seealso [utils::read.table()]
 #' @author T. S. Dye, N. Frerebeau

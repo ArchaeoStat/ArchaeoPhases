@@ -24,7 +24,7 @@ read_chronomodel(file, ...)
 
 \S4method{read_bcal}{character}(file, bin_width = 1)
 
-\S4method{read_chronomodel}{character}(file, BP = FALSE, sep = ",", dec = ".")
+\S4method{read_chronomodel}{character}(file, BP = FALSE, phases = FALSE, sep = ",", dec = ".")
 }
 \arguments{
 \item{file}{the name of the file which the data are to be read from.
@@ -57,6 +57,8 @@ BC/AD? This should not be \code{TRUE} unless you change the default settings in
 \item{bin_width}{The bin width specified for the
 '\href{https://bcal.shef.ac.uk/}{BCal}' calibration. Defaults to the 'BCal'
 default of 1.}
+
+\item{phases}{A \code{\link{logical}} scalar: should the data be imported as phases?}
 
 \item{sep}{the field separator character.  Values on each line of the
     file are separated by this character.  If \code{sep = ""} (the
@@ -95,9 +97,9 @@ Buck C. E., Christen J. A. & James G. N. (1999). BCal: an on-line Bayesian
 radiocarbon calibration tool. \emph{Internet Archaeology}, 7.
 \doi{10.11141/ia.7.1}.
 
-Lanos, Ph., Philippe, A., Lanos, H. & Dufresne, Ph. (2015). Chronomodel:
+Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
 Chronological Modeling of Archaeological Data using Bayesian Statistics.
-Version 2.0.18. URL: \url{https://www.chronomodel.fr}.
+URL: \url{https://www.chronomodel.fr}.
 }
 \seealso{
 \code{\link[utils:read.table]{utils::read.table()}}
