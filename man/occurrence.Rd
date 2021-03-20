@@ -21,7 +21,7 @@ occurrence(object, ...)
 \S4method{plot}{OccurrenceEvents,missing}(x, calendar = c("BCAD", "BP"))
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} or \code{\linkS4class{OccurrenceEvents}} object.}
+\item{object}{An \code{\linkS4class{MCMC}} object.}
 
 \item{...}{Currently not used.}
 

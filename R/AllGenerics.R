@@ -171,7 +171,7 @@ setGeneric(
 #' A statistical graphic designed for the archaeological study of rhythms of the
 #' long term that embodies a theory of archaeological evidence for the
 #' occurrence of events.
-#' @param object An [`MCMC-class`] or [`CumulativeEvents-class`] object.
+#' @param object An [`MCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number
 #'  (the default) or a probability?
@@ -189,7 +189,7 @@ setGeneric(
 #' @param calendar A [`character`] string specifying whether the dates
 #'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
 #'  or "`BP`". Any unambiguous substring can be given.
-#' @param ... Currently not used.
+#' @param ... Any [`CumulativeEvents-class`] object.
 #' @details
 #'  The tempo plot is one way to measure change over time: it estimates the
 #'  cumulative occurrence of archaeological events in a Bayesian calibration.
@@ -221,7 +221,7 @@ setGeneric(
 #' Activity Plot
 #'
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
-#' @param object An [`MCMC-class`] or [`CumulativeEvents-class`] object.
+#' @param object An [`MCMC-class`] or a [`CumulativeEvents-class`] object.
 #' @param elapsed A [`logical`] scalar: should an elapsed time scale be used?
 #' @param origin A length-one [`numeric`] vector giving the position of the
 #'  column corresponding to the event from which elapsed time is calculated.
@@ -234,7 +234,7 @@ setGeneric(
 #' @param calendar A [`character`] string specifying whether the dates
 #'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
 #'  or "`BP`". Any unambiguous substring can be given.
-#' @param ... Currently not used.
+#' @param ... Any [`ActivityEvents-class`] object.
 #' @references
 #'  Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
 #'  stratification. *Journal of Archaeological Science*, 71: 1-9.
@@ -260,7 +260,7 @@ setGeneric(
 #'
 #' A statistical graphic designed for the archaeological study of when
 #' events of a specified kind occurred.
-#' @param object An [`MCMC-class`] or [`OccurrenceEvents-class`] object.
+#' @param object An [`MCMC-class`] object.
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`ci`" (credible interval; the default)
 #'  or "`hpdi`" (highest posterior density interval). Any unambiguous substring
@@ -615,6 +615,13 @@ setGeneric(
 #' @rdname plot
 #' @aliases plot-method
 NULL
+
+#' @rdname plot
+#' @aliases multiplot-method
+setGeneric(
+  name = "multiplot",
+  def = function(...) standardGeneric("multiplot")
+)
 
 # Read =========================================================================
 #' Read MCMC Output

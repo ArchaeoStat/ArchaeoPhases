@@ -4,10 +4,14 @@
 \name{plot}
 \alias{plot}
 \alias{plot-method}
+\alias{multiplot}
+\alias{multiplot-method}
 \alias{plot,MCMC,missing-method}
 \alias{plot,PhasesMCMC,missing-method}
 \title{Plot}
 \usage{
+multiplot(...)
+
 \S4method{plot}{MCMC,missing}(
   x,
   calendar = c("BCAD", "BP"),
@@ -35,6 +39,8 @@
 )
 }
 \arguments{
+\item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
+
 \item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
 
 \item{calendar}{A \code{\link{character}} string specifying whether the dates
@@ -61,8 +67,6 @@ can be given.}
 \item{origin}{A length-one \code{\link{numeric}} vector giving the position of the
 column corresponding to the event from which elapsed time is calculated.
 Only used if \code{elapsed} is \code{TRUE}.}
-
-\item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
 
 \item{succession}{A \code{\link{logical}} scalar: should time ranges be plotted instead
 of densities?}

@@ -5,6 +5,7 @@
 \alias{activity}
 \alias{activity-method}
 \alias{activity,MCMC-method}
+\alias{activity,CumulativeEvents-method}
 \alias{plot,ActivityEvents,missing-method}
 \title{Activity Plot}
 \usage{
@@ -18,12 +19,14 @@ activity(object, ...)
   n = 50 * ncol(object)
 )
 
+\S4method{activity}{CumulativeEvents}(object)
+
 \S4method{plot}{ActivityEvents,missing}(x, calendar = c("BCAD", "BP"))
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} or \code{\linkS4class{CumulativeEvents}} object.}
+\item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
 
-\item{...}{Currently not used.}
+\item{...}{Any \code{\linkS4class{ActivityEvents}} object.}
 
 \item{elapsed}{A \code{\link{logical}} scalar: should an elapsed time scale be used?}
 

@@ -117,3 +117,52 @@ setMethod(
       ggplot2::scale_y_continuous(name = "Cumulative events")
   }
 )
+
+#' @export
+#' @rdname tempo
+#' @aliases multiplot,CumulativeEvents-method
+setMethod(
+  f = "multiplot",
+  signature = "CumulativeEvents",
+  definition = function(..., calendar = c("BCAD", "BP")) {
+    ## Validation
+    calendar <- match.arg(calendar, several.ok = FALSE)
+
+    ## Get names
+    subst <- substitute(list(...))[-1]
+    arg_names <- vapply(X = subst, FUN = deparse, FUN.VALUE = character(1))
+
+    ## Get data
+    dots <- list(...)
+    tmp <- lapply(X = dots, FUN = as.data.frame)
+    n <- vapply(X = tmp, FUN = nrow, FUN.VALUE = integer(1))
+
+    ## Bind data
+    tmp <- do.call(rbind, tmp)
+    tmp$Legend <- rep(arg_names, n)
+
+    ## Calendar scale
+    cal <- unique(lapply(X = dots, FUN = get_calendar))
+    if (length(cal) != 1) {
+      stop("All object must have the same calendar scale.", call. = FALSE)
+    }
+    if (cal == "elapsed") {
+      gg_x_scale <- ggplot2::scale_x_continuous(name = "Elapsed years")
+    } else {
+      if (calendar == "BCAD") {
+        if (cal == "BP") tmp$year <- BP_to_BCAD(tmp$year)
+        gg_x_scale <- ggplot2::scale_x_continuous(name = "Years BC/AD")
+      }
+      if (calendar == "BP") {
+        if (cal == "BCAD") tmp$year <- BCAD_to_BP(tmp$year)
+        gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
+      }
+    }
+
+    ggplot2::ggplot(data = tmp) +
+      ggplot2::aes(x = .data$year, y = .data$estimate, color = .data$Legend) +
+      ggplot2::geom_path() +
+      gg_x_scale +
+      ggplot2::scale_y_continuous(name = "Cumulative events")
+  }
+)
