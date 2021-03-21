@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
 ## Load packages
 library(ArchaeoPhases)
 
-library(coda)
+library(coda) # MCMC diagnostic
 library(magrittr)
 ```
 
@@ -82,16 +82,16 @@ coda_events <- as_coda(chrono_events, chains = 3)
 
 Indeed, the MCMC samples should have no autocorrelation and should have reached their equilibrium (that is the posterior density of the parameter under investigation).
 
-```{r coda-autocor, fig.width=6, fig.height=3}
-coda::autocorr.plot(coda_events)
+```{r coda-autocor, fig.width=7, fig.height=7}
+coda::autocorr.plot(coda_events[[1]])
 ```
 
 The autocorrelation plots show that each of these three chains are not significant. That means that we actually generated a non correlated sample, which was the aim the MCMC process.
 
 We can also check whether the chains reached equilibrium. For example, let's consider the first date of the dataset.
 
-```{r coda-plot, fig.width=6, fig.height=5}
-plot(coda_events[, 1, ][[1]][1:1000], type = "l")
+```{r coda-plot, fig.width=7, fig.height=5}
+plot(coda_events[, 1, ], trace = TRUE, density = FALSE)
 ```
 
 The plot shows that the three chains corresponding to the first date reached the same stationnary process.

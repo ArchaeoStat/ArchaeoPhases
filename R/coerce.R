@@ -61,9 +61,10 @@ setMethod(
   definition = function(from, chains = 1) {
     L <- nrow(from) / chains
     obj <- vector(mode = "list", length = chains)
+
     for (i in 1:chains){
       index <- seq(from = L * (i - 1) + 1, to = L * i, by = 1)
-      obj[[i]] <- coda::mcmc(from[index], start = 1, end = L)
+      obj[[i]] <- coda::mcmc(from[index, ], start = 1, end = L)
     }
 
     coda::mcmc.list(obj)
