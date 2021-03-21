@@ -10,7 +10,8 @@ setMethod(
   signature = "MCMC",
   definition = function(object, level = 0.95, count = TRUE, gauss = FALSE,
                         elapsed = FALSE, origin = 1, time = range(object),
-                        n = 50 * ncol(object)) {
+                        n = 50 * ncol(object),
+                        progress = getOption("ArchaeoPhases.progress")) {
     ## Elapse
     if (elapsed) {
       if (is.null(origin))
@@ -19,30 +20,25 @@ setMethod(
       time <- range(object) # Override user input
     }
 
-    data_seq <- seq(from = time[[1L]], to = time[[2L]], length.out = n)
+    n_iter <- nrow(object)
+    n_events <- ncol(object)
 
     ## Empirical cumulative distribution
-    distr <- apply(
-      X = object,
-      MARGIN = 1,
-      FUN = function(x, sequence) {
-        g <- stats::ecdf(x) # Returns a function
-        g(sequence)
-      },
-      sequence = data_seq
-    )
-    if (count) distr <- distr * ncol(object)
+    data_seq <- seq(from = time[[1L]], to = time[[2L]], length.out = n)
+    distr <- matrix(data = NA_real_, nrow = n, ncol = n_iter)
 
-    # cl <- snow::makeCluster(cores)
-    # doSNOW::registerDoSNOW(cl)
-    #
-    # distr <- foreach::foreach(i = 1:nrow(object), .combine = cbind,
-    #                           .packages = "stats") %dopar% {
-    #   g <- stats::ecdf(object[i, ]) # Returns a function
-    #   g(data_seq)
-    # }
-    #
-    # snow::stopCluster(cl)
+    iter <- seq_len(n_iter)
+    progress_bar <- interactive() && progress # Display a progress bar?
+    if (progress_bar) pb <- utils::txtProgressBar(max = n_iter, style = 3)
+    for (i in iter) {
+      g <- stats::ecdf(object[i, ]) # Returns a function
+      distr[, i] <- g(data_seq)
+      if (progress_bar) utils::setTxtProgressBar(pb, i)
+    }
+    if (progress_bar) close(pb)
+
+    ## Probability
+    if (count) distr <- distr * n_events
 
     ## Mean estimate
     moy <- apply(X = distr, MARGIN = 1, FUN = mean)
@@ -71,6 +67,8 @@ setMethod(
       upper = qu[, 2],
       gauss = gauss,
       level = level,
+      counts = count,
+      events = n_events,
       calendar = ifelse(elapsed, "elapsed", get_calendar(object)),
       hash = get_hash(object)
     )

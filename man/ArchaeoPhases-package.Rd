@@ -23,6 +23,8 @@ Statistical analysis of archaeological dates and groups of
 \itemize{
 \item \code{ArchaeoPhases.precision}: an \code{\link{integer}} indicating the number of decimal
 places (defaults to \eqn{0}).
+\item \code{ArchaeoPhases.progress}: a \code{\link{logical}} scalar specifying if progress bars
+should be displayed.
 }
 }
 

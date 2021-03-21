@@ -22,7 +22,8 @@ tempo(object, ...)
   elapsed = FALSE,
   origin = 1,
   time = range(object),
-  n = 50 * ncol(object)
+  n = 50 * ncol(object),
+  progress = getOption("ArchaeoPhases.progress")
 )
 
 \S4method{plot}{CumulativeEvents,missing}(x, calendar = c("BCAD", "BP"))
@@ -58,6 +59,8 @@ date to estimate for, in BC/AD years. Ignored if \code{elapsed} is \code{TRUE}.}
 \item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
 which the cumulative distribution is to be estimated.}
 
+\item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
+
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
 }
 \description{
@@ -85,6 +88,10 @@ plot(tempo1)
 
 tempo2 <- tempo(events, gauss = TRUE)
 plot(tempo2, calendar = "BP")
+
+## Activity plot
+act <- activity(events)
+plot(act)
 }
 }
 \references{

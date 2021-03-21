@@ -91,6 +91,8 @@ NULL
     upper = "numeric",
     gauss = "logical",
     level = "numeric",
+    counts = "logical",
+    events = "integer",
     calendar = "character",
     hash = "character"
   )

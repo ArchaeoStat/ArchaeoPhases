@@ -2,6 +2,8 @@
 #'  `ArchaeoPhases` uses the following [options()] to configure behaviour:
 #'  * `ArchaeoPhases.precision`: an [`integer`] indicating the number of decimal
 #'    places (defaults to \eqn{0}).
+#'  * `ArchaeoPhases.progress`: a [`logical`] scalar specifying if progress bars
+#'    should be displayed.
 #'
 #' @author
 #'  **Full list of authors and contributors** (alphabetic order)

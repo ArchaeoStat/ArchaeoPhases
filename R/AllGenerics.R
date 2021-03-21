@@ -185,6 +185,7 @@ setGeneric(
 #'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the cumulative distribution is to be estimated.
+#' @param progress A [`logical`] scalar: should a progress bar be displayed?
 #' @param x A [`CumulativeEvents-class`] object.
 #' @param calendar A [`character`] string specifying whether the dates
 #'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
@@ -239,7 +240,7 @@ setGeneric(
 #'  Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
 #'  stratification. *Journal of Archaeological Science*, 71: 1-9.
 #'  \doi{10.1016/j.jas.2016.05.006}.
-#' @example inst/examples/ex-activity.R
+#' @example inst/examples/ex-tempo.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family events
 #' @docType methods

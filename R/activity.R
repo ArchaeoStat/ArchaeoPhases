@@ -25,6 +25,11 @@ setMethod(
   f = "activity",
   signature = "CumulativeEvents",
   definition = function(object) {
+    ## Validation
+    if (object@counts) {
+      stop("Tempo must be computed as probabilities.", call. = FALSE)
+    }
+
     tmp <- as.data.frame(object)
     a <- tmp$estimate
     b <- tmp$year
