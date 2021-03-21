@@ -53,25 +53,6 @@ setMethod(
   }
 )
 
-#' @export
-#' @rdname phase
-#' @aliases get_phases,PhasesMCMC-method
-setMethod(
-  f = "get_phases",
-  signature = c(x = "PhasesMCMC"),
-  definition = function(x) {
-    ord <- get_order(x)
-
-    phases <- vector(mode = "list", length = length(ord))
-    names(phases) <- as.character(ord)
-    k <- seq_along(ord)
-    for (i in k) {
-      phases[[i]] <- x[[i]]
-    }
-    phases
-  }
-)
-
 # Phase order ==================================================================
 #' @export
 #' @rdname phase

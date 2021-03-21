@@ -12,7 +12,7 @@ NULL
 #' in `start`.
 #' @slot ordered A [`logical`] scalar: should the phases be regarded as ordered
 #'  (in the order given in `phases`)?
-#' @slot phases A [`character`] vector specifying the name of the phases.
+#' @slot phases A [`factor`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
 #' @slot hash A [`character`] string specifying the SHA256 hash of the csv file.

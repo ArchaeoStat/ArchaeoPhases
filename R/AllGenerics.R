@@ -451,13 +451,6 @@ setGeneric(
 )
 
 #' @rdname phase
-#' @aliases get_phases-method
-setGeneric(
-  name = "get_phases",
-  def = function(x) standardGeneric("get_phases")
-)
-
-#' @rdname phase
 #' @aliases get_order-method
 setGeneric(
   name = "get_order",

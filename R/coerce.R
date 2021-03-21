@@ -36,6 +36,21 @@ as.data.frame.OccurrenceEvents <- function(x, ..., stringsAsFactors = default.st
   )
 }
 
+# To list ======================================================================
+#' @method as.list PhasesMCMC
+#' @export
+as.list.PhasesMCMC <- function(x, ...) {
+  pha <- get_order(x)
+
+  phases <- vector(mode = "list", length = length(pha))
+  names(phases) <- as.character(pha)
+  k <- seq_along(pha)
+  for (i in k) {
+    phases[[i]] <- x[[i]]
+  }
+  phases
+}
+
 # To coda ======================================================================
 #' @export
 #' @rdname coda

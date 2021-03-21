@@ -4,8 +4,6 @@
 \name{phase}
 \alias{phase}
 \alias{phase-method}
-\alias{get_phases}
-\alias{get_phases-method}
 \alias{get_order}
 \alias{get_order-method}
 \alias{set_order<-}
@@ -16,7 +14,6 @@
 \alias{is_ordered-method}
 \alias{phase,MCMC,missing-method}
 \alias{phase,MCMC,list-method}
-\alias{get_phases,PhasesMCMC-method}
 \alias{set_order<-,PhasesMCMC,character-method}
 \alias{set_order,PhasesMCMC,character-method}
 \alias{get_order,PhasesMCMC-method}
@@ -25,8 +22,6 @@
 \title{Phase}
 \usage{
 phase(x, groups, ...)
-
-get_phases(x)
 
 get_order(x, value)
 
@@ -39,8 +34,6 @@ is_ordered(x)
 \S4method{phase}{MCMC,missing}(x)
 
 \S4method{phase}{MCMC,list}(x, groups, ordered = FALSE)
-
-\S4method{get_phases}{PhasesMCMC}(x)
 
 \S4method{set_order}{PhasesMCMC,character}(x) <- value
 

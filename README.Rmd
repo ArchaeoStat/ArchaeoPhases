@@ -89,12 +89,16 @@ plot(ac) +
 
 ### Analysis of a group of dates (phase)
 
+```{r phases-boundaries}
+boundaries(chrono_phases, level = 0.95)
+```
+
 ```{r phases-plot, fig.width=7, fig.height=3.5}
 plot(chrono_phases) +
   ggplot2::theme_bw()
 ```
 
-```{r, fig.width=7, fig.height=3.5}
+```{r phases-order, fig.width=7, fig.height=3.5}
 ## Set chronological order
 ## (from the oldest to the youngest phase)
 set_order(chrono_phases) <- c("IUP", "Ahmarian", "UP", "EPI")

@@ -145,7 +145,8 @@ setMethod(
     if (succession) {
       gg_phases <- plot_succession(x, level = level, decreasing = decreasing)
     } else {
-      gg_phases <- plot_density(x, n = n, ..., facet = facet)
+      gg_phases <- plot_density(x, level = level, decreasing = decreasing,
+                                n = n, ..., facet = facet)
     }
 
     ## ggplot2
@@ -187,6 +188,7 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
       ymax = max(duree$rank) + 0.5,
       labels = rownames(hia)
     )
+    hia <- stats::na.omit(hia)
 
     ## Layers
     aes_rect <- ggplot2::aes(
@@ -195,19 +197,22 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
       ymin = .data$ymin,
       ymax = .data$ymax
     )
-    gg_trans <- ggplot2::geom_rect(
-      mapping = aes_rect,
-      data = trans,
-      fill = fill,
-      alpha = alpha
-    )
-    gg_hiatus <- ggplot2::geom_rect(
-      mapping = aes_rect,
-      data = hia,
-      fill = fill,
-      alpha = alpha + 0.25,
-      na.rm = TRUE
-    )
+    if (nrow(trans) > 0) {
+      gg_trans <- ggplot2::geom_rect(
+        mapping = aes_rect,
+        data = trans,
+        fill = fill,
+        alpha = alpha
+      )
+    }
+    if (nrow(hia) > 0) {
+      gg_hiatus <- ggplot2::geom_rect(
+        mapping = aes_rect,
+        data = hia,
+        fill = fill,
+        alpha = alpha + 0.25
+      )
+    }
   }
 
   ## Layer
@@ -234,10 +239,10 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
 #' @param x A [`PhasesMCMC`] object.
 #' @return A \pkg{ggplot2} layer.
 #' @noRd
-plot_density <- function(x, n = 512, ..., facet = TRUE,
-                         color = "black", alpha = 0.5) {
+plot_density <- function(x, level = 0.95, decreasing = TRUE, n = 512, ...,
+                         facet = TRUE, color = "black", size = 2, alpha = 0.5) {
   ## Density
-  phases <- get_phases(x)
+  phases <- as.list(x)
   dens <- lapply(
     X = phases,
     FUN = function(x, n, ...) {
@@ -251,29 +256,61 @@ plot_density <- function(x, n = 512, ..., facet = TRUE,
     },
     n = n, ...
   )
+
+  ## Time range
+  duree <- boundaries(x, level = level)
+  ord <- rank(duree$start)
+  duree$rank <- if (decreasing) -ord else ord
+  duree$Phase <- get_order(x)
+  # duree$Range <- paste0(round(level * 100, digits = 0), "%")
+
+  ## Adjust y position
+  y_max <- vapply(X = dens, FUN = function(x) max(x$y), FUN.VALUE = numeric(1))
+  if (facet) {
+    duree$y <- y_max * 1.1
+  } else {
+    y_duree <- max(y_max) * (1 + duree$rank / 10)
+    duree$y <- if (decreasing) y_duree + diff(range(y_max)) else y_duree
+  }
+
+  ## Bind densities
   dens <- do.call(rbind, dens)
   dens$Phase <- rep(get_order(x), each = 2 * n)
   dens$Boundary <- factor(dens$z, levels = c("Begin", "End"), ordered = TRUE)
 
   ## Layer
-  gg_aes <- ggplot2::aes(
+  gg_facet <- NULL
+  if (facet) {
+    gg_facet <- ggplot2::facet_grid(
+      rows = ggplot2::vars(.data$Phase),
+      scales = "free_y"
+    )
+  }
+  aes_dens <- ggplot2::aes(
     x = .data$x,
     ymin = 0,
     ymax = .data$y,
     fill = .data$Phase,
     linetype = .data$Boundary
   )
-  gg_facet <- NULL
-  if (facet) {
-    alpha <- 1 # Override transparency value
-    gg_facet <- ggplot2::facet_grid(rows = ggplot2::vars(.data$Phase))
-  }
-  gg_layer <- ggplot2::geom_ribbon(
-    mapping = gg_aes,
+  gg_dens <- ggplot2::geom_ribbon(
+    mapping = aes_dens,
     data = dens,
     color = color,
     alpha = alpha
   )
+  aes_range <- ggplot2::aes(
+    x = .data$start,
+    y = .data$y,
+    xend = .data$end,
+    yend = .data$y,
+    color = .data$Phase
+  )
+  gg_range <- ggplot2::geom_segment(
+    mapping = aes_range,
+    data = duree,
+    size = size
+  )
   gg_y_scale <- ggplot2::scale_y_continuous(name = "Density")
-  list(gg_layer, gg_facet, gg_y_scale)
+  list(gg_dens, gg_range, gg_facet, gg_y_scale)
 }

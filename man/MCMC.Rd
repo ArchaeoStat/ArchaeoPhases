@@ -26,7 +26,7 @@ in \code{start}.}
 \item{\code{ordered}}{A \code{\link{logical}} scalar: should the phases be regarded as ordered
 (in the order given in \code{phases})?}
 
-\item{\code{phases}}{A \code{\link{character}} vector specifying the name of the phases.}
+\item{\code{phases}}{A \code{\link{factor}} vector specifying the name of the phases.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{BCAD}").}

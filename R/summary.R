@@ -26,7 +26,7 @@ setMethod(
   f = "summary",
   signature = "PhasesMCMC",
   definition = function(object, level = 0.95) {
-    phases <- get_phases(object)
+    phases <- as.list(object)
     k <- seq_along(phases)
     for (i in k) {
       tmp <- phases[[i]]

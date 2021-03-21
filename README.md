@@ -103,6 +103,15 @@ plot(ac) +
 ### Analysis of a group of dates (phase)
 
 ``` r
+boundaries(chrono_phases, level = 0.95)
+#>           start    end
+#> EPI      -29071 -27102
+#> UP       -38559 -29335
+#> Ahmarian -42189 -37461
+#> IUP      -43217 -41106
+```
+
+``` r
 plot(chrono_phases) +
   ggplot2::theme_bw()
 ```
