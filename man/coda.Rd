@@ -24,9 +24,8 @@ as_coda(from, ...)
 An \code{\link[coda:mcmc.list]{coda::mcmc.list}} object.
 }
 \description{
-Extracts parallel chains from a \code{\linkS4class{MCMC}}
-object to create an \code{\link{mcmc.list}} object for use with \pkg{coda}
-diagnostic tools.
+Extracts parallel chains from an \code{\linkS4class{MCMC}} object to create an
+\code{\link{mcmc.list}} object for use with \pkg{coda} diagnostic tools.
 }
 \examples{
 ## Load coda

@@ -67,21 +67,22 @@ scale_01 <- function(x) {
 #' @param file A \code{\link{character}} string specifying the name of the file.
 #' @param algo A \code{\link{character}} string specifying the algorithms to be
 #' used (see \code{\link[digest]{digest}}).
+#' @param ... Extra parameters to be passed to [digest::digest()].
 #' @return A \code{\link{character}} string of a fixed length.
 #' @author Thomas S. Dye
 #' @keywords internal
 #' @noRd
-make_hash <- function(file, algo = "sha256") {
+make_hash <- function(file, algo = "sha256", ...) {
   ## If connection, save temp file
   if (!utils::file_test("-f", file)) {
     temp_file <- tempfile(pattern = "", fileext = "csv")
     write(file, temp_file)
 
-    file_hash <- digest::digest(file = temp_file, algo = algo)
+    file_hash <- digest::digest(file = temp_file, algo = algo, ...)
     unlink(temp_file)
   }
   else {
-    file_hash <- digest::digest(file = file, algo = algo)
+    file_hash <- digest::digest(file = file, algo = algo, ...)
   }
   file_hash
 }

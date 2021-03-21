@@ -16,27 +16,42 @@ S4 classes to represent the output of a MCMC algorithm.
 \section{Slots}{
 
 \describe{
-\item{\code{start}}{An \code{\link{integer}} vector containing the column number
-corresponding to the minimum of the events included in each phase.}
+\item{\code{start}}{An \code{\link{integer}} vector containing the column number corresponding
+to the minimum of each phase.}
 
-\item{\code{end}}{An \code{\link{integer}} vector containing the column number
-corresponding to the maximum of the phases set in the same order as
-in \code{start}.}
-
-\item{\code{ordered}}{A \code{\link{logical}} scalar: should the phases be regarded as ordered
-(in the order given in \code{phases})?}
+\item{\code{end}}{An \code{\link{integer}} vector containing the column number corresponding to
+the maximum of each phase (set in the same order as in \code{start}).}
 
 \item{\code{phases}}{A \code{\link{factor}} vector specifying the name of the phases.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{BCAD}").}
 
-\item{\code{hash}}{A \code{\link{character}} string specifying the SHA256 hash of the csv file.}
+\item{\code{hash}}{A \code{\link{character}} string giving the cryptographical hash of the
+original data file.}
 }}
 
 \note{
-This class inherits from \code{\link{matrix}}.
+These classes inherit from \code{\link{matrix}}.
 }
+\section{Coerce}{
+
+In the code snippets below, \code{x} is a \code{PhasesMCMC} object.
+\describe{
+\item{\code{as.list(x)}}{Coerces to a \code{\link{list}}.}
+}
+}
+
+\section{Subset}{
+
+In the code snippets below, \code{x} is a \verb{*MCMC} object.
+\describe{
+\item{\code{x[[i]]}}{Extracts a date/event (single chain) or a phase (two
+chains) selected by subscript \code{i}. \code{i} is a length-one \code{\link{numeric}} or
+\code{\link{character}} vector.}
+}
+}
+
 \seealso{
 Other class: 
 \code{\link{ActivityEvents}},

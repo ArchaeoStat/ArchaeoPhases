@@ -11,9 +11,8 @@ if (!isGeneric("summary"))
 # Coerce =======================================================================
 #' Coda
 #'
-#' Extracts parallel chains from a [`MCMC-class`]
-#' object to create an [`mcmc.list`] object for use with \pkg{coda}
-#' diagnostic tools.
+#' Extracts parallel chains from an [`MCMC-class`] object to create an
+#' [`mcmc.list`] object for use with \pkg{coda} diagnostic tools.
 #' @param from from An object to be coerced.
 #' @param chains An [`integer`] specifying the number of parallel chains
 #'  (defaults to \eqn{1}).
@@ -677,13 +676,14 @@ setGeneric(
 #' Check for an Original MCMC File
 #'
 #' Checks whether or not a file is identical to the one used to create
-#' a [`MCMC-class`] object.
-#' @param object An [`MCMC-class`] object.
+#' an object.
+#' @param object An object (typically an [`MCMC-class`] object).
 #' @param file Either a path to a CSV file or a connection.
 #' @param ... Currently not used.
 #' @return
-#'  `TRUE` if the files match, `FALSE` otherwise.
+#'  A [`logical`]: `TRUE` if the files match, `FALSE` otherwise.
 #' @example inst/examples/ex-read.R
+#' @seealso [digest::digest()]
 #' @author T. S. Dye, N. Frerebeau
 #' @family read
 #' @docType methods

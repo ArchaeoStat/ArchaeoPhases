@@ -2,18 +2,52 @@
 #' @include AllGenerics.R
 NULL
 
+# Check ========================================================================
 #' @export
 #' @rdname check
 #' @aliases is_original,MCMC-method
 setMethod(
   f = "is_original",
   signature = "MCMC",
-  definition = function(object, file, ...) {
-    ## Calculate hash, if connection, save temp file
-    make_hash(file) == object@hash
+  definition = function(object, file) {
+    make_hash(file) == get_hash(object)
   }
 )
 
+#' @export
+#' @rdname check
+#' @aliases is_original,CumulativeEvents-method
+setMethod(
+  f = "is_original",
+  signature = "CumulativeEvents",
+  definition = function(object, file) {
+    make_hash(file) == get_hash(object)
+  }
+)
+
+#' @export
+#' @rdname check
+#' @aliases is_original,ActivityEvents-method
+setMethod(
+  f = "is_original",
+  signature = "ActivityEvents",
+  definition = function(object, file) {
+    make_hash(file) == get_hash(object)
+  }
+)
+
+#' @export
+#' @rdname check
+#' @aliases is_original,OccurrenceEvents-method
+setMethod(
+  f = "is_original",
+  signature = "OccurrenceEvents",
+  definition = function(object, file) {
+    make_hash(file) == get_hash(object)
+  }
+)
+
+# Read =========================================================================
 #' @export
 #' @rdname read
 #' @aliases read_oxcal,character-method
@@ -73,7 +107,7 @@ setMethod(
 
     ## Take bin width into account, if necessary
     if (bin_width != 1)
-      data <- bin_width * data
+      data <- data * bin_width
 
     ## Convert from BP to BC/AD
     data <- BP_to_BCAD(data)

@@ -6,33 +6,42 @@
 \alias{is_original}
 \alias{is_original-method}
 \alias{is_original,MCMC-method}
+\alias{is_original,CumulativeEvents-method}
+\alias{is_original,ActivityEvents-method}
+\alias{is_original,OccurrenceEvents-method}
 \title{Check for an Original MCMC File}
 \usage{
 is_original(object, ...)
 
-\S4method{is_original}{MCMC}(object, file, ...)
+\S4method{is_original}{MCMC}(object, file)
+
+\S4method{is_original}{CumulativeEvents}(object, file)
+
+\S4method{is_original}{ActivityEvents}(object, file)
+
+\S4method{is_original}{OccurrenceEvents}(object, file)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} object.}
+\item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
 
 \item{...}{Currently not used.}
 
 \item{file}{Either a path to a CSV file or a connection.}
 }
 \value{
-\code{TRUE} if the files match, \code{FALSE} otherwise.
+A \code{\link{logical}}: \code{TRUE} if the files match, \code{FALSE} otherwise.
 }
 \description{
 Checks whether or not a file is identical to the one used to create
-a \code{\linkS4class{MCMC}} object.
+an object.
 }
 \examples{
 \dontrun{
 ## Import ChronoModel Output
 path_zip <- system.file("extdata/chronomodel.zip", package = "ArchaeoPhases")
 path_csv <- utils::unzip(path_zip, exdir = tempdir())
-events <- read_chronomodel(path_csv[[1]])
-phases <- read_chronomodel(path_csv[[2]])
+events <- read_chronomodel(path_csv[[1]], phases = FALSE)
+phases <- read_chronomodel(path_csv[[2]], phases = TRUE)
 
 ## Import OxCal Output
 path_zip <- system.file("extdata/oxcal.zip", package = "ArchaeoPhases")
@@ -43,6 +52,8 @@ is_original(oxcal, path_csv)
 }
 }
 \seealso{
+\code{\link[digest:digest]{digest::digest()}}
+
 Other read: 
 \code{\link{coda}},
 \code{\link{coerce}()},

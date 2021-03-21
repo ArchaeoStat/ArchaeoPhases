@@ -5,19 +5,29 @@ NULL
 #' MCMC
 #'
 #' S4 classes to represent the output of a MCMC algorithm.
-#' @slot start An [`integer`] vector containing the column number
-#' corresponding to the minimum of the events included in each phase.
-#' @slot end An [`integer`] vector containing the column number
-#' corresponding to the maximum of the phases set in the same order as
-#' in `start`.
-#' @slot ordered A [`logical`] scalar: should the phases be regarded as ordered
-#'  (in the order given in `phases`)?
+#' @slot start An [`integer`] vector containing the column number corresponding
+#'  to the minimum of each phase.
+#' @slot end An [`integer`] vector containing the column number corresponding to
+#'  the maximum of each phase (set in the same order as in `start`).
 #' @slot phases A [`factor`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
-#' @slot hash A [`character`] string specifying the SHA256 hash of the csv file.
+#' @slot hash A [`character`] string giving the cryptographical hash of the
+#'  original data file.
+#' @section Coerce:
+#'  In the code snippets below, `x` is a `PhasesMCMC` object.
+#'  \describe{
+#'   \item{`as.list(x)`}{Coerces to a [`list`].}
+#'  }
+#' @section Subset:
+#'  In the code snippets below, `x` is a `*MCMC` object.
+#'  \describe{
+#'   \item{`x[[i]]`}{Extracts a date/event (single chain) or a phase (two
+#'   chains) selected by subscript `i`. `i` is a length-one [`numeric`] or
+#'   [`character`] vector.}
+#'  }
 #' @note
-#'  This class inherits from [`matrix`].
+#'  These classes inherit from [`matrix`].
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
@@ -68,11 +78,29 @@ NULL
 #' Cumulative Events
 #'
 #' An S4 class to store the result of a [`tempo`] plot.
+#' @slot year A [`numeric`] vector giving the time points at which the
+#'  cumulative distribution is estimated.
+#' @slot estimate A [`numeric`] vector giving the estimation of the cumulative
+#'  distribution.
+#' @slot lower A [`numeric`] vector giving the lower boundaries of the
+#'  credibility interval.
+#' @slot upper A [`numeric`] vector giving the upper boundaries of the
+#'  credibility interval.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
+#' @slot gauss A [`logical`] scalar indicating if the Gaussian approximation of
+#'  the credible interval was used.
+#' @slot counts A [`logical`] scalar.
+#' @slot events An [`integer`] scalar giving the number of events included in
+#'  the tempo plot.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
-#' @slot hash A [`character`] string giving the a cryptographical hash of the
+#' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
+#' @section Coerce:
+#'  In the code snippets below, `x` is a `CumulativeEvents` object.
+#'  \describe{
+#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
+#'  }
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
@@ -104,8 +132,13 @@ NULL
 #' An S4 class to store the result of an [`activity`] plot.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
-#' @slot hash A [`character`] string giving the a cryptographical hash of the
+#' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
+#' @section Coerce:
+#'  In the code snippets below, `x` is an `ActivityEvents` object.
+#'  \describe{
+#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
+#'  }
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
@@ -129,11 +162,21 @@ NULL
 #' Occurrence
 #'
 #' An S4 class to store the result of an [`occurrence`] plot.
+#' @slot events An [`integer`] vector giving the occurrence.
+#' @slot lower A [`numeric`] vector giving the lower boundaries of the
+#'  credibility interval.
+#' @slot upper A [`numeric`] vector giving the upper boundaries of the
+#'  credibility interval.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
-#' @slot hash A [`character`] string giving the a cryptographical hash of the
+#' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
+#' @section Coerce:
+#'  In the code snippets below, `x` is an `OccurrenceEvents` object.
+#'  \describe{
+#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
+#'  }
 #' @author N. Frerebeau
 #' @family class
 #' @docType class

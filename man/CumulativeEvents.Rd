@@ -12,14 +12,42 @@ An S4 class to store the result of a \code{\link{tempo}} plot.
 \section{Slots}{
 
 \describe{
+\item{\code{year}}{A \code{\link{numeric}} vector giving the time points at which the
+cumulative distribution is estimated.}
+
+\item{\code{estimate}}{A \code{\link{numeric}} vector giving the estimation of the cumulative
+distribution.}
+
+\item{\code{lower}}{A \code{\link{numeric}} vector giving the lower boundaries of the
+credibility interval.}
+
+\item{\code{upper}}{A \code{\link{numeric}} vector giving the upper boundaries of the
+credibility interval.}
+
 \item{\code{level}}{A length-one \code{\link{numeric}} vector giving the confidence level.}
+
+\item{\code{gauss}}{A \code{\link{logical}} scalar indicating if the Gaussian approximation of
+the credible interval was used.}
+
+\item{\code{counts}}{A \code{\link{logical}} scalar.}
+
+\item{\code{events}}{An \code{\link{integer}} scalar giving the number of events included in
+the tempo plot.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{BCAD}").}
 
-\item{\code{hash}}{A \code{\link{character}} string giving the a cryptographical hash of the
+\item{\code{hash}}{A \code{\link{character}} string giving the cryptographical hash of the
 original data file.}
 }}
+
+\section{Coerce}{
+
+In the code snippets below, \code{x} is a \code{CumulativeEvents} object.
+\describe{
+\item{\code{as.data.frame(x)}}{Coerces to a \code{\link{data.frame}}.}
+}
+}
 
 \seealso{
 Other class: 

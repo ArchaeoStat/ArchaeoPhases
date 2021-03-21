@@ -15,9 +15,17 @@ An S4 class to store the result of an \code{\link{activity}} plot.
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{BCAD}").}
 
-\item{\code{hash}}{A \code{\link{character}} string giving the a cryptographical hash of the
+\item{\code{hash}}{A \code{\link{character}} string giving the cryptographical hash of the
 original data file.}
 }}
+
+\section{Coerce}{
+
+In the code snippets below, \code{x} is an \code{ActivityEvents} object.
+\describe{
+\item{\code{as.data.frame(x)}}{Coerces to a \code{\link{data.frame}}.}
+}
+}
 
 \seealso{
 Other class: 
