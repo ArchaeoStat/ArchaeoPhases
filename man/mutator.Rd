@@ -12,10 +12,12 @@
 \alias{names,PhasesMCMC-method}
 \alias{names<-,PhasesMCMC-method}
 \alias{get_calendar,MCMC-method}
+\alias{get_calendar,PhasesMCMC-method}
 \alias{get_calendar,CumulativeEvents-method}
 \alias{get_calendar,ActivityEvents-method}
 \alias{get_calendar,OccurrenceEvents-method}
 \alias{get_hash,MCMC-method}
+\alias{get_hash,PhasesMCMC-method}
 \alias{get_hash,CumulativeEvents-method}
 \alias{get_hash,ActivityEvents-method}
 \alias{get_hash,OccurrenceEvents-method}
@@ -31,6 +33,8 @@ get_hash(x)
 
 \S4method{get_calendar}{MCMC}(x)
 
+\S4method{get_calendar}{PhasesMCMC}(x)
+
 \S4method{get_calendar}{CumulativeEvents}(x)
 
 \S4method{get_calendar}{ActivityEvents}(x)
@@ -38,6 +42,8 @@ get_hash(x)
 \S4method{get_calendar}{OccurrenceEvents}(x)
 
 \S4method{get_hash}{MCMC}(x)
+
+\S4method{get_hash}{PhasesMCMC}(x)
 
 \S4method{get_hash}{CumulativeEvents}(x)
 

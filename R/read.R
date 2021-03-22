@@ -147,11 +147,14 @@ setMethod(
       pattern <- ".(alpha|beta|Begin|End)"
       pha <- unique(trimws(sub(pattern, "", colnames(mtx))))
       start <- seq(from = 1L, to = ncol(mtx), by = 2L)
+      arr <- array(data = NA_real_, dim = c(nrow(mtx), ncol(mtx) / 2, 2),
+                   dimnames = list(NULL, pha, c("begin", "end")))
+      arr[, , 1] <- mtx[, start]
+      arr[, , 2] <- mtx[, start + 1]
       .PhasesMCMC(
-        mtx,
-        start = start,
-        end = start + 1L,
-        phases = factor(pha, levels = pha, ordered = FALSE),
+        arr,
+        phases = pha,
+        ordered = FALSE,
         calendar = "BCAD",
         hash = file_hash
       )

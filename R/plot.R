@@ -165,7 +165,8 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
   duree <- boundaries(x, level = level)
   ord <- rank(duree$start)
   duree$rank <- if (decreasing) -ord else ord
-  duree$Phase <- get_order(x)
+  pha <- get_order(x)
+  duree$Phase <- factor(pha, levels = pha, ordered = TRUE)
 
   gg_trans <- gg_hiatus <- NULL
   if (is_ordered(x)) {
@@ -241,13 +242,15 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
 #' @noRd
 plot_density <- function(x, level = 0.95, decreasing = TRUE, n = 512, ...,
                          facet = TRUE, color = "black", size = 2, alpha = 0.5) {
+  ## Get phases
+  pha <- as.list(x)
+
   ## Density
-  phases <- as.list(x)
   dens <- lapply(
-    X = phases,
+    X = pha,
     FUN = function(x, n, ...) {
-      a <- stats::density(x[, 1], n = n, ...)
-      b <- stats::density(x[, 2], n = n, ...)
+      a <- stats::density(x[, , 1, drop = TRUE], n = n, ...)
+      b <- stats::density(x[, , 2, drop = TRUE], n = n, ...)
       data.frame(
         x = c(a$x, b$x),
         y = c(a$y, b$y),
@@ -261,7 +264,9 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, n = 512, ...,
   duree <- boundaries(x, level = level)
   ord <- rank(duree$start)
   duree$rank <- if (decreasing) -ord else ord
-  duree$Phase <- get_order(x)
+  duree_phase <- rownames(duree)
+  duree$Phase <- factor(duree_phase, levels = duree_phase,
+                        ordered = is_ordered(x))
   # duree$Range <- paste0(round(level * 100, digits = 0), "%")
 
   ## Adjust y position
@@ -275,7 +280,9 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, n = 512, ...,
 
   ## Bind densities
   dens <- do.call(rbind, dens)
-  dens$Phase <- rep(get_order(x), each = 2 * n)
+  dens_phase <- names(pha)
+  dens$Phase <- factor(rep(dens_phase, each = 2 * n), levels = dens_phase,
+                       ordered = is_ordered(x))
   dens$Boundary <- factor(dens$z, levels = c("Begin", "End"), ordered = TRUE)
 
   ## Layer

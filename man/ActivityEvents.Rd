@@ -31,7 +31,8 @@ In the code snippets below, \code{x} is an \code{ActivityEvents} object.
 Other class: 
 \code{\link{CumulativeEvents}},
 \code{\link{MCMC}},
-\code{\link{OccurrenceEvents}}
+\code{\link{OccurrenceEvents}},
+\code{\link{PhasesMCMC}}
 }
 \author{
 N. Frerebeau

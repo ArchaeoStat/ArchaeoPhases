@@ -24,10 +24,10 @@ setMethod(
 ## [[ --------------------------------------------------------------------------
 #' @export
 #' @rdname subset
-#' @aliases [[,MCMC,ANY,missing-method
+#' @aliases [[,MCMC,numeric,missing-method
 setMethod(
   f = "[[",
-  signature = c(x = "MCMC", i = "ANY", j = "missing"),
+  signature = c(x = "MCMC", i = "numeric", j = "missing"),
   definition = function(x, i) {
     x[, i, drop = TRUE]
   }
@@ -40,12 +40,9 @@ setMethod(
   f = "[[",
   signature = c(x = "PhasesMCMC", i = "numeric", j = "missing"),
   definition = function(x, i) {
-    a <- x@start[[i]]
-    b <- x@end[[i]]
     z <- x@phases[[i]]
-    tmp <- x[, c(a, b)]
-    tmp <- methods::as(tmp, "matrix")
-    methods::initialize(x, tmp, start = 1L, end = 2L, phases = z)
+    tmp <- x[, i, , drop = FALSE]
+    methods::initialize(x, tmp, phases = z)
   }
 )
 
@@ -56,13 +53,8 @@ setMethod(
   f = "[[",
   signature = c(x = "PhasesMCMC", i = "character", j = "missing"),
   definition = function(x, i) {
-    k <- which(levels(x@phases) == i)
-    a <- x@start[[k]]
-    b <- x@end[[k]]
-    z <- x@phases[[k]]
-    tmp <- x[, c(a, b)]
-    tmp <- methods::as(tmp, "matrix")
-    methods::initialize(x, tmp, start = 1L, end = 2L, phases = z)
+    k <- which(x@phases == i)
+    methods::callGeneric(x = x, i = k)
   }
 )
 

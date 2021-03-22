@@ -37,10 +37,38 @@ setMethod(
 
 #' @export
 #' @rdname convert
+#' @aliases BP_to_BCAD,array-method
+setMethod(
+  f = "BP_to_BCAD",
+  signature = "array",
+  definition = function(object){
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname convert
 #' @aliases BP_to_BCAD,MCMC-method
 setMethod(
   f = "BP_to_BCAD",
   signature = "MCMC",
+  definition = function(object){
+    ## Check current scale
+    if (get_calendar(object) == "BCAD") return(object)
+    tmp <- methods::callNextMethod(object)
+    methods::initialize(object, tmp, calendar = "BCAD")
+  }
+)
+
+#' @export
+#' @rdname convert
+#' @aliases BP_to_BCAD,PhasesMCMC-method
+setMethod(
+  f = "BP_to_BCAD",
+  signature = "PhasesMCMC",
   definition = function(object){
     ## Check current scale
     if (get_calendar(object) == "BCAD") return(object)
@@ -86,10 +114,38 @@ setMethod(
 
 #' @export
 #' @rdname convert
+#' @aliases BCAD_to_BP,array-method
+setMethod(
+  f = "BCAD_to_BP",
+  signature = "array",
+  definition = function(object) {
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname convert
 #' @aliases BCAD_to_BP,MCMC-method
 setMethod(
   f = "BCAD_to_BP",
   signature = "MCMC",
+  definition = function(object){
+    ## Check current scale
+    if (get_calendar(object) == "BP") return(object)
+    tmp <- methods::callNextMethod(object = object)
+    methods::initialize(object, tmp, calendar = "BP")
+  }
+)
+
+#' @export
+#' @rdname convert
+#' @aliases BCAD_to_BP,PhasesMCMC-method
+setMethod(
+  f = "BCAD_to_BP",
+  signature = "PhasesMCMC",
   definition = function(object){
     ## Check current scale
     if (get_calendar(object) == "BP") return(object)

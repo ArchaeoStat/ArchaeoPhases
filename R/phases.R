@@ -23,30 +23,25 @@ setMethod(
   signature = c(x = "MCMC", groups = "list"),
   definition = function(x, groups, ordered = FALSE) {
     m <- nrow(x)
-    k <- seq_along(groups) # Number of phases
+    n <- length(groups) # Number of phases
+    k <- seq_len(n)
     grp <- if (is.null(names(groups))) paste0("phase_", k) else names(groups)
 
+    ## Build array
+    min_max <- array(data = NA_real_, dim = c(m, n, 2))
+    dimnames(min_max) <- list(seq_len(nrow(min_max)), grp, c("begin", "end"))
     for (i in k) {
       index <- groups[[i]]
       tmp <- x[, index, drop = FALSE]
-      groups[[i]] <- matrix(
-        data = c(apply(X = tmp, MARGIN = 1, FUN = min),
-                 apply(X = tmp, MARGIN = 1, FUN = max)),
-        nrow = m
-      )
+      min_max[, i, 1] <- apply(X = tmp, MARGIN = 1, FUN = min)
+      min_max[, i, 2] <- apply(X = tmp, MARGIN = 1, FUN = max)
     }
 
-    min_max <- do.call(cbind, groups)
-    rownames(min_max) <- seq_len(nrow(min_max))
-    colnames(min_max) <- paste0(rep(grp, each = 2), c("_start", "_end"))
-
-    start <- seq(from = 1L, to = ncol(min_max), by = 2L)
-    grp <- factor(grp, levels = grp, ordered = ordered)
+    # grp <- factor(grp, levels = grp, ordered = ordered)
     .PhasesMCMC(
       min_max,
-      start = start,
-      end = start + 1L,
       phases = grp,
+      ordered = ordered,
       calendar = get_calendar(x),
       hash = get_hash(x)
     )
@@ -72,11 +67,12 @@ setMethod(
         stop("Some phases do not seem to be defined.", call. = FALSE)
       }
 
-      x@start <- x@start[index]
-      x@end <- x@end[index]
-      value <- factor(value, levels = value, ordered = TRUE)
+      tmp <- x[, index, ]
+      colnames(tmp) <- value
     }
+    x@.Data <- tmp
     x@phases <- value
+    x@ordered <- TRUE
     methods::validObject(x)
     x
   }
@@ -98,8 +94,7 @@ setMethod(
   f = "as_ordered",
   signature = c(x = "PhasesMCMC"),
   definition = function(x) {
-    pha <- x@phases
-    x@phases <- factor(pha, levels = pha, ordered = TRUE)
+    x@ordered <- TRUE
     methods::validObject(x)
     x
   }
@@ -111,7 +106,7 @@ setMethod(
 setMethod(
   f = "is_ordered",
   signature = c(x = "PhasesMCMC"),
-  definition = function(x) is.ordered(x@phases)
+  definition = function(x) x@ordered
 )
 
 # Time range ===================================================================
@@ -150,20 +145,22 @@ setMethod(
     ## Check calendar
     BP <- get_calendar(x) == "BP"
 
+    ## Get phases
+    pha <- get_order(x)
+
     ## Reverse boundaries if BP scale
-    start <- if (BP) x@end else x@start
-    end <- if (BP) x@start else x@end
-    L <- length(start) # Number of phases
+    start <- ifelse(BP, 2, 1)
+    end <- ifelse(BP, 1, 2)
 
     # Matrix of results
-    result <- matrix(nrow = L, ncol = 2)
-    rownames(result) <- x@phases
-    colnames(result) <- c("start", "end")
+    result <- matrix(nrow = ncol(x), ncol = 2)
+    dimnames(result) <- list(pha, c("start", "end"))
 
-    for (i in seq_len(L)) {
-      a <- start[[i]]
-      b <- end[[i]]
-      result[i, ] <- boundaries(x[, a], x[, b], level = level)
+    k <- seq_along(pha)
+    for (i in seq_along(pha)) {
+      a <- x[, i, start]
+      b <- x[, i, end]
+      result[i, ] <- boundaries(a, b, level = level)
     }
 
     as.data.frame(result)
@@ -192,24 +189,22 @@ setMethod(
     ## Check calendar
     BP <- get_calendar(x) == "BP"
 
-    ## Reverse boundaries if BP scale
-    start <- if (BP) x@end else x@start
-    end <- if (BP) x@start else x@end
-    L <- length(start) # Number of phases
+    ## Get phases
+    pha <- get_order(x)
 
-    # Names
-    names_start <- colnames(x)[start]
-    names_end <- colnames(x)[end]
+    ## Reverse boundaries if BP scale
+    start <- ifelse(BP, 2, 1)
+    end <- ifelse(BP, 1, 2)
 
     # Matrix of results
-    result <- matrix(nrow = nrow(x), ncol = L)
-    rownames(result) <- rownames(x)
-    colnames(result) <- x@phases
+    result <- matrix(nrow = nrow(x), ncol = ncol(x))
+    dimnames(result) <- list(rownames(x), pha)
 
-    for (i in seq_len(L)) {
-      a <- start[[i]]
-      b <- end[[i]]
-      result[, i] <- duration(x[, a], x[, b])
+    k <- seq_along(pha)
+    for (i in k) {
+      a <- x[, i, start]
+      b <- x[, i, end]
+      result[, i] <- duration(a, b)
     }
 
     .MCMC(
@@ -247,28 +242,32 @@ setMethod(
     ## Check calendar
     BP <- get_calendar(x) == "BP"
 
+    ## Get phases
+    pha <- get_order(x)
+    m <- ncol(x) - 1
+
     ## Reverse boundaries if BP scale
-    a <- utils::tail(x@start, -1)
-    b <- utils::head(x@end, -1)
-    start <- if (BP) a else b
-    end <- if (BP) b else a
-
-    L <- length(start) # Number of phases
-
-    # Names
-    names_start <- colnames(x)[start]
-    names_end <- colnames(x)[end]
+    start <- ifelse(BP, 1, 2)
+    end <- ifelse(BP, 2, 1)
 
     # Matrix of results
-    result <- matrix(nrow = L, ncol = 2)
-    rownames(result) <- paste(names_start, names_end, sep = "-")
+    result <- matrix(nrow = m, ncol = 2)
     colnames(result) <- c("start", "end")
 
-    for (i in seq_len(L)) {
-      a <- start[[i]]
-      b <- end[[i]]
-      result[i, ] <- boundaries(x[, a], x[, b], level = level)
+    k <- seq_len(m + 1)
+    deb <- utils::head(k, -1)
+    fin <- utils::tail(k, -1)
+
+    for (i in seq_len(m)) {
+      a <- x[, deb[[i]], start]
+      b <- x[, fin[[i]], end]
+      result[i, ] <- boundaries(a, b, level = level)
     }
+
+    # Names
+    names_start <- pha[deb]
+    names_end <- pha[fin]
+    rownames(result) <- paste(names_start, names_end, sep = "-")
 
     as.data.frame(result)
   }
@@ -329,28 +328,32 @@ setMethod(
     ## Check calendar
     BP <- get_calendar(x) == "BP"
 
+    ## Get phases
+    pha <- get_order(x)
+    m <- ncol(x) - 1
+
     ## Reverse boundaries if BP scale
-    a <- utils::tail(x@start, -1)
-    b <- utils::head(x@end, -1)
-    start <- if (BP) a else b
-    end <- if (BP) b else a
-
-    L <- length(start) # Number of phases
-
-    # Names
-    names_start <- colnames(x)[start]
-    names_end <- colnames(x)[end]
+    start <- ifelse(BP, 1, 2)
+    end <- ifelse(BP, 2, 1)
 
     # Matrix of results
-    result <- matrix(nrow = L, ncol = 2)
-    rownames(result) <- paste(names_start, names_end, sep = "-")
+    result <- matrix(nrow = m, ncol = 2)
     colnames(result) <- c("start", "end")
 
-    for (i in seq_len(L)) {
-      a <- start[[i]]
-      b <- end[[i]]
-      result[i, ] <- hiatus(x[, a], x[, b], level = level)
+    k <- seq_len(m + 1)
+    deb <- utils::head(k, -1)
+    fin <- utils::tail(k, -1)
+
+    for (i in seq_len(m)) {
+      a <- x[, deb[[i]], start]
+      b <- x[, fin[[i]], end]
+      result[i, ] <- hiatus(a, b, level = level)
     }
+
+    # Names
+    names_start <- pha[deb]
+    names_end <- pha[fin]
+    rownames(result) <- paste(names_start, names_end, sep = "-")
 
     as.data.frame(result)
   }

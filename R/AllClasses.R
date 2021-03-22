@@ -2,29 +2,20 @@
 NULL
 
 # MCMC =========================================================================
-#' MCMC
+## Events ----------------------------------------------------------------------
+#' MCMC Events
 #'
 #' S4 classes to represent the output of a MCMC algorithm.
-#' @slot start An [`integer`] vector containing the column number corresponding
-#'  to the minimum of each phase.
-#' @slot end An [`integer`] vector containing the column number corresponding to
-#'  the maximum of each phase (set in the same order as in `start`).
 #' @slot phases A [`factor`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
-#' @section Coerce:
-#'  In the code snippets below, `x` is a `PhasesMCMC` object.
-#'  \describe{
-#'   \item{`as.list(x)`}{Coerces to a [`list`].}
-#'  }
 #' @section Subset:
 #'  In the code snippets below, `x` is a `*MCMC` object.
 #'  \describe{
-#'   \item{`x[[i]]`}{Extracts a date/event (single chain) or a phase (two
-#'   chains) selected by subscript `i`. `i` is a length-one [`numeric`] or
-#'   [`character`] vector.}
+#'   \item{`x[[i]]`}{Extracts a single date/event (one chain) selected by
+#'   subscript `i`. `i` is a length-one [`numeric`] or [`character`] vector.}
 #'  }
 #' @note
 #'  These classes inherit from [`matrix`].
@@ -57,21 +48,60 @@ NULL
   contains = "MCMC"
 )
 
-#' @rdname MCMC
+## Phases ----------------------------------------------------------------------
+#' MCMC Phases
+#'
+#' An S4 class to represent the output of a MCMC algorithm.
+#' @slot start An [`integer`] vector containing the column number corresponding
+#'  to the minimum of each phase.
+#' @slot end An [`integer`] vector containing the column number corresponding to
+#'  the maximum of each phase (set in the same order as in `start`).
+#' @slot phases A [`factor`] vector specifying the name of the phases.
+#' @slot calendar A [`character`] string specifying the chronological scale
+#'  (either "`BP`" or "`BCAD`").
+#' @slot hash A [`character`] string giving the cryptographical hash of the
+#'  original data file.
+#' @section Coerce:
+#'  In the code snippets below, `x` is a `PhasesMCMC` object.
+#'  \describe{
+#'   \item{`as.list(x)`}{Coerces to a [`list`].}
+#'  }
+#' @section Subset:
+#'  In the code snippets below, `x` is a `PhasesMCMC` object.
+#'  \describe{
+#'   \item{`x[[i]]`}{Extracts a single phase (two chains) selected by subscript
+#'   `i`. `i` is a length-one [`numeric`] or [`character`] vector.}
+#'  }
+#' @note
+#'  These classes inherit from [`array`].
+#' @author N. Frerebeau
+#' @family class
+#' @docType class
+#' @name PhasesMCMC
+#' @rdname PhasesMCMC
+NULL
+
+#' @rdname PhasesMCMC
 #' @aliases PhasesMCMC-class
 .PhasesMCMC <- setClass(
   Class = "PhasesMCMC",
   slots = c(
     start = "integer",
     end = "integer",
-    phases = "factor"
+    phases = "character",
+    ordered = "logical",
+    calendar = "character",
+    hash = "character"
   ),
   prototype = methods::prototype(
     start = integer(0),
     end = integer(0),
-    phases = factor()
+    phases = character(0),
+    ordered = FALSE,
+    calendar = "BCAD",
+    hash = character(0)
   ),
-  contains = "MCMC"
+  contains = "array"
 )
 
 # Tempo ========================================================================

@@ -42,13 +42,14 @@ as.data.frame.OccurrenceEvents <- function(x, ..., stringsAsFactors = default.st
 as.list.PhasesMCMC <- function(x, ...) {
   pha <- get_order(x)
 
-  phases <- vector(mode = "list", length = length(pha))
-  names(phases) <- as.character(pha)
+  tmp <- vector(mode = "list", length = length(pha))
+  names(tmp) <- pha
+
   k <- seq_along(pha)
   for (i in k) {
-    phases[[i]] <- x[[i]]
+    tmp[[i]] <- x[[i]]
   }
-  phases
+  tmp
 }
 
 # To coda ======================================================================
@@ -114,13 +115,16 @@ setMethod(
     if (BP)
       from <- BP_to_BCAD(from)
 
-    grp <- paste0("phase_", seq_along(start))
-    grp <- factor(grp, levels = grp)
+    pha <- paste0("phase_", seq_along(start))
+    arr <- array(data = NA_real_, dim = c(nrow(from), ncol(from) / 2, 2),
+                 dimnames = list(NULL, pha, c("begin", "end")))
+    arr[, , 1] <- from[, start]
+    arr[, , 2] <- from[, end]
+
     .PhasesMCMC(
-      from,
-      start = as.integer(start),
-      end = as.integer(end),
-      phases = grp,
+      arr,
+      phases = pha,
+      ordered = FALSE,
       calendar = "BCAD"
     )
   }

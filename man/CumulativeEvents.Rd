@@ -53,7 +53,8 @@ In the code snippets below, \code{x} is a \code{CumulativeEvents} object.
 Other class: 
 \code{\link{ActivityEvents}},
 \code{\link{MCMC}},
-\code{\link{OccurrenceEvents}}
+\code{\link{OccurrenceEvents}},
+\code{\link{PhasesMCMC}}
 }
 \author{
 N. Frerebeau

@@ -7,21 +7,13 @@
 \alias{.MCMC}
 \alias{EventsMCMC-class}
 \alias{.EventsMCMC}
-\alias{PhasesMCMC-class}
-\alias{.PhasesMCMC}
-\title{MCMC}
+\title{MCMC Events}
 \description{
 S4 classes to represent the output of a MCMC algorithm.
 }
 \section{Slots}{
 
 \describe{
-\item{\code{start}}{An \code{\link{integer}} vector containing the column number corresponding
-to the minimum of each phase.}
-
-\item{\code{end}}{An \code{\link{integer}} vector containing the column number corresponding to
-the maximum of each phase (set in the same order as in \code{start}).}
-
 \item{\code{phases}}{A \code{\link{factor}} vector specifying the name of the phases.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
@@ -34,21 +26,12 @@ original data file.}
 \note{
 These classes inherit from \code{\link{matrix}}.
 }
-\section{Coerce}{
-
-In the code snippets below, \code{x} is a \code{PhasesMCMC} object.
-\describe{
-\item{\code{as.list(x)}}{Coerces to a \code{\link{list}}.}
-}
-}
-
 \section{Subset}{
 
 In the code snippets below, \code{x} is a \verb{*MCMC} object.
 \describe{
-\item{\code{x[[i]]}}{Extracts a date/event (single chain) or a phase (two
-chains) selected by subscript \code{i}. \code{i} is a length-one \code{\link{numeric}} or
-\code{\link{character}} vector.}
+\item{\code{x[[i]]}}{Extracts a single date/event (one chain) selected by
+subscript \code{i}. \code{i} is a length-one \code{\link{numeric}} or \code{\link{character}} vector.}
 }
 }
 
@@ -56,7 +39,8 @@ chains) selected by subscript \code{i}. \code{i} is a length-one \code{\link{num
 Other class: 
 \code{\link{ActivityEvents}},
 \code{\link{CumulativeEvents}},
-\code{\link{OccurrenceEvents}}
+\code{\link{OccurrenceEvents}},
+\code{\link{PhasesMCMC}}
 }
 \author{
 N. Frerebeau

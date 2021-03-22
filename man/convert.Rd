@@ -9,10 +9,14 @@
 \alias{BCAD_to_BP-method}
 \alias{BP_to_BCAD,numeric-method}
 \alias{BP_to_BCAD,matrix-method}
+\alias{BP_to_BCAD,array-method}
 \alias{BP_to_BCAD,MCMC-method}
+\alias{BP_to_BCAD,PhasesMCMC-method}
 \alias{BCAD_to_BP,numeric-method}
 \alias{BCAD_to_BP,matrix-method}
+\alias{BCAD_to_BP,array-method}
 \alias{BCAD_to_BP,MCMC-method}
+\alias{BCAD_to_BP,PhasesMCMC-method}
 \title{Convert Time Scale}
 \usage{
 BP_to_BCAD(object)
@@ -23,13 +27,21 @@ BCAD_to_BP(object)
 
 \S4method{BP_to_BCAD}{matrix}(object)
 
+\S4method{BP_to_BCAD}{array}(object)
+
 \S4method{BP_to_BCAD}{MCMC}(object)
+
+\S4method{BP_to_BCAD}{PhasesMCMC}(object)
 
 \S4method{BCAD_to_BP}{numeric}(object)
 
 \S4method{BCAD_to_BP}{matrix}(object)
 
+\S4method{BCAD_to_BP}{array}(object)
+
 \S4method{BCAD_to_BP}{MCMC}(object)
+
+\S4method{BCAD_to_BP}{PhasesMCMC}(object)
 }
 \arguments{
 \item{object}{A \code{\link{numeric}} vector or an \code{\linkS4class{MCMC}} object.}

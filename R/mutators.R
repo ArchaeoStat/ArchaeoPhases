@@ -18,7 +18,7 @@ setMethod(
   f = "names<-",
   signature = "PhasesMCMC",
   definition = function(x, value) {
-    x@phases <- factor(value, levels = value, ordered = FALSE)
+    x@phases <- value
     methods::validObject(x)
     x
   }
@@ -31,6 +31,15 @@ setMethod(
 setMethod(
   f = "get_calendar",
   signature = "MCMC",
+  definition = function(x) x@calendar
+)
+
+#' @export
+#' @rdname mutator
+#' @aliases get_calendar,PhasesMCMC-method
+setMethod(
+  f = "get_calendar",
+  signature = "PhasesMCMC",
   definition = function(x) x@calendar
 )
 
@@ -67,6 +76,15 @@ setMethod(
 setMethod(
   f = "get_hash",
   signature = "MCMC",
+  definition = function(x) x@hash
+)
+
+#' @export
+#' @rdname mutator
+#' @aliases get_hash,PhasesMCMC-method
+setMethod(
+  f = "get_hash",
+  signature = "PhasesMCMC",
   definition = function(x) x@hash
 )
 

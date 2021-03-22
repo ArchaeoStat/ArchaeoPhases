@@ -26,16 +26,22 @@ setMethod(
   f = "summary",
   signature = "PhasesMCMC",
   definition = function(object, level = 0.95) {
-    phases <- as.list(object)
-    k <- seq_along(phases)
+    pha <- as.list(object)
+    k <- seq_along(pha)
     for (i in k) {
-      tmp <- phases[[i]]
-      tmp <- cbind(tmp, tmp[, 2] - tmp[, 1])
-      tmp <- methods::callNextMethod(object = tmp, level = level)
-      row.names(tmp) <- c("start", "end", "duration")
-      phases[[i]] <- tmp
+      tmp <- pha[[i]]
+      tmp <- cbind(tmp[, , ], tmp[, , 2] - tmp[, , 1])
+      tmp <- apply(
+        X = tmp,
+        MARGIN = 2,
+        FUN = stats_marginal,
+        level = level
+      )
+      colnames(tmp) <- c("start", "end", "duration")
+
+      pha[[i]] <- as.data.frame(t(tmp))
     }
-    phases
+    pha
   }
 )
 

@@ -669,8 +669,7 @@ setGeneric(
 #' @aliases read_chronomodel-method
 setGeneric(
   name = "read_chronomodel",
-  def = function(file, ...) standardGeneric("read_chronomodel"),
-  valueClass = "MCMC"
+  def = function(file, ...) standardGeneric("read_chronomodel")
 )
 
 #' Check for an Original MCMC File
