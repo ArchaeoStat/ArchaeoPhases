@@ -105,7 +105,7 @@ setMethod(
     tmp$Legend <- rep(arg_names, n)
 
     ## Calendar scale
-    cal <- unique(lapply(X = dots, FUN = get_calendar))
+    cal <- unique(vapply(X = dots, FUN = get_calendar, FUN.VALUE = character(1)))
     if (length(cal) != 1) {
       stop("All object must have the same calendar scale.", call. = FALSE)
     }

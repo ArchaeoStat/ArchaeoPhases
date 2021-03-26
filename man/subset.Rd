@@ -3,7 +3,6 @@
 \docType{methods}
 \name{subset}
 \alias{subset}
-\alias{[,MCMC,ANY,ANY-method}
 \alias{[,MCMC-method}
 \alias{[[,MCMC,numeric,missing-method}
 \alias{[[,PhasesMCMC,numeric,missing-method}
@@ -11,7 +10,7 @@
 \alias{[<-,MCMC-method}
 \title{Extract or Replace Parts of an Object}
 \usage{
-\S4method{[}{MCMC,ANY,ANY}(x, i, j, ..., drop = TRUE)
+\S4method{[}{MCMC}(x, i, j, ..., drop = TRUE)
 
 \S4method{[[}{MCMC,numeric,missing}(x, i)
 

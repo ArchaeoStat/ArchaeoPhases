@@ -10,7 +10,7 @@
 \alias{plot,PhasesMCMC,missing-method}
 \title{Plot}
 \usage{
-multiplot(...)
+multiplot(..., calendar = c("BCAD", "BP"))
 
 \S4method{plot}{MCMC,missing}(
   x,
@@ -41,11 +41,11 @@ multiplot(...)
 \arguments{
 \item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
 
-\item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
-
 \item{calendar}{A \code{\link{character}} string specifying whether the dates
 should be displayed in BP or BC/AD. It must be one of "\code{BCAD}" (the default)
 or "\code{BP}". Any unambiguous substring can be given.}
+
+\item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
 
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 

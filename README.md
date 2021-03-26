@@ -93,7 +93,7 @@ plot(tp) +
   ggplot2::theme(legend.position = "bottom")
 
 ## Activity plot
-ac <- activity(tp)
+ac <- activity(chrono_events)
 plot(ac) +
   ggplot2::theme_bw()
 ```
@@ -123,8 +123,7 @@ plot(chrono_phases) +
 ## (from the oldest to the youngest phase)
 set_order(chrono_phases) <- c("IUP", "Ahmarian", "UP", "EPI")
 get_order(chrono_phases)
-#> [1] IUP      Ahmarian UP       EPI     
-#> Levels: IUP < Ahmarian < UP < EPI
+#> [1] "IUP"      "Ahmarian" "UP"       "EPI"
 ```
 
 ``` r

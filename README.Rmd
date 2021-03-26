@@ -82,7 +82,7 @@ plot(tp) +
   ggplot2::theme(legend.position = "bottom")
 
 ## Activity plot
-ac <- activity(tp)
+ac <- activity(chrono_events)
 plot(ac) +
   ggplot2::theme_bw()
 ```

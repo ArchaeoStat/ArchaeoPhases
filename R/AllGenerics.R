@@ -613,7 +613,8 @@ NULL
 #' @aliases multiplot-method
 setGeneric(
   name = "multiplot",
-  def = function(...) standardGeneric("multiplot")
+  def = function(..., calendar = c("BCAD", "BP")) standardGeneric("multiplot"),
+  signature = "..."
 )
 
 # Read =========================================================================
