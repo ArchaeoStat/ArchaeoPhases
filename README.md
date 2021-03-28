@@ -4,6 +4,19 @@
 # ArchaeoPhases
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/nfrerebeau/ArchaeoPhases/workflows/R-CMD-check/badge.svg)](https://github.com/nfrerebeau/ArchaeoPhases/actions)
+
+[![CRAN
+Version](http://www.r-pkg.org/badges/version/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
+[![CRAN
+checks](https://cranchecks.info/badges/worst/ArchaeoPhases)](https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html)
+[![CRAN
+Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
+
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
 **This repository contains a heavily modified fork of the
