@@ -1,30 +1,21 @@
-## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
-events <- events[1:10000, ]
+## Coerce to MCMC objects
+## Events
+(eve <- as_events(events[1:10000, ], iteration = 1))
+## Phases
+(pha <- as_phases(phases[1:10000, ], start = c(1, 3), iteration = 1))
 
+## Compute phases
 ## Compute min-max range for all chains
-all <- phase(events)
-all
+pha1 <- phase(eve)
 
 ## Compute min-max range by group
 ## Unless otherwise specified, the phases are assumed to be unordered
-phases <- phase(events, groups = list(A = c(1, 3), B = c(2, 4)))
-phases
+pha2 <- phase(eve, groups = list(A = c(1, 3), B = c(2, 4)))
+
+all(pha == pha2)
 
 ## Set chronological order
 ## (from the oldest to the youngest phase)
-set_order(phases) <- c("B", "A")
-get_order(phases)
-
-## Compute phase ranges
-boundaries(phases)
-
-## Compute phase transition
-transition(phases)
-
-## Compute phase hiatus
-hiatus(phases)
-
-## Compute phase duration
-d <- duration(phases)
-summary(d)
+set_order(pha2) <- c("B", "A")
+get_order(pha2)
+is_ordered(pha2)

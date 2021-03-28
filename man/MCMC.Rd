@@ -14,7 +14,7 @@ S4 classes to represent the output of a MCMC algorithm.
 \section{Slots}{
 
 \describe{
-\item{\code{phases}}{A \code{\link{factor}} vector specifying the name of the phases.}
+\item{\code{events}}{A \code{\link{character}} vector specifying the name of the events.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{BCAD}").}

@@ -32,10 +32,10 @@ Extracts parallel chains from an \code{\linkS4class{MCMC}} object to create an
 library(coda)
 
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
+eve <- as_mcmc(events, iteration = 1)
 
 ## Coerce to coda
-mc <- as_coda(events[, 1:2], chains = 3)
+mc <- as_coda(eve[, 1:2], chains = 3)
 plot(mc)
 
 ## Autocorrelation

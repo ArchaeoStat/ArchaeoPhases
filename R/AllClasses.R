@@ -6,7 +6,7 @@ NULL
 #' MCMC Events
 #'
 #' S4 classes to represent the output of a MCMC algorithm.
-#' @slot phases A [`factor`] vector specifying the name of the phases.
+#' @slot events A [`character`] vector specifying the name of the events.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
@@ -31,10 +31,12 @@ NULL
 .MCMC <- setClass(
   Class = "MCMC",
   slots = c(
+    events = "character",
     calendar = "character",
     hash = "character"
   ),
   prototype = methods::prototype(
+    events = character(0),
     calendar = "BCAD",
     hash = character(0)
   ),
@@ -56,7 +58,7 @@ NULL
 #'  to the minimum of each phase.
 #' @slot end An [`integer`] vector containing the column number corresponding to
 #'  the maximum of each phase (set in the same order as in `start`).
-#' @slot phases A [`factor`] vector specifying the name of the phases.
+#' @slot phases A [`character`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`BCAD`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
@@ -73,7 +75,7 @@ NULL
 #'   `i`. `i` is a length-one [`numeric`] or [`character`] vector.}
 #'  }
 #' @note
-#'  These classes inherit from [`array`].
+#'  This class inherits from [`array`].
 #' @author N. Frerebeau
 #' @family class
 #' @docType class

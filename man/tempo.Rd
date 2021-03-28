@@ -79,18 +79,18 @@ the plot is horizontal. When change is instantaneous, the plot is vertical.
 \examples{
 \donttest{
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
-events <- events[1:10000, ]
+eve <- as_mcmc(events, iteration = 1)
+eve <- eve[1:10000, ]
 
 ## Tempo plot
-tempo1 <- tempo(events)
+tempo1 <- tempo(eve)
 plot(tempo1)
 
-tempo2 <- tempo(events, gauss = TRUE)
+tempo2 <- tempo(eve, gauss = TRUE)
 plot(tempo2, calendar = "BP")
 
 ## Activity plot
-act <- activity(events)
+act <- activity(eve)
 plot(act)
 }
 }

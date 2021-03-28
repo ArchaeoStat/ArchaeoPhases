@@ -76,7 +76,12 @@ setMethod(
       data <- BP_to_BCAD(data)
 
     ## Return an MCM object
-    .MCMC(as.matrix(data), calendar = "BCAD", hash = file_hash)
+    .MCMC(
+      as.matrix(data),
+      events = colnames(data),
+      calendar = "BCAD",
+      hash = file_hash
+    )
   }
 )
 
@@ -113,7 +118,12 @@ setMethod(
     data <- BP_to_BCAD(data)
 
     ## Return an MCM object
-    .MCMC(as.matrix(data), calendar = "BCAD", hash = file_hash)
+    .MCMC(
+      as.matrix(data),
+      events = colnames(data),
+      calendar = "BCAD",
+      hash = file_hash
+    )
   }
 )
 
@@ -128,7 +138,8 @@ setMethod(
     ## ChronoModel allows the user to choose any separator
     ## and either a period or comma for decimals
     data <- utils::read.table(file = file, header = TRUE, sep = sep,
-                              quote = "\"", dec = dec, comment.char = "#")
+                              quote = "\"", dec = dec, comment.char = "#",
+                              check.names	= FALSE)
 
     ## Calculate hash
     file_hash <- make_hash(file)
@@ -159,7 +170,12 @@ setMethod(
         hash = file_hash
       )
     } else {
-      .EventsMCMC(mtx, calendar = "BCAD", hash = file_hash)
+      .EventsMCMC(
+        mtx,
+        events = colnames(mtx),
+        calendar = "BCAD",
+        hash = file_hash
+      )
     }
   }
 )

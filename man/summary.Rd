@@ -37,20 +37,20 @@ multiple parameters. Results are given in calendar years (BC/AD).
 }
 \examples{
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
-summary(events)
+eve <- as_mcmc(events, iteration = 1)
+summary(eve)
 
 ## Plot events
-plot(events, interval = "ci", calendar = "BCAD")
-plot(events, interval = "hpdi", calendar = "BC")
+plot(eve, interval = "ci", calendar = "BCAD")
+plot(eve, interval = "hpdi", calendar = "BP")
 
 ## Compute phases
-phases <- phase(events, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
-summary(phases)
+pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
+summary(pha)
 
 ## Plot phases
-plot(phases, succession = FALSE, calendar = "BCAD")
-plot(phases, succession = TRUE, calendar = "BCAD")
+plot(pha, succession = FALSE, calendar = "BCAD")
+plot(pha, succession = TRUE, calendar = "BCAD")
 }
 \seealso{
 Other statistics: 

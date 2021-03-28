@@ -1,5 +1,5 @@
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
+eve <- as_mcmc(events, iteration = 1)
 
 ## Coerce to Phases
-phases <- as_phases(Phases, iteration = 1)
+pha <- as_phases(phases, start = c(1, 3), iteration = 1)

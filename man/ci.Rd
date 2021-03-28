@@ -41,14 +41,14 @@ shortest of all those intervals.
 }
 \examples{
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
-events <- events[1:10000, ]
+eve <- as_mcmc(events, iteration = 1)
+eve <- eve[1:10000, ]
 
 ## Credible interval
-interval_credible(events, level = 0.95)
+interval_credible(eve, level = 0.95)
 
 ## HPD regions
-interval_hpd(events, level = 0.95)
+interval_hpd(eve, level = 0.95)
 }
 \seealso{
 Other statistics: 

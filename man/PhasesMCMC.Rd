@@ -18,7 +18,7 @@ to the minimum of each phase.}
 \item{\code{end}}{An \code{\link{integer}} vector containing the column number corresponding to
 the maximum of each phase (set in the same order as in \code{start}).}
 
-\item{\code{phases}}{A \code{\link{factor}} vector specifying the name of the phases.}
+\item{\code{phases}}{A \code{\link{character}} vector specifying the name of the phases.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{BCAD}").}
@@ -28,7 +28,7 @@ original data file.}
 }}
 
 \note{
-These classes inherit from \code{\link{array}}.
+This class inherits from \code{\link{array}}.
 }
 \section{Coerce}{
 

@@ -89,7 +89,34 @@ setMethod(
     if (BP)
       from <- BP_to_BCAD(from)
 
-    .MCMC(from, calendar = "BCAD")
+    ## Event names
+    event_names <- colnames(from)
+    if (is.null(event_names)) event_names <- paste0("E", seq_len(ncol(from)))
+
+    .MCMC(from, events = event_names, calendar = "BCAD")
+  }
+)
+
+#' @export
+#' @rdname coerce
+#' @aliases as_events,matrix-method
+setMethod(
+  f = "as_events",
+  signature = "matrix",
+  definition = function(from, BP = FALSE, iteration = NULL) {
+    ## Remove the iteration column
+    if (!is.null(iteration))
+      from <- from[, -iteration]
+
+    ## Convert from BP to BC/AD
+    if (BP)
+      from <- BP_to_BCAD(from)
+
+    ## Event names
+    event_names <- colnames(from)
+    if (is.null(event_names)) event_names <- paste0("E", seq_len(ncol(from)))
+
+    .EventsMCMC(from, events = event_names, calendar = "BCAD")
   }
 )
 
@@ -136,6 +163,18 @@ setMethod(
 #' @aliases as_mcmc,data.frame-method
 setMethod(
   f = "as_mcmc",
+  signature = "data.frame",
+  definition = function(from, BP = FALSE, iteration = NULL) {
+    from <- data.matrix(from)
+    methods::callGeneric(from = from, BP = BP, iteration = iteration)
+  }
+)
+
+#' @export
+#' @rdname coerce
+#' @aliases as_events,data.frame-method
+setMethod(
+  f = "as_events",
   signature = "data.frame",
   definition = function(from, BP = FALSE, iteration = NULL) {
     from <- data.matrix(from)

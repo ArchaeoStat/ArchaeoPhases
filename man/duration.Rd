@@ -25,35 +25,29 @@ Phase Duration
 }
 \examples{
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
-events <- events[1:10000, ]
-
-## Compute min-max range for all chains
-all <- phase(events)
-all
+eve <- as_mcmc(events, iteration = 1)
+eve <- eve[1:10000, ]
 
 ## Compute min-max range by group
 ## Unless otherwise specified, the phases are assumed to be unordered
-phases <- phase(events, groups = list(A = c(1, 3), B = c(2, 4)))
-phases
+pha <- phase(eve, groups = list(A = c(1, 3), B = c(2, 4)))
 
 ## Set chronological order
 ## (from the oldest to the youngest phase)
-set_order(phases) <- c("B", "A")
-get_order(phases)
+set_order(pha) <- c("B", "A")
 
 ## Compute phase ranges
-boundaries(phases)
+boundaries(pha)
 
 ## Compute phase transition
-transition(phases)
+transition(pha)
 
 ## Compute phase hiatus
-hiatus(phases)
+hiatus(pha)
 
 ## Compute phase duration
-d <- duration(phases)
-summary(d)
+dur <- duration(pha)
+summary(dur)
 }
 \seealso{
 Other phases: 

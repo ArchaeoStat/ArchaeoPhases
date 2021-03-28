@@ -69,14 +69,24 @@ NULL
 #' @aliases as_mcmc-method
 setGeneric(
   name = "as_mcmc",
-  def = function(from, ...) standardGeneric("as_mcmc")
+  def = function(from, ...) standardGeneric("as_mcmc"),
+  valueClass = "MCMC"
+)
+
+#' @rdname coerce
+#' @aliases as_events-method
+setGeneric(
+  name = "as_events",
+  def = function(from, ...) standardGeneric("as_events"),
+  valueClass = "EventsMCMC"
 )
 
 #' @rdname coerce
 #' @aliases as_phases-method
 setGeneric(
   name = "as_phases",
-  def = function(from, ...) standardGeneric("as_phases")
+  def = function(from, ...) standardGeneric("as_phases"),
+  valueClass = "PhasesMCMC"
 )
 
 # Extract ======================================================================
@@ -491,7 +501,7 @@ setGeneric(
 #' @return
 #'  A [`data.frame`] containing the endpoints (in years BC/AD) of the shortest
 #'  time range (at a given `level`).
-#' @example inst/examples/ex-phase.R
+#' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phases
 #' @docType methods
@@ -508,7 +518,7 @@ setGeneric(
 #' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
 #'  [`PhasesMCMC-class`] object.
 #' @param ... Currently not used.
-#' @example inst/examples/ex-phase.R
+#' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phases
 #' @docType methods
@@ -535,7 +545,7 @@ setGeneric(
 #' @return
 #'  A [`data.frame`] containing the endpoints (in years BC/AD) of the
 #'  transition interval for each pair of successive phases (at a given `level`).
-#' @example inst/examples/ex-phase.R
+#' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phases
 #' @docType methods
@@ -562,7 +572,7 @@ setGeneric(
 #' @return
 #'  A [`data.frame`] containing the endpoints (in years BC/AD) of the hiatus
 #'  between each pair of successive phases (at a given `level`).
-#' @example inst/examples/ex-phase.R
+#' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phases
 #' @docType methods

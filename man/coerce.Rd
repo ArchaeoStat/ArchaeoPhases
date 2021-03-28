@@ -5,23 +5,33 @@
 \alias{coerce}
 \alias{as_mcmc}
 \alias{as_mcmc-method}
+\alias{as_events}
+\alias{as_events-method}
 \alias{as_phases}
 \alias{as_phases-method}
 \alias{as_mcmc,matrix-method}
+\alias{as_events,matrix-method}
 \alias{as_phases,matrix-method}
 \alias{as_mcmc,data.frame-method}
+\alias{as_events,data.frame-method}
 \alias{as_phases,data.frame-method}
 \title{Coerce}
 \usage{
 as_mcmc(from, ...)
 
+as_events(from, ...)
+
 as_phases(from, ...)
 
 \S4method{as_mcmc}{matrix}(from, BP = FALSE, iteration = NULL)
 
+\S4method{as_events}{matrix}(from, BP = FALSE, iteration = NULL)
+
 \S4method{as_phases}{matrix}(from, start, end, BP = FALSE, iteration = NULL)
 
 \S4method{as_mcmc}{data.frame}(from, BP = FALSE, iteration = NULL)
+
+\S4method{as_events}{data.frame}(from, BP = FALSE, iteration = NULL)
 
 \S4method{as_phases}{data.frame}(from, start, end, BP = FALSE, iteration = NULL)
 }
@@ -59,10 +69,10 @@ file exported from '\href{https://chronomodel.com/}{ChronoModel}'.
 }
 \examples{
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
+eve <- as_mcmc(events, iteration = 1)
 
 ## Coerce to Phases
-phases <- as_phases(Phases, iteration = 1)
+pha <- as_phases(phases, start = c(1, 3), iteration = 1)
 }
 \seealso{
 Other read: 

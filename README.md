@@ -20,7 +20,8 @@ simulations from [ChronoModel](https://chronomodel.com),
 study of rhythms of the long term from the posterior distribution of a
 series of dates (tempo and activity plot). It also allows the estimation
 and visualization of time ranges from the posterior distribution of
-groups of dates (e.g. transition and hiatus between successive phases).
+groups of dates (e.g. duration, transition and hiatus between successive
+phases).
 
 To cite **ArchaeoPhases** in publications please use:
 
@@ -105,10 +106,10 @@ plot(ac) +
 ``` r
 boundaries(chrono_phases, level = 0.95)
 #>           start    end
-#> EPI      -29071 -27102
-#> UP       -38559 -29335
-#> Ahmarian -42189 -37461
-#> IUP      -43217 -41106
+#> EPI      -28979 -26970
+#> UP       -38570 -29369
+#> Ahmarian -42136 -37401
+#> IUP      -43240 -41161
 ```
 
 ``` r

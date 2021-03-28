@@ -63,14 +63,14 @@ of confidence.
 \examples{
 \donttest{
 ## Coerce to MCMC
-events <- as_mcmc(Events, iteration = 1)
-events <- events[1:10000, ]
+eve <- as_mcmc(events, iteration = 1)
+eve <- eve[1:10000, ]
 
 ## Occurrence plot
-occ_ci <- occurrence(events, interval = "ci")
+occ_ci <- occurrence(eve, interval = "ci")
 plot(occ_ci, calendar = "BCAD")
 
-occ_hpdi <- occurrence(events, interval = "hpdi")
+occ_hpdi <- occurrence(eve, interval = "hpdi")
 plot(occ_hpdi, calendar = "BP")
 }
 }

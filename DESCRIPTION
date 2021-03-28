@@ -19,17 +19,19 @@ Authors@R:
              comment = c(ORCID = "0000-0001-8116-782X")),
       person(given = "Nicolas",
              family = "Frerebeau",
-             role = c("aut"),
+             role = "aut",
              email = "nicolas.frerebeau@u-bordeaux-montaigne.fr",
              comment = c(ORCID = "0000-0001-5759-4944")))
 Maintainer: Anne Philippe <anne.philippe@univ-nantes.fr>
 Description: Statistical analysis of archaeological dates and groups of
     dates. This package allows to post-process Markov Chain Monte Carlo
-    (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>, 'Oxcal'
-    <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'
-    <https://bcal.shef.ac.uk/>. It provides functions for the estimation
-    and visualization of time ranges from the posterior distribution of a
-    series of dates (e.g. transition and hiatus between successive
+    (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>,
+    'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'
+    <https://bcal.shef.ac.uk/>. It provides functions for the study of
+    rhythms of the long term from the posterior distribution of a series
+    of dates (tempo and activity plot). It also allows the estimation and
+    visualization of time ranges from the posterior distribution of groups
+    of dates (e.g. duration, transition and hiatus between successive
     phases).
 License: GPL (>= 3)
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
