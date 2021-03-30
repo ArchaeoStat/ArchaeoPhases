@@ -5,45 +5,89 @@ NULL
 # Min-Max ======================================================================
 #' @export
 #' @rdname phase
-#' @aliases phase,MCMC,missing-method
+#' @aliases as_phases,matrix,missing-method
 setMethod(
-  f = "phase",
-  signature = c(x = "MCMC", groups = "missing"),
-  definition = function(x) {
-    groups <- list(seq_len(ncol(x)))
-    methods::callGeneric(x = x, groups = groups)
+  f = "as_phases",
+  signature = c(from = "matrix", groups = "missing"),
+  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
+                        end = start + 1, BP = FALSE, iteration = NULL) {
+    ## Remove the iteration column
+    if (!is.null(iteration))
+      from <- from[, -iteration]
+
+    ## Convert from BP to BC/AD
+    if (BP)
+      from <- BP_to_BCAD(from)
+
+    pha <- paste0("phase_", seq_along(start))
+    arr <- array(data = NA_real_, dim = c(nrow(from), ncol(from) / 2, 2),
+                 dimnames = list(NULL, pha, c("begin", "end")))
+    arr[, , 1] <- from[, start]
+    arr[, , 2] <- from[, end]
+
+    .PhasesMCMC(
+      arr,
+      phases = pha,
+      ordered = FALSE,
+      calendar = "BCAD"
+    )
   }
 )
 
 #' @export
 #' @rdname phase
-#' @aliases phase,MCMC,list-method
+#' @aliases as_phases,data.frame,missing-method
 setMethod(
-  f = "phase",
-  signature = c(x = "MCMC", groups = "list"),
-  definition = function(x, groups, ordered = FALSE) {
-    m <- nrow(x)
+  f = "as_phases",
+  signature = c(from = "data.frame", groups = "missing"),
+  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
+                        end = start + 1, BP = FALSE, iteration = NULL) {
+    from <- data.matrix(from)
+    methods::callGeneric(from, start = start, end = end, BP = BP,
+                         iteration = iteration)
+  }
+)
+
+#' @export
+#' @rdname phase
+#' @aliases as_phases,MCMC,missing-method
+setMethod(
+  f = "as_phases",
+  signature = c(from = "MCMC", groups = "missing"),
+  definition = function(from) {
+    groups <- list(seq_len(ncol(from)))
+    methods::callGeneric(from = from, groups = groups)
+  }
+)
+
+#' @export
+#' @rdname phase
+#' @aliases as_phases,MCMC,list-method
+setMethod(
+  f = "as_phases",
+  signature = c(from = "MCMC", groups = "list"),
+  definition = function(from, groups, ordered = FALSE) {
+    m <- nrow(from)
     n <- length(groups) # Number of phases
     k <- seq_len(n)
     grp <- if (is.null(names(groups))) paste0("phase_", k) else names(groups)
 
     ## Build array
     min_max <- array(data = NA_real_, dim = c(m, n, 2))
-    dimnames(min_max) <- list(seq_len(nrow(min_max)), grp, c("begin", "end"))
+    dimnames(min_max) <- list(NULL, grp, c("begin", "end"))
     for (i in k) {
       index <- groups[[i]]
-      tmp <- x[, index, drop = FALSE]
+      tmp <- from[, index, drop = FALSE]
       min_max[, i, 1] <- apply(X = tmp, MARGIN = 1, FUN = min)
       min_max[, i, 2] <- apply(X = tmp, MARGIN = 1, FUN = max)
     }
 
-    # grp <- factor(grp, levels = grp, ordered = ordered)
     .PhasesMCMC(
       min_max,
       phases = grp,
       ordered = ordered,
-      calendar = get_calendar(x),
-      hash = get_hash(x)
+      calendar = get_calendar(from),
+      hash = get_hash(from)
     )
   }
 )

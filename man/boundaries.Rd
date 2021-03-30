@@ -38,7 +38,7 @@ eve <- eve[1:10000, ]
 
 ## Compute min-max range by group
 ## Unless otherwise specified, the phases are assumed to be unordered
-pha <- phase(eve, groups = list(A = c(1, 3), B = c(2, 4)))
+pha <- as_phases(eve, groups = list(A = c(1, 3), B = c(2, 4)))
 
 ## Set chronological order
 ## (from the oldest to the youngest phase)
@@ -61,7 +61,7 @@ summary(dur)
 Other phases: 
 \code{\link{duration}()},
 \code{\link{hiatus}()},
-\code{\link{phase}()},
+\code{\link{phase}},
 \code{\link{transition}()}
 }
 \author{

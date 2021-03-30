@@ -4,13 +4,13 @@
 ## Phases
 (pha <- as_phases(phases[1:10000, ], start = c(1, 3), iteration = 1))
 
-## Compute phases
+## Compute phases from events/dates
 ## Compute min-max range for all chains
-pha1 <- phase(eve)
+pha1 <- as_phases(eve)
 
 ## Compute min-max range by group
 ## Unless otherwise specified, the phases are assumed to be unordered
-pha2 <- phase(eve, groups = list(A = c(1, 3), B = c(2, 4)))
+pha2 <- as_phases(eve, groups = list(A = c(1, 3), B = c(2, 4)))
 
 all(pha == pha2)
 

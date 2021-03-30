@@ -7,6 +7,7 @@
 \alias{activity,MCMC-method}
 \alias{activity,CumulativeEvents-method}
 \alias{plot,ActivityEvents,missing-method}
+\alias{multiplot,ActivityEvents-method}
 \title{Activity Plot}
 \usage{
 activity(object, ...)
@@ -16,12 +17,15 @@ activity(object, ...)
   elapsed = FALSE,
   origin = 1,
   time = range(object),
-  n = 50 * ncol(object)
+  n = 50 * ncol(object),
+  progress = getOption("ArchaeoPhases.progress")
 )
 
 \S4method{activity}{CumulativeEvents}(object)
 
 \S4method{plot}{ActivityEvents,missing}(x, calendar = c("BCAD", "BP"))
+
+\S4method{multiplot}{ActivityEvents}(..., calendar = c("BCAD", "BP"))
 }
 \arguments{
 \item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
@@ -39,6 +43,8 @@ date to estimate for, in BC/AD years. Ignored if \code{elapsed} is \code{TRUE}.}
 
 \item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
 which the density is to be estimated.}
+
+\item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
 
 \item{x}{An \code{\linkS4class{ActivityEvents}} object.}
 

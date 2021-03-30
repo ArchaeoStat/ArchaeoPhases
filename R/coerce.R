@@ -120,43 +120,6 @@ setMethod(
   }
 )
 
-#' @export
-#' @rdname coerce
-#' @aliases as_phases,matrix-method
-setMethod(
-  f = "as_phases",
-  signature = "matrix",
-  definition = function(from, start, end, BP = FALSE, iteration = NULL) {
-    ## Remove the iteration column
-    if (!is.null(iteration))
-      from <- from[, -iteration]
-
-    if (missing(start)) {
-      start <- seq(from = 1, to = ncol(from), by = 2)
-    }
-    if (missing(end)) {
-      end <- start + 1
-    }
-
-    ## Convert from BP to BC/AD
-    if (BP)
-      from <- BP_to_BCAD(from)
-
-    pha <- paste0("phase_", seq_along(start))
-    arr <- array(data = NA_real_, dim = c(nrow(from), ncol(from) / 2, 2),
-                 dimnames = list(NULL, pha, c("begin", "end")))
-    arr[, , 1] <- from[, start]
-    arr[, , 2] <- from[, end]
-
-    .PhasesMCMC(
-      arr,
-      phases = pha,
-      ordered = FALSE,
-      calendar = "BCAD"
-    )
-  }
-)
-
 ## From data.frame -------------------------------------------------------------
 #' @export
 #' @rdname coerce
@@ -179,17 +142,5 @@ setMethod(
   definition = function(from, BP = FALSE, iteration = NULL) {
     from <- data.matrix(from)
     methods::callGeneric(from = from, BP = BP, iteration = iteration)
-  }
-)
-
-#' @export
-#' @rdname coerce
-#' @aliases as_phases,data.frame-method
-setMethod(
-  f = "as_phases",
-  signature = "data.frame",
-  definition = function(from, start, end, BP = FALSE, iteration = NULL) {
-    from <- data.matrix(from)
-    methods::callGeneric(from, start, end, BP = BP, iteration = iteration)
   }
 )

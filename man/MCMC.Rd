@@ -37,10 +37,10 @@ subscript \code{i}. \code{i} is a length-one \code{\link{numeric}} or \code{\lin
 
 \seealso{
 Other class: 
-\code{\link{ActivityEvents}},
-\code{\link{CumulativeEvents}},
-\code{\link{OccurrenceEvents}},
-\code{\link{PhasesMCMC}}
+\code{\link{ActivityEvents-class}},
+\code{\link{CumulativeEvents-class}},
+\code{\link{OccurrenceEvents-class}},
+\code{\link{PhasesMCMC-class}}
 }
 \author{
 N. Frerebeau

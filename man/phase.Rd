@@ -3,7 +3,8 @@
 \docType{methods}
 \name{phase}
 \alias{phase}
-\alias{phase-method}
+\alias{as_phases}
+\alias{as_phases-method}
 \alias{get_order}
 \alias{get_order-method}
 \alias{set_order<-}
@@ -12,16 +13,18 @@
 \alias{as_ordered-method}
 \alias{is_ordered}
 \alias{is_ordered-method}
-\alias{phase,MCMC,missing-method}
-\alias{phase,MCMC,list-method}
+\alias{as_phases,matrix,missing-method}
+\alias{as_phases,data.frame,missing-method}
+\alias{as_phases,MCMC,missing-method}
+\alias{as_phases,MCMC,list-method}
 \alias{set_order<-,PhasesMCMC,character-method}
 \alias{set_order,PhasesMCMC,character-method}
 \alias{get_order,PhasesMCMC-method}
 \alias{as_ordered,PhasesMCMC-method}
 \alias{is_ordered,PhasesMCMC-method}
-\title{Phase}
+\title{Phases}
 \usage{
-phase(x, groups, ...)
+as_phases(from, groups, ...)
 
 get_order(x, value)
 
@@ -31,9 +34,25 @@ as_ordered(x)
 
 is_ordered(x)
 
-\S4method{phase}{MCMC,missing}(x)
+\S4method{as_phases}{matrix,missing}(
+  from,
+  start = seq(from = 1, to = ncol(from), by = 2),
+  end = start + 1,
+  BP = FALSE,
+  iteration = NULL
+)
 
-\S4method{phase}{MCMC,list}(x, groups, ordered = FALSE)
+\S4method{as_phases}{data.frame,missing}(
+  from,
+  start = seq(from = 1, to = ncol(from), by = 2),
+  end = start + 1,
+  BP = FALSE,
+  iteration = NULL
+)
+
+\S4method{as_phases}{MCMC,missing}(from)
+
+\S4method{as_phases}{MCMC,list}(from, groups, ordered = FALSE)
 
 \S4method{set_order}{PhasesMCMC,character}(x) <- value
 
@@ -44,13 +63,32 @@ is_ordered(x)
 \S4method{is_ordered}{PhasesMCMC}(x)
 }
 \arguments{
-\item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
+\item{from}{A \code{numeric} \code{\link{matrix}} or an \code{\linkS4class{MCMC}}.}
 
 \item{groups}{A \code{\link{list}}.}
 
 \item{...}{Currently not used.}
 
+\item{x}{A \code{\linkS4class{PhasesMCMC}} object.}
+
 \item{value}{A possible value for the element(s) of \code{x}.}
+
+\item{start}{An \code{\link{integer}} vector specifying the index of the columns
+corresponding to the beginning of the phases. If missing, every other column
+is used starting from the first column (after deleting the \code{iteration}
+column, if any).}
+
+\item{end}{An \code{\link{integer}} vector specifying the index of the columns
+corresponding to the end of the phases. If missing, every other column
+is used starting from the second column (after deleting the \code{iteration}
+column, if any).}
+
+\item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
+BC/AD? This should not be \code{TRUE} unless you change the default settings in
+'OxCal' or 'ChronoModel'.}
+
+\item{iteration}{An \code{\link{integer}} specifying the index of the iteration column
+to be removed.}
 
 \item{ordered}{A \code{\link{logical}} scalar: should the \code{groups} be regarded as
 ordered (in the order given)?}
@@ -61,6 +99,10 @@ A \code{\linkS4class{PhasesMCMC}} object.
 \description{
 Constructs the minimum and maximum for a group of events (phase).
 }
+\note{
+The default value of \code{start} or \code{end} corresponds to a CSV file exported
+from \href{https://chronomodel.com/}{ChronoModel}.
+}
 \examples{
 ## Coerce to MCMC objects
 ## Events
@@ -68,13 +110,13 @@ Constructs the minimum and maximum for a group of events (phase).
 ## Phases
 (pha <- as_phases(phases[1:10000, ], start = c(1, 3), iteration = 1))
 
-## Compute phases
+## Compute phases from events/dates
 ## Compute min-max range for all chains
-pha1 <- phase(eve)
+pha1 <- as_phases(eve)
 
 ## Compute min-max range by group
 ## Unless otherwise specified, the phases are assumed to be unordered
-pha2 <- phase(eve, groups = list(A = c(1, 3), B = c(2, 4)))
+pha2 <- as_phases(eve, groups = list(A = c(1, 3), B = c(2, 4)))
 
 all(pha == pha2)
 

@@ -75,6 +75,7 @@ Collate:
     'subset.R'
     'summary.R'
     'tempo.R'
+    'test.R'
     'time.R'
     'utilities.R'
     'zzz.R'

@@ -138,8 +138,7 @@ setMethod(
     ## ChronoModel allows the user to choose any separator
     ## and either a period or comma for decimals
     data <- utils::read.table(file = file, header = TRUE, sep = sep,
-                              quote = "\"", dec = dec, comment.char = "#",
-                              check.names	= FALSE)
+                              quote = "\"", dec = dec, comment.char = "#")
 
     ## Calculate hash
     file_hash <- make_hash(file)

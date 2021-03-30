@@ -55,7 +55,7 @@ BC/AD? This should not be \code{TRUE} unless you change the default settings in
 'OxCal' or 'ChronoModel'.}
 
 \item{bin_width}{The bin width specified for the
-'\href{https://bcal.shef.ac.uk/}{BCal}' calibration. Defaults to the 'BCal'
+\href{https://bcal.shef.ac.uk/}{BCal} calibration. Defaults to the BCal
 default of 1.}
 
 \item{phases}{A \code{\link{logical}} scalar: should the data be imported as phases?}

@@ -7,33 +7,23 @@
 \alias{as_mcmc-method}
 \alias{as_events}
 \alias{as_events-method}
-\alias{as_phases}
-\alias{as_phases-method}
 \alias{as_mcmc,matrix-method}
 \alias{as_events,matrix-method}
-\alias{as_phases,matrix-method}
 \alias{as_mcmc,data.frame-method}
 \alias{as_events,data.frame-method}
-\alias{as_phases,data.frame-method}
 \title{Coerce}
 \usage{
 as_mcmc(from, ...)
 
 as_events(from, ...)
 
-as_phases(from, ...)
-
 \S4method{as_mcmc}{matrix}(from, BP = FALSE, iteration = NULL)
 
 \S4method{as_events}{matrix}(from, BP = FALSE, iteration = NULL)
 
-\S4method{as_phases}{matrix}(from, start, end, BP = FALSE, iteration = NULL)
-
 \S4method{as_mcmc}{data.frame}(from, BP = FALSE, iteration = NULL)
 
 \S4method{as_events}{data.frame}(from, BP = FALSE, iteration = NULL)
-
-\S4method{as_phases}{data.frame}(from, start, end, BP = FALSE, iteration = NULL)
 }
 \arguments{
 \item{from}{from An object to be coerced.}
@@ -46,33 +36,16 @@ BC/AD? This should not be \code{TRUE} unless you change the default settings in
 
 \item{iteration}{An \code{\link{integer}} specifying the index of the iteration column
 to be removed.}
-
-\item{start}{An \code{\link{integer}} vector specifying the index of the columns
-corresponding to the beginning of the phases. If missing, every other column
-is used starting from the first column (after deleting the \code{iteration}
-column, if any).}
-
-\item{end}{An \code{\link{integer}} vector specifying the index of the columns
-corresponding to the end of the phases. If missing, every other column
-is used starting from the second column (after deleting the \code{iteration}
-column, if any).}
 }
 \value{
-An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.
+An \code{\linkS4class{MCMC}} object.
 }
 \description{
 Coerce
 }
-\note{
-If \code{start} or \code{end} is missing, the default value of corresponds to a CSV
-file exported from '\href{https://chronomodel.com/}{ChronoModel}'.
-}
 \examples{
 ## Coerce to MCMC
 eve <- as_mcmc(events, iteration = 1)
-
-## Coerce to Phases
-pha <- as_phases(phases, start = c(1, 3), iteration = 1)
 }
 \seealso{
 Other read: 

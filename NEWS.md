@@ -2,10 +2,11 @@
 
 ## Breaking changes
 * Full rewrite in S4.
+* Remove Shiny application.
 
 | Old | New |
 |:----|:----|
-| `CreateMinMaxGroup()` | `phase()` |
+| `CreateMinMaxGroup()` | `as_phases(<matrix>)` |
 | `CredibleInterval()`, `credible_interval()` | `interval_credible(<numeric>, <numeric>)` |
 | `DatesHiatus()`, `dates_hiatus()` | `lapse(<numeric>, <numeric>)` |
 | `MarginalPlot()`, `marginal_plot()` | `plot(<MCMC>)` |

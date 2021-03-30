@@ -79,10 +79,6 @@ NULL
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
-#' @name PhasesMCMC
-#' @rdname PhasesMCMC
-NULL
-
 #' @rdname PhasesMCMC
 #' @aliases PhasesMCMC-class
 .PhasesMCMC <- setClass(
@@ -136,10 +132,6 @@ NULL
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
-#' @name CumulativeEvents
-#' @rdname CumulativeEvents
-NULL
-
 #' @rdname CumulativeEvents
 #' @aliases CumulativeEvents-class
 .CumulativeEvents <- setClass(
@@ -174,10 +166,6 @@ NULL
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
-#' @name ActivityEvents
-#' @rdname ActivityEvents
-NULL
-
 #' @rdname ActivityEvents
 #' @aliases ActivityEvents-class
 .ActivityEvents <- setClass(
@@ -212,10 +200,6 @@ NULL
 #' @author N. Frerebeau
 #' @family class
 #' @docType class
-#' @name OccurrenceEvents
-#' @rdname OccurrenceEvents
-NULL
-
 #' @rdname OccurrenceEvents
 #' @aliases OccurrenceEvents-class
 .OccurrenceEvents <- setClass(

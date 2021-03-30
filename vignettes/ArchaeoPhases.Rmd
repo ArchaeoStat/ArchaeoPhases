@@ -164,7 +164,7 @@ A group of dates (phase) is defined by the date of the minimum and the date of t
 ```{r}
 ## Build phases from events
 p <- list(EPI = 1, UP = 2:4, Ahmarian = 5:15, IUP = 16)
-chrono_groups <- phase(chrono_events, groups = p)
+chrono_groups <- as_phases(chrono_events, groups = p)
 
 all(chrono_phases == chrono_phases)
 ```

@@ -9,10 +9,12 @@ setMethod(
   f = "activity",
   signature = "MCMC",
   definition = function(object, elapsed = FALSE, origin = 1,
-                        time = range(object), n = 50 * ncol(object)) {
+                        time = range(object), n = 50 * ncol(object),
+                        progress = getOption("ArchaeoPhases.progress")) {
     ## Tempo
     tmp <- tempo(object, level = 0.95, count = FALSE, gauss = FALSE,
-                 elapsed = elapsed, origin = origin, time = time, n = n)
+                 elapsed = elapsed, origin = origin, time = time, n = n,
+                 progress = progress)
     ## Activity
     methods::callGeneric(object = tmp)
   }
@@ -82,7 +84,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname tempo
+#' @rdname activity
 #' @aliases multiplot,ActivityEvents-method
 setMethod(
   f = "multiplot",

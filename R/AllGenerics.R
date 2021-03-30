@@ -38,14 +38,6 @@ setGeneric(
 #' Coerce
 #'
 #' @param from from An object to be coerced.
-#' @param start An [`integer`] vector specifying the index of the columns
-#'  corresponding to the beginning of the phases. If missing, every other column
-#'  is used starting from the first column (after deleting the `iteration`
-#'  column, if any).
-#' @param end An [`integer`] vector specifying the index of the columns
-#'  corresponding to the end of the phases. If missing, every other column
-#'  is used starting from the second column (after deleting the `iteration`
-#'  column, if any).
 #' @param BP A [`logical`] scalar: should the data be converted from BP to
 #'  BC/AD? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
@@ -53,10 +45,7 @@ setGeneric(
 #'  to be removed.
 #' @param ... Currently not used.
 #' @return
-#'  An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
-#' @note
-#'  If `start` or `end` is missing, the default value of corresponds to a CSV
-#'  file exported from '\href{https://chronomodel.com/}{ChronoModel}'.
+#'  An [`MCMC-class`] object.
 #' @example inst/examples/ex-coerce.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family read
@@ -81,14 +70,6 @@ setGeneric(
   valueClass = "EventsMCMC"
 )
 
-#' @rdname coerce
-#' @aliases as_phases-method
-setGeneric(
-  name = "as_phases",
-  def = function(from, ...) standardGeneric("as_phases"),
-  valueClass = "PhasesMCMC"
-)
-
 # Extract ======================================================================
 ## Mutators --------------------------------------------------------------------
 #' Get or Set Parts of an Object
@@ -97,7 +78,7 @@ setGeneric(
 #' @param x An object from which to get or set element(s).
 #' @param value A possible value for the element(s) of `x`.
 #' @return
-#'  An object of the same sort as \code{object} with the new values assigned.
+#'  An object of the same sort as `object` with the new values assigned.
 # @example inst/examples/ex-mutator.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -240,6 +221,7 @@ setGeneric(
 #'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the density is to be estimated.
+#' @param progress A [`logical`] scalar: should a progress bar be displayed?
 #' @param x An [`ActivityEvents-class`] object.
 #' @param calendar A [`character`] string specifying whether the dates
 #'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
@@ -398,52 +380,36 @@ setGeneric(
   def = function(x, y, ...) standardGeneric("lapse")
 )
 
-## Anteriority -----------------------------------------------------------------
-#' Bayesian Test for Anteriority/Posteriority Between Two Parameters
-#'
-#' This function estimates the posterior probability that event `x` is older
-#' than event `b` using the output of the MCMC algorithm. This provides a
-#' Bayesian test for checking the following assumption: "Event `x` is older than
-#' event `y`".
-#' @param x A [`numeric`] vector giving the output of the MCMC algorithm for the
-#'  first parameter.
-#' @param y A [`numeric`] vector giving the output of the MCMC algorithm for the
-#'  second parameter.
-#' @param ... Currently not used.
-#' @details
-#'  For a given output of MCMC algorithm, this function estimates the posterior
-#'  probability of the event \eqn{x < y} by the relative frequency of the event
-#'  "the value of event `x` is less than the value of event `y`" in the
-#'  simulated Markov chain.
-#' @return A [`numeric`] vector (the posterior probability of the assumption:
-#'  "event `x` is older than event `y`").
-#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family tests
-#' @docType methods
-#' @name older
-#' @rdname older
-NULL
-
-#' @rdname older
-#' @aliases test_older-method
-setGeneric(
-  name = "test_older",
-  def = function(x, y, ...) standardGeneric("test_older")
-)
-
 # Phase ========================================================================
-## Boundaries ------------------------------------------------------------------
-#' Phase
+## Build -----------------------------------------------------------------------
+#' Phases
 #'
 #' Constructs the minimum and maximum for a group of events (phase).
-#' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
+#' @param from A `numeric` [`matrix`] or an [`MCMC-class`].
+#' @param x A [`PhasesMCMC-class`] object.
 #' @param groups A [`list`].
+#' @param start An [`integer`] vector specifying the index of the columns
+#'  corresponding to the beginning of the phases. If missing, every other column
+#'  is used starting from the first column (after deleting the `iteration`
+#'  column, if any).
+#' @param end An [`integer`] vector specifying the index of the columns
+#'  corresponding to the end of the phases. If missing, every other column
+#'  is used starting from the second column (after deleting the `iteration`
+#'  column, if any).
+#' @param BP A [`logical`] scalar: should the data be converted from BP to
+#'  BC/AD? This should not be `TRUE` unless you change the default settings in
+#'  'OxCal' or 'ChronoModel'.
+#' @param iteration An [`integer`] specifying the index of the iteration column
+#'  to be removed.
 #' @param ordered A [`logical`] scalar: should the `groups` be regarded as
 #'  ordered (in the order given)?
 #' @param value A possible value for the element(s) of `x`.
 #' @param ... Currently not used.
 #' @return
 #'  A [`PhasesMCMC-class`] object.
+#' @note
+#'  The default value of `start` or `end` corresponds to a CSV file exported
+#'  from [ChronoModel](https://chronomodel.com/).
 #' @example inst/examples/ex-phase.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phases
@@ -453,10 +419,10 @@ setGeneric(
 NULL
 
 #' @rdname phase
-#' @aliases phase-method
+#' @aliases as_phases-method
 setGeneric(
-  name = "phase",
-  def = function(x, groups, ...) standardGeneric("phase"),
+  name = "as_phases",
+  def = function(from, groups, ...) standardGeneric("as_phases"),
   valueClass = "PhasesMCMC"
 )
 
@@ -627,6 +593,36 @@ setGeneric(
   signature = "..."
 )
 
+# Test =========================================================================
+## Anteriority -----------------------------------------------------------------
+#' Bayesian Test for Anteriority/Posteriority
+#'
+#' This function estimates the posterior probability that event `x` is older
+#' than event `b` using the output of the MCMC algorithm. This provides a
+#' Bayesian test for checking the following assumption: "Event `x` is older than
+#' event `y`".
+#' @param x A [`numeric`] vector giving the output of the MCMC algorithm for the
+#'  first parameter.
+#' @param y A [`numeric`] vector giving the output of the MCMC algorithm for the
+#'  second parameter.
+#' @param ... Currently not used.
+#' @details
+#'  For a given output of MCMC algorithm, this function estimates the posterior
+#'  probability of the event \eqn{x < y} by the relative frequency of the event
+#'  "the value of event `x` is less than the value of event `y`" in the
+#'  simulated Markov chain.
+#' @return A [`numeric`] vector (the posterior probability of the assumption:
+#'  "event `x` is older than event `y`").
+#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
+#' @family tests
+#' @docType methods
+#' @rdname test_older
+#' @aliases test_older-method
+setGeneric(
+  name = "test_older",
+  def = function(x, y, ...) standardGeneric("test_older")
+)
+
 # Read =========================================================================
 #' Read MCMC Output
 #'
@@ -636,7 +632,7 @@ setGeneric(
 #'  'OxCal' or 'ChronoModel'.
 #' @param phases A [`logical`] scalar: should the data be imported as phases?
 #' @param bin_width The bin width specified for the
-#'  '\href{https://bcal.shef.ac.uk/}{BCal}' calibration. Defaults to the 'BCal'
+#'  [BCal](https://bcal.shef.ac.uk/) calibration. Defaults to the BCal
 #'  default of 1.
 #' @return
 #'  An [`MCMC-class`] object.
@@ -650,7 +646,7 @@ setGeneric(
 #'
 #'  Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
 #'  Chronological Modeling of Archaeological Data using Bayesian Statistics.
-#'  URL: \url{https://www.chronomodel.fr}.
+#'  URL: <https://www.chronomodel.fr>.
 #' @example inst/examples/ex-read.R
 #' @seealso [utils::read.table()]
 #' @author T. S. Dye, N. Frerebeau

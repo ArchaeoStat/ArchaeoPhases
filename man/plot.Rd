@@ -95,7 +95,7 @@ plot(eve, interval = "ci", calendar = "BCAD")
 plot(eve, interval = "hpdi", calendar = "BP")
 
 ## Compute phases
-pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
+pha <- as_phases(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
 summary(pha)
 
 ## Plot phases
