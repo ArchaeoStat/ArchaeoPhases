@@ -9,6 +9,7 @@
 \alias{get_calendar-method}
 \alias{get_hash}
 \alias{get_hash-method}
+\alias{names,MCMC-method}
 \alias{names,PhasesMCMC-method}
 \alias{names<-,PhasesMCMC-method}
 \alias{get_calendar,MCMC-method}
@@ -26,6 +27,8 @@
 get_calendar(x)
 
 get_hash(x)
+
+\S4method{names}{MCMC}(x)
 
 \S4method{names}{PhasesMCMC}(x)
 

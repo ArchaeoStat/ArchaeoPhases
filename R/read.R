@@ -58,13 +58,20 @@ setMethod(
     ## OxCal hard codes csv file conventions, per C. Bronk Ramsey
     ## These match the R defaults
     data <- utils::read.table(file = file, header = TRUE, sep = ",",
-                              quote = "\"", dec = ".", comment.char = "#")
+                              quote = "\"", dec = ".", comment.char = "#",
+                              check.names = FALSE)
 
     ## Calculate hash
     file_hash <- make_hash(file)
 
     ## Remove the iteration column
     data <- data[, -1]
+
+    ## Fix names
+    ## check.names = FALSE allows to get the original names
+    ## then column names must be properly set with make.names()
+    date_names <- colnames(data)
+    colnames(data) <- make.names(date_names)
 
     ## OxCal uses trailing commas in MCMC output,
     ## so trim the last column, which is empty
@@ -78,7 +85,7 @@ setMethod(
     ## Return an MCM object
     .MCMC(
       as.matrix(data),
-      events = colnames(data),
+      events = date_names,
       calendar = "BCAD",
       hash = file_hash
     )
@@ -94,7 +101,8 @@ setMethod(
   definition = function(file, bin_width = 1) {
     ## BCal uses English locale csv conventions
     data <- utils::read.table(file = file, header = TRUE, sep = ",",
-                              quote = "\"", dec = ".", comment.char = "#")
+                              quote = "\"", dec = ".", comment.char = "#",
+                              check.names = FALSE)
 
     ## Calculate hash
     file_hash <- make_hash(file)
@@ -105,6 +113,12 @@ setMethod(
     ## Remove an empty last column, if present
     if (!is.numeric(data[, ncol(data), drop = TRUE]))
       data <- data[, -ncol(data)]
+
+    ## Fix names
+    ## check.names = FALSE allows to get the original names
+    ## then column names must be properly set with make.names()
+    date_names <- colnames(data)
+    colnames(data) <- make.names(date_names)
 
     ## BCal used to add an empty row at the end, check if empty and remove
     if (anyNA(data[nrow(data), ]))
@@ -120,7 +134,7 @@ setMethod(
     ## Return an MCM object
     .MCMC(
       as.matrix(data),
-      events = colnames(data),
+      events = date_names,
       calendar = "BCAD",
       hash = file_hash
     )
@@ -138,13 +152,20 @@ setMethod(
     ## ChronoModel allows the user to choose any separator
     ## and either a period or comma for decimals
     data <- utils::read.table(file = file, header = TRUE, sep = sep,
-                              quote = "\"", dec = dec, comment.char = "#")
+                              quote = "\"", dec = dec, comment.char = "#",
+                              check.names = FALSE)
 
     ## Calculate hash
     file_hash <- make_hash(file)
 
     ## Remove the iteration column
     data <- data[, -1]
+
+    ## Fix names
+    ## check.names = FALSE allows to get the original names
+    ## then column names must be properly set with make.names()
+    date_names <- colnames(data)
+    colnames(data) <- make.names(date_names)
 
     ## Convert from BP to BC/AD
     if (BP)
@@ -154,8 +175,8 @@ setMethod(
     mtx <- as.matrix(data)
     if (phases) {
       ## Get phase names
-      pattern <- ".(alpha|beta|Begin|End)"
-      pha <- unique(trimws(sub(pattern, "", colnames(mtx))))
+      pattern <- "(alpha|beta|Begin|End)"
+      pha <- unique(trimws(sub(pattern, "", date_names)))
       start <- seq(from = 1L, to = ncol(mtx), by = 2L)
       arr <- array(data = NA_real_, dim = c(nrow(mtx), ncol(mtx) / 2, 2),
                    dimnames = list(NULL, pha, c("begin", "end")))
@@ -171,7 +192,7 @@ setMethod(
     } else {
       .EventsMCMC(
         mtx,
-        events = colnames(mtx),
+        events = date_names,
         calendar = "BCAD",
         hash = file_hash
       )

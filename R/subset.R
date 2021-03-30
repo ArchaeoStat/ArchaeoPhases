@@ -17,7 +17,11 @@ setMethod(
       return(z)
     }
 
-    methods::initialize(x, z)
+    eve <- x@events
+    if (!missing(j)) {
+      eve <- eve[j]
+    }
+    methods::initialize(x, z, events = eve)
   }
 )
 

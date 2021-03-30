@@ -4,6 +4,15 @@ NULL
 
 #' @export
 #' @rdname mutator
+#' @aliases names,MCMC-method
+setMethod(
+  f = "names",
+  signature = "MCMC",
+  definition = function(x) x@events
+)
+
+#' @export
+#' @rdname mutator
 #' @aliases names,PhasesMCMC-method
 setMethod(
   f = "names",
