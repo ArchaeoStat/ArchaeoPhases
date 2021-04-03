@@ -93,7 +93,7 @@ estimate_range <- function(mcmc, position, app = "bcal",
   colnames(res) <- colnames(stats_array[[1]])
   list(range_table = res,
        mean = mean(res),
-       sd = sd(res),
+       sd = stats::sd(res),
        min = min(res),
        median = median(res),
        max = max(res))

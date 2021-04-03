@@ -169,6 +169,17 @@ original_file.archaeophases_plot <- function(x, file = NULL, ...) {
     file_hash == m$hash
 }
 
+#' Reproduce an MCMC data frame
+#'
+#' Reproduces a data frame from metadata held in an \code{archaeophases_mcmc}
+#' object.
+#'
+#' @param x An \code{archaeophases_mcmc} object.
+#' @param ... Other parameters.
+#'
+#' @author Thomas S. Dye, \email{tsd@@tsdye.online}
+#'
+#' @export
 reproduce <- function(x, ...) {
     UseMethod("reproduce")
 }

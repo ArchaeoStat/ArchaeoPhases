@@ -70,9 +70,6 @@
 #'
 #' @seealso \code{\link{tempo_plot}}
 #'
-#' @importFrom stats ecdf sd qnorm
-#' @importFrom grDevices dev.new
-#'
 #' @export
 TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
                        count = TRUE, Gauss = FALSE, title = "Tempo plot",
@@ -112,7 +109,7 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
 
     sequence = seq(min, max, length.out = 50 * ncol(groupOfDates))
     f = function(x) {
-      g = ecdf(x)
+      g = stats::ecdf(x)
       y = g(sequence)
       if (count)
         y = y * ncol(groupOfDates)
@@ -122,11 +119,12 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
     # mean estimate
     moy = apply(F, 2, mean)
     # standard deviation
-    ec = apply(F, 2, sd)
+    ec = apply(F, 2, stats::sd)
     # Credible intervals
     qu = t(apply(F, 2, CredibleInterval)[-1,])
     # Gaussian credible intervals
-    quG = cbind(moy + qnorm(1 - (1 - level)/2) * ec, moy - qnorm(1 -(1 - level)/2) * ec)
+    quG = cbind(moy + stats::qnorm(1 - (1 - level) / 2) * ec,
+                moy - stats::qnorm(1 - (1 - level) / 2) * ec)
 
     if (x.scale == "BP") {
       result = list(t = 1950 - sequence, moy = (moy), qu = qu, quG = quG)
@@ -176,7 +174,7 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
            width = width, units = units)
   }
   if(newWindow == TRUE) {
-    dev.new(height = height, width = width)
+    grDevices::dev.new(height = height, width = width)
   }
   print(h)
 
@@ -195,8 +193,15 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
 #'
 #' @param data Data frame or \code{archaeophases_mcmc} object containing
 #' the output of the MCMC algorithm.
-#' @param position Numeric vector containing the position of the column
-#' corresponding to the MCMC chains of interest, or a vector of column names.
+#' @param position A list, each member of which is either a numeric vector
+#'     containing the positions of the columns corresponding to the MCMC chains
+#'     of interest, or a vector of column names. For convenience, a vector can
+#'     be substituted for the singleton list.
+#' @param name A list, each member of which is a string that names the kind of
+#'     event in the corresponding element of \code{position}. For convenience, a
+#'     string can be substituted for the singleton list.
+#' @param plot_result If \code{TRUE}, then draw a plot on the display,
+#' else suppress drawing.
 #' @param level Probability corresponding to the level of confidence.
 #' @param count If \code{TRUE} the counting process is a number,
 #' otherwise it is a probability.
@@ -221,22 +226,21 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
 #' in the order of \code{legend_labels}.  If \code{color_palette} is
 #' \code{NULL}, then standard color names are expected, otherwise the
 #' color names are from the supplied \code{color_palette}.
-#' @param width Width of the plot in \code{units}.
-#' @param height Height of the plot in \code{units}.
-#' @param units Units used to specify \code{width} and \code{height},
+#' @param width Width of the plot in \code{unit}.
+#' @param height Height of the plot in \code{unit}.
+#' @param unit String recognized by the \code{ggsave()} function,
 #' one of "in" (default), "cm", or "mm".
 #' @param x_min Minimum value for x-axis.
 #' @param x_max Maximum value for x-axis.
 #' @param color_palette A palette that supplies the colors used in the plot.
 #' @param file Name of the file that will be saved if specified.
 #' If \code{NULL} no file is saved.
-#' @param x_scale One of "calendar", "bp", or "elapsed".
+#' @param x_scale One of "calendar" for calendar years, "BP" for years before present, or "elapsed" for time elapsed from a specified origin.
+#' @param columns Number of columns for facet.
 #' @param elapsed_origin_position If \code{x.scale} is "elapsed", the position
 #' of the column corresponding to the event from which elapsed time is
 #' calculated.
 #' @param new_window Whether or not the plot is drawn within a new window.
-#' @param plot_result If \code{TRUE}, then draw a plot on the display,
-#' else suppress drawing.
 #'
 #' @return An \code{archaeophases_plot} object with the data and metadata
 #' needed to reproduce the plot.
@@ -284,15 +288,10 @@ TempoPlot <- function (data, position, plot.result = NULL,level = 0.95,
 #' @seealso \code{\link{TempoPlot}}
 #' @seealso \code{\link{new_archaeophases_plot}}
 #'
-#' @importFrom stats ecdf sd qnorm
-#' @importFrom grDevices dev.new
-#' @importFrom ggplot2 ggplot guides ggsave scale_color_manual
-#' scale_linetype_manual scale_size_manual geom_line labs theme xlim
-#' @importFrom reshape2 melt
-#'
 #' @export
 tempo_plot <- function(data,
                        position = 1:ncol(data),
+                       name = list("All"),
                        level = 0.95,
                        count = TRUE,
                        Gauss = FALSE,
@@ -315,47 +314,34 @@ tempo_plot <- function(data,
                                        "grey50"),
                        width = 7,
                        height = 7,
-                       units = "in",
+                       unit = "in",
                        x_min = NULL,
                        x_max = NULL,
                        color_palette = NULL,
                        file = NULL,
                        x_scale = "calendar",
                        elapsed_origin_position = NULL,
+                       columns = 1,
                        new_window = TRUE,
                        plot_result = TRUE) {
 
-    if(!is.data.frame(data)) stop("Data format not recognized.")
-
-    if(is.element("archaeophases_plot", class(data)))
-    {
-        result_df <- data
+    f = function(x, sequence, count, cols) {
+        g <- stats::ecdf(x)
+        y <- g(sequence)
+        if (count)
+            y <- y * cols
+        y
     }
-    else {
+
+    prep_df <- function(data, position, name, eop, count) {
         data_subset <- data[, position]
-
-        if (x_scale == "elapsed") {
-            if (is.null(elapsed_origin_position)) {
-                stop("Elapsed origin not specified")
-            }
-            else {
-                data_subset <- data_subset - data[, elapsed_origin_position]
-            }
-        }
-
+        if (x_scale == "elapsed")
+            data_subset <- data_subset - data[, eop]
         data_min <- min(data_subset)
         data_max <- max(data_subset)
         data_cols <- ncol(data_subset)
         data_seq <- seq(data_min, data_max, length.out = 50 * data_cols)
         doubt <- 1 - level
-
-        f = function(x, sequence, count, cols) {
-            g <- ecdf(x)
-            y <- g(sequence)
-            if (count)
-                y <- y * cols
-            y
-        }
 
         F = t(apply(X = data_subset, MARGIN = 1,
                     FUN = f, sequence = data_seq,
@@ -363,48 +349,66 @@ tempo_plot <- function(data,
         ## mean estimate
         moy = apply(F, 2, mean)
 
-
         if (Gauss == TRUE) {
             ## standard deviation
-            ec = apply(F, 2, sd)
-
+            ec = apply(F, 2, stats::sd)
             ## Gaussian credible intervals
-            quG = cbind(moy + qnorm(1 - doubt / 2) * ec,
-                        moy - qnorm(1 - doubt / 2) * ec)
+            qu = cbind(moy + stats::qnorm(1 - doubt / 2) * ec,
+                       moy - stats::qnorm(1 - doubt / 2) * ec)
         }
-        else {
-            ## Credible intervals
-            qu = t(apply(F, 2, CredibleInterval)[-1,])
+        else { ## Credible intervals
+            qu = t(apply(F, 2, CredibleInterval)[-1, ])
         }
 
-        if (x_scale == "BP") {
+        if (x_scale == "BP")
             data_seq <- 1950 - data_seq
-        }
 
-        if (Gauss == TRUE) {
-            result_df <- data.frame(year = data_seq,
-                                    count = moy,
-                                    ci_hi = quG[, 1],
-                                    ci_lo = quG[, 2])
-        }
-        else {
-            result_df <- data.frame(year = data_seq,
-                                    count = moy,
-                                    ci_lo = qu[, 1],
-                                    ci_hi = qu[, 2])
-        }
+        result_df <- data.frame(year = data_seq,
+                                name = name,
+                                count = moy,
+                                ci_hi = qu[, 1],
+                                ci_lo = qu[, 2])
     }
 
-    result_to_plot <- melt(result_df,
-                           id = "year",
-                           measure = c("count", "ci_hi", "ci_lo"))
+    if(!is.data.frame(data)) stop("Data format not recognized.")
 
-    h <- ggplot(data = result_to_plot,
-                mapping = aes(x = year,
-                              y = value,
-                              colour = variable,
-                              linetype = variable,
-                              size = variable))
+    if(!is.element(x_scale, c("calendar", "BP", "elapsed")))
+        stop(sprintf("%s is not a valid 'x_scale' value.", x_scale))
+
+    if(x_scale == "elapsed" & is.null(elapsed_origin_position))
+        stop("Elapsed origin not specified.")
+
+    if(!is.list(position))
+        position <- list(position)
+
+    if(!is.list(name))
+        name <- list(name)
+
+    if(length(position) != length(name))
+        stop("Position and name lists are different lengths.")
+
+    if(is.element("archaeophases_plot", class(data)))
+        result_df <- data
+    else
+        result_df <- mapply(prep_df,
+                            position = position,
+                            name = name,
+                            MoreArgs = list(
+                                data = data,
+                                eop = elapsed_origin_position,
+                                count = count),
+                            SIMPLIFY = FALSE)
+
+    result_to_plot <- reshape2::melt(result_df,
+                                     id = c("name", "year"),
+                                     measure = c("count", "ci_hi", "ci_lo"))
+
+    h <- ggplot2::ggplot(data = result_to_plot,
+                         mapping = aes(x = year,
+                                       y = value,
+                                       colour = variable,
+                                       linetype = variable,
+                                       size = variable))
 
     if (!is.null(color_palette)) {
         color_values <- unname(color_palette[line_colors])
@@ -413,41 +417,51 @@ tempo_plot <- function(data,
         color_values <- line_colors
     }
 
-    h <- h + scale_color_manual(values = color_values,
-                                labels = legend_labels,
-                                name = legend_title)
+    h <- h + ggplot2::scale_color_manual(values = color_values,
+                                         labels = legend_labels,
+                                         name = legend_title)
 
-    h <- h + scale_linetype_manual(values = line_types,
-                                   labels = legend_labels,
-                                   name = legend_title)
+    h <- h + ggplot2::scale_linetype_manual(values = line_types,
+                                            labels = legend_labels,
+                                            name = legend_title)
 
-    h <- h + scale_size_manual(values = line_sizes,
-                               labels = legend_labels,
-                               name = legend_title)
+    h <- h + ggplot2::scale_size_manual(values = line_sizes,
+                                        labels = legend_labels,
+                                        name = legend_title)
 
-    h <- h + geom_line()
+    h <- h + ggplot2::geom_line()
 
-    h <- h + labs(x = x_label,
-                  y = y_label,
-                  title = title,
-                  subtitle = subtitle,
-                  caption = caption)
+    h <- h + ggplot2::labs(x = x_label,
+                           y = y_label,
+                           title = title,
+                           subtitle = subtitle,
+                           caption = caption)
 
-    h <- h + theme(legend.position = legend_position)
+    h <- h + ggplot2::theme(legend.position = legend_position)
 
     if (!is.null(x_min) & !is.null(x_max)) {
-        h <- h + xlim(x_min, x_max)
+        h <- h + ggplot2::xlim(x_min, x_max)
+    }
+
+    if(length(position) > 1) {
+        h <- h + ggplot2::facet_wrap(ggplot2::vars(name),
+                                     scales = "free_y",
+                                     ncol = columns)
+        h <- h + theme(axis.ticks = element_blank(),
+                       axis.text.y = element_blank())
     }
 
     if (!is.null(file)) {
-        ggsave(filename = file, plot = h, height = height,
-                        width = width, units = units)
+        ggplot2::ggsave(filename = file,
+                        plot = h,
+                        height = height,
+                        width = width,
+                        units = unit)
     }
 
     if (plot_result == TRUE) {
-        if (new_window == TRUE) {
-            dev.new(height = height, width = width)
-        }
+        if (new_window == TRUE)
+            grDevices::dev.new(height = height, width = width)
         print(h)
     }
 

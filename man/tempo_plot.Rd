@@ -7,6 +7,7 @@
 tempo_plot(
   data,
   position = 1:ncol(data),
+  name = list("All"),
   level = 0.95,
   count = TRUE,
   Gauss = FALSE,
@@ -24,13 +25,14 @@ tempo_plot(
   line_colors = c("black", "grey50", "grey50"),
   width = 7,
   height = 7,
-  units = "in",
+  unit = "in",
   x_min = NULL,
   x_max = NULL,
   color_palette = NULL,
   file = NULL,
   x_scale = "calendar",
   elapsed_origin_position = NULL,
+  columns = 1,
   new_window = TRUE,
   plot_result = TRUE
 )
@@ -39,8 +41,14 @@ tempo_plot(
 \item{data}{Data frame or \code{archaeophases_mcmc} object containing
 the output of the MCMC algorithm.}
 
-\item{position}{Numeric vector containing the position of the column
-corresponding to the MCMC chains of interest, or a vector of column names.}
+\item{position}{A list, each member of which is either a numeric vector
+containing the positions of the columns corresponding to the MCMC chains
+of interest, or a vector of column names. For convenience, a vector can
+be substituted for the singleton list.}
+
+\item{name}{A list, each member of which is a string that names the kind of
+event in the corresponding element of \code{position}. For convenience, a
+string can be substituted for the singleton list.}
 
 \item{level}{Probability corresponding to the level of confidence.}
 
@@ -80,11 +88,11 @@ in the order of \code{legend_labels}.  If \code{color_palette} is
 \code{NULL}, then standard color names are expected, otherwise the
 color names are from the supplied \code{color_palette}.}
 
-\item{width}{Width of the plot in \code{units}.}
+\item{width}{Width of the plot in \code{unit}.}
 
-\item{height}{Height of the plot in \code{units}.}
+\item{height}{Height of the plot in \code{unit}.}
 
-\item{units}{Units used to specify \code{width} and \code{height},
+\item{unit}{String recognized by the \code{ggsave()} function,
 one of "in" (default), "cm", or "mm".}
 
 \item{x_min}{Minimum value for x-axis.}
@@ -96,11 +104,13 @@ one of "in" (default), "cm", or "mm".}
 \item{file}{Name of the file that will be saved if specified.
 If \code{NULL} no file is saved.}
 
-\item{x_scale}{One of "calendar", "bp", or "elapsed".}
+\item{x_scale}{One of "calendar" for calendar years, "BP" for years before present, or "elapsed" for time elapsed from a specified origin.}
 
 \item{elapsed_origin_position}{If \code{x.scale} is "elapsed", the position
 of the column corresponding to the event from which elapsed time is
 calculated.}
+
+\item{columns}{Number of columns for facet.}
 
 \item{new_window}{Whether or not the plot is drawn within a new window.}
 

@@ -7,6 +7,7 @@
 occurrence_plot(
   data,
   position = 1:ncol(data),
+  name = list("All"),
   level = 0.95,
   plot_result = TRUE,
   intervals = "CI",
@@ -19,7 +20,7 @@ occurrence_plot(
   occurrence = "occurrence",
   height = 7,
   width = 7,
-  units = "in",
+  unit = "in",
   x_min = NULL,
   x_max = NULL,
   x_scale = "calendar",
@@ -28,6 +29,7 @@ occurrence_plot(
   dot_guide = FALSE,
   dot_guide_size = 0.25,
   y_grid = FALSE,
+  columns = 1,
   file = NULL,
   new_window = TRUE
 )
@@ -35,17 +37,22 @@ occurrence_plot(
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}
 
-\item{position}{Numeric vector containing the positions of the columns
-corresponding to the MCMC chains of interest, or a vector of column
-names.}
+\item{position}{A list, each member of which is either a numeric vector
+containing the positions of the columns corresponding to the MCMC chains
+of interest, or a vector of column names. For convenience, a vector can
+be substituted for the singleton list.}
+
+\item{name}{A list, each member of which is a string that names the kind of
+event in the corresponding element of \code{position}. For convenience, a
+string can be substituted for the singleton list.}
 
 \item{level}{Probability corresponding to the level of confidence.}
 
-\item{plot_result}{If \code{TRUE}, then draw a plot on the display,
-else suppress drawing.}
+\item{plot_result}{If \code{TRUE}, then draw a plot on the display, else
+suppress drawing.}
 
-\item{intervals}{One of "CI" for credible intervals or
-"HPD" for highest posterior density intervals.}
+\item{intervals}{One of "CI" for credible intervals or "HPD" for highest
+posterior density intervals.}
 
 \item{title}{Title of the plot.}
 
@@ -62,23 +69,22 @@ else suppress drawing.}
 
 \item{occurrence}{String to append to each y-axis tic label.}
 
-\item{height}{Plot height in \code{units}.}
+\item{height}{Plot height in \code{unit}.}
 
-\item{width}{Plot width in \code{units}.}
+\item{width}{Plot width in \code{unit}.}
 
-\item{units}{String recognized by the \code{ggsave()} function,
-one of "in", "cm", "mm".}
+\item{unit}{String recognized by the \code{ggsave()} function, one of "in",
+"cm", "mm".}
 
 \item{x_min}{Minimum x-axis value.}
 
 \item{x_max}{Maximum x-axis value.}
 
-\item{x_scale}{One of "calendar" for calendar years,
-"BP" for years before present,
-or "elapsed" for time elapsed from a specified origin.}
+\item{x_scale}{One of "calendar" for calendar years, "BP" for years before
+present, or "elapsed" for time elapsed from a specified origin.}
 
-\item{elapsed_origin_position}{Position of the column to use
-as the origin for elapsed time calculations.}
+\item{elapsed_origin_position}{Position of the column to use as the origin
+for elapsed time calculations.}
 
 \item{dumbbell_size}{Size of the plot symbol.}
 
@@ -88,8 +94,10 @@ as the origin for elapsed time calculations.}
 
 \item{y_grid}{Switch for horizontal grid lines.}
 
-\item{file}{Name of the file that will be saved if specified.
-If \code{NULL} no plot will be saved.}
+\item{columns}{Number of columns for facet.}
+
+\item{file}{Name of the file that will be saved if specified. If \code{NULL}
+no plot will be saved.}
 
 \item{new_window}{Whether or not the plot is drawn within a new window.}
 }
