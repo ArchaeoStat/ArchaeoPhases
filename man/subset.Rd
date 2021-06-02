@@ -41,10 +41,10 @@ A subsetted object.
 Operators acting on objects to extract or replace parts.
 }
 \seealso{
-Other mutator: 
+Other mutators: 
 \code{\link{mutator}}
 }
 \author{
 N. Frerebeau
 }
-\concept{mutator}
+\concept{mutators}

@@ -22,7 +22,7 @@ if (!isGeneric("summary"))
 #' @example inst/examples/ex-coda.R
 #' @seealso [coda::mcmc()], [coda::mcmc.list()]
 #' @author A. Philippe, M.-A. Vibet
-#' @family read
+#' @family read methods
 #' @docType methods
 #' @name coda
 #' @rdname coda
@@ -48,7 +48,7 @@ setGeneric(
 #'  An [`MCMC-class`] object.
 #' @example inst/examples/ex-coerce.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family read
+#' @family read methods
 #' @docType methods
 #' @name coerce
 #' @rdname coerce
@@ -82,7 +82,7 @@ setGeneric(
 # @example inst/examples/ex-mutator.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutator
+#' @family mutators
 #' @name mutator
 #' @rdname mutator
 #' @aliases get set
@@ -119,7 +119,7 @@ setGeneric(
 # @example inst/examples/ex-mutator.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutator
+#' @family mutators
 #' @name subset
 #' @rdname subset
 NULL
@@ -140,6 +140,7 @@ NULL
 #'  An object of the same sort as `object` with a new time scale.
 #' @note
 #'  There is no year \eqn{0} in BCE/CE scale.
+#' @example inst/examples/ex-calendar.R
 #' @author N. Frerebeau
 #' @family time scales
 #' @docType methods
@@ -215,7 +216,7 @@ setGeneric(
 #'  \doi{10.1016/j.jas.2016.05.006}.
 #' @example inst/examples/ex-tempo.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
-#' @family events
+#' @family event tools
 #' @docType methods
 #' @name tempo
 #' @rdname tempo
@@ -247,7 +248,7 @@ setGeneric(
 #'  \doi{10.1016/j.jas.2016.05.006}.
 #' @example inst/examples/ex-tempo.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
-#' @family events
+#' @family event tools
 #' @docType methods
 #' @name activity
 #' @rdname activity
@@ -285,7 +286,7 @@ setGeneric(
 #' @return An [`OccurrenceEvents-class`] object.
 #' @example inst/examples/ex-occurrence.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
-#' @family events
+#' @family event tools
 #' @docType methods
 #' @name occurrence
 #' @rdname occurrence
@@ -374,7 +375,7 @@ setGeneric(
 #'  Finds if a gap exists between two dates and returns the longest interval
 #'  that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family dates
+#' @family event tools
 #' @docType methods
 #' @name lapse
 #' @rdname lapse
@@ -419,7 +420,7 @@ setGeneric(
 #'  from [ChronoModel](https://chronomodel.com/).
 #' @example inst/examples/ex-phase.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phases
+#' @family phase tools
 #' @docType methods
 #' @name phase
 #' @rdname phase
@@ -476,7 +477,7 @@ setGeneric(
 #'  time range (at a given `level`).
 #' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phases
+#' @family phase tools
 #' @docType methods
 #' @rdname boundaries
 #' @aliases boundaries-method
@@ -493,7 +494,7 @@ setGeneric(
 #' @param ... Currently not used.
 #' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phases
+#' @family phase tools
 #' @docType methods
 #' @rdname duration
 #' @aliases duration-method
@@ -520,7 +521,7 @@ setGeneric(
 #'  transition interval for each pair of successive phases (at a given `level`).
 #' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phases
+#' @family phase tools
 #' @docType methods
 #' @rdname transition
 #' @aliases transition-method
@@ -547,7 +548,7 @@ setGeneric(
 #'  between each pair of successive phases (at a given `level`).
 #' @example inst/examples/ex-range.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phases
+#' @family phase tools
 #' @docType methods
 #' @rdname hiatus
 #' @aliases hiatus-method
@@ -578,7 +579,7 @@ setGeneric(
 #' @example inst/examples/ex-summary.R
 #' @seealso [`stats::density()`]
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
-#' @family plot
+#' @family plot methods
 #' @docType methods
 #' @name plot
 #' @rdname plot
@@ -672,7 +673,7 @@ setGeneric(
 #' @example inst/examples/ex-read.R
 #' @seealso [utils::read.table()]
 #' @author T. S. Dye, N. Frerebeau
-#' @family read
+#' @family read methods
 #' @docType methods
 #' @name read
 #' @rdname read
@@ -713,7 +714,7 @@ setGeneric(
 #' @example inst/examples/ex-read.R
 #' @seealso [digest::digest()]
 #' @author T. S. Dye, N. Frerebeau
-#' @family read
+#' @family read methods
 #' @docType methods
 #' @name check
 #' @rdname check

@@ -48,7 +48,7 @@ Coerce
 eve <- as_mcmc(events, iteration = 1)
 }
 \seealso{
-Other read: 
+Other read methods: 
 \code{\link{check}},
 \code{\link{coda}},
 \code{\link{read}}
@@ -56,4 +56,4 @@ Other read:
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau
 }
-\concept{read}
+\concept{read methods}

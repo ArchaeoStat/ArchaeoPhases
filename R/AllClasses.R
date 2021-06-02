@@ -20,7 +20,7 @@ NULL
 #' @note
 #'  These classes inherit from [`matrix`].
 #' @author N. Frerebeau
-#' @family class
+#' @family classes
 #' @docType class
 #' @name MCMC
 #' @rdname MCMC
@@ -73,7 +73,7 @@ NULL
 #' @note
 #'  This class inherits from [`array`].
 #' @author N. Frerebeau
-#' @family class
+#' @family classes
 #' @docType class
 #' @rdname PhasesMCMC
 #' @aliases PhasesMCMC-class
@@ -124,7 +124,7 @@ NULL
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
 #' @author N. Frerebeau
-#' @family class
+#' @family classes
 #' @docType class
 #' @rdname CumulativeEvents
 #' @aliases CumulativeEvents-class
@@ -158,7 +158,7 @@ NULL
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
 #' @author N. Frerebeau
-#' @family class
+#' @family classes
 #' @docType class
 #' @rdname ActivityEvents
 #' @aliases ActivityEvents-class
@@ -192,7 +192,7 @@ NULL
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
 #' @author N. Frerebeau
-#' @family class
+#' @family classes
 #' @docType class
 #' @rdname OccurrenceEvents
 #' @aliases OccurrenceEvents-class

@@ -1,8 +1,13 @@
 # ArchaeoPhases v1.5.0.9000
 
+## New classes and methods
+
+## Enhancements
+* Support for both BP and CE time scales.
+
 ## Breaking changes
 * Full rewrite in S4.
-* Remove Shiny application.
+* Remove the Shiny application.
 
 | Old | New |
 |:----|:----|

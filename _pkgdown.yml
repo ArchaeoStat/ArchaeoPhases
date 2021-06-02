@@ -5,16 +5,16 @@ development:
 reference:
 - title: Data input/output
   contents:
-  - has_concept("read")
+  - has_concept("read methods")
 - title: Rhythms
   contents:
-  - has_concept("events")
+  - has_concept("event tools")
 - title: Phases
   contents:
-  - has_concept("phases")
+  - has_concept("phase tools")
 - title: Visualization
   contents:
-  - has_concept("plot")
+  - has_concept("plot methods")
 - title: Statistics
   contents:
   - has_concept("statistics")
@@ -23,10 +23,10 @@ reference:
   - has_concept("tests")
 - title: Calendar
   contents:
-  - has_concept("time scale")
+  - has_concept("time scales")
 - title: Getters and Setters
   contents:
-  - has_concept("mutator")
+  - has_concept("mutators")
 - title: Classes
   contents:
-  - has_concept("class")
+  - has_concept("classes")

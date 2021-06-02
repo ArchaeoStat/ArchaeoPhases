@@ -104,7 +104,7 @@ URL: \url{https://www.chronomodel.fr}.
 \seealso{
 \code{\link[utils:read.table]{utils::read.table()}}
 
-Other read: 
+Other read methods: 
 \code{\link{check}},
 \code{\link{coda}},
 \code{\link{coerce}()}
@@ -112,4 +112,4 @@ Other read:
 \author{
 T. S. Dye, N. Frerebeau
 }
-\concept{read}
+\concept{read methods}

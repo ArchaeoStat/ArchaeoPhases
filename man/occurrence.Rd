@@ -59,11 +59,12 @@ plot(occ_hpdi)
 }
 }
 \seealso{
-Other events: 
+Other event tools: 
 \code{\link{activity}()},
+\code{\link{lapse}()},
 \code{\link{tempo}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 }
-\concept{events}
+\concept{event tools}

@@ -54,7 +54,7 @@ is_original(oxcal, path_csv)
 \seealso{
 \code{\link[digest:digest]{digest::digest()}}
 
-Other read: 
+Other read methods: 
 \code{\link{coda}},
 \code{\link{coerce}()},
 \code{\link{read}}
@@ -62,4 +62,4 @@ Other read:
 \author{
 T. S. Dye, N. Frerebeau
 }
-\concept{read}
+\concept{read methods}

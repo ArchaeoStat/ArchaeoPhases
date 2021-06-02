@@ -50,7 +50,7 @@ dur <- duration(pha)
 summary(dur)
 }
 \seealso{
-Other phases: 
+Other phase tools: 
 \code{\link{boundaries}()},
 \code{\link{hiatus}()},
 \code{\link{phase}},
@@ -59,4 +59,4 @@ Other phases:
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau
 }
-\concept{phases}
+\concept{phase tools}

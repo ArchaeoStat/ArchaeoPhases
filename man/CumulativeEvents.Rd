@@ -49,7 +49,7 @@ In the code snippets below, \code{x} is a \code{CumulativeEvents} object.
 }
 
 \seealso{
-Other class: 
+Other classes: 
 \code{\link{ActivityEvents-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},
@@ -58,4 +58,4 @@ Other class:
 \author{
 N. Frerebeau
 }
-\concept{class}
+\concept{classes}

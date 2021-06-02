@@ -50,7 +50,7 @@ gelman.plot(mc)
 \seealso{
 \code{\link[coda:mcmc]{coda::mcmc()}}, \code{\link[coda:mcmc.list]{coda::mcmc.list()}}
 
-Other read: 
+Other read methods: 
 \code{\link{check}},
 \code{\link{coerce}()},
 \code{\link{read}}
@@ -58,4 +58,4 @@ Other read:
 \author{
 A. Philippe, M.-A. Vibet
 }
-\concept{read}
+\concept{read methods}

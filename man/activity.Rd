@@ -67,11 +67,12 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 \doi{10.1016/j.jas.2016.05.006}.
 }
 \seealso{
-Other events: 
+Other event tools: 
+\code{\link{lapse}()},
 \code{\link{occurrence}()},
 \code{\link{tempo}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 }
-\concept{events}
+\concept{event tools}

@@ -27,7 +27,7 @@ In the code snippets below, \code{x} is an \code{ActivityEvents} object.
 }
 
 \seealso{
-Other class: 
+Other classes: 
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},
@@ -36,4 +36,4 @@ Other class:
 \author{
 N. Frerebeau
 }
-\concept{class}
+\concept{classes}

@@ -66,10 +66,10 @@ An object of the same sort as \code{object} with the new values assigned.
 Getters and setters to extract or replace parts of an object.
 }
 \seealso{
-Other mutator: 
+Other mutators: 
 \code{\link{subset}()}
 }
 \author{
 N. Frerebeau
 }
-\concept{mutator}
+\concept{mutators}

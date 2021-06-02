@@ -25,7 +25,13 @@ Tests for the existence of a hiatus between two parameters.
 Finds if a gap exists between two dates and returns the longest interval
 that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
 }
+\seealso{
+Other event tools: 
+\code{\link{activity}()},
+\code{\link{occurrence}()},
+\code{\link{tempo}()}
+}
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau
 }
-\concept{dates}
+\concept{event tools}

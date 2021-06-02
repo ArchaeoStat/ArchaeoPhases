@@ -36,7 +36,7 @@ subscript \code{i}. \code{i} is a length-one \code{\link{numeric}} or \code{\lin
 }
 
 \seealso{
-Other class: 
+Other classes: 
 \code{\link{ActivityEvents-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{OccurrenceEvents-class}},
@@ -45,4 +45,4 @@ Other class:
 \author{
 N. Frerebeau
 }
-\concept{class}
+\concept{classes}

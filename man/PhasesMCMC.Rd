@@ -41,7 +41,7 @@ In the code snippets below, \code{x} is a \code{PhasesMCMC} object.
 }
 
 \seealso{
-Other class: 
+Other classes: 
 \code{\link{ActivityEvents-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
@@ -50,4 +50,4 @@ Other class:
 \author{
 N. Frerebeau
 }
-\concept{class}
+\concept{classes}

@@ -92,4 +92,4 @@ plot(pha, succession = TRUE)
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 }
-\concept{plot}
+\concept{plot methods}
