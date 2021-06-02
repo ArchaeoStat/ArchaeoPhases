@@ -10,29 +10,23 @@
 \alias{plot,PhasesMCMC,missing-method}
 \title{Plot}
 \usage{
-multiplot(..., calendar = c("BCAD", "BP"))
+multiplot(...)
 
 \S4method{plot}{MCMC,missing}(
   x,
-  calendar = c("BCAD", "BP"),
   density = TRUE,
   n = 512,
   interval = c("ci", "hpdi"),
   level = 0.95,
   decreasing = TRUE,
-  elapsed = FALSE,
-  origin = 1,
   ...
 )
 
 \S4method{plot}{PhasesMCMC,missing}(
   x,
-  calendar = c("BCAD", "BP"),
   level = 0.95,
   n = 512,
   decreasing = TRUE,
-  elapsed = FALSE,
-  origin = 1,
   succession = is_ordered(x),
   facet = TRUE,
   ...
@@ -40,10 +34,6 @@ multiplot(..., calendar = c("BCAD", "BP"))
 }
 \arguments{
 \item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
-
-\item{calendar}{A \code{\link{character}} string specifying whether the dates
-should be displayed in BP or BC/AD. It must be one of "\code{BCAD}" (the default)
-or "\code{BP}". Any unambiguous substring can be given.}
 
 \item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
 
@@ -61,12 +51,6 @@ can be given.}
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{decreasing}{A \code{\link{logical}} scalar: should the sort order be decreasing?}
-
-\item{elapsed}{A \code{\link{logical}} scalar: should an elapsed time scale be used?}
-
-\item{origin}{A length-one \code{\link{numeric}} vector giving the position of the
-column corresponding to the event from which elapsed time is calculated.
-Only used if \code{elapsed} is \code{TRUE}.}
 
 \item{succession}{A \code{\link{logical}} scalar: should time ranges be plotted instead
 of densities?}
@@ -91,16 +75,16 @@ eve <- as_mcmc(events, iteration = 1)
 summary(eve)
 
 ## Plot events
-plot(eve, interval = "ci", calendar = "BCAD")
-plot(eve, interval = "hpdi", calendar = "BP")
+plot(eve, interval = "ci", level = 0.68)
+plot(eve, interval = "hpdi", level = 0.68)
 
 ## Compute phases
 pha <- as_phases(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
 summary(pha)
 
 ## Plot phases
-plot(pha, succession = FALSE, calendar = "BCAD")
-plot(pha, succession = TRUE, calendar = "BCAD")
+plot(pha, succession = FALSE)
+plot(pha, succession = TRUE)
 }
 \seealso{
 \code{\link[stats:density]{stats::density()}}

@@ -51,7 +51,7 @@ read_chronomodel(file, ...)
 \item{...}{Further arguments to be passed to \code{read.table}.}
 
 \item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
-BC/AD? This should not be \code{TRUE} unless you change the default settings in
+CE? This should not be \code{TRUE} unless you change the default settings in
 'OxCal' or 'ChronoModel'.}
 
 \item{bin_width}{The bin width specified for the

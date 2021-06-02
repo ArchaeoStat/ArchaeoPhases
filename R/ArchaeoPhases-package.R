@@ -1,3 +1,12 @@
+#' @details
+#'  \tabular{ll}{
+#'   **Package:** \tab ArchaeoPhases \cr
+#'   **Type:** \tab Package \cr
+#'   **Version:** \tab 1.5.0.9000 \cr
+#'   **License:** \tab GPL-3 \cr
+#'   **JSS:** \tab \doi{10.18637/jss.v093.c01} \cr
+#'  }
+#'
 #' @section Package options:
 #'  `ArchaeoPhases` uses the following [options()] to configure behaviour:
 #'  * `ArchaeoPhases.precision`: an [`integer`] indicating the number of decimal

@@ -8,17 +8,9 @@ NULL
 setMethod(
   f = "occurrence",
   signature = "MCMC",
-  definition = function(object, interval = c("ci", "hpdi"), level = 0.95,
-                        elapsed = FALSE, origin = 1) {
+  definition = function(object, interval = c("ci", "hpdi"), level = 0.95) {
     ## Validation
     interval <- match.arg(interval, several.ok = FALSE)
-
-    ## Elapse
-    if (elapsed) {
-      if (is.null(origin))
-        stop("Elapsed origin must be specified.", call. = FALSE)
-      object <- object - object[, origin]
-    }
 
     ## Sort rows
     sorted <- apply(X = object, MARGIN = 1, FUN = sort, decreasing = FALSE)
@@ -46,7 +38,7 @@ setMethod(
       lower = inter[, 1],
       upper = inter[, 2],
       level = level,
-      calendar = ifelse(elapsed, "elapsed", get_calendar(object)),
+      calendar = get_calendar(object),
       hash = get_hash(object)
     )
   }
@@ -58,32 +50,12 @@ setMethod(
 setMethod(
   f = "plot",
   signature = c(x = "OccurrenceEvents", y = "missing"),
-  definition = function(x, calendar = c("BCAD", "BP")) {
-    ## Validation
-    calendar <- match.arg(calendar, several.ok = FALSE)
-    data <- as.data.frame(x)
-
+  definition = function(x) {
     ## Calendar scale
-    if (get_calendar(x) == "elapsed") {
-      gg_x_scale <- ggplot2::scale_x_continuous(name = "Elapsed years")
-    } else {
-      if (calendar == "BCAD") {
-        if (get_calendar(x) == "BP") {
-          data$lower <- BP_to_BCAD(data$lower)
-          data$upper <- BP_to_BCAD(data$upper)
-        }
-        gg_x_scale <- ggplot2::scale_x_continuous(name = "Years BC/AD")
-      }
-      if (calendar == "BP") {
-        if (get_calendar(x) == "BCAD") {
-          data$lower <- BCAD_to_BP(data$lower)
-          data$upper <- BCAD_to_BP(data$upper)
-        }
-        gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
-      }
-    }
+    gg_x_scale <- scale_calendar(get_calendar(x))
 
     ## ggplot2
+    data <- as.data.frame(x)
     ggplot2::ggplot(data = data) +
       ggplot2::aes(x = .data$lower, y = .data$events,
                    xend = .data$upper, yend = .data$events) +

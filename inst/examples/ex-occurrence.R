@@ -5,8 +5,8 @@ eve <- eve[1:10000, ]
 
 ## Occurrence plot
 occ_ci <- occurrence(eve, interval = "ci")
-plot(occ_ci, calendar = "BCAD")
+plot(occ_ci)
 
 occ_hpdi <- occurrence(eve, interval = "hpdi")
-plot(occ_hpdi, calendar = "BP")
+plot(occ_hpdi)
 }

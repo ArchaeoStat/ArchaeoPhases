@@ -19,6 +19,15 @@ Statistical analysis of archaeological dates and groups of
     of dates (e.g. duration, transition and hiatus between successive
     phases).
 }
+\details{
+\tabular{ll}{
+\strong{Package:} \tab ArchaeoPhases \cr
+\strong{Type:} \tab Package \cr
+\strong{Version:} \tab 1.5.0.9000 \cr
+\strong{License:} \tab GPL-3 \cr
+\strong{JSS:} \tab \doi{10.18637/jss.v093.c01} \cr
+}
+}
 \section{Package options}{
 
 \code{ArchaeoPhases} uses the following \code{\link[=options]{options()}} to configure behaviour:

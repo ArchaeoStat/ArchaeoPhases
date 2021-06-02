@@ -8,7 +8,7 @@ tempo1 <- tempo(eve)
 plot(tempo1)
 
 tempo2 <- tempo(eve, gauss = TRUE)
-plot(tempo2, calendar = "BP")
+plot(tempo2)
 
 ## Activity plot
 act <- activity(eve)

@@ -9,17 +9,8 @@ setMethod(
   f = "tempo",
   signature = "MCMC",
   definition = function(object, level = 0.95, count = TRUE, gauss = FALSE,
-                        elapsed = FALSE, origin = 1, time = range(object),
-                        n = 50 * ncol(object),
+                        time = range(object), n = 50 * ncol(object),
                         progress = getOption("ArchaeoPhases.progress")) {
-    ## Elapse
-    if (elapsed) {
-      if (is.null(origin))
-        stop("Elapsed origin must be specified.", call. = FALSE)
-      object <- object - object[, origin]
-      time <- range(object) # Override user input
-    }
-
     n_iter <- nrow(object)
     n_events <- ncol(object)
 
@@ -69,7 +60,7 @@ setMethod(
       level = level,
       counts = count,
       events = n_events,
-      calendar = ifelse(elapsed, "elapsed", get_calendar(object)),
+      calendar = get_calendar(object),
       hash = get_hash(object)
     )
   }
@@ -81,25 +72,12 @@ setMethod(
 setMethod(
   f = "plot",
   signature = c(x = "CumulativeEvents", y = "missing"),
-  definition = function(x, calendar = c("BCAD", "BP")) {
-    ## Validation
-    calendar <- match.arg(calendar, several.ok = FALSE)
-    data <- as.data.frame(x)
-
+  definition = function(x) {
     ## Calendar scale
-    if (get_calendar(x) == "elapsed") {
-      gg_x_scale <- ggplot2::scale_x_continuous(name = "Elapsed years")
-    } else {
-      if (calendar == "BCAD") {
-        if (get_calendar(x) == "BP") data$year <- BP_to_BCAD(data$year)
-        gg_x_scale <- ggplot2::scale_x_continuous(name = "Years BC/AD")
-      }
-      if (calendar == "BP") {
-        if (get_calendar(x) == "BCAD") data$year <- BCAD_to_BP(data$year)
-        gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
-      }
-    }
+    gg_x_scale <- scale_calendar(get_calendar(x))
 
+    ## Get data
+    data <- as.data.frame(x)
     tempo_ci <- data.frame(
       year = c(data$year, data$year, rev(data$year)),
       ci = c(data$estimate, data$lower, rev(data$upper)),
@@ -122,10 +100,7 @@ setMethod(
 setMethod(
   f = "multiplot",
   signature = "CumulativeEvents",
-  definition = function(..., calendar = c("BCAD", "BP")) {
-    ## Validation
-    calendar <- match.arg(calendar, several.ok = FALSE)
-
+  definition = function(...) {
     ## Get names
     subst <- substitute(list(...))[-1]
     arg_names <- vapply(X = subst, FUN = deparse, FUN.VALUE = character(1))
@@ -140,22 +115,12 @@ setMethod(
     tmp$Legend <- rep(arg_names, n)
 
     ## Calendar scale
-    cal <- unique(vapply(X = dots, FUN = get_calendar, FUN.VALUE = character(1)))
+    scales <- vapply(X = dots, FUN = get_calendar, FUN.VALUE = character(1))
+    cal <- unique(scales)
     if (length(cal) != 1) {
       stop("All object must have the same calendar scale.", call. = FALSE)
     }
-    if (cal == "elapsed") {
-      gg_x_scale <- ggplot2::scale_x_continuous(name = "Elapsed years")
-    } else {
-      if (calendar == "BCAD") {
-        if (cal == "BP") tmp$year <- BP_to_BCAD(tmp$year)
-        gg_x_scale <- ggplot2::scale_x_continuous(name = "Years BC/AD")
-      }
-      if (calendar == "BP") {
-        if (cal == "BCAD") tmp$year <- BCAD_to_BP(tmp$year)
-        gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
-      }
-    }
+    gg_x_scale <- scale_calendar(cal)
 
     ggplot2::ggplot(data = tmp) +
       ggplot2::aes(x = .data$year, y = .data$estimate, color = .data$Legend) +

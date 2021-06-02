@@ -14,8 +14,6 @@ activity(object, ...)
 
 \S4method{activity}{MCMC}(
   object,
-  elapsed = FALSE,
-  origin = 1,
   time = range(object),
   n = 50 * ncol(object),
   progress = getOption("ArchaeoPhases.progress")
@@ -23,20 +21,14 @@ activity(object, ...)
 
 \S4method{activity}{CumulativeEvents}(object)
 
-\S4method{plot}{ActivityEvents,missing}(x, calendar = c("BCAD", "BP"))
+\S4method{plot}{ActivityEvents,missing}(x)
 
-\S4method{multiplot}{ActivityEvents}(..., calendar = c("BCAD", "BP"))
+\S4method{multiplot}{ActivityEvents}(...)
 }
 \arguments{
 \item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
 
 \item{...}{Any \code{\linkS4class{ActivityEvents}} object.}
-
-\item{elapsed}{A \code{\link{logical}} scalar: should an elapsed time scale be used?}
-
-\item{origin}{A length-one \code{\link{numeric}} vector giving the position of the
-column corresponding to the event from which elapsed time is calculated.
-Only used if \code{elapsed} is \code{TRUE}.}
 
 \item{time}{A length-two \code{\link{numeric}} vector giving the earliest and latest
 date to estimate for, in BC/AD years. Ignored if \code{elapsed} is \code{TRUE}.}
@@ -47,10 +39,6 @@ which the density is to be estimated.}
 \item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
 
 \item{x}{An \code{\linkS4class{ActivityEvents}} object.}
-
-\item{calendar}{A \code{\link{character}} string specifying whether the dates
-should be displayed in BP or BC/AD. It must be one of "\code{BCAD}" (the default)
-or "\code{BP}". Any unambiguous substring can be given.}
 }
 \description{
 Plots the first derivative of the \code{\link{tempo}} plot Bayesian estimate.
@@ -66,7 +54,7 @@ tempo1 <- tempo(eve)
 plot(tempo1)
 
 tempo2 <- tempo(eve, gauss = TRUE)
-plot(tempo2, calendar = "BP")
+plot(tempo2)
 
 ## Activity plot
 act <- activity(eve)

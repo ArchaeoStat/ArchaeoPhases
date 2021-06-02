@@ -86,3 +86,20 @@ make_hash <- function(file, algo = "sha256", ...) {
   }
   file_hash
 }
+
+#' \pkg{ggplot2} Calendar Scale
+#'
+#' @param A [`character`] string specifying the calendar scale. It must be one
+#'  of "`CE`", "`BP`" or "`elapsed`".
+#' @seealso [ggplot2::scale_x_continuous()], [ggplot2::scale_x_reverse()]
+#' @keywords internal
+#' @noRd
+scale_calendar <- function(x) {
+  switch (
+    x,
+    CE = ggplot2::scale_x_continuous(name = "Years CE"),
+    BP = ggplot2::scale_x_reverse(name = "Years cal BP"),
+    elapsed = ggplot2::scale_x_continuous(name = "Elapsed years"),
+    stop(sprintf("Unknown calendar scale (%s).", x), call. = FALSE)
+  )
+}

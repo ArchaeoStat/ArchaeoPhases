@@ -3,78 +3,104 @@
 \docType{methods}
 \name{calendar}
 \alias{calendar}
-\alias{BP_to_BCAD}
-\alias{BP_to_BCAD-method}
-\alias{BCAD_to_BP}
-\alias{BCAD_to_BP-method}
+\alias{elapse}
+\alias{elapse-method}
+\alias{BP_to_CE}
+\alias{BP_to_CE-method}
+\alias{CE_to_BP}
+\alias{CE_to_BP-method}
 \alias{is_BP}
 \alias{is_BP-method}
 \alias{is_CE}
 \alias{is_CE-method}
+\alias{is_BP,MCMC-method}
+\alias{is_BP,PhasesMCMC-method}
 \alias{is_BP,CumulativeEvents-method}
+\alias{is_CE,MCMC-method}
+\alias{is_CE,PhasesMCMC-method}
 \alias{is_CE,CumulativeEvents-method}
-\alias{BP_to_BCAD,numeric-method}
-\alias{BP_to_BCAD,matrix-method}
-\alias{BP_to_BCAD,array-method}
-\alias{BP_to_BCAD,MCMC-method}
-\alias{BP_to_BCAD,PhasesMCMC-method}
-\alias{BP_to_BCAD,CumulativeEvents-method}
-\alias{BCAD_to_BP,numeric-method}
-\alias{BCAD_to_BP,matrix-method}
-\alias{BCAD_to_BP,array-method}
-\alias{BCAD_to_BP,MCMC-method}
-\alias{BCAD_to_BP,PhasesMCMC-method}
-\alias{BCAD_to_BP,CumulativeEvents-method}
-\title{Convert Time Scale}
+\alias{elapse,MCMC-method}
+\alias{BP_to_CE,numeric-method}
+\alias{BP_to_CE,matrix-method}
+\alias{BP_to_CE,array-method}
+\alias{BP_to_CE,MCMC-method}
+\alias{BP_to_CE,PhasesMCMC-method}
+\alias{BP_to_CE,CumulativeEvents-method}
+\alias{CE_to_BP,numeric-method}
+\alias{CE_to_BP,matrix-method}
+\alias{CE_to_BP,array-method}
+\alias{CE_to_BP,MCMC-method}
+\alias{CE_to_BP,PhasesMCMC-method}
+\alias{CE_to_BP,CumulativeEvents-method}
+\title{Time Scale}
 \usage{
-BP_to_BCAD(object)
+elapse(object, ...)
 
-BCAD_to_BP(object)
+BP_to_CE(object)
+
+CE_to_BP(object)
 
 is_BP(object)
 
 is_CE(object)
 
+\S4method{is_BP}{MCMC}(object)
+
+\S4method{is_BP}{PhasesMCMC}(object)
+
 \S4method{is_BP}{CumulativeEvents}(object)
+
+\S4method{is_CE}{MCMC}(object)
+
+\S4method{is_CE}{PhasesMCMC}(object)
 
 \S4method{is_CE}{CumulativeEvents}(object)
 
-\S4method{BP_to_BCAD}{numeric}(object)
+\S4method{elapse}{MCMC}(object, origin = 1)
 
-\S4method{BP_to_BCAD}{matrix}(object)
+\S4method{BP_to_CE}{numeric}(object)
 
-\S4method{BP_to_BCAD}{array}(object)
+\S4method{BP_to_CE}{matrix}(object)
 
-\S4method{BP_to_BCAD}{MCMC}(object)
+\S4method{BP_to_CE}{array}(object)
 
-\S4method{BP_to_BCAD}{PhasesMCMC}(object)
+\S4method{BP_to_CE}{MCMC}(object)
 
-\S4method{BP_to_BCAD}{CumulativeEvents}(object)
+\S4method{BP_to_CE}{PhasesMCMC}(object)
 
-\S4method{BCAD_to_BP}{numeric}(object)
+\S4method{BP_to_CE}{CumulativeEvents}(object)
 
-\S4method{BCAD_to_BP}{matrix}(object)
+\S4method{CE_to_BP}{numeric}(object)
 
-\S4method{BCAD_to_BP}{array}(object)
+\S4method{CE_to_BP}{matrix}(object)
 
-\S4method{BCAD_to_BP}{MCMC}(object)
+\S4method{CE_to_BP}{array}(object)
 
-\S4method{BCAD_to_BP}{PhasesMCMC}(object)
+\S4method{CE_to_BP}{MCMC}(object)
 
-\S4method{BCAD_to_BP}{CumulativeEvents}(object)
+\S4method{CE_to_BP}{PhasesMCMC}(object)
+
+\S4method{CE_to_BP}{CumulativeEvents}(object)
 }
 \arguments{
-\item{object}{A \code{\link{numeric}} vector or an \code{\linkS4class{MCMC}} object.}
+\item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
+
+\item{...}{Currently not used.}
+
+\item{origin}{An \code{\link{integer}} giving the position of the column corresponding
+to the event from which elapsed time is calculated.}
 }
 \value{
 \itemize{
-\item \code{is_BP} and \code{is_CE} return a \code{\link{logical}} scalar.
+\item \code{elapse()}, \code{BP_to_CE()} and \code{CE_to_BP()} return an object of the same
+class as \code{object}.
+\item \code{is_BP()} and \code{is_CE()} return a \code{\link{logical}} scalar.
 }
 
 An object of the same sort as \code{object} with a new time scale.
 }
 \description{
-Converts between BP and BC/AD time scales.
+Converts between BP and CE time scales.
 }
 \note{
 There is no year \eqn{0} in BCE/CE scale.

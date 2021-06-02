@@ -10,15 +10,9 @@
 \usage{
 occurrence(object, ...)
 
-\S4method{occurrence}{MCMC}(
-  object,
-  interval = c("ci", "hpdi"),
-  level = 0.95,
-  elapsed = FALSE,
-  origin = 1
-)
+\S4method{occurrence}{MCMC}(object, interval = c("ci", "hpdi"), level = 0.95)
 
-\S4method{plot}{OccurrenceEvents,missing}(x, calendar = c("BCAD", "BP"))
+\S4method{plot}{OccurrenceEvents,missing}(x)
 }
 \arguments{
 \item{object}{An \code{\linkS4class{MCMC}} object.}
@@ -32,17 +26,7 @@ can be given.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
-\item{elapsed}{A \code{\link{logical}} scalar: should an elapsed time scale be used?}
-
-\item{origin}{A length-one \code{\link{numeric}} vector giving the position of the
-column corresponding to the event from which elapsed time is calculated.
-Only used if \code{elapsed} is \code{TRUE}.}
-
 \item{x}{A \code{\linkS4class{OccurrenceEvents}} object.}
-
-\item{calendar}{A \code{\link{character}} string specifying whether the dates
-should be displayed in BP or BC/AD. It must be one of "\code{BCAD}" (the default)
-or "\code{BP}". Any unambiguous substring can be given.}
 }
 \value{
 An \code{\linkS4class{OccurrenceEvents}} object.
@@ -68,10 +52,10 @@ eve <- eve[1:10000, ]
 
 ## Occurrence plot
 occ_ci <- occurrence(eve, interval = "ci")
-plot(occ_ci, calendar = "BCAD")
+plot(occ_ci)
 
 occ_hpdi <- occurrence(eve, interval = "hpdi")
-plot(occ_hpdi, calendar = "BP")
+plot(occ_hpdi)
 }
 }
 \seealso{

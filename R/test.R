@@ -40,7 +40,7 @@ setMethod(
     fun <- switch(
       get_calendar(object),
       BP = function(x, a, b) which(x < a & x >= b),
-      BCAD = function(x, a, b) which(x >= a & x < b),
+      CE = function(x, a, b) which(x >= a & x < b),
       stop("Unknown calendar scale.", call. = FALSE)
     )
 

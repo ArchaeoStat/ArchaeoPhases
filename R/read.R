@@ -78,15 +78,15 @@ setMethod(
     if (!is.numeric(data[, ncol(data), drop = TRUE]))
       data <- data[, -ncol(data)]
 
-    ## Convert from BP to BC/AD
+    ## Convert from BP to CE
     if (BP)
-      data <- BP_to_BCAD(data)
+      data <- BP_to_CE(data)
 
     ## Return an MCM object
     .MCMC(
       as.matrix(data),
       events = date_names,
-      calendar = "BCAD",
+      calendar = "CE",
       hash = file_hash
     )
   }
@@ -128,14 +128,14 @@ setMethod(
     if (bin_width != 1)
       data <- data * bin_width
 
-    ## Convert from BP to BC/AD
-    data <- BP_to_BCAD(data)
+    ## Convert from BP to CE
+    data <- BP_to_CE(data)
 
     ## Return an MCM object
     .MCMC(
       as.matrix(data),
       events = date_names,
-      calendar = "BCAD",
+      calendar = "CE",
       hash = file_hash
     )
   }
@@ -167,9 +167,9 @@ setMethod(
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
 
-    ## Convert from BP to BC/AD
+    ## Convert from BP to CE
     if (BP)
-      data <- BP_to_BCAD(data)
+      data <- BP_to_CE(data)
 
     ## Return an MCMC object
     mtx <- as.matrix(data)
@@ -186,14 +186,14 @@ setMethod(
         arr,
         phases = pha,
         ordered = FALSE,
-        calendar = "BCAD",
+        calendar = "CE",
         hash = file_hash
       )
     } else {
       .EventsMCMC(
         mtx,
         events = date_names,
-        calendar = "BCAD",
+        calendar = "CE",
         hash = file_hash
       )
     }

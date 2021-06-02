@@ -25,6 +25,8 @@ knitr::opts_chunk$set(
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
+[![DOI JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
 
 **This repository contains a heavily modified fork of the _ArchaeoPhases_ package. You might be interested in the [original package](https://github.com/ArchaeoStat/ArchaeoPhases).**
@@ -33,9 +35,9 @@ knitr::opts_chunk$set(
 
 Statistical analysis of archaeological dates and groups of dates. **ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC) simulations from [ChronoModel](https://chronomodel.com), [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) or [BCal](https://bcal.shef.ac.uk). This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
 
-To cite **ArchaeoPhases** in publications please use:
-
-> Philippe, A. & Vibet, M.-A. (2020). Analysis of Archaeological Phases Using the R Package ArchaeoPhases. *Journal of Statistical Software, Code Snippets*, 93(1), 1-25. DOI [10.18637/jss.v093.c01](https://doi.org/10.18637/jss.v093.c01).
+```{r citation, echo=FALSE}
+utils::citation("ArchaeoPhases")
+```
 
 ## Installation
 
@@ -49,7 +51,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ```{r gh-installation, eval=FALSE}
 # install.packages("remotes")
-remotes::install_github("ArchaeoStat/ArchaeoPhases")
+remotes::install_github("nfrerebeau/ArchaeoPhases")
 ```
 
 ## Usage

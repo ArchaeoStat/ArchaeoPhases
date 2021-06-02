@@ -125,12 +125,17 @@ setGeneric(
 NULL
 
 # Time Scale ===================================================================
-#' Convert Time Scale
+#' Time Scale
 #'
-#' Converts between BP and BC/AD time scales.
-#' @param object A [`numeric`] vector or an [`MCMC-class`] object.
+#' Converts between BP and CE time scales.
+#' @param object An object (typically an [`MCMC-class`] object).
+#' @param origin An [`integer`] giving the position of the column corresponding
+#'  to the event from which elapsed time is calculated.
+#' @param ... Currently not used.
 #' @return
-#'  * `is_BP` and `is_CE` return a [`logical`] scalar.
+#'  * `elapse()`, `BP_to_CE()` and `CE_to_BP()` return an object of the same
+#'    class as `object`.
+#'  * `is_BP()` and `is_CE()` return a [`logical`] scalar.
 #' @return
 #'  An object of the same sort as `object` with a new time scale.
 #' @note
@@ -143,17 +148,24 @@ NULL
 NULL
 
 #' @rdname calendar
-#' @aliases BP_to_BCAD-method
+#' @aliases elapse-method
 setGeneric(
-  name = "BP_to_BCAD",
-  def = function(object) standardGeneric("BP_to_BCAD")
+  name = "elapse",
+  def = function(object, ...) standardGeneric("elapse")
 )
 
 #' @rdname calendar
-#' @aliases BCAD_to_BP-method
+#' @aliases BP_to_CE-method
 setGeneric(
-  name = "BCAD_to_BP",
-  def = function(object) standardGeneric("BCAD_to_BP")
+  name = "BP_to_CE",
+  def = function(object) standardGeneric("BP_to_CE")
+)
+
+#' @rdname calendar
+#' @aliases CE_to_BP-method
+setGeneric(
+  name = "CE_to_BP",
+  def = function(object) standardGeneric("CE_to_BP")
 )
 
 #' @rdname calendar
@@ -183,19 +195,12 @@ setGeneric(
 #'  (the default) or a probability?
 #' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
 #'  credible interval be used?
-#' @param elapsed A [`logical`] scalar: should an elapsed time scale be used?
-#' @param origin A length-one [`numeric`] vector giving the position of the
-#'  column corresponding to the event from which elapsed time is calculated.
-#'  Only used if `elapsed` is `TRUE`.
 #' @param time A length-two [`numeric`] vector giving the earliest and latest
 #'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the cumulative distribution is to be estimated.
 #' @param progress A [`logical`] scalar: should a progress bar be displayed?
 #' @param x A [`CumulativeEvents-class`] object.
-#' @param calendar A [`character`] string specifying whether the dates
-#'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
-#'  or "`BP`". Any unambiguous substring can be given.
 #' @param ... Any [`CumulativeEvents-class`] object.
 #' @details
 #'  The tempo plot is one way to measure change over time: it estimates the
@@ -229,19 +234,12 @@ setGeneric(
 #'
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
 #' @param object An [`MCMC-class`] or a [`CumulativeEvents-class`] object.
-#' @param elapsed A [`logical`] scalar: should an elapsed time scale be used?
-#' @param origin A length-one [`numeric`] vector giving the position of the
-#'  column corresponding to the event from which elapsed time is calculated.
-#'  Only used if `elapsed` is `TRUE`.
 #' @param time A length-two [`numeric`] vector giving the earliest and latest
 #'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the density is to be estimated.
 #' @param progress A [`logical`] scalar: should a progress bar be displayed?
 #' @param x An [`ActivityEvents-class`] object.
-#' @param calendar A [`character`] string specifying whether the dates
-#'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
-#'  or "`BP`". Any unambiguous substring can be given.
 #' @param ... Any [`ActivityEvents-class`] object.
 #' @references
 #'  Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
@@ -274,14 +272,7 @@ setGeneric(
 #'  or "`hpdi`" (highest posterior density interval). Any unambiguous substring
 #'  can be given.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param elapsed A [`logical`] scalar: should an elapsed time scale be used?
-#' @param origin A length-one [`numeric`] vector giving the position of the
-#'  column corresponding to the event from which elapsed time is calculated.
-#'  Only used if `elapsed` is `TRUE`.
 #' @param x A [`OccurrenceEvents-class`] object.
-#' @param calendar A [`character`] string specifying whether the dates
-#'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
-#'  or "`BP`". Any unambiguous substring can be given.
 #' @param ... Currently not used.
 #' @details
 #'  If we have \eqn{k} events, then we can estimate the calendar date \eqn{t}
@@ -569,9 +560,6 @@ setGeneric(
 #' Plot
 #'
 #' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
-#' @param calendar A [`character`] string specifying whether the dates
-#'  should be displayed in BP or BC/AD. It must be one of "`BCAD`" (the default)
-#'  or "`BP`". Any unambiguous substring can be given.
 #' @param density A [`logical`] scalar: should estimated density be plotted?
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the density is to be estimated (should be a power of two). Only used
@@ -582,10 +570,6 @@ setGeneric(
 #'  can be given.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
-#' @param elapsed A [`logical`] scalar: should an elapsed time scale be used?
-#' @param origin A length-one [`numeric`] vector giving the position of the
-#'  column corresponding to the event from which elapsed time is calculated.
-#'  Only used if `elapsed` is `TRUE`.
 #' @param succession A [`logical`] scalar: should time ranges be plotted instead
 #'  of densities?
 #' @param facet A [`logical`] scalar: should a matrix of panels defined by phase
@@ -605,7 +589,7 @@ NULL
 #' @aliases multiplot-method
 setGeneric(
   name = "multiplot",
-  def = function(..., calendar = c("BCAD", "BP")) standardGeneric("multiplot"),
+  def = function(...) standardGeneric("multiplot"),
   signature = "..."
 )
 
@@ -666,7 +650,7 @@ setGeneric(
 #'
 #' @inheritParams utils::read.table
 #' @param BP A [`logical`] scalar: should the data be converted from BP to
-#'  BC/AD? This should not be `TRUE` unless you change the default settings in
+#'  CE? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
 #' @param phases A [`logical`] scalar: should the data be imported as phases?
 #' @param bin_width The bin width specified for the

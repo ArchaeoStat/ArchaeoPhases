@@ -17,7 +17,7 @@ setMethod(
 
     ## Convert from BP to BC/AD
     if (BP)
-      from <- BP_to_BCAD(from)
+      from <- BP_to_CE(from)
 
     pha <- paste0("phase_", seq_along(start))
     arr <- array(data = NA_real_, dim = c(nrow(from), ncol(from) / 2, 2),
@@ -29,7 +29,7 @@ setMethod(
       arr,
       phases = pha,
       ordered = FALSE,
-      calendar = "BCAD"
+      calendar = "CE"
     )
   }
 )
@@ -187,7 +187,7 @@ setMethod(
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95) {
     ## Check calendar
-    BP <- get_calendar(x) == "BP"
+    BP <- is_BP(x)
 
     ## Get phases
     pha <- get_order(x)
@@ -231,7 +231,7 @@ setMethod(
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x) {
     ## Check calendar
-    BP <- get_calendar(x) == "BP"
+    BP <- is_BP(x)
 
     ## Get phases
     pha <- get_order(x)
@@ -284,7 +284,7 @@ setMethod(
     }
 
     ## Check calendar
-    BP <- get_calendar(x) == "BP"
+    BP <- is_BP(x)
 
     ## Get phases
     pha <- get_order(x)
@@ -370,7 +370,7 @@ setMethod(
     }
 
     ## Check calendar
-    BP <- get_calendar(x) == "BP"
+    BP <- is_BP(x)
 
     ## Get phases
     pha <- get_order(x)

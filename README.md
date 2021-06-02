@@ -17,6 +17,9 @@ Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-proje
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
+[![DOI
+JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
 
 **This repository contains a heavily modified fork of the
@@ -36,12 +39,25 @@ and visualization of time ranges from the posterior distribution of
 groups of dates (e.g. duration, transition and hiatus between successive
 phases).
 
-To cite **ArchaeoPhases** in publications please use:
-
-> Philippe, A. & Vibet, M.-A. (2020). Analysis of Archaeological Phases
-> Using the R Package ArchaeoPhases. *Journal of Statistical Software,
-> Code Snippets*, 93(1), 1-25. DOI
-> [10.18637/jss.v093.c01](https://doi.org/10.18637/jss.v093.c01).
+    #> 
+    #> To cite ArchaeoPhases in publications use:
+    #> 
+    #>   Philippe, Anne & Vibet, Marie-Anne (2020). Analysis of Archaeological
+    #>   Phases Using the R Package ArchaeoPhases. Journal of Statistical
+    #>   Software, Code Snippets, 93(1), 1--25. DOI 10.18637/jss.v093.c01.
+    #> 
+    #> Une entrée BibTeX pour les utilisateurs LaTeX est
+    #> 
+    #>   @Article{,
+    #>     title = {Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}},
+    #>     author = {Anne Philippe and Marie-Anne Vibet},
+    #>     year = {2020},
+    #>     journal = {Journal of Statistical Software, Code Snippets},
+    #>     volume = {93},
+    #>     number = {1},
+    #>     page = {1--25},
+    #>     doi = {10.18637/jss.v093.c01},
+    #>   }
 
 ## Installation
 
@@ -56,7 +72,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("ArchaeoStat/ArchaeoPhases")
+remotes::install_github("nfrerebeau/ArchaeoPhases")
 ```
 
 ## Usage
@@ -78,11 +94,11 @@ output_csv <- utils::unzip(output_zip, exdir = tempdir())
 (chrono_events <- read_chronomodel(output_csv[[1]], phases = FALSE))
 #> <EventsMCMC>
 #> - Number of events: 16
-#> - Calendar: BCAD
+#> - Calendar: CE
 (chrono_phases <- read_chronomodel(output_csv[[2]], phases = TRUE))
 #> <PhasesMCMC>
 #> - Modelled phases: EPI UP Ahmarian IUP
-#> - Calendar: BCAD
+#> - Calendar: CE
 ```
 
 **ArchaeoPhases** uses

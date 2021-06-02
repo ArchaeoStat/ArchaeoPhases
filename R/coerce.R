@@ -85,15 +85,15 @@ setMethod(
     if (!is.null(iteration))
       from <- from[, -iteration]
 
-    ## Convert from BP to BC/AD
+    ## Convert from BP to CE
     if (BP)
-      from <- BP_to_BCAD(from)
+      from <- BP_to_CE(from)
 
     ## Event names
     event_names <- colnames(from)
     if (is.null(event_names)) event_names <- paste0("E", seq_len(ncol(from)))
 
-    .MCMC(from, events = event_names, calendar = "BCAD")
+    .MCMC(from, events = event_names, calendar = "CE")
   }
 )
 
@@ -108,15 +108,15 @@ setMethod(
     if (!is.null(iteration))
       from <- from[, -iteration]
 
-    ## Convert from BP to BC/AD
+    ## Convert from BP to CE
     if (BP)
-      from <- BP_to_BCAD(from)
+      from <- BP_to_CE(from)
 
     ## Event names
     event_names <- colnames(from)
     if (is.null(event_names)) event_names <- paste0("E", seq_len(ncol(from)))
 
-    .EventsMCMC(from, events = event_names, calendar = "BCAD")
+    .EventsMCMC(from, events = event_names, calendar = "CE")
   }
 )
 

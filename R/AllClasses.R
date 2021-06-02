@@ -8,7 +8,7 @@ NULL
 #' S4 classes to represent the output of a MCMC algorithm.
 #' @slot events A [`character`] vector specifying the name of the events.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`BCAD`").
+#'  (either "`BP`" or "`CE`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
 #' @section Subset:
@@ -37,7 +37,7 @@ NULL
   ),
   prototype = methods::prototype(
     events = character(0),
-    calendar = "BCAD",
+    calendar = "CE",
     hash = character(0)
   ),
   contains = "matrix"
@@ -54,13 +54,9 @@ NULL
 #' MCMC Phases
 #'
 #' An S4 class to represent the output of a MCMC algorithm.
-#' @slot start An [`integer`] vector containing the column number corresponding
-#'  to the minimum of each phase.
-#' @slot end An [`integer`] vector containing the column number corresponding to
-#'  the maximum of each phase (set in the same order as in `start`).
 #' @slot phases A [`character`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`BCAD`").
+#'  (either "`BP`" or "`CE`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
 #' @section Coerce:
@@ -84,8 +80,6 @@ NULL
 .PhasesMCMC <- setClass(
   Class = "PhasesMCMC",
   slots = c(
-    start = "integer",
-    end = "integer",
     phases = "character",
     ordered = "logical",
     calendar = "character",
@@ -96,7 +90,7 @@ NULL
     end = integer(0),
     phases = character(0),
     ordered = FALSE,
-    calendar = "BCAD",
+    calendar = "CE",
     hash = character(0)
   ),
   contains = "array"
@@ -121,7 +115,7 @@ NULL
 #' @slot events An [`integer`] scalar giving the number of events included in
 #'  the tempo plot.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`BCAD`").
+#'  (either "`BP`" or "`CE`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
 #' @section Coerce:
@@ -155,7 +149,7 @@ NULL
 #'
 #' An S4 class to store the result of an [`activity`] plot.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`BCAD`").
+#'  (either "`BP`" or "`CE`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
 #' @section Coerce:
@@ -189,7 +183,7 @@ NULL
 #'  credibility interval.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`BCAD`").
+#'  (either "`BP`" or "`CE`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
 #'  original data file.
 #' @section Coerce:

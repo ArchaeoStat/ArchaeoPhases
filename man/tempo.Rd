@@ -16,16 +16,14 @@ tempo(object, ...)
   level = 0.95,
   count = TRUE,
   gauss = FALSE,
-  elapsed = FALSE,
-  origin = 1,
   time = range(object),
   n = 50 * ncol(object),
   progress = getOption("ArchaeoPhases.progress")
 )
 
-\S4method{plot}{CumulativeEvents,missing}(x, calendar = c("BCAD", "BP"))
+\S4method{plot}{CumulativeEvents,missing}(x)
 
-\S4method{multiplot}{CumulativeEvents}(..., calendar = c("BCAD", "BP"))
+\S4method{multiplot}{CumulativeEvents}(...)
 }
 \arguments{
 \item{object}{An \code{\linkS4class{MCMC}} object.}
@@ -40,12 +38,6 @@ tempo(object, ...)
 \item{gauss}{A \code{\link{logical}} scalar: should the Gaussian approximation of the
 credible interval be used?}
 
-\item{elapsed}{A \code{\link{logical}} scalar: should an elapsed time scale be used?}
-
-\item{origin}{A length-one \code{\link{numeric}} vector giving the position of the
-column corresponding to the event from which elapsed time is calculated.
-Only used if \code{elapsed} is \code{TRUE}.}
-
 \item{time}{A length-two \code{\link{numeric}} vector giving the earliest and latest
 date to estimate for, in BC/AD years. Ignored if \code{elapsed} is \code{TRUE}.}
 
@@ -55,10 +47,6 @@ which the cumulative distribution is to be estimated.}
 \item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
 
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
-
-\item{calendar}{A \code{\link{character}} string specifying whether the dates
-should be displayed in BP or BC/AD. It must be one of "\code{BCAD}" (the default)
-or "\code{BP}". Any unambiguous substring can be given.}
 }
 \description{
 A statistical graphic designed for the archaeological study of rhythms of the
@@ -84,7 +72,7 @@ tempo1 <- tempo(eve)
 plot(tempo1)
 
 tempo2 <- tempo(eve, gauss = TRUE)
-plot(tempo2, calendar = "BP")
+plot(tempo2)
 
 ## Activity plot
 act <- activity(eve)

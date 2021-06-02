@@ -9,30 +9,13 @@ NULL
 setMethod(
   f = "plot",
   signature = c(x = "MCMC", y = "missing"),
-  definition = function(x, calendar = c("BCAD", "BP"), density = TRUE, n = 512,
-                        interval = c("ci", "hpdi"), level = 0.95,
-                        decreasing = TRUE, elapsed = FALSE, origin = 1, ...) {
+  definition = function(x, density = TRUE, n = 512, interval = c("ci", "hpdi"),
+                        level = 0.95, decreasing = TRUE, ...) {
     ## Validation
-    calendar <- match.arg(calendar, several.ok = FALSE)
     interval <- match.arg(interval, several.ok = FALSE)
 
     ## Calendar scale
-    if (elapsed) {
-      if (is.null(origin))
-        stop("Elapsed origin must be specified.", call. = FALSE)
-      x <- x - x[, origin]
-      gg_x_scale <- ggplot2::scale_x_continuous(name = "Elapsed years")
-    } else {
-      if (calendar == "BCAD") {
-        if (get_calendar(x) == "BP") x <- BP_to_BCAD(x)
-        gg_x_scale <- ggplot2::scale_x_continuous(name = "Years BC/AD")
-      }
-      if (calendar == "BP") {
-        if (get_calendar(x) == "BCAD") x <- BCAD_to_BP(x)
-        decreasing <- !decreasing
-        gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
-      }
-    }
+    gg_x_scale <- scale_calendar(get_calendar(x))
 
     ## Compute interval
     fun <- switch (
@@ -44,7 +27,7 @@ setMethod(
     inter <- fun(x, level = level)
 
     ## Bind results in case of multiple intervals
-    rank_i <- ifelse(calendar == "BP", 2, 1) # Ranking column
+    rank_i <- ifelse(is_BP(x), 2, 1) # Ranking column
     if (interval == "hpdi") {
       k <- vapply(X = inter, FUN = nrow, FUN.VALUE = integer(1))
       low <- vapply(X = inter, FUN = function(x, i) min(x[, i]),
@@ -118,29 +101,10 @@ setMethod(
 setMethod(
   f = "plot",
   signature = c(x = "PhasesMCMC", y = "missing"),
-  definition = function(x, calendar = c("BCAD", "BP"), level = 0.95, n = 512,
-                        decreasing = TRUE, elapsed = FALSE, origin = 1,
+  definition = function(x, level = 0.95, n = 512, decreasing = TRUE,
                         succession = is_ordered(x), facet = TRUE, ...) {
-    ## Validation
-    calendar <- match.arg(calendar, several.ok = FALSE)
-
     ## Calendar scale
-    if (elapsed) {
-      if (is.null(origin))
-        stop("Elapsed origin must be specified.", call. = FALSE)
-      x <- x - x[, origin]
-      gg_x_scale <- ggplot2::scale_x_continuous(name = "Elapsed years")
-    } else {
-      if (calendar == "BCAD") {
-        if (get_calendar(x) == "BP") x <- BP_to_BCAD(x)
-        gg_x_scale <- ggplot2::scale_x_continuous(name = "Years BC/AD")
-      }
-      if (calendar == "BP") {
-        if (get_calendar(x) == "BCAD") x <- BCAD_to_BP(x)
-        decreasing <- !decreasing
-        gg_x_scale <- ggplot2::scale_x_reverse(name = "Years cal BP")
-      }
-    }
+    gg_x_scale <- scale_calendar(get_calendar(x))
 
     if (succession) {
       gg_phases <- plot_succession(x, level = level, decreasing = decreasing)
