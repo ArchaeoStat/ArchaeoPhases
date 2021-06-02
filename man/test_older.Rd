@@ -26,16 +26,18 @@ A \code{\link{numeric}} vector (the posterior probability of the assumption:
 "event \code{x} is older than event \code{y}").
 }
 \description{
-This function estimates the posterior probability that event \code{x} is older
-than event \code{b} using the output of the MCMC algorithm. This provides a
-Bayesian test for checking the following assumption: "Event \code{x} is older than
-event \code{y}".
+A Bayesian test for checking the following assumption: "event \code{x} is older
+than event \code{y}".
 }
 \details{
 For a given output of MCMC algorithm, this function estimates the posterior
 probability of the event \eqn{x < y} by the relative frequency of the event
 "the value of event \code{x} is less than the value of event \code{y}" in the
 simulated Markov chain.
+}
+\seealso{
+Other tests: 
+\code{\link{apportion}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

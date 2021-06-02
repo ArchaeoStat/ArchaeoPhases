@@ -130,28 +130,44 @@ NULL
 #' Converts between BP and BC/AD time scales.
 #' @param object A [`numeric`] vector or an [`MCMC-class`] object.
 #' @return
+#'  * `is_BP` and `is_CE` return a [`logical`] scalar.
+#' @return
 #'  An object of the same sort as `object` with a new time scale.
 #' @note
-#'  There is no year 0 in BC/AD scale.
+#'  There is no year \eqn{0} in BCE/CE scale.
 #' @author N. Frerebeau
-#' @family time scale
+#' @family time scales
 #' @docType methods
-#' @name convert
-#' @rdname convert
+#' @name calendar
+#' @rdname calendar
 NULL
 
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BP_to_BCAD-method
 setGeneric(
   name = "BP_to_BCAD",
   def = function(object) standardGeneric("BP_to_BCAD")
 )
 
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BCAD_to_BP-method
 setGeneric(
   name = "BCAD_to_BP",
   def = function(object) standardGeneric("BCAD_to_BP")
+)
+
+#' @rdname calendar
+#' @aliases is_BP-method
+setGeneric(
+  name = "is_BP",
+  def = function(object) standardGeneric("is_BP")
+)
+
+#' @rdname calendar
+#' @aliases is_CE-method
+setGeneric(
+  name = "is_CE",
+  def = function(object) standardGeneric("is_CE")
 )
 
 # Events =======================================================================
@@ -597,10 +613,8 @@ setGeneric(
 ## Anteriority -----------------------------------------------------------------
 #' Bayesian Test for Anteriority/Posteriority
 #'
-#' This function estimates the posterior probability that event `x` is older
-#' than event `b` using the output of the MCMC algorithm. This provides a
-#' Bayesian test for checking the following assumption: "Event `x` is older than
-#' event `y`".
+#' A Bayesian test for checking the following assumption: "event `x` is older
+#' than event `y`".
 #' @param x A [`numeric`] vector giving the output of the MCMC algorithm for the
 #'  first parameter.
 #' @param y A [`numeric`] vector giving the output of the MCMC algorithm for the
@@ -621,6 +635,30 @@ setGeneric(
 setGeneric(
   name = "test_older",
   def = function(x, y, ...) standardGeneric("test_older")
+)
+
+## Apportion -------------------------------------------------------------------
+#' Apportioned Probabilities
+#'
+#' @param object A [`CumulativeEvents-class`] object.
+#' @param from A [`numeric`] vector. If `to` is missing, must be a [`list`] (or
+#'  a [`data.frame`]) with `numeric` components (columns) `from` and `to`.
+#' @param to A [`numeric`] vector. If missing, an attempt is made to interpret
+#'  `from` in a suitable way.
+#' @param groups A [`factor`] vector in the sense that `as.factor(groups)`
+#'  defines the grouping. If `from` is a `list` (or a `data.frame`), `groups`
+#'  can be a length-one vector giving the index of the grouping component
+#'  (column) of `from`.
+#' @param ... Currently not used.
+#' @return A [`numeric`] vector of posterior probabilities.
+#' @author N. Frerebeau, A. Philippe
+#' @family tests
+#' @docType methods
+#' @rdname apportion
+#' @aliases apportion-method
+setGeneric(
+  name = "apportion",
+  def = function(object, from, to, ...) standardGeneric("apportion")
 )
 
 # Read =========================================================================

@@ -2,9 +2,33 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
-# Convert ======================================================================
+# Predicates ===================================================================
 #' @export
-#' @rdname convert
+#' @rdname calendar
+#' @aliases is_BP,CumulativeEvents-method
+setMethod(
+  f = "is_BP",
+  signature = "CumulativeEvents",
+  definition = function(object) {
+    get_calendar(object) == "BP"
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_CE,CumulativeEvents-method
+setMethod(
+  f = "is_CE",
+  signature = "CumulativeEvents",
+  definition = function(object) {
+    get_calendar(object) == "BCAD"
+  }
+)
+
+# Convert ======================================================================
+## BP to BC/AD -----------------------------------------------------------------
+#' @export
+#' @rdname calendar
 #' @aliases BP_to_BCAD,numeric-method
 setMethod(
   f = "BP_to_BCAD",
@@ -22,7 +46,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BP_to_BCAD,matrix-method
 setMethod(
   f = "BP_to_BCAD",
@@ -36,7 +60,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BP_to_BCAD,array-method
 setMethod(
   f = "BP_to_BCAD",
@@ -50,7 +74,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BP_to_BCAD,MCMC-method
 setMethod(
   f = "BP_to_BCAD",
@@ -64,7 +88,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BP_to_BCAD,PhasesMCMC-method
 setMethod(
   f = "BP_to_BCAD",
@@ -78,7 +102,23 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
+#' @aliases BP_to_BCAD,CumulativeEvents-method
+setMethod(
+  f = "BP_to_BCAD",
+  signature = "CumulativeEvents",
+  definition = function(object){
+    ## Check current scale
+    if (get_calendar(object) == "BCAD") return(object)
+    object@year <- BP_to_BCAD(object@year)
+    object@calendar <- "BCAD"
+    object
+  }
+)
+
+## BC/AD to BP -----------------------------------------------------------------
+#' @export
+#' @rdname calendar
 #' @aliases BCAD_to_BP,numeric-method
 setMethod(
   f = "BCAD_to_BP",
@@ -99,7 +139,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BCAD_to_BP,matrix-method
 setMethod(
   f = "BCAD_to_BP",
@@ -113,7 +153,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BCAD_to_BP,array-method
 setMethod(
   f = "BCAD_to_BP",
@@ -127,7 +167,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BCAD_to_BP,MCMC-method
 setMethod(
   f = "BCAD_to_BP",
@@ -141,7 +181,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname convert
+#' @rdname calendar
 #' @aliases BCAD_to_BP,PhasesMCMC-method
 setMethod(
   f = "BCAD_to_BP",
@@ -151,5 +191,20 @@ setMethod(
     if (get_calendar(object) == "BP") return(object)
     tmp <- methods::callNextMethod(object = object)
     methods::initialize(object, tmp, calendar = "BP")
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases BCAD_to_BP,CumulativeEvents-method
+setMethod(
+  f = "BCAD_to_BP",
+  signature = "CumulativeEvents",
+  definition = function(object){
+    ## Check current scale
+    if (get_calendar(object) == "BP") return(object)
+    object@year <- BCAD_to_BP(object@year)
+    object@calendar <- "BP"
+    object
   }
 )
