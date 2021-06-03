@@ -12,8 +12,11 @@ setMethod(
     ## Validation
     interval <- match.arg(interval, several.ok = FALSE)
 
+    ## Calendar scale
+    desc <- ifelse(is_BP(object), TRUE, FALSE)
+
     ## Sort rows
-    sorted <- apply(X = object, MARGIN = 1, FUN = sort, decreasing = FALSE)
+    sorted <- apply(X = object, MARGIN = 1, FUN = sort, decreasing = desc)
     sorted <- as_mcmc(t(sorted))
     ord <- seq_len(ncol(object))
 

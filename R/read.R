@@ -59,7 +59,7 @@ setMethod(
     ## These match the R defaults
     data <- utils::read.table(file = file, header = TRUE, sep = ",",
                               quote = "\"", dec = ".", comment.char = "#",
-                              colClasses = "numeric", check.names = FALSE)
+                              check.names = FALSE)
 
     ## Calculate hash
     file_hash <- make_hash(file)
@@ -102,7 +102,7 @@ setMethod(
     ## BCal uses English locale csv conventions
     data <- utils::read.table(file = file, header = TRUE, sep = ",",
                               quote = "\"", dec = ".", comment.char = "#",
-                              colClasses = "numeric", check.names = FALSE)
+                              check.names = FALSE)
 
     ## Calculate hash
     file_hash <- make_hash(file)

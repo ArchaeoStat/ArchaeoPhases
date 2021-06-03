@@ -18,18 +18,22 @@ setMethod(
     data_seq <- seq(from = time[[1L]], to = time[[2L]], length.out = n)
     distr <- matrix(data = NA_real_, nrow = n, ncol = n_iter)
 
-    iter <- seq_len(n_iter)
     progress_bar <- interactive() && progress # Display a progress bar?
     if (progress_bar) pb <- utils::txtProgressBar(max = n_iter, style = 3)
+
+    iter <- seq_len(n_iter)
     for (i in iter) {
       g <- stats::ecdf(object[i, ]) # Returns a function
       distr[, i] <- g(data_seq)
       if (progress_bar) utils::setTxtProgressBar(pb, i)
     }
+
     if (progress_bar) close(pb)
 
     ## Probability
-    if (count) distr <- distr * n_events
+    if (count) {
+      distr <- distr * n_events
+    }
 
     ## Mean estimate
     moy <- apply(X = distr, MARGIN = 1, FUN = mean)
@@ -50,6 +54,12 @@ setMethod(
       qu <- t(qu)
     }
     colnames(qu) <- c("lower", "upper")
+
+    ## Calendar scale
+    if (is_BP(object)) {
+      moy <- max(moy) - moy
+      qu <- apply(X = qu, MARGIN = 2, FUN = function(x) max(x) - x)
+    }
 
     .CumulativeEvents(
       year = data_seq,

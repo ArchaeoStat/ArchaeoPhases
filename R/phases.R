@@ -15,13 +15,14 @@ setMethod(
     if (!is.null(iteration))
       from <- from[, -iteration]
 
-    ## Convert from BP to BC/AD
+    ## Convert from BP to CE
     if (BP)
       from <- BP_to_CE(from)
 
     pha <- paste0("phase_", seq_along(start))
     arr <- array(data = NA_real_, dim = c(nrow(from), ncol(from) / 2, 2),
                  dimnames = list(NULL, pha, c("begin", "end")))
+
     arr[, , 1] <- from[, start]
     arr[, , 2] <- from[, end]
 
@@ -72,14 +73,22 @@ setMethod(
     k <- seq_len(n)
     grp <- if (is.null(names(groups))) paste0("phase_", k) else names(groups)
 
+    ## Calendar scale
+    fun_min <- min
+    fun_max <- max
+    if (is_BP(from)) {
+      fun_min <- max
+      fun_max <- min
+    }
+
     ## Build array
     min_max <- array(data = NA_real_, dim = c(m, n, 2))
     dimnames(min_max) <- list(NULL, grp, c("begin", "end"))
     for (i in k) {
       index <- groups[[i]]
       tmp <- from[, index, drop = FALSE]
-      min_max[, i, 1] <- apply(X = tmp, MARGIN = 1, FUN = min)
-      min_max[, i, 2] <- apply(X = tmp, MARGIN = 1, FUN = max)
+      min_max[, i, 1] <- apply(X = tmp, MARGIN = 1, FUN = fun_min)
+      min_max[, i, 2] <- apply(X = tmp, MARGIN = 1, FUN = fun_max)
     }
 
     .PhasesMCMC(
@@ -169,11 +178,14 @@ setMethod(
 
     epsilon <- seq(from = 0, to = 1 - level, by = 0.001)
     p <- periode(epsilon, x, y, level = level)
+
     ## Compute the length of all intervals
     inter <- p[2, ] - p[1, ]
+
     ## Find the shortest interval
     short <- which.min(inter)
     endpoints <- round(p[, short], getOption("ArchaeoPhases.precision"))
+
     ## Return the endpoints of the shortest interval
     c(start = endpoints[[1]], end = endpoints[[2]])
   }
@@ -196,9 +208,8 @@ setMethod(
     start <- ifelse(BP, 2, 1)
     end <- ifelse(BP, 1, 2)
 
-    # Matrix of results
+    ## Matrix of results
     result <- matrix(nrow = ncol(x), ncol = 2)
-    dimnames(result) <- list(pha, c("start", "end"))
 
     k <- seq_along(pha)
     for (i in seq_along(pha)) {
@@ -206,6 +217,14 @@ setMethod(
       b <- x[, i, end]
       result[i, ] <- boundaries(a, b, level = level)
     }
+
+    ## Re-reverse boundaries if BP scale
+    if (BP) {
+      result <- result[, c(2, 1), drop = FALSE]
+    }
+
+    ## Names
+    dimnames(result) <- list(pha, c("start", "end"))
 
     as.data.frame(result)
   }
@@ -253,7 +272,7 @@ setMethod(
 
     .MCMC(
       result,
-      calendar = get_calendar(x),
+      calendar = "elapsed",
       hash = get_hash(x)
     )
   }
@@ -293,14 +312,15 @@ setMethod(
     ## Reverse boundaries if BP scale
     start <- ifelse(BP, 1, 2)
     end <- ifelse(BP, 2, 1)
-
-    # Matrix of results
-    result <- matrix(nrow = m, ncol = 2)
-    colnames(result) <- c("start", "end")
+    fun_head <- ifelse(BP, utils::tail, utils::head)
+    fun_tail <- ifelse(BP, utils::head, utils::tail)
 
     k <- seq_len(m + 1)
-    deb <- utils::head(k, -1)
-    fin <- utils::tail(k, -1)
+    deb <- fun_head(k, -1)
+    fin <- fun_tail(k, -1)
+
+    ## Matrix of results
+    result <- matrix(nrow = m, ncol = 2)
 
     for (i in seq_len(m)) {
       a <- x[, deb[[i]], start]
@@ -308,10 +328,16 @@ setMethod(
       result[i, ] <- boundaries(a, b, level = level)
     }
 
-    # Names
-    names_start <- pha[deb]
-    names_end <- pha[fin]
-    rownames(result) <- paste(names_start, names_end, sep = "-")
+    ## Re-reverse boundaries if BP scale
+    if (BP) {
+      result <- result[, c(2, 1), drop = FALSE]
+    }
+
+    ## Names
+    names_start <- if (BP) fin else deb
+    names_end <- if (BP) deb else fin
+    rownames(result) <- paste(pha[names_start], pha[names_end], sep = "-")
+    colnames(result) <- c("start", "end")
 
     as.data.frame(result)
   }
@@ -339,6 +365,7 @@ setMethod(
 
     epsilon <- seq(0, 1 - level, .001)
     p <- gap(epsilon, x, y, level)
+
     ## Compute the length of all intervals
     inter <- p[2, ] - p[1, ]
     dd <- inter[inter > 0]
@@ -353,7 +380,7 @@ setMethod(
 
     inf <- endpoints[[1]]
     sup <- endpoints[[2]]
-    c(lower = inf, upper = sup)
+    c(start = inf, end = sup)
   }
 )
 
@@ -379,14 +406,15 @@ setMethod(
     ## Reverse boundaries if BP scale
     start <- ifelse(BP, 1, 2)
     end <- ifelse(BP, 2, 1)
-
-    # Matrix of results
-    result <- matrix(nrow = m, ncol = 2)
-    colnames(result) <- c("start", "end")
+    fun_head <- ifelse(BP, utils::tail, utils::head)
+    fun_tail <- ifelse(BP, utils::head, utils::tail)
 
     k <- seq_len(m + 1)
-    deb <- utils::head(k, -1)
-    fin <- utils::tail(k, -1)
+    deb <- fun_head(k, -1)
+    fin <- fun_tail(k, -1)
+
+    ## Matrix of results
+    result <- matrix(nrow = m, ncol = 2)
 
     for (i in seq_len(m)) {
       a <- x[, deb[[i]], start]
@@ -394,10 +422,16 @@ setMethod(
       result[i, ] <- hiatus(a, b, level = level)
     }
 
-    # Names
-    names_start <- pha[deb]
-    names_end <- pha[fin]
-    rownames(result) <- paste(names_start, names_end, sep = "-")
+    ## Re-reverse boundaries if BP scale
+    if (BP) {
+      result <- result[, c(2, 1), drop = FALSE]
+    }
+
+    ## Names
+    names_start <- if (BP) fin else deb
+    names_end <- if (BP) deb else fin
+    rownames(result) <- paste(pha[names_start], pha[names_end], sep = "-")
+    colnames(result) <- c("start", "end")
 
     as.data.frame(result)
   }

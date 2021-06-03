@@ -35,6 +35,12 @@ setMethod(
   definition = function(object, level = 0.95){
     ci <- apply(X = object, MARGIN = 2, FUN = interval_credible, level = level)
     ci <- t(ci)
+
+    ## Re-reverse boundaries if BP scale
+    if (is_BP(object)) {
+      ci <- ci[, c(2, 1), drop = FALSE]
+    }
+
     colnames(ci) <- c("lower", "upper")
     attr(ci, "level") <- level
     attr(ci, "calendar") <- get_calendar(object)
@@ -70,8 +76,13 @@ setMethod(
     names(hpdi) <- colnames(object)
     for (i in k) {
       tmp <- hdrcde::hdr(object[, i, drop = TRUE], prob = level * 100, ...)
-      hpdi[[i]] <- matrix(data = tmp$hdr, ncol = 2, byrow = TRUE,
+      tmp <- matrix(data = tmp$hdr, ncol = 2, byrow = TRUE,
                           dimnames = list(NULL, c("lower", "upper")))
+      ## Reverse boundaries if BP scale
+      if (is_BP(object)) {
+        tmp <- tmp[, c(2, 1), drop = FALSE]
+      }
+      hpdi[[i]] <- tmp
     }
 
     attr(hpdi, "level") <- level

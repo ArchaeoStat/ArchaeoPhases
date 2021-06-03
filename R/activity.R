@@ -37,6 +37,11 @@ setMethod(
     x <- b[-1]
     y <- diff(a) / diff(b)
 
+    ## Calendar scale
+    if (is_BP(object)) {
+      y <- max(y) - y
+    }
+
     .ActivityEvents(
       year = x,
       estimate = y,
