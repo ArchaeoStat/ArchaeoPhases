@@ -62,6 +62,7 @@ Collate:
     'AllGenerics.R'
     'ArchaeoPhases-package.R'
     'activity.R'
+    'bind.R'
     'calendar.R'
     'coerce.R'
     'data.R'

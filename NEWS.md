@@ -1,6 +1,8 @@
 # ArchaeoPhases v1.5.0.9000
 
 ## New classes and methods
+* `apportion()`
+* `bind()`
 
 ## Enhancements
 * Support for both BP and CE time scales.

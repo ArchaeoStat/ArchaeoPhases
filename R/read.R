@@ -67,16 +67,16 @@ setMethod(
     ## Remove the iteration column
     data <- data[, -1]
 
+    ## OxCal uses trailing commas in MCMC output,
+    ## so trim the last column, which is empty
+    if (!is.numeric(data[, ncol(data), drop = TRUE]))
+      data <- data[, -ncol(data)]
+
     ## Fix names
     ## check.names = FALSE allows to get the original names
     ## then column names must be properly set with make.names()
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
-
-    ## OxCal uses trailing commas in MCMC output,
-    ## so trim the last column, which is empty
-    if (!is.numeric(data[, ncol(data), drop = TRUE]))
-      data <- data[, -ncol(data)]
 
     ## Convert from BP to CE
     if (BP)
