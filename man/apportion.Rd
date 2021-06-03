@@ -4,18 +4,18 @@
 \name{apportion}
 \alias{apportion}
 \alias{apportion-method}
-\alias{apportion,CumulativeEvents,numeric,numeric-method}
-\alias{apportion,CumulativeEvents,list,missing-method}
+\alias{apportion,MCMC,numeric,numeric-method}
+\alias{apportion,MCMC,list,missing-method}
 \title{Apportioned Probabilities}
 \usage{
 apportion(object, from, to, ...)
 
-\S4method{apportion}{CumulativeEvents,numeric,numeric}(object, from, to, groups = NULL)
+\S4method{apportion}{MCMC,numeric,numeric}(object, from, to, groups = NULL)
 
-\S4method{apportion}{CumulativeEvents,list,missing}(object, from, groups = NULL)
+\S4method{apportion}{MCMC,list,missing}(object, from, groups = NULL)
 }
 \arguments{
-\item{object}{A \code{\linkS4class{CumulativeEvents}} object.}
+\item{object}{An \code{\linkS4class{MCMC}} object.}
 
 \item{from}{A \code{\link{numeric}} vector. If \code{to} is missing, must be a \code{\link{list}} (or
 a \code{\link{data.frame}}) with \code{numeric} components (columns) \code{from} and \code{to}.}
@@ -31,7 +31,7 @@ can be a length-one vector giving the index of the grouping component
 (column) of \code{from}.}
 }
 \value{
-A \code{\link{numeric}} vector of posterior probabilities.
+A \code{\link{numeric}} \code{\link{matrix}} of probabilities.
 }
 \description{
 Apportioned Probabilities

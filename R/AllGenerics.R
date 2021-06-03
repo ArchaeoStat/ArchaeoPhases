@@ -625,7 +625,7 @@ setGeneric(
 ## Apportion -------------------------------------------------------------------
 #' Apportioned Probabilities
 #'
-#' @param object A [`CumulativeEvents-class`] object.
+#' @param object An [`MCMC-class`] object.
 #' @param from A [`numeric`] vector. If `to` is missing, must be a [`list`] (or
 #'  a [`data.frame`]) with `numeric` components (columns) `from` and `to`.
 #' @param to A [`numeric`] vector. If missing, an attempt is made to interpret
@@ -635,7 +635,7 @@ setGeneric(
 #'  can be a length-one vector giving the index of the grouping component
 #'  (column) of `from`.
 #' @param ... Currently not used.
-#' @return A [`numeric`] vector of posterior probabilities.
+#' @return A [`numeric`] [`matrix`] of probabilities.
 #' @author N. Frerebeau, A. Philippe
 #' @family tests
 #' @docType methods

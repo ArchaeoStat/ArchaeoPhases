@@ -5,10 +5,10 @@ NULL
 # Apportion ====================================================================
 #' @export
 #' @rdname apportion
-#' @aliases apportion,CumulativeEvents,numeric,numeric-method
+#' @aliases apportion,MCMC,numeric,numeric-method
 setMethod(
   f = "apportion",
-  signature = c(object = "CumulativeEvents", from = "numeric", to = "numeric"),
+  signature = c(object = "MCMC", from = "numeric", to = "numeric"),
   definition = function(object, from, to, groups = NULL) {
     ## Validation
     n <- length(from)
@@ -32,9 +32,11 @@ setMethod(
       groups <- paste(from, to, sep = "_")
     }
 
-    ## Get data
-    year <- object@year
-    est <- object@estimate
+    ## Grouping
+    ## (preserve original ordering)
+    lvl <- unique(groups)
+    grp <- factor(groups, levels = lvl, exclude = NULL)
+    spl <- split(seq_along(from), f = grp)
 
     ## Calendar scale
     fun <- switch(
@@ -44,34 +46,42 @@ setMethod(
       stop("Unknown calendar scale.", call. = FALSE)
     )
 
-    prob <- vector(mode = "integer", length = n)
-    for (i in seq_len(n)) {
-      index <- fun(year, from[i], to[i])
+    ## Matrix of results
+    n_dates <- ncol(object)
+    n_group <- length(spl)
+    prob <- matrix(data = 0, nrow = n_dates, ncol = n_group)
+    colnames(prob) <- lvl
+    rownames(prob) <- colnames(object)
 
-      if (length(index) != 0) {
-        k <- range(index)
-        # FIXME: if (diff(k) == 0) do something?
-        prob[i] <- abs(diff(est[k]))
-      } else {
-        prob[i] <- NA_integer_
+    for (i in seq_len(n_dates)) {
+      dates <- object[, i]
+      for (j in seq_len(n_group)) {
+        s <- spl[[j]]
+        tmp <- vapply(
+          X = s,
+          FUN = function(x, dates, from, to) {
+            index <- fun(dates, from[x], to[x])
+            length(index)
+          },
+          FUN.VALUE = numeric(1),
+          dates = dates,
+          from = from,
+          to = to
+        )
+        prob[i, j] <- sum(tmp)
       }
     }
 
-    ## Remove missing values
-    no_na <- !is.na(prob)
-    prob <- prob[no_na]
-    groups <- groups[no_na]
-
-    tapply(X = prob, INDEX = groups, FUN = sum, na.rm = TRUE)
+    prob / nrow(object)
   }
 )
 
 #' @export
 #' @rdname apportion
-#' @aliases apportion,CumulativeEvents,list,missing-method
+#' @aliases apportion,MCMC,list,missing-method
 setMethod(
   f = "apportion",
-  signature = c(object = "CumulativeEvents", from = "list", to = "missing"),
+  signature = c(object = "MCMC", from = "list", to = "missing"),
   definition = function(object, from, groups = NULL) {
     ## Validation
     k <- match(c("from", "to"), names(from))
