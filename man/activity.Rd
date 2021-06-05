@@ -6,6 +6,7 @@
 \alias{activity-method}
 \alias{activity,MCMC-method}
 \alias{activity,CumulativeEvents-method}
+\alias{autoplot,ActivityEvents-method}
 \alias{plot,ActivityEvents,missing-method}
 \alias{multiplot,ActivityEvents-method}
 \title{Activity Plot}
@@ -21,24 +22,33 @@ activity(object, ...)
 
 \S4method{activity}{CumulativeEvents}(object)
 
+\S4method{autoplot}{ActivityEvents}(object, ...)
+
 \S4method{plot}{ActivityEvents,missing}(x)
 
 \S4method{multiplot}{ActivityEvents}(...)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
+\item{object, x}{An \code{\linkS4class{MCMC}}, a \code{\linkS4class{CumulativeEvents}} or an
+\code{\linkS4class{ActivityEvents}} object.}
 
 \item{...}{Any \code{\linkS4class{ActivityEvents}} object.}
 
 \item{time}{A length-two \code{\link{numeric}} vector giving the earliest and latest
-date to estimate for, in BC/AD years. Ignored if \code{elapsed} is \code{TRUE}.}
+date to estimate for, in years.}
 
 \item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
 which the density is to be estimated.}
 
 \item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
-
-\item{x}{An \code{\linkS4class{ActivityEvents}} object.}
+}
+\value{
+\itemize{
+\item \code{activity()} returns an \code{\linkS4class{ActivityEvents}} object.
+\item \code{autoplot()} and \code{multiplot} return a \code{\link[ggplot2:ggplot]{ggplot}} object.
+\item \code{plot()} is called it for its side-effects: it results in a graphic being
+displayed (invisibly returns \code{x}).
+}
 }
 \description{
 Plots the first derivative of the \code{\link{tempo}} plot Bayesian estimate.

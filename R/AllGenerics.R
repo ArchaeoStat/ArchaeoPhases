@@ -3,6 +3,7 @@
 NULL
 
 # S4 dispatch to base S3 generic ===============================================
+setGeneric("autoplot", function(object, ...) standardGeneric("autoplot"))
 if (!isGeneric("plot"))
   setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
 if (!isGeneric("summary"))
@@ -190,18 +191,17 @@ setGeneric(
 #' A statistical graphic designed for the archaeological study of rhythms of the
 #' long term that embodies a theory of archaeological evidence for the
 #' occurrence of events.
-#' @param object An [`MCMC-class`] object.
+#' @param object,x An [`MCMC-class`] or a [`CumulativeEvents-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number
 #'  (the default) or a probability?
 #' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
 #'  credible interval be used?
 #' @param time A length-two [`numeric`] vector giving the earliest and latest
-#'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
+#'  date to estimate for, in years.
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the cumulative distribution is to be estimated.
 #' @param progress A [`logical`] scalar: should a progress bar be displayed?
-#' @param x A [`CumulativeEvents-class`] object.
 #' @param ... Any [`CumulativeEvents-class`] object.
 #' @details
 #'  The tempo plot is one way to measure change over time: it estimates the
@@ -210,6 +210,11 @@ setGeneric(
 #'  reflects the pace of change: a period of rapid change yields a steep slope
 #'  and a period of slow change yields a gentle slope. When there is no change,
 #'  the plot is horizontal. When change is instantaneous, the plot is vertical.
+#' @return
+#'  * `tempo()` returns an [`CumulativeEvents-class`] object.
+#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
 #' @references
 #'  Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
 #'  stratification. *Journal of Archaeological Science*, 71: 1-9.
@@ -234,14 +239,19 @@ setGeneric(
 #' Activity Plot
 #'
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
-#' @param object An [`MCMC-class`] or a [`CumulativeEvents-class`] object.
+#' @param object,x An [`MCMC-class`], a [`CumulativeEvents-class`] or an
+#'  [`ActivityEvents-class`] object.
 #' @param time A length-two [`numeric`] vector giving the earliest and latest
-#'  date to estimate for, in BC/AD years. Ignored if `elapsed` is `TRUE`.
+#'  date to estimate for, in years.
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the density is to be estimated.
 #' @param progress A [`logical`] scalar: should a progress bar be displayed?
-#' @param x An [`ActivityEvents-class`] object.
 #' @param ... Any [`ActivityEvents-class`] object.
+#' @return
+#'  * `activity()` returns an [`ActivityEvents-class`] object.
+#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
 #' @references
 #'  Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
 #'  stratification. *Journal of Archaeological Science*, 71: 1-9.
@@ -267,13 +277,12 @@ setGeneric(
 #'
 #' A statistical graphic designed for the archaeological study of when
 #' events of a specified kind occurred.
-#' @param object An [`MCMC-class`] object.
+#' @param object,x An [`MCMC-class`] or an [`OccurrenceEvents-class`] object.
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`ci`" (credible interval; the default)
 #'  or "`hpdi`" (highest posterior density interval). Any unambiguous substring
 #'  can be given.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param x A [`OccurrenceEvents-class`] object.
 #' @param ... Currently not used.
 #' @details
 #'  If we have \eqn{k} events, then we can estimate the calendar date \eqn{t}
@@ -283,6 +292,11 @@ setGeneric(
 #'  The `occurrence()` estimates these occurrences and gives the credible
 #'  interval or the highest posterior density (HPD) region for a given `level`
 #'  of confidence.
+#' @return
+#'  * `occurrence()` returns an [`OccurrenceEvents-class`] object.
+#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
 #' @return An [`OccurrenceEvents-class`] object.
 #' @example inst/examples/ex-occurrence.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
@@ -560,7 +574,7 @@ setGeneric(
 # Plot =========================================================================
 #' Plot
 #'
-#' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
+#' @param object,x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @param density A [`logical`] scalar: should estimated density be plotted?
 #' @param n An [`integer`] specifying the number of equally spaced points at
 #'  which the density is to be estimated (should be a power of two). Only used
@@ -576,6 +590,10 @@ setGeneric(
 #' @param facet A [`logical`] scalar: should a matrix of panels defined by phase
 #'  be drawn?
 #' @param ... Extra parameters to be passed to [`stats::density()`].
+#' @return
+#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
 #' @example inst/examples/ex-summary.R
 #' @seealso [`stats::density()`]
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

@@ -6,11 +6,23 @@
 \alias{plot-method}
 \alias{multiplot}
 \alias{multiplot-method}
+\alias{autoplot,MCMC-method}
 \alias{plot,MCMC,missing-method}
+\alias{autoplot,PhasesMCMC-method}
 \alias{plot,PhasesMCMC,missing-method}
 \title{Plot}
 \usage{
 multiplot(...)
+
+\S4method{autoplot}{MCMC}(
+  object,
+  ...,
+  density = TRUE,
+  n = 512,
+  interval = c("ci", "hpdi"),
+  level = 0.95,
+  decreasing = TRUE
+)
 
 \S4method{plot}{MCMC,missing}(
   x,
@@ -20,6 +32,16 @@ multiplot(...)
   level = 0.95,
   decreasing = TRUE,
   ...
+)
+
+\S4method{autoplot}{PhasesMCMC}(
+  object,
+  ...,
+  level = 0.95,
+  n = 512,
+  decreasing = TRUE,
+  succession = is_ordered(object),
+  facet = TRUE
 )
 
 \S4method{plot}{PhasesMCMC,missing}(
@@ -35,7 +57,7 @@ multiplot(...)
 \arguments{
 \item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
 
-\item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
+\item{object, x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
 
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 
@@ -57,6 +79,13 @@ of densities?}
 
 \item{facet}{A \code{\link{logical}} scalar: should a matrix of panels defined by phase
 be drawn?}
+}
+\value{
+\itemize{
+\item \code{autoplot()} returns a \code{\link[ggplot2:ggplot]{ggplot}} object.
+\item \code{plot()} is called it for its side-effects: it results in a graphic being
+displayed (invisibly returns \code{x}).
+}
 }
 \description{
 Plot

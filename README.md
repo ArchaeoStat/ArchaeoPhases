@@ -80,8 +80,6 @@ remotes::install_github("nfrerebeau/ArchaeoPhases")
 ``` r
 ## Load packages
 library(ArchaeoPhases)
-
-library(ggplot2)
 ```
 
 Import a CSV file containing a sample from the posterior distribution:
@@ -113,22 +111,21 @@ plot(chrono_events) +
   ggplot2::theme_bw()
 ```
 
-![](man/figures/README-events-plot-1.png)<!-- -->
+<img src="man/figures/README-events-plot-1.png" width="100%" />
+
+    #> NULL
 
 ``` r
 ## Tempo plot
 tp <- tempo(chrono_events, level = 0.95)
-plot(tp) +
-  ggplot2::theme_bw() +
-  ggplot2::theme(legend.position = "bottom")
+plot(tp)
 
 ## Activity plot
 ac <- activity(chrono_events)
-plot(ac) +
-  ggplot2::theme_bw()
+plot(ac)
 ```
 
-![](man/figures/README-tempo-plot-1.png)![](man/figures/README-tempo-plot-2.png)
+<img src="man/figures/README-tempo-plot-1.png" width="50%" /><img src="man/figures/README-tempo-plot-2.png" width="50%" />
 
 ### Analysis of a group of dates (phase)
 
@@ -142,11 +139,10 @@ boundaries(chrono_phases, level = 0.95)
 ```
 
 ``` r
-plot(chrono_phases) +
-  ggplot2::theme_bw()
+plot(chrono_phases)
 ```
 
-![](man/figures/README-phases-plot-1.png)<!-- -->
+<img src="man/figures/README-phases-plot-1.png" width="100%" />
 
 ``` r
 ## Set chronological order
@@ -157,8 +153,7 @@ get_order(chrono_phases)
 ```
 
 ``` r
-plot(chrono_phases, level = 0.95) +
-  ggplot2::theme_bw()
+plot(chrono_phases, level = 0.95)
 ```
 
-![](man/figures/README-succession-plot-1.png)<!-- -->
+<img src="man/figures/README-succession-plot-1.png" width="100%" />

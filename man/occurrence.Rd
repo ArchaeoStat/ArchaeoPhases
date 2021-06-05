@@ -5,6 +5,7 @@
 \alias{occurrence}
 \alias{occurrence-method}
 \alias{occurrence,MCMC-method}
+\alias{autoplot,OccurrenceEvents-method}
 \alias{plot,OccurrenceEvents,missing-method}
 \title{Occurrence Plot}
 \usage{
@@ -12,10 +13,12 @@ occurrence(object, ...)
 
 \S4method{occurrence}{MCMC}(object, interval = c("ci", "hpdi"), level = 0.95)
 
+\S4method{autoplot}{OccurrenceEvents}(object, ...)
+
 \S4method{plot}{OccurrenceEvents,missing}(x)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} object.}
+\item{object, x}{An \code{\linkS4class{MCMC}} or an \code{\linkS4class{OccurrenceEvents}} object.}
 
 \item{...}{Currently not used.}
 
@@ -25,10 +28,15 @@ or "\code{hpdi}" (highest posterior density interval). Any unambiguous substring
 can be given.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
-
-\item{x}{A \code{\linkS4class{OccurrenceEvents}} object.}
 }
 \value{
+\itemize{
+\item \code{occurrence()} returns an \code{\linkS4class{OccurrenceEvents}} object.
+\item \code{autoplot()} and \code{multiplot} return a \code{\link[ggplot2:ggplot]{ggplot}} object.
+\item \code{plot()} is called it for its side-effects: it results in a graphic being
+displayed (invisibly returns \code{x}).
+}
+
 An \code{\linkS4class{OccurrenceEvents}} object.
 }
 \description{

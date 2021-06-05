@@ -77,30 +77,44 @@ setMethod(
 )
 
 #' @export
+#' @method autoplot CumulativeEvents
+autoplot.CumulativeEvents <- function(object, ...) {
+  ## Calendar scale
+  gg_x_scale <- scale_calendar(get_calendar(object))
+
+  ## Get data
+  data <- as.data.frame(object)
+  tempo_ci <- data.frame(
+    year = c(data$year, data$year, rev(data$year)),
+    ci = c(data$estimate, data$lower, rev(data$upper)),
+    Legend = c(rep("Bayes estimate", nrow(data)),
+               rep("Credible interval", nrow(data) * 2))
+  )
+
+  ggplot2::ggplot(data = tempo_ci) +
+    ggplot2::aes(x = .data$year, y = .data$ci, color = .data$Legend,
+                 linetype = .data$Legend) +
+    ggplot2::geom_path() +
+    gg_x_scale +
+    ggplot2::scale_y_continuous(name = "Cumulative events")
+}
+
+#' @export
+#' @rdname tempo
+setMethod("autoplot", "CumulativeEvents", autoplot.CumulativeEvents)
+
+#' @export
 #' @rdname tempo
 #' @aliases plot,CumulativeEvents,missing-method
 setMethod(
   f = "plot",
   signature = c(x = "CumulativeEvents", y = "missing"),
   definition = function(x) {
-    ## Calendar scale
-    gg_x_scale <- scale_calendar(get_calendar(x))
-
-    ## Get data
-    data <- as.data.frame(x)
-    tempo_ci <- data.frame(
-      year = c(data$year, data$year, rev(data$year)),
-      ci = c(data$estimate, data$lower, rev(data$upper)),
-      Legend = c(rep("Bayes estimate", nrow(data)),
-                 rep("Credible interval", nrow(data) * 2))
-    )
-
-    ggplot2::ggplot(data = tempo_ci) +
-      ggplot2::aes(x = .data$year, y = .data$ci, color = .data$Legend,
-                   linetype = .data$Legend) +
-      ggplot2::geom_path() +
-      gg_x_scale +
-      ggplot2::scale_y_continuous(name = "Cumulative events")
+    gg <- autoplot(object = x) +
+      ggplot2::theme_bw() +
+      ggplot2::theme(legend.position = "bottom")
+    print(gg)
+    invisible(x)
   }
 )
 

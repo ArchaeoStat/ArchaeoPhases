@@ -2,6 +2,99 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
+# MCMC =========================================================================
+#' @export
+#' @method autoplot MCMC
+autoplot.MCMC <- function(object, ..., density = TRUE, n = 512,
+                          interval = c("ci", "hpdi"), level = 0.95,
+                          decreasing = TRUE) {
+  ## Validation
+  interval <- match.arg(interval, several.ok = FALSE)
+
+  ## Calendar scale
+  gg_x_scale <- scale_calendar(get_calendar(object))
+
+  ## Compute interval
+  fun <- switch (
+    interval,
+    ci = interval_credible,
+    hpdi = interval_hpd,
+    stop(sprintf("There is no such interval: %s.", interval), call. = FALSE)
+  )
+  inter <- fun(object, level = level)
+
+  ## Bind results in case of multiple intervals
+  rank_i <- ifelse(is_BP(object), 2, 1) # Ranking column
+  if (interval == "hpdi") {
+    k <- vapply(X = inter, FUN = nrow, FUN.VALUE = integer(1))
+    low <- vapply(X = inter, FUN = function(x, i) min(x[, i]),
+                  FUN.VALUE = numeric(1), i = rank_i)
+    ord <- rank(low)
+    ord <- rep(ord, times = k)
+    id <- rep(names(inter), times = k)
+
+    inter <- do.call(rbind, inter)
+  } else {
+    ord <- rank(inter[, rank_i])
+    id <- rownames(inter)
+  }
+
+  ## Reorder
+  inter <- as.data.frame(inter)
+  inter$rank <- if (decreasing) -ord else ord
+  inter$Event <- id
+  inter$Interval <- toupper(interval)
+
+  ## Density
+  gg_dens <- NULL
+  if (density) {
+    dens <- apply(
+      X = object,
+      MARGIN = 2,
+      FUN = function(x, n, ...) {
+        tmp <- stats::density(x = x, n = n, ...)
+        data.frame(x = tmp$x, y = scale_01(tmp$y))
+      },
+      n = n, ...
+    )
+    ## Long data frame for ggplot2
+    dens <- do.call(rbind, dens)
+    dens$Event <- rep(colnames(object), each = n)
+    dens <- merge(dens, inter[, c("Event", "rank")], by = "Event")
+
+    aes_dens <- ggplot2::aes(
+      x = .data$x,
+      ymin = .data$rank,
+      ymax = .data$y + .data$rank,
+      fill = .data$Event
+    )
+    gg_dens <- ggplot2::geom_ribbon(mapping = aes_dens, data = dens,
+                                    alpha = 0.5)
+  }
+
+  ## ggplot2
+  ggplot2::ggplot() +
+    gg_dens +
+    ggplot2::geom_segment(
+      mapping = ggplot2::aes(
+        x = .data$lower,
+        y = .data$rank + 0.1,
+        xend = .data$upper,
+        yend = .data$rank + 0.1,
+        color = .data$Event,
+        linetype = .data$Interval
+      ),
+      data = inter,
+      size = 2
+    ) +
+    gg_x_scale +
+    ggplot2::scale_y_discrete(name = "Dates")
+}
+
+#' @export
+#' @rdname plot
+setMethod("autoplot", "MCMC", autoplot.MCMC)
+
 #' @export
 #' @describeIn plot Plots of credible intervals or HPD regions of a series of
 #' events.
@@ -11,89 +104,41 @@ setMethod(
   signature = c(x = "MCMC", y = "missing"),
   definition = function(x, density = TRUE, n = 512, interval = c("ci", "hpdi"),
                         level = 0.95, decreasing = TRUE, ...) {
-    ## Validation
-    interval <- match.arg(interval, several.ok = FALSE)
-
-    ## Calendar scale
-    gg_x_scale <- scale_calendar(get_calendar(x))
-
-    ## Compute interval
-    fun <- switch (
-      interval,
-      ci = interval_credible,
-      hpdi = interval_hpd,
-      stop(sprintf("There is no such interval: %s.", interval), call. = FALSE)
-    )
-    inter <- fun(x, level = level)
-
-    ## Bind results in case of multiple intervals
-    rank_i <- ifelse(is_BP(x), 2, 1) # Ranking column
-    if (interval == "hpdi") {
-      k <- vapply(X = inter, FUN = nrow, FUN.VALUE = integer(1))
-      low <- vapply(X = inter, FUN = function(x, i) min(x[, i]),
-                    FUN.VALUE = numeric(1), i = rank_i)
-      ord <- rank(low)
-      ord <- rep(ord, times = k)
-      id <- rep(names(inter), times = k)
-
-      inter <- do.call(rbind, inter)
-    } else {
-      ord <- rank(inter[, rank_i])
-      id <- rownames(inter)
-    }
-
-    ## Reorder
-    inter <- as.data.frame(inter)
-    inter$rank <- if (decreasing) -ord else ord
-    inter$Event <- id
-    inter$Interval <- toupper(interval)
-
-    ## Density
-    gg_dens <- NULL
-    if (density) {
-      dens <- apply(
-        X = x,
-        MARGIN = 2,
-        FUN = function(x, n, ...) {
-          tmp <- stats::density(x = x, n = n, ...)
-          data.frame(x = tmp$x, y = scale_01(tmp$y))
-        },
-        n = n, ...
-      )
-      ## Long data frame for ggplot2
-      dens <- do.call(rbind, dens)
-      dens$Event <- rep(colnames(x), each = n)
-      dens <- merge(dens, inter[, c("Event", "rank")], by = "Event")
-
-      aes_dens <- ggplot2::aes(
-        x = .data$x,
-        ymin = .data$rank,
-        ymax = .data$y + .data$rank,
-        fill = .data$Event
-      )
-      gg_dens <- ggplot2::geom_ribbon(mapping = aes_dens, data = dens,
-                                      alpha = 0.5)
-    }
-
-    ## ggplot2
-    ggplot2::ggplot() +
-      gg_dens +
-      ggplot2::geom_segment(
-        mapping = ggplot2::aes(
-          x = .data$lower,
-          y = .data$rank + 0.1,
-          xend = .data$upper,
-          yend = .data$rank + 0.1,
-          color = .data$Event,
-          linetype = .data$Interval
-        ),
-        data = inter,
-        size = 2
-      ) +
-      gg_x_scale +
-      ggplot2::scale_y_discrete(name = "Dates")
+    gg <- autoplot(object = x, ..., density = density, n = n,
+                   interval = interval, level = level,
+                   decreasing = decreasing) +
+      ggplot2::theme_bw()
+    print(gg)
+    invisible(x)
   }
 )
+
+# PhasesMCMC ===================================================================
+#' @export
+#' @method autoplot PhasesMCMC
+autoplot.PhasesMCMC <- function(object, ..., level = 0.95, n = 512,
+                                decreasing = TRUE,
+                                succession = is_ordered(object), facet = TRUE) {
+  ## Calendar scale
+  gg_x_scale <- scale_calendar(get_calendar(object))
+
+  if (succession) {
+    gg_phases <- plot_succession(object, level = level,
+                                 decreasing = decreasing)
+  } else {
+    gg_phases <- plot_density(object, level = level, decreasing = decreasing,
+                              n = n, ..., facet = facet)
+  }
+
+  ## ggplot2
+  ggplot2::ggplot() +
+    gg_phases +
+    gg_x_scale
+}
+
+#' @export
+#' @rdname plot
+setMethod("autoplot", "PhasesMCMC", autoplot.PhasesMCMC)
 
 #' @export
 #' @describeIn plot Plots the characteristics of a group of events (phase).
@@ -103,23 +148,16 @@ setMethod(
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95, n = 512, decreasing = TRUE,
                         succession = is_ordered(x), facet = TRUE, ...) {
-    ## Calendar scale
-    gg_x_scale <- scale_calendar(get_calendar(x))
-
-    if (succession) {
-      gg_phases <- plot_succession(x, level = level, decreasing = decreasing)
-    } else {
-      gg_phases <- plot_density(x, level = level, decreasing = decreasing,
-                                n = n, ..., facet = facet)
-    }
-
-    ## ggplot2
-    ggplot2::ggplot() +
-      gg_phases +
-      gg_x_scale
+    gg <- autoplot(object = x, ..., level = level, n = n,
+                   decreasing = decreasing, succession = succession,
+                   facet = facet) +
+      ggplot2::theme_bw()
+    print(gg)
+    invisible(x)
   }
 )
 
+# Helpers ======================================================================
 #' @param x A [`PhasesMCMC`] object.
 #' @return A \pkg{ggplot2} layer.
 #' @noRd

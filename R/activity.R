@@ -52,21 +52,33 @@ setMethod(
 )
 
 #' @export
+#' @method autoplot ActivityEvents
+autoplot.ActivityEvents <- function(object, ...) {
+  ## Calendar scale
+  gg_x_scale <- scale_calendar(get_calendar(object))
+
+  data <- as.data.frame(object)
+  ggplot2::ggplot(data = data) +
+    ggplot2::aes(x = .data$year, y = .data$estimate) +
+    ggplot2::geom_area() +
+    gg_x_scale +
+    ggplot2::scale_y_continuous(name = "Activity")
+}
+
+#' @export
+#' @rdname activity
+setMethod("autoplot", "ActivityEvents", autoplot.ActivityEvents)
+
+#' @export
 #' @rdname activity
 #' @aliases plot,ActivityEvents,missing-method
 setMethod(
   f = "plot",
   signature = c(x = "ActivityEvents", y = "missing"),
   definition = function(x) {
-    ## Calendar scale
-    gg_x_scale <- scale_calendar(get_calendar(x))
-
-    data <- as.data.frame(x)
-    ggplot2::ggplot(data = data) +
-      ggplot2::aes(x = .data$year, y = .data$estimate) +
-      ggplot2::geom_area() +
-      gg_x_scale +
-      ggplot2::scale_y_continuous(name = "Activity")
+    gg <- autoplot(object = x) + ggplot2::theme_bw()
+    print(gg)
+    invisible(x)
   }
 )
 

@@ -5,6 +5,7 @@
 \alias{tempo}
 \alias{tempo-method}
 \alias{tempo,MCMC-method}
+\alias{autoplot,CumulativeEvents-method}
 \alias{plot,CumulativeEvents,missing-method}
 \alias{multiplot,CumulativeEvents-method}
 \title{Tempo Plot}
@@ -21,12 +22,14 @@ tempo(object, ...)
   progress = getOption("ArchaeoPhases.progress")
 )
 
+\S4method{autoplot}{CumulativeEvents}(object, ...)
+
 \S4method{plot}{CumulativeEvents,missing}(x)
 
 \S4method{multiplot}{CumulativeEvents}(...)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} object.}
+\item{object, x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
 
 \item{...}{Any \code{\linkS4class{CumulativeEvents}} object.}
 
@@ -39,14 +42,20 @@ tempo(object, ...)
 credible interval be used?}
 
 \item{time}{A length-two \code{\link{numeric}} vector giving the earliest and latest
-date to estimate for, in BC/AD years. Ignored if \code{elapsed} is \code{TRUE}.}
+date to estimate for, in years.}
 
 \item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
 which the cumulative distribution is to be estimated.}
 
 \item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
-
-\item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
+}
+\value{
+\itemize{
+\item \code{tempo()} returns an \code{\linkS4class{CumulativeEvents}} object.
+\item \code{autoplot()} and \code{multiplot} return a \code{\link[ggplot2:ggplot]{ggplot}} object.
+\item \code{plot()} is called it for its side-effects: it results in a graphic being
+displayed (invisibly returns \code{x}).
+}
 }
 \description{
 A statistical graphic designed for the archaeological study of rhythms of the
