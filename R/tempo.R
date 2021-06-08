@@ -2,6 +2,23 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
+## Copy from stat::ecdf
+ecdf2 <- function(x) {
+  x <- sort(x, method = "radix") # Faster sorting with radix method
+  n <- length(x)
+  vals <- unique(x)
+  rval <- stats::approxfun(
+    x = vals,
+    y = cumsum(tabulate(match(x, vals))) / n,
+    method = "constant",
+    yleft = 0,
+    yright = 1,
+    f = 0,
+    ties = "ordered"
+  )
+  rval
+}
+
 #' @export
 #' @rdname tempo
 #' @aliases tempo,MCMC-method
@@ -9,48 +26,42 @@ setMethod(
   f = "tempo",
   signature = "MCMC",
   definition = function(object, level = 0.95, count = TRUE, gauss = FALSE,
-                        time = range(object), n = 50 * ncol(object),
-                        progress = getOption("ArchaeoPhases.progress")) {
-    n_iter <- nrow(object)
+                        from = min(object), to = max(object), step = 10) {
     n_events <- ncol(object)
 
     ## Empirical cumulative distribution
-    data_seq <- seq(from = time[[1L]], to = time[[2L]], length.out = n)
-    distr <- matrix(data = NA_real_, nrow = n, ncol = n_iter)
+    data_seq <- seq(from = from, to = to, by = step)
+    ecd_fun <- apply(X = object, MARGIN = 1, FUN = ecdf2, simplify = FALSE)
+    ecd <- lapply(X = ecd_fun, FUN = function(f, x) f(x), x = data_seq)
 
-    progress_bar <- interactive() && progress # Display a progress bar?
-    if (progress_bar) pb <- utils::txtProgressBar(max = n_iter, style = 3)
-
-    iter <- seq_len(n_iter)
-    for (i in iter) {
-      g <- stats::ecdf(object[i, ]) # Returns a function
-      distr[, i] <- g(data_seq)
-      if (progress_bar) utils::setTxtProgressBar(pb, i)
-    }
-
-    if (progress_bar) close(pb)
+    ## Build matrix
+    distr <- unlist(ecd, use.names = FALSE)
+    dim(distr) <- c(length(data_seq), nrow(object))
 
     ## Probability
     if (count) {
       distr <- distr * n_events
     }
 
+    ## Transpose (column-wise computation is faster than row-wise)
+    distr <- t(distr)
+
     ## Mean estimate
-    moy <- apply(X = distr, MARGIN = 1, FUN = mean)
+    moy <- colMeans(distr)
 
     ## Credible interval
     if (gauss == TRUE) {
       ## Standard deviation
-      ec <- apply(X = distr, MARGIN = 1, FUN = stats::sd)
+      ec <- apply(X = distr, MARGIN = 2, FUN = stats::sd)
 
       ## Gaussian credible intervals
       alpha <- 1 - level
-      qu <- cbind(moy - stats::qnorm(1 - alpha / 2) * ec,
-                  moy + stats::qnorm(1 - alpha / 2) * ec)
+      z <- stats::qnorm(1 - alpha / 2)
+      qu <- cbind(moy - z * ec, moy + z * ec)
     }
     else {
       ## Credible intervals
-      qu <- apply(X = distr, MARGIN = 1, FUN = interval_credible, level = level)
+      qu <- apply(X = distr, MARGIN = 2, FUN = credible, level = level)
       qu <- t(qu)
     }
     colnames(qu) <- c("lower", "upper")
@@ -58,7 +69,7 @@ setMethod(
     ## Calendar scale
     if (is_BP(object)) {
       moy <- max(moy) - moy
-      qu <- apply(X = qu, MARGIN = 2, FUN = function(x) max(x) - x)
+      qu <- max(moy) - qu[, c(2, 1)]
     }
 
     .CumulativeEvents(

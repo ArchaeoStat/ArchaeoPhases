@@ -197,11 +197,12 @@ setGeneric(
 #'  (the default) or a probability?
 #' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
 #'  credible interval be used?
-#' @param time A length-two [`numeric`] vector giving the earliest and latest
-#'  date to estimate for, in years.
-#' @param n An [`integer`] specifying the number of equally spaced points at
-#'  which the cumulative distribution is to be estimated.
-#' @param progress A [`logical`] scalar: should a progress bar be displayed?
+#' @param from A length-one [`numeric`] vector giving the earliest date to
+#'  estimate for (in years).
+#' @param to A length-one [`numeric`] vector giving the latest date to estimate
+#'  for (in years).
+#' @param step An [`integer`] specifying the increment at which the cumulative
+#'  distribution is to be estimated (in years).
 #' @param ... Any [`CumulativeEvents-class`] object.
 #' @details
 #'  The tempo plot is one way to measure change over time: it estimates the
@@ -241,11 +242,12 @@ setGeneric(
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
 #' @param object,x An [`MCMC-class`], a [`CumulativeEvents-class`] or an
 #'  [`ActivityEvents-class`] object.
-#' @param time A length-two [`numeric`] vector giving the earliest and latest
-#'  date to estimate for, in years.
-#' @param n An [`integer`] specifying the number of equally spaced points at
-#'  which the density is to be estimated.
-#' @param progress A [`logical`] scalar: should a progress bar be displayed?
+#' @param from A length-one [`numeric`] vector giving the earliest date to
+#'  estimate for (in years).
+#' @param to A length-one [`numeric`] vector giving the latest date to estimate
+#'  for (in years).
+#' @param step An [`integer`] specifying the increment at which the cumulative
+#'  distribution is to be estimated (in years).
 #' @param ... Any [`ActivityEvents-class`] object.
 #' @return
 #'  * `activity()` returns an [`ActivityEvents-class`] object.
@@ -331,6 +333,9 @@ setGeneric(
 #'
 #'  The \eqn{(100 \times level)}{(100 * level)}\% credible interval is the
 #'  shortest of all those intervals.
+#'
+#'  For instance, the 95% credible interval is the central portion of the
+#'  posterior distribution that contains 95% of the values.
 #' @return
 #'  A two columns `numeric` [`matrix`] giving the lower and upper boundaries of
 #'  the credible interval.

@@ -39,25 +39,25 @@ and visualization of time ranges from the posterior distribution of
 groups of dates (e.g. duration, transition and hiatus between successive
 phases).
 
-    #> 
-    #> To cite ArchaeoPhases in publications use:
-    #> 
-    #>   Philippe, Anne & Vibet, Marie-Anne (2020). Analysis of Archaeological
-    #>   Phases Using the R Package ArchaeoPhases. Journal of Statistical
-    #>   Software, Code Snippets, 93(1), 1--25. DOI 10.18637/jss.v093.c01.
-    #> 
-    #> Une entrée BibTeX pour les utilisateurs LaTeX est
-    #> 
-    #>   @Article{,
-    #>     title = {Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}},
-    #>     author = {Anne Philippe and Marie-Anne Vibet},
-    #>     year = {2020},
-    #>     journal = {Journal of Statistical Software, Code Snippets},
-    #>     volume = {93},
-    #>     number = {1},
-    #>     page = {1--25},
-    #>     doi = {10.18637/jss.v093.c01},
-    #>   }
+
+    To cite ArchaeoPhases in publications use:
+
+      Philippe, Anne & Vibet, Marie-Anne (2020). Analysis of Archaeological
+      Phases Using the R Package ArchaeoPhases. Journal of Statistical
+      Software, Code Snippets, 93(1), 1--25. DOI 10.18637/jss.v093.c01.
+
+    Une entrée BibTeX pour les utilisateurs LaTeX est
+
+      @Article{,
+        title = {Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}},
+        author = {Anne Philippe and Marie-Anne Vibet},
+        year = {2020},
+        journal = {Journal of Statistical Software, Code Snippets},
+        volume = {93},
+        number = {1},
+        page = {1--25},
+        doi = {10.18637/jss.v093.c01},
+      }
 
 ## Installation
 

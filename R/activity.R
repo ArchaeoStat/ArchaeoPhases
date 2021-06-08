@@ -8,11 +8,11 @@ NULL
 setMethod(
   f = "activity",
   signature = "MCMC",
-  definition = function(object, time = range(object), n = 50 * ncol(object),
-                        progress = getOption("ArchaeoPhases.progress")) {
+  definition = function(object, from = min(object), to = max(object),
+                        step = 10) {
     ## Tempo
     tmp <- tempo(object, level = 0.95, count = FALSE, gauss = FALSE,
-                 time = time, n = n, progress = progress)
+                 from = from, to = to, step = step)
     ## Activity
     methods::callGeneric(object = tmp)
   }

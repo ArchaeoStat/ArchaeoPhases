@@ -107,6 +107,7 @@ setMethod(
     gg <- autoplot(object = x, ..., density = density, n = n,
                    interval = interval, level = level,
                    decreasing = decreasing) +
+      ggplot2::guides(fill = ggplot2::guide_legend(ncol = 2)) +
       ggplot2::theme_bw()
     print(gg)
     invisible(x)

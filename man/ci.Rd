@@ -38,6 +38,9 @@ sample outside the interval.
 
 The \eqn{(100 \times level)}{(100 * level)}\\% credible interval is the
 shortest of all those intervals.
+
+For instance, the 95\% credible interval is the central portion of the
+posterior distribution that contains 95\% of the values.
 }
 \examples{
 ## Coerce to MCMC

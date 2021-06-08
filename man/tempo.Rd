@@ -17,9 +17,9 @@ tempo(object, ...)
   level = 0.95,
   count = TRUE,
   gauss = FALSE,
-  time = range(object),
-  n = 50 * ncol(object),
-  progress = getOption("ArchaeoPhases.progress")
+  from = min(object),
+  to = max(object),
+  step = 10
 )
 
 \S4method{autoplot}{CumulativeEvents}(object, ...)
@@ -41,13 +41,14 @@ tempo(object, ...)
 \item{gauss}{A \code{\link{logical}} scalar: should the Gaussian approximation of the
 credible interval be used?}
 
-\item{time}{A length-two \code{\link{numeric}} vector giving the earliest and latest
-date to estimate for, in years.}
+\item{from}{A length-one \code{\link{numeric}} vector giving the earliest date to
+estimate for (in years).}
 
-\item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
-which the cumulative distribution is to be estimated.}
+\item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
+for (in years).}
 
-\item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
+\item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
+distribution is to be estimated (in years).}
 }
 \value{
 \itemize{

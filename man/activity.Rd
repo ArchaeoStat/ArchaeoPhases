@@ -13,12 +13,7 @@
 \usage{
 activity(object, ...)
 
-\S4method{activity}{MCMC}(
-  object,
-  time = range(object),
-  n = 50 * ncol(object),
-  progress = getOption("ArchaeoPhases.progress")
-)
+\S4method{activity}{MCMC}(object, from = min(object), to = max(object), step = 10)
 
 \S4method{activity}{CumulativeEvents}(object)
 
@@ -34,13 +29,14 @@ activity(object, ...)
 
 \item{...}{Any \code{\linkS4class{ActivityEvents}} object.}
 
-\item{time}{A length-two \code{\link{numeric}} vector giving the earliest and latest
-date to estimate for, in years.}
+\item{from}{A length-one \code{\link{numeric}} vector giving the earliest date to
+estimate for (in years).}
 
-\item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
-which the density is to be estimated.}
+\item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
+for (in years).}
 
-\item{progress}{A \code{\link{logical}} scalar: should a progress bar be displayed?}
+\item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
+distribution is to be estimated (in years).}
 }
 \value{
 \itemize{
