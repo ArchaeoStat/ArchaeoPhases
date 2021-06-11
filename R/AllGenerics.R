@@ -750,6 +750,33 @@ setGeneric(
   def = function(object, ...) standardGeneric("is_original")
 )
 
+# Sensitivity ==================================================================
+#' Sensitivity
+#'
+#' Calculates the ranges of summary statistics from the output of two or more
+#' runs of the MCMC algorithm.
+#' @param ... Any [`MCMC-class`] object.
+#' @param positions A [`numeric`] vector specifying the positions of the columns
+#'  corresponding to the MCMC chains of interest, or a [`character`] vector of
+#'  column names.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @details
+#' This function is useful for estimating the sensitivity of calibration results
+#' to different model parameters.
+#' @return
+#'  A [`data.frame`].
+#' @seealso [summary()]
+#' @example inst/examples/ex-sensitivity.R
+#' @author T. S. Dye, N. Frerebeau
+#' @family statistics
+#' @docType methods
+#' @rdname sensitivity
+#' @aliases sensitivity-method
+setGeneric(
+  name = "sensitivity",
+  def = function(...) standardGeneric("sensitivity")
+)
+
 # Summary ======================================================================
 #' Marginal Summary Statistics for Multiple MCMC Chains
 #'

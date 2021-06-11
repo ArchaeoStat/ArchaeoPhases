@@ -38,11 +38,18 @@ multiple parameters. Results are given in calendar years (BC/AD).
 \examples{
 ## Coerce to MCMC
 eve <- as_mcmc(events, iteration = 1)
-summary(eve)
+
+## BP
+eve_BP <- CE_to_BP(eve)
+summary(eve_BP)
+
+## CE
+eve_CE <- BP_to_CE(eve_BP)
+summary(eve_CE)
 
 ## Plot events
-plot(eve, interval = "ci", level = 0.68)
-plot(eve, interval = "hpdi", level = 0.68)
+plot(eve_CE, interval = "ci", level = 0.68)
+plot(eve_BP, interval = "hpdi", level = 0.68)
 
 ## Compute phases
 pha <- as_phases(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
@@ -55,7 +62,8 @@ plot(pha, succession = TRUE)
 \seealso{
 Other statistics: 
 \code{\link{ci}},
-\code{\link{hpdi}}
+\code{\link{hpdi}},
+\code{\link{sensitivity}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

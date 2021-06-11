@@ -55,6 +55,9 @@ setMethod(
   }
 )
 
+#' @param x A [`numeric`] vector.
+#' @keywords internal
+#' @noRd
 stats_marginal <- function(x, level = 0.95, BP = FALSE) {
   ## Position
   moy <- mean(x)

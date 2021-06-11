@@ -56,6 +56,7 @@ interval_hpd(eve, level = 0.95)
 \seealso{
 Other statistics: 
 \code{\link{hpdi}},
+\code{\link{sensitivity}()},
 \code{\link{summary}()}
 }
 \author{

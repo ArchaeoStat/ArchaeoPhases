@@ -47,6 +47,7 @@ Hyndman, R. J. (1996). Computing and graphing highest density regions.
 
 Other statistics: 
 \code{\link{ci}},
+\code{\link{sensitivity}()},
 \code{\link{summary}()}
 }
 \author{

@@ -16,6 +16,7 @@
 | `CreateMinMaxGroup()` | `as_phases(<matrix>)` |
 | `CredibleInterval()`, `credible_interval()` | `interval_credible(<numeric>, <numeric>)` |
 | `DatesHiatus()`, `dates_hiatus()` | `lapse(<numeric>, <numeric>)` |
+| `estimate_range()` | `sensitivity(<MCMC>)` |
 | `MarginalPlot()`, `marginal_plot()` | `plot(<MCMC>)` |
 | `MarginalProba()` | `test_older(<numeric>, <numeric>)` |
 | `MarginalStatistics()`, `marginal_statistics()`, `multi_marginal_statistics()` | `summary(<MCMC>)` |
