@@ -53,7 +53,8 @@ Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},
-\code{\link{PhasesMCMC-class}}
+\code{\link{PhasesMCMC-class}},
+\code{\link{RateOfChange-class}}
 }
 \author{
 N. Frerebeau

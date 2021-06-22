@@ -41,7 +41,8 @@ Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
-\code{\link{PhasesMCMC-class}}
+\code{\link{PhasesMCMC-class}},
+\code{\link{RateOfChange-class}}
 }
 \author{
 N. Frerebeau

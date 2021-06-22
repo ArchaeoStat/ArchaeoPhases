@@ -38,6 +38,17 @@ setMethod(
 
 #' @export
 #' @rdname calendar
+#' @aliases is_BP,ActivityEvents-method
+setMethod(
+  f = "is_BP",
+  signature = "ActivityEvents",
+  definition = function(object) {
+    get_calendar(object) == "BP"
+  }
+)
+
+#' @export
+#' @rdname calendar
 #' @aliases is_CE,MCMC-method
 setMethod(
   f = "is_CE",
@@ -64,6 +75,17 @@ setMethod(
 setMethod(
   f = "is_CE",
   signature = "CumulativeEvents",
+  definition = function(object) {
+    get_calendar(object) == "CE"
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_CE,ActivityEvents-method
+setMethod(
+  f = "is_CE",
+  signature = "ActivityEvents",
   definition = function(object) {
     get_calendar(object) == "CE"
   }

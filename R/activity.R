@@ -20,7 +20,7 @@ setMethod(
 
 #' @export
 #' @rdname activity
-#' @aliases activity,MCMC-method
+#' @aliases activity,CumulativeEvents-method
 setMethod(
   f = "activity",
   signature = "CumulativeEvents",
@@ -30,9 +30,8 @@ setMethod(
       stop("Tempo must be computed as probabilities.", call. = FALSE)
     }
 
-    tmp <- as.data.frame(object)
-    a <- tmp$estimate
-    b <- tmp$year
+    a <- object@estimate
+    b <- object@year
 
     x <- b[-1]
     y <- diff(a) / diff(b)

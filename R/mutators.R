@@ -81,6 +81,15 @@ setMethod(
 
 #' @export
 #' @rdname mutator
+#' @aliases get_calendar,RateOfChange-method
+setMethod(
+  f = "get_calendar",
+  signature = "RateOfChange",
+  definition = function(x) x@calendar
+)
+
+#' @export
+#' @rdname mutator
 #' @aliases get_hash,MCMC-method
 setMethod(
   f = "get_hash",
@@ -121,5 +130,14 @@ setMethod(
 setMethod(
   f = "get_hash",
   signature = "OccurrenceEvents",
+  definition = function(x) x@hash
+)
+
+#' @export
+#' @rdname mutator
+#' @aliases get_hash,RateOfChange-method
+setMethod(
+  f = "get_hash",
+  signature = "RateOfChange",
   definition = function(x) x@hash
 )

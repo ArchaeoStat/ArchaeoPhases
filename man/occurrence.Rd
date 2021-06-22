@@ -18,7 +18,7 @@ occurrence(object, ...)
 \S4method{plot}{OccurrenceEvents,missing}(x)
 }
 \arguments{
-\item{object, x}{An \code{\linkS4class{MCMC}} or an \code{\linkS4class{OccurrenceEvents}} object.}
+\item{object}{An \code{\linkS4class{MCMC}} object.}
 
 \item{...}{Currently not used.}
 
@@ -28,6 +28,8 @@ or "\code{hpdi}" (highest posterior density interval). Any unambiguous substring
 can be given.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
+
+\item{x}{An \code{\linkS4class{OccurrenceEvents}} object.}
 }
 \value{
 \itemize{
@@ -70,6 +72,7 @@ plot(occ_hpdi)
 Other event tools: 
 \code{\link{activity}()},
 \code{\link{lapse}()},
+\code{\link{roc}()},
 \code{\link{tempo}()}
 }
 \author{

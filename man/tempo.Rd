@@ -29,7 +29,7 @@ tempo(object, ...)
 \S4method{multiplot}{CumulativeEvents}(...)
 }
 \arguments{
-\item{object, x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
+\item{object}{An \code{\linkS4class{MCMC}} object.}
 
 \item{...}{Any \code{\linkS4class{CumulativeEvents}} object.}
 
@@ -49,6 +49,8 @@ for (in years).}
 
 \item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
 distribution is to be estimated (in years).}
+
+\item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
 }
 \value{
 \itemize{
@@ -85,12 +87,16 @@ plot(tempo_BP)
 
 ## CE
 eve_CE <- BP_to_CE(eve_BP)
-tempo_CE <- tempo(eve_CE, gauss = TRUE)
+tempo_CE <- tempo(eve_CE, count = FALSE, gauss = TRUE)
 plot(tempo_CE)
 
 ## Activity plot
-act <- activity(eve)
+act <- activity(eve_CE)
 plot(act)
+
+## Rate of change
+chg <- roc(eve_CE, step = 50)
+plot(chg)
 }
 }
 \references{
@@ -102,7 +108,8 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 Other event tools: 
 \code{\link{activity}()},
 \code{\link{lapse}()},
-\code{\link{occurrence}()}
+\code{\link{occurrence}()},
+\code{\link{roc}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

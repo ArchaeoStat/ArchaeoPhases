@@ -24,8 +24,7 @@ activity(object, ...)
 \S4method{multiplot}{ActivityEvents}(...)
 }
 \arguments{
-\item{object, x}{An \code{\linkS4class{MCMC}}, a \code{\linkS4class{CumulativeEvents}} or an
-\code{\linkS4class{ActivityEvents}} object.}
+\item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
 
 \item{...}{Any \code{\linkS4class{ActivityEvents}} object.}
 
@@ -37,6 +36,8 @@ for (in years).}
 
 \item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
 distribution is to be estimated (in years).}
+
+\item{x}{An \code{\linkS4class{ActivityEvents}} object.}
 }
 \value{
 \itemize{
@@ -63,12 +64,16 @@ plot(tempo_BP)
 
 ## CE
 eve_CE <- BP_to_CE(eve_BP)
-tempo_CE <- tempo(eve_CE, gauss = TRUE)
+tempo_CE <- tempo(eve_CE, count = FALSE, gauss = TRUE)
 plot(tempo_CE)
 
 ## Activity plot
-act <- activity(eve)
+act <- activity(eve_CE)
 plot(act)
+
+## Rate of change
+chg <- roc(eve_CE, step = 50)
+plot(chg)
 }
 }
 \references{
@@ -80,6 +85,7 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 Other event tools: 
 \code{\link{lapse}()},
 \code{\link{occurrence}()},
+\code{\link{roc}()},
 \code{\link{tempo}()}
 }
 \author{

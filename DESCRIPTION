@@ -73,6 +73,7 @@ Collate:
     'phases.R'
     'plot.R'
     'read.R'
+    'roc.R'
     'sensitivity.R'
     'show.R'
     'subset.R'

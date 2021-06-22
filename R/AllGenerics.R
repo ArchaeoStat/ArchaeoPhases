@@ -191,7 +191,8 @@ setGeneric(
 #' A statistical graphic designed for the archaeological study of rhythms of the
 #' long term that embodies a theory of archaeological evidence for the
 #' occurrence of events.
-#' @param object,x An [`MCMC-class`] or a [`CumulativeEvents-class`] object.
+#' @param object An [`MCMC-class`] object.
+#' @param x A [`CumulativeEvents-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number
 #'  (the default) or a probability?
@@ -240,8 +241,8 @@ setGeneric(
 #' Activity Plot
 #'
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
-#' @param object,x An [`MCMC-class`], a [`CumulativeEvents-class`] or an
-#'  [`ActivityEvents-class`] object.
+#' @param object An [`MCMC-class`] or a [`CumulativeEvents-class`] object.
+#' @param x An [`ActivityEvents-class`] object.
 #' @param from A length-one [`numeric`] vector giving the earliest date to
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
@@ -279,7 +280,8 @@ setGeneric(
 #'
 #' A statistical graphic designed for the archaeological study of when
 #' events of a specified kind occurred.
-#' @param object,x An [`MCMC-class`] or an [`OccurrenceEvents-class`] object.
+#' @param object An [`MCMC-class`] object.
+#' @param x An [`OccurrenceEvents-class`] object.
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`ci`" (credible interval; the default)
 #'  or "`hpdi`" (highest posterior density interval). Any unambiguous substring
@@ -314,6 +316,40 @@ setGeneric(
   name = "occurrence",
   def = function(object, ...) standardGeneric("occurrence"),
   valueClass = "OccurrenceEvents"
+)
+
+## ROC -------------------------------------------------------------------------
+#' Rate of Change
+#'
+#' @param object An [`MCMC-class`], a [`CumulativeEvents-class`] or an
+#'  [`ActivityEvents-class`] object.
+#' @param x A [`RateOfChange-class`] object.
+#' @param from A length-one [`numeric`] vector giving the earliest date to
+#'  estimate for (in years).
+#' @param to A length-one [`numeric`] vector giving the latest date to estimate
+#'  for (in years).
+#' @param step An [`integer`] specifying the increment at which the cumulative
+#'  distribution is to be estimated (in years).
+#' @param ... Currently not used.
+#' @return
+#'  * `roc()` returns an [`RateOfChange-class`] object.
+#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
+#' @example inst/examples/ex-tempo.R
+#' @author N. Frerebeau
+#' @family event tools
+#' @docType methods
+#' @name roc
+#' @rdname roc
+NULL
+
+#' @rdname roc
+#' @aliases roc-method
+setGeneric(
+  name = "roc",
+  def = function(object, ...) standardGeneric("roc"),
+  valueClass = "RateOfChange"
 )
 
 # Interval =====================================================================
@@ -795,8 +831,10 @@ setGeneric(
 #'   \item{median}{Median of the MCMC chain.}
 #'   \item{q3}{Third quantile of the MCMC chain.}
 #'   \item{max}{Maximum value of the MCMC chain.}
-#'   \item{CI_lower}{Lower credible interval of the MCMC chain at `level`.}
-#'   \item{CI_upper}{Upper credible interval of the MCMC chain at `level`.}
+#'   \item{CI_lower}{Lower boundary of the credible interval of the MCMC chain
+#'   at `level`.}
+#'   \item{CI_upper}{Upper boundary of the credible interval of the MCMC chain
+#'   at `level`.}
 #'  }
 #' @example inst/examples/ex-summary.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

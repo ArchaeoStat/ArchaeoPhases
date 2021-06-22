@@ -29,6 +29,7 @@ that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
 Other event tools: 
 \code{\link{activity}()},
 \code{\link{occurrence}()},
+\code{\link{roc}()},
 \code{\link{tempo}()}
 }
 \author{

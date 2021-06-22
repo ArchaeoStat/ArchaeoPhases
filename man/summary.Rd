@@ -27,8 +27,10 @@ columns to the following statistics:
 \item{median}{Median of the MCMC chain.}
 \item{q3}{Third quantile of the MCMC chain.}
 \item{max}{Maximum value of the MCMC chain.}
-\item{CI_lower}{Lower credible interval of the MCMC chain at \code{level}.}
-\item{CI_upper}{Upper credible interval of the MCMC chain at \code{level}.}
+\item{CI_lower}{Lower boundary of the credible interval of the MCMC chain
+at \code{level}.}
+\item{CI_upper}{Upper boundary of the credible interval of the MCMC chain
+at \code{level}.}
 }
 }
 \description{

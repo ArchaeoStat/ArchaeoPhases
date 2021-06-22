@@ -16,9 +16,11 @@
 \alias{is_BP,MCMC-method}
 \alias{is_BP,PhasesMCMC-method}
 \alias{is_BP,CumulativeEvents-method}
+\alias{is_BP,ActivityEvents-method}
 \alias{is_CE,MCMC-method}
 \alias{is_CE,PhasesMCMC-method}
 \alias{is_CE,CumulativeEvents-method}
+\alias{is_CE,ActivityEvents-method}
 \alias{elapse,MCMC-method}
 \alias{BP_to_CE,numeric-method}
 \alias{BP_to_CE,matrix-method}
@@ -50,11 +52,15 @@ is_CE(object)
 
 \S4method{is_BP}{CumulativeEvents}(object)
 
+\S4method{is_BP}{ActivityEvents}(object)
+
 \S4method{is_CE}{MCMC}(object)
 
 \S4method{is_CE}{PhasesMCMC}(object)
 
 \S4method{is_CE}{CumulativeEvents}(object)
+
+\S4method{is_CE}{ActivityEvents}(object)
 
 \S4method{elapse}{MCMC}(object, origin = 1)
 

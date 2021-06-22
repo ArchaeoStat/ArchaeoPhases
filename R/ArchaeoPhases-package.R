@@ -42,9 +42,9 @@
 
 #' @importFrom coda mcmc.list mcmc
 #' @importFrom digest digest
-#' @importFrom ggplot2 aes autoplot facet_grid ggplot geom_area geom_path
-#' geom_rect geom_segment guides guide_legend scale_x_continuous scale_x_reverse
-#' scale_y_continuous scale_y_discrete theme theme_bw vars
+#' @importFrom ggplot2 aes autoplot facet_grid ggplot geom_area geom_hline
+#' geom_path geom_rect geom_segment guides guide_legend scale_x_continuous
+#' scale_x_reverse scale_y_continuous scale_y_discrete theme theme_bw vars
 #' @importFrom hdrcde hdr
 #' @importFrom methods as callGeneric callNextMethod new prototype setClass
 #' setGeneric setMethod validObject .valueClassTest

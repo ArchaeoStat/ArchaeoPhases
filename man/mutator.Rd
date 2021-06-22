@@ -17,11 +17,13 @@
 \alias{get_calendar,CumulativeEvents-method}
 \alias{get_calendar,ActivityEvents-method}
 \alias{get_calendar,OccurrenceEvents-method}
+\alias{get_calendar,RateOfChange-method}
 \alias{get_hash,MCMC-method}
 \alias{get_hash,PhasesMCMC-method}
 \alias{get_hash,CumulativeEvents-method}
 \alias{get_hash,ActivityEvents-method}
 \alias{get_hash,OccurrenceEvents-method}
+\alias{get_hash,RateOfChange-method}
 \title{Get or Set Parts of an Object}
 \usage{
 get_calendar(x)
@@ -44,6 +46,8 @@ get_hash(x)
 
 \S4method{get_calendar}{OccurrenceEvents}(x)
 
+\S4method{get_calendar}{RateOfChange}(x)
+
 \S4method{get_hash}{MCMC}(x)
 
 \S4method{get_hash}{PhasesMCMC}(x)
@@ -53,6 +57,8 @@ get_hash(x)
 \S4method{get_hash}{ActivityEvents}(x)
 
 \S4method{get_hash}{OccurrenceEvents}(x)
+
+\S4method{get_hash}{RateOfChange}(x)
 }
 \arguments{
 \item{x}{An object from which to get or set element(s).}

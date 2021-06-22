@@ -36,6 +36,16 @@ as.data.frame.OccurrenceEvents <- function(x, ..., stringsAsFactors = default.st
   )
 }
 
+#' @method as.data.frame RateOfChange
+#' @export
+as.data.frame.RateOfChange <- function(x, ..., stringsAsFactors = default.stringsAsFactors()) {
+  data.frame(
+    year = x@year,
+    estimate = x@estimate,
+    stringsAsFactors = stringsAsFactors
+  )
+}
+
 # To list ======================================================================
 #' @method as.list PhasesMCMC
 #' @export

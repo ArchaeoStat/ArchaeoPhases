@@ -148,6 +148,10 @@ NULL
 #' Activity
 #'
 #' An S4 class to store the result of an [`activity`] plot.
+#' @slot year A [`numeric`] vector giving the time points at which the
+#'  distribution is estimated.
+#' @slot estimate A [`numeric`] vector giving the estimation of the
+#'  distribution.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`CE`").
 #' @slot hash A [`character`] string giving the cryptographical hash of the
@@ -203,6 +207,38 @@ NULL
     lower = "numeric",
     upper = "numeric",
     level = "numeric",
+    calendar = "character",
+    hash = "character"
+  )
+)
+
+# RateOfChange =================================================================
+#' Rate of Change
+#'
+#' An S4 class to store the result of a [`rate of change`][`roc`] estimation.
+#' @slot year A [`numeric`] vector giving the time points at which the
+#'  rate fo change is estimated.
+#' @slot estimate A [`numeric`] vector giving the estimation of the
+#'  rate of change.
+#' @slot calendar A [`character`] string specifying the chronological scale
+#'  (either "`BP`" or "`CE`").
+#' @slot hash A [`character`] string giving the cryptographical hash of the
+#'  original data file.
+#' @section Coerce:
+#'  In the code snippets below, `x` is an `RateOfChange` object.
+#'  \describe{
+#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
+#'  }
+#' @author N. Frerebeau
+#' @family classes
+#' @docType class
+#' @rdname RateOfChange
+#' @aliases RateOfChange-class
+.RateOfChange <- setClass(
+  Class = "RateOfChange",
+  slots = c(
+    year = "numeric",
+    estimate = "numeric",
     calendar = "character",
     hash = "character"
   )

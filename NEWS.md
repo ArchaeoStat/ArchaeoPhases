@@ -1,8 +1,9 @@
-# ArchaeoPhases v1.5.0.9000
+# ArchaeoPhases 1.5.0.9000
 
 ## New classes and methods
 * `apportion()`
 * `bind()`
+* `roc()` allows to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
 
 ## Enhancements
 * Support for both BP and CE time scales.
@@ -40,7 +41,7 @@
 | `TempoActivityPlot()`, `tempo_activity_plot()` | `activity(<MCMC>)` + `plot(<ActivityEvents>)` |
 | `TempoPlot()`, `tempo_plot()` | `tempo(<MCMC>)` + `plot(<CumulativeEvents>)` |
 
-# ArchaeoPhases v1.5
+# ArchaeoPhases 1.5
 
 ## New functions
 * New read functions for MCMC data: `read_bcal()`, `read_oxcal()`, `read_chronomodel()`.
