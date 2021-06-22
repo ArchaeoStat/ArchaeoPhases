@@ -7,6 +7,7 @@ ecdf2 <- function(x) {
   x <- sort(x, method = "radix") # Faster sorting with radix method
   n <- length(x)
   vals <- unique(x)
+
   rval <- stats::approxfun(
     x = vals,
     y = cumsum(tabulate(match(x, vals))) / n,
@@ -43,6 +44,11 @@ setMethod(
       distr <- distr * n_events
     }
 
+    ## Calendar scale
+    if (is_BP(object)) {
+      distr <- apply(X = distr, MARGIN = 2, function(x) max(x) - x)
+    }
+
     ## Transpose (column-wise computation is faster than row-wise)
     distr <- t(distr)
 
@@ -65,12 +71,6 @@ setMethod(
       qu <- t(qu)
     }
     colnames(qu) <- c("lower", "upper")
-
-    ## Calendar scale
-    if (is_BP(object)) {
-      moy <- max(moy) - moy
-      qu <- max(moy) - qu[, c(2, 1)]
-    }
 
     .CumulativeEvents(
       year = data_seq,
