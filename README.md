@@ -107,13 +107,10 @@ and scales).
 ### Analysis of a series of dates
 
 ``` r
-plot(chrono_events) +
-  ggplot2::theme_bw()
+plot(chrono_events)
 ```
 
 <img src="man/figures/README-events-plot-1.png" width="100%" />
-
-    #> NULL
 
 ``` r
 ## Tempo plot

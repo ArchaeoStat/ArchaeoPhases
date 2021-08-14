@@ -146,9 +146,8 @@ The Occurrence plot calculates the calendar date $t$ corresponding to the smalle
 
 ```{r occurrence-plot, fig.width=6, fig.height=5}
 ## Warning: this may take a few seconds
-chrono_events %>% 
-  occurrence(level = 0.95) %>% 
-  plot()
+oc <- occurrence(chrono_events, level = 0.95)
+plot(oc)
 ```
 
 # Analysis of groups of dates
