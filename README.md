@@ -86,14 +86,16 @@ Import a CSV file containing a sample from the posterior distribution:
 
 ``` r
 ## Read output from ChronoModel
-output_zip <- system.file("extdata/chronomodel.zip", package = "ArchaeoPhases")
-output_csv <- utils::unzip(output_zip, exdir = tempdir())
+path <- "chronomodel/output/"
 
-(chrono_events <- read_chronomodel(output_csv[[1]], phases = FALSE))
+## Events
+path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
+(chrono_events <- read_chronomodel(path_events, phases = FALSE))
 #> <EventsMCMC>
 #> - Number of events: 16
 #> - Calendar: CE
-(chrono_phases <- read_chronomodel(output_csv[[2]], phases = TRUE))
+path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
+(chrono_phases <- read_chronomodel(path_phases, phases = TRUE))
 #> <PhasesMCMC>
 #> - Modelled phases: EPI UP Ahmarian IUP
 #> - Calendar: CE
@@ -131,7 +133,7 @@ boundaries(chrono_phases, level = 0.95)
 #>           start    end
 #> EPI      -28979 -26970
 #> UP       -38570 -29369
-#> Ahmarian -42136 -37401
+#> Ahmarian -42168 -37433
 #> IUP      -43240 -41161
 ```
 

@@ -9,7 +9,7 @@ NULL
 #' @slot events A [`character`] vector specifying the name of the events.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`CE`").
-#' @slot hash A [`character`] string giving the cryptographical hash of the
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Subset:
 #'  In the code snippets below, `x` is a `*MCMC` object.
@@ -57,7 +57,7 @@ NULL
 #' @slot phases A [`character`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`CE`").
-#' @slot hash A [`character`] string giving the cryptographical hash of the
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
 #'  In the code snippets below, `x` is a `PhasesMCMC` object.
@@ -116,7 +116,7 @@ NULL
 #'  the tempo plot.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`CE`").
-#' @slot hash A [`character`] string giving the cryptographical hash of the
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
 #'  In the code snippets below, `x` is a `CumulativeEvents` object.
@@ -154,7 +154,7 @@ NULL
 #'  distribution.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`CE`").
-#' @slot hash A [`character`] string giving the cryptographical hash of the
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
 #'  In the code snippets below, `x` is an `ActivityEvents` object.
@@ -188,7 +188,7 @@ NULL
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`CE`").
-#' @slot hash A [`character`] string giving the cryptographical hash of the
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
 #'  In the code snippets below, `x` is an `OccurrenceEvents` object.
@@ -222,7 +222,7 @@ NULL
 #'  rate of change.
 #' @slot calendar A [`character`] string specifying the chronological scale
 #'  (either "`BP`" or "`CE`").
-#' @slot hash A [`character`] string giving the cryptographical hash of the
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
 #'  In the code snippets below, `x` is an `RateOfChange` object.

@@ -55,7 +55,7 @@ gap <- function(epsilon, p1, p2, level) {
 
 #' Scales
 #'
-#' @param x A \code{\link{numeric}} vector.
+#' @param x A [`numeric`] vector.
 #' @keywords internal
 #' @noRd
 scale_01 <- function(x) {
@@ -64,27 +64,26 @@ scale_01 <- function(x) {
 
 #' Calculate hash
 #'
-#' @param file A \code{\link{character}} string specifying the name of the file.
-#' @param algo A \code{\link{character}} string specifying the algorithms to be
-#' used (see \code{\link[digest]{digest}}).
-#' @param ... Extra parameters to be passed to [digest::digest()].
-#' @return A \code{\link{character}} string of a fixed length.
-#' @author Thomas S. Dye
+#' @param file A [`character`] string specifying the name of the file.
+#' @param download A [`logical`] scalar: should the remote file be downloaded
+#'  and hashed locally?
+#' @return A [`character`] string of a fixed length.
+#' @author T. S. Dye, N. Frerebeau
 #' @keywords internal
 #' @noRd
-make_hash <- function(file, algo = "sha256", ...) {
-  ## If connection, save temp file
-  if (!utils::file_test("-f", file)) {
-    temp_file <- tempfile(pattern = "", fileext = "csv")
-    write(file, temp_file)
+make_hash <- function(file, download = TRUE) {
+  ## If remote, save temp file
+  if (!utils::file_test("-f", file) && download) {
+    temp_file <- tempfile()
+    utils::download.file(file, temp_file) # Download
 
-    file_hash <- digest::digest(file = temp_file, algo = algo, ...)
+    file_hash <- tools::md5sum(temp_file) # Hash
     unlink(temp_file)
   }
   else {
-    file_hash <- digest::digest(file = file, algo = algo, ...)
+    file_hash <- tools::md5sum(file)
   }
-  file_hash
+  unname(file_hash)
 }
 
 #' \pkg{ggplot2} Calendar Scale

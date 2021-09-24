@@ -1,0 +1,238 @@
+{
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
+  "@type": "SoftwareSourceCode",
+  "identifier": "ArchaeoPhases",
+  "description": "Statistical analysis of archaeological dates and groups of\n    dates. This package allows to post-process Markov Chain Monte Carlo\n    (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>,\n    'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'\n    <https://bcal.shef.ac.uk/>. It provides functions for the study of\n    rhythms of the long term from the posterior distribution of a series\n    of dates (tempo and activity plot). It also allows the estimation and\n    visualization of time ranges from the posterior distribution of groups\n    of dates (e.g. duration, transition and hiatus between successive\n    phases).",
+  "name": "ArchaeoPhases: Post-processing of Markov Chain Monte Carlo Simulations for\n    Chronological Modelling",
+  "issueTracker": "https://github.com/ArchaeoStat/ArchaeoPhases/issues",
+  "license": "https://spdx.org/licenses/GPL-3.0",
+  "version": "1.5.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.1.1 (2021-08-10)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Anne",
+      "familyName": "Philippe",
+      "email": "anne.philippe@univ-nantes.fr",
+      "@id": "https://orcid.org/0000-0002-5331-5087"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Marie-Anne",
+      "familyName": "Vibet",
+      "@id": "https://orcid.org/0000-0003-4003-3141"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Nicolas",
+      "familyName": "Frerebeau",
+      "email": "nicolas.frerebeau@u-bordeaux-montaigne.fr",
+      "@id": "https://orcid.org/0000-0001-5759-4944"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Thomas S.",
+      "familyName": "Dye",
+      "@id": "https://orcid.org/0000-0001-8116-782X"
+    }
+  ],
+  "copyrightHolder": {},
+  "funder": {},
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Anne",
+      "familyName": "Philippe",
+      "email": "anne.philippe@univ-nantes.fr",
+      "@id": "https://orcid.org/0000-0002-5331-5087"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "fasti",
+      "name": "fasti"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.5.0"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "coda",
+      "name": "coda",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=coda"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "digest",
+      "name": "digest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=digest"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "hdrcde",
+      "name": "hdrcde",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=hdrcde"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "methods",
+      "name": "methods"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rlang",
+      "name": "rlang",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rlang"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "stats",
+      "name": "stats"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    }
+  ],
+  "codeRepository": "https://github.com/nfrerebeau/ArchaeoPhases",
+  "releaseNotes": "https://github.com/nfrerebeau/ArchaeoPhases/blob/master/NEWS.md",
+  "readme": "https://github.com/nfrerebeau/ArchaeoPhases/blob/master/README.md",
+  "fileSize": "1030.269KB",
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": [
+    "r-package",
+    "bayesian-statistics",
+    "radiocarbon-dates",
+    "geochronology",
+    "markov-chain"
+  ],
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2020",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Anne",
+          "familyName": "Philippe"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Marie-Anne",
+          "familyName": "Vibet"
+        }
+      ],
+      "name": "Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}",
+      "identifier": "10.18637/jss.v093.c01",
+      "@id": "https://doi.org/10.18637/jss.v093.c01",
+      "sameAs": "https://doi.org/10.18637/jss.v093.c01",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "issueNumber": "1",
+        "datePublished": "2020",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "volumeNumber": "93",
+          "name": "Journal of Statistical Software, Code Snippets"
+        }
+      }
+    }
+  ],
+  "relatedLink": "https://CRAN.R-project.org/package=ArchaeoPhases"
+}

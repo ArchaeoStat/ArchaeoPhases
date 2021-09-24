@@ -706,39 +706,24 @@ setGeneric(
 )
 
 # Read =========================================================================
-#' Read MCMC Output
+#' Read OxCal Output
 #'
+#' Reads MCMC output.
 #' @inheritParams utils::read.table
 #' @param BP A [`logical`] scalar: should the data be converted from BP to
 #'  CE? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
-#' @param phases A [`logical`] scalar: should the data be imported as phases?
-#' @param bin_width The bin width specified for the
-#'  [BCal](https://bcal.shef.ac.uk/) calibration. Defaults to the BCal
-#'  default of 1.
 #' @return
 #'  An [`MCMC-class`] object.
 #' @references
 #'  Bronk Ramsey, C. (2009). Bayesian Analysis of Radiocarbon Dates.
 #'  *Radiocarbon*, 51(1), 337-360. \doi{10.1017/S0033822200033865}.
-#'
-#'  Buck C. E., Christen J. A. & James G. N. (1999). BCal: an on-line Bayesian
-#'  radiocarbon calibration tool. *Internet Archaeology*, 7.
-#'  \doi{10.11141/ia.7.1}.
-#'
-#'  Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
-#'  Chronological Modeling of Archaeological Data using Bayesian Statistics.
-#'  URL: <https://www.chronomodel.fr>.
-#' @example inst/examples/ex-read.R
+#' @example inst/examples/ex-read_oxcal.R
 #' @seealso [utils::read.table()]
 #' @author T. S. Dye, N. Frerebeau
 #' @family read methods
 #' @docType methods
-#' @name read
-#' @rdname read
-NULL
-
-#' @rdname read
+#' @rdname read_oxcal
 #' @aliases read_oxcal-method
 setGeneric(
   name = "read_oxcal",
@@ -746,7 +731,25 @@ setGeneric(
   valueClass = "MCMC"
 )
 
-#' @rdname read
+#' Read BCal Output
+#'
+#' Reads MCMC output.
+#' @inheritParams utils::read.table
+#' @param bin_width The bin width specified for the
+#'  [BCal](https://bcal.shef.ac.uk/) calibration. Defaults to the BCal
+#'  default of 1.
+#' @return
+#'  An [`MCMC-class`] object.
+#' @references
+#'  Buck C. E., Christen J. A. & James G. N. (1999). BCal: an on-line Bayesian
+#'  radiocarbon calibration tool. *Internet Archaeology*, 7.
+#'  \doi{10.11141/ia.7.1}.
+#' @example inst/examples/ex-read_bcal.R
+#' @seealso [utils::read.table()]
+#' @author T. S. Dye, N. Frerebeau
+#' @family read methods
+#' @docType methods
+#' @rdname read_bcal
 #' @aliases read_bcal-method
 setGeneric(
   name = "read_bcal",
@@ -754,7 +757,27 @@ setGeneric(
   valueClass = "MCMC"
 )
 
-#' @rdname read
+
+#' Read ChronoModel Output
+#'
+#' Reads MCMC output.
+#' @inheritParams utils::read.table
+#' @param BP A [`logical`] scalar: should the data be converted from BP to
+#'  CE? This should not be `TRUE` unless you change the default settings in
+#'  'OxCal' or 'ChronoModel'.
+#' @param phases A [`logical`] scalar: should the data be imported as phases?
+#' @return
+#'  An [`MCMC-class`] object.
+#' @references
+#'  Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
+#'  Chronological Modeling of Archaeological Data using Bayesian Statistics.
+#'  URL: <https://www.chronomodel.fr>.
+#' @example inst/examples/ex-read_chronomodel.R
+#' @seealso [utils::read.table()]
+#' @author T. S. Dye, N. Frerebeau
+#' @family read methods
+#' @docType methods
+#' @rdname read_chronomodel
 #' @aliases read_chronomodel-method
 setGeneric(
   name = "read_chronomodel",
@@ -767,6 +790,8 @@ setGeneric(
 #' an object.
 #' @param object An object (typically an [`MCMC-class`] object).
 #' @param file Either a path to a CSV file or a connection.
+#' @param download A [`logical`] scalar: should the remote file be downloaded
+#'  and hashed locally?
 #' @param ... Currently not used.
 #' @return
 #'  A [`logical`]: `TRUE` if the files match, `FALSE` otherwise.

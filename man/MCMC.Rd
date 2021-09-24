@@ -19,7 +19,7 @@ S4 classes to represent the output of a MCMC algorithm.
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
 (either "\code{BP}" or "\code{CE}").}
 
-\item{\code{hash}}{A \code{\link{character}} string giving the cryptographical hash of the
+\item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
 }}
 

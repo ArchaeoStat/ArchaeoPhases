@@ -6,20 +6,26 @@
 \alias{is_original}
 \alias{is_original-method}
 \alias{is_original,MCMC-method}
+\alias{is_original,PhasesMCMC-method}
 \alias{is_original,CumulativeEvents-method}
 \alias{is_original,ActivityEvents-method}
 \alias{is_original,OccurrenceEvents-method}
+\alias{is_original,RateOfChange-method}
 \title{Check for an Original MCMC File}
 \usage{
 is_original(object, ...)
 
-\S4method{is_original}{MCMC}(object, file)
+\S4method{is_original}{MCMC}(object, file, download = FALSE)
 
-\S4method{is_original}{CumulativeEvents}(object, file)
+\S4method{is_original}{PhasesMCMC}(object, file, download = FALSE)
 
-\S4method{is_original}{ActivityEvents}(object, file)
+\S4method{is_original}{CumulativeEvents}(object, file, download = FALSE)
 
-\S4method{is_original}{OccurrenceEvents}(object, file)
+\S4method{is_original}{ActivityEvents}(object, file, download = FALSE)
+
+\S4method{is_original}{OccurrenceEvents}(object, file, download = FALSE)
+
+\S4method{is_original}{RateOfChange}(object, file, download = FALSE)
 }
 \arguments{
 \item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
@@ -27,6 +33,9 @@ is_original(object, ...)
 \item{...}{Currently not used.}
 
 \item{file}{Either a path to a CSV file or a connection.}
+
+\item{download}{A \code{\link{logical}} scalar: should the remote file be downloaded
+and hashed locally?}
 }
 \value{
 A \code{\link{logical}}: \code{TRUE} if the files match, \code{FALSE} otherwise.
@@ -37,18 +46,16 @@ an object.
 }
 \examples{
 \dontrun{
-## Import ChronoModel Output
-path_zip <- system.file("extdata/chronomodel.zip", package = "ArchaeoPhases")
-path_csv <- utils::unzip(path_zip, exdir = tempdir())
-eve <- read_chronomodel(path_csv[[1]], phases = FALSE)
-pha <- read_chronomodel(path_csv[[2]], phases = TRUE)
-
 ## Import OxCal Output
-path_zip <- system.file("extdata/oxcal.zip", package = "ArchaeoPhases")
-path_csv <- utils::unzip(path_zip, exdir = tempdir())
-oxcal <- read_chronomodel(path_csv)
+path_output <- system.file("oxcal/output/MCMC_Sample.csv", package = "fasti")
+url_output <- paste0("https://raw.githubusercontent.com/tesselle/fasti/master/",
+                     "inst/oxcal/output/MCMC_Sample.csv")
+oxcal <- read_oxcal(path_output)
 
-is_original(oxcal, path_csv)
+## Check md5 sum
+is_original(oxcal, path_output) # Same as local file? TRUE
+is_original(oxcal, url_output, download = FALSE) # Same as remote file? FALSE
+is_original(oxcal, url_output, download = TRUE) # Same as remote file? TRUE
 }
 }
 \seealso{
@@ -57,7 +64,9 @@ is_original(oxcal, path_csv)
 Other read methods: 
 \code{\link{coda}},
 \code{\link{coerce}()},
-\code{\link{read}}
+\code{\link{read_bcal}()},
+\code{\link{read_chronomodel}()},
+\code{\link{read_oxcal}()}
 }
 \author{
 T. S. Dye, N. Frerebeau

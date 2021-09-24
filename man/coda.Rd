@@ -53,7 +53,9 @@ gelman.plot(mc)
 Other read methods: 
 \code{\link{check}},
 \code{\link{coerce}()},
-\code{\link{read}}
+\code{\link{read_bcal}()},
+\code{\link{read_chronomodel}()},
+\code{\link{read_oxcal}()}
 }
 \author{
 A. Philippe, M.-A. Vibet

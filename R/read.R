@@ -9,8 +9,19 @@ NULL
 setMethod(
   f = "is_original",
   signature = "MCMC",
-  definition = function(object, file) {
-    make_hash(file) == get_hash(object)
+  definition = function(object, file, download = FALSE) {
+    identical(make_hash(file, download), get_hash(object))
+  }
+)
+
+#' @export
+#' @rdname check
+#' @aliases is_original,PhasesMCMC-method
+setMethod(
+  f = "is_original",
+  signature = "PhasesMCMC",
+  definition = function(object, file, download = FALSE) {
+    identical(make_hash(file, download), get_hash(object))
   }
 )
 
@@ -20,8 +31,8 @@ setMethod(
 setMethod(
   f = "is_original",
   signature = "CumulativeEvents",
-  definition = function(object, file) {
-    make_hash(file) == get_hash(object)
+  definition = function(object, file, download = FALSE) {
+    identical(make_hash(file, download), get_hash(object))
   }
 )
 
@@ -31,8 +42,8 @@ setMethod(
 setMethod(
   f = "is_original",
   signature = "ActivityEvents",
-  definition = function(object, file) {
-    make_hash(file) == get_hash(object)
+  definition = function(object, file, download = FALSE) {
+    identical(make_hash(file, download), get_hash(object))
   }
 )
 
@@ -42,14 +53,26 @@ setMethod(
 setMethod(
   f = "is_original",
   signature = "OccurrenceEvents",
-  definition = function(object, file) {
-    make_hash(file) == get_hash(object)
+  definition = function(object, file, download = FALSE) {
+    identical(make_hash(file, download), get_hash(object))
+  }
+)
+
+#' @export
+#' @rdname check
+#' @aliases is_original,RateOfChange-method
+setMethod(
+  f = "is_original",
+  signature = "RateOfChange",
+  definition = function(object, file, download = FALSE) {
+    identical(make_hash(file, download), get_hash(object))
   }
 )
 
 # Read =========================================================================
+## OxCal -----------------------------------------------------------------------
 #' @export
-#' @rdname read
+#' @rdname read_oxcal
 #' @aliases read_oxcal,character-method
 setMethod(
   f = "read_oxcal",
@@ -92,8 +115,9 @@ setMethod(
   }
 )
 
+## BCal ------------------------------------------------------------------------
 #' @export
-#' @rdname read
+#' @rdname read_bcal
 #' @aliases read_bcal,character-method
 setMethod(
   f = "read_bcal",
@@ -141,8 +165,9 @@ setMethod(
   }
 )
 
+## ChronoModel -----------------------------------------------------------------
 #' @export
-#' @rdname read
+#' @rdname read_chronomodel
 #' @aliases read_chronomodel,character-method
 setMethod(
   f = "read_chronomodel",

@@ -51,7 +51,9 @@ eve <- as_mcmc(events, iteration = 1)
 Other read methods: 
 \code{\link{check}},
 \code{\link{coda}},
-\code{\link{read}}
+\code{\link{read_bcal}()},
+\code{\link{read_chronomodel}()},
+\code{\link{read_oxcal}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

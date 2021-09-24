@@ -1,14 +1,12 @@
 \dontrun{
-## Import ChronoModel Output
-path_zip <- system.file("extdata/chronomodel.zip", package = "ArchaeoPhases")
-path_csv <- utils::unzip(path_zip, exdir = tempdir())
-eve <- read_chronomodel(path_csv[[1]], phases = FALSE)
-pha <- read_chronomodel(path_csv[[2]], phases = TRUE)
-
 ## Import OxCal Output
-path_zip <- system.file("extdata/oxcal.zip", package = "ArchaeoPhases")
-path_csv <- utils::unzip(path_zip, exdir = tempdir())
-oxcal <- read_chronomodel(path_csv)
+path_output <- system.file("oxcal/output/MCMC_Sample.csv", package = "fasti")
+url_output <- paste0("https://raw.githubusercontent.com/tesselle/fasti/master/",
+                     "inst/oxcal/output/MCMC_Sample.csv")
+oxcal <- read_oxcal(path_output)
 
-is_original(oxcal, path_csv)
+## Check md5 sum
+is_original(oxcal, path_output) # Same as local file? TRUE
+is_original(oxcal, url_output, download = FALSE) # Same as remote file? FALSE
+is_original(oxcal, url_output, download = TRUE) # Same as remote file? TRUE
 }

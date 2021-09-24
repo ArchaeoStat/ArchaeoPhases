@@ -65,11 +65,14 @@ Import a CSV file containing a sample from the posterior distribution:
 
 ```{r read-chronomodel}
 ## Read output from ChronoModel
-output_zip <- system.file("extdata/chronomodel.zip", package = "ArchaeoPhases")
-output_csv <- utils::unzip(output_zip, exdir = tempdir())
+path <- "chronomodel/output/"
 
-(chrono_events <- read_chronomodel(output_csv[[1]], phases = FALSE))
-(chrono_phases <- read_chronomodel(output_csv[[2]], phases = TRUE))
+## Events
+path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
+(chrono_events <- read_chronomodel(path_events, phases = FALSE))
+
+path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
+(chrono_phases <- read_chronomodel(path_phases, phases = TRUE))
 ```
 
 **ArchaeoPhases** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting information. This makes it easy to customize diagrams (e.g. using themes and scales).
