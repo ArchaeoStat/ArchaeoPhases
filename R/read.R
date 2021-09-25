@@ -101,13 +101,16 @@ setMethod(
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
 
+    ## Coerce to matrix
+    data <- as.matrix(data)
+
     ## Convert from BP to CE
     if (BP)
       data <- BP_to_CE(data)
 
     ## Return an MCM object
     .MCMC(
-      as.matrix(data),
+      data,
       events = date_names,
       calendar = "CE",
       hash = file_hash
@@ -148,6 +151,9 @@ setMethod(
     if (anyNA(data[nrow(data), ]))
       data <- data[-nrow(data), ]
 
+    ## Coerce to matrix
+    data <- as.matrix(data)
+
     ## Take bin width into account, if necessary
     if (bin_width != 1)
       data <- data * bin_width
@@ -157,7 +163,7 @@ setMethod(
 
     ## Return an MCM object
     .MCMC(
-      as.matrix(data),
+      data,
       events = date_names,
       calendar = "CE",
       hash = file_hash
@@ -192,12 +198,14 @@ setMethod(
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
 
+    ## Coerce to matrix
+    mtx <- as.matrix(data)
+
     ## Convert from BP to CE
     if (BP)
-      data <- BP_to_CE(data)
+      mtx <- BP_to_CE(mtx)
 
     ## Return an MCMC object
-    mtx <- as.matrix(data)
     if (phases) {
       ## Get phase names
       pattern <- "(alpha|beta|Begin|End)"

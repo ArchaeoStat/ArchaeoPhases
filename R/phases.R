@@ -5,12 +5,43 @@ NULL
 # Min-Max ======================================================================
 #' @export
 #' @rdname phase
-#' @aliases as_phases,matrix,missing-method
+#' @aliases as_phases,MCMC-method
 setMethod(
   f = "as_phases",
-  signature = c(from = "matrix", groups = "missing"),
+  signature = c(from = "MCMC"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        end = start + 1, BP = FALSE, iteration = NULL) {
+                        stop = start + 1) {
+    ## Validation
+    # TODO: check that length(start) == lenght(stop)
+
+    pha <- paste0("phase_", seq_along(start))
+    arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
+                 dimnames = list(NULL, pha, c("begin", "end")))
+
+    arr[, , 1] <- from[, start]
+    arr[, , 2] <- from[, stop]
+
+    .PhasesMCMC(
+      arr,
+      phases = pha,
+      ordered = FALSE,
+      calendar = get_calendar(from),
+      hash = get_hash(from)
+    )
+  }
+)
+
+#' @export
+#' @rdname phase
+#' @aliases as_phases,matrix-method
+setMethod(
+  f = "as_phases",
+  signature = c(from = "matrix"),
+  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
+                        stop = start + 1, BP = FALSE, iteration = NULL) {
+    ## Validation
+    # TODO: check that length(start) == lenght(stop)
+
     ## Remove the iteration column
     if (!is.null(iteration))
       from <- from[, -iteration]
@@ -20,11 +51,11 @@ setMethod(
       from <- BP_to_CE(from)
 
     pha <- paste0("phase_", seq_along(start))
-    arr <- array(data = NA_real_, dim = c(nrow(from), ncol(from) / 2, 2),
+    arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
                  dimnames = list(NULL, pha, c("begin", "end")))
 
     arr[, , 1] <- from[, start]
-    arr[, , 2] <- from[, end]
+    arr[, , 2] <- from[, stop]
 
     .PhasesMCMC(
       arr,
@@ -37,38 +68,39 @@ setMethod(
 
 #' @export
 #' @rdname phase
-#' @aliases as_phases,data.frame,missing-method
+#' @aliases as_phases,data.frame-method
 setMethod(
   f = "as_phases",
-  signature = c(from = "data.frame", groups = "missing"),
+  signature = c(from = "data.frame"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        end = start + 1, BP = FALSE, iteration = NULL) {
+                        stop = start + 1, BP = FALSE, iteration = NULL) {
     from <- data.matrix(from)
-    methods::callGeneric(from, start = start, end = end, BP = BP,
+    methods::callGeneric(from, start = start, stop = stop, BP = BP,
                          iteration = iteration)
   }
 )
 
+# Build phases =================================================================
 #' @export
 #' @rdname phase
-#' @aliases as_phases,MCMC,missing-method
+#' @aliases phase,MCMC,missing-method
 setMethod(
-  f = "as_phases",
-  signature = c(from = "MCMC", groups = "missing"),
-  definition = function(from) {
-    groups <- list(seq_len(ncol(from)))
-    methods::callGeneric(from = from, groups = groups)
+  f = "phase",
+  signature = c(x = "MCMC", groups = "missing"),
+  definition = function(x) {
+    groups <- list(seq_len(ncol(x)))
+    methods::callGeneric(x = x, groups = groups)
   }
 )
 
 #' @export
 #' @rdname phase
-#' @aliases as_phases,MCMC,list-method
+#' @aliases phase,MCMC,list-method
 setMethod(
-  f = "as_phases",
-  signature = c(from = "MCMC", groups = "list"),
-  definition = function(from, groups, ordered = FALSE) {
-    m <- nrow(from)
+  f = "phase",
+  signature = c(x = "MCMC", groups = "list"),
+  definition = function(x, groups, ordered = FALSE) {
+    m <- nrow(x)
     n <- length(groups) # Number of phases
     k <- seq_len(n)
     grp <- if (is.null(names(groups))) paste0("phase_", k) else names(groups)
@@ -76,7 +108,7 @@ setMethod(
     ## Calendar scale
     fun_min <- min
     fun_max <- max
-    if (is_BP(from)) {
+    if (is_BP(x)) {
       fun_min <- max
       fun_max <- min
     }
@@ -86,7 +118,7 @@ setMethod(
     dimnames(min_max) <- list(NULL, grp, c("begin", "end"))
     for (i in k) {
       index <- groups[[i]]
-      tmp <- from[, index, drop = FALSE]
+      tmp <- x[, index, drop = FALSE]
       min_max[, i, 1] <- apply(X = tmp, MARGIN = 1, FUN = fun_min)
       min_max[, i, 2] <- apply(X = tmp, MARGIN = 1, FUN = fun_max)
     }
@@ -95,8 +127,8 @@ setMethod(
       min_max,
       phases = grp,
       ordered = ordered,
-      calendar = get_calendar(from),
-      hash = get_hash(from)
+      calendar = get_calendar(x),
+      hash = get_hash(x)
     )
   }
 )

@@ -86,8 +86,6 @@ NULL
     hash = "character"
   ),
   prototype = methods::prototype(
-    start = integer(0),
-    end = integer(0),
     phases = character(0),
     ordered = FALSE,
     calendar = "CE",

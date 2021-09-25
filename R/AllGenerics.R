@@ -449,13 +449,13 @@ setGeneric(
 #'
 #' Constructs the minimum and maximum for a group of events (phase).
 #' @param from A `numeric` [`matrix`] or an [`MCMC-class`].
-#' @param x A [`PhasesMCMC-class`] object.
+#' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @param groups A [`list`].
 #' @param start An [`integer`] vector specifying the index of the columns
 #'  corresponding to the beginning of the phases. If missing, every other column
 #'  is used starting from the first column (after deleting the `iteration`
 #'  column, if any).
-#' @param end An [`integer`] vector specifying the index of the columns
+#' @param stop An [`integer`] vector specifying the index of the columns
 #'  corresponding to the end of the phases. If missing, every other column
 #'  is used starting from the second column (after deleting the `iteration`
 #'  column, if any).
@@ -482,10 +482,18 @@ setGeneric(
 NULL
 
 #' @rdname phase
+#' @aliases phase-method
+setGeneric(
+  name = "phase",
+  def = function(x, groups, ...) standardGeneric("phase"),
+  valueClass = "PhasesMCMC"
+)
+
+#' @rdname phase
 #' @aliases as_phases-method
 setGeneric(
   name = "as_phases",
-  def = function(from, groups, ...) standardGeneric("as_phases"),
+  def = function(from, ...) standardGeneric("as_phases"),
   valueClass = "PhasesMCMC"
 )
 

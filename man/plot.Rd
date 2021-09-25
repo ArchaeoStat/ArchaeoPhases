@@ -115,7 +115,7 @@ plot(eve_CE, interval = "ci", level = 0.68)
 plot(eve_BP, interval = "hpdi", level = 0.68)
 
 ## Compute phases
-pha <- as_phases(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
+pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
 summary(pha)
 
 ## Plot phases
