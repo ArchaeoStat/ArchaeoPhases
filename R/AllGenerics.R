@@ -459,13 +459,14 @@ setGeneric(
 #'  corresponding to the end of the phases. If missing, every other column
 #'  is used starting from the second column (after deleting the `iteration`
 #'  column, if any).
+#' @param names A [`character`] vector giving the names of the phases.
+#' @param ordered A [`logical`] scalar: should the `groups` be regarded as
+#'  ordered (in the order given)?
 #' @param BP A [`logical`] scalar: should the data be converted from BP to
 #'  BC/AD? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
 #' @param iteration An [`integer`] specifying the index of the iteration column
 #'  to be removed.
-#' @param ordered A [`logical`] scalar: should the `groups` be regarded as
-#'  ordered (in the order given)?
 #' @param value A possible value for the element(s) of `x`.
 #' @param ... Currently not used.
 #' @return

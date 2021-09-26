@@ -41,13 +41,17 @@ is_ordered(x)
 \S4method{as_phases}{MCMC}(
   from,
   start = seq(from = 1, to = ncol(from), by = 2),
-  stop = start + 1
+  stop = start + 1,
+  names = NULL,
+  ordered = FALSE
 )
 
 \S4method{as_phases}{matrix}(
   from,
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
+  names = NULL,
+  ordered = FALSE,
   BP = FALSE,
   iteration = NULL
 )
@@ -56,6 +60,8 @@ is_ordered(x)
   from,
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
+  names = NULL,
+  ordered = FALSE,
   BP = FALSE,
   iteration = NULL
 )
@@ -93,15 +99,17 @@ corresponding to the end of the phases. If missing, every other column
 is used starting from the second column (after deleting the \code{iteration}
 column, if any).}
 
+\item{names}{A \code{\link{character}} vector giving the names of the phases.}
+
+\item{ordered}{A \code{\link{logical}} scalar: should the \code{groups} be regarded as
+ordered (in the order given)?}
+
 \item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
 BC/AD? This should not be \code{TRUE} unless you change the default settings in
 'OxCal' or 'ChronoModel'.}
 
 \item{iteration}{An \code{\link{integer}} specifying the index of the iteration column
 to be removed.}
-
-\item{ordered}{A \code{\link{logical}} scalar: should the \code{groups} be regarded as
-ordered (in the order given)?}
 }
 \value{
 A \code{\linkS4class{PhasesMCMC}} object.

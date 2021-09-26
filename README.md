@@ -112,7 +112,7 @@ and scales).
 plot(chrono_events)
 ```
 
-<img src="man/figures/README-events-plot-1.png" width="100%" />
+<img src="man/figures/README-events-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ## Tempo plot
@@ -141,7 +141,7 @@ boundaries(chrono_phases, level = 0.95)
 plot(chrono_phases)
 ```
 
-<img src="man/figures/README-phases-plot-1.png" width="100%" />
+<img src="man/figures/README-phases-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
 ## Set chronological order
@@ -155,4 +155,4 @@ get_order(chrono_phases)
 plot(chrono_phases, level = 0.95)
 ```
 
-<img src="man/figures/README-succession-plot-1.png" width="100%" />
+<img src="man/figures/README-succession-plot-1.png" style="display: block; margin: auto;" />

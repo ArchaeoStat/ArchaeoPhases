@@ -10,11 +10,11 @@ setMethod(
   f = "as_phases",
   signature = c(from = "MCMC"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1) {
+                        stop = start + 1, names = NULL, ordered = FALSE) {
     ## Validation
     # TODO: check that length(start) == lenght(stop)
 
-    pha <- paste0("phase_", seq_along(start))
+    pha <- if (is.null(names)) paste0("phase_", seq_along(start)) else names
     arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
                  dimnames = list(NULL, pha, c("begin", "end")))
 
@@ -24,7 +24,7 @@ setMethod(
     .PhasesMCMC(
       arr,
       phases = pha,
-      ordered = FALSE,
+      ordered = ordered,
       calendar = get_calendar(from),
       hash = get_hash(from)
     )
@@ -38,7 +38,8 @@ setMethod(
   f = "as_phases",
   signature = c(from = "matrix"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, BP = FALSE, iteration = NULL) {
+                        stop = start + 1, names = NULL, ordered = FALSE,
+                        BP = FALSE, iteration = NULL) {
     ## Validation
     # TODO: check that length(start) == lenght(stop)
 
@@ -50,7 +51,7 @@ setMethod(
     if (BP)
       from <- BP_to_CE(from)
 
-    pha <- paste0("phase_", seq_along(start))
+    pha <- if (is.null(names)) paste0("phase_", seq_along(start)) else names
     arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
                  dimnames = list(NULL, pha, c("begin", "end")))
 
@@ -60,7 +61,7 @@ setMethod(
     .PhasesMCMC(
       arr,
       phases = pha,
-      ordered = FALSE,
+      ordered = ordered,
       calendar = "CE"
     )
   }
@@ -73,10 +74,11 @@ setMethod(
   f = "as_phases",
   signature = c(from = "data.frame"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, BP = FALSE, iteration = NULL) {
+                        stop = start + 1, names = NULL, ordered = FALSE,
+                        BP = FALSE, iteration = NULL) {
     from <- data.matrix(from)
-    methods::callGeneric(from, start = start, stop = stop, BP = BP,
-                         iteration = iteration)
+    methods::callGeneric(from, start = start, stop = stop, names = names,
+                         ordered = ordered, BP = BP, iteration = iteration)
   }
 )
 

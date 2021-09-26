@@ -10,8 +10,10 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  fig.align = "center",
   fig.path = "man/figures/README-",
-  out.width = '100%'
+  fig.width = 7,
+  out.width = NULL
 )
 ```
 
@@ -79,11 +81,11 @@ path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
 
 ### Analysis of a series of dates
 
-```{r events-plot, fig.width=7, fig.height=5}
+```{r events-plot, fig.height=5}
 plot(chrono_events)
 ```
 
-```{r tempo-plot, fig.width=5, fig.height=5, out.width='50%', fig.show='hold'}
+```{r tempo-plot, fig.width=5, fig.align='default', fig.height=5, out.width='50%', fig.show='hold'}
 ## Tempo plot
 tp <- tempo(chrono_events, level = 0.95)
 plot(tp)
@@ -99,17 +101,17 @@ plot(ac)
 boundaries(chrono_phases, level = 0.95)
 ```
 
-```{r phases-plot, fig.width=7, fig.height=3.5}
+```{r phases-plot, fig.height=3.5}
 plot(chrono_phases)
 ```
 
-```{r phases-order, fig.width=7, fig.height=3.5}
+```{r phases-order, fig.height=3.5}
 ## Set chronological order
 ## (from the oldest to the youngest phase)
 set_order(chrono_phases) <- c("IUP", "Ahmarian", "UP", "EPI")
 get_order(chrono_phases)
 ```
 
-```{r succession-plot, fig.width=7, fig.height=2}
+```{r succession-plot, fig.height=2}
 plot(chrono_phases, level = 0.95)
 ```
