@@ -55,7 +55,6 @@ interval or the highest posterior density (HPD) region for a given \code{level}
 of confidence.
 }
 \examples{
-\donttest{
 ## Coerce to MCMC
 eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
@@ -66,7 +65,6 @@ plot(occ_ci)
 
 occ_hpdi <- occurrence(eve, interval = "hpdi")
 plot(occ_hpdi)
-}
 }
 \seealso{
 Other event tools: 

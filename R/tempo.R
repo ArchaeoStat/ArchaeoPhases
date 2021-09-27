@@ -27,7 +27,8 @@ setMethod(
   f = "tempo",
   signature = "MCMC",
   definition = function(object, level = 0.95, count = TRUE, gauss = FALSE,
-                        from = min(object), to = max(object), step = 10) {
+                        from = min(object), to = max(object),
+                        step = (to - from) / (250 - 1)) {
     n_events <- ncol(object)
 
     ## Empirical cumulative distribution

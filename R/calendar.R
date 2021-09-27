@@ -9,9 +9,7 @@ NULL
 setMethod(
   f = "is_BP",
   signature = "MCMC",
-  definition = function(object) {
-    get_calendar(object) == "BP"
-  }
+  definition = function(object) identical(get_calendar(object), "BP")
 )
 
 #' @export
@@ -20,9 +18,7 @@ setMethod(
 setMethod(
   f = "is_BP",
   signature = "PhasesMCMC",
-  definition = function(object) {
-    get_calendar(object) == "BP"
-  }
+  definition = function(object) identical(get_calendar(object), "BP")
 )
 
 #' @export
@@ -31,9 +27,7 @@ setMethod(
 setMethod(
   f = "is_BP",
   signature = "CumulativeEvents",
-  definition = function(object) {
-    get_calendar(object) == "BP"
-  }
+  definition = function(object) identical(get_calendar(object), "BP")
 )
 
 #' @export
@@ -42,9 +36,7 @@ setMethod(
 setMethod(
   f = "is_BP",
   signature = "ActivityEvents",
-  definition = function(object) {
-    get_calendar(object) == "BP"
-  }
+  definition = function(object) identical(get_calendar(object), "BP")
 )
 
 #' @export
@@ -53,9 +45,7 @@ setMethod(
 setMethod(
   f = "is_CE",
   signature = "MCMC",
-  definition = function(object) {
-    get_calendar(object) == "CE"
-  }
+  definition = function(object) identical(get_calendar(object), "CE")
 )
 
 #' @export
@@ -64,9 +54,7 @@ setMethod(
 setMethod(
   f = "is_CE",
   signature = "PhasesMCMC",
-  definition = function(object) {
-    get_calendar(object) == "CE"
-  }
+  definition = function(object) identical(get_calendar(object), "CE")
 )
 
 #' @export
@@ -75,9 +63,7 @@ setMethod(
 setMethod(
   f = "is_CE",
   signature = "CumulativeEvents",
-  definition = function(object) {
-    get_calendar(object) == "CE"
-  }
+  definition = function(object) identical(get_calendar(object), "CE")
 )
 
 #' @export
@@ -86,9 +72,7 @@ setMethod(
 setMethod(
   f = "is_CE",
   signature = "ActivityEvents",
-  definition = function(object) {
-    get_calendar(object) == "CE"
-  }
+  definition = function(object) identical(get_calendar(object), "CE")
 )
 
 # Convert ======================================================================
@@ -205,10 +189,10 @@ setMethod(
   definition = function(object){
     index <- !is.na(object)
     if (any(object[index] == 0)) {
-      stop("0 BC/AD is not a valid year!", call. = FALSE)
+      stop("0 BCE/CE is not a valid year!", call. = FALSE)
     }
     if (any(object[index] > 1950)) {
-      stop("Post-bomb dates (> 1950 AD) are not supported.", call. = FALSE)
+      stop("Post-bomb dates (> 1950 CE) are not supported.", call. = FALSE)
     }
     tmp <- rep(NA, length(object))
     tmp[index & object > 0] <- abs(object[index & object > 0] - 1950)

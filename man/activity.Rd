@@ -13,7 +13,12 @@
 \usage{
 activity(object, ...)
 
-\S4method{activity}{MCMC}(object, from = min(object), to = max(object), step = 10)
+\S4method{activity}{MCMC}(
+  object,
+  from = min(object),
+  to = max(object),
+  step = (to - from)/(250 - 1)
+)
 
 \S4method{activity}{CumulativeEvents}(object)
 
@@ -51,7 +56,6 @@ displayed (invisibly returns \code{x}).
 Plots the first derivative of the \code{\link{tempo}} plot Bayesian estimate.
 }
 \examples{
-\donttest{
 ## Coerce to MCMC
 eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
@@ -59,22 +63,21 @@ eve <- eve[1:10000, ]
 ## Tempo plot
 ## BP
 eve_BP <- CE_to_BP(eve)
-tempo_BP <- tempo(eve_BP)
-plot(tempo_BP)
+tmp <- tempo(eve_BP)
+plot(tmp)
 
 ## CE
 eve_CE <- BP_to_CE(eve_BP)
-tempo_CE <- tempo(eve_CE, count = FALSE, gauss = TRUE)
-plot(tempo_CE)
+tmp <- tempo(eve_CE, count = FALSE, gauss = TRUE)
+plot(tmp)
 
 ## Activity plot
-act <- activity(eve_CE)
+act <- activity(tmp)
 plot(act)
 
 ## Rate of change
-chg <- roc(eve_CE, step = 50)
+chg <- roc(act)
 plot(chg)
-}
 }
 \references{
 Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
