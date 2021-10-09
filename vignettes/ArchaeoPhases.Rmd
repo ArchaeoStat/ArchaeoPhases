@@ -167,7 +167,7 @@ A group of dates (phase) is defined by the date of the minimum and the date of t
 p <- list(EPI = 1, UP = 2:4, Ahmarian = 5:15, IUP = 16)
 chrono_groups <- phase(chrono_events, groups = p)
 
-all(chrono_phases == chrono_phases)
+all(chrono_groups == chrono_phases)
 ```
 
 We can estimate the time range of a group of dates as the shortest interval that contains all the dates of the group at a given confidence level [@philippe2020].
