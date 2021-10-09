@@ -85,7 +85,9 @@ setMethod(
   signature = "MCMC",
   definition = function(object, origin = 1) {
     tmp <- object[, -origin] - object[, origin]
-    methods::initialize(object, as(tmp, "matrix"), calendar = "elapsed")
+    methods::initialize(object, methods::as(tmp, "matrix"),
+                        events = names(object)[-origin],
+                        calendar = "elapsed")
   }
 )
 

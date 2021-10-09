@@ -306,6 +306,7 @@ setMethod(
 
     .MCMC(
       result,
+      events = pha,
       calendar = "elapsed",
       hash = get_hash(x)
     )

@@ -210,7 +210,7 @@ NULL
   )
 )
 
-# RateOfChange =================================================================
+# Rate of Change ===============================================================
 #' Rate of Change
 #'
 #' An S4 class to store the result of a [`rate of change`][`roc`] estimation.
