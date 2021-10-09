@@ -93,26 +93,27 @@ autoplot.MCMC <- function(object, ..., density = TRUE, n = 512,
 
 #' @export
 #' @rdname plot
+#' @aliases autoplot,MCMC-method
 setMethod("autoplot", "MCMC", autoplot.MCMC)
+
+#' @export
+#' @method plot MCMC
+plot.MCMC <- function(x, density = TRUE, n = 512, interval = c("ci", "hpdi"),
+                      level = 0.95, decreasing = TRUE, ...) {
+  gg <- autoplot(object = x, ..., density = density, n = n,
+                 interval = interval, level = level,
+                 decreasing = decreasing) +
+    ggplot2::guides(fill = ggplot2::guide_legend(ncol = 2)) +
+    ggplot2::theme_bw()
+  print(gg)
+  invisible(x)
+}
 
 #' @export
 #' @describeIn plot Plots of credible intervals or HPD regions of a series of
 #' events.
 #' @aliases plot,MCMC,missing-method
-setMethod(
-  f = "plot",
-  signature = c(x = "MCMC", y = "missing"),
-  definition = function(x, density = TRUE, n = 512, interval = c("ci", "hpdi"),
-                        level = 0.95, decreasing = TRUE, ...) {
-    gg <- autoplot(object = x, ..., density = density, n = n,
-                   interval = interval, level = level,
-                   decreasing = decreasing) +
-      ggplot2::guides(fill = ggplot2::guide_legend(ncol = 2)) +
-      ggplot2::theme_bw()
-    print(gg)
-    invisible(x)
-  }
-)
+setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 
 # PhasesMCMC ===================================================================
 #' @export
@@ -139,24 +140,25 @@ autoplot.PhasesMCMC <- function(object, ..., level = 0.95, n = 512,
 
 #' @export
 #' @rdname plot
+#' @aliases autoplot,PhasesMCMC-method
 setMethod("autoplot", "PhasesMCMC", autoplot.PhasesMCMC)
+
+#' @export
+#' @method plot PhasesMCMC
+plot.PhasesMCMC <- function(x, level = 0.95, n = 512, decreasing = TRUE,
+                            succession = is_ordered(x), facet = TRUE, ...) {
+  gg <- autoplot(object = x, ..., level = level, n = n,
+                 decreasing = decreasing, succession = succession,
+                 facet = facet) +
+    ggplot2::theme_bw()
+  print(gg)
+  invisible(x)
+}
 
 #' @export
 #' @describeIn plot Plots the characteristics of a group of events (phase).
 #' @aliases plot,PhasesMCMC,missing-method
-setMethod(
-  f = "plot",
-  signature = c(x = "PhasesMCMC", y = "missing"),
-  definition = function(x, level = 0.95, n = 512, decreasing = TRUE,
-                        succession = is_ordered(x), facet = TRUE, ...) {
-    gg <- autoplot(object = x, ..., level = level, n = n,
-                   decreasing = decreasing, succession = succession,
-                   facet = facet) +
-      ggplot2::theme_bw()
-    print(gg)
-    invisible(x)
-  }
-)
+setMethod("plot", c(x = "PhasesMCMC", y = "missing"), plot.PhasesMCMC)
 
 # Helpers ======================================================================
 #' @param x A [`PhasesMCMC`] object.

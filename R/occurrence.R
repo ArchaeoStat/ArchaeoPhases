@@ -49,7 +49,7 @@ setMethod(
 
 #' @export
 #' @method autoplot OccurrenceEvents
-autoplot.OccurrenceEvents <- function(object, ...) {
+autoplot.OccurrenceEvents <- function(object, ..., colour = "black") {
   ## Calendar scale
   gg_x_scale <- scale_calendar(get_calendar(object))
 
@@ -58,24 +58,25 @@ autoplot.OccurrenceEvents <- function(object, ...) {
   ggplot2::ggplot(data = data) +
     ggplot2::aes(x = .data$lower, y = .data$events,
                  xend = .data$upper, yend = .data$events) +
-    ggplot2::geom_segment(size = 2) +
+    ggplot2::geom_segment(colour = colour, size = 2) +
     gg_x_scale +
     ggplot2::scale_y_continuous(name = "Occurrence")
 }
 
 #' @export
 #' @rdname occurrence
+#' @aliases autoplot,OccurrenceEvents-method
 setMethod("autoplot", "OccurrenceEvents", autoplot.OccurrenceEvents)
+
+#' @export
+#' @method plot OccurrenceEvents
+plot.OccurrenceEvents <- function(x, colour = "black", ...) {
+  gg <- autoplot(object = x, ..., colour = colour) + ggplot2::theme_bw()
+  print(gg)
+  invisible(x)
+}
 
 #' @export
 #' @rdname occurrence
 #' @aliases plot,OccurrenceEvents,missing-method
-setMethod(
-  f = "plot",
-  signature = c(x = "OccurrenceEvents", y = "missing"),
-  definition = function(x) {
-    gg <- autoplot(object = x) + ggplot2::theme_bw()
-    print(gg)
-    invisible(x)
-  }
-)
+setMethod("plot", c(x = "OccurrenceEvents", y = "missing"), plot.OccurrenceEvents)

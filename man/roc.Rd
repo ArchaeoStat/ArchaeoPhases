@@ -19,9 +19,9 @@ roc(object, ...)
 
 \S4method{roc}{ActivityEvents}(object)
 
-\S4method{autoplot}{RateOfChange}(object, ...)
+\S4method{autoplot}{RateOfChange}(object, ..., colour = "black")
 
-\S4method{plot}{RateOfChange,missing}(x)
+\S4method{plot}{RateOfChange,missing}(x, colour = "black", ...)
 }
 \arguments{
 \item{object}{An \code{\linkS4class{MCMC}}, a \code{\linkS4class{CumulativeEvents}} or an
@@ -37,6 +37,8 @@ for (in years).}
 
 \item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
 distribution is to be estimated (in years).}
+
+\item{colour}{A \code{\link{character}} string specifying the colour of the segments.}
 
 \item{x}{A \code{\linkS4class{RateOfChange}} object.}
 }

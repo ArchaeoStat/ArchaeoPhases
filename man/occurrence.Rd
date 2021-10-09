@@ -13,9 +13,9 @@ occurrence(object, ...)
 
 \S4method{occurrence}{MCMC}(object, interval = c("ci", "hpdi"), level = 0.95)
 
-\S4method{autoplot}{OccurrenceEvents}(object, ...)
+\S4method{autoplot}{OccurrenceEvents}(object, ..., colour = "black")
 
-\S4method{plot}{OccurrenceEvents,missing}(x)
+\S4method{plot}{OccurrenceEvents,missing}(x, colour = "black", ...)
 }
 \arguments{
 \item{object}{An \code{\linkS4class{MCMC}} object.}
@@ -28,6 +28,8 @@ or "\code{hpdi}" (highest posterior density interval). Any unambiguous substring
 can be given.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
+
+\item{colour}{A \code{\link{character}} string specifying the colour of the segments.}
 
 \item{x}{An \code{\linkS4class{OccurrenceEvents}} object.}
 }

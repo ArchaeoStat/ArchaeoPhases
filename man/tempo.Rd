@@ -22,9 +22,9 @@ tempo(object, ...)
   step = (to - from)/(250 - 1)
 )
 
-\S4method{autoplot}{CumulativeEvents}(object, ...)
+\S4method{autoplot}{CumulativeEvents}(object, ..., ci = TRUE)
 
-\S4method{plot}{CumulativeEvents,missing}(x)
+\S4method{plot}{CumulativeEvents,missing}(x, ci = TRUE, ...)
 
 \S4method{multiplot}{CumulativeEvents}(...)
 }
@@ -49,6 +49,8 @@ for (in years).}
 
 \item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
 distribution is to be estimated (in years).}
+
+\item{ci}{A \code{\link{logical}} scalar: should the credible interval be displayed?}
 
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
 }

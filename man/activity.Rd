@@ -22,9 +22,9 @@ activity(object, ...)
 
 \S4method{activity}{CumulativeEvents}(object)
 
-\S4method{autoplot}{ActivityEvents}(object, ...)
+\S4method{autoplot}{ActivityEvents}(object, ..., fill = "grey20")
 
-\S4method{plot}{ActivityEvents,missing}(x)
+\S4method{plot}{ActivityEvents,missing}(x, fill = "grey20", ...)
 
 \S4method{multiplot}{ActivityEvents}(...)
 }
@@ -41,6 +41,9 @@ for (in years).}
 
 \item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
 distribution is to be estimated (in years).}
+
+\item{fill}{A \code{\link{character}} string specifying the colour to be used to fill
+the area under the curve.}
 
 \item{x}{An \code{\linkS4class{ActivityEvents}} object.}
 }

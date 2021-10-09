@@ -90,22 +90,28 @@ setMethod(
 
 #' @export
 #' @method autoplot CumulativeEvents
-autoplot.CumulativeEvents <- function(object, ...) {
+autoplot.CumulativeEvents <- function(object, ..., ci = TRUE) {
   ## Calendar scale
   gg_x_scale <- scale_calendar(get_calendar(object))
 
   ## Get data
   data <- as.data.frame(object)
-  tempo_ci <- data.frame(
-    year = c(data$year, data$year, rev(data$year)),
-    ci = c(data$estimate, data$lower, rev(data$upper)),
-    Legend = c(rep("Bayes estimate", nrow(data)),
-               rep("Credible interval", nrow(data) * 2))
-  )
+  if (ci) {
+    tempo_ci <- data.frame(
+      year = c(data$year, data$year, rev(data$year)),
+      ci = c(data$estimate, data$lower, rev(data$upper)),
+      Legend = c(rep("Bayes estimate", nrow(data)),
+                 rep("Credible interval", nrow(data) * 2))
+    )
+    tempo_aes <- ggplot2::aes(x = .data$year, y = .data$ci,
+                              colour = .data$Legend, linetype = .data$Legend)
+  } else {
+    tempo_ci <- data
+    tempo_aes <- ggplot2::aes(x = .data$year, y = .data$estimate)
+  }
 
   ggplot2::ggplot(data = tempo_ci) +
-    ggplot2::aes(x = .data$year, y = .data$ci, color = .data$Legend,
-                 linetype = .data$Legend) +
+    tempo_aes +
     ggplot2::geom_path() +
     gg_x_scale +
     ggplot2::scale_y_continuous(name = "Cumulative events")
@@ -113,22 +119,23 @@ autoplot.CumulativeEvents <- function(object, ...) {
 
 #' @export
 #' @rdname tempo
+#' @aliases autoplot,CumulativeEvents-method
 setMethod("autoplot", "CumulativeEvents", autoplot.CumulativeEvents)
+
+#' @export
+#' @method plot CumulativeEvents
+plot.CumulativeEvents <- function(x, ci = TRUE, ...) {
+  gg <- autoplot(object = x, ..., ci = ci) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(legend.position = "bottom")
+  print(gg)
+  invisible(x)
+}
 
 #' @export
 #' @rdname tempo
 #' @aliases plot,CumulativeEvents,missing-method
-setMethod(
-  f = "plot",
-  signature = c(x = "CumulativeEvents", y = "missing"),
-  definition = function(x) {
-    gg <- autoplot(object = x) +
-      ggplot2::theme_bw() +
-      ggplot2::theme(legend.position = "bottom")
-    print(gg)
-    invisible(x)
-  }
-)
+setMethod("plot", c(x = "CumulativeEvents", y = "missing"), plot.CumulativeEvents)
 
 #' @export
 #' @rdname tempo
