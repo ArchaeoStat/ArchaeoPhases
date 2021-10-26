@@ -776,7 +776,6 @@ setGeneric(
 #' @param BP A [`logical`] scalar: should the data be converted from BP to
 #'  CE? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
-#' @param phases A [`logical`] scalar: should the data be imported as phases?
 #' @return
 #'  An [`MCMC-class`] object.
 #' @references
@@ -788,11 +787,23 @@ setGeneric(
 #' @author T. S. Dye, N. Frerebeau
 #' @family read methods
 #' @docType methods
+#' @name read_chronomodel
 #' @rdname read_chronomodel
 #' @aliases read_chronomodel-method
+NULL
+
+#' @rdname read_chronomodel
+#' @aliases read_chronomodel_events-method
 setGeneric(
-  name = "read_chronomodel",
-  def = function(file, ...) standardGeneric("read_chronomodel")
+  name = "read_chronomodel_events",
+  def = function(file, ...) standardGeneric("read_chronomodel_events")
+)
+
+#' @rdname read_chronomodel
+#' @aliases read_chronomodel_phases-method
+setGeneric(
+  name = "read_chronomodel_phases",
+  def = function(file, ...) standardGeneric("read_chronomodel_phases")
 )
 
 #' Check for an Original MCMC File

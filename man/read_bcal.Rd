@@ -64,7 +64,7 @@ Other read methods:
 \code{\link{check}},
 \code{\link{coda}},
 \code{\link{coerce}()},
-\code{\link{read_chronomodel}()},
+\code{\link{read_chronomodel}},
 \code{\link{read_oxcal}()}
 }
 \author{

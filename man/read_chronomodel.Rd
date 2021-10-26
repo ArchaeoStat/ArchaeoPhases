@@ -4,12 +4,21 @@
 \name{read_chronomodel}
 \alias{read_chronomodel}
 \alias{read_chronomodel-method}
-\alias{read_chronomodel,character-method}
+\alias{read_chronomodel_events}
+\alias{read_chronomodel_events-method}
+\alias{read_chronomodel_phases}
+\alias{read_chronomodel_phases-method}
+\alias{read_chronomodel_events,character-method}
+\alias{read_chronomodel_phases,character-method}
 \title{Read ChronoModel Output}
 \usage{
-read_chronomodel(file, ...)
+read_chronomodel_events(file, ...)
 
-\S4method{read_chronomodel}{character}(file, BP = FALSE, phases = FALSE, sep = ",", dec = ".")
+read_chronomodel_phases(file, ...)
+
+\S4method{read_chronomodel_events}{character}(file, BP = FALSE, sep = ",", dec = ".")
+
+\S4method{read_chronomodel_phases}{character}(file, BP = FALSE, sep = ",", dec = ".")
 }
 \arguments{
 \item{file}{the name of the file which the data are to be read from.
@@ -39,8 +48,6 @@ read_chronomodel(file, ...)
 CE? This should not be \code{TRUE} unless you change the default settings in
 'OxCal' or 'ChronoModel'.}
 
-\item{phases}{A \code{\link{logical}} scalar: should the data be imported as phases?}
-
 \item{sep}{the field separator character.  Values on each line of the
     file are separated by this character.  If \code{sep = ""} (the
     default for \code{read.table}) the separator is \sQuote{white space},
@@ -57,15 +64,15 @@ Reads MCMC output.
 \examples{
 \dontrun{
 ## Import ChronoModel Output
-path <- "chronomodel/output/"
+path <- "chronomodel/output/ksarakil"
 
 ## Events
 path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
-(chrono_events <- read_chronomodel(path_events, phases = FALSE))
+(chrono_events <- read_chronomodel_events(path_events))
 
 ## Phases
 path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
-(chrono_phases <- read_chronomodel(path_phases, phases = TRUE))
+(chrono_phases <- read_chronomodel_phases(path_phases))
 }
 }
 \references{

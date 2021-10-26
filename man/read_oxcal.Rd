@@ -64,7 +64,7 @@ Other read methods:
 \code{\link{coda}},
 \code{\link{coerce}()},
 \code{\link{read_bcal}()},
-\code{\link{read_chronomodel}()}
+\code{\link{read_chronomodel}}
 }
 \author{
 T. S. Dye, N. Frerebeau
