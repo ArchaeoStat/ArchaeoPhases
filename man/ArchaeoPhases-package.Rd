@@ -5,7 +5,7 @@
 \alias{ArchaeoPhases-package}
 \alias{_PACKAGE}
 \alias{ArchaeoPhases}
-\title{ArchaeoPhases: Post-processing of Markov Chain Monte Carlo Simulations for
+\title{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for
     Chronological Modelling}
 \description{
 Statistical analysis of archaeological dates and groups of

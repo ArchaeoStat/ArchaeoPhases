@@ -71,17 +71,21 @@ path <- "chronomodel/output/"
 
 ## Events
 path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
-(chrono_events <- read_chronomodel(path_events, phases = FALSE))
+(chrono_events <- read_chronomodel_events(path_events))
 
 path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
-(chrono_phases <- read_chronomodel(path_phases, phases = TRUE))
+(chrono_phases <- read_chronomodel_phases(path_phases))
 ```
 
 **ArchaeoPhases** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting information. This makes it easy to customize diagrams (e.g. using themes and scales).
 
 ### Analysis of a series of dates
 
-```{r events-plot, fig.height=5}
+```{r events-plot, fig.width=5, fig.align='default', fig.height=5, out.width='50%', fig.show='hold'}
+## Plot the first event
+plot(chrono_events, select = 1, interval = "hpdi")
+
+## Plot all events
 plot(chrono_events)
 ```
 

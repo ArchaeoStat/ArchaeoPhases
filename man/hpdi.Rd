@@ -3,26 +3,32 @@
 \docType{methods}
 \name{hpdi}
 \alias{hpdi}
-\alias{interval_hpd}
-\alias{interval_hpd-method}
-\alias{interval_hpd,MCMC-method}
+\alias{hpdi-method}
+\alias{hpdi,numeric-method}
+\alias{hpdi,MCMC-method}
 \title{Bayesian HPD Regions}
 \usage{
-interval_hpd(object, ...)
+hpdi(object, ...)
 
-\S4method{interval_hpd}{MCMC}(object, level = 0.95, ...)
+\S4method{hpdi}{numeric}(object, level = 0.95, BP = FALSE, ...)
+
+\S4method{hpdi}{MCMC}(object, level = 0.95, ...)
 }
 \arguments{
 \item{object}{A \code{\link{numeric}} vector or an \code{\linkS4class{MCMC}} object containing the
 output of the MCMC algorithm for the parameter.}
 
-\item{...}{Extra arguments to be passed to \code{\link[hdrcde:hdr]{hdrcde::hdr()}}.}
+\item{...}{Extra arguments to be passed to \code{\link[stats:density]{stats::density()}}.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
+
+\item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
+BC/AD? This should not be \code{TRUE} unless you change the default settings in
+'OxCal' or 'ChronoModel'.}
 }
 \value{
-A \code{\link{list}} of two columns \code{numeric} \code{\link{matrix}} giving the lower and upper
-boundaries of the HPD interval.
+A \code{\link{list}} of \code{numeric} \code{\link{matrix}} giving the lower and upper boundaries of
+the HPD interval and associated probabilities.
 }
 \description{
 Bayesian HPD Regions
@@ -32,21 +38,24 @@ Bayesian HPD Regions
 eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
 
-## Credible interval
-interval_credible(eve, level = 0.95)
+## CE
+credible(eve, level = 0.95) # Credible interval
+hpdi(eve, level = 0.95) # HPD interval
 
-## HPD regions
-interval_hpd(eve, level = 0.95)
+## BP
+eve_BP <- CE_to_BP(eve)
+credible(eve_BP, level = 0.95) # Credible interval
+hpdi(eve_BP, level = 0.95) # HPD interval
 }
 \references{
 Hyndman, R. J. (1996). Computing and graphing highest density regions.
 \emph{American Statistician}, 50: 120-126. \doi{10.2307/2684423}.
 }
 \seealso{
-\code{\link[hdrcde:hdr]{hdrcde::hdr()}}
+\code{\link[stats:density]{stats::density()}}
 
 Other statistics: 
-\code{\link{ci}},
+\code{\link{credible}()},
 \code{\link{sensitivity}()},
 \code{\link{summary}()}
 }

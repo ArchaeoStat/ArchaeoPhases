@@ -53,13 +53,18 @@ gap <- function(epsilon, p1, p2, level) {
   )
 }
 
-#' Scales
+#' Reorder an MCMC Object
 #'
-#' @param x A [`numeric`] vector.
+#' @param x An [`MCMC-class`] object.
+#' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
+#' @return A [`matrix`].
+#' @author N. Frerebeau
 #' @keywords internal
 #' @noRd
-scale_01 <- function(x) {
-  (x - min(x)) / (max(x) - min(x))
+reorder <- function(x, decreasing = TRUE) {
+  i <- order(apply(X = x, MARGIN = 2, FUN = stats::median),
+             decreasing = decreasing)
+  x[, i, drop = FALSE]
 }
 
 #' Calculate hash

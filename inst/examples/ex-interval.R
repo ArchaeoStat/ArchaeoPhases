@@ -2,8 +2,11 @@
 eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
 
-## Credible interval
-interval_credible(eve, level = 0.95)
+## CE
+credible(eve, level = 0.95) # Credible interval
+hpdi(eve, level = 0.95) # HPD interval
 
-## HPD regions
-interval_hpd(eve, level = 0.95)
+## BP
+eve_BP <- CE_to_BP(eve)
+credible(eve_BP, level = 0.95) # Credible interval
+hpdi(eve_BP, level = 0.95) # HPD interval

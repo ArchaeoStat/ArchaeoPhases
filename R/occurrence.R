@@ -23,18 +23,14 @@ setMethod(
     ## Compute interval
     fun <- switch (
       interval,
-      ci = interval_credible,
-      hpdi = interval_hpd,
+      ci = credible,
+      hpdi = hpdi,
       stop(sprintf("There is no such interval: %s.", interval), call. = FALSE)
     )
     inter <- fun(sorted, level = level)
 
     ## Bind results in case of multiple intervals
-    if (interval == "hpdi") {
-      n <- vapply(X = inter, FUN = nrow, FUN.VALUE = integer(1))
-      ord <- rep(ord, times = n)
-      inter <- do.call(rbind, inter)
-    }
+    inter <- bind_intervals(inter)
 
     .OccurrenceEvents(
       events = ord,

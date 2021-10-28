@@ -1,6 +1,6 @@
 Type: Package
 Package: ArchaeoPhases
-Title: Post-processing of Markov Chain Monte Carlo Simulations for
+Title: Post-Processing of Markov Chain Monte Carlo Simulations for
     Chronological Modelling
 Version: 1.5.0.9000
 Authors@R: 
@@ -41,7 +41,7 @@ Imports:
     arkhe (>= 0.4.0),
     coda,
     ggplot2,
-    hdrcde,
+    ggridges,
     methods,
     rlang,
     stats,
@@ -52,9 +52,9 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
-Additional_repositories: https://tesselle.r-universe.dev
 VignetteBuilder: 
     knitr
+Additional_repositories: https://tesselle.r-universe.dev
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

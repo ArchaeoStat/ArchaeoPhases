@@ -17,18 +17,18 @@ multiplot(...)
 \S4method{autoplot}{MCMC}(
   object,
   ...,
+  select = NULL,
   density = TRUE,
-  n = 512,
-  interval = c("ci", "hpdi"),
+  interval = NULL,
   level = 0.95,
   decreasing = TRUE
 )
 
 \S4method{plot}{MCMC,missing}(
   x,
+  select = NULL,
   density = TRUE,
-  n = 512,
-  interval = c("ci", "hpdi"),
+  interval = NULL,
   level = 0.95,
   decreasing = TRUE,
   ...
@@ -38,7 +38,6 @@ multiplot(...)
   object,
   ...,
   level = 0.95,
-  n = 512,
   decreasing = TRUE,
   succession = is_ordered(object),
   facet = TRUE
@@ -47,7 +46,6 @@ multiplot(...)
 \S4method{plot}{PhasesMCMC,missing}(
   x,
   level = 0.95,
-  n = 512,
   decreasing = TRUE,
   succession = is_ordered(x),
   facet = TRUE,
@@ -59,16 +57,15 @@ multiplot(...)
 
 \item{object, x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
 
+\item{select}{An \code{\link{integer}} vector specifying the index of the MCMC samples
+to be drawn.}
+
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 
-\item{n}{An \code{\link{integer}} specifying the number of equally spaced points at
-which the density is to be estimated (should be a power of two). Only used
-if \code{density} is \code{TRUE}.}
-
 \item{interval}{A \code{\link{character}} string specifying the confidence interval to
-be drawn. It must be one of "\code{ci}" (credible interval; the default)
-or "\code{hpdi}" (highest posterior density interval). Any unambiguous substring
-can be given.}
+be drawn. It must be one of "\code{credible}" (credible interval) or "\code{hpdi}"
+(highest posterior density interval). Any unambiguous substring can be
+given. If \code{NULL} (the default) no interval is computed.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
@@ -111,7 +108,7 @@ eve_CE <- BP_to_CE(eve_BP)
 summary(eve_CE)
 
 ## Plot events
-plot(eve_CE, interval = "ci", level = 0.68)
+plot(eve_CE, interval = "credible", level = 0.68)
 plot(eve_BP, interval = "hpdi", level = 0.68)
 
 ## Compute phases

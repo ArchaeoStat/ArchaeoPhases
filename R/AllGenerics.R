@@ -363,6 +363,9 @@ setGeneric(
 #' @param object A [`numeric`] vector or an [`MCMC-class`] object containing the
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param BP A [`logical`] scalar: should the data be converted from BP to
+#'  BC/AD? This should not be `TRUE` unless you change the default settings in
+#'  'OxCal' or 'ChronoModel'.
 #' @param ... Currently not used.
 #' @details
 #'  A \eqn{(100 \times level)}{(100 * level)}\% credible interval is an interval
@@ -375,21 +378,17 @@ setGeneric(
 #'  For instance, the 95% credible interval is the central portion of the
 #'  posterior distribution that contains 95% of the values.
 #' @return
-#'  A two columns `numeric` [`matrix`] giving the lower and upper boundaries of
-#'  the credible interval.
+#'  A [`list`] of `numeric` [`matrix`] giving the lower and upper boundaries of
+#'  the credible interval and associated probabilities.
 #' @example inst/examples/ex-interval.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family statistics
 #' @docType methods
-#' @name ci
-#' @rdname ci
-NULL
-
-#' @rdname ci
-#' @aliases interval_credible-method
+#' @rdname credible
+#' @aliases credible-method
 setGeneric(
-  name = "interval_credible",
-  def = function(object, ...) standardGeneric("interval_credible")
+  name = "credible",
+  def = function(object, ...) standardGeneric("credible")
 )
 
 ## HPDI ------------------------------------------------------------------------
@@ -398,27 +397,26 @@ setGeneric(
 #' @param object A [`numeric`] vector or an [`MCMC-class`] object containing the
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param ... Extra arguments to be passed to [hdrcde::hdr()].
+#' @param BP A [`logical`] scalar: should the data be converted from BP to
+#'  BC/AD? This should not be `TRUE` unless you change the default settings in
+#'  'OxCal' or 'ChronoModel'.
+#' @param ... Extra arguments to be passed to [stats::density()].
 #' @return
-#'  A [`list`] of two columns `numeric` [`matrix`] giving the lower and upper
-#'  boundaries of the HPD interval.
+#'  A [`list`] of `numeric` [`matrix`] giving the lower and upper boundaries of
+#'  the HPD interval and associated probabilities.
 #' @references
 #'  Hyndman, R. J. (1996). Computing and graphing highest density regions.
 #'  *American Statistician*, 50: 120-126. \doi{10.2307/2684423}.
 #' @example inst/examples/ex-interval.R
-#' @seealso [hdrcde::hdr()]
+#' @seealso [stats::density()]
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family statistics
 #' @docType methods
-#' @name hpdi
 #' @rdname hpdi
-NULL
-
-#' @rdname hpdi
-#' @aliases interval_hpd-method
+#' @aliases hpdi-method
 setGeneric(
-  name = "interval_hpd",
-  def = function(object, ...) standardGeneric("interval_hpd")
+  name = "hpdi",
+  def = function(object, ...) standardGeneric("hpdi")
 )
 
 # Dates ========================================================================
@@ -627,14 +625,13 @@ setGeneric(
 #' Plot
 #'
 #' @param object,x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
+#' @param select An [`integer`] vector specifying the index of the MCMC samples
+#'  to be drawn.
 #' @param density A [`logical`] scalar: should estimated density be plotted?
-#' @param n An [`integer`] specifying the number of equally spaced points at
-#'  which the density is to be estimated (should be a power of two). Only used
-#'  if `density` is `TRUE`.
 #' @param interval A [`character`] string specifying the confidence interval to
-#'  be drawn. It must be one of "`ci`" (credible interval; the default)
-#'  or "`hpdi`" (highest posterior density interval). Any unambiguous substring
-#'  can be given.
+#'  be drawn. It must be one of "`credible`" (credible interval) or "`hpdi`"
+#'  (highest posterior density interval). Any unambiguous substring can be
+#'  given. If `NULL` (the default) no interval is computed.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
 #' @param succession A [`logical`] scalar: should time ranges be plotted instead

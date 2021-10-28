@@ -50,7 +50,7 @@ eve_CE <- BP_to_CE(eve_BP)
 summary(eve_CE)
 
 ## Plot events
-plot(eve_CE, interval = "ci", level = 0.68)
+plot(eve_CE, interval = "credible", level = 0.68)
 plot(eve_BP, interval = "hpdi", level = 0.68)
 
 ## Compute phases
@@ -63,8 +63,8 @@ plot(pha, succession = TRUE)
 }
 \seealso{
 Other statistics: 
-\code{\link{ci}},
-\code{\link{hpdi}},
+\code{\link{credible}()},
+\code{\link{hpdi}()},
 \code{\link{sensitivity}()}
 }
 \author{

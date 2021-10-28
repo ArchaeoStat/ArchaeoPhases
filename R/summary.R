@@ -55,23 +55,48 @@ setMethod(
   }
 )
 
+#' Marginal Statistics
+#'
 #' @param x A [`numeric`] vector.
+#' @param mean A [`logical`] scalar: should the mean of `x` be computed?
+#' @param sd A [`logical`] scalar: should the standard deviation of `x` be
+#'  computed?
+#' @param map A [`logical`] scalar: should the mode of `x` be computed?
+#' @param quantiles A [`logical`] scalar: should the quantiles of `x` be
+#'  computed?
+#' @param probs A [`numeric`] vector specifying the probabilities with values in
+#'  \eqn{[0,1]} (see [stats::quantile()]).
+#' @param credible A [`logical`] scalar: should the credible interval of `x` be
+#'  computed?
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @return A [`numeric`] vector.
 #' @keywords internal
 #' @noRd
-stats_marginal <- function(x, level = 0.95, BP = FALSE) {
+stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
+                           quantiles = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1),
+                           credible = TRUE, level = 0.95, BP = FALSE) {
+  ## Defaults
+  moy <- mod <- quant <- ec <- ci <- NA_real_
+
   ## Position
-  moy <- mean(x)
-  quant <- stats::quantile(x, c(0, 0.25, 0.5, 0.75, 1), names = FALSE)
-  names(quant) <- c("min", "q1", "median", "q3", "max")
-  ## Dispersion
-  ec <- stats::sd(x)
-  ci <- interval_credible(x, level = level)
-  ## Reverse boundaries if BP scale
-  if (BP) {
-    ci <- ci[c(2, 1)]
+  if (mean) moy <- mean(x)
+  if (map) mod <- map(x)
+  if (quantiles) {
+    quant <- stats::quantile(x, probs = probs, names = FALSE)
+    names(quant) <- c("min", "q1", "median", "q3", "max")
   }
-  names(ci) <- c("CI_lower", "CI_upper")
+
+  ## Dispersion
+  if (sd) ec <- stats::sd(x)
+  if (credible) ci <- credible(x, level = level, BP = BP)[, -3]
+
   ## Results
-  tmp <- c(mean = moy, sd = ec, quant, ci)
+  tmp <- c(mad = mod, mean = moy, sd = ec, quant, ci)
+  tmp <- Filter(Negate(is.na), tmp)
   round(tmp, digits = getOption("ArchaeoPhases.precision"))
+}
+
+map <- function(x, ...) {
+  d <- stats::density(x, ...)
+  d$x[[which.max(d$y)]]
 }

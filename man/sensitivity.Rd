@@ -42,8 +42,8 @@ sensitivity(eve, eve)
 \code{\link[=summary]{summary()}}
 
 Other statistics: 
-\code{\link{ci}},
-\code{\link{hpdi}},
+\code{\link{credible}()},
+\code{\link{hpdi}()},
 \code{\link{summary}()}
 }
 \author{

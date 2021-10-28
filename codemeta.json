@@ -116,6 +116,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "arkhe",
+      "name": "arkhe",
+      "version": ">= 0.4.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=arkhe"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "coda",
       "name": "coda",
       "provider": {
@@ -125,18 +138,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=coda"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "digest",
-      "name": "digest",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=digest"
     },
     {
       "@type": "SoftwareApplication",
@@ -152,15 +153,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "hdrcde",
-      "name": "hdrcde",
+      "identifier": "ggridges",
+      "name": "ggridges",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=hdrcde"
+      "sameAs": "https://CRAN.R-project.org/package=ggridges"
     },
     {
       "@type": "SoftwareApplication",
@@ -186,6 +187,11 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "tools",
+      "name": "tools"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     }
@@ -193,7 +199,7 @@
   "codeRepository": "https://github.com/nfrerebeau/ArchaeoPhases",
   "releaseNotes": "https://github.com/nfrerebeau/ArchaeoPhases/blob/master/NEWS.md",
   "readme": "https://github.com/nfrerebeau/ArchaeoPhases/blob/master/README.md",
-  "fileSize": "1030.269KB",
+  "fileSize": "1055.089KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": [
     "r-package",

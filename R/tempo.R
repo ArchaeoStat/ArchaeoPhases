@@ -68,10 +68,10 @@ setMethod(
     }
     else {
       ## Credible intervals
-      qu <- apply(X = distr, MARGIN = 2, FUN = credible, level = level)
-      qu <- t(qu)
+      qu <- apply(X = distr, MARGIN = 2, FUN = credible, level = level,
+                  simplify = FALSE)
+      qu <- do.call(rbind, qu)
     }
-    colnames(qu) <- c("lower", "upper")
 
     .CumulativeEvents(
       year = data_seq,

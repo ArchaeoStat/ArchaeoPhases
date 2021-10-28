@@ -90,12 +90,13 @@ path <- "chronomodel/output/"
 
 ## Events
 path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
-(chrono_events <- read_chronomodel(path_events, phases = FALSE))
+(chrono_events <- read_chronomodel_events(path_events))
 #> <EventsMCMC>
 #> - Number of events: 16
 #> - Calendar: CE
+
 path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
-(chrono_phases <- read_chronomodel(path_phases, phases = TRUE))
+(chrono_phases <- read_chronomodel_phases(path_phases))
 #> <PhasesMCMC>
 #> - Modelled phases: EPI UP Ahmarian IUP
 #> - Calendar: CE
@@ -109,10 +110,15 @@ and scales).
 ### Analysis of a series of dates
 
 ``` r
+## Plot the first event
+plot(chrono_events, select = 1, interval = "hpdi")
+
+## Plot all events
 plot(chrono_events)
+#> Picking joint bandwidth of 49.2
 ```
 
-<img src="man/figures/README-events-plot-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-events-plot-1.png" width="50%" /><img src="man/figures/README-events-plot-2.png" width="50%" />
 
 ``` r
 ## Tempo plot
