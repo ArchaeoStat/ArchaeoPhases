@@ -9,10 +9,13 @@
 #'
 #' @section Package options:
 #'  `ArchaeoPhases` uses the following [options()] to configure behaviour:
+#'  * `ArchaeoPhases.grid`: a [`numeric`] value specifying the number of equally
+#'    spaced points at which densities are to be estimated (defaults to
+#'    \eqn{512}). Should be a power of \eqn{2}.
 #'  * `ArchaeoPhases.precision`: an [`integer`] indicating the number of decimal
 #'    places (defaults to \eqn{0}).
 #'  * `ArchaeoPhases.progress`: a [`logical`] scalar specifying if progress bars
-#'    should be displayed.
+#'    should be displayed (defaults to [interactive()]).
 #'
 #' @author
 #'  **Full list of authors and contributors** (alphabetic order)

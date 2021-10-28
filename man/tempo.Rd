@@ -19,7 +19,7 @@ tempo(object, ...)
   gauss = FALSE,
   from = min(object),
   to = max(object),
-  step = (to - from)/(250 - 1)
+  step = getOption("ArchaeoPhases.grid")
 )
 
 \S4method{autoplot}{CumulativeEvents}(object, ..., ci = TRUE)

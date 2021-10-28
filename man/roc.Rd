@@ -13,7 +13,12 @@
 \usage{
 roc(object, ...)
 
-\S4method{roc}{MCMC}(object, from = min(object), to = max(object), step = (to - from)/(250 - 1))
+\S4method{roc}{MCMC}(
+  object,
+  from = min(object),
+  to = max(object),
+  step = getOption("ArchaeoPhases.grid")
+)
 
 \S4method{roc}{CumulativeEvents}(object)
 

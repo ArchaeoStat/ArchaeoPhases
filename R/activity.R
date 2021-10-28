@@ -9,7 +9,7 @@ setMethod(
   f = "activity",
   signature = "MCMC",
   definition = function(object, from = min(object), to = max(object),
-                        step = (to - from) / (250 - 1)) {
+                        step = getOption("ArchaeoPhases.grid")) {
     ## Tempo
     tmp <- tempo(object, level = 0.95, count = FALSE, gauss = FALSE,
                  from = from, to = to, step = step)

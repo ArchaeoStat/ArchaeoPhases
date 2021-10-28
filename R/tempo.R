@@ -28,11 +28,11 @@ setMethod(
   signature = "MCMC",
   definition = function(object, level = 0.95, count = TRUE, gauss = FALSE,
                         from = min(object), to = max(object),
-                        step = (to - from) / (250 - 1)) {
+                        step = getOption("ArchaeoPhases.grid")) {
     n_events <- ncol(object)
 
     ## Empirical cumulative distribution
-    data_seq <- seq(from = from, to = to, by = step)
+    data_seq <- seq(from = from, to = to, length.out = step)
     ecd_fun <- apply(X = object, MARGIN = 1, FUN = ecdf2, simplify = FALSE)
     ecd <- lapply(X = ecd_fun, FUN = function(f, x) f(x), x = data_seq)
 
@@ -65,8 +65,7 @@ setMethod(
       alpha <- 1 - level
       z <- stats::qnorm(1 - alpha / 2)
       qu <- cbind(moy - z * ec, moy + z * ec)
-    }
-    else {
+    } else {
       ## Credible intervals
       qu <- apply(X = distr, MARGIN = 2, FUN = credible, level = level,
                   simplify = FALSE)

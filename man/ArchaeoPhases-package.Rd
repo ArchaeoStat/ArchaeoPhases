@@ -32,10 +32,13 @@ Statistical analysis of archaeological dates and groups of
 
 \code{ArchaeoPhases} uses the following \code{\link[=options]{options()}} to configure behaviour:
 \itemize{
+\item \code{ArchaeoPhases.grid}: a \code{\link{numeric}} value specifying the number of equally
+spaced points at which densities are to be estimated (defaults to
+\eqn{512}). Should be a power of \eqn{2}.
 \item \code{ArchaeoPhases.precision}: an \code{\link{integer}} indicating the number of decimal
 places (defaults to \eqn{0}).
 \item \code{ArchaeoPhases.progress}: a \code{\link{logical}} scalar specifying if progress bars
-should be displayed.
+should be displayed (defaults to \code{\link[=interactive]{interactive()}}).
 }
 }
 

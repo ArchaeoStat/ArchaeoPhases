@@ -17,7 +17,7 @@ activity(object, ...)
   object,
   from = min(object),
   to = max(object),
-  step = (to - from)/(250 - 1)
+  step = getOption("ArchaeoPhases.grid")
 )
 
 \S4method{activity}{CumulativeEvents}(object)

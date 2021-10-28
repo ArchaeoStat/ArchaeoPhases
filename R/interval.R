@@ -58,7 +58,7 @@ setMethod(
   signature = "numeric",
   definition = function(object, level = 0.95, BP = FALSE, ...) {
     ## Compute density
-    d <- stats::density(object, ...)
+    d <- stats::density(object, ..., n = getOption("ArchaeoPhases.grid"))
     x <- d$x
     y <- d$y / sum(d$y)
 
@@ -92,9 +92,8 @@ setMethod(
   f = "hpdi",
   signature = "MCMC",
   definition = function(object, level = 0.95, ...) {
-    hpd <- apply(X = object, MARGIN = 2, FUN = hpdi,
-                 level = level, BP = is_BP(object), n = 1024, ...,
-                 simplify = FALSE)
+    hpd <- apply(X = object, MARGIN = 2, FUN = hpdi, level = level,
+                 BP = is_BP(object), ..., simplify = FALSE)
 
     attr(hpd, "calendar") <- get_calendar(object)
     hpd

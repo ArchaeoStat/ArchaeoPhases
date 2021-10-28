@@ -70,7 +70,7 @@ autoplot.MCMC <- function(object, ..., select = NULL, density = TRUE,
     } else {
       data <- as.vector(data)
       ## Compute density
-      d <- stats::density(data)
+      d <- stats::density(data, n = getOption("ArchaeoPhases.grid"))
       dens <- data.frame(
         x = d$x,
         y = d$y
@@ -148,7 +148,7 @@ autoplot.PhasesMCMC <- function(object, ..., level = 0.95, decreasing = TRUE,
                                  decreasing = decreasing)
   } else {
     gg_phases <- plot_density(object, level = level, decreasing = decreasing,
-                              n = 512, ..., facet = facet)
+                              ..., facet = facet)
   }
 
   ## ggplot2
@@ -264,12 +264,13 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
 #' @param x A [`PhasesMCMC`] object.
 #' @return A \pkg{ggplot2} layer.
 #' @noRd
-plot_density <- function(x, level = 0.95, decreasing = TRUE, n = 512, ...,
-                         facet = TRUE, color = "black", size = 2, alpha = 0.5) {
+plot_density <- function(x, level = 0.95, decreasing = TRUE, ..., facet = TRUE,
+                         color = "black", size = 2, alpha = 0.5) {
   ## Get phases
   pha <- as.list(x)
 
   ## Density
+  n <- getOption("ArchaeoPhases.grid")
   dens <- lapply(
     X = pha,
     FUN = function(x, n, ...) {
