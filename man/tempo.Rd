@@ -15,16 +15,16 @@ tempo(object, ...)
 \S4method{tempo}{MCMC}(
   object,
   level = 0.95,
-  count = TRUE,
-  gauss = FALSE,
+  count = FALSE,
+  credible = TRUE,
+  gauss = TRUE,
   from = min(object),
-  to = max(object),
-  step = getOption("ArchaeoPhases.grid")
+  to = max(object)
 )
 
-\S4method{autoplot}{CumulativeEvents}(object, ..., ci = TRUE)
+\S4method{autoplot}{CumulativeEvents}(object, ..., credible = TRUE, gauss = TRUE)
 
-\S4method{plot}{CumulativeEvents,missing}(x, ci = TRUE, ...)
+\S4method{plot}{CumulativeEvents,missing}(x, credible = TRUE, gauss = TRUE, ...)
 
 \S4method{multiplot}{CumulativeEvents}(...)
 }
@@ -36,21 +36,19 @@ tempo(object, ...)
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{count}{A \code{\link{logical}} scalar: should the counting process be a number
-(the default) or a probability?}
+or a probability (the default)?}
+
+\item{credible}{A \code{\link{logical}} scalar: should the credible interval be
+computed/displayed?}
 
 \item{gauss}{A \code{\link{logical}} scalar: should the Gaussian approximation of the
-credible interval be used?}
+credible interval be computed/displayed?}
 
 \item{from}{A length-one \code{\link{numeric}} vector giving the earliest date to
 estimate for (in years).}
 
 \item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
 for (in years).}
-
-\item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
-distribution is to be estimated (in years).}
-
-\item{ci}{A \code{\link{logical}} scalar: should the credible interval be displayed?}
 
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
 }
@@ -81,16 +79,13 @@ eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
-tmp <- tempo(eve, count = FALSE)
-plot(tmp)
+tmp <- tempo(eve)
+plot(tmp, credible = TRUE, gauss = FALSE)
+plot(tmp, credible = FALSE, gauss = TRUE)
 
 ## Activity plot
 act <- activity(tmp)
 plot(act)
-
-## Rate of change
-chg <- roc(act)
-plot(chg)
 }
 \references{
 Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social

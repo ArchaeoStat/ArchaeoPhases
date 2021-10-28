@@ -131,9 +131,8 @@ NULL
   slots = c(
     year = "numeric",
     estimate = "numeric",
-    lower = "numeric",
-    upper = "numeric",
-    gauss = "logical",
+    credible = "matrix",
+    gauss = "matrix",
     level = "numeric",
     counts = "logical",
     events = "integer",

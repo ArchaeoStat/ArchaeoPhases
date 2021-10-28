@@ -26,13 +26,14 @@ ecdf2 <- function(x) {
 setMethod(
   f = "tempo",
   signature = "MCMC",
-  definition = function(object, level = 0.95, count = TRUE, gauss = FALSE,
-                        from = min(object), to = max(object),
-                        step = getOption("ArchaeoPhases.grid")) {
+  definition = function(object, level = 0.95, count = FALSE,
+                        credible = TRUE, gauss = TRUE,
+                        from = min(object), to = max(object)) {
+    n_grid <- getOption("ArchaeoPhases.grid")
     n_events <- ncol(object)
 
     ## Empirical cumulative distribution
-    data_seq <- seq(from = from, to = to, length.out = step)
+    data_seq <- seq(from = from, to = to, length.out = n_grid)
     ecd_fun <- apply(X = object, MARGIN = 1, FUN = ecdf2, simplify = FALSE)
     ecd <- lapply(X = ecd_fun, FUN = function(f, x) f(x), x = data_seq)
 
@@ -57,27 +58,28 @@ setMethod(
     moy <- colMeans(distr)
 
     ## Credible interval
-    if (gauss == TRUE) {
+    qu <- ga <- matrix(data = 0, nrow = 0, ncol = 2)
+    if (credible) {
+      qu <- apply(X = distr, MARGIN = 2, FUN = credible,
+                  level = level, simplify = FALSE)
+      qu <- do.call(rbind, qu)
+    }
+    if (gauss) {
       ## Standard deviation
       ec <- apply(X = distr, MARGIN = 2, FUN = stats::sd)
 
       ## Gaussian credible intervals
       alpha <- 1 - level
       z <- stats::qnorm(1 - alpha / 2)
-      qu <- cbind(moy - z * ec, moy + z * ec)
-    } else {
-      ## Credible intervals
-      qu <- apply(X = distr, MARGIN = 2, FUN = credible, level = level,
-                  simplify = FALSE)
-      qu <- do.call(rbind, qu)
+      ga <- cbind(lower = moy - z * ec, upper = moy + z * ec)
+      ga[ga <= 0] <- 0
     }
 
     .CumulativeEvents(
       year = data_seq,
       estimate = moy,
-      lower = qu[, 1],
-      upper = qu[, 2],
-      gauss = gauss,
+      credible = qu[, -3],
+      gauss = ga,
       level = level,
       counts = count,
       events = n_events,
@@ -89,28 +91,46 @@ setMethod(
 
 #' @export
 #' @method autoplot CumulativeEvents
-autoplot.CumulativeEvents <- function(object, ..., ci = TRUE) {
+autoplot.CumulativeEvents <- function(object, ..., credible = TRUE,
+                                      gauss = TRUE) {
   ## Calendar scale
   gg_x_scale <- scale_calendar(get_calendar(object))
 
+  ## Intervals
+  credible <- credible & nrow(object@credible) > 0
+  gauss <- gauss & nrow(object@gauss) > 0
+
   ## Get data
-  data <- as.data.frame(object)
-  if (ci) {
-    tempo_ci <- data.frame(
-      year = c(data$year, data$year, rev(data$year)),
-      ci = c(data$estimate, data$lower, rev(data$upper)),
-      Legend = c(rep("Bayes estimate", nrow(data)),
-                 rep("Credible interval", nrow(data) * 2))
+  tmp <- data <- as.data.frame(object)
+  tmp$ci <- tmp$estimate
+  tmp$Legend <- rep("Bayes estimate", nrow(data))
+  aes_tmp <- ggplot2::aes(x = .data$year, y = .data$estimate)
+
+  if (credible) {
+    tmp <- data.frame(
+      year = c(tmp$year, data$year, rev(data$year)),
+      ci = c(tmp$ci, data$credible_lower, rev(data$credible_upper)),
+      Legend = c(tmp$Legend, rep("Credible interval", nrow(data) * 2))
     )
-    tempo_aes <- ggplot2::aes(x = .data$year, y = .data$ci,
-                              colour = .data$Legend, linetype = .data$Legend)
-  } else {
-    tempo_ci <- data
-    tempo_aes <- ggplot2::aes(x = .data$year, y = .data$estimate)
+  }
+  if (gauss) {
+    tmp <- data.frame(
+      year = c(tmp$year, data$year, rev(data$year)),
+      ci = c(tmp$ci, data$gauss_lower, rev(data$gauss_upper)),
+      Legend = c(tmp$Legend, rep("Gauss interval", nrow(data) * 2))
+    )
+  }
+  if (credible | gauss) {
+    aes_tmp <- ggplot2::aes(
+      x = .data$year,
+      y = .data$ci,
+      colour = .data$Legend,
+      linetype = .data$Legend
+    )
   }
 
-  ggplot2::ggplot(data = tempo_ci) +
-    tempo_aes +
+  ggplot2::ggplot(data = tmp) +
+    aes_tmp +
     ggplot2::geom_path() +
     gg_x_scale +
     ggplot2::scale_y_continuous(name = "Cumulative events")
@@ -123,8 +143,8 @@ setMethod("autoplot", "CumulativeEvents", autoplot.CumulativeEvents)
 
 #' @export
 #' @method plot CumulativeEvents
-plot.CumulativeEvents <- function(x, ci = TRUE, ...) {
-  gg <- autoplot(object = x, ..., ci = ci) +
+plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, ...) {
+  gg <- autoplot(object = x, ..., credible = credible, gauss = gauss) +
     ggplot2::theme_bw() +
     ggplot2::theme(legend.position = "bottom")
   print(gg)

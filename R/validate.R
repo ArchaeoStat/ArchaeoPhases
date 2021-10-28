@@ -54,8 +54,7 @@ setValidity(
     # Get data
     year <- object@year
     estimate <- object@estimate
-    lower <- object@lower
-    upper <- object@upper
+    credible <- object@credible
     gauss <- object@gauss
     level <- object@level
     counts <- object@counts
@@ -63,12 +62,12 @@ setValidity(
     calendar <- object@calendar
     hash <- object@hash
     n <- length(year)
+    g <- getOption("ArchaeoPhases.grid")
 
     cnd <- list(
       arkhe::validate(arkhe::assert_length(estimate, n)),
-      arkhe::validate(arkhe::assert_length(lower, n)),
-      arkhe::validate(arkhe::assert_length(upper, n)),
-      arkhe::validate(arkhe::assert_length(gauss, 1)),
+      # arkhe::validate(arkhe::assert_dimensions(credible, c(g, 2))),
+      # arkhe::validate(arkhe::assert_dimensions(gauss, c(g, 2))),
       arkhe::validate(arkhe::assert_length(level, 1)),
       arkhe::validate(arkhe::assert_length(counts, 1)),
       arkhe::validate(arkhe::assert_length(events, 1)),

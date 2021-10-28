@@ -3,13 +3,10 @@ eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
-tmp <- tempo(eve, count = FALSE)
-plot(tmp)
+tmp <- tempo(eve)
+plot(tmp, credible = TRUE, gauss = FALSE)
+plot(tmp, credible = FALSE, gauss = TRUE)
 
 ## Activity plot
 act <- activity(tmp)
 plot(act)
-
-## Rate of change
-chg <- roc(act)
-plot(chg)

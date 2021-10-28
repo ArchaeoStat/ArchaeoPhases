@@ -13,12 +13,7 @@
 \usage{
 activity(object, ...)
 
-\S4method{activity}{MCMC}(
-  object,
-  from = min(object),
-  to = max(object),
-  step = getOption("ArchaeoPhases.grid")
-)
+\S4method{activity}{MCMC}(object, from = min(object), to = max(object))
 
 \S4method{activity}{CumulativeEvents}(object)
 
@@ -38,9 +33,6 @@ estimate for (in years).}
 
 \item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
 for (in years).}
-
-\item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
-distribution is to be estimated (in years).}
 
 \item{fill}{A \code{\link{character}} string specifying the colour to be used to fill
 the area under the curve.}
@@ -64,16 +56,13 @@ eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
-tmp <- tempo(eve, count = FALSE)
-plot(tmp)
+tmp <- tempo(eve)
+plot(tmp, credible = TRUE, gauss = FALSE)
+plot(tmp, credible = FALSE, gauss = TRUE)
 
 ## Activity plot
 act <- activity(tmp)
 plot(act)
-
-## Rate of change
-chg <- roc(act)
-plot(chg)
 }
 \references{
 Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social

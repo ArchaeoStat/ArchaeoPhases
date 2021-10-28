@@ -13,12 +13,7 @@
 \usage{
 roc(object, ...)
 
-\S4method{roc}{MCMC}(
-  object,
-  from = min(object),
-  to = max(object),
-  step = getOption("ArchaeoPhases.grid")
-)
+\S4method{roc}{MCMC}(object, from = min(object), to = max(object))
 
 \S4method{roc}{CumulativeEvents}(object)
 
@@ -39,9 +34,6 @@ estimate for (in years).}
 
 \item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
 for (in years).}
-
-\item{step}{An \code{\link{integer}} specifying the increment at which the cumulative
-distribution is to be estimated (in years).}
 
 \item{colour}{A \code{\link{character}} string specifying the colour of the segments.}
 
@@ -64,16 +56,13 @@ eve <- as_mcmc(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
-tmp <- tempo(eve, count = FALSE)
-plot(tmp)
+tmp <- tempo(eve)
+plot(tmp, credible = TRUE, gauss = FALSE)
+plot(tmp, credible = FALSE, gauss = TRUE)
 
 ## Activity plot
 act <- activity(tmp)
 plot(act)
-
-## Rate of change
-chg <- roc(act)
-plot(chg)
 }
 \seealso{
 Other event tools: 

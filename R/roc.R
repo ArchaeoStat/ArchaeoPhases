@@ -8,10 +8,9 @@ NULL
 setMethod(
   f = "roc",
   signature = "MCMC",
-  definition = function(object, from = min(object), to = max(object),
-                        step = getOption("ArchaeoPhases.grid")) {
+  definition = function(object, from = min(object), to = max(object)) {
     ## Activity
-    tmp <- activity(object, from = from, to = to, step = step)
+    tmp <- activity(object, from = from, to = to)
     ## ROC
     methods::callGeneric(object = tmp)
   }

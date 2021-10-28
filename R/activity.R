@@ -8,11 +8,10 @@ NULL
 setMethod(
   f = "activity",
   signature = "MCMC",
-  definition = function(object, from = min(object), to = max(object),
-                        step = getOption("ArchaeoPhases.grid")) {
+  definition = function(object, from = min(object), to = max(object)) {
     ## Tempo
-    tmp <- tempo(object, level = 0.95, count = FALSE, gauss = FALSE,
-                 from = from, to = to, step = step)
+    tmp <- tempo(object, level = 0.95, count = FALSE, credible = FALSE,
+                 gauss = FALSE, from = from, to = to)
     ## Activity
     methods::callGeneric(object = tmp)
   }

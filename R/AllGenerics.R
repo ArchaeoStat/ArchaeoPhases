@@ -192,16 +192,15 @@ setGeneric(
 #' @param x A [`CumulativeEvents-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number
-#'  (the default) or a probability?
+#'  or a probability (the default)?
+#' @param credible A [`logical`] scalar: should the credible interval be
+#'  computed/displayed?
 #' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
-#'  credible interval be used?
+#'  credible interval be computed/displayed?
 #' @param from A length-one [`numeric`] vector giving the earliest date to
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
 #'  for (in years).
-#' @param step An [`integer`] specifying the increment at which the cumulative
-#'  distribution is to be estimated (in years).
-#' @param ci A [`logical`] scalar: should the credible interval be displayed?
 #' @param ... Any [`CumulativeEvents-class`] object.
 #' @details
 #'  The tempo plot is one way to measure change over time: it estimates the
@@ -245,8 +244,6 @@ setGeneric(
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
 #'  for (in years).
-#' @param step An [`integer`] specifying the increment at which the cumulative
-#'  distribution is to be estimated (in years).
 #' @param fill A [`character`] string specifying the colour to be used to fill
 #'  the area under the curve.
 #' @param ... Any [`ActivityEvents-class`] object.
@@ -329,8 +326,6 @@ setGeneric(
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
 #'  for (in years).
-#' @param step An [`integer`] specifying the increment at which the cumulative
-#'  distribution is to be estimated (in years).
 #' @param colour A [`character`] string specifying the colour of the segments.
 #' @param ... Currently not used.
 #' @return

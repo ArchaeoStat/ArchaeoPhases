@@ -6,13 +6,20 @@ NULL
 #' @method as.data.frame CumulativeEvents
 #' @export
 as.data.frame.CumulativeEvents <- function(x, ..., stringsAsFactors = default.stringsAsFactors()) {
-  data.frame(
+  tmp <- data.frame(
     year = x@year,
     estimate = x@estimate,
-    lower = x@lower,
-    upper = x@upper,
     stringsAsFactors = stringsAsFactors
   )
+  if (nrow(x@credible) > 0) {
+    tmp$credible_lower <- x@credible[, 1]
+    tmp$credible_upper <- x@credible[, 2]
+  }
+  if (nrow(x@gauss) > 0) {
+    tmp$gauss_lower <- x@gauss[, 1]
+    tmp$gauss_upper <- x@gauss[, 2]
+  }
+  tmp
 }
 
 #' @method as.data.frame ActivityEvents
