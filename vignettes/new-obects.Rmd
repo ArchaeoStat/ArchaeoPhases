@@ -1,0 +1,119 @@
+---
+title: "Reproducing ArchaeoPhases objects"
+author: "Thomas S. Dye"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    fig_caption: false
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{4.ArchaeoPhases : Reproducing ArchaeoPhases objects}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Version `ArchaeoPhases 1.5` adds new read, plot, and statistical functions
+designed to encourage reproducibility.  This vignette describes some of these
+functions and illustrates how to use them to reproduce an analysis.
+
+New read functions `read_bcal()`, `read_oxcal()`, and `read_chronomodel()` are
+intended to replace the general purpose function, `ImportCSV()`. The new
+functions are built on the function `read_csv()`, which is fast and able to read
+remote files, as well as local files. The new functions return S3 objects that
+can identify the file that produced them. This facility might be useful in
+situations where an analysis is based on a remote file that isn't under the
+analyst's control, or when files are shared electronically and potentially
+subject to corruption.
+
+The following code block illustrates this capability. After the `ArchaeoPhases`
+package has been loaded, the `read_oxcal` function is used to read a
+remote `OxCal` file and assign an S3 object to the variable `oxc`. The
+`original_file` method of the `oxc` object checks
+if the original file used to create it has changed since the
+object was created. If the original file still exists and is unchanged, then
+the function returns `TRUE`. If the original file cannot be found, or has
+changed, then the function returns `FALSE`.
+
+```{r  read_oxcal }
+## load ArchaeoPhases
+library(ArchaeoPhases)
+## read remote file
+oxc <- read_oxcal("http://tsdye.online/AP/ox.csv", quiet = "yes")
+## returns TRUE, if ox.csv has not changed on the server
+original_file(oxc)
+```
+
+The new plot functions, `multi_dates_plot()`, `tempo_activity_plot()`,
+`tempo_plot()`, `marginal_plot()`, `multi_marginal_plot()`, and
+`occurrence_plot()` are functional replacements for the originals with camelCase
+names, e.g., `TempoPlot()` -> `tempo_plot()`. They return S3 objects with
+`plot()` and `reproduce()` methods that inherit from data frame and can be
+passed to statistical functions.
+
+The following code block illustrates the `plot()` and `reproduce()` methods. The
+call to the `marginal_plot` function draws a plot of the first marginal
+posterior in the `oxc` object and returns an S3 object, which is assigned to the
+variable `oxc.mar`. The call to the `plot` method of the `oxc.mar` object draws
+the same plot and also returns an S3 object. Note that the S3 objects returned
+by `marginal_plot()` and `plot()` differ because the calls that created them
+differ. Nevertheless, the data returned by the two calls are identical, as
+expected. The call, `reproduce(oxc.mar)` checks that the original file is
+accessible and has not changed, then recreates the plot. If successful, the
+object it returns is identical with the object it reproduces.
+
+```{r  marginal_plot }
+## create mariginal plot object
+oxc.mar <- marginal_plot(oxc)
+## use plot method to reproduce marginal plot
+oxc.mar.plot <- plot(oxc.mar)
+## check for identity returns FALSE because calls differ
+identical(oxc.mar, oxc.mar.plot)
+## check for data identity returns TRUE
+identical(oxc.mar$x, oxc.mar.plot$x)
+## reproduce the marginal plot object
+oxc.mar.rep <- reproduce(oxc.mar)
+## check for object identity returns TRUE
+identical(oxc.mar.rep, oxc.mar)
+```
+
+The objects returned by the `read_*()` functions behave like data frames.  The
+new function, `multi_marginal_statistics`, expects a data frame as its first
+argument.  When passed the `oxc` object, it returns an object with various
+summary statistics of the marginals, as if it had been passed a standard data
+frame.
+
+```{r  mult_marginal }
+oxc.stats <- multi_marginal_statistics(oxc)
+oxc.stats$statistics
+```
+
+The ability to reproduce an `ArchaeoPhases` analysis might find several uses.
+
+One use case is when work on a project is interrupted. In this use case, objects
+produced during an earlier session and saved to disk can be read into the new
+`R` session. The `reproduce` methods of the objects will indicate whether or not
+the Bayesian calibration output is still available, and if so, whether or not it
+has changed.
+
+Another use case is a collaboration where one might wish to distribute an MCMC
+file and the `R` code required to make an informative plot. An email message
+with the MCMC file and the saved `ArchaeoPhases` object attached is a reasonable
+way this might be accomplished. In this situation, the recipient can point the
+`reproduce()` function to the local MCMC file and verify that the analysis
+carried out by the sender can actually be reproduced.
+
+A third use case is one you should know how to avoid. The S3 objects produced by
+ArchaeoPhases can be manipulated to include malicious code and an unscrupulous
+scoundrel might intend to harm you in this way. The best defense is, as usual,
+to choose trustworthy collaborators and not try to reproduce objects from
+unknown sources. In any event, a simple way to check for malicious code is to
+inspect the `call` attribute of the object, as shown in the following source
+code block.  If the call looks good, then all should be well.
+
+```{r   }
+attr(oxc.mar, "call")
+```

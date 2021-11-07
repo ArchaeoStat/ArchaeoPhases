@@ -168,39 +168,43 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #' events of a specified kind occurred
 #'
 #' @param data Data frame containing the output of the MCMC algorithm.
-#' @param position Numeric vector containing the positions of the columns
-#' corresponding to the MCMC chains of interest, or a vector of column
-#' names.
-#' @param plot_result If \code{TRUE}, then draw a plot on the display,
-#' else suppress drawing.
+#' @param position A list, each member of which is either a numeric vector
+#'     containing the positions of the columns corresponding to the MCMC chains
+#'     of interest, or a vector of column names. For convenience, a vector can
+#'     be substituted for the singleton list.
+#' @param name A list, each member of which is a string that names the kind of
+#'     event in the corresponding element of \code{position}. For convenience, a
+#'     string can be substituted for the singleton list.
+#' @param plot_result If \code{TRUE}, then draw a plot on the display, else
+#'     suppress drawing.
 #' @param level Probability corresponding to the level of confidence.
-#' @param intervals One of "CI" for credible intervals or
-#' "HPD" for highest posterior density intervals.
+#' @param intervals One of "CI" for credible intervals or "HPD" for highest
+#'     posterior density intervals.
 #' @param title Title of the plot.
 #' @param subtitle Subtitle of the plot.
 #' @param caption Caption of the plot.
 #' @param x_label Label of the x-axis.
 #' @param y_label Label of the y-axis.
 #' @param language String indicating a language recognized by the
-#' \pkg{toOrdinal} package.
+#'     \pkg{toOrdinal} package.
 #' @param occurrence String to append to each y-axis tic label.
-#' @param width Plot width in \code{units}.
-#' @param height Plot height in \code{units}.
-#' @param units String recognized by the \code{ggsave()} function,
-#' one of "in", "cm", "mm".
+#' @param width Plot width in \code{unit}.
+#' @param height Plot height in \code{unit}.
+#' @param unit String recognized by the \code{ggsave()} function, one of "in",
+#'     "cm", "mm".
 #' @param x_min Minimum x-axis value.
 #' @param x_max Maximum x-axis value.
-#' @param x_scale One of "calendar" for calendar years,
-#' "BP" for years before present,
-#' or "elapsed" for time elapsed from a specified origin.
-#' @param elapsed_origin_position Position of the column to use
-#' as the origin for elapsed time calculations.
+#' @param x_scale One of "calendar" for calendar years, "BP" for years before
+#'     present, or "elapsed" for time elapsed from a specified origin.
+#' @param elapsed_origin_position Position of the column to use as the origin
+#'     for elapsed time calculations.
 #' @param dumbbell_size Size of the plot symbol.
 #' @param dot_guide Switch for a horizontal guide from the y axis.
 #' @param dot_guide_size Size of the dot guide.
 #' @param y_grid Switch for horizontal grid lines.
-#' @param file Name of the file that will be saved if specified.
-#' If \code{NULL} no plot will be saved.
+#' @param columns Number of columns for facet.
+#' @param file Name of the file that will be saved if specified. If \code{NULL}
+#'     no plot will be saved.
 #' @param new_window Whether or not the plot is drawn within a new window.
 #'
 #' @details
@@ -238,6 +242,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #' @export
 occurrence_plot <- function(data,
                             position = 1:ncol(data),
+                            name = list("All"),
                             level = 0.95,
                             plot_result = TRUE,
                             intervals = "CI",
@@ -247,14 +252,34 @@ occurrence_plot <- function(data,
                             x_label = "Calendar year",
                             y_label = NULL,
                             language = "English", occurrence = "occurrence",
-                            height = 7, width = 7, units = "in",
+                            height = 7, width = 7, unit = "in",
                             x_min = NULL, x_max = NULL, x_scale = "calendar",
                             elapsed_origin_position = NULL,
                             dumbbell_size = 1, dot_guide = FALSE,
                             dot_guide_size = 0.25, y_grid = FALSE,
+                            columns = 1,
                             file = NULL, new_window=TRUE)
 {
+
     if(!is.data.frame(data)) stop("Data format not recognized.")
+
+    if(!is.element(intervals, c("CI", "HPD")))
+        stop(sprintf("%s is not a valid 'intervals' value.", intervals))
+
+    if(!is.element(x_scale, c("calendar", "BP", "elapsed")))
+        stop(sprintf("%s is not a valid 'x_scale' value.", x_scale))
+
+    if(x_scale == "elapsed" & is.null(elapsed_origin_position))
+        stop("Elapsed origin not specified.")
+
+    if(!is.list(position))
+        position <- list(position)
+
+    if(!is.list(name))
+        name <- list(name)
+
+    if(length(position) != length(name))
+        stop("Position and name lists are different lengths.")
 
     sort.rows <- function(x) {
         if (is.numeric(as.matrix(x))) {
@@ -267,68 +292,97 @@ occurrence_plot <- function(data,
         }
     }
 
+    prep_bornes <- function(position,
+                               d = NULL,
+                               xs = x_scale,
+                               ep = elapsed_origin_position,
+                               l = level) {
+
+        temp_data <- d[, position]
+
+        if (xs == "elapsed") {
+            temp_data <- temp_data - d[, ep]
+        }
+
+        events <- sort.rows(temp_data)
+
+        if (intervals == "CI") {
+            bornes <- MultiCredibleInterval(data = events,
+                                           position = 1:ncol(events),
+                                           level = level,
+                                           roundingOfValue = 0)
+        }
+        else {
+            bornes <- MultiHPD(data = events,
+                              position = 1:ncol(events),
+                              level = l)
+        }
+        ## I think this can go inside the preceding else clause.  Check.
+        x = (dim(bornes)[2] - 1) / 2
+        if ( x > 1 ){
+            y <- NULL
+            for(j in 1:x){
+                bornesj <- subset(bornes, select=-c(2 * j, 2 * j + 1))
+                y <- rbind(bornesj, y)
+            }
+            bornes <- y[is.na(y[,2]) == FALSE, ]
+        }
+        return(bornes)
+    }
+
+    prep_df <- function(b, n,
+                           o = occurrence,
+                           l = language,
+                           x = x_scale) {
+        b_df <- as.data.frame(b)
+        b_row <- as.integer(rownames(b))
+        b_df$row <- b_row
+        b_df$y.lab <- paste(sapply(X = b_row,
+                                   FUN = toOrdinal,
+                                   language = l),
+                            o,
+                            sep= " ")
+        b_df$name <- n
+        colnames(b_df)[c(2, 3)] <- c("start", "end")
+        if (x == "BP") {
+            b_df$start <- 1950 - b_df$start
+            b_df$end <- 1950 - b_df$end
+        }
+        return(list(b_df))
+    }
+
+    assemble_df <- function(l) {
+        o <- data.frame()
+        for(i in seq(along = l)) {
+            o <- rbind(as.data.frame(l[[i]]), o,
+                       stringsAsFactors = FALSE,
+                       make.row.names = FALSE)
+        }
+        o$y.lab <- factor(o$y.lab, levels = unique(o$y.lab))
+        return(o)
+    }
+
     if(is.element("archaeophases_plot", class(data))) {
-        group_of_events <- data
+        ordered_df <- data
     }
     else {
-        temp_data <- data[, position]
-        if (x_scale == "elapsed") {
-            if (is.null(elapsed_origin_position)) {
-                stop("Elapsed origin not specified")
-            }
-            else {
-                temp_data <- temp_data - data[,elapsed_origin_position]
-            }
-        }
-        group_of_events <- sort.rows(temp_data)
+        bornes_list <- lapply(FUN = prep_bornes,
+                              X = position,
+                              d = data)
+        df_list <- mapply(FUN = prep_df,
+                          b = bornes_list,
+                          n = name,
+                          SIMPLIFY = FALSE)
+        ordered_df <- assemble_df(df_list)
     }
-
-    if (intervals == "CI") {
-        Bornes = MultiCredibleInterval(data = group_of_events,
-                                       position = 1:ncol(group_of_events),
-                                       level = level,
-                                       roundingOfValue = 0)
-        ordered_df <- as.data.frame(Bornes)
-        ordered_df$y.labs <- paste(sapply(as.integer(rownames(Bornes)),
-                                          toOrdinal,
-                                          language = language),
-                                   occurrence, sep= " ")
-    }
-    else if (intervals == "HPD") {
-        Bornes = MultiHPD(group_of_events, 1:ncol(group_of_events), level = level)
-        ordered_df <- as.data.frame(Bornes)
-        ordered_df$y.labs <- paste(sapply(as.integer(rownames(Bornes)), toOrdinal,
-                                          language = language), occurrence, sep= " ")
-
-                                        # In the case of (multiple) two intervals
-        x = (dim(Bornes)[2] - 1) /2
-        if ( x > 1 ){
-            data = NULL
-            for(j in 1:x){
-                Bornesj = subset(Bornes,select=-c(2*j,2*j+1))
-                data = rbind(Bornes, data)
-            }
-            data = data[is.na(data[,2])==FALSE, ]
-            ordered_df <- as.data.frame(data)
-            ordered_df$y.labs <- paste(sapply(as.integer(rownames(data)), toOrdinal,
-                                              language = language), occurrence, sep= " ")
-        }
-    }
-
-    if (x_scale == "BP") {
-        ordered_df[,2] <- 1950-ordered_df[,2]
-        ordered_df[,3] <- 1950-ordered_df[,3]
-    }
-
 
     h <- ggplot2::ggplot(data = ordered_df,
-                         ggplot2::aes(y=factor(ordered_df$y.labs,
-                                               levels=unique(ordered_df$y.labs),
-                                               ordered=TRUE),
-                                      x=ordered_df[,2], xend=ordered_df[,3]))
+                         ggplot2::aes(y = y.lab,
+                                      x = start,
+                                      xend = end))
 
     h <- h + ggalt::geom_dumbbell(size = dumbbell_size,
-                                  dot_guide = dot_guide,
+                                 dot_guide = dot_guide,
                                   dot_guide_size = dot_guide_size)
 
     h <- h + ggplot2::labs(x = x_label,
@@ -336,7 +390,6 @@ occurrence_plot <- function(data,
                            title = title,
                            subtitle = subtitle,
                            caption = caption)
-
     if (!y_grid) {
         h <- h + ggplot2::theme(panel.grid.major.y=ggplot2::element_blank())
     }
@@ -345,8 +398,20 @@ occurrence_plot <- function(data,
         h <- h + ggplot2::xlim(x_min, x_max)
     }
 
+    if(length(bornes_list) > 1) {
+        h <- h + ggplot2::facet_wrap(ggplot2::vars(name),
+                                     scales = "free_y",
+                                     ncol = columns)
+        h <- h + theme(axis.ticks = element_blank(),
+                       axis.text.y = element_blank())
+    }
+
     if (!is.null(file)) {
-        ggplot2::ggsave(filename = file, plot = h, height = height,width = width, units = units)
+        ggplot2::ggsave(filename = file,
+                        plot = h,
+                        height = height,
+                        width = width,
+                        units = unit)
     }
 
     if (plot_result == TRUE) {
@@ -356,7 +421,7 @@ occurrence_plot <- function(data,
         print(h)
     }
 
-    new_archaeophases_plot(x = as.data.frame(group_of_events),
+    new_archaeophases_plot(x = ordered_df,
                            mcmc = data,
                            call = match.call())
 }
