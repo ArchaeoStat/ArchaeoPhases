@@ -19,14 +19,14 @@ allen.read.mcmc.chains(
 \arguments{
 \item{mcmc.file}{path to the csv file of MCMC output}
 
-\item{positions}{a vector of 2 or 4 column indices of mcmc.file}
+\item{positions}{a vector of 2 or 4 column indices of \code{mcmc.file}}
 
 \item{mcmc.file.2}{optional path to another csv file of MCMC output}
 
-\item{positions.2}{a vector of 2 column indices of mcmc.file.2}
+\item{positions.2}{a vector of 2 column indices of \code{mcmc.file.2}}
 
 \item{names}{a vector of two strings naming the intervals specified by
-the positions parameters(s)}
+the \code{positions} parameters(s)}
 
 \item{app}{one of 'bcal', 'oxcal', or 'chronomodel'}
 
@@ -39,8 +39,8 @@ the positions parameters(s)}
 to suppress messages and warnings.}
 }
 \value{
-a list with two components: result and names, where result
-contains the MCMC chains and names contains the names parameter.
+a list with two components: \code{result} and \code{names}, where \code{result}
+contains the MCMC chains and \code{names} contains the names parameter.
 }
 \description{
 Reads chains for two intervals from one or two csv files of MCMC

@@ -21,6 +21,18 @@ to suppress messages and warnings.}
 }
 \value{
 a list with the following components:
+\describe{
+\item{result}{The Allen relation as a string.}
+\item{relation_set}{The Allen relation as a set.}
+\item{concurrence}{A string describing the concurrency relation.}
+\item{full_result}{The Allen relation as a vector.}
+\item{six_value_result}{The Allen relation for relations with distinct endpoints.}
+\item{full_proportion}{The proportion of each relation in an empirical Allen relation.}
+\item{six_value_proportion}{The proportion of relations with distinct endpoints in an empirical Allen relation.}
+\item{concurrence_proportion}{The proportion of concurrent relations in an empirical Allen relation.}
+\item{mcmc_file}{File name passed to the \code{mcmc} parameter.}
+\item{application}{String passed to the \code{app} parameter.}
+}
 }
 \description{
 Summarize the relation of two phases

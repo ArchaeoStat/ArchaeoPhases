@@ -68,6 +68,6 @@
 #'
 #' @export
 
-illustrate <- function(relations = "basic", ...) {
+allen_illustrate <- function(relations = "basic", ...) {
     allen_plot(illustrate_allen_relations(relations), ...)
 }

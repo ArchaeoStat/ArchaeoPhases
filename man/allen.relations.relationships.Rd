@@ -11,6 +11,9 @@ allen.relations.relationships(allen.set.1, allen.set.2)
 
 \item{allen.set.2}{an Allen set}
 }
+\value{
+A string that describes the relative strength of two Allen relation sets.
+}
 \description{
 Construct a string that describes the relative strength of two Allen relation
 sets.  Useful for output to the console.

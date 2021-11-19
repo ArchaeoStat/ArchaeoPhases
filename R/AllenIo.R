@@ -6,11 +6,11 @@
 #' or not files exist. It exits with an error message if there are problems.
 #'
 #' @param mcmc.file path to the csv file of MCMC output
-#' @param positions a vector of 2 or 4 column indices of mcmc.file
+#' @param positions a vector of 2 or 4 column indices of \code{mcmc.file}
 #' @param mcmc.file.2 optional path to another csv file of MCMC output
-#' @param positions.2 a vector of 2 column indices of mcmc.file.2
+#' @param positions.2 a vector of 2 column indices of \code{mcmc.file.2}
 #' @param names a vector of two strings naming the intervals specified by
-#' the positions parameters(s)
+#' the \code{positions} parameters(s)
 #' @param app one of 'bcal', 'oxcal', or 'chronomodel'
 #' @param decimal optional decimal character for Chronomodel output
 #' @param separator optional separator character for Chronomodel output
@@ -18,15 +18,21 @@
 #' 'partial' (default) to suppress messages and allow warnings, or 'yes'
 #' to suppress messages and warnings.
 #'
-#' @return a list with two components: result and names, where result
-#' contains the MCMC chains and names contains the names parameter.
+#' @return a list with two components: \code{result} and \code{names}, where \code{result}
+#' contains the MCMC chains and \code{names} contains the names parameter.
 #'
 #' @author Thomas S. Dye
 #'
 #' @export
-allen.read.mcmc.chains <- function(mcmc.file, positions, mcmc.file.2 = NULL, positions.2 = NULL,
-    names = c("Interval 1", "Interval 2"), app = "bcal", decimal = ".", separator = ",",
-    quiet = "partial") {
+allen.read.mcmc.chains <- function(mcmc.file,
+                                   positions,
+                                   mcmc.file.2 = NULL,
+                                   positions.2 = NULL,
+                                   names = c("Interval 1", "Interval 2"),
+                                   app = "bcal",
+                                   decimal = ".",
+                                   separator = ",",
+                                   quiet = "partial") {
     if (missing(mcmc.file) || missing(positions))
         stop("please set required parameters")
     if (is.null(mcmc.file.2) && !is.null(positions.2))
@@ -35,18 +41,22 @@ allen.read.mcmc.chains <- function(mcmc.file, positions, mcmc.file.2 = NULL, pos
         stop("four interval boundaries are required")
     if (!is.null(mcmc.file.2) && is.null(positions.2))
         stop("interval boundaries are required")
-    mcmc.1 <- switch(EXPR = app, bcal = read_bcal(mcmc.file, quiet = quiet), oxcal = read_oxcal(mcmc.file,
-        quiet = quiet), chronomodel = read_chronomodel(mcmc.file, decimal, separator,
-        quiet = quiet), stop("unknown calibration application"))
+    mcmc.1 <- switch(EXPR = app,
+                     bcal = read_bcal(mcmc.file, quiet = quiet),
+                     oxcal = read_oxcal(mcmc.file, quiet = quiet),
+                     chronomodel = read_chronomodel(mcmc.file, decimal, separator, quiet = quiet),
+                     stop("unknown calibration application"))
     start.1 <- unlist(mcmc.1[, positions[[1]]])
     end.1 <- unlist(mcmc.1[, positions[[2]]])
     if (is.null(mcmc.file.2)) {
         start.2 <- unlist(mcmc.1[, positions[[3]]])
         end.2 <- unlist(mcmc.1[, positions[[4]]])
     } else {
-        mcmc.2 <- switch(EXPR = app, bcal = read_bcal(mcmc.file.2),
-            oxcal = read_oxcal(mcmc.file.2), chronomodel = read_chronomodel(mcmc.file.2,
-                decimal, separator), stop("unknown calibration application"))
+      mcmc.2 <- switch(EXPR = app,
+                       bcal = read_bcal(mcmc.file.2, quiet = quiet),
+                       oxcal = read_oxcal(mcmc.file.2, quiet = quiet),
+                       chronomodel = read_chronomodel(mcmc.file.2, decimal, separator, quiet = quiet),
+                       stop("unknown calibration application"))
         start.2 <- unlist(mcmc.2[, positions.2[[1]]])
         end.2 <- unlist(mcmc.2[, positions.2[[2]]])
     }
@@ -102,6 +112,8 @@ allen.relations.concur <- function(allen.set) {
 #' @param allen.set.1 an Allen set
 #' @param allen.set.2 an Allen set
 #'
+#' @return A string that describes the relative strength of two Allen relation sets.
+#' 
 #' @author Thomas S. Dye
 #'
 allen.relations.relationships <- function(allen.set.1, allen.set.2) {
@@ -129,14 +141,27 @@ allen.relations.relationships <- function(allen.set.1, allen.set.2) {
 #' to suppress messages and warnings.
 #'
 #' @return a list with the following components:
-#'
+#' \describe{
+#' \item{result}{The Allen relation as a string.}
+#' \item{relation_set}{The Allen relation as a set.}
+#' \item{concurrence}{A string describing the concurrency relation.}
+#' \item{full_result}{The Allen relation as a vector.}
+#' \item{six_value_result}{The Allen relation for relations with distinct endpoints.}
+#' \item{full_proportion}{The proportion of each relation in an empirical Allen relation.}
+#' \item{six_value_proportion}{The proportion of relations with distinct endpoints in an empirical Allen relation.}
+#' \item{concurrence_proportion}{The proportion of concurrent relations in an empirical Allen relation.}
+#' \item{mcmc_file}{File name passed to the \code{mcmc} parameter.}
+#' \item{application}{String passed to the \code{app} parameter.}
+#' }
 #' @author Thomas S. Dye
 #'
 #' @export
 #'
 allen_relation_summary <- function(mcmc, phases, app = "bcal", quiet = "partial") {
-    chains <- switch(app, chronomodel = read_chronomodel(mcmc, quiet = quiet), oxcal = read_oxcal(mcmc,
-        quiet = quiet), bcal = read_bcal(mcmc, quiet = quiet))
+  chains <- switch(app,
+                   chronomodel = read_chronomodel(mcmc, quiet = quiet),
+                   oxcal = read_oxcal(mcmc, quiet = quiet),
+                   bcal = read_bcal(mcmc, quiet = quiet))
     chains <- chains[, phases]
     names <- allen.check.names(colnames(chains))
     zero.vector <- allen.create.result.vector()
@@ -153,8 +178,14 @@ allen_relation_summary <- function(mcmc, phases, app = "bcal", quiet = "partial"
     max_code <- names(result.six[result.six == max(result.six)])
     relation_string <- allen_code_to_string(max_code)
     result_string <- sprintf("%s %s %s", names$first, relation_string, names$second)
-    list(result = result_string, relation_set = relation.set, concurrence = concurrence_string,
-        full_result = result.full, six_value_result = result.six, full_proportion = round(result.full.proportion,
-            digits = 3), six_value_proportion = round(result.six.proportion, digits = 3),
-        concurrence_proportion = proportion.concurs, mcmc_file = mcmc, application = app)
+    list(result = result_string,
+         relation_set = relation.set,
+         concurrence = concurrence_string,
+         full_result = result.full,
+         six_value_result = result.six,
+         full_proportion = round(result.full.proportion, digits = 3),
+         six_value_proportion = round(result.six.proportion, digits = 3),
+         concurrence_proportion = proportion.concurs,
+         mcmc_file = mcmc,
+         application = app)
 }

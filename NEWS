@@ -1,5 +1,11 @@
 NEWS
 ==============
+ArchaeoPhases 1.6 (Release date: )
+==============
+
+* New functions for Allen's interval algebra: allen_relate_phases(), allen_plot(), allen_illustrate(), allen_relation_summary(),  
+
+==============
 ArchaeoPhases 1.5.1 (Release date: 2021-04-03)
 ==============
 

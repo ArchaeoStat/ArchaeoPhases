@@ -25,7 +25,7 @@ Bayesian calibration application produced the MCMC output}
 to suppress messages and warnings.}
 }
 \value{
-A dataframe suitable for plotting with graph
+A dataframe suitable for plotting with allen_plot().
 }
 \description{
 Reads MCMC output to create a dataframe suitable

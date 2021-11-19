@@ -18,11 +18,9 @@
 #' 'partial' (default) to suppress messages and allow warnings, or 'yes'
 #' to suppress messages and warnings.
 #'
-#' @return A dataframe suitable for plotting with graph
+#' @return A dataframe suitable for plotting with allen_plot().
 #'
 #' @seealso \code{\link{allen_composite_relation}}
-#'
-#' @export
 #'
 allen_relate_phases <- function(mcmc,
                                 phases_1,
@@ -187,7 +185,7 @@ illustrate_allen_relations <- function(relations = "basic") {
 #' 'partial' (default) to suppress messages and allow warnings, or 'yes'
 #' to suppress messages and warnings.
 #'
-#' @return A dataframe for input to allen_plot()
+#' @return A dataframe for input to allen_plot().
 #'
 #' @seealso \code{\link{allen_relate_phases}}
 #'

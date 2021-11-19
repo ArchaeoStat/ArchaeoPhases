@@ -18,7 +18,7 @@ used for the credible interval and the highest posterior density region.}
 \value{
 A named matrix of values corresponding to all the following statistics:
 \describe{
-\item{title}{The title of the summary statistics}
+\item{title}{The title of the summary statistics.}
 \item{mean}{The mean of the MCMC chain. Use of \code{mean()} function.}
 \item{map }{The maximum a posteriori of the MCMC chain. Use of \code{hdr()} function.}
 \item{sd}{The standard deviation of the MCMC chain. Use of \code{sd()} function.}

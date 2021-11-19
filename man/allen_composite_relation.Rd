@@ -30,7 +30,7 @@ Bayesian calibration application produced the MCMC output}
 to suppress messages and warnings.}
 }
 \value{
-A dataframe for input to allen_plot()
+A dataframe for input to allen_plot().
 }
 \description{
 Uses the Allen algebra to infer the relation of two phases from their
