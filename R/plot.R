@@ -5,14 +5,28 @@ NULL
 # MCMC =========================================================================
 #' @export
 #' @method autoplot MCMC
-autoplot.MCMC <- function(object, ..., select = NULL, density = TRUE,
-                          interval = NULL, level = 0.95, decreasing = TRUE) {
+autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
+                          density = TRUE, interval = NULL, level = 0.95,
+                          decreasing = TRUE) {
   ## Calendar scale
   gg_x_scale <- scale_calendar(get_calendar(object))
 
   ## Select data
   if (!is.null(select)) {
     object <- object[, select, drop = FALSE]
+  }
+
+  ## Group data
+  grp <- data.frame(id = character(0), Group = character(0))
+  aes_grp <- NULL
+  if (!is.null(groups)) {
+    if (length(groups) != ncol(object)) {
+      msg <- "%s must be of length %d, not %d."
+      stop(sprintf(msg, sQuote("groups"), ncol(object), length(groups)),
+           call. = FALSE)
+    }
+    grp <- data.frame(id = names(object), Group = as.character(groups))
+    aes_grp <- ggplot2::aes(color = .data$Group, fill = .data$Group)
   }
 
   ## Reorder data
@@ -32,6 +46,10 @@ autoplot.MCMC <- function(object, ..., select = NULL, density = TRUE,
     inter <- fun(data, level = level)
     inter <- bind_intervals(inter)
     inter$id <- factor(inter$id, levels = unique(inter$id))
+
+    ## Add group (if any)
+    inter <- merge(inter, grp, by = "id", all.x = TRUE, all.y = FALSE,
+                   sort = FALSE)
 
     aes_inter <- ggplot2::aes(x = .data$lower, y = .data$id,
                               xend = .data$upper, yend = .data$id)
@@ -106,6 +124,7 @@ autoplot.MCMC <- function(object, ..., select = NULL, density = TRUE,
 
   ## ggplot2
   ggplot2::ggplot() +
+    aes_grp +
     gg_dens +
     gg_inter +
     gg_x_scale
@@ -118,10 +137,11 @@ setMethod("autoplot", "MCMC", autoplot.MCMC)
 
 #' @export
 #' @method plot MCMC
-plot.MCMC <- function(x, select = NULL, density = TRUE, interval = NULL,
-                      level = 0.95, decreasing = TRUE, ...) {
-  gg <- autoplot(object = x, ..., select = select, density = density,
-                 interval = interval, level = level, decreasing = decreasing) +
+plot.MCMC <- function(x, select = NULL, groups = NULL, density = TRUE,
+                      interval = NULL, level = 0.95, decreasing = TRUE, ...) {
+  gg <- autoplot(object = x, ..., select = select, groups = groups,
+                 density = density, interval = interval, level = level,
+                 decreasing = decreasing) +
     ggplot2::guides(fill = ggplot2::guide_legend(ncol = 2)) +
     ggplot2::theme_bw() +
     ggplot2::theme(axis.title.y = ggplot2::element_blank())

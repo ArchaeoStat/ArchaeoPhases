@@ -18,6 +18,7 @@ multiplot(...)
   object,
   ...,
   select = NULL,
+  groups = NULL,
   density = TRUE,
   interval = NULL,
   level = 0.95,
@@ -27,6 +28,7 @@ multiplot(...)
 \S4method{plot}{MCMC,missing}(
   x,
   select = NULL,
+  groups = NULL,
   density = TRUE,
   interval = NULL,
   level = 0.95,
@@ -59,6 +61,8 @@ multiplot(...)
 
 \item{select}{An \code{\link{integer}} vector specifying the index of the MCMC samples
 to be drawn.}
+
+\item{groups}{A \code{\link{character}} vector used for mapping colours.}
 
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 

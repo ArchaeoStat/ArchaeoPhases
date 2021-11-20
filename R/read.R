@@ -100,6 +100,8 @@ setMethod(
     ## then column names must be properly set with make.names()
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
+    if (any(duplicated(date_names)))
+      warning("Duplicated names!", call. = FALSE)
 
     ## Coerce to matrix
     data <- as.matrix(data)
@@ -146,6 +148,8 @@ setMethod(
     ## then column names must be properly set with make.names()
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
+    if (any(duplicated(date_names)))
+      warning("Duplicated names!", call. = FALSE)
 
     ## BCal used to add an empty row at the end, check if empty and remove
     if (anyNA(data[nrow(data), ]))
@@ -196,6 +200,8 @@ setMethod(
     ## then column names must be properly set with make.names()
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
+    if (any(duplicated(date_names)))
+      warning("Duplicated names!", call. = FALSE)
 
     ## Coerce to matrix
     mtx <- as.matrix(data)
@@ -238,6 +244,8 @@ setMethod(
     ## then column names must be properly set with make.names()
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
+    if (any(duplicated(date_names)))
+      warning("Duplicated names!", call. = FALSE)
 
     ## Coerce to matrix
     mtx <- as.matrix(data)

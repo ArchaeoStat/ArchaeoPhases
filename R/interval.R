@@ -43,7 +43,7 @@ setMethod(
   definition = function(object, level = 0.95, ...) {
     cred <- apply(X = object, MARGIN = 2, FUN = credible,
                   level = level, BP = is_BP(object), simplify = FALSE)
-
+    names(cred) <- names(object)
     attr(cred, "calendar") <- get_calendar(object)
     cred
   }
@@ -94,7 +94,7 @@ setMethod(
   definition = function(object, level = 0.95, ...) {
     hpd <- apply(X = object, MARGIN = 2, FUN = hpdi, level = level,
                  BP = is_BP(object), ..., simplify = FALSE)
-
+    names(hpd) <- names(object)
     attr(hpd, "calendar") <- get_calendar(object)
     hpd
   }

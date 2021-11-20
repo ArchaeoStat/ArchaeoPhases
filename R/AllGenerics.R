@@ -620,6 +620,7 @@ setGeneric(
 #' Plot
 #'
 #' @param object,x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
+#' @param groups A [`character`] vector used for mapping colours.
 #' @param select An [`integer`] vector specifying the index of the MCMC samples
 #'  to be drawn.
 #' @param density A [`logical`] scalar: should estimated density be plotted?
