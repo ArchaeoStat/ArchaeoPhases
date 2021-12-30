@@ -9,30 +9,17 @@ allen_illustrate(relations = "basic", ...)
 \arguments{
 \item{relations}{One of:
 \describe{
-\item{basic}{show the 13 basic Allen relations (default);}
-\item{concurrent}{show concurrent relations;}
-\item{six}{show relations with distinct endpoints;}
-\item{inherit}{show chronological information about a transmission
-relationship from the receiver's point of view;}
-\item{contribute}{show chronological information from the giver's point of view during
-transmission;}
-\item{stratigraphic}{show the basic stratigraphic relations established by an
-observation of superposition;}
-\item{anagenetic}{show the basic relations of artifact change without
-branching;}
-\item{cladogenetic}{show the basic relations of artifact change with branching;}
-\item{contributors}{show the composite relations of two donors to a borrowing
-occurrence;}
-\item{innovations}{show the composite relations of two entities produced by
-innovation from a single source;}
-\item{sequence}{show the composite relations of superposition
-in a stratigraphic sequence;}
-\item{anagenesis}{show the composite relations of transmission during
-anagenesis;}
-\item{incorporation.2}{show the composite relations of incorporation with
-two successors; or}
-\item{incorporation.1}{show the composite relations of incorporation with
-one successor.}
+\item{basic}{the 13 basic Allen relations (default);}
+\item{concurrent}{concurrent relations;}
+\item{distinct}{relations with distinct endpoints;}
+\item{stratigraphic}{basic relations established by an observation of superposition;}
+\item{branching}{basic branching relations;}
+\item{transformation}{basic relations of transformation;}
+\item{reticulation}{basic relations of reticulation;}
+\item{sequence}{composite relations in a stratigraphic sequence;}
+\item{branch}{composite relations of branching;}
+\item{transform}{composite relations of transformation; or}
+\item{reticulate}{composite relations of reticulation.}
 }}
 
 \item{...}{Named arguments to be passed on to \code{allen_plot()}.}
@@ -43,24 +30,13 @@ A layout_tbl_graph object.
 \description{
 Illustrate basic and composite Allen relations for several chronological
 model domains with a Nokel lattice. Chronological model domains include
-stratigraphy, anagenetic artifact change, and a variety of cladogenetic
-processes of artifact change, including what archaeologists label tradition,
-innovation, and borrowing. The illustrations show that stratigraphy and
-anagenetic artifact change each offer the necessary information to structure
-a chronological model deductively. In contrast, cladogenetic processes of
-artifact change comprise relatively weak sources of information that offer
-little guidance for the chronological model builder.
+stratigraphy and branching, transformative, and reticulate
+processes of artifact change.
 }
 \examples{
 
-# Plot to the R graphics device
-# illustrate()
-
-# Save layout_tbl_graph object to a variable
-# then plot to the R graphics device
-
-# foo <- illustrate()
-# foo
+# Plot the basic Allen relations to the R graphics device
+# allen_illustrate()
 
 }
 \references{
@@ -71,6 +47,9 @@ Lyman, R. Lee and Michael J. O'Brien.  Seriation and cladistics: The
 difference between anagenetic and cladogenetic evolution.  Chapter 5 in
 \emph{Mapping Our Ancestors: Phylogenetic Approaches in Anthropology and
 Prehistory.} New Brunswick: AldineTransaction.
+
+Viola, Tullio.  \emph{Peirce on the Uses of History.}  Berlin: de Gruyter.
+See chapter 3, Historicity as Process, especially p. 83--88.
 }
 \author{
 Thomas S. Dye

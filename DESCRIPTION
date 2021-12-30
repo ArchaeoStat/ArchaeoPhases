@@ -18,7 +18,7 @@ License: GPL-3
 Depends: R (>= 3.5.0), coda, hdrcde
 Imports: stats, utils, graphics, grDevices, shiny, shinythemes, DT,
         readr, ggthemes, toOrdinal, ggplot2, ggalt, reshape2, dplyr,
-        digest, gplots, magrittr, tibble, ggraph
+        digest, gplots, magrittr, tibble, ggraph, gtools
 Suggests: knitr, rmarkdown, testthat (>= 2.1.0), ArchaeoPhases.dataset
         (>= 0.1.0)
 VignetteBuilder: knitr
