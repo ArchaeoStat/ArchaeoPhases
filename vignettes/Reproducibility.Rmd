@@ -1,5 +1,5 @@
 ---
-title: "Reproducing ArchaeoPhases objects"
+title: "Reproducing ArchaeoPhases Objects"
 author: "Thomas S. Dye"
 date: "`r Sys.Date()`"
 output:
@@ -11,10 +11,21 @@ output:
       smooth_scroll: false
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{4.ArchaeoPhases : Reproducing ArchaeoPhases objects}
+  %\VignetteIndexEntry{4.ArchaeoPhases : Reproducibility}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+4. ArchaeoPhases : Reproducibility
+===============
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(comment = "")
+options(width = 120, max.print = 20)
+library(ArchaeoPhases)
+
+```
+
+## Introduction
 
 Version `ArchaeoPhases 1.5` adds new read, plot, and statistical functions
 designed to encourage reproducibility.  This vignette describes some of these
@@ -28,6 +39,8 @@ can identify the file that produced them. This facility might be useful in
 situations where an analysis is based on a remote file that isn't under the
 analyst's control, or when files are shared electronically and potentially
 subject to corruption.
+
+## Test for Original Data File
 
 The following code block illustrates this capability. After the `ArchaeoPhases`
 package has been loaded, the `read_oxcal` function is used to read a
@@ -46,6 +59,8 @@ oxc <- read_oxcal("http://tsdye.online/AP/ox.csv", quiet = "yes")
 ## returns TRUE, if ox.csv has not changed on the server
 original_file(oxc)
 ```
+
+## New Plot Functions
 
 The new plot functions, `multi_dates_plot()`, `tempo_activity_plot()`,
 `tempo_plot()`, `marginal_plot()`, `multi_marginal_plot()`, and
@@ -80,6 +95,8 @@ oxc.mar.rep <- reproduce(oxc.mar)
 identical(oxc.mar.rep, oxc.mar)
 ```
 
+## Objects Are Data Frames
+
 The objects returned by the `read_*()` functions behave like data frames.  The
 new function, `multi_marginal_statistics`, expects a data frame as its first
 argument.  When passed the `oxc` object, it returns an object with various
@@ -90,6 +107,8 @@ frame.
 oxc.stats <- multi_marginal_statistics(oxc)
 oxc.stats$statistics
 ```
+
+## Use Cases
 
 The ability to reproduce an `ArchaeoPhases` analysis might find several uses.
 

@@ -1,0 +1,51 @@
+#' Illustrate basic and composite relations
+#'
+#' Illustrate basic and composite Allen relations for several chronological
+#' model domains with a Nokel lattice. Chronological model domains include
+#' stratigraphy and branching, transformative, and reticulate
+#' processes of artifact change.
+#' 
+#' @param relations One of:
+#' \describe{
+#' \item{basic}{the 13 basic Allen relations (default);}
+#' \item{concurrent}{concurrent relations;}
+#' \item{distinct}{relations with distinct endpoints;}
+#' \item{stratigraphic}{basic relations established by an observation of superposition;}
+#' \item{branching}{basic branching relations;}
+#' \item{transformation}{basic relations of transformation;}
+#' \item{reticulation}{basic relations of reticulation;}
+#' \item{sequence}{composite relations in a stratigraphic sequence;}
+#' \item{branch}{composite relations of branching;}
+#' \item{transform}{composite relations of transformation; or}
+#' \item{reticulate}{composite relations of reticulation.}
+#' }
+#' @param ... Named arguments to be passed on to \code{allen_plot()}.
+#'
+#' @references
+#'
+#' Harris, E. \emph{Principles of Archaeological Stratigraphy}. Second edition.
+#' London: Academic Press.
+#'
+#' Lyman, R. Lee and Michael J. O'Brien.  Seriation and cladistics: The
+#' difference between anagenetic and cladogenetic evolution.  Chapter 5 in
+#' \emph{Mapping Our Ancestors: Phylogenetic Approaches in Anthropology and
+#' Prehistory.} New Brunswick: AldineTransaction.
+#'
+#' Viola, Tullio.  \emph{Peirce on the Uses of History.}  Berlin: de Gruyter.
+#' See chapter 3, Historicity as Process, especially p. 83--88.
+#'
+#' @author Thomas S. Dye
+#'
+#' @return A layout_tbl_graph object.
+#'
+#' @examples
+#'
+#' # Plot the basic Allen relations to the R graphics device
+#' # allen_illustrate()
+#'
+#' @export
+
+allen_illustrate <- function(relations = "basic", ...) {
+    allen_plot(illustrate_allen_relations(relations), ...)
+}
+

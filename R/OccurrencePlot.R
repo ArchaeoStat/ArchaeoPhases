@@ -309,7 +309,7 @@ occurrence_plot <- function(data,
         if (intervals == "CI") {
             bornes <- MultiCredibleInterval(data = events,
                                            position = 1:ncol(events),
-                                           level = level,
+                                           level = l,
                                            roundingOfValue = 0)
         }
         else {
