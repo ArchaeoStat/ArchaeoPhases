@@ -52,7 +52,7 @@ For the others, a Graphical User Interface is available. Click [here](https://ar
 
 ## Installing 'ArchaeoPhases' package
 
-To install ArchaeoPhases you first need to install [R](https://www.r-project.org/) and  [Rstudio](https://rstudio.com/)  that has a nice desktop environment for using R. Once in R (or in RStudio) you can type:
+To install ArchaeoPhases you first need to install [R](https://www.r-project.org/) and  [Rstudio](https://www.rstudio.com/)  that has a nice desktop environment for using R. Once in R (or in RStudio) you can type:
 
 ```{r,eval=FALSE}
 install.packages('ArchaeoPhases')
