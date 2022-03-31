@@ -24,7 +24,7 @@ Predictive distribution of date
   attach(Phases)
   sample = undated_sample(Phase.1.alpha,Phase.1.beta)
   # credible interval for the new date.
-  sample$ci
+  sample$credible
   #time range interval
   sample$timerange
  # graphics = densities / IC / time range ggplot
