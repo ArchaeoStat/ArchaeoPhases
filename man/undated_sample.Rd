@@ -19,11 +19,6 @@ for the end of interval}
 \description{
 Predictive distribution of date
 }
-\details{
-Simulate sample from the predictive distribution of undated sample
-in  stratigraphy constraint between two dates. The inputs is MCMC sample simulated from
-the joint posterior distribution od these  dates.
-}
 \examples{
   data(Phases);
   attach(Phases)

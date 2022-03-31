@@ -1,8 +1,8 @@
 #' Predictive distribution of date
 #'
-#' @details Simulate sample from the predictive distribution of undated sample
-#'  in  stratigraphy constraint between two dates. The inputs is MCMC sample simulated from
-#'  the joint posterior distribution od these  dates.
+#' @detailsSimulate the sample from the predictive distribution of an undated sample
+#' in stratigraphic constraint between two dates. The input is an MCMC sample simulated
+#'  from the joint posterior distribution of these dates.
 #'
 #' @param data1  Numeric vector containing the output of the MCMC algorithm
 #' for the begining of interval
@@ -19,7 +19,7 @@
 #' \item{call}{Function call.}
 #'}
 #'
-#' @importFrom ggplot2 ggplot aes geom_density layer_scales geom_segment
+#' @importFrom ggplot2 ggplot aes geom_density layer_scales geom_segment xlab ylab
 #' @examples
 #'   data(Phases);
 #'   attach(Phases)
@@ -44,12 +44,18 @@ undated_sample <- function(data1,data2, level =.95) {
   data.new = stats::runif(N, data1,data2)
   ci = credible_interval(data.new ,  level)$ci
   timerange =  PhaseTimeRange(data1, data2, level)[2:3]
-  df = base::data.frame(chain = c(data1,data2,data.new) , date =c(rep("start",N),rep("end",N),rep("pred",N)))
+  chain = c(data1,data2,data.new)
+  name = c(rep("start",N),rep("end",N),rep("pred",N))
+
+  df = data.frame("chain" = chain , "date" = name)
   p <- ggplot(df, aes(x=chain,col = date) ) +
      geom_density()
+
   M = layer_scales(p)$y$range$range[2]
-  p<- p +  geom_segment(aes(x = timerange[1], y = M*1.01 , xend = timerange[2], yend =M*1.01) ,size=2, colour="purple")
-  p<- p +   geom_segment(aes(x = ci[1], y = 0 , xend = ci[2], yend = 0),colour="#00BA38" ,size=2)
+  p<- p +  geom_segment(aes(x = timerange[1], y = M*1.01 , xend = timerange[2], yend =M*1.01) ,size=1.5, colour="purple")
+  p<- p +   geom_segment(aes(x = ci[1], y = 0 , xend = ci[2], yend = 0),colour="#00BA38" ,size=1.5)
+  p<- p+xlab("date") +
+    ylab("")
   p
    list(credible = ci , timerange=timerange, mcmc = data.new ,gr = p,
        call = match.call()  )
