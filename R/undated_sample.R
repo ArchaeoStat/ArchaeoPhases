@@ -1,6 +1,6 @@
 #' Predictive distribution of date
 #'
-#' @detailsSimulate the sample from the predictive distribution of an undated sample
+#' @details Simulate the sample from the predictive distribution of an undated sample
 #' in stratigraphic constraint between two dates. The input is an MCMC sample simulated
 #'  from the joint posterior distribution of these dates.
 #'
