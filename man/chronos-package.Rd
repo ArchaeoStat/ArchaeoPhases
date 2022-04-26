@@ -7,6 +7,8 @@
 \alias{chronos}
 \title{chronos: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Statistical analysis of archaeological dates and groups of dates. This package allows to post-process Markov Chain Monte Carlo (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>, 'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal' <https://bcal.shef.ac.uk/>. It provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
 }
 \details{

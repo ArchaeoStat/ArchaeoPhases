@@ -1,4 +1,4 @@
-citHeader("To cite ArchaeoPhases in publications use:")
+citHeader("To cite chronos in publications use:")
 
 citEntry(entry = "Article",
   title        = "Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}",

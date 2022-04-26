@@ -1,11 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# chronos
+# chronos <img width=120px src="man/figures/logo.png" align="right" />
 
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/tesselle/chronos/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/chronos/actions)
+[![codecov](https://codecov.io/gh/tesselle/chronos/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tesselle/chronos)
+[![CodeFactor](https://www.codefactor.io/repository/github/tesselle/chronos/badge/master)](https://www.codefactor.io/repository/github/tesselle/chronos/overview/master)
+
+<a href="https://tesselle.r-universe.dev" class="pkgdown-devel"><img
+src="https://tesselle.r-universe.dev/badges/chronos"
+alt="r-universe" /></a>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -33,7 +39,7 @@ groups of dates (e.g. duration, transition and hiatus between successive
 phases).
 
 
-    To cite ArchaeoPhases in publications use:
+    To cite chronos in publications use:
 
       Philippe, Anne & Vibet, Marie-Anne (2020). Analysis of Archaeological
       Phases Using the R Package ArchaeoPhases. Journal of Statistical
