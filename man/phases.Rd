@@ -20,4 +20,9 @@ phases
 \description{
 A data set containing information on the start and end dates of two phases.
 }
+\seealso{
+Other datasets: 
+\code{\link{events}}
+}
+\concept{datasets}
 \keyword{datasets}

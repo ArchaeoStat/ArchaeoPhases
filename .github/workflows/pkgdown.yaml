@@ -1,16 +1,80 @@
-# https://docs.github.com/en/actions/learn-github-actions/reusing-workflows
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
     branches: [main, master]
-    tags: ['*']
+  release:
+    types: [published]
+  workflow_dispatch:
 
 name: pkgdown
 
 jobs:
-  pkgdown:
-    uses: tesselle/packages/.github/workflows/pkgdown.yaml@main
-    with:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          use-public-rspm: true
+          extra-repositories: https://tesselle.r-universe.dev
+
+      - uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          extra-packages: pkgdown
+          needs: website
+
+      - name: Build site
+        run: |
+          Rscript -e 'install.packages("tekton", repos = "https://tesselle.r-universe.dev")'
+          Rscript -e 'pkgdown::build_site(preview = FALSE, devel = FALSE)'
+
+      - name: Upload site
+        uses: actions/upload-artifact@v2
+        with:
+          name: website
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
       REPO: ${{ github.event.repository.name }}
       COMMIT: ${{ github.sha }}
-    secrets:
       TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    steps:
+      - name: Download site
+        uses: actions/download-artifact@v2
+        with:
+          name: website
+          path: docs
+
+      - name: Configure git
+        run: |
+          git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+          git config --global user.email "${REPO}@tesselle.org"
+          git config --global user.name "${REPO}"
+
+      - name: Clone tesselle/packages
+        run: |
+          rm -rf tmp
+          git clone -b gh-pages https://github.com/tesselle/packages.git tmp
+
+      - name: Clean old files
+        run: |
+          [ -d docs/dev ] && rm -r tmp/${REPO}/dev || true
+          [ ! -d docs/dev ] && rm -r tmp/${REPO}/* || true
+
+      - name: Deploy
+        run: |
+          mkdir -p tmp/${REPO}
+          cp -r docs/* tmp/${REPO}/
+          cd tmp
+          git add -A
+          git commit -m "Built site for ${REPO}@$(echo ${COMMIT} | cut -c1-7)"
+          git push origin gh-pages

@@ -9,6 +9,7 @@
 #'   \item{Event.22}{Information on event 22.}
 #'   \item{Event.12}{Information on event 12.}
 #'  }
+#' @family datasets
 #' @keywords datasets
 "events"
 
@@ -23,5 +24,6 @@
 #'   \item{Phase.1.alpha}{Start date of Phase 1.}
 #'   \item{Phase.1.beta}{End date of Phase 1.}
 #'  }
+#' @family datasets
 #' @keywords datasets
 "phases"

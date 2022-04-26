@@ -20,4 +20,9 @@ events
 \description{
 A data set containing information on the ages of four dated events.
 }
+\seealso{
+Other datasets: 
+\code{\link{phases}}
+}
+\concept{datasets}
 \keyword{datasets}
