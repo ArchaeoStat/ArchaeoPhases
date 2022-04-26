@@ -1,12 +1,12 @@
 .onLoad <- function(libname, pkgname) {
   op <- options()
-  op.ArchaeoPhases <- list(
-    ArchaeoPhases.grid = 512,
-    ArchaeoPhases.precision = 0,
-    ArchaeoPhases.progress = interactive()
+  op.chronos <- list(
+    chronos.grid = 512,
+    chronos.precision = 0,
+    chronos.progress = interactive()
   )
-  toset <- !(names(op.ArchaeoPhases) %in% names(op))
-  if(any(toset)) options(op.ArchaeoPhases[toset])
+  toset <- !(names(op.chronos) %in% names(op))
+  if(any(toset)) options(op.chronos[toset])
 
   invisible()
 }

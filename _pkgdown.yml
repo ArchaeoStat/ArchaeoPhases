@@ -1,6 +1,10 @@
-url: https://ArchaeoStat.github.io/ArchaeoPhases
-development:
-  mode: auto
+url: https://packages.tesselle.org/chronos
+
+template:
+  package: tekton
+  opengraph:
+    twitter:
+      creator: "@nfrerebeau"
 
 reference:
 - title: Data input/output

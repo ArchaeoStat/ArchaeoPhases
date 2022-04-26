@@ -93,7 +93,7 @@ stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
   ## Results
   tmp <- c(mad = mod, mean = moy, sd = ec, quant, ci)
   tmp <- Filter(Negate(is.na), tmp)
-  round(tmp, digits = getOption("ArchaeoPhases.precision"))
+  round(tmp, digits = getOption("chronos.precision"))
 }
 
 map <- function(x, ...) {

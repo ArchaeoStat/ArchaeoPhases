@@ -2,9 +2,9 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
-# @export
-# @rdname bind
-# @aliases cbind2,MCMC,MCMC-method
+#' @export
+#' @rdname bind
+#' @aliases cbind2,MCMC,MCMC-method
 setMethod(
   f = "cbind2",
   signature = c(x = "MCMC", y = "MCMC"),

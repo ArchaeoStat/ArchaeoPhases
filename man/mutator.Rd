@@ -73,6 +73,7 @@ Getters and setters to extract or replace parts of an object.
 }
 \seealso{
 Other mutators: 
+\code{\link{bind}},
 \code{\link{subset}()}
 }
 \author{

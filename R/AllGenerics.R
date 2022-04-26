@@ -68,6 +68,22 @@ setGeneric(
   valueClass = "EventsMCMC"
 )
 
+# Bind =========================================================================
+#' Combine two Objects
+#'
+#' Combine two MCMC Objects.
+#' @param x,y An [`MCMC-class`] object.
+#' @return
+#'  An [`MCMC-class`] object.
+# @example inst/examples/ex-mutator.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @name bind
+#' @rdname bind
+#' @aliases cbind2-method
+NULL
+
 # Extract ======================================================================
 ## Mutators --------------------------------------------------------------------
 #' Get or Set Parts of an Object
@@ -797,6 +813,13 @@ setGeneric(
 setGeneric(
   name = "read_chronomodel_phases",
   def = function(file, ...) standardGeneric("read_chronomodel_phases")
+)
+
+#' @rdname read_chronomodel
+#' @aliases read_chronomodel_model-method
+setGeneric(
+  name = "read_chronomodel_model",
+  def = function(file, ...) standardGeneric("read_chronomodel_model")
 )
 
 #' Check for an Original MCMC File

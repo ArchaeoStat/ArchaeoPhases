@@ -1,8 +1,8 @@
 \dontrun{
 ## Import OxCal Output
-path_output <- system.file("oxcal/output/MCMC_Sample.csv", package = "fasti")
+path_output <- system.file("oxcal/ksarakil/MCMC_Sample.csv", package = "fasti")
 url_output <- paste0("https://raw.githubusercontent.com/tesselle/fasti/master/",
-                     "inst/oxcal/output/MCMC_Sample.csv")
+                     "inst/oxcal/ksarakil/MCMC_Sample.csv")
 oxcal <- read_oxcal(path_output)
 
 ## Check md5 sum

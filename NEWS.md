@@ -1,12 +1,15 @@
-# ArchaeoPhases 1.5.0.9000
+# chronos 1.5.0.9000
 
 ## New classes and methods
 * `apportion()`
-* `bind()`
+* `bind()` allow to bind multiple `MCMC` objects.
 * `roc()` allows to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
 
 ## Enhancements
 * Support for both BP and CE time scales.
+
+## Bug fixes & changes
+* Changement de l'estimation des intervalles HPD (`hdrcde::hdr()` -> `stats::density()`).
 
 ## Breaking changes
 * Full rewrite in S4.
@@ -14,16 +17,16 @@
 
 | Old | New |
 |:----|:----|
-| `CreateMinMaxGroup()` | `as_phases(<matrix>)` |
-| `CredibleInterval()`, `credible_interval()` | `interval_credible(<numeric>, <numeric>)` |
+| `CreateMinMaxGroup()` | `phase(<MCMC>)`, `as_phases(<matrix>)` |
+| `CredibleInterval()`, `credible_interval()` | `credible(<numeric>, <numeric>)` |
 | `DatesHiatus()`, `dates_hiatus()` | `lapse(<numeric>, <numeric>)` |
 | `estimate_range()` | `sensitivity(<MCMC>)` |
 | `MarginalPlot()`, `marginal_plot()` | `plot(<MCMC>)` |
 | `MarginalProba()` | `test_older(<numeric>, <numeric>)` |
 | `MarginalStatistics()`, `marginal_statistics()`, `multi_marginal_statistics()` | `summary(<MCMC>)` |
-| `MultiCredibleInterval()`, `multi_credible_interval()` | `interval_credible(<MCMC>)` |
+| `MultiCredibleInterval()`, `multi_credible_interval()` | `credible(<MCMC>)` |
 | `MultiDatesPlot()`, `multi_dates_plot()` | `plot(<MCMC>)` |
-| `MultiHPD()`, `multi_hpd()` | `interval_hpd(<MCMC>)` |
+| `MultiHPD()`, `multi_hpd()` | `hpdi(<MCMC>)` |
 | `MultiMarginalPlot()`, `multi_marginal_plot()` | `plot(<MCMC>)` |
 | `MultiPhasePlot()` | `plot(<PhasesMCMC>)` |
 | `MultiPhaseTimeRange()` | `boundaries(<PhasesMCMC>)` |

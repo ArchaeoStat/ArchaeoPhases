@@ -8,17 +8,24 @@
 \alias{read_chronomodel_events-method}
 \alias{read_chronomodel_phases}
 \alias{read_chronomodel_phases-method}
+\alias{read_chronomodel_model}
+\alias{read_chronomodel_model-method}
 \alias{read_chronomodel_events,character-method}
 \alias{read_chronomodel_phases,character-method}
+\alias{read_chronomodel_model,character-method}
 \title{Read ChronoModel Output}
 \usage{
 read_chronomodel_events(file, ...)
 
 read_chronomodel_phases(file, ...)
 
+read_chronomodel_model(file, ...)
+
 \S4method{read_chronomodel_events}{character}(file, BP = FALSE, sep = ",", dec = ".")
 
 \S4method{read_chronomodel_phases}{character}(file, BP = FALSE, sep = ",", dec = ".")
+
+\S4method{read_chronomodel_model}{character}(file)
 }
 \arguments{
 \item{file}{the name of the file which the data are to be read from.
@@ -64,7 +71,7 @@ Reads MCMC output.
 \examples{
 \dontrun{
 ## Import ChronoModel Output
-path <- "chronomodel/output/ksarakil"
+path <- "chronomodel/ksarakil"
 
 ## Events
 path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
@@ -73,6 +80,18 @@ path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
 ## Phases
 path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
 (chrono_phases <- read_chronomodel_phases(path_phases))
+
+path_model <- system.file("chronomodel/ksarakil.chr", package = "fasti")
+chrono_model <- jsonlite::fromJSON(path_model, simplifyVector = FALSE)
+
+k <- do.call(rbind.data.frame, chrono_model$events_constraints)
+iris_tree <- tidygraph::as_tbl_graph(k, directed = TRUE)
+
+ggraph::ggraph(iris_tree, layout = ggraph::layout_tbl_graph_igraph("sygiyama")) +
+  ggraph::geom_edge_link() +
+  ggraph::geom_node_point(size = 8, colour = 'steelblue') +
+  ggraph::geom_node_text(ggplot2::aes(label = name), colour = 'white', vjust = 0.4) +
+  ggraph::theme_graph()
 }
 }
 \references{

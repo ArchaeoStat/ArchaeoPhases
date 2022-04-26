@@ -218,7 +218,7 @@ setMethod(
 
     ## Find the shortest interval
     short <- which.min(inter)
-    endpoints <- round(p[, short], getOption("ArchaeoPhases.precision"))
+    endpoints <- round(p[, short], getOption("chronos.precision"))
 
     ## Return the endpoints of the shortest interval
     c(start = endpoints[[1]], end = endpoints[[2]])
@@ -409,7 +409,7 @@ setMethod(
 
     ## Find the longest interval
     i <- which(inter == max(dd))
-    endpoints <- round(p[, i], getOption("ArchaeoPhases.precision"))
+    endpoints <- round(p[, i], getOption("chronos.precision"))
 
     if (p[2, i] == p[1, i]) return(no_hiatus)
 

@@ -1,18 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ArchaeoPhases
+# chronos
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/nfrerebeau/ArchaeoPhases/workflows/R-CMD-check/badge.svg)](https://github.com/nfrerebeau/ArchaeoPhases/actions)
-
-[![CRAN
-Version](http://www.r-pkg.org/badges/version/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
-[![CRAN
-checks](https://cranchecks.info/badges/worst/ArchaeoPhases)](https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html)
-[![CRAN
-Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
+[![R-CMD-check](https://github.com/tesselle/chronos/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/chronos/actions)
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -22,14 +15,14 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
 
-**This repository contains a heavily modified fork of the
-*ArchaeoPhases* package. You might be interested in the [original
-package](https://github.com/ArchaeoStat/ArchaeoPhases).**
+***chronos* is a heavily modified fork of
+[*ArchaeoPhases*](https://github.com/ArchaeoStat/ArchaeoPhases) v1.5,
+see the changelog for details.**
 
 ## Overview
 
 Statistical analysis of archaeological dates and groups of dates.
-**ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC)
+**chronos** allows to post-process Markov Chain Monte Carlo (MCMC)
 simulations from [ChronoModel](https://chronomodel.com),
 [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) or
 [BCal](https://bcal.shef.ac.uk). This package provides functions for the
@@ -61,32 +54,42 @@ phases).
 
 ## Installation
 
-You can install the released version of **ArchaeoPhases** from
+You can install the released version of **chronos** from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("ArchaeoPhases")
+install.packages("chronos")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("nfrerebeau/ArchaeoPhases")
+remotes::install_github("tesselle/chronos")
 ```
 
 ## Usage
 
+These examples use data available through the
+[**fasti**](https://packages.tesselle.org/fasti/) package which is
+available in a separate [repository](https://tesselle.r-universe.dev).
+**fasti** provides MCMC outputs from ChronoModel, OxCal and BCal.
+
+``` r
+## Install the latest version
+install.packages("fasti", repos = "https://tesselle.r-universe.dev")
+```
+
 ``` r
 ## Load packages
-library(ArchaeoPhases)
+library(chronos)
 ```
 
 Import a CSV file containing a sample from the posterior distribution:
 
 ``` r
 ## Read output from ChronoModel
-path <- "chronomodel/output/"
+path <- "chronomodel/ksarakil/"
 
 ## Events
 path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
@@ -95,6 +98,7 @@ path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
 #> - Number of events: 16
 #> - Calendar: CE
 
+## Phases
 path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
 (chrono_phases <- read_chronomodel_phases(path_phases))
 #> <PhasesMCMC>
@@ -102,10 +106,9 @@ path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
 #> - Calendar: CE
 ```
 
-**ArchaeoPhases** uses
-[**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting
-information. This makes it easy to customize diagrams (e.g. using themes
-and scales).
+**chronos** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for
+plotting information. This makes it easy to customize diagrams
+(e.g. using themes and scales).
 
 ### Analysis of a series of dates
 

@@ -1,0 +1,647 @@
+{
+    "app_version": "2.0.18",
+    "dates_trash": [
+        {
+            "blue": 255,
+            "data": {
+                "a": 0,
+                "age": 15,
+                "b": 0.5,
+                "c": 0,
+                "curve": "example_csv_ref.csv",
+                "error": 1,
+                "mode": "eq"
+            },
+            "delta_average": 0,
+            "delta_error": 0,
+            "delta_fixed": 0,
+            "delta_max": 0,
+            "delta_min": 0,
+            "delta_type": -1,
+            "green": 0,
+            "id": 0,
+            "method": 2,
+            "name": "New Data",
+            "plugin_id": "gauss",
+            "red": 0,
+            "subdates": [
+            ],
+            "valid": true
+        },
+        {
+            "blue": 255,
+            "data": {
+                "a": 0,
+                "age": 137,
+                "b": 0.5,
+                "c": 0,
+                "error": 10,
+                "mode": "eq"
+            },
+            "delta_average": 0,
+            "delta_error": 0,
+            "delta_fixed": 0,
+            "delta_max": 0,
+            "delta_min": 0,
+            "delta_type": -1,
+            "green": 0,
+            "id": 1,
+            "method": 2,
+            "name": "New Data",
+            "plugin_id": "gauss",
+            "red": 0,
+            "subdates": [
+            ],
+            "valid": true
+        },
+        {
+            "blue": 255,
+            "data": {
+                "a": 0,
+                "age": 69,
+                "b": 0.5,
+                "c": 0,
+                "error": 3,
+                "mode": "eq"
+            },
+            "delta_average": 0,
+            "delta_error": 0,
+            "delta_fixed": 0,
+            "delta_max": 0,
+            "delta_min": 0,
+            "delta_type": -1,
+            "green": 0,
+            "id": 0,
+            "method": 2,
+            "name": "New Data",
+            "plugin_id": "gauss",
+            "red": 0,
+            "subdates": [
+            ],
+            "valid": true
+        },
+        {
+            "blue": 255,
+            "data": {
+                "a": 0,
+                "age": 16,
+                "b": 0.5,
+                "c": 0,
+                "error": 1,
+                "mode": "eq"
+            },
+            "delta_average": 0,
+            "delta_error": 0,
+            "delta_fixed": 0,
+            "delta_max": 0,
+            "delta_min": 0,
+            "delta_type": -1,
+            "green": 0,
+            "id": 1,
+            "method": 2,
+            "name": "New Data",
+            "plugin_id": "gauss",
+            "red": 0,
+            "subdates": [
+            ],
+            "valid": true
+        }
+    ],
+    "events": [
+        {
+            "blue": 160,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 16,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 1,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 154,
+            "id": 0,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": -540,
+            "method": 0,
+            "name": "S1",
+            "phase_ids": "0",
+            "red": 217,
+            "type": 0
+        },
+        {
+            "blue": 169,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 69,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 3,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 74,
+            "id": 1,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": -405,
+            "method": 0,
+            "name": "S2",
+            "phase_ids": "0",
+            "red": 178,
+            "type": 0
+        },
+        {
+            "blue": 232,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 137,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 10,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 94,
+            "id": 2,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": -270,
+            "method": 0,
+            "name": "S3",
+            "phase_ids": "0",
+            "red": 178,
+            "type": 0
+        },
+        {
+            "blue": 217,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 160,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 10,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 171,
+            "id": 3,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": 112.5,
+            "item_y": -135,
+            "method": 0,
+            "name": "S4",
+            "phase_ids": "1",
+            "red": 217,
+            "type": 0
+        },
+        {
+            "blue": 237,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 205,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 10,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 155,
+            "id": 4,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": 112.5,
+            "item_y": 0,
+            "method": 0,
+            "name": "S5",
+            "phase_ids": "1",
+            "red": 32,
+            "type": 0
+        },
+        {
+            "blue": 76,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 312,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 15,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 47,
+            "id": 5,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": 112.5,
+            "item_y": 135,
+            "method": 0,
+            "name": "S6",
+            "phase_ids": "1",
+            "red": 105,
+            "type": 0
+        },
+        {
+            "blue": 161,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 344,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 15,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 122,
+            "id": 6,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": 270,
+            "method": 0,
+            "name": "S7",
+            "phase_ids": "2",
+            "red": 64,
+            "type": 0
+        },
+        {
+            "blue": 71,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 412,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 15,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 232,
+            "id": 7,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": 405,
+            "method": 0,
+            "name": "S8",
+            "phase_ids": "2",
+            "red": 31,
+            "type": 0
+        },
+        {
+            "blue": 185,
+            "dates": [
+                {
+                    "blue": 255,
+                    "data": {
+                        "a": 0,
+                        "age": 450,
+                        "b": 0.5,
+                        "c": 0,
+                        "curve": "",
+                        "error": 15,
+                        "mode": "eq"
+                    },
+                    "delta_average": 0,
+                    "delta_error": 0,
+                    "delta_fixed": 0,
+                    "delta_max": 0,
+                    "delta_min": 0,
+                    "delta_type": -1,
+                    "green": 0,
+                    "id": 0,
+                    "is_selected": false,
+                    "method": 2,
+                    "name": "New Data",
+                    "plugin_id": "gauss",
+                    "red": 0,
+                    "subdates": [
+                    ],
+                    "valid": true
+                }
+            ],
+            "green": 249,
+            "id": 9,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": 540,
+            "method": 0,
+            "name": "S9",
+            "phase_ids": "2",
+            "red": 140,
+            "type": 0
+        }
+    ],
+    "events_constraints": [
+        {
+            "bwd_id": 0,
+            "fwd_id": 1,
+            "id": 0
+        },
+        {
+            "bwd_id": 1,
+            "fwd_id": 2,
+            "id": 1
+        },
+        {
+            "bwd_id": 2,
+            "fwd_id": 3,
+            "id": 2
+        },
+        {
+            "bwd_id": 3,
+            "fwd_id": 4,
+            "id": 3
+        },
+        {
+            "bwd_id": 4,
+            "fwd_id": 5,
+            "id": 4
+        },
+        {
+            "bwd_id": 5,
+            "fwd_id": 6,
+            "id": 5
+        },
+        {
+            "bwd_id": 6,
+            "fwd_id": 7,
+            "id": 6
+        },
+        {
+            "bwd_id": 7,
+            "fwd_id": 9,
+            "id": 7
+        }
+    ],
+    "events_trash": [
+        {
+            "blue": 201,
+            "dates": [
+            ],
+            "green": 151,
+            "id": 8,
+            "is_current": true,
+            "is_selected": true,
+            "item_x": 214,
+            "item_y": 131.5,
+            "method": 0,
+            "name": "S9",
+            "phase_ids": "",
+            "red": 2,
+            "type": 0
+        }
+    ],
+    "mcmc": {
+        "iter_per_batch": 500,
+        "max_batches": 20,
+        "mixing_level": 0.99,
+        "num_burn": 1000,
+        "num_iter": 100000,
+        "num_proc": 3,
+        "seeds": [
+        ],
+        "thinning_interval": 10
+    },
+    "phases": [
+        {
+            "blue": 8,
+            "green": 155,
+            "id": 0,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": -135,
+            "name": "Blanc 1",
+            "red": 166,
+            "tau_fixed": 0,
+            "tau_max": 0,
+            "tau_min": 0,
+            "tau_type": 0
+        },
+        {
+            "blue": 226,
+            "green": 196,
+            "id": 1,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": 112.5,
+            "item_y": 0,
+            "name": "Noir",
+            "red": 112,
+            "tau_fixed": 0,
+            "tau_max": 0,
+            "tau_min": 0,
+            "tau_type": 0
+        },
+        {
+            "blue": 21,
+            "green": 174,
+            "id": 2,
+            "is_current": false,
+            "is_selected": false,
+            "item_x": -112.5,
+            "item_y": 135,
+            "name": "Blanc 2",
+            "red": 206,
+            "tau_fixed": 0,
+            "tau_max": 0,
+            "tau_min": 0,
+            "tau_type": 0
+        }
+    ],
+    "phases_constraints": [
+        {
+            "bwd_id": 0,
+            "fwd_id": 1,
+            "gamma_fixed": 100,
+            "gamma_max": 1,
+            "gamma_min": 0,
+            "gamma_type": 1,
+            "id": 0
+        }
+    ],
+    "settings": {
+        "step": 1,
+        "step_forced": false,
+        "tmax": 1000,
+        "tmin": 0
+    },
+    "step": 1,
+    "step_forced": false,
+    "tmax": 1000,
+    "tmin": 0
+}

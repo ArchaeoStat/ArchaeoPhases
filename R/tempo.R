@@ -29,7 +29,7 @@ setMethod(
   definition = function(object, level = 0.95, count = FALSE,
                         credible = TRUE, gauss = TRUE,
                         from = min(object), to = max(object)) {
-    n_grid <- getOption("ArchaeoPhases.grid")
+    n_grid <- getOption("chronos.grid")
     n_events <- ncol(object)
 
     ## Empirical cumulative distribution

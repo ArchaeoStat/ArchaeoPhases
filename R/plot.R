@@ -88,7 +88,7 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
     } else {
       data <- as.vector(data)
       ## Compute density
-      d <- stats::density(data, n = getOption("ArchaeoPhases.grid"))
+      d <- stats::density(data, n = getOption("chronos.grid"))
       dens <- data.frame(
         x = d$x,
         y = d$y
@@ -105,7 +105,7 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
 
       if (!is.null(interval)) {
         ## Is credible?
-        cred <- is_credible(d$x, inter[, c(1, 2)])
+        cred <- is_credible(d$x, inter[, c("lower", "upper")])
         int <- dens[which(cred), , drop = FALSE]
         int$Interval <- paste0(round(level * 100), "%")
 
@@ -290,7 +290,7 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, ..., facet = TRUE,
   pha <- as.list(x)
 
   ## Density
-  n <- getOption("ArchaeoPhases.grid")
+  n <- getOption("chronos.grid")
   dens <- lapply(
     X = pha,
     FUN = function(x, n, ...) {

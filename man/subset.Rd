@@ -42,6 +42,7 @@ Operators acting on objects to extract or replace parts.
 }
 \seealso{
 Other mutators: 
+\code{\link{bind}},
 \code{\link{mutator}}
 }
 \author{

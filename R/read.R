@@ -272,3 +272,14 @@ setMethod(
     )
   }
 )
+
+#' @export
+#' @rdname read_chronomodel
+#' @aliases read_chronomodel_model,character-method
+setMethod(
+  f = "read_chronomodel_model",
+  signature = "character",
+  definition = function(file) {
+
+  }
+)
