@@ -2,7 +2,7 @@
 #'  \tabular{ll}{
 #'   **Package:** \tab chronos \cr
 #'   **Type:** \tab Package \cr
-#'   **Version:** \tab 1.5.0.9000 \cr
+#'   **Version:** \tab 0.0.0.9000 \cr
 #'   **License:** \tab GPL-3 \cr
 #'   **JSS:** \tab \doi{10.18637/jss.v093.c01} \cr
 #'  }

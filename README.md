@@ -21,22 +21,23 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
 
-***chronos* is a heavily modified fork of
-[*ArchaeoPhases*](https://github.com/ArchaeoStat/ArchaeoPhases) v1.5,
-see the changelog for details.**
+***chronos* is a fork of
+[*ArchaeoPhases*](https://github.com/ArchaeoStat/ArchaeoPhases) v1.5
+(Philippe and Vibet 2020) rewritten in S4, see the changelog for
+details.**
 
 ## Overview
 
 Statistical analysis of archaeological dates and groups of dates.
 **chronos** allows to post-process Markov Chain Monte Carlo (MCMC)
-simulations from [ChronoModel](https://chronomodel.com),
-[Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) or
-[BCal](https://bcal.shef.ac.uk). This package provides functions for the
-study of rhythms of the long term from the posterior distribution of a
-series of dates (tempo and activity plot). It also allows the estimation
-and visualization of time ranges from the posterior distribution of
-groups of dates (e.g. duration, transition and hiatus between successive
-phases).
+simulations from [ChronoModel](https://chronomodel.com) (Lanos et al.
+2020), [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) (Bronk Ramsey 2009)
+or [BCal](https://bcal.shef.ac.uk) (Buck, Christen, and James 1999).
+This package provides functions for the study of rhythms of the long
+term from the posterior distribution of a series of dates (tempo and
+activity plot). It also allows the estimation and visualization of time
+ranges from the posterior distribution of groups of dates
+(e.g. duration, transition and hiatus between successive phases).
 
 
     To cite chronos in publications use:
@@ -78,7 +79,7 @@ remotes::install_github("tesselle/chronos")
 
 These examples use data available through the
 [**fasti**](https://packages.tesselle.org/fasti/) package which is
-available in a separate [repository](https://tesselle.r-universe.dev).
+available in a [separate repository](https://tesselle.r-universe.dev).
 **fasti** provides MCMC outputs from ChronoModel, OxCal and BCal.
 
 ``` r
@@ -87,7 +88,7 @@ install.packages("fasti", repos = "https://tesselle.r-universe.dev")
 ```
 
 ``` r
-## Load packages
+## Load package
 library(chronos)
 ```
 
@@ -171,3 +172,41 @@ plot(chrono_phases, level = 0.95)
 ```
 
 <img src="man/figures/README-succession-plot-1.png" style="display: block; margin: auto;" />
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-bronkramsey2009" class="csl-entry">
+
+Bronk Ramsey, C. 2009. “Bayesian Analysis of Radiocarbon Dates.”
+*Radiocarbon* 51 (1): 337–60.
+<https://doi.org/10.1017/S0033822200033865>.
+
+</div>
+
+<div id="ref-buck1999" class="csl-entry">
+
+Buck, C. E., J. A. Christen, and G. E. James. 1999. “BCal: An on-Line
+Bayesian Radiocarbon Calibration Tool.” *Internet Archaeology* 7.
+<https://doi.org/10.11141/ia.7.1>.
+
+</div>
+
+<div id="ref-lanos2020" class="csl-entry">
+
+Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. *Chronomodel:
+Chronological Modeling of Archaeological Data Using Bayesian
+Statistics*. <https://www.chronomodel.fr>.
+
+</div>
+
+<div id="ref-philippe2020" class="csl-entry">
+
+Philippe, A., and M.-A. Vibet. 2020. “Analysis of Archaeological Phases
+Using the r Package ArchaeoPhases.” *Journal of Statistical Software,
+Code Snippets* 93 (1): 1–25. <https://doi.org/10.18637/jss.v093.c01>.
+
+</div>
+
+</div>

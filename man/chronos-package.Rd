@@ -9,13 +9,13 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Statistical analysis of archaeological dates and groups of dates. This package allows to post-process Markov Chain Monte Carlo (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>, 'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal' <https://bcal.shef.ac.uk/>. It provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
+Statistical analysis of archaeological dates and groups of dates. This package allows to post-process Markov Chain Monte Carlo (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>, 'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal' <https://bcal.shef.ac.uk/>. It provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases). This package is an S4 rewrite of 'ArchaeoPhases' by Philippe and Vibet (2020) <doi:10.18637/jss.v093.c01>.
 }
 \details{
 \tabular{ll}{
 \strong{Package:} \tab chronos \cr
 \strong{Type:} \tab Package \cr
-\strong{Version:} \tab 1.5.0.9000 \cr
+\strong{Version:} \tab 0.0.0.9000 \cr
 \strong{License:} \tab GPL-3 \cr
 \strong{JSS:} \tab \doi{10.18637/jss.v093.c01} \cr
 }

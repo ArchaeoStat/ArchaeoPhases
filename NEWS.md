@@ -1,4 +1,4 @@
-# chronos 1.5.0.9000
+# chronos 0.0.0.9000
 
 ## New classes and methods
 * `apportion()`

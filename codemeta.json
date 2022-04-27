@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/tesselle/chronos",
   "issueTracker": "https://github.com/tesselle/chronos/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.5.0.9000",
+  "version": "0.0.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -188,7 +188,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1076.542KB",
+  "fileSize": "1546.075KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -223,7 +223,7 @@
   ],
   "releaseNotes": "https://github.com/tesselle/chronos/blob/master/NEWS.md",
   "readme": "https://github.com/tesselle/chronos/blob/master/README.md",
-  "contIntegration": "https://github.com/tesselle/chronos/actions",
+  "contIntegration": ["https://github.com/tesselle/chronos/actions", "https://app.codecov.io/gh/tesselle/chronos"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["r-package", "bayesian-statistics", "radiocarbon-dates", "geochronology", "markov-chain"]
 }

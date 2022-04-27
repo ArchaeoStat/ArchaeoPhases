@@ -1,7 +1,6 @@
 ---
 output: github_document
-editor_options: 
-  chunk_output_type: console
+bibliography: vignettes/bibliography.bib
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -31,11 +30,11 @@ knitr::opts_chunk$set(
 [![DOI JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
 
-**_chronos_ is a heavily modified fork of [_ArchaeoPhases_](https://github.com/ArchaeoStat/ArchaeoPhases) v1.5, see the changelog for details.**
+**_chronos_ is a fork of [_ArchaeoPhases_](https://github.com/ArchaeoStat/ArchaeoPhases) v1.5 [@philippe2020] rewritten in S4, see the changelog for details.**
 
 ## Overview
 
-Statistical analysis of archaeological dates and groups of dates. **chronos** allows to post-process Markov Chain Monte Carlo (MCMC) simulations from [ChronoModel](https://chronomodel.com), [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) or [BCal](https://bcal.shef.ac.uk). This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
+Statistical analysis of archaeological dates and groups of dates. **chronos** allows to post-process Markov Chain Monte Carlo (MCMC) simulations from [ChronoModel](https://chronomodel.com) [@lanos2020], [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) [@bronkramsey2009] or [BCal](https://bcal.shef.ac.uk) [@buck1999]. This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
 
 ```{r citation, echo=FALSE, comment=''}
 utils::citation("chronos")
@@ -58,7 +57,7 @@ remotes::install_github("tesselle/chronos")
 
 ## Usage
 
-These examples use data available through the [**fasti**](https://packages.tesselle.org/fasti/) package which is available in a separate [repository](https://tesselle.r-universe.dev). **fasti** provides MCMC outputs from ChronoModel, OxCal and BCal.
+These examples use data available through the [**fasti**](https://packages.tesselle.org/fasti/) package which is available in a [separate repository](https://tesselle.r-universe.dev). **fasti** provides MCMC outputs from ChronoModel, OxCal and BCal.
 
 ```{r fasti, eval=FALSE}
 ## Install the latest version
@@ -66,7 +65,7 @@ install.packages("fasti", repos = "https://tesselle.r-universe.dev")
 ```
 
 ```{r packages-load}
-## Load packages
+## Load package
 library(chronos)
 ```
 
@@ -127,3 +126,5 @@ get_order(chrono_phases)
 ```{r succession-plot, fig.height=2}
 plot(chrono_phases, level = 0.95)
 ```
+
+## References
