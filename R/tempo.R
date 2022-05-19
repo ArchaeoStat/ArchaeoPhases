@@ -22,10 +22,10 @@ ecdf2 <- function(x) {
 
 #' @export
 #' @rdname tempo
-#' @aliases tempo,MCMC-method
+#' @aliases tempo,EventsMCMC-method
 setMethod(
   f = "tempo",
-  signature = "MCMC",
+  signature = "EventsMCMC",
   definition = function(object, level = 0.95, count = FALSE,
                         credible = TRUE, gauss = TRUE,
                         from = min(object), to = max(object)) {

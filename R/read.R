@@ -111,7 +111,7 @@ setMethod(
       data <- BP_to_CE(data)
 
     ## Return an MCM object
-    .MCMC(
+    .EventsMCMC(
       data,
       events = date_names,
       calendar = "CE",
@@ -166,7 +166,7 @@ setMethod(
     data <- BP_to_CE(data)
 
     ## Return an MCM object
-    .MCMC(
+    .EventsMCMC(
       data,
       events = date_names,
       calendar = "CE",

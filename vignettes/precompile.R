@@ -1,3 +1,5 @@
 # Vignettes that depend on internet access have been precompiled
-knitr::knit("vignettes/chronos.Rmd.orig", output = "vignettes/chronos.Rmd")
-knitr::knit("vignettes/import.Rmd.orig", output = "vignettes/import.Rmd")
+old_wd <- setwd("./vignettes")
+knitr::knit("chronos.Rmd.orig", output = "chronos.Rmd")
+knitr::knit("import.Rmd.orig", output = "import.Rmd")
+setwd(old_wd)

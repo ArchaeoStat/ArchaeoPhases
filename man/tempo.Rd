@@ -4,7 +4,7 @@
 \name{tempo}
 \alias{tempo}
 \alias{tempo-method}
-\alias{tempo,MCMC-method}
+\alias{tempo,EventsMCMC-method}
 \alias{autoplot,CumulativeEvents-method}
 \alias{plot,CumulativeEvents,missing-method}
 \alias{multiplot,CumulativeEvents-method}
@@ -12,7 +12,7 @@
 \usage{
 tempo(object, ...)
 
-\S4method{tempo}{MCMC}(
+\S4method{tempo}{EventsMCMC}(
   object,
   level = 0.95,
   count = FALSE,
@@ -29,7 +29,7 @@ tempo(object, ...)
 \S4method{multiplot}{CumulativeEvents}(...)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} object.}
+\item{object}{An \code{\linkS4class{EventsMCMC}} object.}
 
 \item{...}{Any \code{\linkS4class{CumulativeEvents}} object.}
 
@@ -75,7 +75,7 @@ the plot is horizontal. When change is instantaneous, the plot is vertical.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot

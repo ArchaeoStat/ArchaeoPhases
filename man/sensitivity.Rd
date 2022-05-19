@@ -4,15 +4,15 @@
 \name{sensitivity}
 \alias{sensitivity}
 \alias{sensitivity-method}
-\alias{sensitivity,MCMC-method}
+\alias{sensitivity,EventsMCMC-method}
 \title{Sensitivity}
 \usage{
 sensitivity(...)
 
-\S4method{sensitivity}{MCMC}(..., positions = NULL, level = 0.95)
+\S4method{sensitivity}{EventsMCMC}(..., positions = NULL, level = 0.95)
 }
 \arguments{
-\item{...}{Any \code{\linkS4class{MCMC}} object.}
+\item{...}{Any \code{\linkS4class{EventsMCMC}} object.}
 
 \item{positions}{A \code{\link{numeric}} vector specifying the positions of the columns
 corresponding to the MCMC chains of interest, or a \code{\link{character}} vector of
@@ -33,7 +33,7 @@ to different model parameters.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 
 ## Returns 0's
 sensitivity(eve, eve)

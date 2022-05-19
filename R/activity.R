@@ -4,10 +4,10 @@ NULL
 
 #' @export
 #' @rdname activity
-#' @aliases activity,MCMC-method
+#' @aliases activity,EventsMCMC-method
 setMethod(
   f = "activity",
-  signature = "MCMC",
+  signature = "EventsMCMC",
   definition = function(object, from = min(object), to = max(object)) {
     ## Tempo
     tmp <- tempo(object, level = 0.95, count = FALSE, credible = FALSE,

@@ -1,5 +1,5 @@
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 
 ## Plot events
 ## BP

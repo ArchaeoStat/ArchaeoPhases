@@ -14,11 +14,11 @@
 \alias{as_ordered-method}
 \alias{is_ordered}
 \alias{is_ordered-method}
-\alias{as_phases,MCMC-method}
+\alias{as_phases,EventsMCMC-method}
 \alias{as_phases,matrix-method}
 \alias{as_phases,data.frame-method}
-\alias{phase,MCMC,missing-method}
-\alias{phase,MCMC,list-method}
+\alias{phase,EventsMCMC,missing-method}
+\alias{phase,EventsMCMC,list-method}
 \alias{set_order<-,PhasesMCMC,character-method}
 \alias{set_order,PhasesMCMC,character-method}
 \alias{get_order,PhasesMCMC-method}
@@ -38,7 +38,7 @@ as_ordered(x)
 
 is_ordered(x)
 
-\S4method{as_phases}{MCMC}(
+\S4method{as_phases}{EventsMCMC}(
   from,
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
@@ -66,9 +66,9 @@ is_ordered(x)
   iteration = NULL
 )
 
-\S4method{phase}{MCMC,missing}(x)
+\S4method{phase}{EventsMCMC,missing}(x)
 
-\S4method{phase}{MCMC,list}(x, groups, ordered = FALSE)
+\S4method{phase}{EventsMCMC,list}(x, groups, ordered = FALSE)
 
 \S4method{set_order}{PhasesMCMC,character}(x) <- value
 
@@ -85,7 +85,7 @@ is_ordered(x)
 
 \item{...}{Currently not used.}
 
-\item{from}{A \code{numeric} \code{\link{matrix}} or an \code{\linkS4class{MCMC}}.}
+\item{from}{A \code{numeric} \code{\link{matrix}} or an \code{\linkS4class{EventsMCMC}}.}
 
 \item{value}{A possible value for the element(s) of \code{x}.}
 

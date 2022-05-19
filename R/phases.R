@@ -5,10 +5,10 @@ NULL
 # Min-Max ======================================================================
 #' @export
 #' @rdname phase
-#' @aliases as_phases,MCMC-method
+#' @aliases as_phases,EventsMCMC-method
 setMethod(
   f = "as_phases",
-  signature = c(from = "MCMC"),
+  signature = c(from = "EventsMCMC"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, ordered = FALSE) {
     ## Validation
@@ -85,10 +85,10 @@ setMethod(
 # Build phases =================================================================
 #' @export
 #' @rdname phase
-#' @aliases phase,MCMC,missing-method
+#' @aliases phase,EventsMCMC,missing-method
 setMethod(
   f = "phase",
-  signature = c(x = "MCMC", groups = "missing"),
+  signature = c(x = "EventsMCMC", groups = "missing"),
   definition = function(x) {
     groups <- list(seq_len(ncol(x)))
     methods::callGeneric(x = x, groups = groups)
@@ -97,10 +97,10 @@ setMethod(
 
 #' @export
 #' @rdname phase
-#' @aliases phase,MCMC,list-method
+#' @aliases phase,EventsMCMC,list-method
 setMethod(
   f = "phase",
-  signature = c(x = "MCMC", groups = "list"),
+  signature = c(x = "EventsMCMC", groups = "list"),
   definition = function(x, groups, ordered = FALSE) {
     m <- nrow(x)
     n <- length(groups) # Number of phases
@@ -304,7 +304,7 @@ setMethod(
       result[, i] <- duration(a, b)
     }
 
-    .MCMC(
+    .DurationsMCMC(
       result,
       events = pha,
       calendar = "elapsed",

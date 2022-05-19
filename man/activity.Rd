@@ -4,7 +4,7 @@
 \name{activity}
 \alias{activity}
 \alias{activity-method}
-\alias{activity,MCMC-method}
+\alias{activity,EventsMCMC-method}
 \alias{activity,CumulativeEvents-method}
 \alias{autoplot,ActivityEvents-method}
 \alias{plot,ActivityEvents,missing-method}
@@ -13,7 +13,7 @@
 \usage{
 activity(object, ...)
 
-\S4method{activity}{MCMC}(object, from = min(object), to = max(object))
+\S4method{activity}{EventsMCMC}(object, from = min(object), to = max(object))
 
 \S4method{activity}{CumulativeEvents}(object)
 
@@ -24,7 +24,7 @@ activity(object, ...)
 \S4method{multiplot}{ActivityEvents}(...)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
+\item{object}{An \code{\linkS4class{EventsMCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
 
 \item{...}{Any \code{\linkS4class{ActivityEvents}} object.}
 
@@ -52,7 +52,7 @@ Plots the first derivative of the \code{\link{tempo}} plot Bayesian estimate.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot

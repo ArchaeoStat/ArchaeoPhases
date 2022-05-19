@@ -40,7 +40,7 @@ CE? This should not be \code{TRUE} unless you change the default settings in
 'OxCal' or 'ChronoModel'.}
 }
 \value{
-An \code{\linkS4class{MCMC}} object.
+An \code{\linkS4class{EventsMCMC}} object.
 }
 \description{
 Reads MCMC output.

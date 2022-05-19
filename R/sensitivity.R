@@ -4,10 +4,10 @@ NULL
 
 #' @export
 #' @rdname sensitivity
-#' @aliases sensitivity,MCMC-method
+#' @aliases sensitivity,EventsMCMC-method
 setMethod(
   f = "sensitivity",
-  signature = "MCMC",
+  signature = "EventsMCMC",
   function(..., positions = NULL, level = 0.95) {
     ## Get data
     dots <- list(...)

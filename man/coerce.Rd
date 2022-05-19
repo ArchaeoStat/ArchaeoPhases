@@ -3,25 +3,15 @@
 \docType{methods}
 \name{coerce}
 \alias{coerce}
-\alias{as_mcmc}
-\alias{as_mcmc-method}
 \alias{as_events}
 \alias{as_events-method}
-\alias{as_mcmc,matrix-method}
 \alias{as_events,matrix-method}
-\alias{as_mcmc,data.frame-method}
 \alias{as_events,data.frame-method}
 \title{Coerce}
 \usage{
-as_mcmc(from, ...)
-
 as_events(from, ...)
 
-\S4method{as_mcmc}{matrix}(from, BP = FALSE, iteration = NULL)
-
 \S4method{as_events}{matrix}(from, BP = FALSE, iteration = NULL)
-
-\S4method{as_mcmc}{data.frame}(from, BP = FALSE, iteration = NULL)
 
 \S4method{as_events}{data.frame}(from, BP = FALSE, iteration = NULL)
 }
@@ -45,7 +35,7 @@ Coerce
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 }
 \seealso{
 Other read methods: 

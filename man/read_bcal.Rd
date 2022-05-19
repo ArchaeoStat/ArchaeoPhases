@@ -40,7 +40,7 @@ read_bcal(file, ...)
 default of 1.}
 }
 \value{
-An \code{\linkS4class{MCMC}} object.
+An \code{\linkS4class{EventsMCMC}} object.
 }
 \description{
 Reads MCMC output.

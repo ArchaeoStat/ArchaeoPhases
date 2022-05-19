@@ -4,10 +4,10 @@ NULL
 
 #' @export
 #' @rdname roc
-#' @aliases roc,MCMC-method
+#' @aliases roc,EventsMCMC-method
 setMethod(
   f = "roc",
-  signature = "MCMC",
+  signature = "EventsMCMC",
   definition = function(object, from = min(object), to = max(object)) {
     ## Activity
     tmp <- activity(object, from = from, to = to)

@@ -7,6 +7,8 @@
 \alias{.MCMC}
 \alias{EventsMCMC-class}
 \alias{.EventsMCMC}
+\alias{DurationsMCMC-class}
+\alias{.DurationsMCMC}
 \title{MCMC Events}
 \description{
 S4 classes to represent the output of a MCMC algorithm.

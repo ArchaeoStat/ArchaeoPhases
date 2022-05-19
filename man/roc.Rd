@@ -4,7 +4,7 @@
 \name{roc}
 \alias{roc}
 \alias{roc-method}
-\alias{roc,MCMC-method}
+\alias{roc,EventsMCMC-method}
 \alias{roc,CumulativeEvents-method}
 \alias{roc,ActivityEvents-method}
 \alias{autoplot,RateOfChange-method}
@@ -13,7 +13,7 @@
 \usage{
 roc(object, ...)
 
-\S4method{roc}{MCMC}(object, from = min(object), to = max(object))
+\S4method{roc}{EventsMCMC}(object, from = min(object), to = max(object))
 
 \S4method{roc}{CumulativeEvents}(object)
 
@@ -24,7 +24,7 @@ roc(object, ...)
 \S4method{plot}{RateOfChange,missing}(x, colour = "black", ...)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}}, a \code{\linkS4class{CumulativeEvents}} or an
+\item{object}{An \code{\linkS4class{EventsMCMC}}, a \code{\linkS4class{CumulativeEvents}} or an
 \code{\linkS4class{ActivityEvents}} object.}
 
 \item{...}{Currently not used.}
@@ -52,7 +52,7 @@ Rate of Change
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot

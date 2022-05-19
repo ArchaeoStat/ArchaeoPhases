@@ -4,10 +4,10 @@ NULL
 
 #' @export
 #' @rdname occurrence
-#' @aliases occurrence,MCMC-method
+#' @aliases occurrence,EventsMCMC-method
 setMethod(
   f = "occurrence",
-  signature = "MCMC",
+  signature = "EventsMCMC",
   definition = function(object, interval = c("ci", "hpdi"), level = 0.95) {
     ## Validation
     interval <- match.arg(interval, several.ok = FALSE)
@@ -17,7 +17,7 @@ setMethod(
 
     ## Sort rows
     sorted <- apply(X = object, MARGIN = 1, FUN = sort, decreasing = desc)
-    sorted <- as_mcmc(t(sorted))
+    sorted <- as_events(t(sorted))
     ord <- seq_len(ncol(object))
 
     ## Compute interval

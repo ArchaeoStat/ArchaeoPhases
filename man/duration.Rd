@@ -25,7 +25,7 @@ Phase Duration
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Compute min-max range by group

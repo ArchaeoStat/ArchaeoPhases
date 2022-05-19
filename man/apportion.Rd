@@ -4,18 +4,18 @@
 \name{apportion}
 \alias{apportion}
 \alias{apportion-method}
-\alias{apportion,MCMC,numeric,numeric-method}
-\alias{apportion,MCMC,list,missing-method}
+\alias{apportion,EventsMCMC,numeric,numeric-method}
+\alias{apportion,EventsMCMC,list,missing-method}
 \title{Apportioned Probabilities}
 \usage{
 apportion(object, from, to, ...)
 
-\S4method{apportion}{MCMC,numeric,numeric}(object, from, to, groups = NULL)
+\S4method{apportion}{EventsMCMC,numeric,numeric}(object, from, to, groups = NULL)
 
-\S4method{apportion}{MCMC,list,missing}(object, from, groups = NULL)
+\S4method{apportion}{EventsMCMC,list,missing}(object, from, groups = NULL)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} object.}
+\item{object}{An \code{\linkS4class{EventsMCMC}} object.}
 
 \item{from}{A \code{\link{numeric}} vector. If \code{to} is missing, must be a \code{\link{list}} (or
 a \code{\link{data.frame}}) with \code{numeric} components (columns) \code{from} and \code{to}.}

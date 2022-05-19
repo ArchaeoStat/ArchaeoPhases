@@ -53,14 +53,6 @@ setGeneric(
 NULL
 
 #' @rdname coerce
-#' @aliases as_mcmc-method
-setGeneric(
-  name = "as_mcmc",
-  def = function(from, ...) standardGeneric("as_mcmc"),
-  valueClass = "MCMC"
-)
-
-#' @rdname coerce
 #' @aliases as_events-method
 setGeneric(
   name = "as_events",
@@ -289,7 +281,7 @@ setGeneric(
 #' A statistical graphic designed for the archaeological study of rhythms of the
 #' long term that embodies a theory of archaeological evidence for the
 #' occurrence of events.
-#' @param object An [`MCMC-class`] object.
+#' @param object An [`EventsMCMC-class`] object.
 #' @param x A [`CumulativeEvents-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number
@@ -339,7 +331,7 @@ setGeneric(
 #' Activity Plot
 #'
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
-#' @param object An [`MCMC-class`] or a [`CumulativeEvents-class`] object.
+#' @param object An [`EventsMCMC-class`] or a [`CumulativeEvents-class`] object.
 #' @param x An [`ActivityEvents-class`] object.
 #' @param from A length-one [`numeric`] vector giving the earliest date to
 #'  estimate for (in years).
@@ -378,7 +370,7 @@ setGeneric(
 #'
 #' A statistical graphic designed for the archaeological study of when
 #' events of a specified kind occurred.
-#' @param object An [`MCMC-class`] object.
+#' @param object An [`EventsMCMC-class`] object.
 #' @param x An [`OccurrenceEvents-class`] object.
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`ci`" (credible interval; the default)
@@ -420,7 +412,7 @@ setGeneric(
 ## ROC -------------------------------------------------------------------------
 #' Rate of Change
 #'
-#' @param object An [`MCMC-class`], a [`CumulativeEvents-class`] or an
+#' @param object An [`EventsMCMC-class`], a [`CumulativeEvents-class`] or an
 #'  [`ActivityEvents-class`] object.
 #' @param x A [`RateOfChange-class`] object.
 #' @param from A length-one [`numeric`] vector giving the earliest date to
@@ -520,7 +512,7 @@ setGeneric(
 #' Phases
 #'
 #' Constructs the minimum and maximum for a group of events (phase).
-#' @param from A `numeric` [`matrix`] or an [`MCMC-class`].
+#' @param from A `numeric` [`matrix`] or an [`EventsMCMC-class`].
 #' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @param groups A [`list`].
 #' @param start An [`integer`] vector specifying the index of the columns
@@ -818,7 +810,7 @@ setGeneric(
 #'  CE? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
 #' @return
-#'  An [`MCMC-class`] object.
+#'  An [`EventsMCMC-class`] object.
 #' @references
 #'  Bronk Ramsey, C. (2009). Bayesian Analysis of Radiocarbon Dates.
 #'  *Radiocarbon*, 51(1), 337-360. \doi{10.1017/S0033822200033865}.
@@ -843,7 +835,7 @@ setGeneric(
 #'  [BCal](https://bcal.shef.ac.uk/) calibration. Defaults to the BCal
 #'  default of 1.
 #' @return
-#'  An [`MCMC-class`] object.
+#'  An [`EventsMCMC-class`] object.
 #' @references
 #'  Buck C. E., Christen J. A. & James G. N. (1999). BCal: an on-line Bayesian
 #'  radiocarbon calibration tool. *Internet Archaeology*, 7.
@@ -869,7 +861,7 @@ setGeneric(
 #'  CE? This should not be `TRUE` unless you change the default settings in
 #'  'OxCal' or 'ChronoModel'.
 #' @return
-#'  An [`MCMC-class`] object.
+#'  An [`EventsMCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @references
 #'  Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
 #'  Chronological Modeling of Archaeological Data using Bayesian Statistics.
@@ -937,7 +929,7 @@ setGeneric(
 #'
 #' Calculates the ranges of summary statistics from the output of two or more
 #' runs of the MCMC algorithm.
-#' @param ... Any [`MCMC-class`] object.
+#' @param ... Any [`EventsMCMC-class`] object.
 #' @param positions A [`numeric`] vector specifying the positions of the columns
 #'  corresponding to the MCMC chains of interest, or a [`character`] vector of
 #'  column names.

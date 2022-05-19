@@ -1,7 +1,7 @@
 ---
 title: "Manual"
 author: "A. Philippe, M.-A. Vibet"
-date: "2022-04-26"
+date: "2022-05-19"
 output:
   rmarkdown::html_vignette:
     toc: true

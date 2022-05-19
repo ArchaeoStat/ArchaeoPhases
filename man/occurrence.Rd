@@ -4,21 +4,21 @@
 \name{occurrence}
 \alias{occurrence}
 \alias{occurrence-method}
-\alias{occurrence,MCMC-method}
+\alias{occurrence,EventsMCMC-method}
 \alias{autoplot,OccurrenceEvents-method}
 \alias{plot,OccurrenceEvents,missing-method}
 \title{Occurrence Plot}
 \usage{
 occurrence(object, ...)
 
-\S4method{occurrence}{MCMC}(object, interval = c("ci", "hpdi"), level = 0.95)
+\S4method{occurrence}{EventsMCMC}(object, interval = c("ci", "hpdi"), level = 0.95)
 
 \S4method{autoplot}{OccurrenceEvents}(object, ..., colour = "black")
 
 \S4method{plot}{OccurrenceEvents,missing}(x, colour = "black", ...)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} object.}
+\item{object}{An \code{\linkS4class{EventsMCMC}} object.}
 
 \item{...}{Currently not used.}
 
@@ -58,7 +58,7 @@ of confidence.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Occurrence plot

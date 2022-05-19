@@ -39,7 +39,7 @@ multiple parameters. Results are given in calendar years (BC/AD).
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_mcmc(events, iteration = 1)
+eve <- as_events(events, iteration = 1)
 
 ## BP
 eve_BP <- CE_to_BP(eve)

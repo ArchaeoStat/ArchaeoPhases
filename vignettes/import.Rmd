@@ -1,7 +1,7 @@
 ---
 title: "Import MCMC Samples"
 author: "N. Frerebeau"
-date: "2022-04-26"
+date: "2022-05-19"
 output: rmarkdown::html_vignette
 bibliography: bibliography.bib
 vignette: >
