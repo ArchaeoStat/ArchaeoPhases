@@ -52,6 +52,7 @@ Imports:
     utils
 Suggests: 
     fasti,
+    folio,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
@@ -61,7 +62,7 @@ Additional_repositories: https://tesselle.r-universe.dev
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Collate: 
     'AllClasses.R'
     'AllGenerics.R'
@@ -77,6 +78,7 @@ Collate:
     'occurrence.R'
     'phases.R'
     'plot.R'
+    'proxy.R'
     'read.R'
     'roc.R'
     'sensitivity.R'

@@ -55,6 +55,26 @@ setMethod(
   }
 )
 
+#' @export
+#' @rdname proxy
+#' @aliases summary,ProxyRecord-method
+setMethod(
+  f = "summary",
+  signature = "ProxyRecord",
+  definition = function(object, level = 0.95) {
+    x <- apply(
+      X = object@samples,
+      MARGIN = 1,
+      FUN = stats_marginal,
+      map = FALSE,
+      level = level,
+      BP = is_BP(object),
+      digits = NULL
+    )
+    as.data.frame(t(x))
+  }
+)
+
 #' Marginal Statistics
 #'
 #' @param x A [`numeric`] vector.
@@ -74,7 +94,8 @@ setMethod(
 #' @noRd
 stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
                            quantiles = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1),
-                           credible = TRUE, level = 0.95, BP = FALSE) {
+                           credible = TRUE, level = 0.95, BP = FALSE,
+                           digits = getOption("chronos.precision")) {
   ## Defaults
   moy <- mod <- quant <- ec <- ci <- NA_real_
 
@@ -93,7 +114,8 @@ stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
   ## Results
   tmp <- c(mad = mod, mean = moy, sd = ec, quant, ci)
   tmp <- Filter(Negate(is.na), tmp)
-  round(tmp, digits = getOption("chronos.precision"))
+  if (!is.null(digits)) tmp <- round(tmp, digits = digits)
+  tmp
 }
 
 map <- function(x, ...) {

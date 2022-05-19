@@ -17,7 +17,7 @@ S4 classes to represent the output of a MCMC algorithm.
 \item{\code{events}}{A \code{\link{character}} vector specifying the name of the events.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
-(either "\code{BP}" or "\code{CE}").}
+(either "\code{BP}", "\code{CE}" or "\code{b2k}").}
 
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
@@ -41,6 +41,7 @@ Other classes:
 \code{\link{CumulativeEvents-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
+\code{\link{ProxyRecord-class}},
 \code{\link{RateOfChange-class}}
 }
 \author{

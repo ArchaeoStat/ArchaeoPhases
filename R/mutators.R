@@ -90,6 +90,15 @@ setMethod(
 
 #' @export
 #' @rdname mutator
+#' @aliases get_calendar,ProxyRecord-method
+setMethod(
+  f = "get_calendar",
+  signature = "ProxyRecord",
+  definition = function(x) x@calendar
+)
+
+#' @export
+#' @rdname mutator
 #' @aliases get_hash,MCMC-method
 setMethod(
   f = "get_hash",

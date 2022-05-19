@@ -214,6 +214,74 @@ setGeneric(
   def = function(object) standardGeneric("is_CE")
 )
 
+#' @rdname calendar
+#' @aliases is_b2k-method
+setGeneric(
+  name = "is_b2k",
+  def = function(object) standardGeneric("is_b2k")
+)
+
+# Age-Depth Modeling ===========================================================
+#' Layer-Counted Proxy Records Uncertainties
+#'
+#' Represents layer-counted proxy records as sequences of probability
+#' distributions on absolute, error-free time axes.
+#' @param x,object A [`ProxyRecord-class`] object.
+#' @param raw A [`logical`] scalar: should the raw proxy data be displayed
+#'  instead of the mean estimates?
+#' @param IQR A [`logical`] scalar: should the IQR be displayed instead of the
+#'  95% confidence intervals?
+#' @param depth A [`numeric`] vector giving the depth at which proxy values and
+#'  calendar ages were measured.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param proxy A [`numeric`] vector giving the proxy values.
+#' @param proxy_error A [`numeric`] vector giving the proxy uncertainties.
+#' @param time A [`numeric`] vector giving the calendar ages.
+#' @param time_error A [`numeric`] vector giving the calendar age uncertainties.
+#' @param from A length-one [`numeric`] vector specifying the starting value of
+#'  the temporal sequence at which densities are to be estimated.
+#' @param to A length-one [`numeric`] vector specifying the end value of the
+#'  temporal sequence at which densities are to be estimated.
+#' @param grid A length-one [`numeric`] vector specifying the step size (in
+#'  units of `proxy`) at which proxy records densities are to be estimated.
+#'  If `NULL` (the default), equally spaced points will be used (according to
+#'  `options("chronos.grid")`).
+#' @param resolution A length-one [`numeric`] vector specifying the temporal
+#'  resolution (in units of `time`) at which densities are to be estimated.
+#'  If `NULL` (the default), the smallest temporal difference between two
+#'  consecutive records will be used.
+#' @param calendar A [`character`] string specifying the chronological scale
+#'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
+#' @param density A [`logical`] scalar: should densities be kept in the results?
+#' @param samples A [`logical`] scalar: should samples be returned?
+#'  Defaults to `TRUE`.
+#' @param n An [`integer`] specifying the number of item to choose.
+#'  Only used if `samples` is `TRUE`.
+#' @param ... Currently not used.
+#' @return
+#'  * `proxy()` returns an [`ProxyRecord-class`] object.
+#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
+#' @references
+#'  Boers, N., Goswami, B. & Ghil, M. (2017). A Complete Representation of
+#'  Uncertainties in Layer-Counted Paleoclimatic Archives. *Climate of the
+#'  Past*, 13(9): 1169-1180. \doi{10.5194/cp-13-1169-2017}.
+#' @example inst/examples/ex-proxy.R
+#' @author N. Frerebeau
+#' @family age-depth modeling tools
+#' @docType methods
+#' @name proxy
+#' @rdname proxy
+NULL
+
+#' @rdname proxy
+#' @aliases proxy-method
+setGeneric(
+  name = "proxy",
+  def = function(depth, ...) standardGeneric("proxy")
+)
+
 # Events =======================================================================
 ## Tempo -----------------------------------------------------------------------
 #' Tempo Plot
@@ -447,30 +515,6 @@ setGeneric(
   def = function(object, ...) standardGeneric("hpdi")
 )
 
-# Dates ========================================================================
-#' Hiatus Between Two Dates
-#'
-#' Tests for the existence of a hiatus between two parameters.
-#' @param x,y A [`numeric`] vector.
-#' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param ... Currently not used.
-#' @details
-#'  Finds if a gap exists between two dates and returns the longest interval
-#'  that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
-#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family event tools
-#' @docType methods
-#' @name lapse
-#' @rdname lapse
-NULL
-
-#' @rdname lapse
-#' @aliases lapse-method
-setGeneric(
-  name = "lapse",
-  def = function(x, y, ...) standardGeneric("lapse")
-)
-
 # Phase ========================================================================
 ## Build -----------------------------------------------------------------------
 #' Phases
@@ -691,6 +735,30 @@ setGeneric(
 )
 
 # Test =========================================================================
+## Hiatus ----------------------------------------------------------------------
+#' Hiatus Between Two Dates
+#'
+#' Tests for the existence of a hiatus between two parameters.
+#' @param x,y A [`numeric`] vector.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param ... Currently not used.
+#' @details
+#'  Finds if a gap exists between two dates and returns the longest interval
+#'  that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
+#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
+#' @family event tools
+#' @docType methods
+#' @name lapse
+#' @rdname lapse
+NULL
+
+#' @rdname lapse
+#' @aliases lapse-method
+setGeneric(
+  name = "lapse",
+  def = function(x, y, ...) standardGeneric("lapse")
+)
+
 ## Anteriority -----------------------------------------------------------------
 #' Bayesian Test for Anteriority/Posteriority
 #'
@@ -793,7 +861,6 @@ setGeneric(
   def = function(file, ...) standardGeneric("read_bcal"),
   valueClass = "MCMC"
 )
-
 
 #' Read ChronoModel Output
 #'

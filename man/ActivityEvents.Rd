@@ -38,6 +38,7 @@ Other classes:
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
+\code{\link{ProxyRecord-class}},
 \code{\link{RateOfChange-class}}
 }
 \author{

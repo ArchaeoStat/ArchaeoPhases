@@ -53,7 +53,7 @@
 #' @importFrom methods as callGeneric callNextMethod new prototype setClass
 #' setGeneric setMethod setValidity validObject .valueClassTest
 #' @importFrom rlang .data
-#' @importFrom stats density median
+#' @importFrom stats density dnorm dunif median
 #' @importFrom tools md5sum
 #' @importFrom utils download.file file_test
 NULL

@@ -42,6 +42,7 @@ Other classes:
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
 \code{\link{PhasesMCMC-class}},
+\code{\link{ProxyRecord-class}},
 \code{\link{RateOfChange-class}}
 }
 \author{

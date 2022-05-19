@@ -8,7 +8,7 @@ NULL
 #' S4 classes to represent the output of a MCMC algorithm.
 #' @slot events A [`character`] vector specifying the name of the events.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`CE`").
+#'  (either "`BP`", "`CE`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Subset:
@@ -238,5 +238,29 @@ NULL
     estimate = "numeric",
     calendar = "character",
     hash = "character"
+  )
+)
+
+# Proxy Record =================================================================
+#' Proxy Record
+#'
+#' An S4 class to store proxy records.
+#' @author N. Frerebeau
+#' @family classes
+#' @docType class
+#' @rdname ProxyRecord
+#' @aliases ProxyRecord-class
+.ProxyRecord <- setClass(
+  Class = "ProxyRecord",
+  slots = c(
+    depth = "numeric",
+    proxy = "numeric",
+    proxy_error = "numeric",
+    time = "numeric",
+    time_error = "numeric",
+    time_grid = "numeric",
+    calendar = "character",
+    density = "matrix",
+    samples = "matrix"
   )
 )

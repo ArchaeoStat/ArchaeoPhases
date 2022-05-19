@@ -38,7 +38,8 @@ Other classes:
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},
-\code{\link{PhasesMCMC-class}}
+\code{\link{PhasesMCMC-class}},
+\code{\link{ProxyRecord-class}}
 }
 \author{
 N. Frerebeau
