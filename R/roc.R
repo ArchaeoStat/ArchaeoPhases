@@ -68,7 +68,7 @@ setMethod(
 #' @method autoplot RateOfChange
 autoplot.RateOfChange <- function(object, ..., colour = "black") {
   ## Calendar scale
-  gg_x_scale <- scale_calendar(get_calendar(object))
+  gg_x_scale <- scale_calendar(object)
 
   data <- as.data.frame(object)
   ggplot2::ggplot(data = data) +

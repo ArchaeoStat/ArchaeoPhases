@@ -94,7 +94,7 @@ setMethod(
 autoplot.CumulativeEvents <- function(object, ..., credible = TRUE,
                                       gauss = TRUE) {
   ## Calendar scale
-  gg_x_scale <- scale_calendar(get_calendar(object))
+  gg_x_scale <- scale_calendar(object)
 
   ## Intervals
   credible <- credible & nrow(object@credible) > 0

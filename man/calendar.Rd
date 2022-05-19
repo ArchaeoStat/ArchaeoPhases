@@ -9,18 +9,34 @@
 \alias{BP_to_CE-method}
 \alias{CE_to_BP}
 \alias{CE_to_BP-method}
+\alias{b2k_to_BP}
+\alias{b2k_to_BP-method}
+\alias{b2k_to_CE}
+\alias{b2k_to_CE-method}
 \alias{is_BP}
 \alias{is_BP-method}
 \alias{is_CE}
 \alias{is_CE-method}
+\alias{is_b2k}
+\alias{is_b2k-method}
 \alias{is_BP,MCMC-method}
 \alias{is_BP,PhasesMCMC-method}
 \alias{is_BP,CumulativeEvents-method}
 \alias{is_BP,ActivityEvents-method}
+\alias{is_BP,OccurrenceEvents-method}
+\alias{is_BP,ProxyRecord-method}
 \alias{is_CE,MCMC-method}
 \alias{is_CE,PhasesMCMC-method}
 \alias{is_CE,CumulativeEvents-method}
 \alias{is_CE,ActivityEvents-method}
+\alias{is_CE,OccurrenceEvents-method}
+\alias{is_CE,ProxyRecord-method}
+\alias{is_b2k,MCMC-method}
+\alias{is_b2k,PhasesMCMC-method}
+\alias{is_b2k,CumulativeEvents-method}
+\alias{is_b2k,ActivityEvents-method}
+\alias{is_b2k,OccurrenceEvents-method}
+\alias{is_b2k,ProxyRecord-method}
 \alias{elapse,MCMC-method}
 \alias{BP_to_CE,numeric-method}
 \alias{BP_to_CE,matrix-method}
@@ -34,7 +50,15 @@
 \alias{CE_to_BP,MCMC-method}
 \alias{CE_to_BP,PhasesMCMC-method}
 \alias{CE_to_BP,CumulativeEvents-method}
-\title{Time Scale}
+\alias{b2k_to_BP,numeric-method}
+\alias{b2k_to_BP,matrix-method}
+\alias{b2k_to_BP,array-method}
+\alias{b2k_to_BP,ProxyRecord-method}
+\alias{b2k_to_CE,numeric-method}
+\alias{b2k_to_CE,matrix-method}
+\alias{b2k_to_CE,array-method}
+\alias{b2k_to_CE,ProxyRecord-method}
+\title{Time Scales}
 \usage{
 elapse(object, ...)
 
@@ -42,9 +66,15 @@ BP_to_CE(object)
 
 CE_to_BP(object)
 
+b2k_to_BP(object)
+
+b2k_to_CE(object)
+
 is_BP(object)
 
 is_CE(object)
+
+is_b2k(object)
 
 \S4method{is_BP}{MCMC}(object)
 
@@ -54,6 +84,10 @@ is_CE(object)
 
 \S4method{is_BP}{ActivityEvents}(object)
 
+\S4method{is_BP}{OccurrenceEvents}(object)
+
+\S4method{is_BP}{ProxyRecord}(object)
+
 \S4method{is_CE}{MCMC}(object)
 
 \S4method{is_CE}{PhasesMCMC}(object)
@@ -61,6 +95,22 @@ is_CE(object)
 \S4method{is_CE}{CumulativeEvents}(object)
 
 \S4method{is_CE}{ActivityEvents}(object)
+
+\S4method{is_CE}{OccurrenceEvents}(object)
+
+\S4method{is_CE}{ProxyRecord}(object)
+
+\S4method{is_b2k}{MCMC}(object)
+
+\S4method{is_b2k}{PhasesMCMC}(object)
+
+\S4method{is_b2k}{CumulativeEvents}(object)
+
+\S4method{is_b2k}{ActivityEvents}(object)
+
+\S4method{is_b2k}{OccurrenceEvents}(object)
+
+\S4method{is_b2k}{ProxyRecord}(object)
 
 \S4method{elapse}{MCMC}(object, origin = 1)
 
@@ -87,6 +137,22 @@ is_CE(object)
 \S4method{CE_to_BP}{PhasesMCMC}(object)
 
 \S4method{CE_to_BP}{CumulativeEvents}(object)
+
+\S4method{b2k_to_BP}{numeric}(object)
+
+\S4method{b2k_to_BP}{matrix}(object)
+
+\S4method{b2k_to_BP}{array}(object)
+
+\S4method{b2k_to_BP}{ProxyRecord}(object)
+
+\S4method{b2k_to_CE}{numeric}(object)
+
+\S4method{b2k_to_CE}{matrix}(object)
+
+\S4method{b2k_to_CE}{array}(object)
+
+\S4method{b2k_to_CE}{ProxyRecord}(object)
 }
 \arguments{
 \item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
@@ -98,15 +164,18 @@ to the event from which elapsed time is calculated.}
 }
 \value{
 \itemize{
-\item \code{elapse()}, \code{BP_to_CE()} and \code{CE_to_BP()} return an object of the same
-class as \code{object}.
-\item \code{is_BP()} and \code{is_CE()} return a \code{\link{logical}} scalar.
+\item \code{elapse()} returns an object of the same class as \code{object} with an elapsed
+time scale.
+\item \code{BP_to_CE()}, \code{CE_to_BP()}, \code{b2k_to_CE} and \code{b2k_to_BP} return an object
+of the same class as \code{object}.
+\item \code{is_BP()}, \code{is_CE()}, \code{is_b2k()} return a \code{\link{logical}} scalar.
 }
 
 An object of the same sort as \code{object} with a new time scale.
 }
 \description{
-Converts between BP and CE time scales.
+Converts between BP (Before Present), CE (Common Era) and b2k (before 2000)
+time scales.
 }
 \note{
 There is no year \eqn{0} in BCE/CE scale.

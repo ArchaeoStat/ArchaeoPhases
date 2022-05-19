@@ -9,7 +9,7 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
                           density = TRUE, interval = NULL, level = 0.95,
                           decreasing = TRUE) {
   ## Calendar scale
-  gg_x_scale <- scale_calendar(get_calendar(object))
+  gg_x_scale <- scale_calendar(object)
 
   ## Select data
   if (!is.null(select)) {
@@ -161,7 +161,7 @@ setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 autoplot.PhasesMCMC <- function(object, ..., level = 0.95, decreasing = TRUE,
                                 succession = is_ordered(object), facet = TRUE) {
   ## Calendar scale
-  gg_x_scale <- scale_calendar(get_calendar(object))
+  gg_x_scale <- scale_calendar(object)
 
   if (succession) {
     gg_phases <- plot_succession(object, level = level,

@@ -139,17 +139,20 @@ setGeneric(
 NULL
 
 # Time Scale ===================================================================
-#' Time Scale
+#' Time Scales
 #'
-#' Converts between BP and CE time scales.
+#' Converts between BP (Before Present), CE (Common Era) and b2k (before 2000)
+#' time scales.
 #' @param object An object (typically an [`MCMC-class`] object).
 #' @param origin An [`integer`] giving the position of the column corresponding
 #'  to the event from which elapsed time is calculated.
 #' @param ... Currently not used.
 #' @return
-#'  * `elapse()`, `BP_to_CE()` and `CE_to_BP()` return an object of the same
-#'    class as `object`.
-#'  * `is_BP()` and `is_CE()` return a [`logical`] scalar.
+#'  * `elapse()` returns an object of the same class as `object` with an elapsed
+#'    time scale.
+#'  * `BP_to_CE()`, `CE_to_BP()`, `b2k_to_CE` and `b2k_to_BP` return an object
+#'    of the same class as `object`.
+#'  * `is_BP()`, `is_CE()`, `is_b2k()` return a [`logical`] scalar.
 #' @return
 #'  An object of the same sort as `object` with a new time scale.
 #' @note
@@ -181,6 +184,20 @@ setGeneric(
 setGeneric(
   name = "CE_to_BP",
   def = function(object) standardGeneric("CE_to_BP")
+)
+
+#' @rdname calendar
+#' @aliases b2k_to_BP-method
+setGeneric(
+  name = "b2k_to_BP",
+  def = function(object) standardGeneric("b2k_to_BP")
+)
+
+#' @rdname calendar
+#' @aliases b2k_to_CE-method
+setGeneric(
+  name = "b2k_to_CE",
+  def = function(object) standardGeneric("b2k_to_CE")
 )
 
 #' @rdname calendar

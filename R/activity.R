@@ -53,7 +53,7 @@ setMethod(
 #' @method autoplot ActivityEvents
 autoplot.ActivityEvents <- function(object, ..., fill = "grey20") {
   ## Calendar scale
-  gg_x_scale <- scale_calendar(get_calendar(object))
+  gg_x_scale <- scale_calendar(object)
 
   data <- as.data.frame(object)
   ggplot2::ggplot(data = data) +

@@ -47,7 +47,7 @@ setMethod(
 #' @method autoplot OccurrenceEvents
 autoplot.OccurrenceEvents <- function(object, ..., colour = "black") {
   ## Calendar scale
-  gg_x_scale <- scale_calendar(get_calendar(object))
+  gg_x_scale <- scale_calendar(object)
 
   ## ggplot2
   data <- as.data.frame(object)

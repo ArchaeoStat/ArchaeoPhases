@@ -3,6 +3,7 @@
 NULL
 
 # Predicates ===================================================================
+## BP --------------------------------------------------------------------------
 #' @export
 #' @rdname calendar
 #' @aliases is_BP,MCMC-method
@@ -41,6 +42,25 @@ setMethod(
 
 #' @export
 #' @rdname calendar
+#' @aliases is_BP,OccurrenceEvents-method
+setMethod(
+  f = "is_BP",
+  signature = "OccurrenceEvents",
+  definition = function(object) identical(get_calendar(object), "BP")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_BP,ProxyRecord-method
+setMethod(
+  f = "is_BP",
+  signature = "ProxyRecord",
+  definition = function(object) identical(get_calendar(object), "BP")
+)
+
+## CE --------------------------------------------------------------------------
+#' @export
+#' @rdname calendar
 #' @aliases is_CE,MCMC-method
 setMethod(
   f = "is_CE",
@@ -73,6 +93,79 @@ setMethod(
   f = "is_CE",
   signature = "ActivityEvents",
   definition = function(object) identical(get_calendar(object), "CE")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_CE,OccurrenceEvents-method
+setMethod(
+  f = "is_CE",
+  signature = "OccurrenceEvents",
+  definition = function(object) identical(get_calendar(object), "CE")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_CE,ProxyRecord-method
+setMethod(
+  f = "is_CE",
+  signature = "ProxyRecord",
+  definition = function(object) identical(get_calendar(object), "CE")
+)
+
+## b2k -------------------------------------------------------------------------
+#' @export
+#' @rdname calendar
+#' @aliases is_b2k,MCMC-method
+setMethod(
+  f = "is_b2k",
+  signature = "MCMC",
+  definition = function(object) identical(get_calendar(object), "b2k")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_b2k,PhasesMCMC-method
+setMethod(
+  f = "is_b2k",
+  signature = "PhasesMCMC",
+  definition = function(object) identical(get_calendar(object), "b2k")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_b2k,CumulativeEvents-method
+setMethod(
+  f = "is_b2k",
+  signature = "CumulativeEvents",
+  definition = function(object) identical(get_calendar(object), "b2k")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_b2k,ActivityEvents-method
+setMethod(
+  f = "is_b2k",
+  signature = "ActivityEvents",
+  definition = function(object) identical(get_calendar(object), "b2k")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_b2k,OccurrenceEvents-method
+setMethod(
+  f = "is_b2k",
+  signature = "OccurrenceEvents",
+  definition = function(object) identical(get_calendar(object), "b2k")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_b2k,ProxyRecord-method
+setMethod(
+  f = "is_b2k",
+  signature = "ProxyRecord",
+  definition = function(object) identical(get_calendar(object), "b2k")
 )
 
 # Convert ======================================================================
@@ -270,6 +363,128 @@ setMethod(
     if (is_BP(object)) return(object)
     object@year <- CE_to_BP(object@year)
     object@calendar <- "BP"
+    object
+  }
+)
+
+## b2k to BP -------------------------------------------------------------------
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_BP,numeric-method
+setMethod(
+  f = "b2k_to_BP",
+  signature = "numeric",
+  definition = function(object){
+    index <- !is.na(object)
+    tmp <- rep(NA, length(object))
+    tmp[index] <- object[index] - 50
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_BP,matrix-method
+setMethod(
+  f = "b2k_to_BP",
+  signature = "matrix",
+  definition = function(object) {
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_BP,array-method
+setMethod(
+  f = "b2k_to_BP",
+  signature = "array",
+  definition = function(object) {
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_BP,ProxyRecord-method
+setMethod(
+  f = "b2k_to_BP",
+  signature = "ProxyRecord",
+  definition = function(object) {
+    ## Check current scale
+    if (is_BP(object)) return(object)
+    object@time <- b2k_to_BP(object@time)
+    object@time_grid <- b2k_to_BP(object@time_grid)
+    object@calendar <- "BP"
+    object
+  }
+)
+
+## b2k to CE -------------------------------------------------------------------
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_CE,numeric-method
+setMethod(
+  f = "b2k_to_CE",
+  signature = "numeric",
+  definition = function(object){
+    index <- !is.na(object)
+    if (any(object[index] < 0)) {
+      stop("Actual dates (< 0 b2k) are not supported.", call. = FALSE)
+    }
+    tmp <- rep(NA, length(object))
+    tmp[index & object < 2000] <- 2000 - object[index & object < 2000]
+    tmp[index & object >= 2000] <- 1999 - object[index & object >= 1999]
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_CE,matrix-method
+setMethod(
+  f = "b2k_to_CE",
+  signature = "matrix",
+  definition = function(object) {
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_CE,array-method
+setMethod(
+  f = "b2k_to_CE",
+  signature = "array",
+  definition = function(object) {
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases b2k_to_CE,ProxyRecord-method
+setMethod(
+  f = "b2k_to_CE",
+  signature = "ProxyRecord",
+  definition = function(object) {
+    ## Check current scale
+    if (is_CE(object)) return(object)
+    object@time <- b2k_to_CE(object@time)
+    object@time_grid <- b2k_to_CE(object@time_grid)
+    object@calendar <- "CE"
     object
   }
 )

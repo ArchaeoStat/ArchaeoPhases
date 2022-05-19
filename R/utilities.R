@@ -100,9 +100,10 @@ make_hash <- function(file, download = TRUE) {
 #' @noRd
 scale_calendar <- function(x) {
   switch (
-    x,
-    CE = ggplot2::scale_x_continuous(name = "Years CE"),
-    BP = ggplot2::scale_x_reverse(name = "Years cal BP"),
+    get_calendar(x),
+    CE = ggplot2::scale_x_continuous(name = "Year CE"),
+    BP = ggplot2::scale_x_reverse(name = "Year BP"),
+    b2k = ggplot2::scale_x_reverse(name = "Year b2k"),
     elapsed = ggplot2::scale_x_continuous(name = "Elapsed years"),
     stop(sprintf("Unknown calendar scale (%s).", x), call. = FALSE)
   )
