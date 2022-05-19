@@ -19,7 +19,8 @@ tempo(object, ...)
   credible = TRUE,
   gauss = TRUE,
   from = min(object),
-  to = max(object)
+  to = max(object),
+  resolution = NULL
 )
 
 \S4method{autoplot}{CumulativeEvents}(object, ..., credible = TRUE, gauss = TRUE)
@@ -49,6 +50,11 @@ estimate for (in years).}
 
 \item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
 for (in years).}
+
+\item{resolution}{A length-one \code{\link{numeric}} vector specifying the temporal
+resolution (in years) at which densities are to be estimated.
+If \code{NULL} (the default), equally spaced points will be used (according to
+\code{options("chronos.grid")}).}
 
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object.}
 }

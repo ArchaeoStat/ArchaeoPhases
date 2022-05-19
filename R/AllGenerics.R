@@ -294,6 +294,10 @@ setGeneric(
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
 #'  for (in years).
+#' @param resolution A length-one [`numeric`] vector specifying the temporal
+#'  resolution (in years) at which densities are to be estimated.
+#'  If `NULL` (the default), equally spaced points will be used (according to
+#'  `options("chronos.grid")`).
 #' @param ... Any [`CumulativeEvents-class`] object.
 #' @details
 #'  The tempo plot is one way to measure change over time: it estimates the
@@ -337,6 +341,10 @@ setGeneric(
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
 #'  for (in years).
+#' @param resolution A length-one [`numeric`] vector specifying the temporal
+#'  resolution (in years) at which densities are to be estimated.
+#'  If `NULL` (the default), equally spaced points will be used (according to
+#'  `options("chronos.grid")`).
 #' @param fill A [`character`] string specifying the colour to be used to fill
 #'  the area under the curve.
 #' @param ... Any [`ActivityEvents-class`] object.
@@ -363,6 +371,43 @@ setGeneric(
   name = "activity",
   def = function(object, ...) standardGeneric("activity"),
   valueClass = "ActivityEvents"
+)
+
+## ROC -------------------------------------------------------------------------
+#' Rate of Change
+#'
+#' @param object An [`EventsMCMC-class`], a [`CumulativeEvents-class`] or an
+#'  [`ActivityEvents-class`] object.
+#' @param x A [`RateOfChange-class`] object.
+#' @param from A length-one [`numeric`] vector giving the earliest date to
+#'  estimate for (in years).
+#' @param to A length-one [`numeric`] vector giving the latest date to estimate
+#'  for (in years).
+#' @param resolution A length-one [`numeric`] vector specifying the temporal
+#'  resolution (in years) at which densities are to be estimated.
+#'  If `NULL` (the default), equally spaced points will be used (according to
+#'  `options("chronos.grid")`).
+#' @param colour A [`character`] string specifying the colour of the segments.
+#' @param ... Currently not used.
+#' @return
+#'  * `roc()` returns an [`RateOfChange-class`] object.
+#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
+#' @example inst/examples/ex-tempo.R
+#' @author N. Frerebeau
+#' @family event tools
+#' @docType methods
+#' @name roc
+#' @rdname roc
+NULL
+
+#' @rdname roc
+#' @aliases roc-method
+setGeneric(
+  name = "roc",
+  def = function(object, ...) standardGeneric("roc"),
+  valueClass = "RateOfChange"
 )
 
 ## Occurrence ------------------------------------------------------------------
@@ -407,39 +452,6 @@ setGeneric(
   name = "occurrence",
   def = function(object, ...) standardGeneric("occurrence"),
   valueClass = "OccurrenceEvents"
-)
-
-## ROC -------------------------------------------------------------------------
-#' Rate of Change
-#'
-#' @param object An [`EventsMCMC-class`], a [`CumulativeEvents-class`] or an
-#'  [`ActivityEvents-class`] object.
-#' @param x A [`RateOfChange-class`] object.
-#' @param from A length-one [`numeric`] vector giving the earliest date to
-#'  estimate for (in years).
-#' @param to A length-one [`numeric`] vector giving the latest date to estimate
-#'  for (in years).
-#' @param colour A [`character`] string specifying the colour of the segments.
-#' @param ... Currently not used.
-#' @return
-#'  * `roc()` returns an [`RateOfChange-class`] object.
-#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
-#'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
-#' @example inst/examples/ex-tempo.R
-#' @author N. Frerebeau
-#' @family event tools
-#' @docType methods
-#' @name roc
-#' @rdname roc
-NULL
-
-#' @rdname roc
-#' @aliases roc-method
-setGeneric(
-  name = "roc",
-  def = function(object, ...) standardGeneric("roc"),
-  valueClass = "RateOfChange"
 )
 
 # Interval =====================================================================

@@ -13,7 +13,7 @@
 \usage{
 activity(object, ...)
 
-\S4method{activity}{EventsMCMC}(object, from = min(object), to = max(object))
+\S4method{activity}{EventsMCMC}(object, from = min(object), to = max(object), resolution = NULL)
 
 \S4method{activity}{CumulativeEvents}(object)
 
@@ -33,6 +33,11 @@ estimate for (in years).}
 
 \item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
 for (in years).}
+
+\item{resolution}{A length-one \code{\link{numeric}} vector specifying the temporal
+resolution (in years) at which densities are to be estimated.
+If \code{NULL} (the default), equally spaced points will be used (according to
+\code{options("chronos.grid")}).}
 
 \item{fill}{A \code{\link{character}} string specifying the colour to be used to fill
 the area under the curve.}

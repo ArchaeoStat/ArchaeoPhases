@@ -8,10 +8,11 @@ NULL
 setMethod(
   f = "activity",
   signature = "EventsMCMC",
-  definition = function(object, from = min(object), to = max(object)) {
+  definition = function(object, from = min(object), to = max(object),
+                        resolution = NULL) {
     ## Tempo
     tmp <- tempo(object, level = 0.95, count = FALSE, credible = FALSE,
-                 gauss = FALSE, from = from, to = to)
+                 gauss = FALSE, from = from, to = to, resolution = resolution)
     ## Activity
     methods::callGeneric(object = tmp)
   }

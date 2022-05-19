@@ -8,9 +8,10 @@ NULL
 setMethod(
   f = "roc",
   signature = "EventsMCMC",
-  definition = function(object, from = min(object), to = max(object)) {
+  definition = function(object, from = min(object), to = max(object),
+                        resolution = NULL) {
     ## Activity
-    tmp <- activity(object, from = from, to = to)
+    tmp <- activity(object, from = from, to = to, resolution = resolution)
     ## ROC
     methods::callGeneric(object = tmp)
   }
