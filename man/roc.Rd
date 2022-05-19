@@ -67,7 +67,6 @@ plot(act)
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
-\code{\link{lapse}()},
 \code{\link{occurrence}()},
 \code{\link{tempo}()}
 }

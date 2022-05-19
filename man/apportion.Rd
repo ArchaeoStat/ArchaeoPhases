@@ -38,7 +38,8 @@ Apportioned Probabilities
 }
 \seealso{
 Other tests: 
-\code{\link{test_older}()}
+\code{\link{lapse}()},
+\code{\link{older}()}
 }
 \author{
 N. Frerebeau, A. Philippe

@@ -72,7 +72,6 @@ Collate:
     'chronos-package.R'
     'coerce.R'
     'data.R'
-    'dates.R'
     'interval.R'
     'mutators.R'
     'occurrence.R'

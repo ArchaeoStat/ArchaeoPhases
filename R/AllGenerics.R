@@ -739,19 +739,19 @@ setGeneric(
 #' Hiatus Between Two Dates
 #'
 #' Tests for the existence of a hiatus between two parameters.
-#' @param x,y A [`numeric`] vector.
+#' @param x A [`numeric`] vector giving the output of the MCMC algorithm for the
+#'  first parameter, or an [`EventsMCMC-class`] object.
+#' @param y A [`numeric`] vector giving the output of the MCMC algorithm for the
+#'  second parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param ... Currently not used.
 #' @details
 #'  Finds if a gap exists between two dates and returns the longest interval
 #'  that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
+#' @example inst/examples/ex-test.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family event tools
+#' @family tests
 #' @docType methods
-#' @name lapse
-#' @rdname lapse
-NULL
-
 #' @rdname lapse
 #' @aliases lapse-method
 setGeneric(
@@ -765,7 +765,7 @@ setGeneric(
 #' A Bayesian test for checking the following assumption: "event `x` is older
 #' than event `y`".
 #' @param x A [`numeric`] vector giving the output of the MCMC algorithm for the
-#'  first parameter.
+#'  first parameter, or an [`EventsMCMC-class`] object.
 #' @param y A [`numeric`] vector giving the output of the MCMC algorithm for the
 #'  second parameter.
 #' @param ... Currently not used.
@@ -774,22 +774,21 @@ setGeneric(
 #'  probability of the event \eqn{x < y} by the relative frequency of the event
 #'  "the value of event `x` is less than the value of event `y`" in the
 #'  simulated Markov chain.
-#' @return A [`numeric`] vector (the posterior probability of the assumption:
-#'  "event `x` is older than event `y`").
+#' @example inst/examples/ex-test.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family tests
 #' @docType methods
-#' @rdname test_older
-#' @aliases test_older-method
+#' @rdname older
+#' @aliases older-method
 setGeneric(
-  name = "test_older",
-  def = function(x, y, ...) standardGeneric("test_older")
+  name = "older",
+  def = function(x, y, ...) standardGeneric("older")
 )
 
 ## Apportion -------------------------------------------------------------------
 #' Apportioned Probabilities
 #'
-#' @param object An [`MCMC-class`] object.
+#' @param object An [`EventsMCMC-class`] object.
 #' @param from A [`numeric`] vector. If `to` is missing, must be a [`list`] (or
 #'  a [`data.frame`]) with `numeric` components (columns) `from` and `to`.
 #' @param to A [`numeric`] vector. If missing, an attempt is made to interpret
