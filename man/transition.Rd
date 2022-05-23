@@ -65,7 +65,6 @@ summary(dur)
 Other phase tools: 
 \code{\link{boundaries}()},
 \code{\link{duration}()},
-\code{\link{hiatus}()},
 \code{\link{phase}()}
 }
 \author{

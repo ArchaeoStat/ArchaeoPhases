@@ -107,11 +107,11 @@ setMethod(
 
 # Hiatus =======================================================================
 #' @export
-#' @describeIn lapse Returns a length-three [`numeric`] vector (upper and upper
+#' @describeIn hiatus Returns a length-three [`numeric`] vector (upper and upper
 #'  boundaries, and hiatus duration, if any).
-#' @aliases lapse,numeric,numeric-method
+#' @aliases hiatus,numeric,numeric-method
 setMethod(
-  f = "lapse",
+  f = "hiatus",
   signature = c(x = "numeric", y = "numeric"),
   definition = function(x, y, level = 0.95) {
     ## Validation
@@ -126,8 +126,9 @@ setMethod(
     if (gamma < level) return(no_hiatus)
 
     ind <- which(x < y)
-    epsilon <- seq(0, 1 - level, gamma)
+    epsilon <- seq(0, 1 - level / gamma, .001)
     p <- gap(epsilon, x[ind], y[ind], level / gamma)
+
     ## Compute the length of all intervals
     d <- p[2, ] - p[1, ]
     dd <- d[d > 0]
@@ -135,21 +136,22 @@ setMethod(
     if (length(dd) < 1) return(no_hiatus)
 
     i <- which(d == max(dd))
-    endpoints <- round(p[, i], 0)
+    endpoints <- p[, i]
 
     if (p[2, i] == p[1, i]) return(no_hiatus)
 
     inf <- endpoints[[1]]
     sup <- endpoints[[2]]
-    c(lower = inf, upper = sup, duration = sup - inf)
+    c(lower = inf, upper = sup, duration = abs(sup - inf))
   }
 )
 
 #' @export
-#' @describeIn lapse Returns a [`numeric`] matrix of hiatus durations.
-#' @aliases lapse,EventsMCMC-method
+#' @describeIn hiatus Hiatus between successive events. Returns a [`numeric`]
+#' matrix of hiatus durations.
+#' @aliases hiatus,EventsMCMC-method
 setMethod(
-  f = "lapse",
+  f = "hiatus",
   signature = c(x = "EventsMCMC", y = "missing"),
   definition = function(x, y) {
     n <- ncol(x)
@@ -157,10 +159,48 @@ setMethod(
     dimnames(z) <- list(names(x), names(x))
     for (i in 1:(n - 1)) {
       for (j in (i + 1):n) {
-        z[i, j] <- lapse(x[, i], x[, j])["duration"]
+        z[i, j] <- hiatus(x[, i], x[, j])["duration"]
       }
     }
     z
+  }
+)
+
+# Interpolate ==================================================================
+#' @export
+#' @rdname interpolate
+#' @aliases interpolate,numeric,numeric-method
+setMethod(
+  f = "interpolate",
+  signature = c(x = "numeric", y = "numeric"),
+  definition = function(x, y) {
+    n <- length(x)
+    stats::runif(n, x, y)
+  }
+)
+
+#' @export
+#' @rdname interpolate
+#' @aliases interpolate,EventsMCMC,missing-method
+setMethod(
+  f = "interpolate",
+  signature = c(x = "EventsMCMC", y = "missing"),
+  definition = function(x, e1 = 1, e2 = 2) {
+    a <- x[, e1]
+    b <- x[, e2]
+    e <- interpolate(x = a, y = b)
+
+    ## Build names
+    eve <- names(x)
+    eve <- c(eve[[e1]], paste(eve[[e1]], eve[[e2]], sep = "_"), eve[[e2]])
+
+    ## Return an MCM object
+    .EventsMCMC(
+      cbind(a, e, b),
+      events = eve,
+      calendar = get_calendar(x),
+      hash = get_hash(x)
+    )
   }
 )
 

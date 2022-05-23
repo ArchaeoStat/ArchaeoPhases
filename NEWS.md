@@ -2,11 +2,14 @@
 
 ## New classes and methods
 * `apportion()`
+* `interpolate()`
 * `bind()` allow to bind multiple `MCMC` objects.
+* `proxy()`
+* `rece()`
 * `roc()` allows to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
 
 ## Enhancements
-* Support for both BP and CE time scales.
+* Support for CE, BP and b2k time scales.
 
 ## Bug fixes & changes
 * Changement de l'estimation des intervalles HPD (`hdrcde::hdr()` -> `stats::density()`).
@@ -15,11 +18,16 @@
 * Full rewrite in S4.
 * Remove the Shiny application.
 
-| Old | New |
+| ArchaeoPhases 1.6 | Chronos |
+|:----|:----|
+| `undated_sample()` | `interpolate()` |
+| `undated_sample()` | `interpolate()` |
+
+| ArchaeoPhases 1.5 | Chronos |
 |:----|:----|
 | `CreateMinMaxGroup()` | `phase(<MCMC>)`, `as_phases(<matrix>)` |
 | `CredibleInterval()`, `credible_interval()` | `credible(<numeric>, <numeric>)` |
-| `DatesHiatus()`, `dates_hiatus()` | `lapse(<numeric>, <numeric>)` |
+| `DatesHiatus()`, `dates_hiatus()` | `hiatus(<numeric>, <numeric>)` |
 | `estimate_range()` | `sensitivity(<MCMC>)` |
 | `MarginalPlot()`, `marginal_plot()` | `plot(<MCMC>)` |
 | `MarginalProba()` | `test_older(<numeric>, <numeric>)` |

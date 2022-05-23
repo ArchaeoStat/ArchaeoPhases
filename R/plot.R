@@ -32,6 +32,7 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
   ## Reorder data
   decreasing <- ifelse(is_BP(object), !decreasing, decreasing)
   data <- reorder(object, decreasing = decreasing)
+  ids <- names(data)
 
   ## Compute interval
   gg_inter <- NULL
@@ -62,9 +63,11 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
   if (density) {
     if (ncol(data) > 1) {
       ## Build long table for ggplot2
+      col_ids <- rep(ids, each = nrow(data))
       dens <- data.frame(
         row = as.vector(row(data, as.factor = FALSE)),
-        column = as.vector(col(data, as.factor = T)),
+        column = factor(col_ids, levels = unique(col_ids)),
+        # column = as.vector(col(data, as.factor = TRUE)),
         value = as.vector(data),
         stringsAsFactors = FALSE
       )

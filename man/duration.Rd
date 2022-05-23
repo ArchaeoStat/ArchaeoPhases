@@ -52,7 +52,6 @@ summary(dur)
 \seealso{
 Other phase tools: 
 \code{\link{boundaries}()},
-\code{\link{hiatus}()},
 \code{\link{phase}()},
 \code{\link{transition}()}
 }

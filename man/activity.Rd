@@ -77,7 +77,7 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 \seealso{
 Other event tools: 
 \code{\link{occurrence}()},
-\code{\link{rece}()},
+\code{\link{rec}},
 \code{\link{roc}()},
 \code{\link{tempo}()}
 }

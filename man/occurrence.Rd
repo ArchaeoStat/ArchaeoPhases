@@ -71,7 +71,7 @@ plot(occ_hpdi)
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
-\code{\link{rece}()},
+\code{\link{rec}},
 \code{\link{roc}()},
 \code{\link{tempo}()}
 }

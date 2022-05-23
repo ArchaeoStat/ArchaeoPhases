@@ -39,17 +39,14 @@ setMethod(
   signature = c(from = "matrix"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, ordered = FALSE,
-                        BP = FALSE, iteration = NULL) {
+                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
     ## Validation
     # TODO: check that length(start) == lenght(stop)
+    calendar <- match.arg(calendar, several.ok = FALSE)
 
     ## Remove the iteration column
     if (!is.null(iteration))
       from <- from[, -iteration]
-
-    ## Convert from BP to CE
-    if (BP)
-      from <- BP_to_CE(from)
 
     pha <- if (is.null(names)) paste0("phase_", seq_along(start)) else names
     arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
@@ -62,7 +59,7 @@ setMethod(
       arr,
       phases = pha,
       ordered = ordered,
-      calendar = "CE"
+      calendar = calendar
     )
   }
 )
@@ -75,10 +72,11 @@ setMethod(
   signature = c(from = "data.frame"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, ordered = FALSE,
-                        BP = FALSE, iteration = NULL) {
+                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
     from <- data.matrix(from)
     methods::callGeneric(from, start = start, stop = stop, names = names,
-                         ordered = ordered, BP = BP, iteration = iteration)
+                         ordered = ordered, calendar = calendar,
+                         iteration = iteration)
   }
 )
 
@@ -218,7 +216,7 @@ setMethod(
 
     ## Find the shortest interval
     short <- which.min(inter)
-    endpoints <- round(p[, short], getOption("chronos.precision"))
+    endpoints <- p[, short]
 
     ## Return the endpoints of the shortest interval
     c(start = endpoints[[1]], end = endpoints[[2]])
@@ -380,47 +378,7 @@ setMethod(
 
 # Hiatus =======================================================================
 #' @export
-#' @rdname hiatus
-#' @aliases hiatus,numeric,numeric-method
-setMethod(
-  f = "hiatus",
-  signature = c(x = "numeric", y = "numeric"),
-  definition = function(x, y, level = 0.95) {
-    ## Validation
-    if (length(x) != length(y)) {
-      stop(sprintf("%s and %s must have the same length.",
-                   sQuote("x"), sQuote("y")), call. = FALSE)
-    }
-    # if (!all(x <= y)) {
-    #   stop(sprintf("%s must be strictly older than %s",
-    #                sQuote("x"), sQuote("y")), call. = FALSE)
-    # }
-
-    no_hiatus <- c(lower = NA, upper = NA)
-
-    epsilon <- seq(0, 1 - level, .001)
-    p <- gap(epsilon, x, y, level)
-
-    ## Compute the length of all intervals
-    inter <- p[2, ] - p[1, ]
-    dd <- inter[inter > 0]
-
-    if (length(dd) < 1) return(no_hiatus)
-
-    ## Find the longest interval
-    i <- which(inter == max(dd))
-    endpoints <- round(p[, i], getOption("chronos.precision"))
-
-    if (p[2, i] == p[1, i]) return(no_hiatus)
-
-    inf <- endpoints[[1]]
-    sup <- endpoints[[2]]
-    c(start = inf, end = sup)
-  }
-)
-
-#' @export
-#' @rdname hiatus
+#' @describeIn hiatus Hiatus between successive phases.
 #' @aliases hiatus,PhasesMCMC,missing-method
 setMethod(
   f = "hiatus",
@@ -449,7 +407,7 @@ setMethod(
     fin <- fun_tail(k, -1)
 
     ## Matrix of results
-    result <- matrix(nrow = m, ncol = 2)
+    result <- matrix(nrow = m, ncol = 3)
 
     for (i in seq_len(m)) {
       a <- x[, deb[[i]], start]
@@ -466,7 +424,7 @@ setMethod(
     names_start <- if (BP) fin else deb
     names_end <- if (BP) deb else fin
     rownames(result) <- paste(pha[names_start], pha[names_end], sep = "-")
-    colnames(result) <- c("start", "end")
+    colnames(result) <- c("start", "end", "duration")
 
     as.data.frame(result)
   }

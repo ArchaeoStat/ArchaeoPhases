@@ -60,7 +60,6 @@ summary(dur)
 \seealso{
 Other phase tools: 
 \code{\link{duration}()},
-\code{\link{hiatus}()},
 \code{\link{phase}()},
 \code{\link{transition}()}
 }

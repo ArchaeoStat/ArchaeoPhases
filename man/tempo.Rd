@@ -102,7 +102,7 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 Other event tools: 
 \code{\link{activity}()},
 \code{\link{occurrence}()},
-\code{\link{rece}()},
+\code{\link{rec}},
 \code{\link{roc}()}
 }
 \author{

@@ -223,6 +223,29 @@ setGeneric(
 )
 
 # Age-Depth Modeling ===========================================================
+## Interpolation ---------------------------------------------------------------
+#' Interpolate Between Two Dates
+#'
+#' @param x A [`numeric`] vector giving the output of the MCMC algorithm for the
+#'  first parameter.
+#' @param y A [`numeric`] vector giving the output of the MCMC algorithm for the
+#'  second parameter.
+#' @param e1,e2 An [`integer`] specifying.
+#' @param ... Currently not used.
+#' @details
+#'  For a given output of MCMC algorithm, this function interpolates between
+#'  to events \eqn{x} and \eqn{y} (assuming \eqn{x < y}).
+#' @example inst/examples/ex-interpolate.R
+#' @author N. Frerebeau
+#' @family age-depth modeling tools
+#' @docType methods
+#' @rdname interpolate
+#' @aliases interpolate-method
+setGeneric(
+  name = "interpolate",
+  def = function(x, y, ...) standardGeneric("interpolate")
+)
+
 #' Layer-Counted Proxy Records Uncertainties
 #'
 #' Represents layer-counted proxy records as sequences of probability
@@ -575,9 +598,8 @@ setGeneric(
 #' @param names A [`character`] vector giving the names of the phases.
 #' @param ordered A [`logical`] scalar: should the `groups` be regarded as
 #'  ordered (in the order given)?
-#' @param BP A [`logical`] scalar: should the data be converted from BP to
-#'  BC/AD? This should not be `TRUE` unless you change the default settings in
-#'  'OxCal' or 'ChronoModel'.
+#' @param calendar A [`character`] string specifying the chronological scale
+#'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
 #' @param iteration An [`integer`] specifying the index of the iteration column
 #'  to be removed.
 #' @param value A possible value for the element(s) of `x`.
@@ -707,33 +729,6 @@ setGeneric(
   def = function(x, y, ...) standardGeneric("transition")
 )
 
-## Hiatus ----------------------------------------------------------------------
-#' Hiatus Between Successive Phases
-#'
-#' Finds, if it exists, a hiatus between two successive phases.
-#' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
-#'  [`PhasesMCMC-class`] object.
-#' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param ... Currently not used.
-#' @details
-#'  The hiatus is the longest interval that satisfies
-#'  \eqn{P(Phase1Max < IntervalInf < IntervalSup < Phase2Min | M) = level}
-#'
-#'  This assumes that the phases are in temporal order constraint.
-#' @return
-#'  A [`data.frame`] containing the endpoints (in years BC/AD) of the hiatus
-#'  between each pair of successive phases (at a given `level`).
-#' @example inst/examples/ex-range.R
-#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phase tools
-#' @docType methods
-#' @rdname hiatus
-#' @aliases hiatus-method
-setGeneric(
-  name = "hiatus",
-  def = function(x, y, ...) standardGeneric("hiatus")
-)
-
 # Plot =========================================================================
 #' Plot
 #'
@@ -780,24 +775,27 @@ setGeneric(
 #' Hiatus Between Two Dates
 #'
 #' Tests for the existence of a hiatus between two parameters.
-#' @param x A [`numeric`] vector giving the output of the MCMC algorithm for the
-#'  first parameter, or an [`EventsMCMC-class`] object.
-#' @param y A [`numeric`] vector giving the output of the MCMC algorithm for the
-#'  second parameter.
+#' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
+#'  [`PhasesMCMC-class`] or an [`EventsMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param ... Currently not used.
 #' @details
 #'  Finds if a gap exists between two dates and returns the longest interval
-#'  that satisfies: \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
+#'  that satisfies \eqn{P(x < HiatusInf < HiatusSup < y | M) = level}
+#'
+#'  The hiatus between two successive phases is the longest interval that
+#'  satisfies
+#'  \eqn{P(Phase1Max < IntervalInf < IntervalSup < Phase2Min | M) = level}
+#'  (this assumes that the phases are in temporal order constraint).
 #' @example inst/examples/ex-test.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family tests
 #' @docType methods
-#' @rdname lapse
-#' @aliases lapse-method
+#' @rdname hiatus
+#' @aliases hiatus-method
 setGeneric(
-  name = "lapse",
-  def = function(x, y, ...) standardGeneric("lapse")
+  name = "hiatus",
+  def = function(x, y, ...) standardGeneric("hiatus")
 )
 
 ## Anteriority -----------------------------------------------------------------

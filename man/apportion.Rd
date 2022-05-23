@@ -38,7 +38,7 @@ Apportioned Probabilities
 }
 \seealso{
 Other tests: 
-\code{\link{lapse}()},
+\code{\link{hiatus}()},
 \code{\link{older}()}
 }
 \author{

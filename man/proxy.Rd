@@ -122,6 +122,10 @@ Boers, N., Goswami, B. & Ghil, M. (2017). A Complete Representation of
 Uncertainties in Layer-Counted Paleoclimatic Archives. \emph{Climate of the
 Past}, 13(9): 1169-1180. \doi{10.5194/cp-13-1169-2017}.
 }
+\seealso{
+Other age-depth modeling tools: 
+\code{\link{interpolate}()}
+}
 \author{
 N. Frerebeau
 }

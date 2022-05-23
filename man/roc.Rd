@@ -73,7 +73,7 @@ plot(act)
 Other event tools: 
 \code{\link{activity}()},
 \code{\link{occurrence}()},
-\code{\link{rece}()},
+\code{\link{rec}},
 \code{\link{tempo}()}
 }
 \author{

@@ -51,12 +51,12 @@ eve <- eve[1:10000, ]
 older(eve)
 
 ## Test for hiatus
-lapse(eve)
+hiatus(eve[, 2], eve[, 3])
 }
 \seealso{
 Other tests: 
 \code{\link{apportion}()},
-\code{\link{lapse}()}
+\code{\link{hiatus}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau
