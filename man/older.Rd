@@ -44,7 +44,7 @@ probability of the assumption: "event \code{x} is older than event \code{y}").
 
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, iteration = 1)
+eve <- as_events(events, calendar = "CE", iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Test for anteriority

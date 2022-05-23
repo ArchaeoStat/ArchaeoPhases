@@ -58,7 +58,7 @@ of confidence.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, iteration = 1)
+eve <- as_events(events, calendar = "CE", iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Occurrence plot
@@ -71,6 +71,7 @@ plot(occ_hpdi)
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
+\code{\link{rece}()},
 \code{\link{roc}()},
 \code{\link{tempo}()}
 }

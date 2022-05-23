@@ -13,6 +13,19 @@ setMethod(
 
 #' @export
 #' @rdname mutator
+#' @aliases names<-,MCMC-method
+setMethod(
+  f = "names<-",
+  signature = "MCMC",
+  definition = function(x, value) {
+    x@events <- value
+    methods::validObject(x)
+    x
+  }
+)
+
+#' @export
+#' @rdname mutator
 #' @aliases names,PhasesMCMC-method
 setMethod(
   f = "names",
@@ -85,6 +98,15 @@ setMethod(
 setMethod(
   f = "get_calendar",
   signature = "RateOfChange",
+  definition = function(x) x@calendar
+)
+
+#' @export
+#' @rdname mutator
+#' @aliases get_calendar,RECE-method
+setMethod(
+  f = "get_calendar",
+  signature = "RECE",
   definition = function(x) x@calendar
 )
 

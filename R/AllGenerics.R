@@ -36,11 +36,12 @@ setGeneric(
 #' Coerce
 #'
 #' @param from from An object to be coerced.
-#' @param BP A [`logical`] scalar: should the data be converted from BP to
-#'  BC/AD? This should not be `TRUE` unless you change the default settings in
-#'  'OxCal' or 'ChronoModel'.
-#' @param iteration An [`integer`] specifying the index of the iteration column
-#'  to be removed.
+#' @param calendar A [`character`] string specifying the chronological scale
+#'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
+#' @param iteration A length-one [`numeric`] vector specifying the index of the
+#'  iteration column.
+#' @param age A length-one [`numeric`] vector specifying the index of the age
+#'  column.
 #' @param ... Currently not used.
 #' @return
 #'  An [`MCMC-class`] object.
@@ -58,6 +59,14 @@ setGeneric(
   name = "as_events",
   def = function(from, ...) standardGeneric("as_events"),
   valueClass = "EventsMCMC"
+)
+
+#' @rdname coerce
+#' @aliases as_rece-method
+setGeneric(
+  name = "as_rece",
+  def = function(from, ...) standardGeneric("as_rece"),
+  valueClass = "RECE"
 )
 
 # Bind =========================================================================
@@ -452,6 +461,34 @@ setGeneric(
   name = "occurrence",
   def = function(object, ...) standardGeneric("occurrence"),
   valueClass = "OccurrenceEvents"
+)
+
+## REC -------------------------------------------------------------------------
+#' Radiocarbon Event Count Ensemble
+#'
+#' @param object An [`EventsMCMC-class`] object.
+#' @param x,y An [`RECE-class`] object.
+#' @param n An [`integer`] specifying the number of item to choose randomly.
+#' @param ... Currently not used.
+#' @return An [`RECE-class`] object.
+#' @references
+#'  Carleton, W. C. (2021). Evaluating Bayesian Radiocarbon‐dated Event Count
+#'  (REC) Models for the Study of Long‐term Human and Environmental Processes.
+#'  *Journal of Quaternary Science*, 36(1): 110‑23. \doi{10.1002/jqs.3256}.
+#' @seealso [`as_rece()`]
+#' @author N. Frerebeau
+#' @family event tools
+#' @docType methods
+#' @name rec
+#' @rdname rec
+NULL
+
+#' @rdname rec
+#' @aliases rece-method
+setGeneric(
+  name = "rece",
+  def = function(object, ...) standardGeneric("rece"),
+  valueClass = "RECE"
 )
 
 # Interval =====================================================================

@@ -5,11 +5,10 @@ NULL
 # To data.frame ================================================================
 #' @method as.data.frame CumulativeEvents
 #' @export
-as.data.frame.CumulativeEvents <- function(x, ..., stringsAsFactors = default.stringsAsFactors()) {
+as.data.frame.CumulativeEvents <- function(x, ...) {
   tmp <- data.frame(
     year = x@year,
-    estimate = x@estimate,
-    stringsAsFactors = stringsAsFactors
+    estimate = x@estimate
   )
   if (nrow(x@credible) > 0) {
     tmp$credible_lower <- x@credible[, 1]
@@ -24,32 +23,47 @@ as.data.frame.CumulativeEvents <- function(x, ..., stringsAsFactors = default.st
 
 #' @method as.data.frame ActivityEvents
 #' @export
-as.data.frame.ActivityEvents <- function(x, ..., stringsAsFactors = default.stringsAsFactors()) {
+as.data.frame.ActivityEvents <- function(x, ...) {
   data.frame(
     year = x@year,
-    estimate = x@estimate,
-    stringsAsFactors = stringsAsFactors
+    estimate = x@estimate
   )
 }
 
 #' @method as.data.frame OccurrenceEvents
 #' @export
-as.data.frame.OccurrenceEvents <- function(x, ..., stringsAsFactors = default.stringsAsFactors()) {
+as.data.frame.OccurrenceEvents <- function(x, ...) {
   data.frame(
     events = x@events,
     lower = x@lower,
-    upper = x@upper,
-    stringsAsFactors = stringsAsFactors
+    upper = x@upper
   )
 }
 
 #' @method as.data.frame RateOfChange
 #' @export
-as.data.frame.RateOfChange <- function(x, ..., stringsAsFactors = default.stringsAsFactors()) {
+as.data.frame.RateOfChange <- function(x, ...) {
   data.frame(
     year = x@year,
-    estimate = x@estimate,
-    stringsAsFactors = stringsAsFactors
+    estimate = x@estimate
+  )
+}
+
+#' @method as.data.frame RECE
+#' @export
+as.data.frame.RECE <- function(x, ...) {
+  data.frame(
+    year = x@year,
+    x@.Data
+  )
+}
+
+#' @method as.data.frame ProxyRecord
+#' @export
+as.data.frame.ProxyRecord <- function(x, ...) {
+  data.frame(
+    year = x@year,
+    x@samples
   )
 }
 
@@ -97,20 +111,19 @@ setMethod(
 setMethod(
   f = "as_events",
   signature = "matrix",
-  definition = function(from, BP = FALSE, iteration = NULL) {
-    ## Remove the iteration column
-    if (!is.null(iteration))
-      from <- from[, -iteration]
+  definition = function(from, calendar = c("BP", "CE", "b2k"),
+                        iteration = NULL) {
+    ## Validation
+    calendar <- match.arg(calendar, several.ok = FALSE)
 
-    ## Convert from BP to CE
-    if (BP)
-      from <- BP_to_CE(from)
+    ## Remove the iteration column
+    if (!is.null(iteration)) from <- from[, -iteration]
 
     ## Event names
     event_names <- colnames(from)
     if (is.null(event_names)) event_names <- paste0("E", seq_len(ncol(from)))
 
-    .EventsMCMC(from, events = event_names, calendar = "CE")
+    .EventsMCMC(from, events = event_names, calendar = calendar)
   }
 )
 
@@ -121,8 +134,10 @@ setMethod(
 setMethod(
   f = "as_events",
   signature = "data.frame",
-  definition = function(from, BP = FALSE, iteration = NULL) {
+  definition = function(from, calendar = c("BP", "CE", "b2k"),
+                        iteration = NULL) {
     from <- data.matrix(from)
-    methods::callGeneric(from = from, BP = BP, iteration = iteration)
+    methods::callGeneric(from = from, calendar = calendar,
+                         iteration = iteration)
   }
 )

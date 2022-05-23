@@ -10,6 +10,7 @@
 \alias{get_hash}
 \alias{get_hash-method}
 \alias{names,MCMC-method}
+\alias{names<-,MCMC-method}
 \alias{names,PhasesMCMC-method}
 \alias{names<-,PhasesMCMC-method}
 \alias{get_calendar,MCMC-method}
@@ -18,6 +19,7 @@
 \alias{get_calendar,ActivityEvents-method}
 \alias{get_calendar,OccurrenceEvents-method}
 \alias{get_calendar,RateOfChange-method}
+\alias{get_calendar,RECE-method}
 \alias{get_calendar,ProxyRecord-method}
 \alias{get_hash,MCMC-method}
 \alias{get_hash,PhasesMCMC-method}
@@ -32,6 +34,8 @@ get_calendar(x)
 get_hash(x)
 
 \S4method{names}{MCMC}(x)
+
+\S4method{names}{MCMC}(x) <- value
 
 \S4method{names}{PhasesMCMC}(x)
 
@@ -48,6 +52,8 @@ get_hash(x)
 \S4method{get_calendar}{OccurrenceEvents}(x)
 
 \S4method{get_calendar}{RateOfChange}(x)
+
+\S4method{get_calendar}{RECE}(x)
 
 \S4method{get_calendar}{ProxyRecord}(x)
 

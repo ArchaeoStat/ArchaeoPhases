@@ -101,7 +101,7 @@ events.
 
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, iteration = 1)
+eve <- as_events(events, calendar = "CE", iteration = 1)
 
 ## BP
 eve_BP <- CE_to_BP(eve)

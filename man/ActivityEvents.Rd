@@ -39,6 +39,7 @@ Other classes:
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
 \code{\link{ProxyRecord-class}},
+\code{\link{RECE-class}},
 \code{\link{RateOfChange-class}}
 }
 \author{

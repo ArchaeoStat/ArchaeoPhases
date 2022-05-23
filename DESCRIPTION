@@ -79,6 +79,7 @@ Collate:
     'plot.R'
     'proxy.R'
     'read.R'
+    'rec.R'
     'roc.R'
     'sensitivity.R'
     'show.R'

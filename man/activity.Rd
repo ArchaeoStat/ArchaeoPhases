@@ -57,7 +57,7 @@ Plots the first derivative of the \code{\link{tempo}} plot Bayesian estimate.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, iteration = 1)
+eve <- as_events(events, calendar = "CE", iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
@@ -77,6 +77,7 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 \seealso{
 Other event tools: 
 \code{\link{occurrence}()},
+\code{\link{rece}()},
 \code{\link{roc}()},
 \code{\link{tempo}()}
 }

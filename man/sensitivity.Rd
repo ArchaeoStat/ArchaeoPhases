@@ -33,7 +33,7 @@ to different model parameters.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, iteration = 1)
+eve <- as_events(events, calendar = "CE", iteration = 1)
 
 ## Returns 0's
 sensitivity(eve, eve)

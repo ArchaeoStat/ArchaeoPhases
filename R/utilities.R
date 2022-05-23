@@ -102,8 +102,8 @@ scale_calendar <- function(x) {
   switch (
     get_calendar(x),
     CE = ggplot2::scale_x_continuous(name = "Year CE"),
-    BP = ggplot2::scale_x_reverse(name = "Year BP"),
-    b2k = ggplot2::scale_x_reverse(name = "Year b2k"),
+    BP = ggplot2::scale_x_continuous(name = "Year BP", trans = "reverse"),
+    b2k = ggplot2::scale_x_continuous(name = "Year b2k", trans = "reverse"),
     elapsed = ggplot2::scale_x_continuous(name = "Elapsed years"),
     stop(sprintf("Unknown calendar scale (%s).", x), call. = FALSE)
   )

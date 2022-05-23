@@ -81,7 +81,7 @@ the plot is horizontal. When change is instantaneous, the plot is vertical.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, iteration = 1)
+eve <- as_events(events, calendar = "CE", iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
@@ -102,6 +102,7 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 Other event tools: 
 \code{\link{activity}()},
 \code{\link{occurrence}()},
+\code{\link{rece}()},
 \code{\link{roc}()}
 }
 \author{

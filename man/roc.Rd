@@ -57,7 +57,7 @@ Rate of Change
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, iteration = 1)
+eve <- as_events(events, calendar = "CE", iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
@@ -73,6 +73,7 @@ plot(act)
 Other event tools: 
 \code{\link{activity}()},
 \code{\link{occurrence}()},
+\code{\link{rece}()},
 \code{\link{tempo}()}
 }
 \author{

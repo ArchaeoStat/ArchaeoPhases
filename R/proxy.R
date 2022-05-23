@@ -15,13 +15,17 @@ setMethod(
                         density = !samples, samples = TRUE, n = 100) {
     ## Validation
     calendar <- match.arg(calendar, several.ok = FALSE)
+
+    ## Remove extra values
+    keep <- which(time >= from & time <= to)
+    depth <- depth[keep]
+    proxy <- proxy[keep]
+    if (length(proxy_error) > 1) proxy_error <- proxy_error[keep]
+    time <- time[keep]
+    if (length(time_error) > 1) time_error <- time_error[keep]
+
     res <- min(diff(time))
     if (is.null(resolution)) resolution <- res
-    if (resolution > res) {
-      msg <- sprintf("%s must be smaller than or equal to %d.",
-                     sQuote("resolution"), res)
-      stop(msg, call. = FALSE)
-    }
 
     ## Build a matrix to contain the p(t|zi) densities
     ## Rows will refer to depth
@@ -103,7 +107,7 @@ setMethod(
       proxy_error = proxy_error,
       time = time,
       time_error = time_error,
-      time_grid = t_grid,
+      year = t_grid,
       calendar = calendar,
       density = X,
       samples = Y
@@ -118,16 +122,15 @@ autoplot.ProxyRecord <- function(object, ..., raw = FALSE, IQR = TRUE) {
   gg_x_scale <- scale_calendar(object)
 
   ## Get data
-  age <- object@time_grid
   tmp <- summary(object, level = 0.95)
 
   data <- data.frame(
-    Age = age,
+    Age = if (raw) object@time else object@year,
     Proxy = if (raw) "x" else "hat(x)(t)",
     Value = if (raw) object@proxy else tmp$mean
   )
   ribbon <- data.frame(
-    Age = age,
+    Age = object@year,
     Uncertainty = if (IQR) "IQR" else "95% CI",
     Lower = if (IQR) tmp$q1 else tmp$lower,
     Upper = if (IQR) tmp$q3 else tmp$upper

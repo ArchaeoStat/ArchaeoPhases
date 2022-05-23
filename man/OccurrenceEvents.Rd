@@ -43,6 +43,7 @@ Other classes:
 \code{\link{MCMC}},
 \code{\link{PhasesMCMC-class}},
 \code{\link{ProxyRecord-class}},
+\code{\link{RECE-class}},
 \code{\link{RateOfChange-class}}
 }
 \author{

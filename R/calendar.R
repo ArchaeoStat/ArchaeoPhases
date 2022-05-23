@@ -420,7 +420,7 @@ setMethod(
     ## Check current scale
     if (is_BP(object)) return(object)
     object@time <- b2k_to_BP(object@time)
-    object@time_grid <- b2k_to_BP(object@time_grid)
+    object@year <- b2k_to_BP(object@year)
     object@calendar <- "BP"
     object
   }
@@ -483,7 +483,7 @@ setMethod(
     ## Check current scale
     if (is_CE(object)) return(object)
     object@time <- b2k_to_CE(object@time)
-    object@time_grid <- b2k_to_CE(object@time_grid)
+    object@year <- b2k_to_CE(object@year)
     object@calendar <- "CE"
     object
   }
