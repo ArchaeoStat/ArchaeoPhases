@@ -115,12 +115,9 @@ setMethod(
   signature = c(x = "numeric", y = "numeric"),
   definition = function(x, y, level = 0.95) {
     ## Validation
-    if (length(x) != length(y)) {
-      stop(sprintf("%s and %s must have the same length.",
-                   sQuote("x"), sQuote("y")), call. = FALSE)
-    }
+    arkhe::assert_length(y, length(x))
 
-    no_hiatus <- c(lower = NA, upper = NA, duration = NA)
+    no_hiatus <- c(lower = NA, upper = NA)
 
     gamma <- mean(x < y)
     if (gamma < level) return(no_hiatus)
@@ -142,27 +139,50 @@ setMethod(
 
     inf <- endpoints[[1]]
     sup <- endpoints[[2]]
-    c(lower = inf, upper = sup, duration = abs(sup - inf))
+    c(lower = inf, upper = sup)
   }
 )
 
 #' @export
-#' @describeIn hiatus Hiatus between successive events. Returns a [`numeric`]
-#' matrix of hiatus durations.
+#' @describeIn hiatus Hiatus between successive events.
 #' @aliases hiatus,EventsMCMC-method
 setMethod(
   f = "hiatus",
   signature = c(x = "EventsMCMC", y = "missing"),
   definition = function(x, y) {
+    ## Get phases
     n <- ncol(x)
-    z <- matrix(nrow = n, ncol = n)
-    dimnames(z) <- list(names(x), names(x))
-    for (i in 1:(n - 1)) {
-      for (j in (i + 1):n) {
-        z[i, j] <- hiatus(x[, i], x[, j])["duration"]
+    z <- names(x)
+
+    ## Matrix of results
+    lower <- upper <- event <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
+
+    for (i in 1:n) {
+      for (j in 1:n) {
+        if (i != j) {
+          h <- hiatus(x[, i], x[, j])
+          lower[i, j] <- h["lower"]
+          upper[i, j] <- h["upper"]
+        }
+        event[i, j] <- paste(z[i], z[j], sep = "-")
       }
     }
-    z
+
+    ## Check calendar
+    BP <- is_BP(x) || is_b2k(x)
+    ## Reverse boundaries if BP or b2k scale
+    if (BP) {
+      lower <- t(lower)
+      upper <- t(upper)
+    }
+
+    .TimeRange(
+      lower = if (BP) upper else lower,
+      upper = if (BP) lower else upper,
+      names = event,
+      calendar = get_calendar(x),
+      hash = get_hash(x)
+    )
   }
 )
 
@@ -174,6 +194,8 @@ setMethod(
   f = "interpolate",
   signature = c(x = "numeric", y = "numeric"),
   definition = function(x, y) {
+    arkhe::assert_length(y, length(x))
+
     n <- length(x)
     stats::runif(n, x, y)
   }
@@ -213,6 +235,8 @@ setMethod(
   f = "older",
   signature = c(x = "numeric", y = "numeric"),
   definition = function(x, y) {
+    arkhe::assert_length(y, length(x))
+
     ## Bayesian test: x < y
     mean(x < y)
   }
@@ -228,8 +252,8 @@ setMethod(
     n <- ncol(x)
     z <- matrix(nrow = n, ncol = n)
     dimnames(z) <- list(names(x), names(x))
-    for (i in 1:(n - 1)) {
-      for (j in (i + 1):n) {
+    for (i in 1:n) {
+      for (j in 1:n) {
         z[i, j] <- older(x[, i], x[, j])
       }
     }

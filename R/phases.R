@@ -2,84 +2,6 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
-# Min-Max ======================================================================
-#' @export
-#' @rdname phase
-#' @aliases as_phases,EventsMCMC-method
-setMethod(
-  f = "as_phases",
-  signature = c(from = "EventsMCMC"),
-  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, names = NULL, ordered = FALSE) {
-    ## Validation
-    # TODO: check that length(start) == lenght(stop)
-
-    pha <- if (is.null(names)) paste0("phase_", seq_along(start)) else names
-    arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
-                 dimnames = list(NULL, pha, c("begin", "end")))
-
-    arr[, , 1] <- from[, start]
-    arr[, , 2] <- from[, stop]
-
-    .PhasesMCMC(
-      arr,
-      phases = pha,
-      ordered = ordered,
-      calendar = get_calendar(from),
-      hash = get_hash(from)
-    )
-  }
-)
-
-#' @export
-#' @rdname phase
-#' @aliases as_phases,matrix-method
-setMethod(
-  f = "as_phases",
-  signature = c(from = "matrix"),
-  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, names = NULL, ordered = FALSE,
-                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
-    ## Validation
-    # TODO: check that length(start) == lenght(stop)
-    calendar <- match.arg(calendar, several.ok = FALSE)
-
-    ## Remove the iteration column
-    if (!is.null(iteration))
-      from <- from[, -iteration]
-
-    pha <- if (is.null(names)) paste0("phase_", seq_along(start)) else names
-    arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
-                 dimnames = list(NULL, pha, c("begin", "end")))
-
-    arr[, , 1] <- from[, start]
-    arr[, , 2] <- from[, stop]
-
-    .PhasesMCMC(
-      arr,
-      phases = pha,
-      ordered = ordered,
-      calendar = calendar
-    )
-  }
-)
-
-#' @export
-#' @rdname phase
-#' @aliases as_phases,data.frame-method
-setMethod(
-  f = "as_phases",
-  signature = c(from = "data.frame"),
-  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, names = NULL, ordered = FALSE,
-                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
-    from <- data.matrix(from)
-    methods::callGeneric(from, start = start, stop = stop, names = names,
-                         ordered = ordered, calendar = calendar,
-                         iteration = iteration)
-  }
-)
-
 # Build phases =================================================================
 #' @export
 #' @rdname phase
@@ -103,7 +25,7 @@ setMethod(
     m <- nrow(x)
     n <- length(groups) # Number of phases
     k <- seq_len(n)
-    grp <- if (is.null(names(groups))) paste0("phase_", k) else names(groups)
+    grp <- if (is.null(names(groups))) paste0("P", k) else names(groups)
 
     ## Calendar scale
     fun_min <- min
@@ -203,10 +125,14 @@ setMethod(
   signature = c(x = "numeric", y = "numeric"),
   definition = function(x, y, level = 0.95) {
     ## Validation
-    if (length(x) != length(y)) {
-      stop(sprintf("%s and %s must have the same length.",
-                   sQuote("x"), sQuote("y")), call. = FALSE)
-    }
+    arkhe::assert_length(y, length(x))
+
+    # no_bound <- c(lower = NA, upper = NA)
+    # if (older(x, y) < 0.5) {
+    #   warning("Events do not seem to be in chronological order; ",
+    #           "NAs introduced.", call. = FALSE)
+    #   return(no_bound)
+    # }
 
     epsilon <- seq(from = 0, to = 1 - level, by = 0.001)
     p <- periode(epsilon, x, y, level = level)
@@ -219,7 +145,7 @@ setMethod(
     endpoints <- p[, short]
 
     ## Return the endpoints of the shortest interval
-    c(start = endpoints[[1]], end = endpoints[[2]])
+    c(lower = endpoints[[1]], upper = endpoints[[2]])
   }
 )
 
@@ -231,10 +157,10 @@ setMethod(
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95) {
     ## Check calendar
-    BP <- is_BP(x)
+    BP <- is_BP(x) || is_b2k(x)
 
     ## Get phases
-    pha <- get_order(x)
+    pha <- names(x)
 
     ## Reverse boundaries if BP scale
     start <- ifelse(BP, 2, 1)
@@ -244,7 +170,7 @@ setMethod(
     result <- matrix(nrow = ncol(x), ncol = 2)
 
     k <- seq_along(pha)
-    for (i in seq_along(pha)) {
+    for (i in k) {
       a <- x[, i, start]
       b <- x[, i, end]
       result[i, ] <- boundaries(a, b, level = level)
@@ -256,7 +182,7 @@ setMethod(
     }
 
     ## Names
-    dimnames(result) <- list(pha, c("start", "end"))
+    dimnames(result) <- list(pha, c("lower", "upper"))
 
     as.data.frame(result)
   }
@@ -270,7 +196,10 @@ setMethod(
   f = "duration",
   signature = c(x = "numeric", y = "numeric"),
   definition = function(x, y) {
-    y - x
+    ## Validation
+    arkhe::assert_length(y, length(x))
+
+    abs(y - x)
   }
 )
 
@@ -281,15 +210,8 @@ setMethod(
   f = "duration",
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x) {
-    ## Check calendar
-    BP <- is_BP(x)
-
     ## Get phases
-    pha <- get_order(x)
-
-    ## Reverse boundaries if BP scale
-    start <- ifelse(BP, 2, 1)
-    end <- ifelse(BP, 1, 2)
+    pha <- names(x)
 
     # Matrix of results
     result <- matrix(nrow = nrow(x), ncol = ncol(x))
@@ -297,8 +219,8 @@ setMethod(
 
     k <- seq_along(pha)
     for (i in k) {
-      a <- x[, i, start]
-      b <- x[, i, end]
+      a <- x[, i, 1]
+      b <- x[, i, 2]
       result[, i] <- duration(a, b)
     }
 
@@ -330,49 +252,51 @@ setMethod(
   f = "transition",
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95) {
-    ## Validation
-    if (!is_ordered(x)) {
-      stop("Phases must be arranged in chronological order.", call. = FALSE)
-    }
-
     ## Check calendar
-    BP <- is_BP(x)
+    BP <- is_BP(x) || is_b2k(x)
 
     ## Get phases
-    pha <- get_order(x)
-    m <- ncol(x) - 1
+    n <- ncol(x)
+    z <- names(x)
 
     ## Reverse boundaries if BP scale
     start <- ifelse(BP, 1, 2)
     end <- ifelse(BP, 2, 1)
-    fun_head <- ifelse(BP, utils::tail, utils::head)
-    fun_tail <- ifelse(BP, utils::head, utils::tail)
-
-    k <- seq_len(m + 1)
-    deb <- fun_head(k, -1)
-    fin <- fun_tail(k, -1)
 
     ## Matrix of results
-    result <- matrix(nrow = m, ncol = 2)
+    lower <- upper <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
 
-    for (i in seq_len(m)) {
-      a <- x[, deb[[i]], start]
-      b <- x[, fin[[i]], end]
-      result[i, ] <- boundaries(a, b, level = level)
+    for (i in 1:n) {
+      for (j in 1:n) {
+        if (i != j) {
+          h <- boundaries(x[, i, start], x[, j, end], level = level)
+          lower[i, j] <- h["lower"]
+          upper[i, j] <- h["upper"]
+        }
+        phase[i, j] <- paste(z[i], z[j], sep = "-")
+      }
     }
+
+    ## Remove false results
+    drop <- lower > upper
 
     ## Re-reverse boundaries if BP scale
     if (BP) {
-      result <- result[, c(2, 1), drop = FALSE]
+      drop <- !drop
+      lower <- t(lower)
+      upper <- t(upper)
     }
 
-    ## Names
-    names_start <- if (BP) fin else deb
-    names_end <- if (BP) deb else fin
-    rownames(result) <- paste(pha[names_start], pha[names_end], sep = "-")
-    colnames(result) <- c("start", "end")
+    upper[drop] <- NA
+    lower[drop] <- NA
 
-    as.data.frame(result)
+    .TimeRange(
+      lower = if (BP) upper else lower,
+      upper = if (BP) lower else upper,
+      names = phase,
+      calendar = get_calendar(x),
+      hash = get_hash(x)
+    )
   }
 )
 
@@ -384,48 +308,43 @@ setMethod(
   f = "hiatus",
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95) {
-    ## Validation
-    if (!is_ordered(x)) {
-      stop("Phases must be arranged in chronological order.", call. = FALSE)
-    }
-
     ## Check calendar
-    BP <- is_BP(x)
+    BP <- is_BP(x) || is_b2k(x)
 
     ## Get phases
-    pha <- get_order(x)
-    m <- ncol(x) - 1
+    n <- ncol(x)
+    z <- names(x)
 
     ## Reverse boundaries if BP scale
     start <- ifelse(BP, 1, 2)
     end <- ifelse(BP, 2, 1)
-    fun_head <- ifelse(BP, utils::tail, utils::head)
-    fun_tail <- ifelse(BP, utils::head, utils::tail)
-
-    k <- seq_len(m + 1)
-    deb <- fun_head(k, -1)
-    fin <- fun_tail(k, -1)
 
     ## Matrix of results
-    result <- matrix(nrow = m, ncol = 3)
+    lower <- upper <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
 
-    for (i in seq_len(m)) {
-      a <- x[, deb[[i]], start]
-      b <- x[, fin[[i]], end]
-      result[i, ] <- hiatus(a, b, level = level)
+    for (i in 1:n) {
+      for (j in 1:n) {
+        if (i != j) {
+          h <- hiatus(x[, i, start], x[, j, end], level = level)
+          lower[i, j] <- h["lower"]
+          upper[i, j] <- h["upper"]
+        }
+        phase[i, j] <- paste(z[i], z[j], sep = "-")
+      }
     }
 
     ## Re-reverse boundaries if BP scale
     if (BP) {
-      result <- result[, c(2, 1), drop = FALSE]
+      lower <- t(lower)
+      upper <- t(upper)
     }
 
-    ## Names
-    names_start <- if (BP) fin else deb
-    names_end <- if (BP) deb else fin
-    rownames(result) <- paste(pha[names_start], pha[names_end], sep = "-")
-    colnames(result) <- c("start", "end", "duration")
-
-    as.data.frame(result)
+    .TimeRange(
+      lower = if (BP) upper else lower,
+      upper = if (BP) lower else upper,
+      names = phase,
+      calendar = get_calendar(x),
+      hash = get_hash(x)
+    )
   }
 )

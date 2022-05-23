@@ -34,7 +34,7 @@ the credible interval was used.}
 the tempo plot.}
 
 \item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
-(either "\code{BP}" or "\code{CE}").}
+(either "\code{CE}", "\code{BP}" or "\code{b2k}").}
 
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
@@ -56,7 +56,8 @@ Other classes:
 \code{\link{PhasesMCMC-class}},
 \code{\link{ProxyRecord-class}},
 \code{\link{RECE-class}},
-\code{\link{RateOfChange-class}}
+\code{\link{RateOfChange-class}},
+\code{\link{TimeRange-class}}
 }
 \author{
 N. Frerebeau

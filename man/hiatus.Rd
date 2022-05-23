@@ -45,8 +45,7 @@ satisfies
 \item \code{x = numeric,y = numeric}: Returns a length-three \code{\link{numeric}} vector (upper and upper
 boundaries, and hiatus duration, if any).
 
-\item \code{x = EventsMCMC,y = missing}: Hiatus between successive events. Returns a \code{\link{numeric}}
-matrix of hiatus durations.
+\item \code{x = EventsMCMC,y = missing}: Hiatus between successive events.
 }}
 
 \examples{
@@ -58,7 +57,8 @@ eve <- eve[1:10000, ]
 older(eve)
 
 ## Test for hiatus
-hiatus(eve[, 2], eve[, 3])
+hia <- hiatus(eve)
+as.data.frame(hia)
 }
 \seealso{
 Other tests: 

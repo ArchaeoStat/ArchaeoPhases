@@ -104,11 +104,10 @@ setMethod(
 
     ## Calendar scale
     scales <- vapply(X = dots, FUN = get_calendar, FUN.VALUE = character(1))
-    cal <- unique(scales)
-    if (length(cal) != 1) {
+    if (length(unique(scales)) != 1) {
       stop("All object must have the same calendar scale.", call. = FALSE)
     }
-    gg_x_scale <- scale_calendar(cal)
+    gg_x_scale <- scale_calendar(dots[[1]])
 
     ggplot2::ggplot(data = tmp) +
       ggplot2::aes(x = .data$year, y = .data$estimate, color = .data$Legend) +

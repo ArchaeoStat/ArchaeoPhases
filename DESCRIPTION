@@ -55,7 +55,8 @@ Suggests:
     folio,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    vdiffr (>= 1.0.0)
 VignetteBuilder: 
     knitr
 Additional_repositories: https://tesselle.r-universe.dev
@@ -90,3 +91,4 @@ Collate:
     'utilities.R'
     'validate.R'
     'zzz.R'
+Config/testthat/edition: 3

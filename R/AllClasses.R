@@ -8,7 +8,7 @@ NULL
 #' S4 classes to represent the output of a MCMC algorithm.
 #' @slot events A [`character`] vector specifying the name of the events.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`", "`CE`" or "`b2k`").
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Subset:
@@ -63,7 +63,7 @@ NULL
 #' An S4 class to represent the output of a MCMC algorithm.
 #' @slot phases A [`character`] vector specifying the name of the phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`CE`").
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -101,6 +101,33 @@ NULL
   contains = "array"
 )
 
+# Time Range ===================================================================
+#' Cumulative Events
+#'
+#' An S4 class to represent time ranges.
+#' @slot upper,lower A `numeric` [`matrix`] giving the lower and upper
+#'  boundaries.
+#' @slot names A [`character`] vector specifying the name of the events/phases.
+#' @slot calendar A [`character`] string specifying the chronological scale
+#'  (either "`CE`", "`BP`" or "`b2k`").
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
+#'  original data file.
+#' @author N. Frerebeau
+#' @family classes
+#' @docType class
+#' @rdname TimeRange
+#' @aliases TimeRange-class
+.TimeRange <- setClass(
+  Class = "TimeRange",
+  slots = c(
+    lower = "matrix",
+    upper = "matrix",
+    names = "matrix",
+    calendar = "character",
+    hash = "character"
+  )
+)
+
 # Tempo ========================================================================
 #' Cumulative Events
 #'
@@ -120,7 +147,7 @@ NULL
 #' @slot events An [`integer`] scalar giving the number of events included in
 #'  the tempo plot.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`CE`").
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -157,7 +184,7 @@ NULL
 #' @slot estimate A [`numeric`] vector giving the estimation of the
 #'  distribution.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`CE`").
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -191,7 +218,7 @@ NULL
 #'  credibility interval.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`CE`").
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -225,7 +252,7 @@ NULL
 #' @slot estimate A [`numeric`] vector giving the estimation of the
 #'  rate of change.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`CE`").
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -256,7 +283,7 @@ NULL
 #' @slot year A [`numeric`] vector giving the time points at which the
 #'  distribution is estimated.
 #' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`BP`" or "`CE`").
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -292,6 +319,8 @@ NULL
 #' An S4 class to store proxy records.
 #' @slot year A [`numeric`] vector giving the time points at which the
 #'  distribution is estimated.
+#' @slot calendar A [`character`] string specifying the chronological scale
+#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @section Coerce:
 #'  In the code snippets below, `x` is an `ProxyRecord` object.
 #'  \describe{

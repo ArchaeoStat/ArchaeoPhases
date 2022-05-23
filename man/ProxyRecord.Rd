@@ -13,6 +13,9 @@ An S4 class to store proxy records.
 \describe{
 \item{\code{year}}{A \code{\link{numeric}} vector giving the time points at which the
 distribution is estimated.}
+
+\item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
+(either "\code{CE}", "\code{BP}" or "\code{b2k}").}
 }}
 
 \section{Coerce}{
@@ -31,7 +34,8 @@ Other classes:
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
 \code{\link{RECE-class}},
-\code{\link{RateOfChange-class}}
+\code{\link{RateOfChange-class}},
+\code{\link{TimeRange-class}}
 }
 \author{
 N. Frerebeau

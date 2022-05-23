@@ -8,6 +8,7 @@
 \alias{[[,PhasesMCMC,numeric,missing-method}
 \alias{[[,PhasesMCMC,character,missing-method}
 \alias{[<-,MCMC-method}
+\alias{[<-,PhasesMCMC-method}
 \title{Extract or Replace Parts of an Object}
 \usage{
 \S4method{[}{MCMC}(x, i, j, ..., drop = TRUE)
@@ -19,6 +20,8 @@
 \S4method{[[}{PhasesMCMC,character,missing}(x, i)
 
 \S4method{[}{MCMC}(x, i, j, ...) <- value
+
+\S4method{[}{PhasesMCMC}(x, i, j, ...) <- value
 }
 \arguments{
 \item{x}{An object from which to extract element(s) or in which to replace

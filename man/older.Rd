@@ -51,7 +51,8 @@ eve <- eve[1:10000, ]
 older(eve)
 
 ## Test for hiatus
-hiatus(eve[, 2], eve[, 3])
+hia <- hiatus(eve)
+as.data.frame(hia)
 }
 \seealso{
 Other tests: 

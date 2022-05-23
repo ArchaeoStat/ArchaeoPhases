@@ -8,21 +8,7 @@ setMethod(
   signature = "MCMC",
   definition = function(object) {
     cat(
-      "<MCMC>",
-      sprintf("- Number of dates: %d", ncol(object)),
-      sprintf("- Calendar: %s", get_calendar(object)),
-      sep = "\n"
-    )
-  }
-)
-
-# EventsMCMC ===================================================================
-setMethod(
-  f = "show",
-  signature = "EventsMCMC",
-  definition = function(object) {
-    cat(
-      "<EventsMCMC>",
+      sprintf("<%s>", class(object)),
       sprintf("- Number of events: %d", ncol(object)),
       sprintf("- Calendar: %s", get_calendar(object)),
       sep = "\n"

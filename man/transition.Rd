@@ -44,18 +44,16 @@ eve <- eve[1:10000, ]
 ## Unless otherwise specified, the phases are assumed to be unordered
 pha <- phase(eve, groups = list(A = c(1, 3), B = c(2, 4)))
 
-## Set chronological order
-## (from the oldest to the youngest phase)
-set_order(pha) <- c("B", "A")
-
 ## Compute phase ranges
 boundaries(pha)
 
 ## Compute phase transition
-transition(pha)
+tra <- transition(pha)
+as.data.frame(tra)
 
 ## Compute phase hiatus
-hiatus(pha)
+hia <- hiatus(pha)
+as.data.frame(hia)
 
 ## Compute phase duration
 dur <- duration(pha)

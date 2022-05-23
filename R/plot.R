@@ -210,7 +210,7 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
                             size = 2, fill = "grey50", alpha = 0.5) {
   ## Time range
   duree <- boundaries(x, level = level)
-  ord <- rank(duree$start)
+  ord <- rank(duree$lower)
   duree$rank <- if (decreasing) -ord else ord
   pha <- get_order(x)
   duree$Phase <- factor(pha, levels = pha, ordered = TRUE)
@@ -218,20 +218,20 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
   gg_trans <- gg_hiatus <- NULL
   if (is_ordered(x)) {
     ## Transition
-    trans <- transition(x, level = level)
+    trans <- as.data.frame(transition(x, level = level))
     trans <- data.frame(
-      xmin = trans$start,
-      xmax = trans$end,
+      xmin = trans$lower,
+      xmax = trans$upper,
       ymin = min(duree$rank) - 0.5,
       ymax = max(duree$rank) + 0.5,
       labels = rownames(trans)
     )
 
     ## Hiatus
-    hia <- hiatus(x, level = level)
+    hia <- as.data.frame(hiatus(x, level = level))
     hia <- data.frame(
-      xmin = hia$start,
-      xmax = hia$end,
+      xmin = hia$lower,
+      xmax = hia$upper,
       ymin = min(duree$rank) - 0.5,
       ymax = max(duree$rank) + 0.5,
       labels = rownames(hia)
@@ -265,9 +265,9 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
 
   ## Layer
   aes_range <- ggplot2::aes(
-    x = .data$start,
+    x = .data$lower,
     y = .data$rank,
-    xend = .data$end,
+    xend = .data$upper,
     yend = .data$rank,
     color = .data$Phase
   )
@@ -310,7 +310,7 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, ..., facet = TRUE,
 
   ## Time range
   duree <- boundaries(x, level = level)
-  ord <- rank(duree$start)
+  ord <- rank(duree$lower)
   duree$rank <- if (decreasing) -ord else ord
   duree_phase <- rownames(duree)
   duree$Phase <- factor(duree_phase, levels = duree_phase,
@@ -355,9 +355,9 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, ..., facet = TRUE,
     alpha = alpha
   )
   aes_range <- ggplot2::aes(
-    x = .data$start,
+    x = .data$lower,
     y = .data$y,
-    xend = .data$end,
+    xend = .data$upper,
     yend = .data$y,
     color = .data$Phase
   )

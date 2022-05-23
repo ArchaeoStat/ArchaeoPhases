@@ -49,6 +49,22 @@ as.data.frame.RateOfChange <- function(x, ...) {
   )
 }
 
+#' @method as.data.frame TimeRange
+#' @export
+as.data.frame.TimeRange <- function(x, ...) {
+
+  ok <- !is.na(x@lower)
+  lower <- x@lower[ok]
+  upper <- x@upper[ok]
+
+  data.frame(
+    lower = lower,
+    upper = upper,
+    duration = abs(upper - lower),
+    row.names = x@names[ok]
+  )
+}
+
 #' @method as.data.frame RECE
 #' @export
 as.data.frame.RECE <- function(x, ...) {
@@ -104,7 +120,6 @@ setMethod(
 )
 
 # To EventsMCMC ================================================================
-## From matrix -----------------------------------------------------------------
 #' @export
 #' @rdname coerce
 #' @aliases as_events,matrix-method
@@ -127,7 +142,6 @@ setMethod(
   }
 )
 
-## From data.frame -------------------------------------------------------------
 #' @export
 #' @rdname coerce
 #' @aliases as_events,data.frame-method
@@ -138,6 +152,56 @@ setMethod(
                         iteration = NULL) {
     from <- data.matrix(from)
     methods::callGeneric(from = from, calendar = calendar,
+                         iteration = iteration)
+  }
+)
+
+# To PhasesMCMC ================================================================
+#' @export
+#' @rdname phase
+#' @aliases as_phases,matrix-method
+setMethod(
+  f = "as_phases",
+  signature = c(from = "matrix"),
+  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
+                        stop = start + 1, names = NULL, ordered = FALSE,
+                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
+    ## Validation
+    # TODO: check that length(start) == lenght(stop)
+    calendar <- match.arg(calendar, several.ok = FALSE)
+
+    ## Remove the iteration column
+    if (!is.null(iteration))
+      from <- from[, -iteration]
+
+    pha <- if (is.null(names)) paste0("P", seq_along(start)) else names
+    arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
+                 dimnames = list(NULL, pha, c("begin", "end")))
+
+    arr[, , 1] <- from[, start]
+    arr[, , 2] <- from[, stop]
+
+    .PhasesMCMC(
+      arr,
+      phases = pha,
+      ordered = ordered,
+      calendar = calendar
+    )
+  }
+)
+
+#' @export
+#' @rdname phase
+#' @aliases as_phases,data.frame-method
+setMethod(
+  f = "as_phases",
+  signature = c(from = "data.frame"),
+  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
+                        stop = start + 1, names = NULL, ordered = FALSE,
+                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
+    from <- data.matrix(from)
+    methods::callGeneric(from, start = start, stop = stop, names = names,
+                         ordered = ordered, calendar = calendar,
                          iteration = iteration)
   }
 )
