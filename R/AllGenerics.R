@@ -743,8 +743,9 @@ setGeneric(
 #'  given. If `NULL` (the default) no interval is computed.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
-#' @param succession A [`logical`] scalar: should time ranges be plotted instead
-#'  of densities?
+#' @param range A [`character`] string specifying the additional time range to
+#'  be displayed. It must be one of "`hiatus`" or "`transition`". If `NULL` (the
+#'  default), no additional time ranges are displayed.
 #' @param facet A [`logical`] scalar: should a matrix of panels defined by phase
 #'  be drawn?
 #' @param ... Extra parameters to be passed to [`stats::density()`].

@@ -146,11 +146,11 @@ plot(ac)
 
 ``` r
 boundaries(chrono_phases, level = 0.95)
-#>           start    end
-#> EPI      -28979 -26970
-#> UP       -38570 -29369
-#> Ahmarian -42168 -37433
-#> IUP      -43240 -41161
+#>              lower     upper
+#> EPI      -28978.53 -26969.82
+#> UP       -38570.37 -29368.75
+#> Ahmarian -42168.47 -37433.31
+#> IUP      -43240.37 -41161.00
 ```
 
 ``` r
@@ -160,18 +160,16 @@ plot(chrono_phases)
 <img src="man/figures/README-phases-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
-## Set chronological order
-## (from the oldest to the youngest phase)
-set_order(chrono_phases) <- c("IUP", "Ahmarian", "UP", "EPI")
-get_order(chrono_phases)
-#> [1] "IUP"      "Ahmarian" "UP"       "EPI"
-```
-
-``` r
-plot(chrono_phases, level = 0.95)
+plot(chrono_phases, range = "hiatus")
 ```
 
 <img src="man/figures/README-succession-plot-1.png" style="display: block; margin: auto;" />
+
+``` r
+plot(chrono_phases, range = "transition")
+```
+
+<img src="man/figures/README-succession-plot-2.png" style="display: block; margin: auto;" />
 
 ## References
 

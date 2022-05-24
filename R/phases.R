@@ -30,7 +30,7 @@ setMethod(
     ## Calendar scale
     fun_min <- min
     fun_max <- max
-    if (is_BP(x)) {
+    if (is_BP(x) || is_b2k(x)) {
       fun_min <- max
       fun_max <- min
     }

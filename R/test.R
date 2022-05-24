@@ -214,7 +214,7 @@ setMethod(
 
     ## Build names
     eve <- names(x)
-    eve <- c(eve[[e1]], paste(eve[[e1]], eve[[e2]], sep = "_"), eve[[e2]])
+    eve <- c(eve[[e1]], paste(eve[[e1]], eve[[e2]], sep = "-"), eve[[e2]])
 
     ## Return an MCM object
     .EventsMCMC(

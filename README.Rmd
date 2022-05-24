@@ -116,15 +116,9 @@ boundaries(chrono_phases, level = 0.95)
 plot(chrono_phases)
 ```
 
-```{r phases-order, fig.height=3.5}
-## Set chronological order
-## (from the oldest to the youngest phase)
-set_order(chrono_phases) <- c("IUP", "Ahmarian", "UP", "EPI")
-get_order(chrono_phases)
-```
-
-```{r succession-plot, fig.height=2}
-plot(chrono_phases, level = 0.95)
+```{r succession-plot}
+plot(chrono_phases, range = "hiatus")
+plot(chrono_phases, range = "transition")
 ```
 
 ## References

@@ -1,7 +1,7 @@
 ---
 title: "Import MCMC Samples"
 author: "N. Frerebeau"
-date: "2022-05-19"
+date: "2022-05-24"
 output: rmarkdown::html_vignette
 bibliography: bibliography.bib
 vignette: >
@@ -53,8 +53,7 @@ output_phases <- system.file("chronomodel/ksarakil/Chain_all_Phases.csv",
 chrono_phases <- read_chronomodel_phases(output_phases)
 
 ## Plot phases
-set_order(chrono_phases) <- c("IUP", "Ahmarian", "UP", "EPI")
-plot(chrono_phases, succession = FALSE)
+plot(chrono_phases)
 ```
 
 <img src="./figures/read-chronomodel-phases-1.png" title="plot of chunk read-chronomodel-phases" alt="plot of chunk read-chronomodel-phases" style="display: block; margin: auto;" />
@@ -78,11 +77,10 @@ The phase boundaries cannot be extracted automatically from Oxcal output. Use `a
 oxcal_phases <- as_phases(oxcal_mcmc,
                           start = c(2, 5, 19, 24),
                           stop = c(4, 18, 23, 26),
-                          names = c("IUP", "Ahmarian", "UP", "EPI"),
-                          ordered = TRUE)
+                          names = c("IUP", "Ahmarian", "UP", "EPI"))
 
 ## Plot phase boundaries
-plot(oxcal_phases, succession = FALSE)
+plot(oxcal_phases)
 ```
 
 <img src="./figures/oxcal-phases-1.png" title="plot of chunk oxcal-phases" alt="plot of chunk oxcal-phases" style="display: block; margin: auto;" />
@@ -91,10 +89,10 @@ plot(oxcal_phases, succession = FALSE)
 ```r
 ## Computes phases boundaries (min-max)
 groups <- list(IUP = 3, Ahmarian = c(6:12, 14:17), UP = 20:22, EPI = 25)
-oxcal_groups <- phase(oxcal_mcmc, groups = groups, ordered = TRUE)
+oxcal_groups <- phase(oxcal_mcmc, groups = groups)
 
 ## Plot phases boundaries
-plot(oxcal_groups, succession = FALSE)
+plot(oxcal_groups)
 ```
 
 <img src="./figures/oxcal-groups-1.png" title="plot of chunk oxcal-groups" alt="plot of chunk oxcal-groups" style="display: block; margin: auto;" />
@@ -121,8 +119,7 @@ bcal_phases <- as_phases(bcal_mcmc,
                          names = c("EPI", "UP", "Ahmarian", "IUP"))
 
 ## Plot group boundaries
-set_order(bcal_phases) <- c("IUP", "Ahmarian", "UP", "EPI")
-plot(bcal_phases, succession = FALSE)
+plot(bcal_phases)
 ```
 
 <img src="./figures/bcal-phases-1.png" title="plot of chunk bcal-phases" alt="plot of chunk bcal-phases" style="display: block; margin: auto;" />
@@ -131,10 +128,10 @@ plot(bcal_phases, succession = FALSE)
 ```r
 ## Compute phase boundaries (min-max)
 groups <- list(IUP = 23, Ahmarian = 10:20, UP = 5:7, EPI = 2)
-bcal_groups <- phase(bcal_mcmc, groups = groups, ordered = TRUE)
+bcal_groups <- phase(bcal_mcmc, groups = groups)
 
 ## Plot phase boundaries
-plot(bcal_groups, succession = FALSE)
+plot(bcal_groups)
 ```
 
 <img src="./figures/bcal-groups-1.png" title="plot of chunk bcal-groups" alt="plot of chunk bcal-groups" style="display: block; margin: auto;" />

@@ -162,13 +162,13 @@ setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 #' @export
 #' @method autoplot PhasesMCMC
 autoplot.PhasesMCMC <- function(object, ..., level = 0.95, decreasing = TRUE,
-                                succession = is_ordered(object), facet = TRUE) {
+                                range = NULL, facet = TRUE) {
   ## Calendar scale
   gg_x_scale <- scale_calendar(object)
 
-  if (succession) {
-    gg_phases <- plot_succession(object, level = level,
-                                 decreasing = decreasing)
+  if (!is.null(range)) {
+    gg_phases <- plot_succession(object, level = level, decreasing = decreasing,
+                                 range = range, facet = facet)
   } else {
     gg_phases <- plot_density(object, level = level, decreasing = decreasing,
                               ..., facet = facet)
@@ -188,9 +188,14 @@ setMethod("autoplot", "PhasesMCMC", autoplot.PhasesMCMC)
 #' @export
 #' @method plot PhasesMCMC
 plot.PhasesMCMC <- function(x, level = 0.95, decreasing = TRUE,
-                            succession = is_ordered(x), facet = TRUE, ...) {
+                            range = NULL, facet = TRUE, ...) {
+  gg_fill <- NULL
+  if (!is.null(range)) {
+    gg_fill <- ggplot2::scale_fill_manual(values = "grey50")
+  }
   gg <- autoplot(object = x, ..., level = level, decreasing = decreasing,
-                 succession = succession, facet = facet) +
+                 range = range, facet = facet) +
+    gg_fill +
     ggplot2::theme_bw() +
     ggplot2::theme(axis.title.y = ggplot2::element_blank())
   print(gg)
@@ -207,58 +212,60 @@ setMethod("plot", c(x = "PhasesMCMC", y = "missing"), plot.PhasesMCMC)
 #' @return A \pkg{ggplot2} layer.
 #' @noRd
 plot_succession <- function(x, level = 0.95, decreasing = TRUE,
-                            size = 2, fill = "grey50", alpha = 0.5) {
+                            range = c("transition", "hiatus"), facet = TRUE,
+                            size = 2, alpha = 0.5) {
+  ## Validation
+  range <- match.arg(range, several.ok = FALSE)
+
   ## Time range
   duree <- boundaries(x, level = level)
   ord <- rank(duree$lower)
   duree$rank <- if (decreasing) -ord else ord
-  pha <- get_order(x)
-  duree$Phase <- factor(pha, levels = pha, ordered = TRUE)
+  pha <- rownames(duree)
+  duree$Phase <- factor(pha, levels = unique(pha))
 
-  gg_trans <- gg_hiatus <- NULL
-  if (is_ordered(x)) {
-    ## Transition
-    trans <- as.data.frame(transition(x, level = level))
-    trans <- data.frame(
-      xmin = trans$lower,
-      xmax = trans$upper,
-      ymin = min(duree$rank) - 0.5,
-      ymax = max(duree$rank) + 0.5,
-      labels = rownames(trans)
-    )
+  ## Succession
+  fun <- switch(
+    range,
+    hiatus = hiatus,
+    transition = transition
+  )
+  hia <- as.data.frame(fun(x, level = level))
+  hia <- data.frame(
+    xmin = hia$lower,
+    xmax = hia$upper,
+    ymin = min(duree$rank) - 0.5,
+    ymax = max(duree$rank) + 0.5,
+    labels = rownames(hia),
+    Range = range
+  )
+  hia <- stats::na.omit(hia)
 
-    ## Hiatus
-    hia <- as.data.frame(hiatus(x, level = level))
-    hia <- data.frame(
-      xmin = hia$lower,
-      xmax = hia$upper,
-      ymin = min(duree$rank) - 0.5,
-      ymax = max(duree$rank) + 0.5,
-      labels = rownames(hia)
-    )
-    hia <- stats::na.omit(hia)
+  ## Layers
+  gg_hiatus <- NULL
+  gg_facet <- NULL
+  if (nrow(hia) > 0) {
+    ## Reorder
+    ord <- order(hia$xmin, decreasing = !decreasing)
+    hia <- hia[ord, ]
+    hia$labels <- factor(hia$labels, levels = hia$labels)
 
-    ## Layers
     aes_rect <- ggplot2::aes(
       xmin = .data$xmin,
       xmax = .data$xmax,
-      ymin = .data$ymin,
-      ymax = .data$ymax
+      ymin = -Inf,
+      ymax = Inf,
+      fill = .data$Range
     )
-    if (nrow(trans) > 0) {
-      gg_trans <- ggplot2::geom_rect(
-        mapping = aes_rect,
-        data = trans,
-        fill = fill,
-        alpha = alpha
-      )
-    }
-    if (nrow(hia) > 0) {
-      gg_hiatus <- ggplot2::geom_rect(
-        mapping = aes_rect,
-        data = hia,
-        fill = fill,
-        alpha = alpha + 0.25
+    gg_hiatus <- ggplot2::geom_rect(
+      mapping = aes_rect,
+      data = hia,
+      alpha = alpha
+    )
+    if (facet) {
+      gg_facet <- ggplot2::facet_grid(
+        rows = ggplot2::vars(.data$labels),
+        scales = "free_y"
       )
     }
   }
@@ -281,7 +288,7 @@ plot_succession <- function(x, level = 0.95, decreasing = TRUE,
     breaks = duree$rank,
     labels = duree$Phase
   )
-  list(gg_trans, gg_hiatus, gg_range, gg_y_scale)
+  list(gg_hiatus, gg_facet, gg_range, gg_y_scale)
 }
 
 #' @param x A [`PhasesMCMC`] object.
@@ -313,8 +320,7 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, ..., facet = TRUE,
   ord <- rank(duree$lower)
   duree$rank <- if (decreasing) -ord else ord
   duree_phase <- rownames(duree)
-  duree$Phase <- factor(duree_phase, levels = duree_phase,
-                        ordered = is_ordered(x))
+  duree$Phase <- factor(duree_phase, levels = unique(duree_phase))
   # duree$Range <- paste0(round(level * 100, digits = 0), "%")
 
   ## Adjust y position
@@ -329,8 +335,7 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, ..., facet = TRUE,
   ## Bind densities
   dens <- do.call(rbind, dens)
   dens_phase <- names(pha)
-  dens$Phase <- factor(rep(dens_phase, each = 2 * n), levels = dens_phase,
-                       ordered = is_ordered(x))
+  dens$Phase <- factor(rep(dens_phase, each = 2 * n), levels = unique(dens_phase))
   dens$Boundary <- factor(dens$z, levels = c("Begin", "End"), ordered = TRUE)
 
   ## Layer

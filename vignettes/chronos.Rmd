@@ -1,7 +1,7 @@
 ---
 title: "Manual"
 author: "A. Philippe, M.-A. Vibet"
-date: "2022-05-19"
+date: "2022-05-24"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -240,11 +240,11 @@ The following code gives the endpoints of the time range of all groups of dates 
 
 ```r
 boundaries(chrono_groups, level = 0.95)
-#>           start    end
-#> EPI      -28979 -26970
-#> UP       -38570 -29369
-#> Ahmarian -42168 -37433
-#> IUP      -43240 -41161
+#>              lower     upper
+#> EPI      -28978.53 -26969.82
+#> UP       -38570.37 -29368.75
+#> Ahmarian -42168.47 -37433.31
+#> IUP      -43240.37 -41161.00
 ```
 
 The time range interval of the group of dates is a way to summarize the estimation of its minimum, the estimation of its maximum and their uncertainties at the same time.
@@ -260,13 +260,6 @@ plot(chrono_groups, level = 0.95)
 
 We may also be interested in a succession of phases. This is actually the case of the succession of *IUP*, *Ahmarian*, *UP* and *EPI* that are in stratigraphic order. Hence, we can estimate the transition interval and, if it exists, the gap between these successive phases.
 
-
-```r
-set_order(chrono_groups) <- c("IUP", "Ahmarian", "UP", "EPI")
-get_order(chrono_groups)
-#> [1] "IUP"      "Ahmarian" "UP"       "EPI"
-```
-
 #### Transistions between successive groups
 
 The transition interval between two successive phases is the shortest interval that covers the end of the oldest group of dates and the start of the youngest group of dates. The start and the end are estimated by the minimum and the maximum of the dates included in the group of dates. It gives an idea of the transition period between two successive group of dates. From a computational point of view this is equivalent to the time range calculated between the end of the oldest group of dates and the start of the youngest group of dates.
@@ -274,10 +267,33 @@ The transition interval between two successive phases is the shortest interval t
 
 ```r
 transition(chrono_groups, level = 0.95)
-#>               start    end
-#> IUP-Ahmarian -43212 -40734
-#> Ahmarian-UP  -39118 -36741
-#> UP-EPI       -31480 -26905
+#> An object of class "TimeRange"
+#> Slot "lower":
+#>                EPI        UP  Ahmarian IUP
+#> EPI             NA        NA        NA  NA
+#> UP       -31479.80        NA        NA  NA
+#> Ahmarian -39138.82 -39118.07        NA  NA
+#> IUP      -43487.53 -43395.89 -43212.31  NA
+#> 
+#> Slot "upper":
+#>                EPI        UP  Ahmarian IUP
+#> EPI             NA        NA        NA  NA
+#> UP       -26905.04        NA        NA  NA
+#> Ahmarian -27122.05 -36741.08        NA  NA
+#> IUP      -26866.99 -36480.26 -40733.77  NA
+#> 
+#> Slot "names":
+#>          EPI            UP            Ahmarian            IUP           
+#> EPI      "EPI-EPI"      "EPI-UP"      "EPI-Ahmarian"      "EPI-IUP"     
+#> UP       "UP-EPI"       "UP-UP"       "UP-Ahmarian"       "UP-IUP"      
+#> Ahmarian "Ahmarian-EPI" "Ahmarian-UP" "Ahmarian-Ahmarian" "Ahmarian-IUP"
+#> IUP      "IUP-EPI"      "IUP-UP"      "IUP-Ahmarian"      "IUP-IUP"     
+#> 
+#> Slot "calendar":
+#> [1] "CE"
+#> 
+#> Slot "hash":
+#> [1] "496feac16967682860342e99fbd5189d"
 ```
 
 #### Gap between successive groups
@@ -287,19 +303,42 @@ Successive phases may also be separated in time. Indeed there may exist a gap be
 
 ```r
 hiatus(chrono_groups, level = 0.95)
-#>               start    end
-#> IUP-Ahmarian     NA     NA
-#> Ahmarian-UP      NA     NA
-#> UP-EPI       -29189 -28962
+#> An object of class "TimeRange"
+#> Slot "lower":
+#>                EPI        UP Ahmarian IUP
+#> EPI             NA        NA       NA  NA
+#> UP       -29188.56        NA       NA  NA
+#> Ahmarian -37368.33        NA       NA  NA
+#> IUP      -41220.64 -41282.64       NA  NA
+#> 
+#> Slot "upper":
+#>                EPI        UP Ahmarian IUP
+#> EPI             NA        NA       NA  NA
+#> UP       -28961.79        NA       NA  NA
+#> Ahmarian -28884.37        NA       NA  NA
+#> IUP      -28814.70 -38421.49       NA  NA
+#> 
+#> Slot "names":
+#>          EPI            UP            Ahmarian            IUP           
+#> EPI      "EPI-EPI"      "EPI-UP"      "EPI-Ahmarian"      "EPI-IUP"     
+#> UP       "UP-EPI"       "UP-UP"       "UP-Ahmarian"       "UP-IUP"      
+#> Ahmarian "Ahmarian-EPI" "Ahmarian-UP" "Ahmarian-Ahmarian" "Ahmarian-IUP"
+#> IUP      "IUP-EPI"      "IUP-UP"      "IUP-Ahmarian"      "IUP-IUP"     
+#> 
+#> Slot "calendar":
+#> [1] "CE"
+#> 
+#> Slot "hash":
+#> [1] "496feac16967682860342e99fbd5189d"
 ```
 
 At a confidence level of 95%, there is no gap between the succession of phases *IUP*, *Ahmarian* and *UP*, but there exists one of 203 years between phase *UP* and phase *EPI*.
 
 
 ```r
-plot(chrono_groups, level = 0.95)
+plot(chrono_groups, range = "hiatus", level = 0.95)
 ```
 
-<img src="./figures/unnamed-chunk-7-1.png" title="plot of chunk unnamed-chunk-7" alt="plot of chunk unnamed-chunk-7" style="display: block; margin: auto;" />
+<img src="./figures/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />
 
 ## References

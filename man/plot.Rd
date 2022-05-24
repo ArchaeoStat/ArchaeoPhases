@@ -41,18 +41,11 @@ multiplot(...)
   ...,
   level = 0.95,
   decreasing = TRUE,
-  succession = is_ordered(object),
+  range = NULL,
   facet = TRUE
 )
 
-\S4method{plot}{PhasesMCMC,missing}(
-  x,
-  level = 0.95,
-  decreasing = TRUE,
-  succession = is_ordered(x),
-  facet = TRUE,
-  ...
-)
+\S4method{plot}{PhasesMCMC,missing}(x, level = 0.95, decreasing = TRUE, range = NULL, facet = TRUE, ...)
 }
 \arguments{
 \item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
@@ -75,8 +68,9 @@ given. If \code{NULL} (the default) no interval is computed.}
 
 \item{decreasing}{A \code{\link{logical}} scalar: should the sort order be decreasing?}
 
-\item{succession}{A \code{\link{logical}} scalar: should time ranges be plotted instead
-of densities?}
+\item{range}{A \code{\link{character}} string specifying the additional time range to
+be displayed. It must be one of "\code{hiatus}" or "\code{transition}". If \code{NULL} (the
+default), no additional time ranges are displayed.}
 
 \item{facet}{A \code{\link{logical}} scalar: should a matrix of panels defined by phase
 be drawn?}
@@ -116,12 +110,13 @@ plot(eve_CE, interval = "credible", level = 0.68)
 plot(eve_BP, interval = "hpdi", level = 0.68)
 
 ## Compute phases
-pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
+pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)))
 summary(pha)
 
 ## Plot phases
-plot(pha, succession = FALSE)
-plot(pha, succession = TRUE)
+plot(pha)
+plot(pha, range = "hiatus")
+plot(pha, range = "transition")
 }
 \seealso{
 \code{\link[stats:density]{stats::density()}}

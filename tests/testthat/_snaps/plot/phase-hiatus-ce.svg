@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<rect x='0.00' y='0.00' width='720.00' height='576.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<defs>
+  <clipPath id='cpMzMuNzd8NjQwLjY3fDIyLjc4fDU0NS4xMQ=='>
+    <rect x='33.77' y='22.78' width='606.90' height='522.33' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzMuNzd8NjQwLjY3fDIyLjc4fDU0NS4xMQ==)'>
+<rect x='33.77' y='22.78' width='606.90' height='522.33' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='344.82' y='22.78' width='4.59' height='522.33' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D; fill-opacity: 0.50;' />
+<line x1='349.42' y1='521.37' x2='613.08' y2='521.37' style='stroke-width: 4.27; stroke: #F8766D; stroke-linecap: butt;' />
+<line x1='61.36' y1='46.53' x2='340.30' y2='46.53' style='stroke-width: 4.27; stroke: #00BFC4; stroke-linecap: butt;' />
+<rect x='33.77' y='22.78' width='606.90' height='522.33' style='stroke-width: 1.07; stroke: #333333;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNjQwLjY3fDY1Ny4zMnwyMi43OHw1NDUuMTE='>
+    <rect x='640.67' y='22.78' width='16.65' height='522.33' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNjQwLjY3fDY1Ny4zMnwyMi43OHw1NDUuMTE=)'>
+<rect x='640.67' y='22.78' width='16.65' height='522.33' style='stroke-width: 1.07; stroke: #333333; fill: #D9D9D9;' />
+<text transform='translate(645.96,283.95) rotate(90)' text-anchor='middle' style='font-size: 8.80px; fill: #1A1A1A; font-family: sans;' textLength='24.46px' lengthAdjust='spacingAndGlyphs'>P2-P1</text>
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<polyline points='52.55,547.85 52.55,545.11 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='208.45,547.85 208.45,545.11 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='364.35,547.85 364.35,545.11 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='520.25,547.85 520.25,545.11 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<text x='52.55' y='556.10' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>-2000</text>
+<text x='208.45' y='556.10' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>-1500</text>
+<text x='364.35' y='556.10' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>-1000</text>
+<text x='520.25' y='556.10' text-anchor='middle' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='17.61px' lengthAdjust='spacingAndGlyphs'>-500</text>
+<text x='28.84' y='524.40' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='10.77px' lengthAdjust='spacingAndGlyphs'>P1</text>
+<text x='28.84' y='49.55' text-anchor='end' style='font-size: 8.80px; fill: #4D4D4D; font-family: sans;' textLength='10.77px' lengthAdjust='spacingAndGlyphs'>P2</text>
+<polyline points='31.03,521.37 33.77,521.37 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='31.03,46.53 33.77,46.53 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<text x='337.22' y='568.24' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='41.58px' lengthAdjust='spacingAndGlyphs'>Year CE</text>
+<text transform='translate(13.05,283.95) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='36.70px' lengthAdjust='spacingAndGlyphs'>Phases</text>
+<rect x='668.28' y='237.22' width='33.53' height='49.89' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='668.28' y='245.93' style='font-size: 11.00px; font-family: sans;' textLength='31.20px' lengthAdjust='spacingAndGlyphs'>Phase</text>
+<rect x='668.28' y='252.55' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='670.00' y1='261.19' x2='683.83' y2='261.19' style='stroke-width: 4.27; stroke: #F8766D; stroke-linecap: butt;' />
+<rect x='668.28' y='269.83' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='670.00' y1='278.47' x2='683.83' y2='278.47' style='stroke-width: 4.27; stroke: #00BFC4; stroke-linecap: butt;' />
+<text x='691.04' y='264.22' style='font-size: 8.80px; font-family: sans;' textLength='10.77px' lengthAdjust='spacingAndGlyphs'>P1</text>
+<text x='691.04' y='281.50' style='font-size: 8.80px; font-family: sans;' textLength='10.77px' lengthAdjust='spacingAndGlyphs'>P2</text>
+<rect x='668.28' y='298.07' width='46.24' height='32.61' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='668.28' y='306.78' style='font-size: 11.00px; font-family: sans;' textLength='32.42px' lengthAdjust='spacingAndGlyphs'>Range</text>
+<rect x='668.28' y='313.40' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<rect x='668.98' y='314.11' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: square; stroke-linejoin: miter; fill: #F8766D; fill-opacity: 0.50;' />
+<text x='691.04' y='325.07' style='font-size: 8.80px; font-family: sans;' textLength='23.49px' lengthAdjust='spacingAndGlyphs'>hiatus</text>
+<text x='33.77' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='104.23px' lengthAdjust='spacingAndGlyphs'>phase_hiatus_CE</text>
+</g>
+</svg>

@@ -14,9 +14,10 @@ plot(eve_CE, interval = "credible", level = 0.68)
 plot(eve_BP, interval = "hpdi", level = 0.68)
 
 ## Compute phases
-pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)), ordered = TRUE)
+pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)))
 summary(pha)
 
 ## Plot phases
-plot(pha, succession = FALSE)
-plot(pha, succession = TRUE)
+plot(pha)
+plot(pha, range = "hiatus")
+plot(pha, range = "transition")
