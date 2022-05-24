@@ -103,14 +103,14 @@ path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
 (chrono_events <- read_chronomodel_events(path_events))
 #> <EventsMCMC>
 #> - Number of events: 16
-#> - Calendar: CE
+#> - Time scale: CE
 
 ## Phases
 path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
 (chrono_phases <- read_chronomodel_phases(path_phases))
 #> <PhasesMCMC>
-#> - Modelled phases: EPI UP Ahmarian IUP
-#> - Calendar: CE
+#> - Number of phases: 4
+#> - Time scale: CE
 ```
 
 **chronos** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for
@@ -160,13 +160,13 @@ plot(chrono_phases)
 <img src="man/figures/README-phases-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
-plot(chrono_phases, range = "hiatus")
+plot(chrono_phases, select = c("UP", "EPI"), range = "hiatus")
 ```
 
 <img src="man/figures/README-succession-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
-plot(chrono_phases, range = "transition")
+plot(chrono_phases, select = c("UP", "EPI"), range = "transition")
 ```
 
 <img src="man/figures/README-succession-plot-2.png" style="display: block; margin: auto;" />

@@ -39,13 +39,22 @@ multiplot(...)
 \S4method{autoplot}{PhasesMCMC}(
   object,
   ...,
+  select = NULL,
   level = 0.95,
-  decreasing = TRUE,
   range = NULL,
+  decreasing = TRUE,
   facet = TRUE
 )
 
-\S4method{plot}{PhasesMCMC,missing}(x, level = 0.95, decreasing = TRUE, range = NULL, facet = TRUE, ...)
+\S4method{plot}{PhasesMCMC,missing}(
+  x,
+  select = NULL,
+  level = 0.95,
+  range = NULL,
+  decreasing = TRUE,
+  facet = TRUE,
+  ...
+)
 }
 \arguments{
 \item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}

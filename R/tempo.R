@@ -148,6 +148,7 @@ setMethod("autoplot", "CumulativeEvents", autoplot.CumulativeEvents)
 #' @method plot CumulativeEvents
 plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, ...) {
   gg <- autoplot(object = x, ..., credible = credible, gauss = gauss) +
+    ggplot2::scale_colour_manual(values = c("#004488", "#BB5566", "#DDAA33")) +
     ggplot2::theme_bw() +
     ggplot2::theme(legend.position = "bottom")
   print(gg)

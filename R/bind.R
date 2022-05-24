@@ -30,3 +30,19 @@ setMethod(
     )
   }
 )
+
+#' @export
+#' @rdname sort
+#' @aliases sort,MCMC-method
+setMethod(
+  f = "sort",
+  signature = c(x = "MCMC"),
+  definition = function(x, decreasing = FALSE) {
+    decreasing <- ifelse(is_CE(x), decreasing, !decreasing)
+
+    i <- order(apply(X = x, MARGIN = 2, FUN = stats::median),
+               decreasing = decreasing)
+
+    x[, i, drop = FALSE]
+  }
+)

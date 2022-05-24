@@ -119,8 +119,8 @@
 <rect x='668.13' y='305.47' width='15.86' height='15.86' style='stroke-width: 1.07; stroke-linecap: square; stroke-linejoin: miter; fill: #333333; fill-opacity: 0.50;' />
 <rect x='667.42' y='322.04' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
 <rect x='668.13' y='322.75' width='15.86' height='15.86' style='stroke-width: 1.07; stroke-dasharray: 2.85,2.85; stroke-linecap: square; stroke-linejoin: miter; fill: #333333; fill-opacity: 0.50;' />
-<text x='690.18' y='316.43' style='font-size: 8.80px; font-family: sans;' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>Begin</text>
-<text x='690.18' y='333.71' style='font-size: 8.80px; font-family: sans;' textLength='15.66px' lengthAdjust='spacingAndGlyphs'>End</text>
+<text x='690.18' y='316.43' style='font-size: 8.80px; font-family: sans;' textLength='15.66px' lengthAdjust='spacingAndGlyphs'>End</text>
+<text x='690.18' y='333.71' style='font-size: 8.80px; font-family: sans;' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>Begin</text>
 <text x='45.03' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='96.89px' lengthAdjust='spacingAndGlyphs'>phase_facet_BP</text>
 </g>
 </svg>

@@ -47,9 +47,9 @@
 #' @importFrom coda mcmc.list mcmc
 #' @importFrom ggplot2 aes autoplot element_blank element_text facet_grid ggplot
 #' geom_area geom_hline geom_path geom_rect geom_ribbon geom_segment geom_tile
-#' guides guide_colorbar guide_legend scale_fill_manual scale_fill_viridis_c
-#' scale_x_continuous scale_x_reverse scale_y_continuous scale_y_discrete theme
-#' theme_bw vars
+#' guides guide_colorbar guide_legend scale_colour_manual scale_fill_manual
+#' scale_fill_viridis_c scale_x_continuous scale_x_reverse scale_y_continuous
+#' scale_y_discrete theme theme_bw vars
 #' @importFrom ggridges geom_density_ridges
 #' @importFrom methods as callGeneric callNextMethod new prototype setClass
 #' setGeneric setMethod setValidity validObject .valueClassTest

@@ -336,7 +336,7 @@ At a confidence level of 95%, there is no gap between the succession of phases *
 
 
 ```r
-plot(chrono_groups, range = "hiatus", level = 0.95)
+plot(chrono_groups, select = c("UP", "EPI"), range = "hiatus", level = 0.95)
 ```
 
 <img src="./figures/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto;" />

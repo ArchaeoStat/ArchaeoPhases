@@ -206,7 +206,7 @@ hiatus(chrono_groups, level = 0.95)
 At a confidence level of 95%, there is no gap between the succession of phases *IUP*, *Ahmarian* and *UP*, but there exists one of 203 years between phase *UP* and phase *EPI*.
 
 ```{r, fig.height=2}
-plot(chrono_groups, range = "hiatus", level = 0.95)
+plot(chrono_groups, select = c("UP", "EPI"), range = "hiatus", level = 0.95)
 ```
 
 ## References

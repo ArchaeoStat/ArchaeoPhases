@@ -19,6 +19,7 @@ setMethod(
 
     eve <- x@events
     if (!missing(j)) {
+      if (is.character(j)) j <- match(j, eve)
       eve <- eve[j]
     }
     methods::initialize(x, z, events = eve)
@@ -40,6 +41,7 @@ setMethod(
 
     pha <- x@phases
     if (!missing(j)) {
+      if (is.character(j)) j <- match(j, pha)
       pha <- pha[j]
     }
     methods::initialize(x, z, phases = pha)

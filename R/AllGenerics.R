@@ -4,6 +4,7 @@ NULL
 
 # S4 dispatch to base S3 generic ===============================================
 setGeneric("summary")
+setGeneric("sort")
 setGeneric("autoplot", package = "ggplot2")
 
 # Coerce =======================================================================
@@ -69,22 +70,7 @@ setGeneric(
   valueClass = "RECE"
 )
 
-# Bind =========================================================================
-#' Combine two Objects
-#'
-#' Combine two MCMC Objects.
-#' @param x,y An [`MCMC-class`] object.
-#' @return
-#'  An [`MCMC-class`] object.
-#' @example inst/examples/ex-subset.R
-#' @author N. Frerebeau
-#' @docType methods
-#' @family mutators
-#' @name bind
-#' @rdname bind
-NULL
-
-# Extract ======================================================================
+# Tools ========================================================================
 ## Mutators --------------------------------------------------------------------
 #' Get or Set Parts of an Object
 #'
@@ -136,6 +122,36 @@ setGeneric(
 #' @family mutators
 #' @name subset
 #' @rdname subset
+NULL
+
+## Bind ------------------------------------------------------------------------
+#' Combine two MCMC Objects
+#'
+#' @param x,y An [`MCMC-class`] object.
+#' @return
+#'  An [`MCMC-class`] object.
+#' @example inst/examples/ex-subset.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @name bind
+#' @rdname bind
+NULL
+
+## Sort ------------------------------------------------------------------------
+#' Sort an MCMC Object
+#'
+#' Sort (or order) an object into ascending or descending temporal order.
+#' @param x An [`MCMC-class`] object.
+#' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
+#' @return
+#'  An object of the same sort as `x`.
+#' @example inst/examples/ex-subset.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @name sort
+#' @rdname sort
 NULL
 
 # Time Scale ===================================================================
