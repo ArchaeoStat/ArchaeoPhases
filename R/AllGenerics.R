@@ -37,6 +37,15 @@ setGeneric(
 #' Coerce
 #'
 #' @param from from An object to be coerced.
+#' @param start An [`integer`] vector specifying the index of the columns
+#'  corresponding to the beginning of the phases. If missing, every other column
+#'  is used starting from the first column (after deleting the `iteration`
+#'  column, if any).
+#' @param stop An [`integer`] vector specifying the index of the columns
+#'  corresponding to the end of the phases. If missing, every other column
+#'  is used starting from the second column (after deleting the `iteration`
+#'  column, if any).
+#' @param names A [`character`] vector giving the names of the phases.
 #' @param calendar A [`character`] string specifying the chronological scale
 #'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
 #' @param iteration A length-one [`numeric`] vector specifying the index of the
@@ -60,6 +69,14 @@ setGeneric(
   name = "as_events",
   def = function(from, ...) standardGeneric("as_events"),
   valueClass = "EventsMCMC"
+)
+
+#' @rdname coerce
+#' @aliases as_phases-method
+setGeneric(
+  name = "as_phases",
+  def = function(from, ...) standardGeneric("as_phases"),
+  valueClass = "PhasesMCMC"
 )
 
 #' @rdname coerce
@@ -599,25 +616,8 @@ setGeneric(
 #' Phases
 #'
 #' Constructs the minimum and maximum for a group of events (phase).
-#' @param from A `numeric` [`matrix`] or an [`EventsMCMC-class`].
-#' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
+#' @param x An [`EventsMCMC-class`].
 #' @param groups A [`list`].
-#' @param start An [`integer`] vector specifying the index of the columns
-#'  corresponding to the beginning of the phases. If missing, every other column
-#'  is used starting from the first column (after deleting the `iteration`
-#'  column, if any).
-#' @param stop An [`integer`] vector specifying the index of the columns
-#'  corresponding to the end of the phases. If missing, every other column
-#'  is used starting from the second column (after deleting the `iteration`
-#'  column, if any).
-#' @param names A [`character`] vector giving the names of the phases.
-#' @param ordered A [`logical`] scalar: should the `groups` be regarded as
-#'  ordered (in the order given)?
-#' @param calendar A [`character`] string specifying the chronological scale
-#'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
-#' @param iteration An [`integer`] specifying the index of the iteration column
-#'  to be removed.
-#' @param value A possible value for the element(s) of `x`.
 #' @param ... Currently not used.
 #' @return
 #'  A [`PhasesMCMC-class`] object.
@@ -640,41 +640,26 @@ setGeneric(
   valueClass = "PhasesMCMC"
 )
 
-#' @rdname phase
-#' @aliases as_phases-method
-setGeneric(
-  name = "as_phases",
-  def = function(from, ...) standardGeneric("as_phases"),
-  valueClass = "PhasesMCMC"
-)
+# @rdname phase
+# @aliases get_order-method
+# setGeneric(
+#   name = "get_order",
+#   def = function(x, value) standardGeneric("get_order")
+# )
 
-#' @rdname phase
-#' @aliases get_order-method
-setGeneric(
-  name = "get_order",
-  def = function(x, value) standardGeneric("get_order")
-)
+# @rdname phase
+# @aliases set_order-method
+# setGeneric(
+#   name = "set_order<-",
+#   def = function(x, value) standardGeneric("set_order<-")
+# )
 
-#' @rdname phase
-#' @aliases set_order-method
-setGeneric(
-  name = "set_order<-",
-  def = function(x, value) standardGeneric("set_order<-")
-)
-
-#' @rdname phase
-#' @aliases as_ordered-method
-setGeneric(
-  name = "as_ordered",
-  def = function(x) standardGeneric("as_ordered")
-)
-
-#' @rdname phase
-#' @aliases is_ordered-method
-setGeneric(
-  name = "is_ordered",
-  def = function(x) standardGeneric("is_ordered")
-)
+# @rdname phase
+# @aliases is_ordered-method
+# setGeneric(
+#   name = "is_ordered",
+#   def = function(x) standardGeneric("is_ordered")
+# )
 
 ## Range -----------------------------------------------------------------------
 #' Phase Time Range

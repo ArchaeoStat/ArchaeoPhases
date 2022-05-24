@@ -21,7 +21,7 @@ setMethod(
 setMethod(
   f = "phase",
   signature = c(x = "EventsMCMC", groups = "list"),
-  definition = function(x, groups, ordered = FALSE) {
+  definition = function(x, groups) {
     m <- nrow(x)
     n <- length(groups) # Number of phases
     k <- seq_len(n)
@@ -48,7 +48,6 @@ setMethod(
     .PhasesMCMC(
       min_max,
       phases = grp,
-      ordered = ordered,
       calendar = get_calendar(x),
       hash = get_hash(x)
     )
@@ -56,65 +55,32 @@ setMethod(
 )
 
 # Phase order ==================================================================
-#' @export
-#' @rdname phase
-#' @aliases set_order,PhasesMCMC,character-method
-setMethod(
-  f = "set_order<-",
-  signature = c(x = "PhasesMCMC", value = "character"),
-  definition = function(x, value) {
-    pha <- x@phases
-    if (is.null(value)) {
-      value <- factor(pha, levels = pha, ordered = FALSE)
-    } else {
-      index <- match(value, pha)
+# @export
+# @rdname phase
+# @aliases set_order,PhasesMCMC,character-method
+# setMethod(
+#   f = "set_order<-",
+#   signature = c(x = "PhasesMCMC", value = "character"),
+#   definition = function(x, value) {}
+# )
 
-      ## Validation
-      if (anyNA(index)) {
-        stop("Some phases do not seem to be defined.", call. = FALSE)
-      }
+# @export
+# @rdname phase
+# @aliases get_order,PhasesMCMC-method
+# setMethod(
+#   f = "get_order",
+#   signature = c(x = "PhasesMCMC"),
+#   definition = function(x) {}
+# )
 
-      tmp <- x[, index, ]
-      colnames(tmp) <- value
-    }
-    x@.Data <- tmp
-    x@phases <- value
-    x@ordered <- TRUE
-    methods::validObject(x)
-    x
-  }
-)
-
-#' @export
-#' @rdname phase
-#' @aliases get_order,PhasesMCMC-method
-setMethod(
-  f = "get_order",
-  signature = c(x = "PhasesMCMC"),
-  definition = function(x) x@phases
-)
-
-#' @export
-#' @rdname phase
-#' @aliases as_ordered,PhasesMCMC-method
-setMethod(
-  f = "as_ordered",
-  signature = c(x = "PhasesMCMC"),
-  definition = function(x) {
-    x@ordered <- TRUE
-    methods::validObject(x)
-    x
-  }
-)
-
-#' @export
-#' @rdname phase
-#' @aliases is_ordered,PhasesMCMC-method
-setMethod(
-  f = "is_ordered",
-  signature = c(x = "PhasesMCMC"),
-  definition = function(x) x@ordered
-)
+# @export
+# @rdname phase
+# @aliases is_ordered,PhasesMCMC-method
+# setMethod(
+#   f = "is_ordered",
+#   signature = c(x = "PhasesMCMC"),
+#   definition = function(x) {}
+# )
 
 # Time range ===================================================================
 #' @export

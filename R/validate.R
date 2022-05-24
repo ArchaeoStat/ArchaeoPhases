@@ -30,14 +30,12 @@ setValidity(
   method = function(object) {
     # Get data
     phases <- object@phases
-    ordered <- object@ordered
     calendar <- object@calendar
     hash <- object@hash
     p <- ncol(object)
 
     cnd <- list(
       arkhe::validate(arkhe::assert_length(phases, p)),
-      arkhe::validate(arkhe::assert_length(ordered, 1)),
       arkhe::validate(arkhe::assert_length(calendar, 1)),
       arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
     )

@@ -5,21 +5,45 @@
 \alias{coerce}
 \alias{as_events}
 \alias{as_events-method}
+\alias{as_phases}
+\alias{as_phases-method}
 \alias{as_rece}
 \alias{as_rece-method}
 \alias{as_events,matrix-method}
 \alias{as_events,data.frame-method}
+\alias{as_phases,matrix-method}
+\alias{as_phases,data.frame-method}
 \alias{as_rece,matrix-method}
 \alias{as_rece,data.frame-method}
 \title{Coerce}
 \usage{
 as_events(from, ...)
 
+as_phases(from, ...)
+
 as_rece(from, ...)
 
 \S4method{as_events}{matrix}(from, calendar = c("BP", "CE", "b2k"), iteration = NULL)
 
 \S4method{as_events}{data.frame}(from, calendar = c("BP", "CE", "b2k"), iteration = NULL)
+
+\S4method{as_phases}{matrix}(
+  from,
+  start = seq(from = 1, to = ncol(from), by = 2),
+  stop = start + 1,
+  names = NULL,
+  calendar = c("BP", "CE", "b2k"),
+  iteration = NULL
+)
+
+\S4method{as_phases}{data.frame}(
+  from,
+  start = seq(from = 1, to = ncol(from), by = 2),
+  stop = start + 1,
+  names = NULL,
+  calendar = c("BP", "CE", "b2k"),
+  iteration = NULL
+)
 
 \S4method{as_rece}{matrix}(from, calendar = c("BP", "CE", "b2k"), age = 1)
 
@@ -35,6 +59,18 @@ It must be one of "\code{BP}" (the default), "\code{CE}" or "\code{b2k}".}
 
 \item{iteration}{A length-one \code{\link{numeric}} vector specifying the index of the
 iteration column.}
+
+\item{start}{An \code{\link{integer}} vector specifying the index of the columns
+corresponding to the beginning of the phases. If missing, every other column
+is used starting from the first column (after deleting the \code{iteration}
+column, if any).}
+
+\item{stop}{An \code{\link{integer}} vector specifying the index of the columns
+corresponding to the end of the phases. If missing, every other column
+is used starting from the second column (after deleting the \code{iteration}
+column, if any).}
+
+\item{names}{A \code{\link{character}} vector giving the names of the phases.}
 
 \item{age}{A length-one \code{\link{numeric}} vector specifying the index of the age
 column.}

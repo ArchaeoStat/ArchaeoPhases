@@ -12,5 +12,3 @@ sort(eve, decreasing = TRUE)   # Sort events in descending order
 
 pha[1:1000, , ]          # Select the first 1000 iterations
 pha[, 1, , drop = FALSE] # Select the first phase
-
-sort(pha, decreasing = TRUE) # Sort phases in descending order

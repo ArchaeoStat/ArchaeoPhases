@@ -88,13 +88,11 @@ NULL
   Class = "PhasesMCMC",
   slots = c(
     phases = "character",
-    ordered = "logical",
     calendar = "character",
     hash = "character"
   ),
   prototype = methods::prototype(
     phases = character(0),
-    ordered = FALSE,
     calendar = "CE",
     hash = character(0)
   ),

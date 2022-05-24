@@ -157,16 +157,16 @@ setMethod(
 
 # To PhasesMCMC ================================================================
 #' @export
-#' @rdname phase
+#' @rdname coerce
 #' @aliases as_phases,matrix-method
 setMethod(
   f = "as_phases",
   signature = c(from = "matrix"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, names = NULL, ordered = FALSE,
+                        stop = start + 1, names = NULL,
                         calendar = c("BP", "CE", "b2k"), iteration = NULL) {
     ## Validation
-    # TODO: check that length(start) == lenght(stop)
+    arkhe::assert_length(stop, length(start))
     calendar <- match.arg(calendar, several.ok = FALSE)
 
     ## Remove the iteration column
@@ -182,24 +182,22 @@ setMethod(
     .PhasesMCMC(
       arr,
       phases = pha,
-      ordered = ordered,
       calendar = calendar
     )
   }
 )
 
 #' @export
-#' @rdname phase
+#' @rdname coerce
 #' @aliases as_phases,data.frame-method
 setMethod(
   f = "as_phases",
   signature = c(from = "data.frame"),
   definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, names = NULL, ordered = FALSE,
+                        stop = start + 1, names = NULL,
                         calendar = c("BP", "CE", "b2k"), iteration = NULL) {
     from <- data.matrix(from)
     methods::callGeneric(from, start = start, stop = stop, names = names,
-                         ordered = ordered, calendar = calendar,
-                         iteration = iteration)
+                         calendar = calendar, iteration = iteration)
   }
 )
