@@ -59,7 +59,7 @@
                lower    upper duration
       P2-P1 3358.486 2450.609 907.8772
 
-# hiatus bewteen phases exists
+# Hiatus
 
     Code
       as.data.frame(pha_CE)

@@ -156,33 +156,24 @@ setMethod(
   f = "boundaries",
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95) {
-    ## Check calendar
-    BP <- is_BP(x) || is_b2k(x)
-
-    ## Get phases
-    pha <- names(x)
-
-    ## Reverse boundaries if BP scale
-    start <- ifelse(BP, 2, 1)
-    end <- ifelse(BP, 1, 2)
-
     ## Matrix of results
-    result <- matrix(nrow = ncol(x), ncol = 2)
+    n <- ncol(x)
+    result <- matrix(nrow = n, ncol = 2)
 
-    k <- seq_along(pha)
+    k <- seq_len(n)
     for (i in k) {
-      a <- x[, i, start]
-      b <- x[, i, end]
+      a <- x[, i, 1]
+      b <- x[, i, 2]
       result[i, ] <- boundaries(a, b, level = level)
     }
 
-    ## Re-reverse boundaries if BP scale
-    if (BP) {
+    ## Reverse boundaries if BP scale
+    if (is_BP(x) || is_b2k(x)) {
       result <- result[, c(2, 1), drop = FALSE]
     }
 
     ## Names
-    dimnames(result) <- list(pha, c("lower", "upper"))
+    dimnames(result) <- list(names(x), c("lower", "upper"))
 
     as.data.frame(result)
   }
@@ -252,16 +243,9 @@ setMethod(
   f = "transition",
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95) {
-    ## Check calendar
-    BP <- is_BP(x) || is_b2k(x)
-
     ## Get phases
     n <- ncol(x)
     z <- names(x)
-
-    ## Reverse boundaries if BP scale
-    start <- ifelse(BP, 1, 2)
-    end <- ifelse(BP, 2, 1)
 
     ## Matrix of results
     lower <- upper <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
@@ -269,7 +253,7 @@ setMethod(
     for (i in 1:n) {
       for (j in 1:n) {
         if (i != j) {
-          h <- boundaries(x[, i, start], x[, j, end], level = level)
+          h <- boundaries(x[, i, 2], x[, j, 1], level = level)
           lower[i, j] <- h["lower"]
           upper[i, j] <- h["upper"]
         }
@@ -280,7 +264,8 @@ setMethod(
     ## Remove false results
     drop <- lower > upper
 
-    ## Re-reverse boundaries if BP scale
+    ## Reverse boundaries if BP scale
+    BP <- is_BP(x) || is_b2k(x)
     if (BP) {
       drop <- !drop
       lower <- t(lower)
@@ -308,16 +293,9 @@ setMethod(
   f = "hiatus",
   signature = c(x = "PhasesMCMC", y = "missing"),
   definition = function(x, level = 0.95) {
-    ## Check calendar
-    BP <- is_BP(x) || is_b2k(x)
-
     ## Get phases
     n <- ncol(x)
     z <- names(x)
-
-    ## Reverse boundaries if BP scale
-    start <- ifelse(BP, 1, 2)
-    end <- ifelse(BP, 2, 1)
 
     ## Matrix of results
     lower <- upper <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
@@ -325,7 +303,7 @@ setMethod(
     for (i in 1:n) {
       for (j in 1:n) {
         if (i != j) {
-          h <- hiatus(x[, i, start], x[, j, end], level = level)
+          h <- hiatus(x[, i, 2], x[, j, 1], level = level)
           lower[i, j] <- h["lower"]
           upper[i, j] <- h["upper"]
         }
@@ -334,6 +312,7 @@ setMethod(
     }
 
     ## Re-reverse boundaries if BP scale
+    BP <- is_BP(x) || is_b2k(x)
     if (BP) {
       lower <- t(lower)
       upper <- t(upper)

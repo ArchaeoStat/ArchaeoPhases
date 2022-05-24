@@ -14,7 +14,7 @@ setMethod(
       MARGIN = 2,
       FUN = stats_marginal,
       level = level,
-      BP = is_BP(object)
+      BP = is_BP(object) || is_b2k(object)
     )
     as.data.frame(t(x))
   }
@@ -30,21 +30,16 @@ setMethod(
     pha <- as.list(object)
     k <- seq_along(pha)
 
-    ## Reverse boundaries if BP scale
-    BP <- is_BP(object)
-    start <- ifelse(BP, 1, 2)
-    end <- ifelse(BP, 2, 1)
-
     for (i in k) {
       tmp <- pha[[i]]
-      tmp <- cbind(tmp[, , ], tmp[, , start] - tmp[, , end])
+      tmp <- cbind(tmp, tmp[, 2] - tmp[, 1])
 
       tmp <- apply(
         X = tmp,
         MARGIN = 2,
         FUN = stats_marginal,
         level = level,
-        BP = BP
+        BP = is_BP(object) || is_b2k(object)
       )
       colnames(tmp) <- c("start", "end", "duration")
 

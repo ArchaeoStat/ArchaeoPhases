@@ -25,7 +25,7 @@ test_that("Phases", {
 
   pha <- CE_to_BP(pha)
   gg_phase_facet_BP <- autoplot(pha, range = NULL, facet = TRUE,
-                                decreasing = TRUE)
+                                decreasing = FALSE)
   vdiffr::expect_doppelganger("phase_facet_BP", gg_phase_facet_BP)
 })
 test_that("Succession", {
@@ -34,7 +34,7 @@ test_that("Succession", {
   pha <- as_phases(phases, start = c(1, 3), calendar = "CE", iteration = 1)
 
   gg_phase_hiatus_CE <- autoplot(pha, range = "hiatus", facet = TRUE,
-                                 decreasing = TRUE)
+                                 decreasing = FALSE)
   vdiffr::expect_doppelganger("phase_hiatus_CE", gg_phase_hiatus_CE)
 
   pha <- CE_to_BP(pha)

@@ -1,6 +1,7 @@
 ## Coerce to MCMC objects
 ## Events
 (eve <- as_events(events[1:10000, ], calendar = "CE", iteration = 1))
+
 ## Phases
 (pha <- as_phases(phases[1:10000, ], start = c(1, 3), calendar = "CE",
                   iteration = 1))
@@ -14,9 +15,3 @@ pha1 <- phase(eve)
 pha2 <- phase(eve, groups = list(phase_1 = c(1, 3), phase_2 = c(2, 4)))
 
 all(pha == pha2) # TRUE
-
-## Set chronological order
-## (from the oldest to the youngest phase)
-set_order(pha2) <- c("phase_2", "phase_1")
-get_order(pha2)
-is_ordered(pha2)

@@ -87,14 +87,13 @@ as.data.frame.ProxyRecord <- function(x, ...) {
 #' @method as.list PhasesMCMC
 #' @export
 as.list.PhasesMCMC <- function(x, ...) {
-  pha <- get_order(x)
+  n <- ncol(x)
+  tmp <- vector(mode = "list", length = n)
+  names(tmp) <- names(x)
 
-  tmp <- vector(mode = "list", length = length(pha))
-  names(tmp) <- pha
-
-  k <- seq_along(pha)
+  k <- seq_len(n)
   for (i in k) {
-    tmp[[i]] <- x[[i]]
+    tmp[[i]] <- x[, i, ]
   }
   tmp
 }
@@ -171,8 +170,7 @@ setMethod(
     calendar <- match.arg(calendar, several.ok = FALSE)
 
     ## Remove the iteration column
-    if (!is.null(iteration))
-      from <- from[, -iteration]
+    if (!is.null(iteration)) from <- from[, -iteration]
 
     pha <- if (is.null(names)) paste0("P", seq_along(start)) else names
     arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),

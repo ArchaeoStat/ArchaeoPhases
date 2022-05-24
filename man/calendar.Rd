@@ -43,13 +43,11 @@
 \alias{BP_to_CE,array-method}
 \alias{BP_to_CE,MCMC-method}
 \alias{BP_to_CE,PhasesMCMC-method}
-\alias{BP_to_CE,CumulativeEvents-method}
 \alias{CE_to_BP,numeric-method}
 \alias{CE_to_BP,matrix-method}
 \alias{CE_to_BP,array-method}
 \alias{CE_to_BP,MCMC-method}
 \alias{CE_to_BP,PhasesMCMC-method}
-\alias{CE_to_BP,CumulativeEvents-method}
 \alias{b2k_to_BP,numeric-method}
 \alias{b2k_to_BP,matrix-method}
 \alias{b2k_to_BP,array-method}
@@ -124,8 +122,6 @@ is_b2k(object)
 
 \S4method{BP_to_CE}{PhasesMCMC}(object)
 
-\S4method{BP_to_CE}{CumulativeEvents}(object)
-
 \S4method{CE_to_BP}{numeric}(object)
 
 \S4method{CE_to_BP}{matrix}(object)
@@ -135,8 +131,6 @@ is_b2k(object)
 \S4method{CE_to_BP}{MCMC}(object)
 
 \S4method{CE_to_BP}{PhasesMCMC}(object)
-
-\S4method{CE_to_BP}{CumulativeEvents}(object)
 
 \S4method{b2k_to_BP}{numeric}(object)
 

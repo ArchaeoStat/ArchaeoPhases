@@ -255,22 +255,10 @@ setMethod(
     ## Check current scale
     if (is_CE(object)) return(object)
     tmp <- methods::callNextMethod(object)
-    methods::initialize(object, tmp, calendar = "CE")
-  }
-)
+    ## Revert boundaries
+    tmp <- tmp[, , c(2, 1)]
 
-#' @export
-#' @rdname calendar
-#' @aliases BP_to_CE,CumulativeEvents-method
-setMethod(
-  f = "BP_to_CE",
-  signature = "CumulativeEvents",
-  definition = function(object){
-    ## Check current scale
-    if (is_CE(object)) return(object)
-    object@year <- BP_to_CE(object@year)
-    object@calendar <- "CE"
-    object
+    methods::initialize(object, tmp, calendar = "CE")
   }
 )
 
@@ -348,22 +336,10 @@ setMethod(
     ## Check current scale
     if (is_BP(object)) return(object)
     tmp <- methods::callNextMethod(object = object)
-    methods::initialize(object, tmp, calendar = "BP")
-  }
-)
+    ## Revert boundaries
+    tmp <- tmp[, , c(2, 1)]
 
-#' @export
-#' @rdname calendar
-#' @aliases CE_to_BP,CumulativeEvents-method
-setMethod(
-  f = "CE_to_BP",
-  signature = "CumulativeEvents",
-  definition = function(object){
-    ## Check current scale
-    if (is_BP(object)) return(object)
-    object@year <- CE_to_BP(object@year)
-    object@calendar <- "BP"
-    object
+    methods::initialize(object, tmp, calendar = "BP")
   }
 )
 

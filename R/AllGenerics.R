@@ -76,13 +76,12 @@ setGeneric(
 #' @param x,y An [`MCMC-class`] object.
 #' @return
 #'  An [`MCMC-class`] object.
-# @example inst/examples/ex-mutator.R
+#' @example inst/examples/ex-subset.R
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
 #' @name bind
 #' @rdname bind
-#' @aliases cbind2-method
 NULL
 
 # Extract ======================================================================
@@ -131,7 +130,7 @@ setGeneric(
 #' @param ... Currently not used.
 #' @return
 #'  A subsetted object.
-# @example inst/examples/ex-mutator.R
+#' @example inst/examples/ex-subset.R
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators

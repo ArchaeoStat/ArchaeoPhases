@@ -304,8 +304,8 @@ plot_density <- function(x, level = 0.95, decreasing = TRUE, ..., facet = TRUE,
   dens <- lapply(
     X = pha,
     FUN = function(x, n, ...) {
-      a <- stats::density(x[, , 1, drop = TRUE], n = n, ...)
-      b <- stats::density(x[, , 2, drop = TRUE], n = n, ...)
+      a <- stats::density(x[, 1], n = n, ...)
+      b <- stats::density(x[, 2], n = n, ...)
       data.frame(
         x = c(a$x, b$x),
         y = c(a$y, b$y),

@@ -25,27 +25,26 @@ setMethod(
   }
 )
 
-# TODO:
-# @export
-# @rdname subset
-# @aliases [,PhasesMCMC-method
-# setMethod(
-#   f = "[",
-#   signature = c(x = "PhasesMCMC"),
-#   function(x, i, j, ..., drop = TRUE) {
-#     z <- methods::callNextMethod()
-#
-#     if (is.null(dim(z))) {
-#       return(z)
-#     }
-#
-#     pha <- x@phases
-#     if (!missing(j)) {
-#       pha <- pha[j]
-#     }
-#     methods::initialize(x, z, phases = pha)
-#   }
-# )
+#' @export
+#' @rdname subset
+#' @aliases [,PhasesMCMC-method
+setMethod(
+  f = "[",
+  signature = c(x = "PhasesMCMC"),
+  function(x, i, j, ..., drop = TRUE) {
+    z <- methods::callNextMethod()
+
+    if (is.null(dim(z)) | length(dim(z)) == 2) {
+      return(z)
+    }
+
+    pha <- x@phases
+    if (!missing(j)) {
+      pha <- pha[j]
+    }
+    methods::initialize(x, z, phases = pha)
+  }
+)
 
 ## [[ --------------------------------------------------------------------------
 #' @export
