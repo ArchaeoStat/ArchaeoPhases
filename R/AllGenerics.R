@@ -360,6 +360,7 @@ setGeneric(
 #'  Defaults to `TRUE`.
 #' @param n An [`integer`] specifying the number of item to choose.
 #'  Only used if `samples` is `TRUE`.
+#' @param progress A [`logical`] scalar: should progress bars be displayed?
 #' @param ... Currently not used.
 #' @return
 #'  * `proxy()` returns an [`ProxyRecord-class`] object.

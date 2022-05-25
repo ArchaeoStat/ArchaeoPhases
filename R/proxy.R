@@ -12,7 +12,8 @@ setMethod(
                         from = min(time), to = max(time),
                         grid = NULL, resolution = NULL,
                         calendar = c("BP", "CE", "b2k"),
-                        density = !samples, samples = TRUE, n = 100) {
+                        density = !samples, samples = TRUE, n = 100,
+                        progress = getOption("chronos.progress")) {
     ## Validation
     calendar <- match.arg(calendar, several.ok = FALSE)
 
@@ -79,23 +80,32 @@ setMethod(
     r <- c(depth[2] - depth[1], ri, depth[z] - depth[z - 1])
 
     iter <- seq_along(t_grid)
+    if (progress) pbar <- utils::txtProgressBar(max = max(iter), style = 3)
     for (j in iter) {
       X[j, ] <- colSums(r * x_dens * t_dens[, j]) / sum(r * t_dens[, j])
+      if (progress) utils::setTxtProgressBar(pbar, j)
     }
+    if (progress) close(pbar)
     X[is.na(X)] <- 0 # In case of division by zero
 
     Y <- matrix(0, nrow = 0, ncol = 0)
     if (samples) {
-      Y <- apply(
-        X = X,
-        MARGIN = 1,
-        FUN = function(x, g, n) {
-          sample(g, size = n, prob = x, replace = TRUE)
-        },
-        g = x_grid,
-        n = n
-      )
-      Y <- t(Y)
+      n_seq <- seq_len(n)
+      Y <- matrix(0, nrow = ncol(t_dens), ncol = n)
+
+      if (progress) pbar <- utils::txtProgressBar(max = n, style = 3)
+      for (i in n_seq) {
+        Y[, i] <- apply(
+          X = X,
+          MARGIN = 1,
+          FUN = function(x, g) {
+            sample(g, size = 1, prob = x)
+          },
+          g = x_grid
+        )
+        if (progress) utils::setTxtProgressBar(pbar, i)
+      }
+      if (progress) close(pbar)
     }
     if (!density) {
       X <- matrix(0, nrow = 0, ncol = 0)
