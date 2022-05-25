@@ -57,12 +57,12 @@ setMethod(
   definition = function(object, n = 100) {
 
     object <- round(object, digits = 0)
+    object <- object[sample(nrow(object), size = n, replace = FALSE), ]
 
     count <- vector(mode = "list", length = n)
     n_seq <- seq_len(n)
     for (i in n_seq) {
-      tmp <- apply(X = object, MARGIN = 2, FUN = sample, size = 1)
-      tmp <- as.data.frame(table(tmp))
+      tmp <- as.data.frame(table(object[i, ]))
       colnames(tmp) <- c("age", paste0("C", i))
       count[[i]] <- tmp
     }
