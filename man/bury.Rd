@@ -27,6 +27,8 @@ bury(object, depth, ...)
 
 \item{depth}{A \code{\link{numeric}} vector giving of the depths of the dated samples.}
 
+\item{...}{Currently not used.}
+
 \item{newdata}{A \code{\link{numeric}} vector giving the depths at which ages will be
 predicted. If \code{missing}, the original data points are used.}
 
@@ -37,7 +39,7 @@ predicted. If \code{missing}, the original data points are used.}
 \value{
 \itemize{
 \item \code{bury()} returns an \code{\linkS4class{AgeDepthModel}} object.
-\item \code{predict()} returns an \code{\linkS4class{EventMCMC}} object.
+\item \code{predict()} returns an \code{\linkS4class{EventsMCMC}} object.
 \item \code{autoplot()} returns a \code{\link[ggplot2:ggplot]{ggplot}} object.
 \item \code{plot()} is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns \code{x}).

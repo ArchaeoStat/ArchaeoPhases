@@ -266,6 +266,7 @@ setGeneric(
 #' @param newdata A [`numeric`] vector giving the depths at which ages will be
 #'  predicted. If `missing`, the original data points are used.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param ... Currently not used.
 #' @details
 #'  We assume it exists a function \eqn{f} relating the age and the depth
 #'  \eqn{age = f(depth)}. We estimate the function using local regression
@@ -275,7 +276,7 @@ setGeneric(
 #'  the posterior distribution of the age function for each desired depth.
 #' @return
 #'  * `bury()` returns an [`AgeDepthModel-class`] object.
-#'  * `predict()` returns an [`EventMCMC-class`] object.
+#'  * `predict()` returns an [`EventsMCMC-class`] object.
 #'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
 #'  * `plot()` is called it for its side-effects: it results in a graphic being
 #'  displayed (invisibly returns `x`).
