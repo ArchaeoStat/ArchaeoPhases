@@ -105,35 +105,43 @@ autoplot.CumulativeEvents <- function(object, ..., credible = TRUE,
 
   ## Get data
   tmp <- data <- as.data.frame(object)
-  tmp$ci <- tmp$estimate
   tmp$Legend <- rep("Bayes estimate", nrow(data))
-  aes_tmp <- ggplot2::aes(x = .data$year, y = .data$estimate)
+  aes_tmp <- ggplot2::aes(x = .data$year, y = .data$estimate,
+                          colour = .data$Legend, linetype = .data$Legend)
 
+  gg_inter <- NULL
+  int <- data.frame()
   if (credible) {
-    tmp <- data.frame(
-      year = c(tmp$year, data$year, rev(data$year)),
-      ci = c(tmp$ci, data$credible_lower, rev(data$credible_upper)),
-      Legend = c(tmp$Legend, rep("Credible interval", nrow(data) * 2))
+    int <- data.frame(
+      year = data$year,
+      lower = data$credible_lower,
+      upper = data$credible_upper,
+      Legend = rep("Credible interval", nrow(data))
     )
   }
   if (gauss) {
-    tmp <- data.frame(
-      year = c(tmp$year, data$year, rev(data$year)),
-      ci = c(tmp$ci, data$gauss_lower, rev(data$gauss_upper)),
-      Legend = c(tmp$Legend, rep("Gauss interval", nrow(data) * 2))
+    int <- data.frame(
+      year = c(int$year, data$year),
+      lower = c(int$lower, data$gauss_lower),
+      upper = c(int$upper, data$gauss_upper),
+      Legend = c(int$Legend, rep("Gauss interval", nrow(data)))
     )
   }
   if (credible | gauss) {
-    aes_tmp <- ggplot2::aes(
+    aes_inter <- ggplot2::aes(
       x = .data$year,
-      y = .data$ci,
+      ymin = .data$lower,
+      ymax = .data$upper,
       colour = .data$Legend,
       linetype = .data$Legend
     )
+    gg_inter <- ggplot2::geom_ribbon(mapping = aes_inter, data = int,
+                                     fill = NA, inherit.aes = FALSE)
   }
 
   ggplot2::ggplot(data = tmp) +
     aes_tmp +
+    gg_inter +
     ggplot2::geom_path() +
     gg_x_scale +
     ggplot2::scale_y_continuous(name = "Cumulative events")
@@ -178,7 +186,32 @@ setMethod(
 
     ## Bind data
     tmp <- do.call(rbind, tmp)
-    tmp$Legend <- rep(arg_names, n)
+    tmp$`Bayes estimate` <- rep(arg_names, n)
+
+    ## Intervals
+    credible <- !all(is.na(tmp$credible_lower))
+    gauss <- !all(is.na(tmp$gauss_lower))
+
+    gg_inter <- NULL
+    if (credible) {
+      tmp$lower <- tmp$credible_lower
+      tmp$upper <- tmp$credible_upper
+    }
+    if (gauss) {
+      tmp$lower <- tmp$gauss_lower
+      tmp$upper <- tmp$gauss_upper
+    }
+    if (credible | gauss) {
+      aes_inter <- ggplot2::aes(
+        x = .data$year,
+        ymin = .data$lower,
+        ymax = .data$upper,
+        group = .data$`Bayes estimate`
+      )
+      gg_inter <- ggplot2::geom_ribbon(mapping = aes_inter, data = tmp,
+                                       fill = "grey50", alpha = 0.5,
+                                       inherit.aes = FALSE)
+    }
 
     ## Calendar scale
     scales <- vapply(X = dots, FUN = get_calendar, FUN.VALUE = character(1))
@@ -188,7 +221,9 @@ setMethod(
     gg_x_scale <- scale_calendar(dots[[1]])
 
     ggplot2::ggplot(data = tmp) +
-      ggplot2::aes(x = .data$year, y = .data$estimate, color = .data$Legend) +
+      ggplot2::aes(x = .data$year, y = .data$estimate,
+                   color = .data$`Bayes estimate`) +
+      gg_inter +
       ggplot2::geom_path() +
       gg_x_scale +
       ggplot2::scale_y_continuous(name = "Cumulative events")

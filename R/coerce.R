@@ -13,10 +13,16 @@ as.data.frame.CumulativeEvents <- function(x, ...) {
   if (nrow(x@credible) > 0) {
     tmp$credible_lower <- x@credible[, 1]
     tmp$credible_upper <- x@credible[, 2]
+  } else {
+    tmp$credible_lower <- NA_real_
+    tmp$credible_upper <- NA_real_
   }
   if (nrow(x@gauss) > 0) {
     tmp$gauss_lower <- x@gauss[, 1]
     tmp$gauss_upper <- x@gauss[, 2]
+  } else {
+    tmp$gauss_lower <- NA_real_
+    tmp$gauss_upper <- NA_real_
   }
   tmp
 }
