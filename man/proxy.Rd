@@ -124,6 +124,7 @@ Past}, 13(9): 1169-1180. \doi{10.5194/cp-13-1169-2017}.
 }
 \seealso{
 Other age-depth modeling tools: 
+\code{\link{bury}()},
 \code{\link{interpolate}()}
 }
 \author{

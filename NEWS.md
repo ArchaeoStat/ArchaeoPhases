@@ -20,7 +20,7 @@
 
 | ArchaeoPhases 1.6 | Chronos |
 |:----|:----|
-| `undated_sample()` | `interpolate()` |
+| `AgeDepth()` | `bury()` |
 | `undated_sample()` | `interpolate()` |
 
 | ArchaeoPhases 1.5 | Chronos |

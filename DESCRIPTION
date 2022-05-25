@@ -73,6 +73,7 @@ Collate:
     'chronos-package.R'
     'coerce.R'
     'data.R'
+    'depth.R'
     'interval.R'
     'mutators.R'
     'occurrence.R'

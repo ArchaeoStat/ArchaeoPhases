@@ -26,6 +26,7 @@ original data file.}
 \seealso{
 Other classes: 
 \code{\link{ActivityEvents-class}},
+\code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},

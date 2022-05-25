@@ -40,6 +40,7 @@ subscript \code{i}. \code{i} is a length-one \code{\link{numeric}} or \code{\lin
 \seealso{
 Other classes: 
 \code{\link{ActivityEvents-class}},
+\code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},

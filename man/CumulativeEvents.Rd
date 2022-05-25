@@ -51,6 +51,7 @@ In the code snippets below, \code{x} is a \code{CumulativeEvents} object.
 \seealso{
 Other classes: 
 \code{\link{ActivityEvents-class}},
+\code{\link{AgeDepthModel-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},

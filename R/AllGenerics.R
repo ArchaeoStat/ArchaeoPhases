@@ -254,7 +254,53 @@ setGeneric(
   def = function(object) standardGeneric("is_b2k")
 )
 
-# Age-Depth Modeling ===========================================================
+# Modeling =====================================================================
+## Age-Depth Modeling ----------------------------------------------------------
+#' Age-Depth Modeling
+#'
+#' Computes the age-depth curve from the output of the MCMC algorithm and the
+#' known depth of each dated samples.
+#' @param object An [`EventsMCMC-class`] object.
+#' @param x An [`AgeDepthModel-class`] object.
+#' @param depth A [`numeric`] vector giving of the depths of the dated samples.
+#' @param newdata A [`numeric`] vector giving the depths at which ages will be
+#'  predicted. If `missing`, the original data points are used.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @details
+#'  We assume it exists a function \eqn{f} relating the age and the depth
+#'  \eqn{age = f(depth)}. We estimate the function using local regression
+#'  (also called local polynomial regression): \eqn{f = loess(age ~ depth)}.
+#'  This estimated function \eqn{f} depends on the unknown dates. However,
+#'  from the posterior distribution of the age/date sequence, we can evaluate
+#'  the posterior distribution of the age function for each desired depth.
+#' @return
+#'  * `bury()` returns an [`AgeDepthModel-class`] object.
+#'  * `predict()` returns an [`EventMCMC-class`] object.
+#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
+#' @references
+#'  Jha, D. K., Sanyal, P. & Philippe, A. (2020). Multi-Proxy Evidence of Late
+#'  Quaternary Climate and Vegetational History of North-Central India:
+#'  Implication for the Paleolithic to Neolithic Phases. *Quaternary Science
+#'  Reviews*, 229: 106121. \doi{10.1016/j.quascirev.2019.106121}.
+#'
+#'  Ghosh, S., Sanyal, P., Roy, S., Bhushan, R., Sati, S. P., Philippe, A. &
+#'  Juyal, N. (2020). Early Holocene Indian Summer Monsoon and Its Impact on
+#'  Vegetation in the Central Himalaya: Insight from ΔD and δ13C Values of Leaf
+#'  Wax Lipid. *The Holocene*, 30(7): 1063-1074. \doi{10.1177/0959683620908639}.
+#' @example inst/examples/ex-age.R
+#' @author A. Philippe
+#' @family age-depth modeling tools
+#' @docType methods
+#' @rdname bury
+#' @aliases bury-method
+setGeneric(
+  name = "bury",
+  def = function(object, depth, ...) standardGeneric("bury"),
+  valueClass = "AgeDepthModel"
+)
+
 ## Interpolation ---------------------------------------------------------------
 #' Interpolate Between Two Dates
 #'

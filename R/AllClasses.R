@@ -32,6 +32,7 @@ NULL
   Class = "MCMC",
   slots = c(
     events = "character",
+    depth = "numeric",
     calendar = "character",
     hash = "character"
   ),
@@ -309,6 +310,32 @@ NULL
     hash = character(0)
   ),
   contains = "matrix"
+)
+
+# Age-Depth Model ==============================================================
+#' Age-Depth Model
+#'
+#' An S4 class to represents an age-depth model.
+#' @slot depth A [`numeric`] vector giving the depth of the samples.
+#' @slot model A [`list`] of local polynomial regressions
+#'  (see [stats::loess()]).
+#' @slot calendar A [`character`] string specifying the chronological scale
+#'  (either "`CE`", "`BP`" or "`b2k`").
+#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
+#'  original data file.
+#' @author N. Frerebeau
+#' @family classes
+#' @docType class
+#' @rdname AgeDepthModel
+#' @aliases AgeDepthModel-class
+.AgeDepthModel <- setClass(
+  Class = "AgeDepthModel",
+  slots = c(
+    depth = "numeric",
+    model = "list",
+    calendar = "character",
+    hash = "character"
+  )
 )
 
 # Proxy Record =================================================================

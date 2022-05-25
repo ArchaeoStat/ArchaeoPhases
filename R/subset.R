@@ -18,11 +18,13 @@ setMethod(
     }
 
     eve <- x@events
+    dep <- x@depth
     if (!missing(j)) {
       if (is.character(j)) j <- match(j, eve)
       eve <- eve[j]
+      dep <- dep[j]
     }
-    methods::initialize(x, z, events = eve)
+    methods::initialize(x, z, events = eve, depth = dep)
   }
 )
 

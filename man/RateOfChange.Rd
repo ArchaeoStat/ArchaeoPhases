@@ -35,6 +35,7 @@ In the code snippets below, \code{x} is an \code{RateOfChange} object.
 \seealso{
 Other classes: 
 \code{\link{ActivityEvents-class}},
+\code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},

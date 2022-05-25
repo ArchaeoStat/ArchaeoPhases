@@ -20,6 +20,7 @@
 \alias{get_calendar,OccurrenceEvents-method}
 \alias{get_calendar,RateOfChange-method}
 \alias{get_calendar,RECE-method}
+\alias{get_calendar,AgeDepthModel-method}
 \alias{get_calendar,ProxyRecord-method}
 \alias{get_hash,MCMC-method}
 \alias{get_hash,PhasesMCMC-method}
@@ -27,6 +28,9 @@
 \alias{get_hash,ActivityEvents-method}
 \alias{get_hash,OccurrenceEvents-method}
 \alias{get_hash,RateOfChange-method}
+\alias{get_hash,RECE-method}
+\alias{get_hash,AgeDepthModel-method}
+\alias{get_hash,ProxyRecord-method}
 \title{Get or Set Parts of an Object}
 \usage{
 get_calendar(x)
@@ -55,6 +59,8 @@ get_hash(x)
 
 \S4method{get_calendar}{RECE}(x)
 
+\S4method{get_calendar}{AgeDepthModel}(x)
+
 \S4method{get_calendar}{ProxyRecord}(x)
 
 \S4method{get_hash}{MCMC}(x)
@@ -68,6 +74,12 @@ get_hash(x)
 \S4method{get_hash}{OccurrenceEvents}(x)
 
 \S4method{get_hash}{RateOfChange}(x)
+
+\S4method{get_hash}{RECE}(x)
+
+\S4method{get_hash}{AgeDepthModel}(x)
+
+\S4method{get_hash}{ProxyRecord}(x)
 }
 \arguments{
 \item{x}{An object from which to get or set element(s).}
