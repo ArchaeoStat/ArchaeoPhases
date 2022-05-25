@@ -10,7 +10,7 @@
 \usage{
 hpdi(object, ...)
 
-\S4method{hpdi}{numeric}(object, level = 0.95, BP = FALSE, ...)
+\S4method{hpdi}{numeric}(object, level = 0.95, CE = TRUE, ...)
 
 \S4method{hpdi}{MCMC}(object, level = 0.95, ...)
 }
@@ -22,9 +22,7 @@ output of the MCMC algorithm for the parameter.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
-\item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
-BC/AD? This should not be \code{TRUE} unless you change the default settings in
-'OxCal' or 'ChronoModel'.}
+\item{CE}{A \code{\link{logical}} scalar: are the data expressed in BC/AD years?}
 }
 \value{
 A \code{\link{list}} of \code{numeric} \code{\link{matrix}} giving the lower and upper boundaries of

@@ -9,7 +9,7 @@ NULL
 setMethod(
   f = "credible",
   signature = "numeric",
-  definition = function(object, level = 0.95, BP = FALSE, ...) {
+  definition = function(object, level = 0.95, CE = TRUE, ...) {
     ## Order the sample
     sorted <- sort(object, method = "radix") # Faster sorting with radix method
 
@@ -27,8 +27,8 @@ setMethod(
     ind <- which.min(a - b)
 
     ## Reverse boundaries if BP scale
-    x <- ifelse(BP, a[[ind]], b[[ind]])
-    y <- ifelse(BP, b[[ind]], a[[ind]])
+    x <- ifelse(CE, b[[ind]], a[[ind]])
+    y <- ifelse(CE, a[[ind]], b[[ind]])
 
     cbind(lower = x, upper = y, p = level)
   }
@@ -42,7 +42,7 @@ setMethod(
   signature = "MCMC",
   definition = function(object, level = 0.95, ...) {
     cred <- apply(X = object, MARGIN = 2, FUN = credible,
-                  level = level, BP = is_BP(object), simplify = FALSE)
+                  level = level, CE = is_CE(object), simplify = FALSE)
     names(cred) <- names(object)
     attr(cred, "calendar") <- get_calendar(object)
     cred
@@ -56,7 +56,7 @@ setMethod(
 setMethod(
   f = "hpdi",
   signature = "numeric",
-  definition = function(object, level = 0.95, BP = FALSE, ...) {
+  definition = function(object, level = 0.95, CE = TRUE, ...) {
     ## Compute density
     d <- stats::density(object, ..., n = getOption("chronos.grid"))
     x <- d$x
@@ -78,8 +78,8 @@ setMethod(
                 FUN.VALUE = numeric(1), y = y)
 
     ## Reverse boundaries if BP scale
-    a <- if(BP) x[sup] else x[inf]
-    b <- if(BP) x[inf] else x[sup]
+    a <- if (CE) x[inf] else x[sup]
+    b <- if (CE) x[sup] else x[inf]
 
     cbind(lower = a, upper = b, p = round(p, digits = 2))
   }
@@ -93,7 +93,7 @@ setMethod(
   signature = "MCMC",
   definition = function(object, level = 0.95, ...) {
     hpd <- apply(X = object, MARGIN = 2, FUN = hpdi, level = level,
-                 BP = is_BP(object), ..., simplify = FALSE)
+                 CE = is_CE(object), ..., simplify = FALSE)
     names(hpd) <- names(object)
     attr(hpd, "calendar") <- get_calendar(object)
     hpd
@@ -110,10 +110,11 @@ setMethod(
 #' @keywords internal
 #' @noRd
 bind_intervals <- function(x) {
-  hpdi <- do.call(rbind.data.frame, x)
+  hpd <- do.call(rbind.data.frame, x)
+  rownames(hpd) <- NULL
   n <- vapply(X = x, FUN = nrow, FUN.VALUE = integer(1))
-  hpdi$id <- rep(names(x), times = n)
-  hpdi
+  hpd$id <- rep(names(x), times = n)
+  hpd
 }
 
 #' Interval Matching

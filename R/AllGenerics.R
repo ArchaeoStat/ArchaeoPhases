@@ -601,16 +601,14 @@ setGeneric(
 #' @param object A [`numeric`] vector or an [`MCMC-class`] object containing the
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param BP A [`logical`] scalar: should the data be converted from BP to
-#'  BC/AD? This should not be `TRUE` unless you change the default settings in
-#'  'OxCal' or 'ChronoModel'.
+#' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
 #' @param ... Currently not used.
 #' @details
-#'  A \eqn{(100 \times level)}{(100 * level)}\% credible interval is an interval
+#'  A \eqn{(100 \times level)}{(100 * level)} % credible interval is an interval
 #'  that keeps \eqn{N \times (1 - level)}{N * (1 - level)} elements of the
 #'  sample outside the interval.
 #'
-#'  The \eqn{(100 \times level)}{(100 * level)}\% credible interval is the
+#'  The \eqn{(100 \times level)}{(100 * level)} % credible interval is the
 #'  shortest of all those intervals.
 #'
 #'  For instance, the 95% credible interval is the central portion of the
@@ -635,9 +633,7 @@ setGeneric(
 #' @param object A [`numeric`] vector or an [`MCMC-class`] object containing the
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param BP A [`logical`] scalar: should the data be converted from BP to
-#'  BC/AD? This should not be `TRUE` unless you change the default settings in
-#'  'OxCal' or 'ChronoModel'.
+#' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
 #' @param ... Extra arguments to be passed to [stats::density()].
 #' @return
 #'  A [`list`] of `numeric` [`matrix`] giving the lower and upper boundaries of

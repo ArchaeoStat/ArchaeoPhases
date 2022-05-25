@@ -10,7 +10,7 @@
 \usage{
 credible(object, ...)
 
-\S4method{credible}{numeric}(object, level = 0.95, BP = FALSE, ...)
+\S4method{credible}{numeric}(object, level = 0.95, CE = TRUE, ...)
 
 \S4method{credible}{MCMC}(object, level = 0.95, ...)
 }
@@ -22,9 +22,7 @@ output of the MCMC algorithm for the parameter.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
-\item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
-BC/AD? This should not be \code{TRUE} unless you change the default settings in
-'OxCal' or 'ChronoModel'.}
+\item{CE}{A \code{\link{logical}} scalar: are the data expressed in BC/AD years?}
 }
 \value{
 A \code{\link{list}} of \code{numeric} \code{\link{matrix}} giving the lower and upper boundaries of
@@ -35,11 +33,11 @@ Computes the shortest credible interval of the output of the MCMC algorithm
 for a single parameter.
 }
 \details{
-A \eqn{(100 \times level)}{(100 * level)}\\% credible interval is an interval
+A \eqn{(100 \times level)}{(100 * level)} \% credible interval is an interval
 that keeps \eqn{N \times (1 - level)}{N * (1 - level)} elements of the
 sample outside the interval.
 
-The \eqn{(100 \times level)}{(100 * level)}\\% credible interval is the
+The \eqn{(100 \times level)}{(100 * level)} \% credible interval is the
 shortest of all those intervals.
 
 For instance, the 95\% credible interval is the central portion of the
