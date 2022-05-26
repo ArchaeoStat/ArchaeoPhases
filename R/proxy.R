@@ -12,21 +12,17 @@ setMethod(
                         from = min(time), to = max(time),
                         grid = NULL, resolution = NULL,
                         calendar = c("BP", "CE", "b2k"),
-                        density = !samples, samples = TRUE, n = 100,
-                        progress = getOption("chronos.progress")) {
+                        density = FALSE, n = 100) {
     ## Validation
     calendar <- match.arg(calendar, several.ok = FALSE)
 
-    ## Remove extra values
-    keep <- which(time >= from & time <= to)
-    depth <- depth[keep]
-    proxy <- proxy[keep]
-    if (length(proxy_error) > 1) proxy_error <- proxy_error[keep]
-    time <- time[keep]
-    if (length(time_error) > 1) time_error <- time_error[keep]
-
-    res <- min(diff(time))
-    if (is.null(resolution)) resolution <- res
+    if (is.null(grid)) {
+      n_grid <- getOption("chronos.grid")
+      grid <- ((x_to - x_from) / (n_grid - 1))
+    }
+    if (is.null(resolution)) {
+      resolution <- min(diff(time))
+    }
 
     ## Build a matrix to contain the p(t|zi) densities
     ## Rows will refer to depth
@@ -46,11 +42,11 @@ setMethod(
     ## Build a matrix to contain the p(x|zi) densities
     ## Rows will refer to depth
     ## Columns will refer to the proxy density
-    x_from <- min(proxy - 2 * proxy_error)
-    x_to <- max(proxy + 2 * proxy_error)
-    n_grid <- getOption("chronos.grid")
-    if (is.null(grid)) grid <- ((x_to - x_from) / (n_grid - 1))
+    x_range <- range(proxy)
+    x_from <- min(x_range) - 2 * max(proxy_error)
+    x_to <- max(x_range) + 2 * max(proxy_error)
     x_grid <- seq(from = x_from, to = x_to, by = grid)
+
     x_data <- cbind(proxy, proxy_error)
     x_dens <- apply(
       X = x_data,
@@ -79,34 +75,21 @@ setMethod(
     )
     r <- c(depth[2] - depth[1], ri, depth[z] - depth[z - 1])
 
-    iter <- seq_along(t_grid)
-    if (progress) pbar <- utils::txtProgressBar(max = max(iter), style = 3)
-    for (j in iter) {
-      X[j, ] <- colSums(r * x_dens * t_dens[, j]) / sum(r * t_dens[, j])
-      if (progress) utils::setTxtProgressBar(pbar, j)
-    }
-    if (progress) close(pbar)
+    X <- t(crossprod(r * x_dens, t_dens)) / (colSums(r * t_dens))
     X[is.na(X)] <- 0 # In case of division by zero
 
-    Y <- matrix(0, nrow = 0, ncol = 0)
-    if (samples) {
-      n_seq <- seq_len(n)
-      Y <- matrix(0, nrow = ncol(t_dens), ncol = n)
+    ## Create an ensemble of potential proxy records
+    Y <- apply(
+      X = X,
+      MARGIN = 1,
+      FUN = function(x, g, n) {
+        sample(g, size = n, replace = TRUE, prob = x)
+      },
+      g = x_grid,
+      n = n
+    )
+    Y <- t(Y)
 
-      if (progress) pbar <- utils::txtProgressBar(max = n, style = 3)
-      for (i in n_seq) {
-        Y[, i] <- apply(
-          X = X,
-          MARGIN = 1,
-          FUN = function(x, g) {
-            sample(g, size = 1, prob = x)
-          },
-          g = x_grid
-        )
-        if (progress) utils::setTxtProgressBar(pbar, i)
-      }
-      if (progress) close(pbar)
-    }
     if (!density) {
       X <- matrix(0, nrow = 0, ncol = 0)
     }

@@ -325,6 +325,7 @@ setGeneric(
   def = function(x, y, ...) standardGeneric("interpolate")
 )
 
+## Proxy Records Uncertainties -------------------------------------------------
 #' Layer-Counted Proxy Records Uncertainties
 #'
 #' Represents layer-counted proxy records as sequences of probability
@@ -356,11 +357,7 @@ setGeneric(
 #' @param calendar A [`character`] string specifying the chronological scale
 #'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
 #' @param density A [`logical`] scalar: should densities be kept in the results?
-#' @param samples A [`logical`] scalar: should samples be returned?
-#'  Defaults to `TRUE`.
 #' @param n An [`integer`] specifying the number of item to choose.
-#'  Only used if `samples` is `TRUE`.
-#' @param progress A [`logical`] scalar: should progress bars be displayed?
 #' @param ... Currently not used.
 #' @return
 #'  * `proxy()` returns an [`ProxyRecord-class`] object.

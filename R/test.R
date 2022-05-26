@@ -149,7 +149,7 @@ setMethod(
 setMethod(
   f = "hiatus",
   signature = c(x = "EventsMCMC", y = "missing"),
-  definition = function(x, y) {
+  definition = function(x, level = 0.95) {
     ## Get phases
     n <- ncol(x)
     z <- names(x)
@@ -160,7 +160,7 @@ setMethod(
     for (i in 1:n) {
       for (j in 1:n) {
         if (i != j) {
-          h <- hiatus(x[, i], x[, j])
+          h <- hiatus(x[, i], x[, j], level = level)
           lower[i, j] <- h["lower"]
           upper[i, j] <- h["upper"]
         }
