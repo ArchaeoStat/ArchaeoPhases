@@ -16,7 +16,7 @@ hiatus(x, y, ...)
 
 \S4method{hiatus}{numeric,numeric}(x, y, level = 0.95)
 
-\S4method{hiatus}{EventsMCMC,missing}(x, y)
+\S4method{hiatus}{EventsMCMC,missing}(x, level = 0.95)
 }
 \arguments{
 \item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an

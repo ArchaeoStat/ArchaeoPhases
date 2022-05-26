@@ -9,7 +9,7 @@ NULL
 setMethod(
   f = "credible",
   signature = "numeric",
-  definition = function(object, level = 0.95, CE = TRUE, ...) {
+  definition = function(object, level = 0.95, CE = TRUE) {
     ## Order the sample
     sorted <- sort(object, method = "radix") # Faster sorting with radix method
 
@@ -26,7 +26,7 @@ setMethod(
     b <- sorted[inf]
     ind <- which.min(a - b)
 
-    ## Reverse boundaries if BP scale
+    ## Reverse boundaries if BP or b2k scale
     x <- ifelse(CE, b[[ind]], a[[ind]])
     y <- ifelse(CE, a[[ind]], b[[ind]])
 
@@ -40,10 +40,18 @@ setMethod(
 setMethod(
   f = "credible",
   signature = "MCMC",
-  definition = function(object, level = 0.95, ...) {
+  definition = function(object, level = 0.95, simplify = TRUE) {
+    CE <- !(is_BP(object) || is_b2k(object))
     cred <- apply(X = object, MARGIN = 2, FUN = credible,
-                  level = level, CE = is_CE(object), simplify = FALSE)
-    names(cred) <- names(object)
+                  level = level, CE = CE, simplify = simplify)
+
+    if (simplify) {
+      cred <- t(cred)
+      dimnames(cred) <- list(NULL, c("lower", "upper", "p"))
+      cred <- data.frame(name = names(object), cred)
+    } else {
+      names(cred) <- names(object)
+    }
     attr(cred, "calendar") <- get_calendar(object)
     cred
   }
@@ -91,10 +99,15 @@ setMethod(
 setMethod(
   f = "hpdi",
   signature = "MCMC",
-  definition = function(object, level = 0.95, ...) {
+  definition = function(object, level = 0.95, simplify = TRUE, ...) {
+    CE <- !(is_BP(object) || is_b2k(object))
     hpd <- apply(X = object, MARGIN = 2, FUN = hpdi, level = level,
-                 CE = is_CE(object), ..., simplify = FALSE)
+                 CE = CE, ..., simplify = FALSE)
+
     names(hpd) <- names(object)
+    if (simplify) {
+      hpd <- bind_intervals(hpd)
+    }
     attr(hpd, "calendar") <- get_calendar(object)
     hpd
   }
@@ -113,7 +126,7 @@ bind_intervals <- function(x) {
   hpd <- do.call(rbind.data.frame, x)
   rownames(hpd) <- NULL
   n <- vapply(X = x, FUN = nrow, FUN.VALUE = integer(1))
-  hpd$id <- rep(names(x), times = n)
+  hpd <- data.frame(name = rep(names(x), times = n), hpd)
   hpd
 }
 

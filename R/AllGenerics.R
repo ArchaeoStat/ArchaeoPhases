@@ -604,6 +604,8 @@ setGeneric(
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
+#' @param simplify A [`logical`] scalar: should the results should be
+#'  simplified?
 #' @param ... Currently not used.
 #' @details
 #'  A \eqn{(100 \times level)}{(100 * level)} % credible interval is an interval
@@ -616,8 +618,9 @@ setGeneric(
 #'  For instance, the 95% credible interval is the central portion of the
 #'  posterior distribution that contains 95% of the values.
 #' @return
-#'  A [`list`] of `numeric` [`matrix`] giving the lower and upper boundaries of
-#'  the credible interval and associated probabilities.
+#'  If `simplify` is `TRUE` (the default), returns a [`data.frame`] giving the
+#'  lower and upper boundaries of the credible interval and associated
+#'  probabilities. Else, returns a [`list`] of `numeric` [`matrix`].
 #' @example inst/examples/ex-interval.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family statistics
@@ -636,10 +639,13 @@ setGeneric(
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
+#' @param simplify A [`logical`] scalar: should the results should be
+#'  simplified?
 #' @param ... Extra arguments to be passed to [stats::density()].
 #' @return
-#'  A [`list`] of `numeric` [`matrix`] giving the lower and upper boundaries of
-#'  the HPD interval and associated probabilities.
+#'  If `simplify` is `TRUE` (the default), returns a [`data.frame`] giving the
+#'  lower and upper boundaries of the HPD interval and associated
+#'  probabilities. Else, returns a [`list`] of `numeric` [`matrix`].
 #' @references
 #'  Hyndman, R. J. (1996). Computing and graphing highest density regions.
 #'  *American Statistician*, 50: 120-126. \doi{10.2307/2684423}.
@@ -1061,10 +1067,10 @@ setGeneric(
 #'   \item{median}{Median of the MCMC chain.}
 #'   \item{q3}{Third quantile of the MCMC chain.}
 #'   \item{max}{Maximum value of the MCMC chain.}
-#'   \item{CI_lower}{Lower boundary of the credible interval of the MCMC chain
-#'   at `level`.}
-#'   \item{CI_upper}{Upper boundary of the credible interval of the MCMC chain
-#'   at `level`.}
+#'   \item{lower}{Lower boundary of the [credible interval][credible()] of the
+#'    MCMC chain at `level`.}
+#'   \item{upper}{Upper boundary of the [credible interval][credible()] of the
+#'    MCMC chain at `level`.}
 #'  }
 #' @example inst/examples/ex-summary.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

@@ -12,7 +12,7 @@ hpdi(object, ...)
 
 \S4method{hpdi}{numeric}(object, level = 0.95, CE = TRUE, ...)
 
-\S4method{hpdi}{MCMC}(object, level = 0.95, ...)
+\S4method{hpdi}{MCMC}(object, level = 0.95, simplify = TRUE, ...)
 }
 \arguments{
 \item{object}{A \code{\link{numeric}} vector or an \code{\linkS4class{MCMC}} object containing the
@@ -23,10 +23,14 @@ output of the MCMC algorithm for the parameter.}
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{CE}{A \code{\link{logical}} scalar: are the data expressed in BC/AD years?}
+
+\item{simplify}{A \code{\link{logical}} scalar: should the results should be
+simplified?}
 }
 \value{
-A \code{\link{list}} of \code{numeric} \code{\link{matrix}} giving the lower and upper boundaries of
-the HPD interval and associated probabilities.
+If \code{simplify} is \code{TRUE} (the default), returns a \code{\link{data.frame}} giving the
+lower and upper boundaries of the HPD interval and associated
+probabilities. Else, returns a \code{\link{list}} of \code{numeric} \code{\link{matrix}}.
 }
 \description{
 Bayesian HPD Regions
@@ -38,7 +42,7 @@ eve <- eve[1:10000, ]
 
 ## CE
 credible(eve, level = 0.95) # Credible interval
-hpdi(eve, level = 0.95) # HPD interval
+hpdi(eve, level = 0.68) # HPD interval
 
 ## BP
 eve_BP <- CE_to_BP(eve)

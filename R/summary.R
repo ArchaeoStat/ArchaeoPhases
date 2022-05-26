@@ -14,7 +14,7 @@ setMethod(
       MARGIN = 2,
       FUN = stats_marginal,
       level = level,
-      BP = is_BP(object) || is_b2k(object)
+      CE = !(is_BP(object) || is_b2k(object))
     )
     as.data.frame(t(x))
   }
@@ -39,7 +39,7 @@ setMethod(
         MARGIN = 2,
         FUN = stats_marginal,
         level = level,
-        BP = is_BP(object) || is_b2k(object)
+        CE = is_CE(object)
       )
       colnames(tmp) <- c("start", "end", "duration")
 
@@ -63,7 +63,7 @@ setMethod(
       FUN = stats_marginal,
       map = FALSE,
       level = level,
-      BP = is_BP(object),
+      CE = is_CE(object),
       digits = NULL
     )
     as.data.frame(t(x))
@@ -89,7 +89,7 @@ setMethod(
 #' @noRd
 stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
                            quantiles = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1),
-                           credible = TRUE, level = 0.95, BP = FALSE,
+                           credible = TRUE, level = 0.95, CE = TRUE,
                            digits = getOption("chronos.precision")) {
   ## Defaults
   moy <- mod <- quant <- ec <- ci <- NA_real_
@@ -104,7 +104,7 @@ stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
 
   ## Dispersion
   if (sd) ec <- stats::sd(x)
-  if (credible) ci <- credible(x, level = level, BP = BP)[, -3]
+  if (credible) ci <- credible(x, level = level, CE = CE)[, c("lower", "upper")]
 
   ## Results
   tmp <- c(mad = mod, mean = moy, sd = ec, quant, ci)

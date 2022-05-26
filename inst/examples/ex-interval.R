@@ -4,7 +4,7 @@ eve <- eve[1:10000, ]
 
 ## CE
 credible(eve, level = 0.95) # Credible interval
-hpdi(eve, level = 0.95) # HPD interval
+hpdi(eve, level = 0.68) # HPD interval
 
 ## BP
 eve_BP <- CE_to_BP(eve)

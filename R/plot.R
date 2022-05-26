@@ -35,12 +35,10 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
     fun <- switch (
       interval,
       credible = credible,
-      hpdi = hpdi,
-      stop(sprintf("There is no such interval: %s.", interval), call. = FALSE)
+      hpdi = hpdi
     )
     inter <- fun(data, level = level)
-    inter <- bind_intervals(inter)
-    inter$id <- factor(inter$id, levels = unique(inter$id))
+    inter$id <- factor(inter$name, levels = unique(inter$name))
 
     ## Add group (if any)
     inter <- merge(inter, grp, by = "id", all.x = TRUE, all.y = FALSE,

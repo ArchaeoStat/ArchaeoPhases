@@ -13,7 +13,7 @@ setMethod(
     interval <- match.arg(interval, several.ok = FALSE)
 
     ## Calendar scale
-    desc <- ifelse(is_BP(object), TRUE, FALSE)
+    desc <- is_BP(object) || is_b2k(object)
 
     ## Sort rows
     sorted <- apply(X = object, MARGIN = 1, FUN = sort, decreasing = desc)
@@ -29,13 +29,10 @@ setMethod(
     )
     inter <- fun(sorted, level = level)
 
-    ## Bind results in case of multiple intervals
-    inter <- bind_intervals(inter)
-
     .OccurrenceEvents(
       events = ord,
-      lower = inter[, 1],
-      upper = inter[, 2],
+      lower = inter[, "lower"],
+      upper = inter[, "upper"],
       level = level,
       calendar = get_calendar(object),
       hash = get_hash(object)
