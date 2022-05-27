@@ -12,7 +12,7 @@
 \usage{
 rece(object, ...)
 
-\S4method{rece}{EventsMCMC}(object, n = 100)
+\S4method{rece}{EventsMCMC}(object, resolution = 1, n = 100)
 
 \S4method{autoplot}{RECE}(object, ...)
 
@@ -22,6 +22,10 @@ rece(object, ...)
 \item{object}{An \code{\linkS4class{EventsMCMC}} object.}
 
 \item{...}{Currently not used.}
+
+\item{resolution}{A length-one \code{\link{numeric}} vector specifying the temporal
+resolution. It should be a power of ten, eg. \eqn{1} (the default; annual
+resolution) or \eqn{10} (decennial resolution).}
 
 \item{n}{An \code{\link{integer}} specifying the number of item to choose randomly.}
 

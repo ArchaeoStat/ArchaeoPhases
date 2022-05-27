@@ -54,15 +54,15 @@ setMethod(
 setMethod(
   f = "rece",
   signature = "EventsMCMC",
-  definition = function(object, n = 100) {
+  definition = function(object, resolution = 1, n = 100) {
 
-    object <- round(object, digits = 0)
-    object <- object[sample(nrow(object), size = n, replace = FALSE), ]
+    data <- object[sample(nrow(object), size = n, replace = FALSE), ]
+    data <- data - data %% resolution
 
     count <- vector(mode = "list", length = n)
     n_seq <- seq_len(n)
     for (i in n_seq) {
-      tmp <- as.data.frame(table(object[i, ]))
+      tmp <- as.data.frame(table(data[i, ]))
       colnames(tmp) <- c("age", paste0("C", i))
       count[[i]] <- tmp
     }
@@ -73,18 +73,23 @@ setMethod(
       },
       x = count
     )
-    count[is.na(count)] <- 0
 
     ## Get ages (merge() coerce joining column to factor)
     age <- as.numeric(as.character(count$age))
+
+    ## Align on a regularly spaced grid
+    grid <- seq(from = min(age), to = max(age), by = resolution)
+    count <- merge(data.frame(age = grid), count, by = "age", all = TRUE)
+
     ## Remove age column and coerce to matrix
+    count[is.na(count)] <- 0
     count <- as.matrix(count[, -1])
 
     ## Return an RECE object
     .RECE(
       count,
       events = names(object),
-      year = age,
+      year = grid,
       calendar = get_calendar(object),
       hash = get_hash(object)
     )
@@ -115,12 +120,13 @@ autoplot.RECE <- function(object, ...) {
   bin <- bin[bin$n != 0, ]
 
   ## Adjust for geom_tile
-  bin$Count <- bin$Count - 0.5
-  bin$Age <- bin$Age - 0.5
+  res <- mean(diff(object@year)) / 2
 
   ggplot2::ggplot(data = bin) +
-    ggplot2::aes(x = .data$Age, y = .data$Count, fill = .data$n) +
-    ggplot2::geom_tile() +
+    ggplot2::aes(xmin = .data$Age - res, xmax = .data$Age + res,
+                 ymin = .data$Count - 1, ymax = .data$Count,
+                 fill = .data$n) +
+    ggplot2::geom_rect() +
     gg_x_scale
 }
 

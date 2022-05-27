@@ -568,6 +568,9 @@ setGeneric(
 #'
 #' @param object An [`EventsMCMC-class`] object.
 #' @param x,y An [`RECE-class`] object.
+#' @param resolution A length-one [`numeric`] vector specifying the temporal
+#'  resolution. It should be a power of ten, eg. \eqn{1} (the default; annual
+#'  resolution) or \eqn{10} (decennial resolution).
 #' @param n An [`integer`] specifying the number of item to choose randomly.
 #' @param ... Currently not used.
 #' @return An [`RECE-class`] object.
