@@ -22,7 +22,7 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
   if (!is.null(groups)) {
     arkhe::assert_length(groups, ncol(object))
     grp <- data.frame(id = names(object), Group = as.character(groups))
-    aes_grp <- ggplot2::aes(color = .data$Group, fill = .data$Group)
+    aes_grp <- ggplot2::aes(color = .data$Group)
   }
 
   ## Reorder data
@@ -78,7 +78,8 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
         panel_scaling = TRUE,
         rel_min_height = 0.01,
         scale = 1.75,
-        alpha = 0.5
+        alpha = 0.5,
+        inherit.aes = FALSE
       )
     } else {
       data <- as.vector(data)
@@ -95,7 +96,8 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
       )
       gg_dens <- ggplot2::geom_path(
         mapping = aes_dens,
-        data = dens
+        data = dens,
+        inherit.aes = FALSE
       )
 
       if (!is.null(interval)) {
@@ -111,7 +113,8 @@ autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
         )
         gg_inter <- ggplot2::geom_area(
           mapping = aes_inter,
-          data = int
+          data = int,
+          inherit.aes = FALSE
         )
       }
     }
