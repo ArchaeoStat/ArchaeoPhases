@@ -170,6 +170,9 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #' @export
 read_oxcal <- function(file, quiet="no")
 {
+  if(is.url(file) && !valid_url(file)) {
+    stop('Unable to locate ', file)
+  }
     ## OxCal hard codes csv file conventions, per C. Bronk Ramsey
     ## These match the R defaults
     data <- switch(quiet,
@@ -252,6 +255,9 @@ read_oxcal <- function(file, quiet="no")
 #' @export
 read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
 {
+  if(is.url(file) && !valid_url(file)) {
+    stop('Unable to locate ', file)
+  }
     ## ChronoModel allows the user to choose any separator
     ## and either a period or comma for decimals
     data <- switch(quiet,
@@ -338,37 +344,71 @@ read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
 #' @export
 read_bcal <- function(file, bin_width = 1, quiet = "no")
 {
-    ## BCal uses English locale csv conventions
-    data <- switch(quiet,
-                   "no" = read_csv(file),
-                   "partial" = suppressMessages(read_csv(file)),
-                   "yes" = suppressMessages(suppressWarnings(read_csv(file))),
-                   read_csv(file))
-    ## Calculate hash, if connection, save temp file
-    if(!file_test("-f", file)) {
-        temp_file <- tempfile(pattern = "", fileext = "csv")
-        write(file, temp_file)
-        file_hash <- digest(file = temp_file, algo = "sha256")
-        unlink(temp_file)
-    }
-    else {
-        file_hash <- digest(file = file, algo = "sha256")
-    }
-    ## Remove the iteration column
-    data <- data[, -1]
-    ## Remove an empty last column, if present
-    if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
-        data <- data[, -ncol(data)]
-    ## BCal used to add an empty row at the end, check if empty and remove
-    suppressWarnings(if (is.na(data[nrow(data), ]))
-        data <- data[-nrow(data), ])
-    ## Take bin width into account, if necessary
-    if (bin_width != 1)
-        data <- bin_width * data
-    ## Convert from BP to BC/AD
-    data <- 1950 - data
-    ## Return archaeophases_mcmc object
-    new_archaeophases_mcmc(x = as.data.frame(data),
-                           call = match.call(),
-                           hash = file_hash)
+  if(is.url(file) && !valid_url(file)) {
+    stop('Unable to locate ', file)
+  }
+  ## BCal uses English locale csv conventions
+  data <- switch(quiet,
+                 "no" = read_csv(file),
+                 "partial" = suppressMessages(read_csv(file)),
+                 "yes" = suppressMessages(suppressWarnings(read_csv(file))),
+                 read_csv(file))
+  ## Calculate hash, if connection, save temp file
+  if(!file_test("-f", file)) {
+    temp_file <- tempfile(pattern = "", fileext = "csv")
+    write(file, temp_file)
+    file_hash <- digest(file = temp_file, algo = "sha256")
+    unlink(temp_file)
+  }
+  else {
+    file_hash <- digest(file = file, algo = "sha256")
+  }
+  ## Remove the iteration column
+  data <- data[, -1]
+  ## Remove an empty last column, if present
+  if (data[, ncol(data)] %>% summarise_all(class) != "numeric")
+    data <- data[, -ncol(data)]
+  ## BCal used to add an empty row at the end, check if empty and remove
+  suppressWarnings(if (is.na(data[nrow(data), ]))
+                     data <- data[-nrow(data), ])
+  ## Take bin width into account, if necessary
+  if (bin_width != 1)
+    data <- bin_width * data
+  ## Convert from BP to BC/AD
+  data <- 1950 - data
+  ## Return archaeophases_mcmc object
+  new_archaeophases_mcmc(x = as.data.frame(data),
+                         call = match.call(),
+                         hash = file_hash)
+}
+
+#' Check if a resource can be located
+#'
+#' Function retrieved from
+#' https://stackoverflow.com/questions/52911812/check-if-url-exists-in-r 
+
+valid_url <- function(url_in,t=2){
+  con <- url(url_in)
+  check <- suppressWarnings(try(open.connection(con,open="rt",timeout=t),silent=T)[1])
+  suppressWarnings(try(close.connection(con),silent=T))
+  ifelse(is.null(check),TRUE,FALSE)
+}
+
+#' Check if string is a URL
+#'
+#' Uses a regex approach to check if a string is a URL.  This approach is faster
+#' than \code{\link[RCurl]{url.exists}} but does do the actual verification.
+#'
+#' Retrieved from:
+#' https://github.com/trinker/reports/blob/master/R/is.url.R
+#'
+#' @param x A character string.
+#' @return Returns a logical evalution as to whether a string is a URL.
+#' @keywords url
+#' @seealso \code{\link[RCurl]{url.exists}}
+#' @examples
+#' urls <- c("a", "f/g/h", "www.talkstats.com", "https://github.com/trinker")
+#' is.url(urls)
+is.url <-function(x) {
+    grepl("www.|http:|https:", x)
 }
