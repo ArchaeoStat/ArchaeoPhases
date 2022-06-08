@@ -385,8 +385,10 @@ read_bcal <- function(file, bin_width = 1, quiet = "no")
 #' Check if a resource can be located
 #'
 #' Function retrieved from
-#' https://stackoverflow.com/questions/52911812/check-if-url-exists-in-r 
-
+#' https://stackoverflow.com/questions/52911812/check-if-url-exists-in-r
+#'
+#' @param url_in A character string.
+#' @param t Timeout in seconds.
 valid_url <- function(url_in,t=2){
   con <- url(url_in)
   check <- suppressWarnings(try(open.connection(con,open="rt",timeout=t),silent=T)[1])
@@ -404,11 +406,6 @@ valid_url <- function(url_in,t=2){
 #'
 #' @param x A character string.
 #' @return Returns a logical evalution as to whether a string is a URL.
-#' @keywords url
-#' @seealso \code{\link[RCurl]{url.exists}}
-#' @examples
-#' urls <- c("a", "f/g/h", "www.talkstats.com", "https://github.com/trinker")
-#' is.url(urls)
 is.url <-function(x) {
     grepl("www.|http:|https:", x)
 }
