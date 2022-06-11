@@ -24,3 +24,16 @@
 #'  \item{Phase.1.beta}{end date of Phase 1}
 #' }
 "Phases"
+
+#' oxc
+#'
+#' A data set containing information on the ages of two events.
+#' see the vignette Reproductibility for more details
+#'
+#' @format A data frame with 1000 rows and 2 variables:
+#' \describe{
+#'  \item{foo-early}{date oo-early}
+#'  \item{foo-late}{date foo-late}
+#'
+#' }
+"oxc"
