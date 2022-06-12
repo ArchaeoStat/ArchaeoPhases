@@ -25,7 +25,7 @@ and warnings.}
 }
 \value{
 An \code{archaeophases_mcmc} object containing the marginal
-posterior(s) from file.
+posterior(s) from file, or NULL if \code{file} is not found.
 }
 \description{
 Import a CSV file containing the output of the MCMC algorithm produced
