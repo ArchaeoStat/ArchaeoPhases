@@ -49,7 +49,7 @@ This  estimated function \eqn{f} depends on the unknown dates.  However, from th
 \references{
 D.K. Jha , P. Sanyal and A. Philippe 2020.  Multi-Proxy Evidence of Late Quaternary Climate and Vegetational History of North-Central India: Implication for the Paleolithic to Neolithic Phases. Quaternary Science Reviews 229: 106-121.
 
-S. Ghosh, P. Sanyal, R. Bhushan, S. P Sati, A. Philippe, and N. Juyal. 2020. Early Holocene Indian summer monsoon and its impact on vegetation in the Central Himalaya: Insight from δD and δ13C values of leaf wax lipid. The Holecene 30:7, 1063-1074.
+S. Ghosh, P. Sanyal, R. Bhushan, S. P Sati, A. Philippe, and N. Juyal. 2020. Early Holocene Indian summer monsoon and its impact on vegetation in the Central Himalaya. The Holecene 30:7, 1063-1074.
 }
 \author{
 Anne Philippe, \email{Anne.Philippe@univ-nantes.fr}
