@@ -142,7 +142,7 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 #' and warnings.
 #'
 #' @return An \code{archaeophases_mcmc} object containing the marginal
-#' posterior(s) as a data frame.
+#' posterior(s) as a data frame, or NULL if \code{file} is not found.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -171,7 +171,8 @@ ImportCSV <- function(file, dec='.', sep=',', comment.char = '#',
 read_oxcal <- function(file, quiet="no")
 {
   if(is.url(file) && !valid_url(file)) {
-    stop('Unable to locate ', file)
+    message('Unable to locate ', file)
+    return(invisible(NULL))
   }
     ## OxCal hard codes csv file conventions, per C. Bronk Ramsey
     ## These match the R defaults
@@ -227,7 +228,7 @@ read_oxcal <- function(file, quiet="no")
 #' and warnings.
 #'
 #' @return An \code{archaeophases_mcmc} object containing the marginal
-#' posterior(s) from file.
+#' posterior(s) from file, or NULL if \code{file} is not found.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -256,7 +257,8 @@ read_oxcal <- function(file, quiet="no")
 read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
 {
   if(is.url(file) && !valid_url(file)) {
-    stop('Unable to locate ', file)
+    message('Unable to locate ', file)
+    return(invisible(NULL))
   }
     ## ChronoModel allows the user to choose any separator
     ## and either a period or comma for decimals
@@ -275,6 +277,7 @@ read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
                    read_delim(file,
                               locale = locale("en", decimal_mark = decimal),
                               delim = separator, comment = "#"))
+
     ## Calculate hash, if connection, save temp file
     if(!file_test("-f", file)) {
         temp_file <- tempfile(pattern = "", fileext = "csv")
@@ -315,7 +318,7 @@ read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
 #' and warnings.
 #'
 #' @return An \code{archaeophases_mcmc} object containing the marginal
-#' posterior(s) as a data frame.
+#' posterior(s) as a data frame, or NULL if \code{file} is not found.
 #'
 #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
 #'
@@ -345,7 +348,8 @@ read_chronomodel <- function(file, decimal = ".", separator = ",", quiet = "no")
 read_bcal <- function(file, bin_width = 1, quiet = "no")
 {
   if(is.url(file) && !valid_url(file)) {
-    stop('Unable to locate ', file)
+    message('Unable to locate ', file)
+    return(invisible(NULL))
   }
   ## BCal uses English locale csv conventions
   data <- switch(quiet,
