@@ -385,7 +385,7 @@ allen_is_result_vector <- function(obj) {
   if (is.vector(obj)
       && !is.null(names(obj))
       && (all(names(obj) == allen_basic_relation_set()))
-      && (class(obj) == "numeric"))
+      && inherits(obj, "numeric"))
     TRUE
   else
     FALSE
