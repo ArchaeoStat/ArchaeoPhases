@@ -3,7 +3,6 @@
 S3method(original_file,archaeophases_mcmc)
 S3method(original_file,archaeophases_plot)
 S3method(plot,archaeophases_plot)
-S3method(reproduce,archaeophases_mcmc)
 S3method(reproduce,archaeophases_plot)
 export(AgeDepth)
 export(CreateMinMaxGroup)

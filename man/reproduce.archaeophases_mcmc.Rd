@@ -15,7 +15,7 @@
 }
 \description{
 Reproduces a data frame from metadata held in an \code{archaeophases_mcmc}
-object.
+object.  Returns NULL if \code{file} is not the original file.
 }
 \examples{
 \dontrun{

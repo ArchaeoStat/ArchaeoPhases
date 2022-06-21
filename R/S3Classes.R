@@ -187,7 +187,7 @@ reproduce <- function(x, ...) {
 #' Reproduce an MCMC data frame
 #'
 #' Reproduces a data frame from metadata held in an \code{archaeophases_mcmc}
-#' object.
+#' object.  Returns NULL if \code{file} is not the original file.
 #'
 #' @param x An \code{archaeophases_mcmc} object.
 #' @param file A path to the original MCMC csv file, or a copy of the file.
@@ -205,80 +205,86 @@ reproduce <- function(x, ...) {
 #'
 #' @seealso \code{\link{original_file}}
 #'
-#' @export
 reproduce.archaeophases_mcmc <- function(x, file = NULL, ...) {
-    if (!original_file(x, file))
-        stop("Not the original file.")
+  if (!original_file(x, file)) {
+    message("Not the original file.")
+    return(NULL)
+  }
+  else
     eval(attr(x, "mcmc"))
 }
 
-#' Reproduce an ArchaeoPhases plot
-#'
-#' Reproduces a plot from metadata held in an \code{archaeophases_plot}
-#' object.
-#'
-#' @param x An \code{archaeophases_plot} object.
-#' @param file Path to the original MCMC csv file, or a copy of the file.
-#' @param ... Other parameters.
-#'
-#' @author Thomas S. Dye, \email{tsd@@tsdye.online}
-#'
-#' @examples
-#' \dontrun{
-#' x <- read_bcal("http://tsdye.online/AP/bc-1.csv")
-#' y <- multi_dates_plot(x)
-#' z <- reproduce(y)
-#' # TRUE
-#' identical(y, z)
-#'
-#' #ERROR, Not the original file.
-#' z <- reproduce(y, file = "foo.csv")
-#' }
-#'
-#' @seealso \code{\link{original_file}}
-#'
-#' @export
-reproduce.archaeophases_plot <- function(x, file = NULL, ...) {
+  #' Reproduce an ArchaeoPhases plot
+  #'
+  #' Reproduces a plot from metadata held in an \code{archaeophases_plot}
+  #' object.  Returns NULL if \code{file} is not the original file.
+  #'
+  #' @param x An \code{archaeophases_plot} object.
+  #' @param file Path to the original MCMC csv file, or a copy of the file.
+  #' @param ... Other parameters.
+  #'
+  #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
+  #'
+  #' @examples
+  #' \dontrun{
+  #' x <- read_bcal("http://tsdye.online/AP/bc-1.csv")
+  #' y <- multi_dates_plot(x)
+  #' z <- reproduce(y)
+  #' # TRUE
+  #' identical(y, z)
+  #'
+  #' #ERROR, Not the original file.
+  #' z <- reproduce(y, file = "foo.csv")
+  #' }
+  #'
+  #' @seealso \code{\link{original_file}}
+  #'
+  #' @export
+  reproduce.archaeophases_plot <- function(x, file = NULL, ...) {
     if (!original_file(x, file))
-        stop("Not the original file.")
-    eval(attr(x, "call"))
-}
+    {
+      message("Not the original file.")
+      return(NULL)
+    }
+    else
+      eval(attr(x, "call"))
+  }
 
-#' Recreate a graphical plot
-#'
-#' Recreates a graphic from data and metadata held in a
-#' \code{archaeophases_plot} object.
-#'
-#' @details
-#' Uses data stored in the \code{archaeophases_plot} object, along with
-#' metadata from the call of the plotting function, to recreate the original
-#' graphic on the display.
-#'
-#' @param x An \code{archaeophases_plot} object.
-#' @param ... Other parameters.
-#'
-#' @author Thomas S. Dye, \email{tsd@@tsdye.online}
-#'
-#' @seealso \code{\link{tempo_plot}}
-#' @seealso \code{\link{occurrence_plot}}
-#' @seealso \code{\link{marginal_plot}}
-#' @seealso \code{\link{multi_marginal_plot}}
-#' @seealso \code{\link{tempo_activity_plot}}
-#' @seealso \code{\link{multi_dates_plot}}
-#'
-#' @examples
-#'
-#' \dontrun{
-#' # Read from connection
-#'   ox <- read_oxcal("http://tsdye.online/AP/ox.csv")
-#'   tp_1 <- tempo_plot(ox, position = 1:ncol(ox))
-#' # Recreate the tempo_plot with the original arguments
-#'   plot(tp_1)
-#' }
-#' @export
-plot.archaeophases_plot <- function(x, ...) {
-    foo <- as.list(attr(x, "call"))
-    foo$data <- as.name(deparse(substitute(x)))
-    foo$position <- NULL
-    eval(as.call(foo))
-}
+    #' Recreate a graphical plot
+    #'
+    #' Recreates a graphic from data and metadata held in a
+    #' \code{archaeophases_plot} object.
+    #'
+    #' @details
+    #' Uses data stored in the \code{archaeophases_plot} object, along with
+    #' metadata from the call of the plotting function, to recreate the original
+    #' graphic on the display.
+    #'
+    #' @param x An \code{archaeophases_plot} object.
+    #' @param ... Other parameters.
+    #'
+    #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
+    #'
+    #' @seealso \code{\link{tempo_plot}}
+    #' @seealso \code{\link{occurrence_plot}}
+    #' @seealso \code{\link{marginal_plot}}
+    #' @seealso \code{\link{multi_marginal_plot}}
+    #' @seealso \code{\link{tempo_activity_plot}}
+    #' @seealso \code{\link{multi_dates_plot}}
+    #'
+    #' @examples
+    #'
+    #' \dontrun{
+    #' # Read from connection
+    #'   ox <- read_oxcal("http://tsdye.online/AP/ox.csv")
+    #'   tp_1 <- tempo_plot(ox, position = 1:ncol(ox))
+    #' # Recreate the tempo_plot with the original arguments
+    #'   plot(tp_1)
+    #' }
+    #' @export
+    plot.archaeophases_plot <- function(x, ...) {
+      foo <- as.list(attr(x, "call"))
+      foo$data <- as.name(deparse(substitute(x)))
+      foo$position <- NULL
+      eval(as.call(foo))
+    }
