@@ -46,6 +46,7 @@ new_archaeophases_mcmc <- function(x = list(),
 #' @seealso \code{\link{read_bcal}}
 #' @seealso \code{\link{read_oxcal}}
 new_archaeophases_plot <- function(x = list(),
+                                   ## plot = list(),
                                    mcmc = list(),
                                    call = match.call()) {
 
@@ -58,6 +59,7 @@ new_archaeophases_plot <- function(x = list(),
         attr_list <- as.list(attributes(mcmc))
         }
     structure(x,
+              ## plot = plot,
               class = c("archaeophases_plot", "archaeophases_mcmc", "data.frame"),
               mcmc = attr_list[match(mcmc_attrs, names(attr_list))],
               call = call)
@@ -87,7 +89,7 @@ new_archaeophases_plot <- function(x = list(),
 #'
 #' @export
 original_file <- function(x, ...) {
-    UseMethod("original_file")
+    UseMethod("original_file", x)
 }
 
 #' Check for an original mcmc file
@@ -220,7 +222,7 @@ reproduce.archaeophases_mcmc <- function(x, file = NULL, ...) {
   #' object.  Returns NULL if \code{file} is not the original file.
   #'
   #' @param x An \code{archaeophases_plot} object.
-  #' @param file Path to the original MCMC csv file, or a copy of the file.
+  #' @param file Optional path to the original MCMC csv file, or a copy of the file.
   #' @param ... Other parameters.
   #'
   #' @author Thomas S. Dye, \email{tsd@@tsdye.online}
@@ -239,16 +241,16 @@ reproduce.archaeophases_mcmc <- function(x, file = NULL, ...) {
   #'
   #' @seealso \code{\link{original_file}}
   #'
-  #' @export
-  reproduce.archaeophases_plot <- function(x, file = NULL, ...) {
-    if (!original_file(x, file))
-    {
-      message("Not the original file.")
-      return(NULL)
-    }
-    else
-      eval(attr(x, "call"))
-  }
+  #'
+  ## reproduce.archaeophases_plot <- function(x, file = NULL, ...) {
+  ##   if (!original_file(x, file))
+  ##   {
+  ##     message("Not the original file.")
+  ##     return(NULL)
+  ##   }
+  ##   else
+  ##     eval(attr(x, "call"))
+  ## }
 
     #' Recreate a graphical plot
     #'
@@ -281,10 +283,13 @@ reproduce.archaeophases_mcmc <- function(x, file = NULL, ...) {
     #' # Recreate the tempo_plot with the original arguments
     #'   plot(tp_1)
     #' }
-    #' @export
-    plot.archaeophases_plot <- function(x, ...) {
-      foo <- as.list(attr(x, "call"))
-      foo$data <- as.name(deparse(substitute(x)))
-      foo$position <- NULL
-      eval(as.call(foo))
-    }
+    #'
+    ## plot.archaeophases_plot <- function(x, file = NULL, ...) {
+    ## if (!original_file(x, file))
+    ## {
+    ##   message("Not the original file.")
+    ##   return(NULL)
+    ## }
+    ## else
+    ##   eval(attr(x, "call"))
+    ## }
