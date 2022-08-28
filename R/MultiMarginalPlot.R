@@ -1,5 +1,5 @@
 #####################################################
-#       Multi Marginal posterior Density            #
+#       Multi Marginal Posterior Density            #
 #       NEW version in ArchaeoPhases 1.4            #
 #####################################################
 #' Marginal posterior densities of several events
@@ -328,7 +328,7 @@ multi_marginal_plot <- function(data,
     }
 
     if (is.null(colors)) {
-        h <- h + guides(fill = FALSE)
+        h <- h + guides(fill = "none")
     }
 
     h <- h + facet_grid(variable ~ ., switch = "y")
