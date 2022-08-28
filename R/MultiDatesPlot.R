@@ -286,13 +286,13 @@ multi_dates_plot <- function (data,
 
     if (order == "increasing"){
         h <- ggplot2::ggplot(data = Ordered.df,
-                             ggplot2::aes(y = reorder(Ordered.df$y.labs,
+                             ggplot2::aes(y = reorder(y.labs,
                                                       Ordered.df[,2]),
                                           x=Ordered.df[,2],
                                           xend=Ordered.df[,3]))
     } else if (order == "default") {
         h <- ggplot2::ggplot(data = Ordered.df,
-                             ggplot2::aes(y = Ordered.df$y.labs,
+                             ggplot2::aes(y = y.labs,
                                           x=Ordered.df[,2],
                                           xend=Ordered.df[,3]))
     }
