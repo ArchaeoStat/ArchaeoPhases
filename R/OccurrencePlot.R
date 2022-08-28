@@ -138,7 +138,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
     Ordered.df[,3] <- 1950-Ordered.df[,3]
   }
 
-  h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y=factor(Ordered.df$y.labs, levels=unique(Ordered.df$y.labs), ordered=TRUE), x=Ordered.df[,2], xend=Ordered.df[,3]))
+  h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y=factor(y.labs, levels=unique(y.labs), ordered=TRUE), x=Ordered.df[,2], xend=Ordered.df[,3]))
   h <- h + ggalt::geom_dumbbell(size = dumbbell.size, dot_guide = dot.guide, dot_guide_size = dot.guide.size)
   h <- h + ggplot2::labs(x = labelXaxis, y = labelYaxis, title = title,subtitle = subtitle, caption = caption)
 
@@ -168,13 +168,12 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #' events of a specified kind occurred
 #'
 #' @param data Data frame containing the output of the MCMC algorithm.
-#' @param position A list, each member of which is either a numeric vector
+#' @param position Either a numeric vector
 #'     containing the positions of the columns corresponding to the MCMC chains
-#'     of interest, or a vector of column names. For convenience, a vector can
-#'     be substituted for the singleton list.
-#' @param name A list, each member of which is a string that names the kind of
-#'     event in the corresponding element of \code{position}. For convenience, a
-#'     string can be substituted for the singleton list.
+#'     of interest, or a vector of column names. 
+## ' @param name A list, each member of which is a string that names the kind of
+## '     event in the corresponding element of \code{position}. For convenience, a
+## '     string can be substituted for the singleton list.
 #' @param plot_result If \code{TRUE}, then draw a plot on the display, else
 #'     suppress drawing.
 #' @param level Probability corresponding to the level of confidence.
@@ -202,7 +201,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #' @param dot_guide Switch for a horizontal guide from the y axis.
 #' @param dot_guide_size Size of the dot guide.
 #' @param y_grid Switch for horizontal grid lines.
-#' @param columns Number of columns for facet.
+## ' @param columns Number of columns for facet. 
 #' @param file Name of the file that will be saved if specified. If \code{NULL}
 #'     no plot will be saved.
 #' @param new_window Whether or not the plot is drawn within a new window.
@@ -222,7 +221,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #'
 #' @examples
 #'   data(Events);
-#'   OccurrencePlot(Events[1:1000, ], c(2:5),  print.data.result = FALSE)
+#'   OccurrencePlot(Events[1:1000, ], c(2:5))
 #'
 #'
 #' \dontrun{
@@ -230,8 +229,10 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #' ox <- read_oxcal("http://tsdye.online/AP/ox.csv")
 #' # Plot all the columns
 #' op <- occurrence_plot(ox, position = 1:ncol(ox))
-#' # Plot again
-#' plot(op)
+#' # Check for original data file, TRUE
+#' original_file(op)
+#' # Calculate statistics
+#' multi_marginal_statistics(op)
 #' # View metadata
 #' str(op)
 #' }
@@ -242,7 +243,7 @@ OccurrencePlot <- function(data, position, plot.result = NULL, level = 0.95, int
 #' @export
 occurrence_plot <- function(data,
                             position = 1:ncol(data),
-                            name = list("All"),
+                            ## name = list("All"),
                             level = 0.95,
                             plot_result = TRUE,
                             intervals = "CI",
@@ -261,8 +262,6 @@ occurrence_plot <- function(data,
                             file = NULL, new_window=TRUE)
 {
 
-    if(!is.data.frame(data)) stop("Data format not recognized.")
-
     if(!is.element(intervals, c("CI", "HPD")))
         stop(sprintf("%s is not a valid 'intervals' value.", intervals))
 
@@ -272,114 +271,85 @@ occurrence_plot <- function(data,
     if(x_scale == "elapsed" & is.null(elapsed_origin_position))
         stop("Elapsed origin not specified.")
 
-    if(!is.list(position))
-        position <- list(position)
+    ## if(!is.list(position))
+    ##     position <- list(position)
 
-    if(!is.list(name))
-        name <- list(name)
+    ## if(!is.list(name))
+    ##     name <- list(name)
 
-    if(length(position) != length(name))
-        stop("Position and name lists are different lengths.")
+    ## if(length(position) != length(name))
+    ##     stop("Position and name lists are different lengths.")
 
-    sort.rows <- function(x) {
-        if (is.numeric(as.matrix(x))) {
-            res <- as.data.frame(t(apply(x,1,sort)))
-            colnames(res) <- 1:ncol(res)
-            res
-        }
-        else {
-            stop("Cannot sort non-numeric data frame")
-        }
-    }
-
-    prep_bornes <- function(position,
-                               d = NULL,
-                               xs = x_scale,
-                               ep = elapsed_origin_position,
-                               l = level) {
-
-        temp_data <- d[, position]
-
-        if (xs == "elapsed") {
-            temp_data <- temp_data - d[, ep]
-        }
-
-        events <- sort.rows(temp_data)
-
-        if (intervals == "CI") {
-            bornes <- MultiCredibleInterval(data = events,
-                                           position = 1:ncol(events),
-                                           level = l,
-                                           roundingOfValue = 0)
-        }
-        else {
-            bornes <- MultiHPD(data = events,
-                              position = 1:ncol(events),
-                              level = l)
-        }
-        ## I think this can go inside the preceding else clause.  Check.
-        x = (dim(bornes)[2] - 1) / 2
-        if ( x > 1 ){
-            y <- NULL
-            for(j in 1:x){
-                bornesj <- subset(bornes, select=-c(2 * j, 2 * j + 1))
-                y <- rbind(bornesj, y)
-            }
-            bornes <- y[is.na(y[,2]) == FALSE, ]
-        }
-        return(bornes)
-    }
-
-    prep_df <- function(b, n,
-                           o = occurrence,
-                           l = language,
-                           x = x_scale) {
-        b_df <- as.data.frame(b)
-        b_row <- as.integer(rownames(b))
-        b_df$row <- b_row
-        b_df$y.lab <- paste(sapply(X = b_row,
-                                   FUN = toOrdinal,
-                                   language = l),
-                            o,
-                            sep= " ")
-        b_df$name <- n
-        colnames(b_df)[c(2, 3)] <- c("start", "end")
-        if (x == "BP") {
-            b_df$start <- 1950 - b_df$start
-            b_df$end <- 1950 - b_df$end
-        }
-        return(list(b_df))
-    }
-
-    assemble_df <- function(l) {
-        o <- data.frame()
-        for(i in seq(along = l)) {
-            o <- rbind(as.data.frame(l[[i]]), o,
-                       stringsAsFactors = FALSE,
-                       make.row.names = FALSE)
-        }
-        o$y.lab <- factor(o$y.lab, levels = unique(o$y.lab))
-        return(o)
-    }
-
-    if(is.element("archaeophases_plot", class(data))) {
-        ordered_df <- data
+  sort.rows <- function(x) {
+    if (is.numeric(as.matrix(x))) {
+      res <- as.data.frame(t(apply(x,1,sort)))
+      colnames(res) <- 1:ncol(res)
+      res
     }
     else {
-        bornes_list <- lapply(FUN = prep_bornes,
-                              X = position,
-                              d = data)
-        df_list <- mapply(FUN = prep_df,
-                          b = bornes_list,
-                          n = name,
-                          SIMPLIFY = FALSE)
-        ordered_df <- assemble_df(df_list)
+      stop("Cannot sort non-numeric data frame")
+    }
+  }
+  group.dates <- function(data, position) {
+    L = length(position)
+    res = matrix(ncol = L, nrow=nrow(data))
+    for (i in 1:L) {
+      res[,i] = data[,position[i]]
+    }
+    res
+  }
+  if (x_scale == "elapsed") {
+    if (is.null(elapsed.origin.position)) {
+      stop("Elapsed origin not specified")
+    }
+    else {
+      data <- data - data[,elapsed.origin.position]
+    }
+  }
+
+  if (inherits(data, "archaeophases_plot"))
+      groupOfEvents <- data 
+  else {
+  groupOfDates <- group.dates(data, position)
+  groupOfEvents <- sort.rows(groupOfDates)
+  }
+
+  if (intervals == "CI") {
+    Bornes = MultiCredibleInterval(groupOfEvents, 1:ncol(groupOfEvents), level = level, roundingOfValue = 0)
+    Ordered.df <- as.data.frame(Bornes)
+    Ordered.df$y.labs <- paste(sapply(as.integer(rownames(Bornes)), toOrdinal, language = language), occurrence, sep= " ")
+
+  }
+  else if (intervals == "HPD") {
+    Bornes = MultiHPD(groupOfEvents, 1:ncol(groupOfEvents), level = level)
+    Ordered.df <- as.data.frame(Bornes)
+    Ordered.df$y.labs <- paste(sapply(as.integer(rownames(Bornes)), toOrdinal, language = language), occurrence, sep= " ")
+
+    # In the case of (multiple) two intervals
+    x = (dim(Bornes)[2] - 1) /2
+    if ( x > 1 ){
+      data = NULL
+      for(j in 1:x){
+        Bornesj = subset(Bornes,select=-c(2*j,2*j+1))
+        data = rbind(Bornesj, data)
+      }
+      data = data[is.na(data[,2])==FALSE,]
+      Ordered.df <- as.data.frame(data)
+      Ordered.df$y.labs <- paste(sapply(as.integer(rownames(data)), toOrdinal, language = language), occurrence, sep= " ")
     }
 
-    h <- ggplot2::ggplot(data = ordered_df,
-                         ggplot2::aes(y = y.lab,
-                                      x = start,
-                                      xend = end))
+  }
+
+  if (x_scale == "BP") {
+    Ordered.df[,2] <- 1950-Ordered.df[,2]
+    Ordered.df[,3] <- 1950-Ordered.df[,3]
+  }
+
+  h <- ggplot2::ggplot(data = Ordered.df, ggplot2::aes(y=factor(y.labs,
+                                                       levels=unique(y.labs),
+                                                       ordered=TRUE),
+                                                       x=Ordered.df[,2],
+                                                       xend=Ordered.df[,3]))
 
     h <- h + ggalt::geom_dumbbell(size = dumbbell_size,
                                  dot_guide = dot_guide,
@@ -398,13 +368,13 @@ occurrence_plot <- function(data,
         h <- h + ggplot2::xlim(x_min, x_max)
     }
 
-    if(length(bornes_list) > 1) {
-        h <- h + ggplot2::facet_wrap(ggplot2::vars(name),
-                                     scales = "free_y",
-                                     ncol = columns)
-        h <- h + theme(axis.ticks = element_blank(),
-                       axis.text.y = element_blank())
-    }
+    ## if(length(bornes_list) > 1) {
+    ##     h <- h + ggplot2::facet_wrap(ggplot2::vars(name),
+    ##                                  scales = "free_y",
+    ##                                  ncol = columns)
+    ##     h <- h + theme(axis.ticks = element_blank(),
+    ##                    axis.text.y = element_blank())
+    ## }
 
     if (!is.null(file)) {
         ggplot2::ggsave(filename = file,
@@ -421,7 +391,7 @@ occurrence_plot <- function(data,
         print(h)
     }
 
-    new_archaeophases_plot(x = ordered_df,
-                           mcmc = data,
-                           call = match.call())
+  new_archaeophases_plot(x = groupOfEvents,
+                         mcmc = data,
+                         call = match.call())
 }
