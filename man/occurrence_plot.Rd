@@ -7,7 +7,6 @@
 occurrence_plot(
   data,
   position = 1:ncol(data),
-  name = list("All"),
   level = 0.95,
   plot_result = TRUE,
   intervals = "CI",
@@ -37,14 +36,9 @@ occurrence_plot(
 \arguments{
 \item{data}{Data frame containing the output of the MCMC algorithm.}
 
-\item{position}{A list, each member of which is either a numeric vector
+\item{position}{Either a numeric vector
 containing the positions of the columns corresponding to the MCMC chains
-of interest, or a vector of column names. For convenience, a vector can
-be substituted for the singleton list.}
-
-\item{name}{A list, each member of which is a string that names the kind of
-event in the corresponding element of \code{position}. For convenience, a
-string can be substituted for the singleton list.}
+of interest, or a vector of column names.}
 
 \item{level}{Probability corresponding to the level of confidence.}
 
@@ -94,8 +88,6 @@ for elapsed time calculations.}
 
 \item{y_grid}{Switch for horizontal grid lines.}
 
-\item{columns}{Number of columns for facet.}
-
 \item{file}{Name of the file that will be saved if specified. If \code{NULL}
 no plot will be saved.}
 
@@ -117,7 +109,7 @@ interval or the highest posterior density (HPD) region with a desired level of c
 }
 \examples{
   data(Events);
-  OccurrencePlot(Events[1:1000, ], c(2:5),  print.data.result = FALSE)
+  OccurrencePlot(Events[1:1000, ], c(2:5))
 
 
 \dontrun{
@@ -125,8 +117,10 @@ interval or the highest posterior density (HPD) region with a desired level of c
 ox <- read_oxcal("http://tsdye.online/AP/ox.csv")
 # Plot all the columns
 op <- occurrence_plot(ox, position = 1:ncol(ox))
-# Plot again
-plot(op)
+# Check for original data file, TRUE
+original_file(op)
+# Calculate statistics
+multi_marginal_statistics(op)
 # View metadata
 str(op)
 }
