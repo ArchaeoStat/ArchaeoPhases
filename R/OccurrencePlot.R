@@ -258,7 +258,7 @@ occurrence_plot <- function(data,
                             elapsed_origin_position = NULL,
                             dumbbell_size = 1, dot_guide = FALSE,
                             dot_guide_size = 0.25, y_grid = FALSE,
-                            columns = 1,
+                            ## columns = 1,
                             file = NULL, new_window=TRUE)
 {
 

@@ -28,7 +28,6 @@ occurrence_plot(
   dot_guide = FALSE,
   dot_guide_size = 0.25,
   y_grid = FALSE,
-  columns = 1,
   file = NULL,
   new_window = TRUE
 )
