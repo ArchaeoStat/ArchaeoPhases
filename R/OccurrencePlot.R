@@ -268,9 +268,6 @@ occurrence_plot <- function(data,
     if(!is.element(x_scale, c("calendar", "BP", "elapsed")))
         stop(sprintf("%s is not a valid 'x_scale' value.", x_scale))
 
-    if(x_scale == "elapsed" & is.null(elapsed_origin_position))
-        stop("Elapsed origin not specified.")
-
     ## if(!is.list(position))
     ##     position <- list(position)
 
@@ -299,11 +296,11 @@ occurrence_plot <- function(data,
     res
   }
   if (x_scale == "elapsed") {
-    if (is.null(elapsed.origin.position)) {
+    if (is.null(elapsed_origin_position)) {
       stop("Elapsed origin not specified")
     }
     else {
-      data <- data - data[,elapsed.origin.position]
+      data <- data - data[,elapsed_origin_position]
     }
   }
 
