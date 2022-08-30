@@ -101,7 +101,7 @@ data(oxc)
 oxc.op <- occurrence_plot(oxc)
 ## check call
 attr(oxc.op, "call")
-** reproduce occurrence plot
+## reproduce occurrence plot
 oxc.op.rep <- occurrence_plot(oxc.op)
 ```
 ## Use Cases
