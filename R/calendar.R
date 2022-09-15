@@ -343,6 +343,87 @@ setMethod(
   }
 )
 
+## CE to b2k -------------------------------------------------------------------
+#' @export
+#' @rdname calendar
+#' @aliases CE_to_b2k,numeric-method
+setMethod(
+  f = "CE_to_b2k",
+  signature = "numeric",
+  definition = function(object){
+    index <- !is.na(object)
+    if (any(object[index] == 0)) {
+      stop("0 BCE/CE is not a valid year!", call. = FALSE)
+    }
+    if (any(object[index] > 2000)) {
+      stop("Actual dates (> 2000 CE) are not supported.", call. = FALSE)
+    }
+    tmp <- rep(NA, length(object))
+    tmp[index & object > 0] <- abs(object[index & object > 0] - 2000)
+    tmp[index & object < 0] <- abs(object[index & object < 0] - 1999)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases CE_to_b2k,matrix-method
+setMethod(
+  f = "CE_to_b2k",
+  signature = "matrix",
+  definition = function(object) {
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases CE_to_b2k,array-method
+setMethod(
+  f = "CE_to_b2k",
+  signature = "array",
+  definition = function(object) {
+    tmp <- methods::callGeneric(object = as.vector(object))
+    dim(tmp) <- dim(object)
+    dimnames(tmp) <- dimnames(object)
+    tmp
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases CE_to_b2k,MCMC-method
+setMethod(
+  f = "CE_to_b2k",
+  signature = "MCMC",
+  definition = function(object){
+    ## Check current scale
+    if (is_BP(object)) return(object)
+    tmp <- methods::callNextMethod(object = object)
+    methods::initialize(object, tmp, calendar = "BP")
+  }
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases CE_to_b2k,PhasesMCMC-method
+setMethod(
+  f = "CE_to_b2k",
+  signature = "PhasesMCMC",
+  definition = function(object){
+    ## Check current scale
+    if (is_BP(object)) return(object)
+    tmp <- methods::callNextMethod(object = object)
+    ## Revert boundaries
+    tmp <- tmp[, , c(2, 1)]
+
+    methods::initialize(object, tmp, calendar = "BP")
+  }
+)
+
 ## b2k to BP -------------------------------------------------------------------
 #' @export
 #' @rdname calendar

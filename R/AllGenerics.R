@@ -183,8 +183,8 @@ NULL
 #' @return
 #'  * `elapse()` returns an object of the same class as `object` with an elapsed
 #'    time scale.
-#'  * `BP_to_CE()`, `CE_to_BP()`, `b2k_to_CE` and `b2k_to_BP` return an object
-#'    of the same class as `object`.
+#'  * `BP_to_CE()`, `BP_to_b2k()`, `CE_to_BP()`, `CE_to_b2k()`, `b2k_to_CE()`
+#'    and `b2k_to_BP()` return an object of the same class as `object`.
 #'  * `is_BP()`, `is_CE()`, `is_b2k()` return a [`logical`] scalar.
 #' @return
 #'  An object of the same sort as `object` with a new time scale.
@@ -213,10 +213,24 @@ setGeneric(
 )
 
 #' @rdname calendar
+#' @aliases BP_to_b2k-method
+setGeneric(
+  name = "BP_to_b2k",
+  def = function(object) standardGeneric("BP_to_b2k")
+)
+
+#' @rdname calendar
 #' @aliases CE_to_BP-method
 setGeneric(
   name = "CE_to_BP",
   def = function(object) standardGeneric("CE_to_BP")
+)
+
+#' @rdname calendar
+#' @aliases CE_to_b2k-method
+setGeneric(
+  name = "CE_to_b2k",
+  def = function(object) standardGeneric("CE_to_b2k")
 )
 
 #' @rdname calendar

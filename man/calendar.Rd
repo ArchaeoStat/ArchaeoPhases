@@ -7,8 +7,12 @@
 \alias{elapse-method}
 \alias{BP_to_CE}
 \alias{BP_to_CE-method}
+\alias{BP_to_b2k}
+\alias{BP_to_b2k-method}
 \alias{CE_to_BP}
 \alias{CE_to_BP-method}
+\alias{CE_to_b2k}
+\alias{CE_to_b2k-method}
 \alias{b2k_to_BP}
 \alias{b2k_to_BP-method}
 \alias{b2k_to_CE}
@@ -48,6 +52,11 @@
 \alias{CE_to_BP,array-method}
 \alias{CE_to_BP,MCMC-method}
 \alias{CE_to_BP,PhasesMCMC-method}
+\alias{CE_to_b2k,numeric-method}
+\alias{CE_to_b2k,matrix-method}
+\alias{CE_to_b2k,array-method}
+\alias{CE_to_b2k,MCMC-method}
+\alias{CE_to_b2k,PhasesMCMC-method}
 \alias{b2k_to_BP,numeric-method}
 \alias{b2k_to_BP,matrix-method}
 \alias{b2k_to_BP,array-method}
@@ -62,7 +71,11 @@ elapse(object, ...)
 
 BP_to_CE(object)
 
+BP_to_b2k(object)
+
 CE_to_BP(object)
+
+CE_to_b2k(object)
 
 b2k_to_BP(object)
 
@@ -132,6 +145,16 @@ is_b2k(object)
 
 \S4method{CE_to_BP}{PhasesMCMC}(object)
 
+\S4method{CE_to_b2k}{numeric}(object)
+
+\S4method{CE_to_b2k}{matrix}(object)
+
+\S4method{CE_to_b2k}{array}(object)
+
+\S4method{CE_to_b2k}{MCMC}(object)
+
+\S4method{CE_to_b2k}{PhasesMCMC}(object)
+
 \S4method{b2k_to_BP}{numeric}(object)
 
 \S4method{b2k_to_BP}{matrix}(object)
@@ -160,8 +183,8 @@ to the event from which elapsed time is calculated.}
 \itemize{
 \item \code{elapse()} returns an object of the same class as \code{object} with an elapsed
 time scale.
-\item \code{BP_to_CE()}, \code{CE_to_BP()}, \code{b2k_to_CE} and \code{b2k_to_BP} return an object
-of the same class as \code{object}.
+\item \code{BP_to_CE()}, \code{BP_to_b2k()}, \code{CE_to_BP()}, \code{CE_to_b2k()}, \code{b2k_to_CE()}
+and \code{b2k_to_BP()} return an object of the same class as \code{object}.
 \item \code{is_BP()}, \code{is_CE()}, \code{is_b2k()} return a \code{\link{logical}} scalar.
 }
 
