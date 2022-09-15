@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/tesselle/chronos/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/chronos/actions)
 [![codecov](https://codecov.io/gh/tesselle/chronos/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tesselle/chronos)
 [![CodeFactor](https://www.codefactor.io/repository/github/tesselle/chronos/badge/master)](https://www.codefactor.io/repository/github/tesselle/chronos/overview/master)
+[![Dependencies](https://tinyverse.netlify.com/badge/chronos)](https://cran.r-project.org/package=chronos)
 
 [![r-universe](https://tesselle.r-universe.dev/badges/chronos)](https://tesselle.r-universe.dev){.pkgdown-devel}
 

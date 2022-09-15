@@ -96,12 +96,12 @@ Plot
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{x = MCMC,y = missing}: Plots of credible intervals or HPD regions of a series of
+\item \code{plot(x = MCMC, y = missing)}: Plots of credible intervals or HPD regions of a series of
 events.
 
-\item \code{x = PhasesMCMC,y = missing}: Plots the characteristics of a group of events (phase).
-}}
+\item \code{plot(x = PhasesMCMC, y = missing)}: Plots the characteristics of a group of events (phase).
 
+}}
 \examples{
 ## Coerce to MCMC
 eve <- as_events(events, calendar = "CE", iteration = 1)

@@ -374,7 +374,7 @@ setGeneric(
 #' @param n An [`integer`] specifying the number of item to choose.
 #' @param ... Currently not used.
 #' @return
-#'  * `proxy()` returns an [`ProxyRecord-class`] object.
+#'  * `proxy()` returns a [`ProxyRecord-class`] object.
 #'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
 #'  * `plot()` is called it for its side-effects: it results in a graphic being
 #'  displayed (invisibly returns `x`).
@@ -587,7 +587,11 @@ setGeneric(
 #'  resolution) or \eqn{10} (decennial resolution).
 #' @param n An [`integer`] specifying the number of item to choose randomly.
 #' @param ... Currently not used.
-#' @return An [`RECE-class`] object.
+#' @return
+#'  * `rece()` returns an [`RECE-class`] object.
+#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
+#'  * `plot()` is called it for its side-effects: it results in a graphic being
+#'  displayed (invisibly returns `x`).
 #' @references
 #'  Carleton, W. C. (2021). Evaluating Bayesian Radiocarbon‐dated Event Count
 #'  (REC) Models for the Study of Long‐term Human and Environmental Processes.

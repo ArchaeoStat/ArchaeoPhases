@@ -1,18 +1,17 @@
 # chronos 0.0.0.9000
 
 ## New classes and methods
-* `apportion()`
-* `interpolate()`
-* `bind()` allow to bind multiple `MCMC` objects.
-* `proxy()`
-* `rece()`
-* `roc()` allows to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
+* Add `apportion()`.
+* Add `bind()` to bind multiple `MCMC` objects.
+* Add `proxy()` to compute layer-counted proxy records uncertainties (returns a `ProxyRecord` object).
+* Add `rece()` to compute Radiocarbon Event Count Ensembles from MCMC (returns an `RECE` object).
+* Add `roc()` to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
 
 ## Enhancements
 * Support for CE, BP and b2k time scales.
 
 ## Bug fixes & changes
-* Changement de l'estimation des intervalles HPD (`hdrcde::hdr()` -> `stats::density()`).
+* Use `stats::density()` instead of `hdrcde::hdr()` for HDPI estimation.
 
 ## Breaking changes
 * Full rewrite in S4.

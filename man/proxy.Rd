@@ -82,7 +82,7 @@ instead of the mean estimates?}
 }
 \value{
 \itemize{
-\item \code{proxy()} returns an \code{\linkS4class{ProxyRecord}} object.
+\item \code{proxy()} returns a \code{\linkS4class{ProxyRecord}} object.
 \item \code{autoplot()} returns a \code{\link[ggplot2:ggplot]{ggplot}} object.
 \item \code{plot()} is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns \code{x}).

@@ -8,6 +8,7 @@
 [![R-CMD-check](https://github.com/tesselle/chronos/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/chronos/actions)
 [![codecov](https://codecov.io/gh/tesselle/chronos/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tesselle/chronos)
 [![CodeFactor](https://www.codefactor.io/repository/github/tesselle/chronos/badge/master)](https://www.codefactor.io/repository/github/tesselle/chronos/overview/master)
+[![Dependencies](https://tinyverse.netlify.com/badge/chronos)](https://cran.r-project.org/package=chronos)
 
 <a href="https://tesselle.r-universe.dev" class="pkgdown-devel"><img
 src="https://tesselle.r-universe.dev/badges/chronos"
@@ -177,8 +178,8 @@ plot(chrono_phases, select = c("UP", "EPI"), range = "transition")
 
 <div id="ref-bronkramsey2009" class="csl-entry">
 
-Bronk Ramsey, C. 2009. “Bayesian Analysis of Radiocarbon Dates.”
-*Radiocarbon* 51 (1): 337–60.
+Bronk Ramsey, Christopher. 2009. “Bayesian Analysis of Radiocarbon
+Dates.” *Radiocarbon* 51 (1): 337–60.
 <https://doi.org/10.1017/S0033822200033865>.
 
 </div>
@@ -195,15 +196,15 @@ Bayesian Radiocarbon Calibration Tool.” *Internet Archaeology* 7.
 
 Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. *Chronomodel:
 Chronological Modeling of Archaeological Data Using Bayesian
-Statistics*. <https://www.chronomodel.fr>.
+Statistics*. CNRS. <https://chronomodel.com>.
 
 </div>
 
 <div id="ref-philippe2020" class="csl-entry">
 
-Philippe, A., and M.-A. Vibet. 2020. “Analysis of Archaeological Phases
-Using the r Package ArchaeoPhases.” *Journal of Statistical Software,
-Code Snippets* 93 (1): 1–25. <https://doi.org/10.18637/jss.v093.c01>.
+Philippe, Anne, and Marie-Anne Vibet. 2020. “Analysis of Archaeological
+Phases Using the R Package ArchaeoPhases.” *Journal of Statistical
+Software* 93. <https://doi.org/10.18637/jss.v093.c01>.
 
 </div>
 

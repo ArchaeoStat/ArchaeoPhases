@@ -32,7 +32,12 @@ resolution) or \eqn{10} (decennial resolution).}
 \item{x, y}{An \code{\linkS4class{RECE}} object.}
 }
 \value{
-An \code{\linkS4class{RECE}} object.
+\itemize{
+\item \code{rece()} returns an \code{\linkS4class{RECE}} object.
+\item \code{autoplot()} and \code{multiplot} return a \code{\link[ggplot2:ggplot]{ggplot}} object.
+\item \code{plot()} is called it for its side-effects: it results in a graphic being
+displayed (invisibly returns \code{x}).
+}
 }
 \description{
 Radiocarbon Event Count Ensemble

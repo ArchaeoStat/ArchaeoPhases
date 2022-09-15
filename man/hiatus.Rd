@@ -40,14 +40,14 @@ satisfies
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{x = PhasesMCMC,y = missing}: Hiatus between successive phases.
+\item \code{hiatus(x = PhasesMCMC, y = missing)}: Hiatus between successive phases.
 
-\item \code{x = numeric,y = numeric}: Returns a length-three \code{\link{numeric}} vector (upper and upper
+\item \code{hiatus(x = numeric, y = numeric)}: Returns a length-three \code{\link{numeric}} vector (upper and upper
 boundaries, and hiatus duration, if any).
 
-\item \code{x = EventsMCMC,y = missing}: Hiatus between successive events.
-}}
+\item \code{hiatus(x = EventsMCMC, y = missing)}: Hiatus between successive events.
 
+}}
 \examples{
 ## Coerce to MCMC
 eve <- as_events(events, calendar = "CE", iteration = 1)

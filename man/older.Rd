@@ -36,12 +36,12 @@ simulated Markov chain.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{x = numeric,y = numeric}: Returns a length-one \code{\link{numeric}} vector (the posterior
+\item \code{older(x = numeric, y = numeric)}: Returns a length-one \code{\link{numeric}} vector (the posterior
 probability of the assumption: "event \code{x} is older than event \code{y}").
 
-\item \code{x = EventsMCMC,y = missing}: Returns a \code{\link{numeric}} matrix of posterior probabilities.
-}}
+\item \code{older(x = EventsMCMC, y = missing)}: Returns a \code{\link{numeric}} matrix of posterior probabilities.
 
+}}
 \examples{
 ## Coerce to MCMC
 eve <- as_events(events, calendar = "CE", iteration = 1)
