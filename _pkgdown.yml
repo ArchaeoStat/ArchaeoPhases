@@ -28,6 +28,9 @@ reference:
 - title: Tests
   contents:
   - has_concept("tests")
+- title: Execute OxCal
+  contents:
+  - has_concept("OxCal tools")
 - title: Calendar
   contents:
   - has_concept("time scales")

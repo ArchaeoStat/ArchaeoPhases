@@ -3,7 +3,7 @@ Package: chronos
 Title: Post-Processing of Markov Chain Monte Carlo Simulations for
     Chronological Modelling
 Version: 0.0.0.9000
-Authors@R:c(
+Authors@R: c(
     person("Anne", "Philippe", , "anne.philippe@univ-nantes.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-5331-5087")),
     person("Marie-Anne", "Vibet", role = "aut",
@@ -70,6 +70,7 @@ Collate:
     'interval.R'
     'mutators.R'
     'occurrence.R'
+    'oxcal.R'
     'phases.R'
     'plot.R'
     'proxy.R'
