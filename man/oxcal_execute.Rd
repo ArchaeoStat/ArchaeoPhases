@@ -69,6 +69,6 @@ Other OxCal tools:
 \code{\link{oxcal_setup}()}
 }
 \author{
-Martin Hinz, N. Frerebeau
+M. Hinz, N. Frerebeau
 }
 \concept{OxCal tools}

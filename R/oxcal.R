@@ -52,7 +52,7 @@ oxcal_download <- function(path = NULL) {
 #'  Adapted from [oxcAAR::quickSetupOxcal()].
 #' @return Invisibly returns the path to the OxCal executable.
 #' @example inst/examples/ex-oxcal.R
-#' @author Clemens Schmid, N. Frerebeau
+#' @author C. Schmid, N. Frerebeau
 #' @family OxCal tools
 #' @export
 oxcal_setup <- function(path = NULL, os = NULL, ask = TRUE) {
@@ -134,7 +134,7 @@ oxcal_path <- function() {
 #' @example inst/examples/ex-oxcal.R
 #' @references
 #'  \url{https://c14.arch.ox.ac.uk/oxcalhelp/hlp_analysis_file.html}
-#' @author Martin Hinz, N. Frerebeau
+#' @author M. Hinz, N. Frerebeau
 #' @family OxCal tools
 #' @export
 oxcal_execute <- function(script, file = NULL,
@@ -183,7 +183,7 @@ oxcal_execute <- function(script, file = NULL,
 #'
 #' @param file A [`character`] string naming a JavaScript file which the data
 #'  are to be read from (typically returned by [oxcal_execute()]).
-#' @returns A [`list`] with the following elements:
+#' @return A [`list`] with the following elements:
 #'  \describe{
 #'   \item{`ocd`}{A `list` holding the ranges, probability distributions, etc.
 #'   for each parameter.}
@@ -222,6 +222,15 @@ oxcal_parse <- function(file) {
 #'  to be calibrated.
 #' @param curve A [`character`] string specifying the calibration curve to be
 #'  used.
+#' @return A [`data.frame`] with the following columns:
+#'  \describe{
+#'   \item{`name`}{}
+#'   \item{`type`}{}
+#'   \item{`date`}{}
+#'   \item{`error`}{}
+#'   \item{`range`}{}
+#'   \item{`likelihood`}{}
+#'  }
 #' @example inst/examples/ex-oxcal.R
 #' @author N. Frerebeau
 #' @family OxCal tools
@@ -254,24 +263,29 @@ oxcal_calibrate <- function(names, dates, errors, curve = "IntCal20") {
   res <- oxcal_parse(out)
 
   ## Get dates
-  data.frame(
+  df <- data.frame(
     name = oxcal_get_name(res),
     type = oxcal_get_type(res),
     date = oxcal_get_bp_date(res),
     error = oxcal_get_bp_error(res),
+    range = I(oxcal_get_range(res)),
     likelihood = I(oxcal_get_likelihood(res))
   )
+  structure(df, class = c("OxCalCalibratedDates", "data.frame"))
 }
 
 # Print ========================================================================
-#' @method print OxCalOutput
 #' @export
-print.OxCalOutput <- function(x) {
+format.OxCalOutput <- function(x, ...) {
   com <- oxcal_get_comment(x)
   sep <- paste0(rep("-", length.out = getOption("width")), collapse = "")
 
-  cat(paste(com, sep, sep = "\n"), sep = "\n")
+  paste(com, sep, sep = "\n")
 }
+
+#' @export
+print.OxCalOutput <- function(x, ...) cat(format(x, ...), sep = "\n")
+
 # Getters ======================================================================
 oxcal_get_name <- function(x) {
   UseMethod("oxcal_get_name")

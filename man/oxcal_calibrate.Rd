@@ -18,6 +18,17 @@ to be calibrated.}
 \item{curve}{A \code{\link{character}} string specifying the calibration curve to be
 used.}
 }
+\value{
+A \code{\link{data.frame}} with the following columns:
+\describe{
+\item{\code{name}}{}
+\item{\code{type}}{}
+\item{\code{date}}{}
+\item{\code{error}}{}
+\item{\code{range}}{}
+\item{\code{likelihood}}{}
+}
+}
 \description{
 14C Calibration with OxCal
 }

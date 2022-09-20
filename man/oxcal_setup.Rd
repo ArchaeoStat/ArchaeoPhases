@@ -65,6 +65,6 @@ Other OxCal tools:
 \code{\link{oxcal_parse}()}
 }
 \author{
-Clemens Schmid, N. Frerebeau
+C. Schmid, N. Frerebeau
 }
 \concept{OxCal tools}
