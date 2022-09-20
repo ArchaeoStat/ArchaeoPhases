@@ -40,7 +40,8 @@ Imports:
     rlang,
     stats,
     tools,
-    utils
+    utils,
+    V8
 Suggests: 
     covr,
     fasti,

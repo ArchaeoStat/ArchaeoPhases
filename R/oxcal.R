@@ -89,13 +89,20 @@ oxcal_setup <- function(path = NULL, ask = TRUE) {
   invisible(full_path)
 }
 
+#' Get OxCal Executable Path
+#'
+#' @return Returns the path to OxCal executable.
+#' @author N. Frerebeau
+#' @family OxCal tools
+#' @keywords internal
+#' @noRd
 oxcal_path <- function() {
   path <- getOption("chronos.oxcal")
   if (is.null(path) || path == "") {
     stop("Please set the path to OxCal executable.", call. = FALSE)
   }
   if (!file.exists(path)) {
-    stop("OxCal doesn't seem to be installed.", call. = FALSE)
+    stop("Please fix the path to OxCal executable.", call. = FALSE)
   }
   path
 }
@@ -110,7 +117,7 @@ oxcal_path <- function() {
 #'  returned (see below). It must be one of "`js`", "`log`", "`txt`" or "`csv`".
 #' @param timeout An [`integer`] value specifying the timeout in seconds,
 #'  ignored if 0. This is a limit for the elapsed time running OxCal.
-#'  Fractions of seconds are ignored.
+#'  Fractions of seconds are ignored (see [system2()]).
 #' @return Invisibly returns the path to the `output` file.
 #' @references
 #'  \url{https://c14.arch.ox.ac.uk/oxcalhelp/hlp_analysis_file.html}
@@ -156,6 +163,29 @@ oxcal_execute <- function(script, file = NULL,
     warning(sprintf("%s does not exist.", output), call. = FALSE)
   }
   invisible(output)
+}
+
+#' Read and Parse OxCal Output
+#'
+#' @param file A [`character`] string naming a JavaScript file which the data
+#'  are to be read from (typically returned by [oxcal_execute()]).
+#' @author N. Frerebeau
+#' @family OxCal tools
+#' @export
+oxcal_parse <- function(file) {
+  ox <- V8::v8()
+  ox$eval("ocd={};")
+  ox$eval("calib={};")
+  ox$eval("model={};")
+  ox$source(file)
+
+  results <- list(
+    ocd = ox$get("ocd"),
+    calib = ox$get("calib"),
+    model = ox$get("model")
+  )
+
+  results
 }
 
 #' 14C Calibration with OxCal

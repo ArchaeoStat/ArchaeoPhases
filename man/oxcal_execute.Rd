@@ -23,7 +23,7 @@ returned (see below). It must be one of "\code{js}", "\code{log}", "\code{txt}" 
 
 \item{timeout}{An \code{\link{integer}} value specifying the timeout in seconds,
 ignored if 0. This is a limit for the elapsed time running OxCal.
-Fractions of seconds are ignored.}
+Fractions of seconds are ignored (see \code{\link[=system2]{system2()}}).}
 }
 \value{
 Invisibly returns the path to the \code{output} file.
@@ -38,6 +38,7 @@ Execute an Oxcal Script
 Other OxCal tools: 
 \code{\link{oxcal_calibrate}()},
 \code{\link{oxcal_download}()},
+\code{\link{oxcal_parse}()},
 \code{\link{oxcal_setup}()}
 }
 \author{

@@ -57,4 +57,5 @@
 #' @importFrom stats density dnorm dunif loess median
 #' @importFrom tools md5sum
 #' @importFrom utils download.file file_test unzip
+#' @importFrom V8 v8
 NULL

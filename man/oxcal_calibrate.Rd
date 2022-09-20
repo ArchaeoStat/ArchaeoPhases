@@ -25,6 +25,7 @@ used.}
 Other OxCal tools: 
 \code{\link{oxcal_download}()},
 \code{\link{oxcal_execute}()},
+\code{\link{oxcal_parse}()},
 \code{\link{oxcal_setup}()}
 }
 \author{

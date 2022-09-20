@@ -23,6 +23,7 @@ Adapted from \code{\link[oxcAAR:quickSetupOxcal]{oxcAAR::quickSetupOxcal()}}.
 Other OxCal tools: 
 \code{\link{oxcal_calibrate}()},
 \code{\link{oxcal_execute}()},
+\code{\link{oxcal_parse}()},
 \code{\link{oxcal_setup}()}
 }
 \author{
