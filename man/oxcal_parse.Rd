@@ -10,8 +10,45 @@ oxcal_parse(file)
 \item{file}{A \code{\link{character}} string naming a JavaScript file which the data
 are to be read from (typically returned by \code{\link[=oxcal_execute]{oxcal_execute()}}).}
 }
+\value{
+A \code{\link{list}} with the following elements:
+\describe{
+\item{\code{ocd}}{A \code{list} holding the ranges, probability distributions, etc.
+for each parameter.}
+\item{\code{model}}{A \code{list} containing information about the model.}
+\item{\code{calib}}{A \code{list} containing information about the calibration
+curve.}
+}
+}
 \description{
 Read and Parse OxCal Output
+}
+\examples{
+\dontrun{
+## Download OxCal
+oxcal_setup()
+
+## Calibrate 14C dates
+cal <- oxcal_calibrate(
+  names = c("X","Y"),
+  dates = c(5000, 2500),
+  errors = c(25, 50)
+)
+cal
+
+## Custom script
+scr <- 'Plot()
+ {
+  R_Date("X",5000,25);
+  R_Date("Y",2500,50);
+ };'
+out <- oxcal_execute(scr)
+res <- oxcal_parse(out)
+res
+}
+}
+\references{
+\url{https://c14.arch.ox.ac.uk/oxcalhelp/hlp_analysis_file.html}
 }
 \seealso{
 Other OxCal tools: 

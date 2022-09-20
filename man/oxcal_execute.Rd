@@ -31,6 +31,33 @@ Invisibly returns the path to the \code{output} file.
 \description{
 Execute an Oxcal Script
 }
+\note{
+Adapted from \code{\link[oxcAAR:executeOxcalScript]{oxcAAR::executeOxcalScript()}}.
+}
+\examples{
+\dontrun{
+## Download OxCal
+oxcal_setup()
+
+## Calibrate 14C dates
+cal <- oxcal_calibrate(
+  names = c("X","Y"),
+  dates = c(5000, 2500),
+  errors = c(25, 50)
+)
+cal
+
+## Custom script
+scr <- 'Plot()
+ {
+  R_Date("X",5000,25);
+  R_Date("Y",2500,50);
+ };'
+out <- oxcal_execute(scr)
+res <- oxcal_parse(out)
+res
+}
+}
 \references{
 \url{https://c14.arch.ox.ac.uk/oxcalhelp/hlp_analysis_file.html}
 }
@@ -42,6 +69,6 @@ Other OxCal tools:
 \code{\link{oxcal_setup}()}
 }
 \author{
-N. Frerebeau
+Martin Hinz, N. Frerebeau
 }
 \concept{OxCal tools}

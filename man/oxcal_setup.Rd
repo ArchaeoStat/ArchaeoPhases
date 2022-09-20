@@ -4,11 +4,16 @@
 \alias{oxcal_setup}
 \title{Setup OxCal}
 \usage{
-oxcal_setup(path = NULL, ask = TRUE)
+oxcal_setup(path = NULL, os = NULL, ask = TRUE)
 }
 \arguments{
 \item{path}{A \code{\link{character}} string specifying the directory where to find the
 OxCal executable (or to extract OxCal files to).}
+
+\item{os}{A \code{\link{character}} string specifying the operating system of the
+workstation. It must be one of "\code{Linux}", "\code{Windows}" or "\code{Darwin}".
+If \code{NULL} (the default), the operating system will be determined
+automatically (see \code{\link[=Sys.info]{Sys.info()}}).}
 
 \item{ask}{A \code{\link{logical}} scalar: if OxCal is not installed, should the user
 be asked to download it?
@@ -28,6 +33,30 @@ path correctly.
 \note{
 Adapted from \code{\link[oxcAAR:quickSetupOxcal]{oxcAAR::quickSetupOxcal()}}.
 }
+\examples{
+\dontrun{
+## Download OxCal
+oxcal_setup()
+
+## Calibrate 14C dates
+cal <- oxcal_calibrate(
+  names = c("X","Y"),
+  dates = c(5000, 2500),
+  errors = c(25, 50)
+)
+cal
+
+## Custom script
+scr <- 'Plot()
+ {
+  R_Date("X",5000,25);
+  R_Date("Y",2500,50);
+ };'
+out <- oxcal_execute(scr)
+res <- oxcal_parse(out)
+res
+}
+}
 \seealso{
 Other OxCal tools: 
 \code{\link{oxcal_calibrate}()},
@@ -36,6 +65,6 @@ Other OxCal tools:
 \code{\link{oxcal_parse}()}
 }
 \author{
-N. Frerebeau
+Clemens Schmid, N. Frerebeau
 }
 \concept{OxCal tools}

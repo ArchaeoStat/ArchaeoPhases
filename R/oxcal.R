@@ -2,6 +2,7 @@
 #' @include AllClasses.R AllGenerics.R
 NULL
 
+# Dowload ======================================================================
 #' Download OxCal
 #'
 #' @param path A [`character`] string specifying the directory to extract files
@@ -9,6 +10,7 @@ NULL
 #' @note
 #'  Adapted from [oxcAAR::quickSetupOxcal()].
 #' @return Invisibly returns `path`.
+#' @example inst/examples/ex-oxcal.R
 #' @author N. Frerebeau
 #' @family OxCal tools
 #' @export
@@ -30,10 +32,15 @@ oxcal_download <- function(path = NULL) {
   invisible(path)
 }
 
+# Setup ========================================================================
 #' Setup OxCal
 #'
 #' @param path A [`character`] string specifying the directory where to find the
 #'  OxCal executable (or to extract OxCal files to).
+#' @param os A [`character`] string specifying the operating system of the
+#'  workstation. It must be one of "`Linux`", "`Windows`" or "`Darwin`".
+#'  If `NULL` (the default), the operating system will be determined
+#'  automatically (see [Sys.info()]).
 #' @param ask A [`logical`] scalar: if OxCal is not installed, should the user
 #'  be asked to download it?
 #'  If `FALSE` and the OxCal executable cannot be found, will raise an error.
@@ -44,15 +51,16 @@ oxcal_download <- function(path = NULL) {
 #' @note
 #'  Adapted from [oxcAAR::quickSetupOxcal()].
 #' @return Invisibly returns the path to the OxCal executable.
-#' @author N. Frerebeau
+#' @example inst/examples/ex-oxcal.R
+#' @author Clemens Schmid, N. Frerebeau
 #' @family OxCal tools
 #' @export
-oxcal_setup <- function(path = NULL, ask = TRUE) {
+oxcal_setup <- function(path = NULL, os = NULL, ask = TRUE) {
   ## Set path
   if (is.null(path)) path <- tempdir()
 
   ## Construct the executable path
-  operator <- Sys.info()["sysname"]
+  operator <- if (is.null(os)) Sys.info()["sysname"] else os
   binary <- switch(
     operator,
     Linux = "OxCalLinux",
@@ -92,6 +100,7 @@ oxcal_setup <- function(path = NULL, ask = TRUE) {
 #' Get OxCal Executable Path
 #'
 #' @return Returns the path to OxCal executable.
+#' @example inst/examples/ex-oxcal.R
 #' @author N. Frerebeau
 #' @family OxCal tools
 #' @keywords internal
@@ -107,6 +116,7 @@ oxcal_path <- function() {
   path
 }
 
+# Execute ======================================================================
 #' Execute an Oxcal Script
 #'
 #' @param script A [`character`] string of instructions for OxCal.
@@ -118,10 +128,13 @@ oxcal_path <- function() {
 #' @param timeout An [`integer`] value specifying the timeout in seconds,
 #'  ignored if 0. This is a limit for the elapsed time running OxCal.
 #'  Fractions of seconds are ignored (see [system2()]).
+#' @note
+#'  Adapted from [oxcAAR::executeOxcalScript()].
 #' @return Invisibly returns the path to the `output` file.
+#' @example inst/examples/ex-oxcal.R
 #' @references
 #'  \url{https://c14.arch.ox.ac.uk/oxcalhelp/hlp_analysis_file.html}
-#' @author N. Frerebeau
+#' @author Martin Hinz, N. Frerebeau
 #' @family OxCal tools
 #' @export
 oxcal_execute <- function(script, file = NULL,
@@ -165,10 +178,22 @@ oxcal_execute <- function(script, file = NULL,
   invisible(output)
 }
 
+# Parse ========================================================================
 #' Read and Parse OxCal Output
 #'
 #' @param file A [`character`] string naming a JavaScript file which the data
 #'  are to be read from (typically returned by [oxcal_execute()]).
+#' @returns A [`list`] with the following elements:
+#'  \describe{
+#'   \item{`ocd`}{A `list` holding the ranges, probability distributions, etc.
+#'   for each parameter.}
+#'   \item{`model`}{A `list` containing information about the model.}
+#'   \item{`calib`}{A `list` containing information about the calibration
+#'   curve.}
+#'  }
+#' @example inst/examples/ex-oxcal.R
+#' @references
+#'  \url{https://c14.arch.ox.ac.uk/oxcalhelp/hlp_analysis_file.html}
 #' @author N. Frerebeau
 #' @family OxCal tools
 #' @export
@@ -181,11 +206,11 @@ oxcal_parse <- function(file) {
 
   results <- list(
     ocd = ox$get("ocd"),
-    calib = ox$get("calib"),
-    model = ox$get("model")
+    model = ox$get("model"),
+    calib = ox$get("calib")
   )
 
-  results
+  structure(results, class = "OxCalOutput")
 }
 
 #' 14C Calibration with OxCal
@@ -197,6 +222,7 @@ oxcal_parse <- function(file) {
 #'  to be calibrated.
 #' @param curve A [`character`] string specifying the calibration curve to be
 #'  used.
+#' @example inst/examples/ex-oxcal.R
 #' @author N. Frerebeau
 #' @family OxCal tools
 #' @export
@@ -223,5 +249,86 @@ oxcal_calibrate <- function(names, dates, errors, curve = "IntCal20") {
   ## Execute OxCal
   script <- paste0(c(opt, r_dates), collapse = "\n")
   out <- oxcal_execute(script, output = "js")
-  out
+
+  ## Parse OxCal output
+  res <- oxcal_parse(out)
+
+  ## Get dates
+  data.frame(
+    name = oxcal_get_name(res),
+    type = oxcal_get_type(res),
+    date = oxcal_get_bp_date(res),
+    error = oxcal_get_bp_error(res),
+    likelihood = I(oxcal_get_likelihood(res))
+  )
+}
+
+# Print ========================================================================
+#' @method print OxCalOutput
+#' @export
+print.OxCalOutput <- function(x) {
+  com <- oxcal_get_comment(x)
+  sep <- paste0(rep("-", length.out = getOption("width")), collapse = "")
+
+  cat(paste(com, sep, sep = "\n"), sep = "\n")
+}
+# Getters ======================================================================
+oxcal_get_name <- function(x) {
+  UseMethod("oxcal_get_name")
+}
+oxcal_get_name.OxCalOutput <- function(x) {
+  vapply(X = x$ocd[-1], FUN = `[[`, FUN.VALUE = character(1), i = "name")
+}
+oxcal_get_type <- function(x) {
+  UseMethod("oxcal_get_type")
+}
+oxcal_get_type.OxCalOutput <- function(x) {
+  vapply(X = x$ocd[-1], FUN = `[[`, FUN.VALUE = character(1), i = "type")
+}
+oxcal_get_bp_date <- function(x) {
+  UseMethod("oxcal_get_bp_date")
+}
+oxcal_get_bp_date.OxCalOutput <- function(x) {
+  vapply(X = x$ocd[-1], FUN = `[[`, FUN.VALUE = numeric(1), i = "date")
+}
+oxcal_get_bp_error <- function(x) {
+  UseMethod("oxcal_get_bp_error")
+}
+oxcal_get_bp_error.OxCalOutput <- function(x) {
+  vapply(X = x$ocd[-1], FUN = `[[`, FUN.VALUE = numeric(1), i = "error")
+}
+oxcal_get_likelihood <- function(x) {
+  UseMethod("oxcal_get_likelihood")
+}
+oxcal_get_likelihood.OxCalOutput <- function(x) {
+  lapply(
+    X = x$ocd[-1],
+    FUN = function(x) {
+      years <- seq.int(
+        from = x$likelihood$start,
+        by = x$likelihood$resolution,
+        length.out = length(x$likelihood$prob)
+      )
+      list(x = years, y = x$likelihood$prob)
+    }
+  )
+}
+oxcal_get_range <- function(x) {
+  UseMethod("oxcal_get_range")
+}
+oxcal_get_range.OxCalOutput <- function(x) {
+  lapply(X = x$ocd[-1], FUN = function(x) x$likelihood$range)
+}
+oxcal_get_comment <- function(x) {
+  UseMethod("oxcal_get_comment")
+}
+oxcal_get_comment.OxCalOutput <- function(x) {
+  vapply(
+    X = x$ocd,
+    FUN = function(x) {
+      com <- x$likelihood$comment
+      paste0(com, collapse = "\n")
+    },
+    FUN.VALUE = character(1)
+  )
 }
