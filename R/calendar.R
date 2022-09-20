@@ -171,7 +171,7 @@ setMethod(
 # Convert ======================================================================
 ## Elapsed origin --------------------------------------------------------------
 #' @export
-#' @rdname calendar
+#' @rdname elapse
 #' @aliases elapse,MCMC-method
 setMethod(
   f = "elapse",

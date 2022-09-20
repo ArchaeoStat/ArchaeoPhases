@@ -172,17 +172,12 @@ NULL
 NULL
 
 # Time Scale ===================================================================
-#' Time Scales
+#' Time Scale Conversion
 #'
 #' Converts between BP (Before Present), CE (Common Era) and b2k (before 2000)
 #' time scales.
 #' @param object An object (typically an [`MCMC-class`] object).
-#' @param origin An [`integer`] giving the position of the column corresponding
-#'  to the event from which elapsed time is calculated.
-#' @param ... Currently not used.
 #' @return
-#'  * `elapse()` returns an object of the same class as `object` with an elapsed
-#'    time scale.
 #'  * `BP_to_CE()`, `BP_to_b2k()`, `CE_to_BP()`, `CE_to_b2k()`, `b2k_to_CE()`
 #'    and `b2k_to_BP()` return an object of the same class as `object`.
 #'  * `is_BP()`, `is_CE()`, `is_b2k()` return a [`logical`] scalar.
@@ -197,13 +192,6 @@ NULL
 #' @name calendar
 #' @rdname calendar
 NULL
-
-#' @rdname calendar
-#' @aliases elapse-method
-setGeneric(
-  name = "elapse",
-  def = function(object, ...) standardGeneric("elapse")
-)
 
 #' @rdname calendar
 #' @aliases BP_to_CE-method
@@ -266,6 +254,28 @@ setGeneric(
 setGeneric(
   name = "is_b2k",
   def = function(object) standardGeneric("is_b2k")
+)
+
+#' Elapsed Time Scale
+#'
+#' @param object An object (typically an [`MCMC-class`] object).
+#' @param origin An [`integer`] giving the position of the column corresponding
+#'  to the event from which elapsed time is calculated.
+#' @param ... Currently not used.
+#' @return
+#'  Returns an object of the same class as `object` with an elapsed
+#' @return
+#'  An object of the same sort as `object` with a new time scale.
+#' @note
+#'  There is no year \eqn{0} in BCE/CE scale.
+#' @example inst/examples/ex-calendar.R
+#' @author N. Frerebeau
+#' @family time scales
+#' @docType methods
+#' @aliases elapse-method
+setGeneric(
+  name = "elapse",
+  def = function(object, ...) standardGeneric("elapse")
 )
 
 # Modeling =====================================================================

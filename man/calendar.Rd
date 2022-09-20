@@ -3,8 +3,6 @@
 \docType{methods}
 \name{calendar}
 \alias{calendar}
-\alias{elapse}
-\alias{elapse-method}
 \alias{BP_to_CE}
 \alias{BP_to_CE-method}
 \alias{BP_to_b2k}
@@ -41,7 +39,6 @@
 \alias{is_b2k,ActivityEvents-method}
 \alias{is_b2k,OccurrenceEvents-method}
 \alias{is_b2k,ProxyRecord-method}
-\alias{elapse,MCMC-method}
 \alias{BP_to_CE,numeric-method}
 \alias{BP_to_CE,matrix-method}
 \alias{BP_to_CE,array-method}
@@ -65,10 +62,8 @@
 \alias{b2k_to_CE,matrix-method}
 \alias{b2k_to_CE,array-method}
 \alias{b2k_to_CE,ProxyRecord-method}
-\title{Time Scales}
+\title{Time Scale Conversion}
 \usage{
-elapse(object, ...)
-
 BP_to_CE(object)
 
 BP_to_b2k(object)
@@ -123,8 +118,6 @@ is_b2k(object)
 
 \S4method{is_b2k}{ProxyRecord}(object)
 
-\S4method{elapse}{MCMC}(object, origin = 1)
-
 \S4method{BP_to_CE}{numeric}(object)
 
 \S4method{BP_to_CE}{matrix}(object)
@@ -173,16 +166,9 @@ is_b2k(object)
 }
 \arguments{
 \item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
-
-\item{...}{Currently not used.}
-
-\item{origin}{An \code{\link{integer}} giving the position of the column corresponding
-to the event from which elapsed time is calculated.}
 }
 \value{
 \itemize{
-\item \code{elapse()} returns an object of the same class as \code{object} with an elapsed
-time scale.
 \item \code{BP_to_CE()}, \code{BP_to_b2k()}, \code{CE_to_BP()}, \code{CE_to_b2k()}, \code{b2k_to_CE()}
 and \code{b2k_to_BP()} return an object of the same class as \code{object}.
 \item \code{is_BP()}, \code{is_CE()}, \code{is_b2k()} return a \code{\link{logical}} scalar.
@@ -213,6 +199,10 @@ plot(eve_CE)
 ## Elapsed origin
 eve_elapse <- elapse(eve, origin = 4)
 plot(eve_elapse)
+}
+\seealso{
+Other time scales: 
+\code{\link{elapse}()}
 }
 \author{
 N. Frerebeau
