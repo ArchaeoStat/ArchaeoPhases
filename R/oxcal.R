@@ -274,6 +274,45 @@ oxcal_calibrate <- function(names, dates, errors, curve = "IntCal20") {
   structure(df, class = c("OxCalCalibratedDates", "data.frame"))
 }
 
+# Plot =========================================================================
+#' @export
+#' @method autoplot OxCalCalibratedDates
+autoplot.OxCalCalibratedDates <- function(object, ..., decreasing = TRUE) {
+  ## Get data
+  prob <- lapply(X = object$likelihood, FUN = as.data.frame)
+  mu <- vapply(X = prob, FUN = function(x) stats::weighted.mean(x$x, w = x$y),
+               FUN.VALUE = numeric(1))
+  n <- vapply(X = prob, FUN = nrow, FUN.VALUE = integer(1))
+
+  ## Build a long table for ggplot2
+  prob <- do.call(rbind, prob)
+  prob$ymin <- 0
+  prob$Date <- rep(object$name, n)
+
+  ## Order
+  k <- order(mu, decreasing = !decreasing)
+  prob$Date <- factor(prob$Date, levels = object$name[k])
+
+  facet_dates <- NULL
+  if (nrow(object) > 1) {
+    facet_dates <- ggplot2::facet_grid(rows = ggplot2::vars(.data$Date))
+  }
+
+  ggplot2::ggplot(prob) +
+    ggplot2::aes(x = .data$x, ymin = .data$ymin, ymax = .data$y) +
+    ggplot2::geom_ribbon(fill = "darkgrey", colour = "black") +
+    facet_dates
+}
+
+#' @export
+#' @method plot OxCalCalibratedDates
+plot.OxCalCalibratedDates <- function(x, decreasing = TRUE, ...) {
+  gg <- autoplot(object = x, ..., decreasing = decreasing) +
+    ggplot2::theme_bw()
+  print(gg)
+  invisible(x)
+}
+
 # Print ========================================================================
 #' @export
 format.OxCalOutput <- function(x, ...) {

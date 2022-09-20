@@ -54,7 +54,7 @@
 #' @importFrom methods as callGeneric callNextMethod new prototype setClass
 #' setGeneric setMethod setValidity validObject .valueClassTest
 #' @importFrom rlang .data
-#' @importFrom stats density dnorm dunif loess median
+#' @importFrom stats density dnorm dunif loess median weighted.mean
 #' @importFrom tools md5sum
 #' @importFrom utils download.file file_test unzip
 #' @importFrom V8 v8

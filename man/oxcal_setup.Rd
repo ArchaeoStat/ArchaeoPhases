@@ -41,10 +41,10 @@ oxcal_setup()
 ## Calibrate 14C dates
 cal <- oxcal_calibrate(
   names = c("X","Y"),
-  dates = c(5000, 2500),
-  errors = c(25, 50)
+  dates = c(5000, 4500),
+  errors = c(45, 35)
 )
-cal
+plot(cal)
 
 ## Custom script
 scr <- 'Plot()
