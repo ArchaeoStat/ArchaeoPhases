@@ -39,12 +39,26 @@ plot(cal)
 ## Custom script
 scr <- 'Plot()
  {
-  R_Date("X",5000,25);
-  R_Date("Y",2500,50);
+  Sequence("Sequence1")
+  {
+   Boundary("Begin");
+   Phase("Phase1")
+   {
+    R_Date("Lab-1",5000,25);
+    R_Date("Lab-2",4900,37);
+   };
+   Boundary("Between");
+   Phase("Phase2")
+   {
+    R_Date("Lab-3",4800,43);
+   };
+   Boundary("End");
+  };
  };'
 out <- oxcal_execute(scr)
 res <- oxcal_parse(out)
-res
+plot(res)
+as.data.frame(res)
 }
 }
 \references{

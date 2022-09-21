@@ -25,6 +25,7 @@ oxcal_download <- function(path = NULL) {
   utils::download.file(url, destfile = tmp, quiet = getOption("chronos.progress"))
 
   ## Extract
+  ## TODO: extract only OxCal/bin/
   utils::unzip(tmp, exdir = path)
   msg <- sprintf("OxCal successfully downloaded and extracted to %s.", path)
   message(msg)
@@ -210,7 +211,9 @@ oxcal_parse <- function(file) {
     calib = ox$get("calib")
   )
 
-  structure(results, class = "OxCalOutput")
+  results <- structure(results, class = "OxCalOutput")
+  attr(results, "comments") <- results$ocd[[1]]$ref
+  results
 }
 
 #' 14C Calibration with OxCal
@@ -261,37 +264,41 @@ oxcal_calibrate <- function(names, dates, errors, curve = "IntCal20") {
 
   ## Parse OxCal output
   res <- oxcal_parse(out)
-
-  ## Get dates
-  df <- data.frame(
-    name = oxcal_get_name(res),
-    type = oxcal_get_type(res),
-    date = oxcal_get_bp_date(res),
-    error = oxcal_get_bp_error(res),
-    range = I(oxcal_get_range(res)),
-    likelihood = I(oxcal_get_likelihood(res))
-  )
-  structure(df, class = c("OxCalCalibratedDates", "data.frame"))
+  res
 }
 
 # Plot =========================================================================
 #' @export
-#' @method autoplot OxCalCalibratedDates
-autoplot.OxCalCalibratedDates <- function(object, ..., decreasing = TRUE) {
+#' @method autoplot OxCalOutput
+autoplot.OxCalOutput <- function(object, ..., posterior = TRUE,
+                                 decreasing = TRUE) {
   ## Get data
+  object <- as.data.frame(object)
+
   prob <- lapply(X = object$likelihood, FUN = as.data.frame)
-  mu <- vapply(X = prob, FUN = function(x) stats::weighted.mean(x$x, w = x$y),
-               FUN.VALUE = numeric(1))
   n <- vapply(X = prob, FUN = nrow, FUN.VALUE = integer(1))
+
+  post <- lapply(X = object$posterior, FUN = as.data.frame)
+  m <- vapply(X = post, FUN = nrow, FUN.VALUE = integer(1))
 
   ## Build a long table for ggplot2
   prob <- do.call(rbind, prob)
-  prob$ymin <- 0
   prob$Date <- rep(object$name, n)
+  prob$Distribution <- "Likelihood"
+
+  ## Posterior
+  if (posterior && any(m > 0)) {
+    post <- do.call(rbind, post)
+    post$Date <- rep(object$name, m)
+    post$Distribution <- "Posterior"
+
+    prob <- rbind(prob, post)
+  }
 
   ## Order
-  k <- order(mu, decreasing = !decreasing)
-  prob$Date <- factor(prob$Date, levels = object$name[k])
+  prob$ymin <- 0
+  ref <- if (decreasing) object$name else rev(object$name)
+  prob$Date <- factor(prob$Date, levels = ref)
 
   facet_dates <- NULL
   if (nrow(object) > 1) {
@@ -299,21 +306,38 @@ autoplot.OxCalCalibratedDates <- function(object, ..., decreasing = TRUE) {
   }
 
   ggplot2::ggplot(prob) +
-    ggplot2::aes(x = .data$x, ymin = .data$ymin, ymax = .data$y) +
-    ggplot2::geom_ribbon(fill = "darkgrey", colour = "black") +
+    ggplot2::aes(x = .data$x, ymin = .data$ymin, ymax = .data$y,
+                 fill = .data$Distribution) +
+    ggplot2::geom_ribbon(colour = "black", alpha = 0.5) +
     facet_dates
 }
 
 #' @export
-#' @method plot OxCalCalibratedDates
-plot.OxCalCalibratedDates <- function(x, decreasing = TRUE, ...) {
+#' @method plot OxCalOutput
+plot.OxCalOutput <- function(x, decreasing = TRUE, ...) {
   gg <- autoplot(object = x, ..., decreasing = decreasing) +
+    # ggplot2::labs(caption = attr(x, "comment")) +
+    ggplot2::scale_fill_manual(values = c("#004488", "#BB5566", "#DDAA33")) +
     ggplot2::theme_bw()
   print(gg)
   invisible(x)
 }
 
 # Print ========================================================================
+#' @export
+#' @method as.data.frame OxCalOutput
+as.data.frame.OxCalOutput <- function(x, ...) {
+  data.frame(
+    name = oxcal_get_name(x),
+    type = oxcal_get_type(x),
+    date = oxcal_get_bp_date(x),
+    error = oxcal_get_bp_error(x),
+    range = I(oxcal_get_range(x)),
+    likelihood = I(oxcal_get_likelihood(x)),
+    posterior = I(oxcal_get_posterior(x))
+  )
+}
+
 #' @export
 format.OxCalOutput <- function(x, ...) {
   com <- oxcal_get_comment(x)
@@ -324,6 +348,13 @@ format.OxCalOutput <- function(x, ...) {
 
 #' @export
 print.OxCalOutput <- function(x, ...) cat(format(x, ...), sep = "\n")
+
+`%||%` <- function(x, y) {
+  if (!is.null(x) && length(x) != 0) x else y
+}
+compact <- function(f, x) {
+  Filter(Negate(f), x)
+}
 
 # Getters ======================================================================
 oxcal_get_name <- function(x) {
@@ -342,13 +373,21 @@ oxcal_get_bp_date <- function(x) {
   UseMethod("oxcal_get_bp_date")
 }
 oxcal_get_bp_date.OxCalOutput <- function(x) {
-  vapply(X = x$ocd[-1], FUN = `[[`, FUN.VALUE = numeric(1), i = "date")
+  vapply(
+    X = x$ocd[-1],
+    FUN = function(x) x[["date"]] %||% NA_real_,
+    FUN.VALUE = numeric(1)
+  )
 }
 oxcal_get_bp_error <- function(x) {
   UseMethod("oxcal_get_bp_error")
 }
 oxcal_get_bp_error.OxCalOutput <- function(x) {
-  vapply(X = x$ocd[-1], FUN = `[[`, FUN.VALUE = numeric(1), i = "error")
+  vapply(
+    X = x$ocd[-1],
+    FUN = function(x) x[["error"]] %||% NA_real_,
+    FUN.VALUE = numeric(1)
+  )
 }
 oxcal_get_likelihood <- function(x) {
   UseMethod("oxcal_get_likelihood")
@@ -362,7 +401,25 @@ oxcal_get_likelihood.OxCalOutput <- function(x) {
         by = x$likelihood$resolution,
         length.out = length(x$likelihood$prob)
       )
+      if (length(years) == 0) return(list())
       list(x = years, y = x$likelihood$prob)
+    }
+  )
+}
+oxcal_get_posterior <- function(x) {
+  UseMethod("oxcal_get_posterior")
+}
+oxcal_get_posterior.OxCalOutput <- function(x) {
+  lapply(
+    X = x$ocd[-1],
+    FUN = function(x) {
+      years <- seq.int(
+        from = x$posterior$start,
+        by = x$posterior$resolution,
+        length.out = length(x$posterior$prob)
+      )
+      if (length(years) == 0) return(list())
+      list(x = years, y = x$posterior$prob)
     }
   )
 }
@@ -370,7 +427,7 @@ oxcal_get_range <- function(x) {
   UseMethod("oxcal_get_range")
 }
 oxcal_get_range.OxCalOutput <- function(x) {
-  lapply(X = x$ocd[-1], FUN = function(x) x$likelihood$range)
+  lapply(X = x$ocd[-1], FUN = function(x) compact(is.null, x$likelihood$range))
 }
 oxcal_get_comment <- function(x) {
   UseMethod("oxcal_get_comment")
