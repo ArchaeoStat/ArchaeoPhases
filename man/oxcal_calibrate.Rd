@@ -19,14 +19,13 @@ to be calibrated.}
 used.}
 }
 \value{
-A \code{\link{data.frame}} with the following columns:
+A \code{\link{list}} with the following elements:
 \describe{
-\item{\code{name}}{}
-\item{\code{type}}{}
-\item{\code{date}}{}
-\item{\code{error}}{}
-\item{\code{range}}{}
-\item{\code{likelihood}}{}
+\item{\code{ocd}}{A \code{list} holding the ranges, probability distributions, etc.
+for each parameter.}
+\item{\code{model}}{A \code{list} containing information about the model.}
+\item{\code{calib}}{A \code{list} containing information about the calibration
+curve.}
 }
 }
 \description{
@@ -43,7 +42,8 @@ cal <- oxcal_calibrate(
   dates = c(5000, 4500),
   errors = c(45, 35)
 )
-plot(cal)
+plot(cal, curve = FALSE)
+plot(cal, curve = TRUE)
 
 ## Custom script
 scr <- 'Plot()
@@ -66,7 +66,10 @@ scr <- 'Plot()
  };'
 out <- oxcal_execute(scr)
 res <- oxcal_parse(out)
-plot(res)
+
+plot(res, curve = FALSE)
+plot(res, curve = TRUE)
+
 as.data.frame(res)
 }
 }

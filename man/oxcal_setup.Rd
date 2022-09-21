@@ -44,7 +44,8 @@ cal <- oxcal_calibrate(
   dates = c(5000, 4500),
   errors = c(45, 35)
 )
-plot(cal)
+plot(cal, curve = FALSE)
+plot(cal, curve = TRUE)
 
 ## Custom script
 scr <- 'Plot()
@@ -67,7 +68,10 @@ scr <- 'Plot()
  };'
 out <- oxcal_execute(scr)
 res <- oxcal_parse(out)
-plot(res)
+
+plot(res, curve = FALSE)
+plot(res, curve = TRUE)
+
 as.data.frame(res)
 }
 }

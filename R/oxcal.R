@@ -212,7 +212,8 @@ oxcal_parse <- function(file) {
   )
 
   results <- structure(results, class = "OxCalOutput")
-  attr(results, "comments") <- results$ocd[[1]]$ref
+  attr(results, "oxcal") <- results$ocd[[1]]$ref
+  attr(results, "curve") <- results$calib[[1]]$ref
   results
 }
 
@@ -225,14 +226,13 @@ oxcal_parse <- function(file) {
 #'  to be calibrated.
 #' @param curve A [`character`] string specifying the calibration curve to be
 #'  used.
-#' @return A [`data.frame`] with the following columns:
+#' @return A [`list`] with the following elements:
 #'  \describe{
-#'   \item{`name`}{}
-#'   \item{`type`}{}
-#'   \item{`date`}{}
-#'   \item{`error`}{}
-#'   \item{`range`}{}
-#'   \item{`likelihood`}{}
+#'   \item{`ocd`}{A `list` holding the ranges, probability distributions, etc.
+#'   for each parameter.}
+#'   \item{`model`}{A `list` containing information about the model.}
+#'   \item{`calib`}{A `list` containing information about the calibration
+#'   curve.}
 #'  }
 #' @example inst/examples/ex-oxcal.R
 #' @author N. Frerebeau
@@ -270,60 +270,120 @@ oxcal_calibrate <- function(names, dates, errors, curve = "IntCal20") {
 # Plot =========================================================================
 #' @export
 #' @method autoplot OxCalOutput
-autoplot.OxCalOutput <- function(object, ..., posterior = TRUE,
+autoplot.OxCalOutput <- function(object, ..., curve = FALSE, posterior = TRUE,
                                  decreasing = TRUE) {
   ## Get data
-  object <- as.data.frame(object)
+  oxcal <- as.data.frame(object)
 
-  prob <- lapply(X = object$likelihood, FUN = as.data.frame)
-  n <- vapply(X = prob, FUN = nrow, FUN.VALUE = integer(1))
-
-  post <- lapply(X = object$posterior, FUN = as.data.frame)
-  m <- vapply(X = post, FUN = nrow, FUN.VALUE = integer(1))
-
-  ## Build a long table for ggplot2
-  prob <- do.call(rbind, prob)
-  prob$Date <- rep(object$name, n)
-  prob$Distribution <- "Likelihood"
-
-  ## Posterior
-  if (posterior && any(m > 0)) {
-    post <- do.call(rbind, post)
-    post$Date <- rep(object$name, m)
-    post$Distribution <- "Posterior"
-
-    prob <- rbind(prob, post)
-  }
-
-  ## Order
-  prob$ymin <- 0
-  ref <- if (decreasing) object$name else rev(object$name)
-  prob$Date <- factor(prob$Date, levels = ref)
-
+  gg_curve <- NULL
   facet_dates <- NULL
-  if (nrow(object) > 1) {
-    facet_dates <- ggplot2::facet_grid(rows = ggplot2::vars(.data$Date))
+
+  if (curve) {
+    ## Intervals
+    ranges <- oxcal_get_range(object, prob = "likelihood")
+    ranges <- lapply(X = ranges, FUN = function(x) {
+      if (is.list(x) && length(x) > 2) x[[2]] else matrix(0, nrow = 0, ncol = 3)
+    })
+    p <- vapply(X = ranges, FUN = nrow, FUN.VALUE = integer(1))
+
+    ## Build a long table for ggplot2
+    ranges <- as.data.frame(do.call(rbind, ranges))
+    ranges$BP <- rep(oxcal$date, p)
+    ranges$Date <- rep(oxcal$name, p)
+
+    ## Dates
+    aes_dates <- ggplot2::aes(x = .data$V1, xend = .data$V2,
+                              y = .data$BP, yend = .data$BP,
+                              group = .data$Date)
+    gg_dates <- ggplot2::geom_segment(mapping = aes_dates, data = ranges,
+                                      size = 2, colour = "black")
+
+    ## Calibraion curve
+    calib <- oxcal_get_curve(object)
+    k <- calib$years > min(ranges$V1) & calib$years < max(ranges$V2)
+    calib <- calib[k, ]
+
+    calib <- data.frame(
+      x = c(calib$years, rev(calib$years)),
+      y = c(calib$bp - calib$sigma, rev(calib$bp + calib$sigma))
+    )
+
+    aes_curve <- ggplot2::aes(x = .data$x, y = .data$y)
+    gg_curve <- ggplot2::geom_polygon(mapping = aes_curve, data = calib,
+                                      fill = "lightgrey", colour = "darkgrey")
+
+  } else {
+    ## Likelihood
+    prob <- lapply(X = oxcal$likelihood, FUN = as.data.frame)
+    n <- vapply(X = prob, FUN = nrow, FUN.VALUE = integer(1))
+
+    ## Posterior
+    post <- lapply(X = oxcal$posterior, FUN = as.data.frame)
+    m <- vapply(X = post, FUN = nrow, FUN.VALUE = integer(1))
+
+    ## Build a long table for ggplot2
+    prob <- do.call(rbind, prob)
+    prob$ymin <- rep(oxcal$date, n)
+    prob$Date <- rep(oxcal$name, n)
+    prob$Distribution <- "Likelihood"
+
+    ## Posterior
+    if (posterior && any(m > 0)) {
+      post <- do.call(rbind, post)
+      post$ymin <- rep(oxcal$date, m)
+      post$Date <- rep(oxcal$name, m)
+      post$Distribution <- "Posterior"
+
+      prob <- rbind(prob, post)
+    }
+
+    ## Order
+    ref <- if (decreasing) oxcal$name else rev(oxcal$name)
+    prob$Date <- factor(prob$Date, levels = ref)
+    prob$ymin <- 0
+
+    ## Dates
+    aes_dates <- ggplot2::aes(x = .data$x, ymin = .data$ymin, ymax = .data$y,
+                              fill = .data$Distribution)
+    gg_dates <- ggplot2::geom_ribbon(mapping = aes_dates, data = prob,
+                                     colour = "black", alpha = 0.5)
+
+    ## Facets
+    if (nrow(oxcal) > 1) {
+      facet_dates <- ggplot2::facet_grid(rows = ggplot2::vars(.data$Date))
+    }
   }
 
-  ggplot2::ggplot(prob) +
-    ggplot2::aes(x = .data$x, ymin = .data$ymin, ymax = .data$y,
-                 fill = .data$Distribution) +
-    ggplot2::geom_ribbon(colour = "black", alpha = 0.5) +
+  ggplot2::ggplot() +
+    gg_curve +
+    gg_dates +
     facet_dates
 }
 
 #' @export
 #' @method plot OxCalOutput
-plot.OxCalOutput <- function(x, decreasing = TRUE, ...) {
-  gg <- autoplot(object = x, ..., decreasing = decreasing) +
-    # ggplot2::labs(caption = attr(x, "comment")) +
+plot.OxCalOutput <- function(x, posterior = TRUE, curve = TRUE,
+                             decreasing = TRUE, ...) {
+  gg <- autoplot(object = x, ..., posterior = posterior, curve = curve,
+                 decreasing = decreasing) +
+    ggplot2::labs(caption = attr(x, "curve")) +
     ggplot2::scale_fill_manual(values = c("#004488", "#BB5566", "#DDAA33")) +
-    ggplot2::theme_bw()
+    ggplot2::theme_bw() +
+    ggplot2::theme(legend.position = "bottom")
   print(gg)
   invisible(x)
 }
 
 # Print ========================================================================
+# @return A [`data.frame`] with the following columns:
+#  \describe{
+#   \item{`name`}{}
+#   \item{`type`}{}
+#   \item{`date`}{}
+#   \item{`error`}{}
+#   \item{`likelihood`}{}
+#   \item{`posterior`}{}
+#  }
 #' @export
 #' @method as.data.frame OxCalOutput
 as.data.frame.OxCalOutput <- function(x, ...) {
@@ -332,9 +392,8 @@ as.data.frame.OxCalOutput <- function(x, ...) {
     type = oxcal_get_type(x),
     date = oxcal_get_bp_date(x),
     error = oxcal_get_bp_error(x),
-    range = I(oxcal_get_range(x)),
-    likelihood = I(oxcal_get_likelihood(x)),
-    posterior = I(oxcal_get_posterior(x))
+    likelihood = I(oxcal_get_density(x, prob = "likelihood")),
+    posterior = I(oxcal_get_density(x, prob = "posterior"))
   )
 }
 
@@ -389,56 +448,74 @@ oxcal_get_bp_error.OxCalOutput <- function(x) {
     FUN.VALUE = numeric(1)
   )
 }
-oxcal_get_likelihood <- function(x) {
-  UseMethod("oxcal_get_likelihood")
+oxcal_get_curve <- function(x) {
+  UseMethod("oxcal_get_curve")
 }
-oxcal_get_likelihood.OxCalOutput <- function(x) {
+oxcal_get_curve.OxCalOutput <- function(x) {
+  years <- seq.int(
+    from = x$calib[[1]]$start,
+    by = x$calib[[1]]$resolution,
+    length.out = length(x$calib[[1]]$bp)
+  )
+  if (length(years) == 0) return(data.frame())
+  data.frame(
+    years = years,
+    bp = x$calib[[1]]$bp,
+    sigma = x$calib[[1]]$sigma
+  )
+}
+oxcal_get_density <- function(x, ...) {
+  UseMethod("oxcal_get_density")
+}
+oxcal_get_density.OxCalOutput <- function(x, prob = c("likelihood", "posterior")) {
+  prob <- match.arg(prob, several.ok = FALSE)
   lapply(
     X = x$ocd[-1],
     FUN = function(x) {
       years <- seq.int(
-        from = x$likelihood$start,
-        by = x$likelihood$resolution,
-        length.out = length(x$likelihood$prob)
+        from = x[[prob]]$start,
+        by = x[[prob]]$resolution,
+        length.out = length(x[[prob]]$prob)
       )
       if (length(years) == 0) return(list())
-      list(x = years, y = x$likelihood$prob)
+      list(x = years, y = x[[prob]]$prob)
     }
   )
 }
-oxcal_get_posterior <- function(x) {
-  UseMethod("oxcal_get_posterior")
-}
-oxcal_get_posterior.OxCalOutput <- function(x) {
-  lapply(
-    X = x$ocd[-1],
-    FUN = function(x) {
-      years <- seq.int(
-        from = x$posterior$start,
-        by = x$posterior$resolution,
-        length.out = length(x$posterior$prob)
-      )
-      if (length(years) == 0) return(list())
-      list(x = years, y = x$posterior$prob)
-    }
-  )
-}
-oxcal_get_range <- function(x) {
+oxcal_get_range <- function(x, ...) {
   UseMethod("oxcal_get_range")
 }
-oxcal_get_range.OxCalOutput <- function(x) {
-  lapply(X = x$ocd[-1], FUN = function(x) compact(is.null, x$likelihood$range))
+oxcal_get_range.OxCalOutput <- function(x, prob = c("likelihood", "posterior")) {
+  prob <- match.arg(prob, several.ok = FALSE)
+  lapply(X = x$ocd[-1], FUN = function(x) compact(is.null, x[[prob]]$range))
 }
-oxcal_get_comment <- function(x) {
+oxcal_get_comment <- function(x, ...) {
   UseMethod("oxcal_get_comment")
 }
-oxcal_get_comment.OxCalOutput <- function(x) {
+oxcal_get_comment.OxCalOutput <- function(x, prob = c("likelihood", "posterior")) {
+  prob <- match.arg(prob, several.ok = FALSE)
   vapply(
     X = x$ocd,
     FUN = function(x) {
-      com <- x$likelihood$comment
+      com <- x[[prob]]$comment
       paste0(com, collapse = "\n")
     },
     FUN.VALUE = character(1)
   )
+}
+
+
+oxcal_has_likelihood <- function(x) {
+  UseMethod("oxcal_has_likelihood")
+}
+oxcal_has_likelihood.OxCalOutput <- function(x) {
+  like <- oxcal_get_density(x, prob = "likelihood")
+  any(lengths(like) > 0)
+}
+oxcal_has_posterior <- function(x) {
+  UseMethod("oxcal_has_posterior")
+}
+oxcal_has_posterior.OxCalOutput <- function(x) {
+  post <- oxcal_get_density(x, prob = "posterior")
+  any(lengths(post) > 0)
 }
