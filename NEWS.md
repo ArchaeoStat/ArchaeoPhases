@@ -5,7 +5,6 @@
 * Add `proxy()` to compute layer-counted proxy records uncertainties (returns a `ProxyRecord` object).
 * Add `rece()` to compute Radiocarbon Event Count Ensembles from MCMC samples (returns an `RECE` object).
 * Add `roc()` to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
-* Add `oxcal_*()` to interact with OxCal from within R.
 
 ## Enhancements
 * Support for CE, BP and b2k time scales.

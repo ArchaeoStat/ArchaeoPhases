@@ -40,8 +40,7 @@ Imports:
     rlang,
     stats,
     tools,
-    utils,
-    V8
+    utils
 Suggests: 
     covr,
     fasti,
@@ -71,7 +70,6 @@ Collate:
     'interval.R'
     'mutators.R'
     'occurrence.R'
-    'oxcal.R'
     'phases.R'
     'plot.R'
     'proxy.R'

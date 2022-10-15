@@ -56,6 +56,5 @@
 #' @importFrom rlang .data
 #' @importFrom stats density dnorm dunif loess median weighted.mean
 #' @importFrom tools md5sum
-#' @importFrom utils download.file file_test unzip
-#' @importFrom V8 v8
+#' @importFrom utils download.file file_test
 NULL
