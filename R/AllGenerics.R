@@ -1,5 +1,13 @@
 # GENERIC METHODS
 #' @include AllClasses.R
+#' @importFrom ggplot2 aes autoplot element_blank element_text facet_grid ggplot
+#' geom_area geom_hline geom_path geom_rect geom_ribbon geom_segment geom_tile
+#' guides guide_colorbar guide_legend labs scale_colour_manual scale_fill_manual
+#' scale_fill_viridis_c scale_x_continuous scale_x_reverse scale_y_continuous
+#' scale_y_discrete scale_y_reverse theme theme_bw vars
+#' @importFrom ggridges geom_density_ridges
+#' @importFrom methods as new setGeneric setMethod setValidity .valueClassTest
+#' @importFrom rlang .data
 NULL
 
 # S4 dispatch to base S3 generic ===============================================
@@ -11,7 +19,7 @@ setGeneric("autoplot", package = "ggplot2")
 #' Coda
 #'
 #' Extracts parallel chains from an [`MCMC-class`] object to create an
-#' [`mcmc.list`] object for use with \pkg{coda} diagnostic tools.
+#' `mcmc.list` object for use with \pkg{coda} diagnostic tools.
 #' @param from from An object to be coerced.
 #' @param chains An [`integer`] specifying the number of parallel chains
 #'  (defaults to \eqn{1}).

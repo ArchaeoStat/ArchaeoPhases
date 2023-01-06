@@ -112,6 +112,9 @@ setMethod(
   f = "as_coda",
   signature = "MCMC",
   definition = function(from, chains = 1) {
+    ## Validation
+    arkhe::needs("coda")
+
     L <- nrow(from) / chains
     obj <- vector(mode = "list", length = chains)
 
