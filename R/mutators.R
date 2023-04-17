@@ -103,28 +103,10 @@ setMethod(
 
 #' @export
 #' @rdname mutator
-#' @aliases get_calendar,RECE-method
-setMethod(
-  f = "get_calendar",
-  signature = "RECE",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
 #' @aliases get_calendar,AgeDepthModel-method
 setMethod(
   f = "get_calendar",
   signature = "AgeDepthModel",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,ProxyRecord-method
-setMethod(
-  f = "get_calendar",
-  signature = "ProxyRecord",
   definition = function(x) x@calendar
 )
 
@@ -184,27 +166,9 @@ setMethod(
 
 #' @export
 #' @rdname mutator
-#' @aliases get_hash,RECE-method
-setMethod(
-  f = "get_hash",
-  signature = "RECE",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
 #' @aliases get_hash,AgeDepthModel-method
 setMethod(
   f = "get_hash",
   signature = "AgeDepthModel",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,ProxyRecord-method
-setMethod(
-  f = "get_hash",
-  signature = "ProxyRecord",
   definition = function(x) x@hash
 )

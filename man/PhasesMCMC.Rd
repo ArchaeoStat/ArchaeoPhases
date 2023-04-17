@@ -47,8 +47,6 @@ Other classes:
 \code{\link{CumulativeEvents-class}},
 \code{\link{MCMC}},
 \code{\link{OccurrenceEvents-class}},
-\code{\link{ProxyRecord-class}},
-\code{\link{RECE-class}},
 \code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
 }

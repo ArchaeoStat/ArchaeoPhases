@@ -357,64 +357,6 @@ setGeneric(
   def = function(x, y, ...) standardGeneric("interpolate")
 )
 
-## Proxy Records Uncertainties -------------------------------------------------
-#' Layer-Counted Proxy Records Uncertainties
-#'
-#' Represents layer-counted proxy records as sequences of probability
-#' distributions on absolute, error-free time axes.
-#' @param x,object A [`ProxyRecord-class`] object.
-#' @param raw A [`logical`] scalar: should the raw proxy data be displayed
-#'  instead of the mean estimates?
-#' @param IQR A [`logical`] scalar: should the IQR be displayed instead of the
-#'  95% confidence intervals?
-#' @param depth A [`numeric`] vector giving the depth at which proxy values and
-#'  calendar ages were measured.
-#' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param proxy A [`numeric`] vector giving the proxy values.
-#' @param proxy_error A [`numeric`] vector giving the proxy uncertainties.
-#' @param time A [`numeric`] vector giving the calendar ages.
-#' @param time_error A [`numeric`] vector giving the calendar age uncertainties.
-#' @param from A length-one [`numeric`] vector specifying the starting value of
-#'  the temporal sequence at which densities are to be estimated.
-#' @param to A length-one [`numeric`] vector specifying the end value of the
-#'  temporal sequence at which densities are to be estimated.
-#' @param grid A length-one [`numeric`] vector specifying the step size (in
-#'  units of `proxy`) at which proxy records densities are to be estimated.
-#'  If `NULL` (the default), equally spaced points will be used (according to
-#'  `options("chronos.grid")`).
-#' @param resolution A length-one [`numeric`] vector specifying the temporal
-#'  resolution (in units of `time`) at which densities are to be estimated.
-#'  If `NULL` (the default), the smallest temporal difference between two
-#'  consecutive records will be used.
-#' @param calendar A [`character`] string specifying the chronological scale
-#'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
-#' @param density A [`logical`] scalar: should densities be kept in the results?
-#' @param n An [`integer`] specifying the number of item to choose.
-#' @param ... Currently not used.
-#' @return
-#'  * `proxy()` returns a [`ProxyRecord-class`] object.
-#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
-#'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
-#' @references
-#'  Boers, N., Goswami, B. & Ghil, M. (2017). A Complete Representation of
-#'  Uncertainties in Layer-Counted Paleoclimatic Archives. *Climate of the
-#'  Past*, 13(9): 1169-1180. \doi{10.5194/cp-13-1169-2017}.
-#' @example inst/examples/ex-proxy.R
-#' @author N. Frerebeau
-#' @family age-depth modeling tools
-#' @docType methods
-#' @name proxy
-#' @rdname proxy
-NULL
-
-#' @rdname proxy
-#' @aliases proxy-method
-setGeneric(
-  name = "proxy",
-  def = function(depth, ...) standardGeneric("proxy")
-)
-
 # Events =======================================================================
 ## Tempo -----------------------------------------------------------------------
 #' Tempo Plot
@@ -423,14 +365,6 @@ setGeneric(
 #' long term that embodies a theory of archaeological evidence for the
 #' occurrence of events.
 #' @param object An [`EventsMCMC-class`] object.
-#' @param x A [`CumulativeEvents-class`] object.
-#' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param count A [`logical`] scalar: should the counting process be a number
-#'  or a probability (the default)?
-#' @param credible A [`logical`] scalar: should the credible interval be
-#'  computed/displayed?
-#' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
-#'  credible interval be computed/displayed?
 #' @param from A length-one [`numeric`] vector giving the earliest date to
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
@@ -439,7 +373,30 @@ setGeneric(
 #'  resolution (in years) at which densities are to be estimated.
 #'  If `NULL` (the default), equally spaced points will be used (according to
 #'  `options("chronos.grid")`).
-#' @param ... Any [`CumulativeEvents-class`] object.
+#' @param x A [`CumulativeEvents-class`] object or an [`EventsMCMC-class`]
+#'  object.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param count A [`logical`] scalar: should the counting process be a number
+#'  or a probability (the default)?
+#' @param credible A [`logical`] scalar: should the credible interval be
+#'  computed/displayed?
+#' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
+#'  credible interval be computed/displayed?
+#' @param legend A [`logical`] scalar: should a legend be displayed?
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ann A [`logical`] scalar: should the default annotation (title and x,
+#'  y and z axis labels) appear on the plot?
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param panel.first An an `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param ... Other [graphical parameters][graphics::par] may also be passed as
+#'  arguments to this function.
 #' @details
 #'  The tempo plot is one way to measure change over time: it estimates the
 #'  cumulative occurrence of archaeological events in a Bayesian calibration.
@@ -449,9 +406,8 @@ setGeneric(
 #'  the plot is horizontal. When change is instantaneous, the plot is vertical.
 #' @return
 #'  * `tempo()` returns an [`CumulativeEvents-class`] object.
-#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
 #'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
+#'    displayed (invisibly returns `x`).
 #' @references
 #'  Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
 #'  stratification. *Journal of Archaeological Science*, 71: 1-9.
@@ -460,11 +416,6 @@ setGeneric(
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family event tools
 #' @docType methods
-#' @name tempo
-#' @rdname tempo
-NULL
-
-#' @rdname tempo
 #' @aliases tempo-method
 setGeneric(
   name = "tempo",
@@ -593,41 +544,6 @@ setGeneric(
   name = "occurrence",
   def = function(object, ...) standardGeneric("occurrence"),
   valueClass = "OccurrenceEvents"
-)
-
-## REC -------------------------------------------------------------------------
-#' Radiocarbon Event Count Ensemble
-#'
-#' @param object An [`EventsMCMC-class`] object.
-#' @param x,y An [`RECE-class`] object.
-#' @param resolution A length-one [`numeric`] vector specifying the temporal
-#'  resolution. It should be a power of ten, eg. \eqn{1} (the default; annual
-#'  resolution) or \eqn{10} (decennial resolution).
-#' @param n An [`integer`] specifying the number of item to choose randomly.
-#' @param ... Currently not used.
-#' @return
-#'  * `rece()` returns an [`RECE-class`] object.
-#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
-#'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
-#' @references
-#'  Carleton, W. C. (2021). Evaluating Bayesian Radiocarbon‐dated Event Count
-#'  (REC) Models for the Study of Long‐term Human and Environmental Processes.
-#'  *Journal of Quaternary Science*, 36(1): 110‑23. \doi{10.1002/jqs.3256}.
-#' @seealso [`as_rece()`]
-#' @author N. Frerebeau
-#' @family event tools
-#' @docType methods
-#' @name rec
-#' @rdname rec
-NULL
-
-#' @rdname rec
-#' @aliases rece-method
-setGeneric(
-  name = "rece",
-  def = function(object, ...) standardGeneric("rece"),
-  valueClass = "RECE"
 )
 
 # Interval =====================================================================

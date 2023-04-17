@@ -71,24 +71,6 @@ as.data.frame.TimeRange <- function(x, ...) {
   )
 }
 
-#' @method as.data.frame RECE
-#' @export
-as.data.frame.RECE <- function(x, ...) {
-  data.frame(
-    year = x@year,
-    x@.Data
-  )
-}
-
-#' @method as.data.frame ProxyRecord
-#' @export
-as.data.frame.ProxyRecord <- function(x, ...) {
-  data.frame(
-    year = x@year,
-    x@samples
-  )
-}
-
 # To list ======================================================================
 #' @method as.list PhasesMCMC
 #' @export

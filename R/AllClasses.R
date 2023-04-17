@@ -274,44 +274,6 @@ NULL
   )
 )
 
-# RECE =========================================================================
-#' Radiocarbon Event Count Ensemble
-#'
-#' S4 classes to represent a radiocarbon event count ensemble.
-#' @slot events A [`character`] vector specifying the name of the events.
-#' @slot year A [`numeric`] vector giving the time points at which the
-#'  distribution is estimated.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
-#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
-#'  original data file.
-#' @section Coerce:
-#'  In the code snippets below, `x` is an `RECE` object.
-#'  \describe{
-#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
-#'  }
-#' @author N. Frerebeau
-#' @family classes
-#' @docType class
-#' @rdname RECE
-#' @aliases RECE-class
-.RECE <- setClass(
-  Class = "RECE",
-  slots = c(
-    events = "character",
-    year = "numeric",
-    calendar = "character",
-    hash = "character"
-  ),
-  prototype = methods::prototype(
-    events = character(0),
-    year = numeric(0),
-    calendar = "CE",
-    hash = character(0)
-  ),
-  contains = "matrix"
-)
-
 # Age-Depth Model ==============================================================
 #' Age-Depth Model
 #'
@@ -335,38 +297,5 @@ NULL
     model = "list",
     calendar = "character",
     hash = "character"
-  )
-)
-
-# Proxy Record =================================================================
-#' Proxy Record
-#'
-#' An S4 class to store proxy records.
-#' @slot year A [`numeric`] vector giving the time points at which the
-#'  distribution is estimated.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
-#' @section Coerce:
-#'  In the code snippets below, `x` is an `ProxyRecord` object.
-#'  \describe{
-#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
-#'  }
-#' @author N. Frerebeau
-#' @family classes
-#' @docType class
-#' @rdname ProxyRecord
-#' @aliases ProxyRecord-class
-.ProxyRecord <- setClass(
-  Class = "ProxyRecord",
-  slots = c(
-    depth = "numeric",
-    proxy = "numeric",
-    proxy_error = "numeric",
-    time = "numeric",
-    time_error = "numeric",
-    year = "numeric",
-    calendar = "character",
-    density = "matrix",
-    samples = "matrix"
   )
 )

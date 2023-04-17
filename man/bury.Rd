@@ -85,8 +85,7 @@ Wax Lipid. \emph{The Holocene}, 30(7): 1063-1074. \doi{10.1177/0959683620908639}
 }
 \seealso{
 Other age-depth modeling tools: 
-\code{\link{interpolate}()},
-\code{\link{proxy}()}
+\code{\link{interpolate}()}
 }
 \author{
 A. Philippe

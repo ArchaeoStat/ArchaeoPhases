@@ -50,26 +50,6 @@ setMethod(
   }
 )
 
-#' @export
-#' @rdname proxy
-#' @aliases summary,ProxyRecord-method
-setMethod(
-  f = "summary",
-  signature = "ProxyRecord",
-  definition = function(object, level = 0.95) {
-    x <- apply(
-      X = object@samples,
-      MARGIN = 1,
-      FUN = stats_marginal,
-      map = FALSE,
-      level = level,
-      CE = is_CE(object),
-      digits = NULL
-    )
-    as.data.frame(t(x))
-  }
-)
-
 #' Marginal Statistics
 #'
 #' @param x A [`numeric`] vector.

@@ -43,8 +43,7 @@ plot(inter, level = 0.95, interval = "credible")
 }
 \seealso{
 Other age-depth modeling tools: 
-\code{\link{bury}()},
-\code{\link{proxy}()}
+\code{\link{bury}()}
 }
 \author{
 N. Frerebeau

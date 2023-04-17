@@ -26,19 +26,16 @@
 \alias{is_BP,CumulativeEvents-method}
 \alias{is_BP,ActivityEvents-method}
 \alias{is_BP,OccurrenceEvents-method}
-\alias{is_BP,ProxyRecord-method}
 \alias{is_CE,MCMC-method}
 \alias{is_CE,PhasesMCMC-method}
 \alias{is_CE,CumulativeEvents-method}
 \alias{is_CE,ActivityEvents-method}
 \alias{is_CE,OccurrenceEvents-method}
-\alias{is_CE,ProxyRecord-method}
 \alias{is_b2k,MCMC-method}
 \alias{is_b2k,PhasesMCMC-method}
 \alias{is_b2k,CumulativeEvents-method}
 \alias{is_b2k,ActivityEvents-method}
 \alias{is_b2k,OccurrenceEvents-method}
-\alias{is_b2k,ProxyRecord-method}
 \alias{BP_to_CE,numeric-method}
 \alias{BP_to_CE,matrix-method}
 \alias{BP_to_CE,array-method}
@@ -57,11 +54,9 @@
 \alias{b2k_to_BP,numeric-method}
 \alias{b2k_to_BP,matrix-method}
 \alias{b2k_to_BP,array-method}
-\alias{b2k_to_BP,ProxyRecord-method}
 \alias{b2k_to_CE,numeric-method}
 \alias{b2k_to_CE,matrix-method}
 \alias{b2k_to_CE,array-method}
-\alias{b2k_to_CE,ProxyRecord-method}
 \title{Time Scale Conversion}
 \usage{
 BP_to_CE(object)
@@ -92,8 +87,6 @@ is_b2k(object)
 
 \S4method{is_BP}{OccurrenceEvents}(object)
 
-\S4method{is_BP}{ProxyRecord}(object)
-
 \S4method{is_CE}{MCMC}(object)
 
 \S4method{is_CE}{PhasesMCMC}(object)
@@ -104,8 +97,6 @@ is_b2k(object)
 
 \S4method{is_CE}{OccurrenceEvents}(object)
 
-\S4method{is_CE}{ProxyRecord}(object)
-
 \S4method{is_b2k}{MCMC}(object)
 
 \S4method{is_b2k}{PhasesMCMC}(object)
@@ -115,8 +106,6 @@ is_b2k(object)
 \S4method{is_b2k}{ActivityEvents}(object)
 
 \S4method{is_b2k}{OccurrenceEvents}(object)
-
-\S4method{is_b2k}{ProxyRecord}(object)
 
 \S4method{BP_to_CE}{numeric}(object)
 
@@ -154,15 +143,11 @@ is_b2k(object)
 
 \S4method{b2k_to_BP}{array}(object)
 
-\S4method{b2k_to_BP}{ProxyRecord}(object)
-
 \S4method{b2k_to_CE}{numeric}(object)
 
 \S4method{b2k_to_CE}{matrix}(object)
 
 \S4method{b2k_to_CE}{array}(object)
-
-\S4method{b2k_to_CE}{ProxyRecord}(object)
 }
 \arguments{
 \item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
@@ -170,11 +155,10 @@ is_b2k(object)
 \value{
 \itemize{
 \item \code{BP_to_CE()}, \code{BP_to_b2k()}, \code{CE_to_BP()}, \code{CE_to_b2k()}, \code{b2k_to_CE()}
-and \code{b2k_to_BP()} return an object of the same class as \code{object}.
+and \code{b2k_to_BP()} return an object of the same sort as \code{object} with a
+new time scale.
 \item \code{is_BP()}, \code{is_CE()}, \code{is_b2k()} return a \code{\link{logical}} scalar.
 }
-
-An object of the same sort as \code{object} with a new time scale.
 }
 \description{
 Converts between BP (Before Present), CE (Common Era) and b2k (before 2000)

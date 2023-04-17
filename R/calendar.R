@@ -49,15 +49,6 @@ setMethod(
   definition = function(object) identical(get_calendar(object), "BP")
 )
 
-#' @export
-#' @rdname calendar
-#' @aliases is_BP,ProxyRecord-method
-setMethod(
-  f = "is_BP",
-  signature = "ProxyRecord",
-  definition = function(object) identical(get_calendar(object), "BP")
-)
-
 ## CE --------------------------------------------------------------------------
 #' @export
 #' @rdname calendar
@@ -104,15 +95,6 @@ setMethod(
   definition = function(object) identical(get_calendar(object), "CE")
 )
 
-#' @export
-#' @rdname calendar
-#' @aliases is_CE,ProxyRecord-method
-setMethod(
-  f = "is_CE",
-  signature = "ProxyRecord",
-  definition = function(object) identical(get_calendar(object), "CE")
-)
-
 ## b2k -------------------------------------------------------------------------
 #' @export
 #' @rdname calendar
@@ -156,15 +138,6 @@ setMethod(
 setMethod(
   f = "is_b2k",
   signature = "OccurrenceEvents",
-  definition = function(object) identical(get_calendar(object), "b2k")
-)
-
-#' @export
-#' @rdname calendar
-#' @aliases is_b2k,ProxyRecord-method
-setMethod(
-  f = "is_b2k",
-  signature = "ProxyRecord",
   definition = function(object) identical(get_calendar(object), "b2k")
 )
 
@@ -467,22 +440,6 @@ setMethod(
   }
 )
 
-#' @export
-#' @rdname calendar
-#' @aliases b2k_to_BP,ProxyRecord-method
-setMethod(
-  f = "b2k_to_BP",
-  signature = "ProxyRecord",
-  definition = function(object) {
-    ## Check current scale
-    if (is_BP(object)) return(object)
-    object@time <- b2k_to_BP(object@time)
-    object@year <- b2k_to_BP(object@year)
-    object@calendar <- "BP"
-    object
-  }
-)
-
 ## b2k to CE -------------------------------------------------------------------
 #' @export
 #' @rdname calendar
@@ -527,21 +484,5 @@ setMethod(
     dim(tmp) <- dim(object)
     dimnames(tmp) <- dimnames(object)
     tmp
-  }
-)
-
-#' @export
-#' @rdname calendar
-#' @aliases b2k_to_CE,ProxyRecord-method
-setMethod(
-  f = "b2k_to_CE",
-  signature = "ProxyRecord",
-  definition = function(object) {
-    ## Check current scale
-    if (is_CE(object)) return(object)
-    object@time <- b2k_to_CE(object@time)
-    object@year <- b2k_to_CE(object@year)
-    object@calendar <- "CE"
-    object
   }
 )
