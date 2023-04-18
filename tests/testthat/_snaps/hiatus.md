@@ -3,7 +3,7 @@
     Code
       as.data.frame(hia_CE)
     Output
-                lower      upper  duration
+                start       stop  duration
       E2-E1 -1601.050 -1059.8006 541.24908
       E4-E1 -1062.599 -1045.3355  17.26366
       E2-E3 -1603.779  -803.1067 800.67205
@@ -15,7 +15,7 @@
     Code
       as.data.frame(hia_BP)
     Output
-               lower    upper  duration
+               start     stop  duration
       E2-E1 3549.254 3008.014 541.24080
       E4-E1 3011.599 2994.335  17.26349
       E2-E3 3552.739 2751.807 800.93226

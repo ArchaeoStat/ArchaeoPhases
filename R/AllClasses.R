@@ -104,7 +104,7 @@ NULL
 #' Cumulative Events
 #'
 #' An S4 class to represent time ranges.
-#' @slot upper,lower A `numeric` [`matrix`] giving the lower and upper
+#' @slot start,stop A `numeric` [`matrix`] giving the lower and upper
 #'  boundaries.
 #' @slot names A [`character`] vector specifying the name of the events/phases.
 #' @slot calendar A [`character`] string specifying the chronological scale
@@ -119,8 +119,8 @@ NULL
 .TimeRange <- setClass(
   Class = "TimeRange",
   slots = c(
-    lower = "matrix",
-    upper = "matrix",
+    start = "matrix",
+    stop = "matrix",
     names = "matrix",
     calendar = "character",
     hash = "character"
@@ -131,7 +131,7 @@ NULL
 #' Cumulative Events
 #'
 #' An S4 class to store the result of a [`tempo`] plot.
-#' @slot year A [`numeric`] vector giving the time points at which the
+#' @slot years A [`numeric`] vector giving the time points at which the
 #'  cumulative distribution is estimated.
 #' @slot estimate A [`numeric`] vector giving the estimation of the cumulative
 #'  distribution.
@@ -162,7 +162,7 @@ NULL
 .CumulativeEvents <- setClass(
   Class = "CumulativeEvents",
   slots = c(
-    year = "numeric",
+    years = "numeric",
     estimate = "numeric",
     credible = "matrix",
     gauss = "matrix",
@@ -178,7 +178,7 @@ NULL
 #' Activity
 #'
 #' An S4 class to store the result of an [`activity`] plot.
-#' @slot year A [`numeric`] vector giving the time points at which the
+#' @slot years A [`numeric`] vector giving the time points at which the
 #'  distribution is estimated.
 #' @slot estimate A [`numeric`] vector giving the estimation of the
 #'  distribution.
@@ -199,7 +199,7 @@ NULL
 .ActivityEvents <- setClass(
   Class = "ActivityEvents",
   slots = c(
-    year = "numeric",
+    years = "numeric",
     estimate = "numeric",
     calendar = "character",
     hash = "character"
@@ -211,9 +211,9 @@ NULL
 #'
 #' An S4 class to store the result of an [`occurrence`] plot.
 #' @slot events An [`integer`] vector giving the occurrence.
-#' @slot lower A [`numeric`] vector giving the lower boundaries of the
+#' @slot start A [`numeric`] vector giving the lower boundaries of the
 #'  credibility interval.
-#' @slot upper A [`numeric`] vector giving the upper boundaries of the
+#' @slot stop A [`numeric`] vector giving the upper boundaries of the
 #'  credibility interval.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot calendar A [`character`] string specifying the chronological scale
@@ -234,8 +234,8 @@ NULL
   Class = "OccurrenceEvents",
   slots = c(
     events = "integer",
-    lower = "numeric",
-    upper = "numeric",
+    start = "numeric",
+    stop = "numeric",
     level = "numeric",
     calendar = "character",
     hash = "character"
@@ -246,7 +246,7 @@ NULL
 #' Rate of Change
 #'
 #' An S4 class to store the result of a [`rate of change`][`roc`] estimation.
-#' @slot year A [`numeric`] vector giving the time points at which the
+#' @slot years A [`numeric`] vector giving the time points at which the
 #'  rate fo change is estimated.
 #' @slot estimate A [`numeric`] vector giving the estimation of the
 #'  rate of change.
@@ -267,7 +267,7 @@ NULL
 .RateOfChange <- setClass(
   Class = "RateOfChange",
   slots = c(
-    year = "numeric",
+    years = "numeric",
     estimate = "numeric",
     calendar = "character",
     hash = "character"

@@ -4,9 +4,12 @@
 \name{sort}
 \alias{sort}
 \alias{sort,MCMC-method}
+\alias{sort,PhasesMCMC-method}
 \title{Sort an MCMC Object}
 \usage{
 \S4method{sort}{MCMC}(x, decreasing = FALSE)
+
+\S4method{sort}{PhasesMCMC}(x, decreasing = FALSE)
 }
 \arguments{
 \item{x}{An \code{\linkS4class{MCMC}} object.}
@@ -39,6 +42,7 @@ pha[, 1, , drop = FALSE] # Select the first phase
 Other mutators: 
 \code{\link{bind}},
 \code{\link{mutator}},
+\code{\link{sort.list}()},
 \code{\link{subset}()}
 }
 \author{

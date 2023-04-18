@@ -30,7 +30,7 @@ setMethod(
     x <- ifelse(CE, b[[ind]], a[[ind]])
     y <- ifelse(CE, a[[ind]], b[[ind]])
 
-    cbind(lower = x, upper = y, p = level)
+    cbind(start = x, stop = y, p = level)
   }
 )
 
@@ -40,18 +40,12 @@ setMethod(
 setMethod(
   f = "credible",
   signature = "MCMC",
-  definition = function(object, level = 0.95, simplify = TRUE) {
+  definition = function(object, level = 0.95) {
     CE <- !(is_BP(object) || is_b2k(object))
     cred <- apply(X = object, MARGIN = 2, FUN = credible,
-                  level = level, CE = CE, simplify = simplify)
+                  level = level, CE = CE, simplify = FALSE)
 
-    if (simplify) {
-      cred <- t(cred)
-      dimnames(cred) <- list(NULL, c("lower", "upper", "p"))
-      cred <- data.frame(name = names(object), cred)
-    } else {
-      names(cred) <- names(object)
-    }
+    names(cred) <- names(object)
     attr(cred, "calendar") <- get_calendar(object)
     cred
   }
@@ -89,7 +83,7 @@ setMethod(
     a <- if (CE) x[inf] else x[sup]
     b <- if (CE) x[sup] else x[inf]
 
-    cbind(lower = a, upper = b, p = round(p, digits = 2))
+    cbind(start = a, stop = b, p = round(p, digits = 2))
   }
 )
 
@@ -99,15 +93,12 @@ setMethod(
 setMethod(
   f = "hpdi",
   signature = "MCMC",
-  definition = function(object, level = 0.95, simplify = TRUE, ...) {
+  definition = function(object, level = 0.95, ...) {
     CE <- !(is_BP(object) || is_b2k(object))
     hpd <- apply(X = object, MARGIN = 2, FUN = hpdi, level = level,
                  CE = CE, ..., simplify = FALSE)
 
     names(hpd) <- names(object)
-    if (simplify) {
-      hpd <- bind_intervals(hpd)
-    }
     attr(hpd, "calendar") <- get_calendar(object)
     hpd
   }

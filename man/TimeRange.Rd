@@ -11,7 +11,7 @@ An S4 class to represent time ranges.
 \section{Slots}{
 
 \describe{
-\item{\code{upper,lower}}{A \code{numeric} \code{\link{matrix}} giving the lower and upper
+\item{\code{start,stop}}{A \code{numeric} \code{\link{matrix}} giving the lower and upper
 boundaries.}
 
 \item{\code{names}}{A \code{\link{character}} vector specifying the name of the events/phases.}

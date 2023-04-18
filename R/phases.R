@@ -54,34 +54,6 @@ setMethod(
   }
 )
 
-# Phase order ==================================================================
-# @export
-# @rdname phase
-# @aliases set_order,PhasesMCMC,character-method
-# setMethod(
-#   f = "set_order<-",
-#   signature = c(x = "PhasesMCMC", value = "character"),
-#   definition = function(x, value) {}
-# )
-
-# @export
-# @rdname phase
-# @aliases get_order,PhasesMCMC-method
-# setMethod(
-#   f = "get_order",
-#   signature = c(x = "PhasesMCMC"),
-#   definition = function(x) {}
-# )
-
-# @export
-# @rdname phase
-# @aliases is_ordered,PhasesMCMC-method
-# setMethod(
-#   f = "is_ordered",
-#   signature = c(x = "PhasesMCMC"),
-#   definition = function(x) {}
-# )
-
 # Time range ===================================================================
 #' @export
 #' @rdname boundaries
@@ -93,7 +65,7 @@ setMethod(
     ## Validation
     arkhe::assert_length(y, length(x))
 
-    # no_bound <- c(lower = NA, upper = NA)
+    # no_bound <- c(start = NA, stop = NA)
     # if (older(x, y) < 0.5) {
     #   warning("Events do not seem to be in chronological order; ",
     #           "NAs introduced.", call. = FALSE)
@@ -111,7 +83,7 @@ setMethod(
     endpoints <- p[, short]
 
     ## Return the endpoints of the shortest interval
-    c(lower = endpoints[[1]], upper = endpoints[[2]])
+    c(start = endpoints[[1]], stop = endpoints[[2]])
   }
 )
 
@@ -139,7 +111,7 @@ setMethod(
     }
 
     ## Names
-    dimnames(result) <- list(names(x), c("lower", "upper"))
+    dimnames(result) <- list(names(x), c("start", "stop"))
 
     as.data.frame(result)
   }
@@ -214,36 +186,36 @@ setMethod(
     z <- names(x)
 
     ## Matrix of results
-    lower <- upper <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
+    start <- stop <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
 
     for (i in 1:n) {
       for (j in 1:n) {
         if (i != j) {
           h <- boundaries(x[, i, 2], x[, j, 1], level = level)
-          lower[i, j] <- h["lower"]
-          upper[i, j] <- h["upper"]
+          start[i, j] <- h["start"]
+          stop[i, j] <- h["stop"]
         }
         phase[i, j] <- paste(z[i], z[j], sep = "-")
       }
     }
 
     ## Remove false results
-    drop <- lower > upper
+    drop <- start > stop
 
     ## Reverse boundaries if BP scale
     BP <- is_BP(x) || is_b2k(x)
     if (BP) {
       drop <- !drop
-      lower <- t(lower)
-      upper <- t(upper)
+      start <- t(start)
+      stop <- t(stop)
     }
 
-    upper[drop] <- NA
-    lower[drop] <- NA
+    stop[drop] <- NA
+    start[drop] <- NA
 
     .TimeRange(
-      lower = if (BP) upper else lower,
-      upper = if (BP) lower else upper,
+      start = if (BP) stop else start,
+      stop = if (BP) start else stop,
       names = phase,
       calendar = get_calendar(x),
       hash = get_hash(x)
@@ -264,14 +236,14 @@ setMethod(
     z <- names(x)
 
     ## Matrix of results
-    lower <- upper <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
+    start <- stop <- phase <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
 
     for (i in 1:n) {
       for (j in 1:n) {
         if (i != j) {
           h <- hiatus(x[, i, 2], x[, j, 1], level = level)
-          lower[i, j] <- h["lower"]
-          upper[i, j] <- h["upper"]
+          start[i, j] <- h["start"]
+          stop[i, j] <- h["stop"]
         }
         phase[i, j] <- paste(z[i], z[j], sep = "-")
       }
@@ -280,13 +252,13 @@ setMethod(
     ## Re-reverse boundaries if BP scale
     BP <- is_BP(x) || is_b2k(x)
     if (BP) {
-      lower <- t(lower)
-      upper <- t(upper)
+      start <- t(start)
+      stop <- t(stop)
     }
 
     .TimeRange(
-      lower = if (BP) upper else lower,
-      upper = if (BP) lower else upper,
+      start = if (BP) stop else start,
+      stop = if (BP) start else stop,
       names = phase,
       calendar = get_calendar(x),
       hash = get_hash(x)

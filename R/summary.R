@@ -84,7 +84,7 @@ stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
 
   ## Dispersion
   if (sd) ec <- stats::sd(x)
-  if (credible) ci <- credible(x, level = level, CE = CE)[, c("lower", "upper")]
+  if (credible) ci <- credible(x, level = level, CE = CE)[, c("start", "stop")]
 
   ## Results
   tmp <- c(mad = mod, mean = moy, sd = ec, quant, ci)

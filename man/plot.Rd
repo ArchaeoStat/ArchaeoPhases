@@ -4,67 +4,45 @@
 \name{plot}
 \alias{plot}
 \alias{plot-method}
-\alias{multiplot}
-\alias{multiplot-method}
-\alias{autoplot,MCMC-method}
 \alias{plot,MCMC,missing-method}
-\alias{autoplot,PhasesMCMC-method}
 \alias{plot,PhasesMCMC,missing-method}
 \title{Plot}
 \usage{
-multiplot(...)
-
-\S4method{autoplot}{MCMC}(
-  object,
-  ...,
-  select = NULL,
-  groups = NULL,
-  density = TRUE,
-  interval = NULL,
-  level = 0.95,
-  decreasing = TRUE
-)
-
 \S4method{plot}{MCMC,missing}(
   x,
-  select = NULL,
-  groups = NULL,
   density = TRUE,
   interval = NULL,
   level = 0.95,
   decreasing = TRUE,
+  main = NULL,
+  sub = NULL,
+  ann = graphics::par("ann"),
+  axes = TRUE,
+  frame.plot = FALSE,
+  panel.first = NULL,
+  panel.last = NULL,
   ...
-)
-
-\S4method{autoplot}{PhasesMCMC}(
-  object,
-  ...,
-  select = NULL,
-  level = 0.95,
-  range = NULL,
-  decreasing = TRUE,
-  facet = TRUE
 )
 
 \S4method{plot}{PhasesMCMC,missing}(
   x,
-  select = NULL,
-  level = 0.95,
+  density = TRUE,
+  boundaries = TRUE,
   range = NULL,
+  level = 0.95,
   decreasing = TRUE,
-  facet = TRUE,
+  main = NULL,
+  sub = NULL,
+  ann = graphics::par("ann"),
+  axes = TRUE,
+  frame.plot = FALSE,
+  panel.first = NULL,
+  panel.last = NULL,
   ...
 )
 }
 \arguments{
-\item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
-
-\item{object, x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
-
-\item{select}{An \code{\link{integer}} vector specifying the index of the MCMC samples
-to be drawn.}
-
-\item{groups}{A \code{\link{character}} vector used for mapping colours.}
+\item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
 
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 
@@ -77,19 +55,37 @@ given. If \code{NULL} (the default) no interval is computed.}
 
 \item{decreasing}{A \code{\link{logical}} scalar: should the sort order be decreasing?}
 
+\item{main}{A \code{\link{character}} string giving a main title for the plot.}
+
+\item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
+
+\item{ann}{A \code{\link{logical}} scalar: should the default annotation (title and x,
+y and z axis labels) appear on the plot?}
+
+\item{axes}{A \code{\link{logical}} scalar: should axes be drawn on the plot?}
+
+\item{frame.plot}{A \code{\link{logical}} scalar: should a box be drawn around the
+plot?}
+
+\item{panel.first}{An an \code{expression} to be evaluated after the plot axes are
+set up but before any plotting takes place. This can be useful for drawing
+background grids.}
+
+\item{panel.last}{An \code{expression} to be evaluated after plotting has taken
+place but before the axes, title and box are added.}
+
+\item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
+
+\item{boundaries}{A \code{\link{logical}} scalar: should phase time range be plotted
+(see \code{\link[=boundaries]{boundaries()}})?}
+
 \item{range}{A \code{\link{character}} string specifying the additional time range to
 be displayed. It must be one of "\code{hiatus}" or "\code{transition}". If \code{NULL} (the
 default), no additional time ranges are displayed.}
-
-\item{facet}{A \code{\link{logical}} scalar: should a matrix of panels defined by phase
-be drawn?}
 }
 \value{
-\itemize{
-\item \code{autoplot()} returns a \code{\link[ggplot2:ggplot]{ggplot}} object.
-\item \code{plot()} is called it for its side-effects: it results in a graphic being
+\code{plot()} is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns \code{x}).
-}
 }
 \description{
 Plot
@@ -117,6 +113,7 @@ summary(eve_CE)
 ## Plot events
 plot(eve_CE, interval = "credible", level = 0.68)
 plot(eve_BP, interval = "hpdi", level = 0.68)
+plot(eve_BP[[1]], interval = "hpdi")
 
 ## Compute phases
 pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)))
@@ -129,6 +126,9 @@ plot(pha, range = "transition")
 }
 \seealso{
 \code{\link[stats:density]{stats::density()}}
+
+Other plot methods: 
+\code{\link{multiplot}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

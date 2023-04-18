@@ -1,149 +1,109 @@
 # PLOT
-#' @include AllClasses.R AllGenerics.R
+#' @include AllGenerics.R
 NULL
 
 # MCMC =========================================================================
 #' @export
-#' @method autoplot MCMC
-autoplot.MCMC <- function(object, ..., select = NULL, groups = NULL,
-                          density = TRUE, interval = NULL, level = 0.95,
-                          decreasing = TRUE) {
-  ## Calendar scale
-  gg_x_scale <- scale_calendar(object)
+#' @method plot MCMC
+plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
+                      decreasing = TRUE,
+                      main = NULL, sub = NULL,
+                      ann = graphics::par("ann"), axes = TRUE,
+                      frame.plot = FALSE,
+                      panel.first = NULL, panel.last = NULL, ...) {
+  ## Get data
+  n_events <- dim(x)[2L]
 
-  ## Select data
-  if (!is.null(select)) {
-    object <- object[, select, drop = FALSE]
-  }
+  ## Graphical parameters
+  col <- list(...)$col %||% c("grey")
+  lty <- list(...)$lty %||% graphics::par("lty")
+  lwd <- list(...)$lwd %||% graphics::par("lwd")
+  tcl <- list(...)$tcl %||% graphics::par("tcl")
+  if (length(col) != n_events) col <- rep(col, length.out = n_events)
+  fill <- grDevices::adjustcolor(col, alpha.f = 0.5)
 
-  ## Group data
-  grp <- data.frame(id = character(0), Group = character(0))
-  aes_grp <- NULL
-  if (!is.null(groups)) {
-    arkhe::assert_length(groups, ncol(object))
-    grp <- data.frame(id = names(object), Group = as.character(groups))
-    aes_grp <- ggplot2::aes(color = .data$Group)
-  }
+  ## Open new window
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush(), add = TRUE)
+  graphics::plot.new()
+
+  ## Set plotting coordinates
+  xlim <- range(x)
+  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  ylim <- c(1, n_events + 1.5)
+  graphics::plot.window(xlim = xlim, ylim = ylim)
+
+  ## Evaluate pre-plot expressions
+  panel.first
 
   ## Reorder data
-  data <- sort(object, decreasing = decreasing)
+  k <- sort.list(x, decreasing = decreasing)
+  x <- x[, k, drop = FALSE]
+  col <- col[k]
+  fill <- fill[k]
 
-  ## Compute interval
-  gg_inter <- NULL
-  if (!is.null(interval)) {
-    interval <- match.arg(interval, choices = c("credible", "hpdi"))
-    fun <- switch (
-      interval,
-      credible = credible,
-      hpdi = hpdi
-    )
-    inter <- fun(data, level = level)
-    inter$id <- factor(inter$name, levels = unique(inter$name))
-
-    ## Add group (if any)
-    inter <- merge(inter, grp, by = "id", all.x = TRUE, all.y = FALSE,
-                   sort = FALSE)
-
-    aes_inter <- ggplot2::aes(x = .data$lower, y = .data$id,
-                              xend = .data$upper, yend = .data$id)
-    gg_inter <- ggplot2::geom_segment(mapping = aes_inter, data = inter,
-                                      size = 2)
-  }
-
-  ## Density
-  gg_dens <- NULL
+  ## Plot
+  ages <- rev(seq_len(n_events))
   if (density) {
-    if (ncol(data) > 1) {
-      ## Build long table for ggplot2
-      col_ids <- rep(names(data), each = nrow(data))
-      dens <- data.frame(
-        row = as.vector(row(data, as.factor = FALSE)),
-        column = factor(col_ids, levels = unique(col_ids)),
-        # column = as.vector(col(data, as.factor = TRUE)),
-        value = as.vector(data),
-        stringsAsFactors = FALSE
-      )
-      ## Keep original ordering
-      dens$column <- as.character(dens$column)
-      dens$id <- factor(dens$column, levels = unique(dens$column))
+    for (i in ages) {
+      d <- stats::density(x[, i, drop = TRUE], n = getOption("chronos.grid"), ...)
 
-      aes_dens <- ggplot2::aes(
-        x = .data$value,
-        y = .data$id,
-        group = .data$id
-      )
-      gg_dens <- ggridges::geom_density_ridges(
-        mapping = aes_dens,
-        data = dens,
-        panel_scaling = TRUE,
-        rel_min_height = 0.01,
-        scale = 1.75,
-        alpha = 0.5,
-        inherit.aes = FALSE
-      )
-    } else {
-      data <- as.vector(data)
-      ## Compute density
-      d <- stats::density(data, n = getOption("chronos.grid"))
-      dens <- data.frame(
-        x = d$x,
-        y = d$y
-      )
+      years <- d$x
+      dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 1.5
+      k <- which(dens > 0) # Keep only density > 0
+      lb <- if (min(k) > 1) min(k) - 1 else min(k)
+      ub <- if (max(k) < length(years)) max(k) + 1 else max(k)
+      xi <- c(years[lb], years[k], years[ub])
+      yi <- c(0, dens[k], 0) + i
 
-      aes_dens <- ggplot2::aes(
-        x = .data$x,
-        y = .data$y
+      graphics::polygon(xi, yi, border = NA, col = fill[i])
+      graphics::lines(xi, yi, lty = "solid", col = "black")
+    }
+  }
+  if (!is.null(interval) & !is.null(level)) {
+    interval <- match.arg(interval, choices = c("credible", "hpdi"))
+    fun <- switch (interval, credible = credible, hpdi = hpdi)
+    inter <- fun(x, level = level)
+    for (i in ages) {
+      h <- inter[[i]]
+      graphics::segments(
+        x0 = h[, "start"], x1 = h[, "stop"],
+        y0 = i, y1 = i,
+        col = if (density) "black" else col[i],
+        lty = lty, lwd = lwd,
+        lend = 1
       )
-      gg_dens <- ggplot2::geom_path(
-        mapping = aes_dens,
-        data = dens,
-        inherit.aes = FALSE
+      graphics::segments(
+        x0 = c(h[, "start"], h[, "stop"]), x1 = c(h[, "start"], h[, "stop"]),
+        y0 = i, y1 = i + tcl * graphics::strheight("M") * -1,
+        col = if (density) "black" else col[i],
+        lty = lty, lwd = lwd,
+        lend = 1
       )
-
-      if (!is.null(interval)) {
-        ## Is credible?
-        cred <- is_credible(d$x, inter[, c("lower", "upper")])
-        int <- dens[which(cred), , drop = FALSE]
-        int$Interval <- paste0(round(level * 100), "%")
-
-        aes_inter <- ggplot2::aes(
-          x = .data$x,
-          y = .data$y,
-          fill = .data$Interval
-        )
-        gg_inter <- ggplot2::geom_area(
-          mapping = aes_inter,
-          data = int,
-          inherit.aes = FALSE
-        )
-      }
     }
   }
 
-  ## ggplot2
-  ggplot2::ggplot() +
-    aes_grp +
-    gg_dens +
-    gg_inter +
-    gg_x_scale
-}
+  ## Evaluate post-plot and pre-axis expressions
+  panel.last
 
-#' @export
-#' @rdname plot
-#' @aliases autoplot,MCMC-method
-setMethod("autoplot", "MCMC", autoplot.MCMC)
+  ## Construct Axis
+  if (axes) {
+    graphics::axis(side = 1)
+    graphics::mtext(names(x)[ages], side = 2, at = ages, las = 2, padj = 0)
+  }
 
-#' @export
-#' @method plot MCMC
-plot.MCMC <- function(x, select = NULL, groups = NULL, density = TRUE,
-                      interval = NULL, level = 0.95, decreasing = TRUE, ...) {
-  gg <- autoplot(object = x, ..., select = select, groups = groups,
-                 density = density, interval = interval, level = level,
-                 decreasing = decreasing) +
-    ggplot2::guides(fill = ggplot2::guide_legend(ncol = 2)) +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.title.y = ggplot2::element_blank())
-  print(gg)
+  ## Plot frame
+  if (frame.plot) {
+    graphics::box()
+  }
+
+  ## Add annotation
+  if (ann) {
+    xlab <- time_axis_label(x)
+    ylab <- NULL
+    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
+  }
+
   invisible(x)
 }
 
@@ -155,51 +115,129 @@ setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 
 # PhasesMCMC ===================================================================
 #' @export
-#' @method autoplot PhasesMCMC
-autoplot.PhasesMCMC <- function(object, ..., select = NULL, level = 0.95,
-                                range = NULL, decreasing = TRUE, facet = TRUE) {
-  ## Calendar scale
-  gg_x_scale <- scale_calendar(object)
-
-  if (length(select) == 1) {
-    range <- NULL
-    facet <- FALSE
-  }
-
-  if (!is.null(range)) {
-    gg_phases <- plot_succession(object, select = select, level = level,
-                                 range = range, decreasing = decreasing,
-                                 facet = facet)
-  } else {
-    gg_phases <- plot_density(object, select = select, level = level,
-                              decreasing = decreasing, facet = facet, ...)
-  }
-
-  ## ggplot2
-  ggplot2::ggplot() +
-    gg_phases +
-    gg_x_scale
-}
-
-#' @export
-#' @rdname plot
-#' @aliases autoplot,PhasesMCMC-method
-setMethod("autoplot", "PhasesMCMC", autoplot.PhasesMCMC)
-
-#' @export
 #' @method plot PhasesMCMC
-plot.PhasesMCMC <- function(x, select = NULL, level = 0.95, range = NULL,
-                            decreasing = TRUE, facet = TRUE, ...) {
-  gg_fill <- NULL
-  if (!is.null(range) & length(select) != 1) {
-    gg_fill <- ggplot2::scale_fill_manual(values = "grey50")
+plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
+                            level = 0.95, decreasing = TRUE,
+                            main = NULL, sub = NULL,
+                            ann = graphics::par("ann"), axes = TRUE,
+                            frame.plot = FALSE,
+                            panel.first = NULL, panel.last = NULL, ...) {
+  ## Get data
+  n_phases <- dim(x)[2L]
+
+  ## Graphical parameters
+  col <- list(...)$col %||% c("grey")
+  lty <- list(...)$lty %||% graphics::par("lty")
+  lwd <- list(...)$lwd %||% graphics::par("lwd")
+  tcl <- list(...)$tcl %||% graphics::par("tcl")
+  if (length(col) != n_phases) col <- rep(col, length.out = n_phases)
+  fill <- grDevices::adjustcolor(col, alpha.f = 0.5)
+
+  ## Open new window
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush(), add = TRUE)
+  graphics::plot.new()
+
+  ## Set plotting coordinates
+  xlim <- range(x)
+  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  ylim <- c(1, n_phases + 1)
+  graphics::plot.window(xlim = xlim, ylim = ylim)
+
+  ## Evaluate pre-plot expressions
+  panel.first
+
+  ## Reorder data
+  k <- sort.list(x, decreasing = decreasing)
+  x <- x[, k, , drop = FALSE]
+  col <- col[k]
+  fill <- fill[k]
+
+  ## Plot
+  ages <- rev(seq_len(n_phases))
+  if (density) {
+    ## Density
+    for (i in ages) {
+      p <- x[, i, ]
+      for (j in c(1, 2)) {
+        d <- stats::density(p[, j], n = getOption("chronos.grid"), ...)
+
+        years <- d$x
+        dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 0.9
+        k <- which(dens > 0) # Keep only density > 0
+        lb <- if (min(k) > 1) min(k) - 1 else min(k)
+        ub <- if (max(k) < length(years)) max(k) + 1 else max(k)
+        xi <- c(years[lb], years[k], years[ub])
+        yi <- c(0, dens[k], 0) + i
+
+        graphics::polygon(xi, yi, border = NA, col = fill[i])
+        graphics::lines(xi, yi, lty = "solid", col = "black")
+      }
+    }
   }
-  gg <- autoplot(object = x, ..., select = select, level = level,
-                 range = range, decreasing = decreasing, facet = facet) +
-    gg_fill +
-    ggplot2::theme_bw() +
-    ggplot2::theme(axis.title.y = ggplot2::element_blank())
-  print(gg)
+
+  if (!is.null(level)) {
+    ## Time range
+    if (boundaries) {
+      bound <- boundaries(x, level = level)
+      for (i in ages) {
+        h <- bound[i, ]
+        graphics::segments(
+          x0 = h[, "start"], x1 = h[, "stop"],
+          y0 = i, y1 = i,
+          col = "black",
+          lty = lty, lwd = lwd,
+          lend = 1
+        )
+        graphics::segments(
+          x0 = c(h[, "start"], h[, "stop"]), x1 = c(h[, "start"], h[, "stop"]),
+          y0 = i, y1 = i + tcl * graphics::strheight("M") * -1,
+          col = "black",
+          lty = lty, lwd = lwd,
+          lend = 1
+        )
+      }
+    }
+
+    ## Succession
+    if (!is.null(range)) {
+      if (n_phases != 2)
+        stop("Time ranges can only be displayed with two phases.", call. = FALSE)
+
+      range <- match.arg(range, choices = c("transition", "hiatus"), several.ok = FALSE)
+      fun <- switch(range, hiatus = hiatus, transition = transition)
+      hia <- as.data.frame(fun(x, level = level))
+
+      graphics::rect(
+        xleft = hia$start, xright = hia$stop,
+        ybottom = min(ylim), ytop = max(ylim),
+        border = "black",
+        lty = "dashed"
+      )
+    }
+  }
+
+  ## Evaluate post-plot and pre-axis expressions
+  panel.last
+
+  ## Construct Axis
+  if (axes) {
+    graphics::axis(side = 1)
+    graphics::mtext(names(x)[ages], side = 2, at = ages, las = 2, padj = 0)
+  }
+
+  ## Plot frame
+  if (frame.plot) {
+    graphics::box()
+  }
+
+  ## Add annotation
+  if (ann) {
+    xlab <- time_axis_label(x)
+    ylab <- NULL
+    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
+  }
+
   invisible(x)
 }
 
@@ -208,179 +246,398 @@ plot.PhasesMCMC <- function(x, select = NULL, level = 0.95, range = NULL,
 #' @aliases plot,PhasesMCMC,missing-method
 setMethod("plot", c(x = "PhasesMCMC", y = "missing"), plot.PhasesMCMC)
 
-# Helpers ======================================================================
-#' @param x A [`PhasesMCMC`] object.
-#' @return A \pkg{ggplot2} layer.
-#' @noRd
-plot_succession <- function(x, select = NULL, level = 0.95,
-                            range = c("transition", "hiatus"),
-                            decreasing = TRUE, facet = TRUE,
-                            size = 2, alpha = 0.5) {
-  ## Validation
-  range <- match.arg(range, several.ok = FALSE)
+# TempoEvents ==================================================================
+#' @export
+#' @method plot CumulativeEvents
+plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, legend = TRUE,
+                                  col.tempo = "#004488", lty.tempo = "solid", lwd.tempo = 1,
+                                  col.credible = "#BB5566", lty.credible = "dashed", lwd.credible = 1,
+                                  col.gauss = "#DDAA33", lty.gauss = "dotted", lwd.gauss = 1,
+                                  main = NULL, sub = NULL, ann = graphics::par("ann"),
+                                  axes = TRUE, frame.plot = axes,
+                                  panel.first = NULL, panel.last = NULL, ...) {
+  ## Get data
+  years <- x@years
 
-  ## Time range
-  decreasing <- ifelse(is_CE(x), decreasing, !decreasing)
-  duree <- boundaries(x, level = level)
-  duree$rank <- order(duree$lower, decreasing = decreasing)
-  duree$Phase <- rownames(duree)
+  ## Open new window
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush(), add = TRUE)
+  graphics::plot.new()
 
-  ## Select data
-  if (!is.null(select)) x <- x[, select, , drop = FALSE]
+  ## Set plotting coordinates
+  xlim <- range(years)
+  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  ylim <- range(x@estimate, x@credible, x@gauss)
+  graphics::plot.window(xlim = xlim, ylim = ylim)
 
-  ## Succession
-  fun <- switch(
-    range,
-    hiatus = hiatus,
-    transition = transition
+  ## Evaluate pre-plot expressions
+  panel.first
+
+  ## Plot
+  graphics::lines(
+    x = years,
+    y = x@estimate,
+    type = "l",
+    col = col.tempo,
+    lty = lty.tempo,
+    lwd = lwd.tempo
   )
-  hia <- as.data.frame(fun(x, level = level))
-  hia <- data.frame(
-    xmin = hia$lower,
-    xmax = hia$upper,
-    ymin = min(duree$rank) - 0.5,
-    ymax = max(duree$rank) + 0.5,
-    labels = rownames(hia),
-    Range = range
-  )
-  hia <- stats::na.omit(hia)
 
-  ## Layers
-  gg_hiatus <- NULL
-  gg_facet <- NULL
-  if (nrow(hia) > 0) {
-    ## Reorder
-    ord <- order(hia$xmin, decreasing = !decreasing)
-    hia <- hia[ord, ]
-    hia$labels <- factor(hia$labels, levels = hia$labels)
-
-    aes_rect <- ggplot2::aes(
-      xmin = .data$xmin,
-      xmax = .data$xmax,
-      ymin = -Inf,
-      ymax = Inf,
-      fill = .data$Range
-    )
-    gg_hiatus <- ggplot2::geom_rect(
-      mapping = aes_rect,
-      data = hia,
-      alpha = alpha
-    )
-    if (facet) {
-      gg_facet <- ggplot2::facet_grid(
-        rows = ggplot2::vars(.data$labels),
-        scales = "free_y"
-      )
-    }
+  ## Intervals
+  credible <- credible & nrow(x@credible) > 0
+  if (credible) {
+    plot_y_ribbon(x = years, ymin = x@credible[, 1], ymax = x@credible[, 2],
+                border = col.credible, lty = lty.credible, lwd = lwd.credible)
+  }
+  gauss <- gauss & nrow(x@gauss) > 0
+  if (gauss) {
+    plot_y_ribbon(x = years, ymin = x@gauss[, 1], ymax = x@gauss[, 2],
+                border = col.gauss, lty = lty.gauss, lwd = lwd.gauss)
   }
 
-  ## Layer
-  aes_range <- ggplot2::aes(
-    x = .data$lower,
-    y = .data$rank,
-    xend = .data$upper,
-    yend = .data$rank,
-    color = .data$Phase
-  )
-  gg_range <- ggplot2::geom_segment(
-    mapping = aes_range,
-    data = duree,
-    size = size
-  )
-  gg_y_scale <- ggplot2::scale_y_continuous(
-    name = "Phases",
-    breaks = duree$rank,
-    labels = duree$Phase
-  )
-  list(gg_hiatus, gg_facet, gg_range, gg_y_scale)
+  ## Legend
+  if (legend) {
+    lab <- c(TRUE, credible, gauss)
+    graphics::legend(
+      x = "topleft",
+      legend = c("Bayes estimate", "Credible interval", "Gauss interval")[lab],
+      col = c(col.tempo, col.credible, col.gauss)[lab],
+      lty = c(lty.tempo, lty.credible, lty.gauss)[lab],
+      lwd = c(lwd.tempo, lwd.credible, lwd.gauss)[lab]
+    )
+  }
+
+  ## Evaluate post-plot and pre-axis expressions
+  panel.last
+
+  ## Construct Axis
+  if (axes) {
+    graphics::axis(side = 1)
+    graphics::axis(side = 2, las = 1)
+  }
+
+  ## Plot frame
+  if (frame.plot) {
+    graphics::box()
+  }
+
+  ## Add annotation
+  if (ann) {
+    xlab <- time_axis_label(x)
+    ylab <- "Cumulative events"
+    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
+  }
+
+  invisible(x)
 }
 
-#' @param x A [`PhasesMCMC`] object.
-#' @return A \pkg{ggplot2} layer.
-#' @noRd
-plot_density <- function(x, select = NULL, level = 0.95, decreasing = TRUE,
-                         facet = TRUE, color = "black", size = 2, alpha = 0.5,
-                         ...) {
-  ## Select data
-  if (!is.null(select)) x <- x[, select, , drop = FALSE]
+#' @export
+#' @rdname tempo
+#' @aliases plot,CumulativeEvents,missing-method
+setMethod("plot", c(x = "CumulativeEvents", y = "missing"), plot.CumulativeEvents)
 
-  ## Get phases
-  pha <- as.list(x)
-  phase_names <- names(x)
+# ActivityEvents ===============================================================
+#' @export
+#' @method plot ActivityEvents
+plot.ActivityEvents <- function(x, main = NULL, sub = NULL,
+                                ann = graphics::par("ann"),
+                                axes = TRUE, frame.plot = axes,
+                                panel.first = NULL, panel.last = NULL, ...) {
+  ## Get data
+  years <- x@years
 
-  decreasing <- ifelse(is_CE(x), !decreasing, decreasing)
-  bound <- if (is_CE(x)) c("Begin", "End") else c("End", "Begin")
+  ## Graphical parameters
+  border <- list(...)$border %||% c("black")
+  col <- list(...)$col %||% c("grey70")
+  lwd <- list(...)$lwd %||% graphics::par("lwd")
+  lty <- list(...)$lty %||% graphics::par("lty")
 
-  ## Density
-  n <- getOption("chronos.grid")
-  dens <- lapply(
-    X = pha,
-    FUN = function(x, n, ...) {
-      a <- stats::density(x[, 1], n = n, ...)
-      b <- stats::density(x[, 2], n = n, ...)
-      data.frame(
-        x = c(a$x, b$x),
-        y = c(a$y, b$y),
-        z = rep(bound, each = n)
-      )
-    },
-    n = n, ...
+  ## Open new window
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush(), add = TRUE)
+  graphics::plot.new()
+
+  ## Set plotting coordinates
+  xlim <- range(years)
+  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  ylim <- range(x@estimate)
+  graphics::plot.window(xlim = xlim, ylim = ylim)
+
+  ## Evaluate pre-plot expressions
+  panel.first
+
+  ## Plot
+  plot_y_ribbon(
+    x = years,
+    ymin = rep(0, length(years)),
+    ymax = x@estimate,
+    border = border,
+    col = col,
+    lty = lty,
+    lwd = lwd
   )
 
-  ## Time range
-  duree <- boundaries(x, level = level)
-  duree$rank <- order(duree$lower, decreasing = decreasing)
-  duree$Phase <- rownames(duree)
-  duree$grid <- factor(duree$Phase, levels = phase_names[duree$rank])
+  ## Evaluate post-plot and pre-axis expressions
+  panel.last
 
-  ## Adjust y position
-  y_max <- vapply(X = dens, FUN = function(x) max(x$y), FUN.VALUE = numeric(1))
-  if (facet) {
-    duree$y <- y_max * 1.1
-  } else {
-    y_duree <- max(y_max) * (1 + duree$rank / 10)
-    duree$y <- if (decreasing) y_duree + diff(range(y_max)) else y_duree
+  ## Construct Axis
+  if (axes) {
+    graphics::axis(side = 1)
+    graphics::axis(side = 2, las = 1)
   }
 
-  ## Bind densities
-  dens <- do.call(rbind, dens)
-  dens$Boundary <- factor(dens$z, levels = bound, ordered = TRUE)
-  dens$Phase <- rep(phase_names, each = 2 * n)
-  dens$grid <- factor(dens$Phase, levels = phase_names[duree$rank])
-
-  ## Layer
-  gg_facet <- NULL
-  if (facet) {
-    gg_facet <- ggplot2::facet_grid(
-      rows = ggplot2::vars(.data$grid),
-      scales = "free_y"
-    )
+  ## Plot frame
+  if (frame.plot) {
+    graphics::box()
   }
-  aes_dens <- ggplot2::aes(
-    x = .data$x,
-    ymin = 0,
-    ymax = .data$y,
-    fill = .data$Phase,
-    linetype = .data$Boundary
+
+  ## Add annotation
+  if (ann) {
+    xlab <- time_axis_label(x)
+    ylab <- "Activity"
+    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
+  }
+
+  invisible(x)
+}
+
+#' @export
+#' @rdname activity
+#' @aliases plot,ActivityEvents,missing-method
+setMethod("plot", c(x = "ActivityEvents", y = "missing"), plot.ActivityEvents)
+
+# RateOfChange =================================================================
+#' @export
+#' @method plot RateOfChange
+plot.RateOfChange <- function(x, main = NULL, sub = NULL,
+                              ann = graphics::par("ann"),
+                              axes = TRUE, frame.plot = axes,
+                              panel.first = NULL, panel.last = NULL, ...) {
+  ## Get data
+  years <- x@years
+
+  ## Graphical parameters
+  col <- list(...)$col %||% c("black")
+  lwd <- list(...)$lwd %||% graphics::par("lwd")
+  lty <- list(...)$lty %||% graphics::par("lty")
+
+  ## Open new window
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush(), add = TRUE)
+  graphics::plot.new()
+
+  ## Set plotting coordinates
+  xlim <- range(years)
+  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  ylim <- range(x@estimate)
+  graphics::plot.window(xlim = xlim, ylim = ylim)
+
+  ## Evaluate pre-plot expressions
+  panel.first
+
+  ## Plot
+  graphics::lines(
+    x = years,
+    y = x@estimate,
+    type = "l",
+    col = col,
+    lty = lty,
+    lwd = lwd
   )
-  gg_dens <- ggplot2::geom_ribbon(
-    mapping = aes_dens,
-    data = dens,
-    color = color,
-    alpha = alpha
+  graphics::abline(h = 0, col = "grey20", lty = "dashed", lwd = 1)
+
+  ## Evaluate post-plot and pre-axis expressions
+  panel.last
+
+  ## Construct Axis
+  if (axes) {
+    graphics::axis(side = 1)
+    graphics::axis(side = 2, las = 1)
+  }
+
+  ## Plot frame
+  if (frame.plot) {
+    graphics::box()
+  }
+
+  ## Add annotation
+  if (ann) {
+    xlab <- time_axis_label(x)
+    ylab <- "Rate of change"
+    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
+  }
+
+  invisible(x)
+}
+
+#' @export
+#' @rdname roc
+#' @aliases plot,RateOfChange,missing-method
+setMethod("plot", c(x = "RateOfChange", y = "missing"), plot.RateOfChange)
+
+# OccurrenceEvents =============================================================
+#' @export
+#' @method plot OccurrenceEvents
+plot.OccurrenceEvents <- function(x, main = NULL, sub = NULL,
+                                  ann = graphics::par("ann"),
+                                  axes = TRUE, frame.plot = axes,
+                                  panel.first = NULL, panel.last = NULL, ...) {
+  ## Get data
+  n_events <- length(x@events)
+
+  ## Graphical parameters
+  col <- list(...)$col %||% graphics::par("col")
+  lty <- list(...)$lty %||% graphics::par("lty")
+  lwd <- list(...)$lwd %||% graphics::par("lwd")
+  pch <- list(...)$pch %||% 16
+  cex <- list(...)$cex %||% graphics::par("cex")
+
+  ## Open new window
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush(), add = TRUE)
+  graphics::plot.new()
+
+  ## Set plotting coordinates
+  xlim <- range(x@start, x@stop)
+  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  ylim <- range(x@events)
+  graphics::plot.window(xlim = xlim, ylim = ylim)
+
+  ## Evaluate pre-plot expressions
+  panel.first
+
+  ## Plot
+  graphics::segments(x0 = x@start,  x1 = x@stop,
+                     y0 = x@events, y1 = x@events,
+                     col = col, lty = lty, lwd = lwd)
+  graphics::points(x = c(x@start, x@stop),
+                   y = c(x@events, x@events),
+                   pch = pch, col = col, cex = cex)
+
+  ## Evaluate post-plot and pre-axis expressions
+  panel.last
+
+  ## Construct Axis
+  if (axes) {
+    graphics::axis(side = 1)
+    graphics::axis(side = 2, at = seq_len(n_events), labels = x@events, las = 1)
+  }
+
+  ## Plot frame
+  if (frame.plot) {
+    graphics::box()
+  }
+
+  ## Add annotation
+  if (ann) {
+    xlab <- time_axis_label(x)
+    ylab <- "Occurrence"
+    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
+  }
+
+  invisible(x)
+}
+
+#' @export
+#' @rdname occurrence
+#' @aliases plot,OccurrenceEvents,missing-method
+setMethod("plot", c(x = "OccurrenceEvents", y = "missing"), plot.OccurrenceEvents)
+
+# AgeDepthModel ================================================================
+#' @export
+#' @method plot AgeDepthModel
+plot.AgeDepthModel <- function(x, level = 0.95,
+                               main = NULL, sub = NULL,
+                               ann = graphics::par("ann"),
+                               axes = TRUE, frame.plot = axes,
+                               panel.first = NULL, panel.last = NULL, ...) {
+  ## Get data
+  depth <- x@depth
+  n <- length(depth)
+  data <- predict(x)
+  data <- summary(data, level = level)
+
+  ## Graphical parameters
+  border <- list(...)$border %||% c("grey70")
+  col <- list(...)$col %||% c("grey70")
+  lwd <- list(...)$lwd %||% graphics::par("lwd")
+  lty <- list(...)$lty %||% graphics::par("lty")
+  pch <- list(...)$pch %||% 16
+
+  ## Open new window
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush(), add = TRUE)
+  graphics::plot.new()
+
+  ## Set plotting coordinates
+  xlim <- range(data$median, data$start, data$stop)
+  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  ylim <- sort(range(depth), decreasing = TRUE)
+  graphics::plot.window(xlim = xlim, ylim = ylim)
+
+  ## Evaluate pre-plot expressions
+  panel.first
+
+  ## Plot
+  plot_x_ribbon(
+    xmin = data$start,
+    xmax = data$stop,
+    y = depth,
+    border = border,
+    col = col
   )
-  aes_range <- ggplot2::aes(
-    x = .data$lower,
-    y = .data$y,
-    xend = .data$upper,
-    yend = .data$y,
-    color = .data$Phase
+  graphics::lines(
+    x = data$median,
+    y = depth,
+    lty = lty,
+    lwd = lwd
   )
-  gg_range <- ggplot2::geom_segment(
-    mapping = aes_range,
-    data = duree,
-    size = size
+  graphics::points(
+    x = data$median,
+    y = depth,
+    pch = pch
   )
-  gg_y_scale <- ggplot2::scale_y_continuous(name = "Density")
-  list(gg_dens, gg_range, gg_facet, gg_y_scale)
+
+  ## Evaluate post-plot and pre-axis expressions
+  panel.last
+
+  ## Construct Axis
+  if (axes) {
+    graphics::axis(side = 1)
+    graphics::axis(side = 2, las = 1)
+  }
+
+  ## Plot frame
+  if (frame.plot) {
+    graphics::box()
+  }
+
+  ## Add annotation
+  if (ann) {
+    xlab <- time_axis_label(x)
+    ylab <- "Depth"
+    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
+  }
+
+  invisible(x)
+}
+
+#' @export
+#' @rdname bury
+#' @aliases plot,AgeDepthModel,missing-method
+setMethod("plot", c(x = "AgeDepthModel", y = "missing"), plot.AgeDepthModel)
+
+# Helpers ======================================================================
+time_axis_label <- function(x) {
+  if (is_CE(x)) return("Year CE")
+  if (is_BP(x)) return("Year cal. BP")
+  if (is_b2k(x)) return("Year b2k")
+  if (x@calendar == "elapsed") return("Elapsed origin")
+  stop("Unknown calendar scale.", call. = FALSE)
+}
+plot_x_ribbon <- function(xmin, xmax, y, ...) {
+  graphics::polygon(x = c(xmin, rev(xmax)), y = c(y, rev(y)), ...)
+}
+plot_y_ribbon <- function(x, ymin, ymax, ...) {
+  graphics::polygon(x = c(x, rev(x)), y = c(ymin, rev(ymax)), ...)
 }

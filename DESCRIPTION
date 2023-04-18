@@ -23,8 +23,7 @@ Description: Statistical analysis of archaeological dates and groups of
     of dates (tempo and activity plot). It also allows the estimation and
     visualization of time ranges from the posterior distribution of groups
     of dates (e.g. duration, transition and hiatus between successive
-    phases). This package is an S4 rewrite of 'ArchaeoPhases' by Philippe
-    and Vibet (2020) <doi:10.18637/jss.v093.c01>.
+    phases) as described in Philippe and Vibet (2020) <doi:10.18637/jss.v093.c01>.
 License: GPL (>= 3)
 URL: https://packages.tesselle.org/chronos/,
     https://github.com/tesselle/chronos
@@ -33,17 +32,15 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     arkhe (>= 1.1.0),
-    ggplot2,
-    ggridges,
+    graphics,
+    grDevices,
     methods,
-    rlang,
     stats,
     tools,
     utils
 Suggests: 
     coda,
     fasti,
-    folio,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
@@ -55,7 +52,7 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Collate: 
     'AllClasses.R'
     'AllGenerics.R'
@@ -67,6 +64,7 @@ Collate:
     'data.R'
     'depth.R'
     'interval.R'
+    'multiplot.R'
     'mutators.R'
     'occurrence.R'
     'phases.R'

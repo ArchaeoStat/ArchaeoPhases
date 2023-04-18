@@ -13,10 +13,10 @@ An S4 class to store the result of an \code{\link{occurrence}} plot.
 \describe{
 \item{\code{events}}{An \code{\link{integer}} vector giving the occurrence.}
 
-\item{\code{lower}}{A \code{\link{numeric}} vector giving the lower boundaries of the
+\item{\code{start}}{A \code{\link{numeric}} vector giving the lower boundaries of the
 credibility interval.}
 
-\item{\code{upper}}{A \code{\link{numeric}} vector giving the upper boundaries of the
+\item{\code{stop}}{A \code{\link{numeric}} vector giving the upper boundaries of the
 credibility interval.}
 
 \item{\code{level}}{A length-one \code{\link{numeric}} vector giving the confidence level.}

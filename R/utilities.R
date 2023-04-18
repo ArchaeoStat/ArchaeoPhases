@@ -1,5 +1,9 @@
 # HELPERS
 
+`%||%` <- function(x, y) {
+  if (!is.null(x)) x else y
+}
+
 # periode <- Vectorize(
 #   function(epsilon, p1, p2, level) {
 #     # Computes the 'level'th quantile of the minimum of the events included in the phase
@@ -75,22 +79,4 @@ make_hash <- function(file, download = TRUE) {
     file_hash <- tools::md5sum(file)
   }
   unname(file_hash)
-}
-
-#' \pkg{ggplot2} Calendar Scale
-#'
-#' @param A [`character`] string specifying the calendar scale. It must be one
-#'  of "`CE`", "`BP`" or "`elapsed`".
-#' @seealso [ggplot2::scale_x_continuous()], [ggplot2::scale_x_reverse()]
-#' @keywords internal
-#' @noRd
-scale_calendar <- function(x) {
-  switch (
-    get_calendar(x),
-    CE = ggplot2::scale_x_continuous(name = "Year CE"),
-    BP = ggplot2::scale_x_continuous(name = "Year BP", trans = "reverse"),
-    b2k = ggplot2::scale_x_continuous(name = "Year b2k", trans = "reverse"),
-    elapsed = ggplot2::scale_x_continuous(name = "Elapsed years"),
-    stop(sprintf("Unknown calendar scale (%s).", x), call. = FALSE)
-  )
 }

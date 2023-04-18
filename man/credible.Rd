@@ -12,7 +12,7 @@ credible(object, ...)
 
 \S4method{credible}{numeric}(object, level = 0.95, CE = TRUE)
 
-\S4method{credible}{MCMC}(object, level = 0.95, simplify = TRUE)
+\S4method{credible}{MCMC}(object, level = 0.95)
 }
 \arguments{
 \item{object}{A \code{\link{numeric}} vector or an \code{\linkS4class{MCMC}} object containing the
@@ -23,14 +23,9 @@ output of the MCMC algorithm for the parameter.}
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{CE}{A \code{\link{logical}} scalar: are the data expressed in BC/AD years?}
-
-\item{simplify}{A \code{\link{logical}} scalar: should the results should be
-simplified?}
 }
 \value{
-If \code{simplify} is \code{TRUE} (the default), returns a \code{\link{data.frame}} giving the
-lower and upper boundaries of the credible interval and associated
-probabilities. Else, returns a \code{\link{list}} of \code{numeric} \code{\link{matrix}}.
+Returns a \code{\link{list}} of \code{numeric} \code{\link{matrix}}.
 }
 \description{
 Computes the shortest credible interval of the output of the MCMC algorithm

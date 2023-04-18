@@ -1,19 +1,11 @@
 # GENERIC METHODS
 #' @include AllClasses.R
-#' @importFrom ggplot2 aes autoplot element_blank element_text facet_grid ggplot
-#' geom_area geom_hline geom_path geom_rect geom_ribbon geom_segment geom_tile
-#' guides guide_colorbar guide_legend labs scale_colour_manual scale_fill_manual
-#' scale_fill_viridis_c scale_x_continuous scale_x_reverse scale_y_continuous
-#' scale_y_discrete scale_y_reverse theme theme_bw vars
-#' @importFrom ggridges geom_density_ridges
-#' @importFrom methods as new setGeneric setMethod setValidity .valueClassTest
-#' @importFrom rlang .data
 NULL
 
 # S4 dispatch to base S3 generic ===============================================
 setGeneric("summary")
 setGeneric("sort")
-setGeneric("autoplot", package = "ggplot2")
+setGeneric("sort.list")
 
 # Coerce =======================================================================
 #' Coda
@@ -58,8 +50,6 @@ setGeneric(
 #'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
 #' @param iteration A length-one [`numeric`] vector specifying the index of the
 #'  iteration column.
-#' @param age A length-one [`numeric`] vector specifying the index of the age
-#'  column.
 #' @param ... Currently not used.
 #' @return
 #'  An [`MCMC-class`] object.
@@ -103,7 +93,7 @@ setGeneric(
 #' @param x An object from which to get or set element(s).
 #' @param value A possible value for the element(s) of `x`.
 #' @return
-#'  An object of the same sort as `object` with the new values assigned.
+#'  An object of the same sort as `x` with the new values assigned.
 # @example inst/examples/ex-mutator.R
 #' @author N. Frerebeau
 #' @docType methods
@@ -164,6 +154,22 @@ NULL
 NULL
 
 ## Sort ------------------------------------------------------------------------
+#' Ordering Permutation of an MCMC Object
+#'
+#' Returns a permutation which rearranges an object into ascending or descending
+#' temporal order.
+#' @param x An [`MCMC-class`] object.
+#' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
+#' @return
+#'  An [`integer`] vector.
+#' @example inst/examples/ex-subset.R
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @name sort.list
+#' @rdname sort.list
+NULL
+
 #' Sort an MCMC Object
 #'
 #' Sort (or order) an object into ascending or descending temporal order.
@@ -187,10 +193,9 @@ NULL
 #' @param object An object (typically an [`MCMC-class`] object).
 #' @return
 #'  * `BP_to_CE()`, `BP_to_b2k()`, `CE_to_BP()`, `CE_to_b2k()`, `b2k_to_CE()`
-#'    and `b2k_to_BP()` return an object of the same class as `object`.
+#'    and `b2k_to_BP()` return an object of the same sort as `object` with a
+#'    new time scale.
 #'  * `is_BP()`, `is_CE()`, `is_b2k()` return a [`logical`] scalar.
-#' @return
-#'  An object of the same sort as `object` with a new time scale.
 #' @note
 #'  There is no year \eqn{0} in BCE/CE scale.
 #' @example inst/examples/ex-calendar.R
@@ -298,7 +303,21 @@ setGeneric(
 #' @param newdata A [`numeric`] vector giving the depths at which ages will be
 #'  predicted. If `missing`, the original data points are used.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param ... Currently not used.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ann A [`logical`] scalar: should the default annotation (title and x,
+#'  y and z axis labels) appear on the plot?
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param panel.first An an `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param ... Other [graphical parameters][graphics::par] may also be passed as
+#'  arguments to this function, particularly, `border`, `col`, `lwd`, `lty` or
+#'  `pch`.
 #' @details
 #'  We assume it exists a function \eqn{f} relating the age and the depth
 #'  \eqn{age = f(depth)}. We estimate the function using local regression
@@ -309,7 +328,6 @@ setGeneric(
 #' @return
 #'  * `bury()` returns an [`AgeDepthModel-class`] object.
 #'  * `predict()` returns an [`EventsMCMC-class`] object.
-#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
 #'  * `plot()` is called it for its side-effects: it results in a graphic being
 #'  displayed (invisibly returns `x`).
 #' @references
@@ -383,6 +401,10 @@ setGeneric(
 #' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
 #'  credible interval be computed/displayed?
 #' @param legend A [`logical`] scalar: should a legend be displayed?
+#' @param col.tempo,col.credible,col.gauss A specification for the plotting
+#'  colors.
+#' @param lty.tempo,lty.credible,lty.gauss The line types to be used.
+#' @param lwd.tempo,lwd.credible,lwd.gauss The line widths.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x,
@@ -428,7 +450,6 @@ setGeneric(
 #'
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
 #' @param object An [`EventsMCMC-class`] or a [`CumulativeEvents-class`] object.
-#' @param x An [`ActivityEvents-class`] object.
 #' @param from A length-one [`numeric`] vector giving the earliest date to
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
@@ -437,14 +458,25 @@ setGeneric(
 #'  resolution (in years) at which densities are to be estimated.
 #'  If `NULL` (the default), equally spaced points will be used (according to
 #'  `options("chronos.grid")`).
-#' @param fill A [`character`] string specifying the colour to be used to fill
-#'  the area under the curve.
-#' @param ... Any [`ActivityEvents-class`] object.
+#' @param x An [`ActivityEvents-class`] object.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ann A [`logical`] scalar: should the default annotation (title and x,
+#'  y and z axis labels) appear on the plot?
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param panel.first An an `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param ... Other [graphical parameters][graphics::par] may also be passed as
+#'  arguments to this function, particularly, `border`, `col`, `lwd` or `lty`.
 #' @return
 #'  * `activity()` returns an [`ActivityEvents-class`] object.
-#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
 #'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
+#'    displayed (invisibly returns `x`).
 #' @references
 #'  Dye, T. S. (2016). Long-term rhythms in the development of Hawaiian social
 #'  stratification. *Journal of Archaeological Science*, 71: 1-9.
@@ -453,11 +485,6 @@ setGeneric(
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family event tools
 #' @docType methods
-#' @name activity
-#' @rdname activity
-NULL
-
-#' @rdname activity
 #' @aliases activity-method
 setGeneric(
   name = "activity",
@@ -470,7 +497,6 @@ setGeneric(
 #'
 #' @param object An [`EventsMCMC-class`], a [`CumulativeEvents-class`] or an
 #'  [`ActivityEvents-class`] object.
-#' @param x A [`RateOfChange-class`] object.
 #' @param from A length-one [`numeric`] vector giving the earliest date to
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
@@ -479,13 +505,25 @@ setGeneric(
 #'  resolution (in years) at which densities are to be estimated.
 #'  If `NULL` (the default), equally spaced points will be used (according to
 #'  `options("chronos.grid")`).
-#' @param colour A [`character`] string specifying the colour of the segments.
-#' @param ... Currently not used.
+#' @param x A [`RateOfChange-class`] object.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ann A [`logical`] scalar: should the default annotation (title and x,
+#'  y and z axis labels) appear on the plot?
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param panel.first An an `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param ... Other [graphical parameters][graphics::par] may also be passed as
+#'  arguments to this function.
 #' @return
 #'  * `roc()` returns an [`RateOfChange-class`] object.
-#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
 #'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
+#'    displayed (invisibly returns `x`).
 #' @example inst/examples/ex-tempo.R
 #' @author N. Frerebeau
 #' @family event tools
@@ -508,14 +546,23 @@ setGeneric(
 #' A statistical graphic designed for the archaeological study of when
 #' events of a specified kind occurred.
 #' @param object An [`EventsMCMC-class`] object.
-#' @param x An [`OccurrenceEvents-class`] object.
-#' @param interval A [`character`] string specifying the confidence interval to
-#'  be drawn. It must be one of "`ci`" (credible interval; the default)
-#'  or "`hpdi`" (highest posterior density interval). Any unambiguous substring
-#'  can be given.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param colour A [`character`] string specifying the colour of the segments.
-#' @param ... Currently not used.
+#' @param x An [`OccurrenceEvents-class`] object.
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ann A [`logical`] scalar: should the default annotation (title and x,
+#'  y and z axis labels) appear on the plot?
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param panel.first An an `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param ... Other [graphical parameters][graphics::par] may also be passed as
+#'  arguments to this function, particularly, `border`, `col`, `lwd`, `lty` or
+#'  `pch`.
 #' @details
 #'  If we have \eqn{k} events, then we can estimate the calendar date \eqn{t}
 #'  corresponding to the smallest date such that the number of events observed
@@ -526,9 +573,8 @@ setGeneric(
 #'  of confidence.
 #' @return
 #'  * `occurrence()` returns an [`OccurrenceEvents-class`] object.
-#'  * `autoplot()` and `multiplot` return a [`ggplot`][`ggplot2::ggplot`] object.
 #'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
+#'    displayed (invisibly returns `x`).
 #' @return An [`OccurrenceEvents-class`] object.
 #' @example inst/examples/ex-occurrence.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
@@ -556,8 +602,6 @@ setGeneric(
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
-#' @param simplify A [`logical`] scalar: should the results should be
-#'  simplified?
 #' @param ... Currently not used.
 #' @details
 #'  A \eqn{(100 \times level)}{(100 * level)} % credible interval is an interval
@@ -570,9 +614,7 @@ setGeneric(
 #'  For instance, the 95% credible interval is the central portion of the
 #'  posterior distribution that contains 95% of the values.
 #' @return
-#'  If `simplify` is `TRUE` (the default), returns a [`data.frame`] giving the
-#'  lower and upper boundaries of the credible interval and associated
-#'  probabilities. Else, returns a [`list`] of `numeric` [`matrix`].
+#'  Returns a [`list`] of `numeric` [`matrix`].
 #' @example inst/examples/ex-interval.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family statistics
@@ -591,13 +633,9 @@ setGeneric(
 #'  output of the MCMC algorithm for the parameter.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
-#' @param simplify A [`logical`] scalar: should the results should be
-#'  simplified?
 #' @param ... Extra arguments to be passed to [stats::density()].
 #' @return
-#'  If `simplify` is `TRUE` (the default), returns a [`data.frame`] giving the
-#'  lower and upper boundaries of the HPD interval and associated
-#'  probabilities. Else, returns a [`list`] of `numeric` [`matrix`].
+#'  Returns a [`list`] of `numeric` [`matrix`].
 #' @references
 #'  Hyndman, R. J. (1996). Computing and graphing highest density regions.
 #'  *American Statistician*, 50: 120-126. \doi{10.2307/2684423}.
@@ -641,27 +679,6 @@ setGeneric(
   def = function(x, groups, ...) standardGeneric("phase"),
   valueClass = "PhasesMCMC"
 )
-
-# @rdname phase
-# @aliases get_order-method
-# setGeneric(
-#   name = "get_order",
-#   def = function(x, value) standardGeneric("get_order")
-# )
-
-# @rdname phase
-# @aliases set_order-method
-# setGeneric(
-#   name = "set_order<-",
-#   def = function(x, value) standardGeneric("set_order<-")
-# )
-
-# @rdname phase
-# @aliases is_ordered-method
-# setGeneric(
-#   name = "is_ordered",
-#   def = function(x) standardGeneric("is_ordered")
-# )
 
 ## Range -----------------------------------------------------------------------
 #' Phase Time Range
@@ -734,11 +751,10 @@ setGeneric(
 # Plot =========================================================================
 #' Plot
 #'
-#' @param object,x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
-#' @param groups A [`character`] vector used for mapping colours.
-#' @param select An [`integer`] vector specifying the index of the MCMC samples
-#'  to be drawn.
+#' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @param density A [`logical`] scalar: should estimated density be plotted?
+#' @param boundaries A [`logical`] scalar: should phase time range be plotted
+#'  (see [boundaries()])?
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`credible`" (credible interval) or "`hpdi`"
 #'  (highest posterior density interval). Any unambiguous substring can be
@@ -748,13 +764,22 @@ setGeneric(
 #' @param range A [`character`] string specifying the additional time range to
 #'  be displayed. It must be one of "`hiatus`" or "`transition`". If `NULL` (the
 #'  default), no additional time ranges are displayed.
-#' @param facet A [`logical`] scalar: should a matrix of panels defined by phase
-#'  be drawn?
-#' @param ... Extra parameters to be passed to [`stats::density()`].
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ann A [`logical`] scalar: should the default annotation (title and x,
+#'  y and z axis labels) appear on the plot?
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param panel.first An an `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param ... Extra parameters to be passed to [stats::density()].
 #' @return
-#'  * `autoplot()` returns a [`ggplot`][`ggplot2::ggplot`] object.
-#'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'  displayed (invisibly returns `x`).
+#'   `plot()` is called it for its side-effects: it results in a graphic being
+#'   displayed (invisibly returns `x`).
 #' @example inst/examples/ex-summary.R
 #' @seealso [`stats::density()`]
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
@@ -765,7 +790,15 @@ setGeneric(
 #' @aliases plot-method
 NULL
 
-#' @rdname plot
+#' Multiple Plots
+#'
+#' @param ... Any object of the same class.
+#' @return
+#'   `multiplot()` is called it for its side-effects: it results in a graphic
+#'   being displayed.
+#' @author N. Frerebeau
+#' @family plot methods
+#' @docType methods
 #' @aliases multiplot-method
 setGeneric(
   name = "multiplot",

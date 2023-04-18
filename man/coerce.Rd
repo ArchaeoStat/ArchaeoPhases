@@ -65,9 +65,6 @@ is used starting from the second column (after deleting the \code{iteration}
 column, if any).}
 
 \item{names}{A \code{\link{character}} vector giving the names of the phases.}
-
-\item{age}{A length-one \code{\link{numeric}} vector specifying the index of the age
-column.}
 }
 \value{
 An \code{\linkS4class{MCMC}} object.

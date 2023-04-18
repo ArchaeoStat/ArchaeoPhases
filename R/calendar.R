@@ -88,10 +88,28 @@ setMethod(
 
 #' @export
 #' @rdname calendar
+#' @aliases is_CE,RateOfChange-method
+setMethod(
+  f = "is_CE",
+  signature = "RateOfChange",
+  definition = function(object) identical(get_calendar(object), "CE")
+)
+
+#' @export
+#' @rdname calendar
 #' @aliases is_CE,OccurrenceEvents-method
 setMethod(
   f = "is_CE",
   signature = "OccurrenceEvents",
+  definition = function(object) identical(get_calendar(object), "CE")
+)
+
+#' @export
+#' @rdname calendar
+#' @aliases is_CE,AgeDepthModel-method
+setMethod(
+  f = "is_CE",
+  signature = "AgeDepthModel",
   definition = function(object) identical(get_calendar(object), "CE")
 )
 

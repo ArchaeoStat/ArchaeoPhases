@@ -52,6 +52,7 @@ summary(eve_CE)
 ## Plot events
 plot(eve_CE, interval = "credible", level = 0.68)
 plot(eve_BP, interval = "hpdi", level = 0.68)
+plot(eve_BP[[1]], interval = "hpdi")
 
 ## Compute phases
 pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)))

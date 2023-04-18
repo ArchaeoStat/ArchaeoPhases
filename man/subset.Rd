@@ -66,6 +66,7 @@ pha[, 1, , drop = FALSE] # Select the first phase
 Other mutators: 
 \code{\link{bind}},
 \code{\link{mutator}},
+\code{\link{sort.list}()},
 \code{\link{sort}()}
 }
 \author{

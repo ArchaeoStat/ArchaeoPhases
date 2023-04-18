@@ -58,7 +58,7 @@ setMethod(
   f = "[[",
   signature = c(x = "MCMC", i = "numeric", j = "missing"),
   definition = function(x, i) {
-    x[, i, drop = TRUE]
+    x[, i, drop = FALSE]
   }
 )
 

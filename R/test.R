@@ -107,7 +107,7 @@ setMethod(
 
 # Hiatus =======================================================================
 #' @export
-#' @describeIn hiatus Returns a length-three [`numeric`] vector (upper and upper
+#' @describeIn hiatus Returns a length-three [`numeric`] vector (stop and stop
 #'  boundaries, and hiatus duration, if any).
 #' @aliases hiatus,numeric,numeric-method
 setMethod(
@@ -117,7 +117,7 @@ setMethod(
     ## Validation
     arkhe::assert_length(y, length(x))
 
-    no_hiatus <- c(lower = NA, upper = NA)
+    no_hiatus <- c(start = NA, stop = NA)
 
     gamma <- mean(x < y)
     if (gamma < level) return(no_hiatus)
@@ -139,7 +139,7 @@ setMethod(
 
     inf <- endpoints[[1]]
     sup <- endpoints[[2]]
-    c(lower = inf, upper = sup)
+    c(start = inf, stop = sup)
   }
 )
 
@@ -155,14 +155,14 @@ setMethod(
     z <- names(x)
 
     ## Matrix of results
-    lower <- upper <- event <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
+    start <- stop <- event <- matrix(nrow = n, ncol = n, dimnames = list(z, z))
 
     for (i in 1:n) {
       for (j in 1:n) {
         if (i != j) {
           h <- hiatus(x[, i], x[, j], level = level)
-          lower[i, j] <- h["lower"]
-          upper[i, j] <- h["upper"]
+          start[i, j] <- h["start"]
+          stop[i, j] <- h["stop"]
         }
         event[i, j] <- paste(z[i], z[j], sep = "-")
       }
@@ -172,13 +172,13 @@ setMethod(
     BP <- is_BP(x) || is_b2k(x)
     ## Reverse boundaries if BP or b2k scale
     if (BP) {
-      lower <- t(lower)
-      upper <- t(upper)
+      start <- t(start)
+      stop <- t(stop)
     }
 
     .TimeRange(
-      lower = if (BP) upper else lower,
-      upper = if (BP) lower else upper,
+      start = if (BP) stop else start,
+      stop = if (BP) start else stop,
       names = event,
       calendar = get_calendar(x),
       hash = get_hash(x)

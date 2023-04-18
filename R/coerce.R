@@ -7,22 +7,22 @@ NULL
 #' @export
 as.data.frame.CumulativeEvents <- function(x, ...) {
   tmp <- data.frame(
-    year = x@year,
+    years = x@years,
     estimate = x@estimate
   )
   if (nrow(x@credible) > 0) {
-    tmp$credible_lower <- x@credible[, 1]
-    tmp$credible_upper <- x@credible[, 2]
+    tmp$credible_start <- x@credible[, 1]
+    tmp$credible_stop <- x@credible[, 2]
   } else {
-    tmp$credible_lower <- NA_real_
-    tmp$credible_upper <- NA_real_
+    tmp$credible_start <- NA_real_
+    tmp$credible_stop <- NA_real_
   }
   if (nrow(x@gauss) > 0) {
-    tmp$gauss_lower <- x@gauss[, 1]
-    tmp$gauss_upper <- x@gauss[, 2]
+    tmp$gauss_start <- x@gauss[, 1]
+    tmp$gauss_stop <- x@gauss[, 2]
   } else {
-    tmp$gauss_lower <- NA_real_
-    tmp$gauss_upper <- NA_real_
+    tmp$gauss_start <- NA_real_
+    tmp$gauss_stop <- NA_real_
   }
   tmp
 }
@@ -31,7 +31,7 @@ as.data.frame.CumulativeEvents <- function(x, ...) {
 #' @export
 as.data.frame.ActivityEvents <- function(x, ...) {
   data.frame(
-    year = x@year,
+    years = x@years,
     estimate = x@estimate
   )
 }
@@ -41,8 +41,8 @@ as.data.frame.ActivityEvents <- function(x, ...) {
 as.data.frame.OccurrenceEvents <- function(x, ...) {
   data.frame(
     events = x@events,
-    lower = x@lower,
-    upper = x@upper
+    start = x@start,
+    stop = x@stop
   )
 }
 
@@ -50,7 +50,7 @@ as.data.frame.OccurrenceEvents <- function(x, ...) {
 #' @export
 as.data.frame.RateOfChange <- function(x, ...) {
   data.frame(
-    year = x@year,
+    years = x@years,
     estimate = x@estimate
   )
 }
@@ -59,14 +59,14 @@ as.data.frame.RateOfChange <- function(x, ...) {
 #' @export
 as.data.frame.TimeRange <- function(x, ...) {
 
-  ok <- !is.na(x@lower)
-  lower <- x@lower[ok]
-  upper <- x@upper[ok]
+  ok <- !is.na(x@start)
+  start <- x@start[ok]
+  stop <- x@stop[ok]
 
   data.frame(
-    lower = lower,
-    upper = upper,
-    duration = abs(upper - lower),
+    start = start,
+    stop = stop,
+    duration = abs(stop - start),
     row.names = x@names[ok]
   )
 }

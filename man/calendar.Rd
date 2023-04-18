@@ -30,7 +30,9 @@
 \alias{is_CE,PhasesMCMC-method}
 \alias{is_CE,CumulativeEvents-method}
 \alias{is_CE,ActivityEvents-method}
+\alias{is_CE,RateOfChange-method}
 \alias{is_CE,OccurrenceEvents-method}
+\alias{is_CE,AgeDepthModel-method}
 \alias{is_b2k,MCMC-method}
 \alias{is_b2k,PhasesMCMC-method}
 \alias{is_b2k,CumulativeEvents-method}
@@ -95,7 +97,11 @@ is_b2k(object)
 
 \S4method{is_CE}{ActivityEvents}(object)
 
+\S4method{is_CE}{RateOfChange}(object)
+
 \S4method{is_CE}{OccurrenceEvents}(object)
+
+\S4method{is_CE}{AgeDepthModel}(object)
 
 \S4method{is_b2k}{MCMC}(object)
 

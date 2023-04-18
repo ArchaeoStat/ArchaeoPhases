@@ -42,7 +42,7 @@ satisfies
 \itemize{
 \item \code{hiatus(x = PhasesMCMC, y = missing)}: Hiatus between successive phases.
 
-\item \code{hiatus(x = numeric, y = numeric)}: Returns a length-three \code{\link{numeric}} vector (upper and upper
+\item \code{hiatus(x = numeric, y = numeric)}: Returns a length-three \code{\link{numeric}} vector (stop and stop
 boundaries, and hiatus duration, if any).
 
 \item \code{hiatus(x = EventsMCMC, y = missing)}: Hiatus between successive events.

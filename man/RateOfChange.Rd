@@ -11,7 +11,7 @@ An S4 class to store the result of a \code{\link[=roc]{rate of change}} estimati
 \section{Slots}{
 
 \describe{
-\item{\code{year}}{A \code{\link{numeric}} vector giving the time points at which the
+\item{\code{years}}{A \code{\link{numeric}} vector giving the time points at which the
 rate fo change is estimated.}
 
 \item{\code{estimate}}{A \code{\link{numeric}} vector giving the estimation of the

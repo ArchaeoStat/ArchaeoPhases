@@ -11,7 +11,7 @@ An S4 class to store the result of an \code{\link{activity}} plot.
 \section{Slots}{
 
 \describe{
-\item{\code{year}}{A \code{\link{numeric}} vector giving the time points at which the
+\item{\code{years}}{A \code{\link{numeric}} vector giving the time points at which the
 distribution is estimated.}
 
 \item{\code{estimate}}{A \code{\link{numeric}} vector giving the estimation of the

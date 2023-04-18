@@ -50,7 +50,7 @@ setValidity(
   Class = "CumulativeEvents",
   method = function(object) {
     # Get data
-    year <- object@year
+    years <- object@years
     estimate <- object@estimate
     credible <- object@credible
     gauss <- object@gauss
@@ -59,7 +59,7 @@ setValidity(
     events <- object@events
     calendar <- object@calendar
     hash <- object@hash
-    n <- length(year)
+    n <- length(years)
     g <- getOption("chronos.grid")
 
     cnd <- list(
@@ -83,11 +83,11 @@ setValidity(
   Class = "ActivityEvents",
   method = function(object) {
     # Get data
-    year <- object@year
+    years <- object@years
     estimate <- object@estimate
     calendar <- object@calendar
     hash <- object@hash
-    n <- length(year)
+    n <- length(years)
 
     cnd <- list(
       arkhe::validate(arkhe::assert_length(estimate, n)),
@@ -106,16 +106,16 @@ setValidity(
   method = function(object) {
     # Get data
     events <- object@events
-    lower <- object@lower
-    upper <- object@upper
+    start <- object@start
+    stop <- object@stop
     level <- object@level
     calendar <- object@calendar
     hash <- object@hash
     n <- length(events)
 
     cnd <- list(
-      arkhe::validate(arkhe::assert_length(lower, n)),
-      arkhe::validate(arkhe::assert_length(upper, n)),
+      arkhe::validate(arkhe::assert_length(start, n)),
+      arkhe::validate(arkhe::assert_length(stop, n)),
       arkhe::validate(arkhe::assert_length(level, 1)),
       arkhe::validate(arkhe::assert_length(calendar, 1)),
       arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
@@ -131,11 +131,11 @@ setValidity(
   Class = "RateOfChange",
   method = function(object) {
     # Get data
-    year <- object@year
+    years <- object@years
     estimate <- object@estimate
     calendar <- object@calendar
     hash <- object@hash
-    n <- length(year)
+    n <- length(years)
 
     cnd <- list(
       arkhe::validate(arkhe::assert_length(estimate, n)),

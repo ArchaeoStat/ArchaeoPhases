@@ -8,6 +8,7 @@ plot(age)
 
 ## Predict new values
 new <- predict(age, newdata = 1.5:5.5)
+summary(new)
 
 plot(eve)
 plot(new)
