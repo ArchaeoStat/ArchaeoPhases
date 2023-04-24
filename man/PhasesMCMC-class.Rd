@@ -6,7 +6,7 @@
 \alias{.PhasesMCMC}
 \title{MCMC Phases}
 \description{
-An S4 class to represent the output of a MCMC algorithm.
+S4 classes to represent a collection of phases.
 }
 \section{Slots}{
 
@@ -21,7 +21,7 @@ original data file.}
 }}
 
 \note{
-This class inherits from \code{\link{array}}.
+Theses classes inherit from \code{\link{array}}.
 }
 \section{Coerce}{
 
@@ -45,7 +45,9 @@ Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},
-\code{\link{MCMC}},
+\code{\link{DurationsMCMC-class}},
+\code{\link{EventsMCMC-class}},
+\code{\link{MCMC-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
@@ -54,3 +56,4 @@ Other classes:
 N. Frerebeau
 }
 \concept{classes}
+\keyword{internal}

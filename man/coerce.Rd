@@ -7,8 +7,6 @@
 \alias{as_events-method}
 \alias{as_phases}
 \alias{as_phases-method}
-\alias{as_rece}
-\alias{as_rece-method}
 \alias{as_events,matrix-method}
 \alias{as_events,data.frame-method}
 \alias{as_phases,matrix-method}
@@ -18,8 +16,6 @@
 as_events(from, ...)
 
 as_phases(from, ...)
-
-as_rece(from, ...)
 
 \S4method{as_events}{matrix}(from, calendar = c("BP", "CE", "b2k"), iteration = NULL)
 

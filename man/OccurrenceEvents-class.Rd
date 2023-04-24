@@ -41,7 +41,9 @@ Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},
-\code{\link{MCMC}},
+\code{\link{DurationsMCMC-class}},
+\code{\link{EventsMCMC-class}},
+\code{\link{MCMC-class}},
 \code{\link{PhasesMCMC-class}},
 \code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
@@ -50,3 +52,4 @@ Other classes:
 N. Frerebeau
 }
 \concept{classes}
+\keyword{internal}

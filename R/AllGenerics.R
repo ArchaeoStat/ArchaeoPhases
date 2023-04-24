@@ -77,14 +77,6 @@ setGeneric(
   valueClass = "PhasesMCMC"
 )
 
-#' @rdname coerce
-#' @aliases as_rece-method
-setGeneric(
-  name = "as_rece",
-  def = function(from, ...) standardGeneric("as_rece"),
-  valueClass = "RECE"
-)
-
 # Tools ========================================================================
 ## Mutators --------------------------------------------------------------------
 #' Get or Set Parts of an Object
