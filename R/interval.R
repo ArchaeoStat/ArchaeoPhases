@@ -60,7 +60,7 @@ setMethod(
   signature = "numeric",
   definition = function(object, level = 0.95, CE = TRUE, ...) {
     ## Compute density
-    d <- stats::density(object, ..., n = getOption("chronos.grid"))
+    d <- stats::density(object, ..., n = getOption("ArchaeoPhases.grid"))
     x <- d$x
     y <- d$y / sum(d$y)
 

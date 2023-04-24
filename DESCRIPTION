@@ -1,8 +1,8 @@
 Type: Package
-Package: chronos
+Package: ArchaeoPhases
 Title: Post-Processing of Markov Chain Monte Carlo Simulations for
     Chronological Modelling
-Version: 0.0.0.9000
+Version: 2.0.0.9000
 Authors@R: c(
     person("Anne", "Philippe", , "anne.philippe@univ-nantes.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-5331-5087")),
@@ -25,9 +25,8 @@ Description: Statistical analysis of archaeological dates and groups of
     of dates (e.g. duration, transition and hiatus between successive
     phases) as described in Philippe and Vibet (2020) <doi:10.18637/jss.v093.c01>.
 License: GPL (>= 3)
-URL: https://packages.tesselle.org/chronos/,
-    https://github.com/tesselle/chronos
-BugReports: https://github.com/tesselle/chronos/issues
+URL: https://github.com/ArchaeoStat/ArchaeoPhases
+BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
 Depends: 
     R (>= 3.5.0)
 Imports: 
@@ -56,10 +55,10 @@ RoxygenNote: 7.2.3
 Collate: 
     'AllClasses.R'
     'AllGenerics.R'
+    'ArchaeoPhases-package.R'
     'activity.R'
     'bind.R'
     'calendar.R'
-    'chronos-package.R'
     'coerce.R'
     'data.R'
     'depth.R'

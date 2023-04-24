@@ -382,7 +382,7 @@ setGeneric(
 #' @param resolution A length-one [`numeric`] vector specifying the temporal
 #'  resolution (in years) at which densities are to be estimated.
 #'  If `NULL` (the default), equally spaced points will be used (according to
-#'  `options("chronos.grid")`).
+#'  `options("ArchaeoPhases.grid")`).
 #' @param x A [`CumulativeEvents-class`] object or an [`EventsMCMC-class`]
 #'  object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
@@ -449,7 +449,7 @@ setGeneric(
 #' @param resolution A length-one [`numeric`] vector specifying the temporal
 #'  resolution (in years) at which densities are to be estimated.
 #'  If `NULL` (the default), equally spaced points will be used (according to
-#'  `options("chronos.grid")`).
+#'  `options("ArchaeoPhases.grid")`).
 #' @param x An [`ActivityEvents-class`] object.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
@@ -496,7 +496,7 @@ setGeneric(
 #' @param resolution A length-one [`numeric`] vector specifying the temporal
 #'  resolution (in years) at which densities are to be estimated.
 #'  If `NULL` (the default), equally spaced points will be used (according to
-#'  `options("chronos.grid")`).
+#'  `options("ArchaeoPhases.grid")`).
 #' @param x A [`RateOfChange-class`] object.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.

@@ -32,7 +32,7 @@ setMethod(
                         resolution = NULL) {
 
     n_events <- ncol(object)
-    n_grid <- getOption("chronos.grid")
+    n_grid <- getOption("ArchaeoPhases.grid")
     if (is.null(resolution)) resolution <- ((to - from) / (n_grid - 1))
 
     ## Empirical cumulative distribution

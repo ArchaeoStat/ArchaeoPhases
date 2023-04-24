@@ -16,44 +16,53 @@ knitr::opts_chunk$set(
 )
 ```
 
-# chronos <img width=120px src="man/figures/logo.png" align="right" />
+# ArchaeoPhases
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/tesselle/chronos/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/chronos/actions)
-[![codecov](https://codecov.io/gh/tesselle/chronos/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tesselle/chronos)
-[![CodeFactor](https://www.codefactor.io/repository/github/tesselle/chronos/badge/master)](https://www.codefactor.io/repository/github/tesselle/chronos/overview/master)
-[![Dependencies](https://tinyverse.netlify.com/badge/chronos)](https://cran.r-project.org/package=chronos)
+[![R-CMD-check](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
+[![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
-[![r-universe](https://tesselle.r-universe.dev/badges/chronos)](https://tesselle.r-universe.dev){.pkgdown-devel}
+[![r-universe](https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases)](https://ArchaeoStat.r-universe.dev){.pkgdown-devel}
+[![CRAN Version](http://www.r-pkg.org/badges/version/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
+[![CRAN checks](https://badges.cranchecks.info/worst/ArchaeoPhases.svg)](https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html){.pkgdown-release}
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 [![DOI JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
 
-**_chronos_ is a fork of [_ArchaeoPhases_](https://github.com/ArchaeoStat/ArchaeoPhases) v1.5 [@philippe2020] rewritten in S4, see the changelog for details.**
-
 ## Overview
 
-Statistical analysis of archaeological dates and groups of dates. **chronos** allows to post-process Markov Chain Monte Carlo (MCMC) simulations from [ChronoModel](https://chronomodel.com) [@lanos2020], [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) [@bronkramsey2009] or [BCal](https://bcal.shef.ac.uk) [@buck1999]. This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
+Statistical analysis of archaeological dates and groups of dates. **ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC) simulations from [ChronoModel](https://chronomodel.com) [@lanos2020], [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) [@bronkramsey2009] or [BCal](https://bcal.shef.ac.uk) [@buck1999]. This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
+
+**Version 2.0 of ArchaeoPhases introduces a complete rewrite of the package: all functions have been renamed (see `news(Version >= "2.0", package = "ArchaeoPhases")`).**
 
 ```{r citation, echo=FALSE, comment=''}
-utils::citation("chronos")
+utils::citation("ArchaeoPhases")
 ```
 
 ## Installation
 
-You can install the released version of **chronos** from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of **ArchaeoPhases** from [CRAN](https://CRAN.R-project.org) with:
 
 ```{r cran-installation, eval=FALSE}
-install.packages("chronos")
+install.packages("ArchaeoPhases")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ```{r gh-installation, eval=FALSE}
 # install.packages("remotes")
-remotes::install_github("tesselle/chronos")
+remotes::install_github("ArchaeoStat/ArchaeoPhases")
+```
+
+You can install the 1.x releases from the CRAN archives:
+
+```{r archive-installation, eval=FALSE}
+# install.packages("devtools")
+devtools::install_version("ArchaeoPhases", version = "1.8")
 ```
 
 ## Usage
@@ -67,7 +76,7 @@ install.packages("fasti", repos = "https://tesselle.r-universe.dev")
 
 ```{r packages-load}
 ## Load package
-library(chronos)
+library(ArchaeoPhases)
 ```
 
 Import a CSV file containing a sample from the posterior distribution:
@@ -85,13 +94,11 @@ path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
 (chrono_phases <- read_chronomodel_phases(path_phases))
 ```
 
-**chronos** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for plotting information. This makes it easy to customize diagrams (e.g. using themes and scales).
-
 ### Analysis of a series of dates
 
 ```{r events-plot, fig.width=5, fig.align='default', fig.height=5, out.width='50%', fig.show='hold'}
 ## Plot the first event
-plot(chrono_events, select = 1, interval = "hpdi")
+plot(chrono_events[[1]], interval = "hpdi")
 
 ## Plot all events
 plot(chrono_events)
@@ -117,9 +124,9 @@ boundaries(chrono_phases, level = 0.95)
 plot(chrono_phases)
 ```
 
-```{r succession-plot, fig.height=2.5}
-plot(chrono_phases, select = c("UP", "EPI"), range = "hiatus")
-plot(chrono_phases, select = c("UP", "EPI"), range = "transition")
+```{r succession-plot, fig.height=3.5}
+plot(chrono_phases[, c("UP", "EPI"), ], range = "hiatus")
+plot(chrono_phases[, c("UP", "EPI"), ], range = "transition")
 ```
 
 ## References

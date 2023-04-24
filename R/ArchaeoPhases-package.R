@@ -1,20 +1,20 @@
 #' @details
 #'  \tabular{ll}{
-#'   **Package:** \tab chronos \cr
+#'   **Package:** \tab ArchaeoPhases \cr
 #'   **Type:** \tab Package \cr
-#'   **Version:** \tab 0.0.0.9000 \cr
+#'   **Version:** \tab 2.0.0 \cr
 #'   **License:** \tab GPL-3 \cr
 #'   **JSS:** \tab \doi{10.18637/jss.v093.c01} \cr
 #'  }
 #'
 #' @section Package options:
-#'  `chronos` uses the following [options()] to configure behaviour:
-#'  * `chronos.grid`: a [`numeric`] value specifying the number of equally
+#'  `ArchaeoPhases` uses the following [options()] to configure behaviour:
+#'  * `ArchaeoPhases.grid`: a [`numeric`] value specifying the number of equally
 #'    spaced points at which densities are to be estimated (defaults to
 #'    \eqn{512}). Should be a power of \eqn{2}.
-#'  * `chronos.precision`: an [`integer`] indicating the number of decimal
+#'  * `ArchaeoPhases.precision`: an [`integer`] indicating the number of decimal
 #'    places (defaults to \eqn{0}).
-#'  * `chronos.progress`: a [`logical`] scalar specifying if progress bars
+#'  * `ArchaeoPhases.progress`: a [`logical`] scalar specifying if progress bars
 #'    should be displayed (defaults to [interactive()]).
 #'
 #' @author
@@ -37,8 +37,8 @@
 #'  BP 92208\cr
 #'  F-44322 Nantes Cedex 3\cr
 #'  France
-#' @name chronos-package
-#' @aliases chronos
+#' @name ArchaeoPhases-package
+#' @aliases ArchaeoPhases
 #' @docType package
 #' @keywords internal
 "_PACKAGE"

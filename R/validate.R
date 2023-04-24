@@ -60,7 +60,7 @@ setValidity(
     calendar <- object@calendar
     hash <- object@hash
     n <- length(years)
-    g <- getOption("chronos.grid")
+    g <- getOption("ArchaeoPhases.grid")
 
     cnd <- list(
       arkhe::validate(arkhe::assert_length(estimate, n)),

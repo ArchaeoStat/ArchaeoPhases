@@ -1,7 +1,9 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
+    branches: [main, master]
+  pull_request:
     branches: [main, master]
   release:
     types: [published]
@@ -10,71 +12,37 @@ on:
 name: pkgdown
 
 jobs:
-  build:
+  pkgdown:
     runs-on: ubuntu-latest
+    # Only restrict concurrency for non-PR jobs
+    concurrency:
+      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-pandoc@v2
 
-      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
-          extra-repositories: https://tesselle.r-universe.dev
 
-      - uses: r-lib/actions/setup-r-dependencies@v1
+      - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: pkgdown
+          extra-packages: any::pkgdown, local::.
           needs: website
 
       - name: Build site
-        run: |
-          Rscript -e 'install.packages("tekton", repos = "https://tesselle.r-universe.dev")'
-          Rscript -e 'pkgdown::build_site(preview = FALSE, devel = FALSE)'
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
 
-      - name: Upload site
-        uses: actions/upload-artifact@v2
+      - name: Deploy to GitHub pages 🚀
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          name: website
-          path: docs
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    env:
-      REPO: ${{ github.event.repository.name }}
-      COMMIT: ${{ github.sha }}
-      TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    steps:
-      - name: Download site
-        uses: actions/download-artifact@v2
-        with:
-          name: website
-          path: docs
-
-      - name: Configure git
-        run: |
-          git config --global url."https://${TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
-          git config --global user.email "${REPO}@tesselle.org"
-          git config --global user.name "${REPO}"
-
-      - name: Clone tesselle/packages
-        run: |
-          rm -rf tmp
-          git clone -b gh-pages https://github.com/tesselle/packages.git tmp
-
-      - name: Clean old files
-        run: |
-          [ -d docs/dev ] && rm -r tmp/${REPO}/dev || true
-          [ ! -d docs/dev ] && rm -r tmp/${REPO}/* || true
-
-      - name: Deploy
-        run: |
-          mkdir -p tmp/${REPO}
-          cp -r docs/* tmp/${REPO}/
-          cd tmp
-          git add -A
-          git commit -m "Built site for ${REPO}@$(echo ${COMMIT} | cut -c1-7)"
-          git push origin gh-pages
+          clean: false
+          branch: gh-pages
+          folder: docs

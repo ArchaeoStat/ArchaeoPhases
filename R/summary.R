@@ -70,7 +70,7 @@ setMethod(
 stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
                            quantiles = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1),
                            credible = TRUE, level = 0.95, CE = TRUE,
-                           digits = getOption("chronos.precision")) {
+                           digits = getOption("ArchaeoPhases.precision")) {
   ## Defaults
   moy <- mod <- quant <- ec <- ci <- NA_real_
 

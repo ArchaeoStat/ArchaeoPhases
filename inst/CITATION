@@ -1,19 +1,23 @@
-citHeader("To cite chronos in publications use:")
-
-citEntry(entry = "Article",
-  title        = "Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}",
-  author       = c(person(given = "Anne", family = "Philippe", role = "aut"),
-                   person(given = "Marie-Anne", family = "Vibet", role = "aut")),
+bibentry(
+  bibtype      = "Article",
+  header       = "To cite ArchaeoPhases in publications use:",
+  author       = "Anne Philippe and Marie-Anne Vibet",
+  title        = "{{Analysis of Archaeological Phases Using the R Package ArchaeoPhases}}",
   year         = "2020",
   journal      = "Journal of Statistical Software, Code Snippets",
   volume       = "93",
   number       = "1",
   page         = "1--25",
-  doi          = "10.18637/jss.v093.c01",
+  doi          = "10.18637/jss.v093.c01"
+)
 
-  textVersion  =
-  paste("Philippe, Anne & Vibet, Marie-Anne (2020).",
-        "Analysis of Archaeological Phases Using the R Package ArchaeoPhases.",
-        "Journal of Statistical Software, Code Snippets, 93(1), 1--25.",
-        "DOI 10.18637/jss.v093.c01.")
+bibentry(
+  bibtype      = "Manual",
+  author       = "Anne Philippe and Marie-Anne Vibet and Thomas S. Dye and Nicolas Frerebeau",
+  title        = "{{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}}",
+  year         = "2023",
+  organization = "Université de Nantes",
+  address      = "Nantes, France",
+  note         = "R package version 2.0.0",
+  url          = "https://ArchaeoStat.github.io/ArchaeoPhases"
 )

@@ -1,9 +1,7 @@
-# chronos 0.0.0.9000
+# ArchaeoPhases 2.0.0.9000
 
 ## New classes and methods
 * Add `bind()` to bind multiple `MCMC` objects.
-* Add `proxy()` to compute layer-counted proxy records uncertainties (returns a `ProxyRecord` object).
-* Add `rece()` to compute Radiocarbon Event Count Ensembles from MCMC samples (returns an `RECE` object).
 * Add `roc()` to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
 
 ## Enhancements
@@ -13,16 +11,12 @@
 * Use `stats::density()` instead of `hdrcde::hdr()` for HDPI estimation.
 
 ## Breaking changes
-* Full rewrite in S4.
+* Full rewrite in S4 (see below).
 * Remove the Shiny application.
 
-| ArchaeoPhases 1.6 | Chronos |
+| ArchaeoPhases 1.x | ArchaeoPhases 2.0 |
 |:----|:----|
 | `AgeDepth()` | `bury()` |
-| `undated_sample()` | `interpolate()` |
-
-| ArchaeoPhases 1.5 | Chronos |
-|:----|:----|
 | `CreateMinMaxGroup()` | `phase(<MCMC>)`, `as_phases(<matrix>)` |
 | `CredibleInterval()`, `credible_interval()` | `credible(<numeric>, <numeric>)` |
 | `DatesHiatus()`, `dates_hiatus()` | `hiatus(<numeric>, <numeric>)` |
@@ -49,6 +43,16 @@
 | `SuccessionPlot()` | `plot(<PhasesMCMC>)` |
 | `TempoActivityPlot()`, `tempo_activity_plot()` | `activity(<MCMC>)` + `plot(<ActivityEvents>)` |
 | `TempoPlot()`, `tempo_plot()` | `tempo(<MCMC>)` + `plot(<CumulativeEvents>)` |
+| `undated_sample()` | `interpolate()` |
+
+# ArchaeoPhases 1.6
+
+## New functions
+* New functions for Allen's interval algebra: `allen_analyze()`, `allen_joint_concurrency()`, `allen_observe_frequency()`, `allen_illustrate()`, `allen_observe()`.
+
+## Bugfixes & changes
+* Fixed a bug that failed to export the `reproduce()` function.
+* Added a vignette on object reproducibility.
 
 # ArchaeoPhases 1.5
 

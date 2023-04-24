@@ -1,12 +1,12 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
-  "identifier": "chronos",
+  "identifier": "ArchaeoPhases",
   "description": "Statistical analysis of archaeological dates and groups of dates. This package allows to post-process Markov Chain Monte Carlo (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>, 'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal' <https://bcal.shef.ac.uk/>. It provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).",
-  "name": "chronos: Post-Processing of Markov Chain Monte Carlo Simulations for\n    Chronological Modelling",
-  "relatedLink": "https://packages.tesselle.org/chronos/",
-  "codeRepository": "https://github.com/tesselle/chronos",
-  "issueTracker": "https://github.com/tesselle/chronos/issues",
+  "name": "ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for\n    Chronological Modelling",
+  "relatedLink": "https://packages.tesselle.org/ArchaeoPhases/",
+  "codeRepository": "https://github.com/tesselle/ArchaeoPhases",
+  "issueTracker": "https://github.com/tesselle/ArchaeoPhases/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "0.0.0.9000",
   "programmingLanguage": {
@@ -221,9 +221,9 @@
       }
     }
   ],
-  "releaseNotes": "https://github.com/tesselle/chronos/blob/master/NEWS.md",
-  "readme": "https://github.com/tesselle/chronos/blob/master/README.md",
-  "contIntegration": ["https://github.com/tesselle/chronos/actions", "https://app.codecov.io/gh/tesselle/chronos"],
+  "releaseNotes": "https://github.com/tesselle/ArchaeoPhases/blob/master/NEWS.md",
+  "readme": "https://github.com/tesselle/ArchaeoPhases/blob/master/README.md",
+  "contIntegration": ["https://github.com/tesselle/ArchaeoPhases/actions", "https://app.codecov.io/gh/tesselle/ArchaeoPhases"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["r-package", "bayesian-statistics", "radiocarbon-dates", "geochronology", "markov-chain"]
 }

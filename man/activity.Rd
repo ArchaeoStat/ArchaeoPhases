@@ -42,7 +42,7 @@ for (in years).}
 \item{resolution}{A length-one \code{\link{numeric}} vector specifying the temporal
 resolution (in years) at which densities are to be estimated.
 If \code{NULL} (the default), equally spaced points will be used (according to
-\code{options("chronos.grid")}).}
+\code{options("ArchaeoPhases.grid")}).}
 
 \item{x}{An \code{\linkS4class{ActivityEvents}} object.}
 

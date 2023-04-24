@@ -1,18 +1,29 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# chronos <img width=120px src="man/figures/logo.png" align="right" />
+# ArchaeoPhases
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/tesselle/chronos/workflows/R-CMD-check/badge.svg)](https://github.com/tesselle/chronos/actions)
-[![codecov](https://codecov.io/gh/tesselle/chronos/branch/master/graph/badge.svg)](https://app.codecov.io/gh/tesselle/chronos)
-[![CodeFactor](https://www.codefactor.io/repository/github/tesselle/chronos/badge/master)](https://www.codefactor.io/repository/github/tesselle/chronos/overview/master)
-[![Dependencies](https://tinyverse.netlify.com/badge/chronos)](https://cran.r-project.org/package=chronos)
+[![R-CMD-check](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
+[![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
-<a href="https://tesselle.r-universe.dev" class="pkgdown-devel"><img
-src="https://tesselle.r-universe.dev/badges/chronos"
+<a href="https://ArchaeoStat.r-universe.dev" class="pkgdown-devel"><img
+src="https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases"
 alt="r-universe" /></a>
+<a href="https://cran.r-project.org/package=ArchaeoPhases"
+class="pkgdown-release"><img
+src="http://www.r-pkg.org/badges/version/ArchaeoPhases"
+alt="CRAN Version" /></a> <a
+href="https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html"
+class="pkgdown-release"><img
+src="https://badges.cranchecks.info/worst/ArchaeoPhases.svg"
+alt="CRAN checks" /></a>
+<a href="https://cran.r-project.org/package=ArchaeoPhases"
+class="pkgdown-release"><img
+src="http://cranlogs.r-pkg.org/badges/ArchaeoPhases"
+alt="CRAN Downloads" /></a>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -22,15 +33,10 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
 
-***chronos* is a fork of
-[*ArchaeoPhases*](https://github.com/ArchaeoStat/ArchaeoPhases) v1.5
-(Philippe and Vibet 2020) rewritten in S4, see the changelog for
-details.**
-
 ## Overview
 
 Statistical analysis of archaeological dates and groups of dates.
-**chronos** allows to post-process Markov Chain Monte Carlo (MCMC)
+**ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC)
 simulations from [ChronoModel](https://chronomodel.com) (Lanos et al.
 2020), [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) (Bronk Ramsey 2009)
 or [BCal](https://bcal.shef.ac.uk) (Buck, Christen, and James 1999).
@@ -40,40 +46,48 @@ activity plot). It also allows the estimation and visualization of time
 ranges from the posterior distribution of groups of dates
 (e.g. duration, transition and hiatus between successive phases).
 
+**Version 2.0 of ArchaeoPhases introduces a complete rewrite of the
+package: all functions have been renamed (see
+`news(Version >= "2.0", package = "ArchaeoPhases")`).**
 
-    To cite chronos in publications use:
 
-      Philippe, Anne & Vibet, Marie-Anne (2020). Analysis of Archaeological
-      Phases Using the R Package ArchaeoPhases. Journal of Statistical
-      Software, Code Snippets, 93(1), 1--25. DOI 10.18637/jss.v093.c01.
+    To cite ArchaeoPhases in publications use:
 
-    Une entrée BibTeX pour les utilisateurs LaTeX est
+      Philippe A, Vibet M (2020). "Analysis of Archaeological Phases Using
+      the R Package ArchaeoPhases." _Journal of Statistical Software, Code
+      Snippets_, *93*(1). doi:10.18637/jss.v093.c01
+      <https://doi.org/10.18637/jss.v093.c01>.
 
-      @Article{,
-        title = {Analysis of Archaeological Phases Using the {R} Package {ArchaeoPhases}},
-        author = {Anne Philippe and Marie-Anne Vibet},
-        year = {2020},
-        journal = {Journal of Statistical Software, Code Snippets},
-        volume = {93},
-        number = {1},
-        page = {1--25},
-        doi = {10.18637/jss.v093.c01},
-      }
+    Philippe A, Vibet M, Dye TS, Frerebeau N (2023). _ArchaeoPhases:
+    Post-Processing of Markov Chain Monte Carlo Simulations for
+    Chronological Modelling_. Université de Nantes, Nantes, France. R
+    package version 2.0.0, <https://ArchaeoStat.github.io/ArchaeoPhases>.
+
+    To see these entries in BibTeX format, use 'print(<citation>,
+    bibtex=TRUE)', 'toBibtex(.)', or set
+    'options(citation.bibtex.max=999)'.
 
 ## Installation
 
-You can install the released version of **chronos** from
+You can install the released version of **ArchaeoPhases** from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("chronos")
+install.packages("ArchaeoPhases")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("tesselle/chronos")
+remotes::install_github("ArchaeoStat/ArchaeoPhases")
+```
+
+You can install the 1.x releases from the CRAN archives:
+
+``` r
+# install.packages("devtools")
+devtools::install_version("ArchaeoPhases", version = "1.8")
 ```
 
 ## Usage
@@ -90,7 +104,7 @@ install.packages("fasti", repos = "https://tesselle.r-universe.dev")
 
 ``` r
 ## Load package
-library(chronos)
+library(ArchaeoPhases)
 ```
 
 Import a CSV file containing a sample from the posterior distribution:
@@ -114,19 +128,14 @@ path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
 #> - Time scale: CE
 ```
 
-**chronos** uses [**ggplot2**](https://github.com/tidyverse/ggplot2) for
-plotting information. This makes it easy to customize diagrams
-(e.g. using themes and scales).
-
 ### Analysis of a series of dates
 
 ``` r
 ## Plot the first event
-plot(chrono_events, select = 1, interval = "hpdi")
+plot(chrono_events[[1]], interval = "hpdi")
 
 ## Plot all events
 plot(chrono_events)
-#> Picking joint bandwidth of 49.2
 ```
 
 <img src="man/figures/README-events-plot-1.png" width="50%" /><img src="man/figures/README-events-plot-2.png" width="50%" />
@@ -147,7 +156,7 @@ plot(ac)
 
 ``` r
 boundaries(chrono_phases, level = 0.95)
-#>              lower     upper
+#>              start      stop
 #> EPI      -28978.53 -26969.82
 #> UP       -38570.37 -29368.75
 #> Ahmarian -42168.47 -37433.31
@@ -161,13 +170,13 @@ plot(chrono_phases)
 <img src="man/figures/README-phases-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
-plot(chrono_phases, select = c("UP", "EPI"), range = "hiatus")
+plot(chrono_phases[, c("UP", "EPI"), ], range = "hiatus")
 ```
 
 <img src="man/figures/README-succession-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
-plot(chrono_phases, select = c("UP", "EPI"), range = "transition")
+plot(chrono_phases[, c("UP", "EPI"), ], range = "transition")
 ```
 
 <img src="man/figures/README-succession-plot-2.png" style="display: block; margin: auto;" />
@@ -197,14 +206,6 @@ Bayesian Radiocarbon Calibration Tool.” *Internet Archaeology* 7.
 Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. *Chronomodel:
 Chronological Modeling of Archaeological Data Using Bayesian
 Statistics*. CNRS. <https://chronomodel.com>.
-
-</div>
-
-<div id="ref-philippe2020" class="csl-entry">
-
-Philippe, Anne, and Marie-Anne Vibet. 2020. “Analysis of Archaeological
-Phases Using the R Package ArchaeoPhases.” *Journal of Statistical
-Software* 93. <https://doi.org/10.18637/jss.v093.c01>.
 
 </div>
 

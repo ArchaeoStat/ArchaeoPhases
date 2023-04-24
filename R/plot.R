@@ -46,7 +46,7 @@ plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
   ages <- rev(seq_len(n_events))
   if (density) {
     for (i in ages) {
-      d <- stats::density(x[, i, drop = TRUE], n = getOption("chronos.grid"), ...)
+      d <- stats::density(x[, i, drop = TRUE], n = getOption("ArchaeoPhases.grid"), ...)
 
       years <- d$x
       dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 1.5
@@ -160,7 +160,7 @@ plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
     for (i in ages) {
       p <- x[, i, ]
       for (j in c(1, 2)) {
-        d <- stats::density(p[, j], n = getOption("chronos.grid"), ...)
+        d <- stats::density(p[, j], n = getOption("ArchaeoPhases.grid"), ...)
 
         years <- d$x
         dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 0.9

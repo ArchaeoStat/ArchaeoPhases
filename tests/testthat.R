@@ -1,4 +1,4 @@
 library(testthat)
-library(chronos)
+library(ArchaeoPhases)
 
-test_check("chronos")
+test_check("ArchaeoPhases")

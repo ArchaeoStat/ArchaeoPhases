@@ -31,7 +31,7 @@ install.packages("fasti", repos = "https://tesselle.r-universe.dev")
 ```
 
 ```{r packages}
-library(chronos)
+library(ArchaeoPhases)
 ```
 
 ## ChronoModel
