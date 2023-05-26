@@ -1,7 +1,8 @@
 comment: false
 
 ignore:
-  - "R/deprecate.R"
+  - "R/ArchaeoPhases-deprecate.R"
+  - "R/ArchaeoPhases-defunct.R"
   - "R/zzz.R"
 
 coverage:

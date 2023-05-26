@@ -55,6 +55,8 @@ RoxygenNote: 7.2.3
 Collate: 
     'AllClasses.R'
     'AllGenerics.R'
+    'ArchaeoPhases-defunct.R'
+    'ArchaeoPhases-deprecated.R'
     'ArchaeoPhases-package.R'
     'activity.R'
     'bind.R'
