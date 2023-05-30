@@ -12,7 +12,7 @@ as_phases(from, ...)
 
 \S4method{as_phases}{matrix}(
   from,
-  calendar,
+  calendar = NULL,
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
   names = NULL,

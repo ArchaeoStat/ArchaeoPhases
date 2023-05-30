@@ -57,14 +57,11 @@ package: all functions have been renamed (see
       Snippets_, *93*(1). doi:10.18637/jss.v093.c01
       <https://doi.org/10.18637/jss.v093.c01>.
 
-    Philippe A, Vibet M, Dye TS, Frerebeau N (2023). _ArchaeoPhases:
-    Post-Processing of Markov Chain Monte Carlo Simulations for
-    Chronological Modelling_. Université de Nantes, Nantes, France. R
-    package version 2.0.0, <https://ArchaeoStat.github.io/ArchaeoPhases>.
-
-    To see these entries in BibTeX format, use 'print(<citation>,
-    bibtex=TRUE)', 'toBibtex(.)', or set
-    'options(citation.bibtex.max=999)'.
+      Philippe A, Vibet M, Dye TS, Frerebeau N (2023). _ArchaeoPhases:
+      Post-Processing of Markov Chain Monte Carlo Simulations for
+      Chronological Modelling_. Université de Nantes, Nantes, France. R
+      package version 2.0.0,
+      <https://ArchaeoStat.github.io/ArchaeoPhases>.
 
 ## Installation
 

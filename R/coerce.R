@@ -5,7 +5,7 @@ NULL
 # To data.frame ================================================================
 #' @method as.data.frame CumulativeEvents
 #' @export
-as.data.frame.CumulativeEvents <- function(x, ..., calendar = NULL) {
+as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   tmp <- data.frame(
     years = chronos::time(x@years, calendar = calendar),
     estimate = x[, 1, drop = TRUE]
@@ -29,7 +29,7 @@ as.data.frame.CumulativeEvents <- function(x, ..., calendar = NULL) {
 
 #' @method as.data.frame ActivityEvents
 #' @export
-as.data.frame.ActivityEvents <- function(x, ..., calendar = NULL) {
+as.data.frame.ActivityEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   data.frame(
     years = chronos::time(x@years, calendar = calendar),
     estimate = x[, 1, drop = TRUE]
@@ -38,7 +38,7 @@ as.data.frame.ActivityEvents <- function(x, ..., calendar = NULL) {
 
 #' @method as.data.frame OccurrenceEvents
 #' @export
-as.data.frame.OccurrenceEvents <- function(x, ..., calendar = NULL) {
+as.data.frame.OccurrenceEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   data.frame(
     events = x@events,
     start = chronos::time(x@start, calendar = calendar),

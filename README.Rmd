@@ -40,7 +40,8 @@ Statistical analysis of archaeological dates and groups of dates. **ArchaeoPhase
 **Version 2.0 of ArchaeoPhases introduces a complete rewrite of the package: all functions have been renamed (see `news(Version >= "2.0", package = "ArchaeoPhases")`).**
 
 ```{r citation, echo=FALSE, comment=''}
-utils::citation("ArchaeoPhases")
+cite <- utils::citation("ArchaeoPhases")
+print(cite, bibtex = FALSE)
 ```
 
 ## Installation

@@ -1,6 +1,7 @@
+citHeader("To cite ArchaeoPhases in publications use:")
+
 bibentry(
   bibtype      = "Article",
-  header       = "To cite ArchaeoPhases in publications use:",
   author       = "Anne Philippe and Marie-Anne Vibet",
   title        = "{{Analysis of Archaeological Phases Using the R Package ArchaeoPhases}}",
   year         = "2020",
@@ -10,14 +11,13 @@ bibentry(
   page         = "1--25",
   doi          = "10.18637/jss.v093.c01"
 )
-
 bibentry(
   bibtype      = "Manual",
   author       = "Anne Philippe and Marie-Anne Vibet and Thomas S. Dye and Nicolas Frerebeau",
   title        = "{{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}}",
-  year         = "2023",
+  year         = sub("-.*", "", meta$Date),
   organization = "Université de Nantes",
   address      = "Nantes, France",
-  note         = "R package version 2.0.0",
+  note         = sprintf("R package version %s", meta$Version),
   url          = "https://ArchaeoStat.github.io/ArchaeoPhases"
 )

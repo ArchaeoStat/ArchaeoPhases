@@ -55,7 +55,7 @@ setMethod(
 setMethod(
   f = "as_phases",
   signature = c(from = "matrix"),
-  definition = function(from, calendar,
+  definition = function(from, calendar = NULL,
                         start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, iteration = NULL) {
     ## Validation

@@ -23,7 +23,8 @@ Description: Statistical analysis of archaeological dates and groups of
     of dates (tempo and activity plot). It also allows the estimation and
     visualization of time ranges from the posterior distribution of groups
     of dates (e.g. duration, transition and hiatus between successive
-    phases) as described in Philippe and Vibet (2020) <doi:10.18637/jss.v093.c01>.
+    phases) as described in Philippe and Vibet (2020)
+    <doi:10.18637/jss.v093.c01>.
 License: GPL (>= 3)
 URL: https://github.com/ArchaeoStat/ArchaeoPhases
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
@@ -45,15 +46,48 @@ Suggests:
     rmarkdown,
     rsvg,
     svglite,
-    tinytest,
-    tinysnapshot
-VignetteBuilder: knitr
+    tinysnapshot,
+    tinytest
+VignetteBuilder: 
+    knitr
 Additional_repositories: https://archaeostat.r-universe.dev
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Collate: 'reexport.R' 'AllClasses.R' 'AllGenerics.R' 'ArchaeoPhases-defunct.R' 'ArchaeoPhases-deprecated.R' 'ArchaeoPhases-internal.R' 'ArchaeoPhases-package.R' 'activity.R'
-                   'bind.R' 'boundaries.R' 'coerce.R' 'data.R' 'depth.R' 'duration.R' 'elapse.R' 'events.R' 'hiatus.R' 'interpolate.R' 'interval.R' 'mutators.R' 'occurrence.R'
-                   'phases.R' 'plot.R' 'read.R' 'sensitivity.R' 'show.R' 'sort.R' 'subset.R' 'summary.R' 'tempo.R' 'test.R' 'transition.R' 'validate.R' 'zzz.R'
+Collate: 
+    'reexport.R'
+    'AllClasses.R'
+    'AllGenerics.R'
+    'ArchaeoPhases-defunct.R'
+    'ArchaeoPhases-deprecated.R'
+    'ArchaeoPhases-internal.R'
+    'ArchaeoPhases-package.R'
+    'activity.R'
+    'bind.R'
+    'boundaries.R'
+    'coerce.R'
+    'data.R'
+    'depth.R'
+    'duration.R'
+    'elapse.R'
+    'events.R'
+    'hiatus.R'
+    'interpolate.R'
+    'interval.R'
+    'mutators.R'
+    'occurrence.R'
+    'phases.R'
+    'plot.R'
+    'read.R'
+    'sensitivity.R'
+    'show.R'
+    'sort.R'
+    'subset.R'
+    'summary.R'
+    'tempo.R'
+    'test.R'
+    'transition.R'
+    'validate.R'
+    'zzz.R'
