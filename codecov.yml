@@ -1,7 +1,7 @@
 comment: false
 
 ignore:
-  - "R/ArchaeoPhases-deprecate.R"
+  - "R/ArchaeoPhases-deprecated.R"
   - "R/ArchaeoPhases-defunct.R"
   - "R/zzz.R"
 

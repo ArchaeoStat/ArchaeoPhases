@@ -43,8 +43,10 @@ Suggests:
     coda,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    vdiffr (>= 1.0.0)
+    rsvg,
+    svglite,
+    tinytest,
+    tinysnapshot
 VignetteBuilder: knitr
 Additional_repositories: https://archaeostat.r-universe.dev
 Config/testthat/edition: 3
