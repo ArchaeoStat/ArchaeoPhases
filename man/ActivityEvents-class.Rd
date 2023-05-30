@@ -11,19 +11,13 @@ An S4 class to store the result of an \code{\link{activity}} plot.
 \section{Slots}{
 
 \describe{
-\item{\code{years}}{A \code{\link{numeric}} vector giving the time points at which the
-distribution is estimated.}
-
-\item{\code{estimate}}{A \code{\link{numeric}} vector giving the estimation of the
-distribution.}
-
-\item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
-(either "\code{CE}", "\code{BP}" or "\code{b2k}").}
-
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
 }}
 
+\note{
+This class inherits from \code{\linkS4class{TimeSeries}}.
+}
 \section{Coerce}{
 
 In the code snippets below, \code{x} is an \code{ActivityEvents} object.
@@ -41,7 +35,6 @@ Other classes:
 \code{\link{MCMC-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
-\code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
 }
 \author{

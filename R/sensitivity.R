@@ -17,13 +17,6 @@ setMethod(
     dims <- vapply(X = dots, FUN = dim, FUN.VALUE = integer(2))
     # TODO: check
 
-    ## Calendar scale
-    scales <- vapply(X = dots, FUN = get_calendar, FUN.VALUE = character(1))
-    cal <- unique(scales)
-    if (length(cal) != 1) {
-      stop("All object must have the same calendar scale.", call. = FALSE)
-    }
-
     ## Subset
     if (is.null(positions)) {
       positions <- seq_len(ncol(dots[[1L]]))

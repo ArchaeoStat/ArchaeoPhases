@@ -10,7 +10,7 @@ setMethod(
     cat(
       sprintf("<%s>", class(object)),
       sprintf("- Number of events: %d", ncol(object)),
-      sprintf("- Time scale: %s", get_calendar(object)),
+      sprintf("- Number of MCMC samples: %s", nrow(object)),
       sep = "\n"
     )
   }
@@ -24,7 +24,7 @@ setMethod(
     cat(
       sprintf("<%s>", class(object)),
       sprintf("- Number of phases: %d", ncol(object)),
-      sprintf("- Time scale: %s", get_calendar(object)),
+      sprintf("- Number of MCMC samples: %s", nrow(object)),
       sep = "\n"
     )
   }

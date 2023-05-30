@@ -9,7 +9,7 @@
 \usage{
 read_bcal(file, ...)
 
-\S4method{read_bcal}{character}(file, bin_width = 1)
+\S4method{read_bcal}{character}(file, bin_width = 1, calendar = BP())
 }
 \arguments{
 \item{file}{the name of the file which the data are to be read from.
@@ -38,6 +38,10 @@ read_bcal(file, ...)
 \item{bin_width}{The bin width specified for the
 \href{https://bcal.shef.ac.uk/}{BCal} calibration. Defaults to the BCal
 default of 1.}
+
+\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the calendar
+(see \code{\link[chronos:calendar]{chronos::calendar()}}). It should be \code{\link[=BP]{BP()}} unless you change the
+default settings in 'BCal'.}
 }
 \value{
 An \code{\linkS4class{EventsMCMC}} object.
@@ -46,10 +50,10 @@ An \code{\linkS4class{EventsMCMC}} object.
 Reads MCMC output.
 }
 \examples{
-\dontrun{
-## Import BCal Output
-path_output <- system.file("bcal/output/rawmcmc.csv", package = "fasti")
-(bcal <- read_bcal(path_output))
+if (requireNamespace("ArchaeoData", quietly = TRUE)) {
+  ## Import BCal Output
+  path_output <- system.file("bcal/output/rawmcmc.csv", package = "ArchaeoData")
+  (bcal <- read_bcal(path_output))
 }
 }
 \references{
@@ -62,8 +66,6 @@ radiocarbon calibration tool. \emph{Internet Archaeology}, 7.
 
 Other read methods: 
 \code{\link{check}},
-\code{\link{coda}},
-\code{\link{coerce}()},
 \code{\link{read_chronomodel}},
 \code{\link{read_oxcal}()}
 }

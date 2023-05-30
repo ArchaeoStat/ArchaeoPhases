@@ -10,6 +10,7 @@
 \usage{
 \S4method{plot}{MCMC,missing}(
   x,
+  calendar = getOption("ArchaeoPhases.calendar"),
   density = TRUE,
   interval = NULL,
   level = 0.95,
@@ -26,9 +27,10 @@
 
 \S4method{plot}{PhasesMCMC,missing}(
   x,
+  calendar = getOption("ArchaeoPhases.calendar"),
   density = TRUE,
-  boundaries = TRUE,
-  range = NULL,
+  range = TRUE,
+  succession = NULL,
   level = 0.95,
   decreasing = TRUE,
   main = NULL,
@@ -44,10 +46,13 @@
 \arguments{
 \item{x}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
 
+\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
+(see \code{\link[=calendar]{calendar()}}).}
+
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 
 \item{interval}{A \code{\link{character}} string specifying the confidence interval to
-be drawn. It must be one of "\code{credible}" (credible interval) or "\code{hpdi}"
+be drawn. It must be one of "\code{credible}" (credible interval) or "\code{hdr}"
 (highest posterior density interval). Any unambiguous substring can be
 given. If \code{NULL} (the default) no interval is computed.}
 
@@ -76,12 +81,12 @@ place but before the axes, title and box are added.}
 
 \item{...}{Extra parameters to be passed to \code{\link[stats:density]{stats::density()}}.}
 
-\item{boundaries}{A \code{\link{logical}} scalar: should phase time range be plotted
+\item{range}{A \code{\link{logical}} scalar: should phase time range be plotted
 (see \code{\link[=boundaries]{boundaries()}})?}
 
-\item{range}{A \code{\link{character}} string specifying the additional time range to
-be displayed. It must be one of "\code{hiatus}" or "\code{transition}". If \code{NULL} (the
-default), no additional time ranges are displayed.}
+\item{succession}{A \code{\link{character}} string specifying the additional time range
+to be displayed. It must be one of "\code{hiatus}" or "\code{transition}".
+If \code{NULL} (the default), no additional time ranges are displayed.}
 }
 \value{
 \code{plot()} is called it for its side-effects: it results in a graphic being
@@ -100,35 +105,31 @@ events.
 }}
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, calendar = "CE", iteration = 1)
+eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 
-## BP
-eve_BP <- CE_to_BP(eve)
-summary(eve_BP)
-
-## CE
-eve_CE <- BP_to_CE(eve_BP)
-summary(eve_CE)
+## Summary
+summary(eve, calendar = CE())
+summary(eve, calendar = BP())
 
 ## Plot events
-plot(eve_CE, interval = "credible", level = 0.68)
-plot(eve_BP, interval = "hpdi", level = 0.68)
-plot(eve_BP[[1]], interval = "hpdi")
+plot(eve, calendar = CE(), interval = "credible", level = 0.68)
+plot(eve, calendar = BP(), interval = "hdr", level = 0.68)
+plot(eve[[1]], interval = "hdr")
 
 ## Compute phases
-pha <- phase(eve, groups = list(B = c(2, 4), A = c(1, 3)))
-summary(pha)
+pha <- phases(eve, groups = list(B = c(2, 4), A = c(1, 3)), calendar = CE())
+
+## Summary
+summary(pha, calendar = CE())
+summary(pha, calendar = BP())
 
 ## Plot phases
 plot(pha)
-plot(pha, range = "hiatus")
-plot(pha, range = "transition")
+plot(pha, succession = "hiatus")
+plot(pha, succession = "transition")
 }
 \seealso{
 \code{\link[stats:density]{stats::density()}}
-
-Other plot methods: 
-\code{\link{multiplot}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

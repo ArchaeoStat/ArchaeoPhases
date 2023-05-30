@@ -14,6 +14,7 @@ occurrence(object, ...)
 
 \S4method{plot}{OccurrenceEvents,missing}(
   x,
+  calendar = getOption("ArchaeoPhases.calendar"),
   main = NULL,
   sub = NULL,
   ann = graphics::par("ann"),
@@ -34,6 +35,9 @@ arguments to this function, particularly, \code{border}, \code{col}, \code{lwd},
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{x}{An \code{\linkS4class{OccurrenceEvents}} object.}
+
+\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
+(see \code{\link[=calendar]{calendar()}}).}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
@@ -78,7 +82,7 @@ of confidence.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, calendar = "CE", iteration = 1)
+eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Occurrence plot
@@ -88,7 +92,8 @@ plot(occ)
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
-\code{\link{roc}()},
+\code{\link{as_events}()},
+\code{\link{elapse}()},
 \code{\link{tempo}()}
 }
 \author{

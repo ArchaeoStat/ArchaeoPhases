@@ -20,7 +20,6 @@ Other classes:
 \code{\link{MCMC-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
-\code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
 }
 \author{

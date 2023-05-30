@@ -50,7 +50,6 @@ ranges from the posterior distribution of groups of dates
 package: all functions have been renamed (see
 `news(Version >= "2.0", package = "ArchaeoPhases")`).**
 
-
     To cite ArchaeoPhases in publications use:
 
       Philippe A, Vibet M (2020). "Analysis of Archaeological Phases Using
@@ -86,20 +85,21 @@ remotes::install_github("ArchaeoStat/ArchaeoPhases")
 You can install the 1.x releases from the CRAN archives:
 
 ``` r
-# install.packages("devtools")
-devtools::install_version("ArchaeoPhases", version = "1.8")
+# install.packages("remotes")
+remotes::install_version("ArchaeoPhases", version = "1.8")
 ```
 
 ## Usage
 
 These examples use data available through the
-[**fasti**](https://packages.tesselle.org/fasti/) package which is
-available in a [separate repository](https://tesselle.r-universe.dev).
-**fasti** provides MCMC outputs from ChronoModel, OxCal and BCal.
+[**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package
+which is available in a [separate
+repository](https://archaeostat.r-universe.dev). **ArchaeoData**
+provides MCMC outputs from ChronoModel, OxCal and BCal.
 
 ``` r
-## Install the latest version
-install.packages("fasti", repos = "https://tesselle.r-universe.dev")
+## Install data package
+install.packages("ArchaeoData", repos = "https://archaeostat.r-universe.dev")
 ```
 
 ``` r
@@ -114,25 +114,25 @@ Import a CSV file containing a sample from the posterior distribution:
 path <- "chronomodel/ksarakil/"
 
 ## Events
-path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
-(chrono_events <- read_chronomodel_events(path_events))
+path_event <- system.file(path, "Chain_all_Events.csv", package = "ArchaeoData")
+(chrono_events <- read_chronomodel_events(path_event))
 #> <EventsMCMC>
 #> - Number of events: 16
-#> - Time scale: CE
+#> - Number of MCMC samples: 30000
 
 ## Phases
-path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
-(chrono_phases <- read_chronomodel_phases(path_phases))
+path_phase <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+(chrono_phases <- read_chronomodel_phases(path_phase))
 #> <PhasesMCMC>
 #> - Number of phases: 4
-#> - Time scale: CE
+#> - Number of MCMC samples: 30000
 ```
 
 ### Analysis of a series of dates
 
 ``` r
 ## Plot the first event
-plot(chrono_events[[1]], interval = "hpdi")
+plot(chrono_events[, 1], interval = "hdr")
 
 ## Plot all events
 plot(chrono_events)
@@ -155,12 +155,13 @@ plot(ac)
 ### Analysis of a group of dates (phase)
 
 ``` r
-boundaries(chrono_phases, level = 0.95)
-#>              start      stop
-#> EPI      -28978.53 -26969.82
-#> UP       -38570.37 -29368.75
-#> Ahmarian -42168.47 -37433.31
-#> IUP      -43240.37 -41161.00
+bound <- boundaries(chrono_phases, level = 0.95)
+as.data.frame(bound)
+#>              start       end duration
+#> EPI      -28978.53 -26969.82 2009.709
+#> UP       -38570.37 -29368.75 9202.620
+#> Ahmarian -42168.47 -37433.31 4736.161
+#> IUP      -43240.37 -41161.00 2080.371
 ```
 
 ``` r
@@ -170,13 +171,13 @@ plot(chrono_phases)
 <img src="man/figures/README-phases-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
-plot(chrono_phases[, c("UP", "EPI"), ], range = "hiatus")
+plot(chrono_phases[, c("UP", "EPI"), ], succession = "hiatus")
 ```
 
 <img src="man/figures/README-succession-plot-1.png" style="display: block; margin: auto;" />
 
 ``` r
-plot(chrono_phases[, c("UP", "EPI"), ], range = "transition")
+plot(chrono_phases[, c("UP", "EPI"), ], succession = "transition")
 ```
 
 <img src="man/figures/README-succession-plot-2.png" style="display: block; margin: auto;" />

@@ -2,11 +2,6 @@
 #' @include AllClasses.R
 NULL
 
-# S4 dispatch to base S3 generic ===============================================
-setGeneric("summary")
-setGeneric("sort")
-setGeneric("sort.list")
-
 # Coerce =======================================================================
 #' Coda
 #'
@@ -21,60 +16,12 @@ setGeneric("sort.list")
 #' @example inst/examples/ex-coda.R
 #' @seealso [coda::mcmc()], [coda::mcmc.list()]
 #' @author A. Philippe, M.-A. Vibet
-#' @family read methods
+#' @family mutators
 #' @docType methods
-#' @name coda
-#' @rdname coda
-NULL
-
-#' @rdname coda
 #' @aliases as_coda-method
 setGeneric(
   name = "as_coda",
   def = function(from, ...) standardGeneric("as_coda")
-)
-
-#' Coerce
-#'
-#' @param from from An object to be coerced.
-#' @param start An [`integer`] vector specifying the index of the columns
-#'  corresponding to the beginning of the phases. If missing, every other column
-#'  is used starting from the first column (after deleting the `iteration`
-#'  column, if any).
-#' @param stop An [`integer`] vector specifying the index of the columns
-#'  corresponding to the end of the phases. If missing, every other column
-#'  is used starting from the second column (after deleting the `iteration`
-#'  column, if any).
-#' @param names A [`character`] vector giving the names of the phases.
-#' @param calendar A [`character`] string specifying the chronological scale
-#'  It must be one of "`BP`" (the default), "`CE`" or "`b2k`".
-#' @param iteration A length-one [`numeric`] vector specifying the index of the
-#'  iteration column.
-#' @param ... Currently not used.
-#' @return
-#'  An [`MCMC-class`] object.
-#' @example inst/examples/ex-coerce.R
-#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family read methods
-#' @docType methods
-#' @name coerce
-#' @rdname coerce
-NULL
-
-#' @rdname coerce
-#' @aliases as_events-method
-setGeneric(
-  name = "as_events",
-  def = function(from, ...) standardGeneric("as_events"),
-  valueClass = "EventsMCMC"
-)
-
-#' @rdname coerce
-#' @aliases as_phases-method
-setGeneric(
-  name = "as_phases",
-  def = function(from, ...) standardGeneric("as_phases"),
-  valueClass = "PhasesMCMC"
 )
 
 # Tools ========================================================================
@@ -95,20 +42,6 @@ setGeneric(
 #' @aliases get set
 NULL
 
-#' @rdname mutator
-#' @aliases get_calendar-method
-setGeneric(
-  name = "get_calendar",
-  def = function(x) standardGeneric("get_calendar")
-)
-
-#' @rdname mutator
-#' @aliases get_hash-method
-setGeneric(
-  name = "get_hash",
-  def = function(x) standardGeneric("get_hash")
-)
-
 ## Subset ----------------------------------------------------------------------
 #' Extract or Replace Parts of an Object
 #'
@@ -119,7 +52,7 @@ setGeneric(
 #' @param drop A [`logical`] scalar: should the result be coerced to
 #'  the lowest possible dimension? This only works for extracting elements,
 #'  not for the replacement.
-#' @param value A possible value for the element(s) of `x`.
+# @param value A possible value for the element(s) of `x`.
 #' @param ... Currently not used.
 #' @return
 #'  A subsetted object.
@@ -161,6 +94,7 @@ NULL
 #' @name sort.list
 #' @rdname sort.list
 NULL
+setGeneric("sort.list")
 
 #' Sort an MCMC Object
 #'
@@ -177,112 +111,6 @@ NULL
 #' @rdname sort
 NULL
 
-# Time Scale ===================================================================
-#' Time Scale Conversion
-#'
-#' Converts between BP (Before Present), CE (Common Era) and b2k (before 2000)
-#' time scales.
-#' @param object An object (typically an [`MCMC-class`] object).
-#' @return
-#'  * `BP_to_CE()`, `BP_to_b2k()`, `CE_to_BP()`, `CE_to_b2k()`, `b2k_to_CE()`
-#'    and `b2k_to_BP()` return an object of the same sort as `object` with a
-#'    new time scale.
-#'  * `is_BP()`, `is_CE()`, `is_b2k()` return a [`logical`] scalar.
-#' @note
-#'  There is no year \eqn{0} in BCE/CE scale.
-#' @example inst/examples/ex-calendar.R
-#' @author N. Frerebeau
-#' @family time scales
-#' @docType methods
-#' @name calendar
-#' @rdname calendar
-NULL
-
-#' @rdname calendar
-#' @aliases BP_to_CE-method
-setGeneric(
-  name = "BP_to_CE",
-  def = function(object) standardGeneric("BP_to_CE")
-)
-
-#' @rdname calendar
-#' @aliases BP_to_b2k-method
-setGeneric(
-  name = "BP_to_b2k",
-  def = function(object) standardGeneric("BP_to_b2k")
-)
-
-#' @rdname calendar
-#' @aliases CE_to_BP-method
-setGeneric(
-  name = "CE_to_BP",
-  def = function(object) standardGeneric("CE_to_BP")
-)
-
-#' @rdname calendar
-#' @aliases CE_to_b2k-method
-setGeneric(
-  name = "CE_to_b2k",
-  def = function(object) standardGeneric("CE_to_b2k")
-)
-
-#' @rdname calendar
-#' @aliases b2k_to_BP-method
-setGeneric(
-  name = "b2k_to_BP",
-  def = function(object) standardGeneric("b2k_to_BP")
-)
-
-#' @rdname calendar
-#' @aliases b2k_to_CE-method
-setGeneric(
-  name = "b2k_to_CE",
-  def = function(object) standardGeneric("b2k_to_CE")
-)
-
-#' @rdname calendar
-#' @aliases is_BP-method
-setGeneric(
-  name = "is_BP",
-  def = function(object) standardGeneric("is_BP")
-)
-
-#' @rdname calendar
-#' @aliases is_CE-method
-setGeneric(
-  name = "is_CE",
-  def = function(object) standardGeneric("is_CE")
-)
-
-#' @rdname calendar
-#' @aliases is_b2k-method
-setGeneric(
-  name = "is_b2k",
-  def = function(object) standardGeneric("is_b2k")
-)
-
-#' Elapsed Time Scale
-#'
-#' @param object An object (typically an [`MCMC-class`] object).
-#' @param origin An [`integer`] giving the position of the column corresponding
-#'  to the event from which elapsed time is calculated.
-#' @param ... Currently not used.
-#' @return
-#'  Returns an object of the same class as `object` with an elapsed
-#' @return
-#'  An object of the same sort as `object` with a new time scale.
-#' @note
-#'  There is no year \eqn{0} in BCE/CE scale.
-#' @example inst/examples/ex-calendar.R
-#' @author N. Frerebeau
-#' @family time scales
-#' @docType methods
-#' @aliases elapse-method
-setGeneric(
-  name = "elapse",
-  def = function(object, ...) standardGeneric("elapse")
-)
-
 # Modeling =====================================================================
 ## Age-Depth Modeling ----------------------------------------------------------
 #' Age-Depth Modeling
@@ -295,6 +123,8 @@ setGeneric(
 #' @param newdata A [`numeric`] vector giving the depths at which ages will be
 #'  predicted. If `missing`, the original data points are used.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x,
@@ -332,11 +162,10 @@ setGeneric(
 #'  Juyal, N. (2020). Early Holocene Indian Summer Monsoon and Its Impact on
 #'  Vegetation in the Central Himalaya: Insight from ΔD and δ13C Values of Leaf
 #'  Wax Lipid. *The Holocene*, 30(7): 1063-1074. \doi{10.1177/0959683620908639}.
-#' @example inst/examples/ex-age.R
+#' @example inst/examples/ex-bury.R
 #' @author A. Philippe
 #' @family age-depth modeling tools
 #' @docType methods
-#' @rdname bury
 #' @aliases bury-method
 setGeneric(
   name = "bury",
@@ -360,7 +189,6 @@ setGeneric(
 #' @author N. Frerebeau
 #' @family age-depth modeling tools
 #' @docType methods
-#' @rdname interpolate
 #' @aliases interpolate-method
 setGeneric(
   name = "interpolate",
@@ -368,6 +196,28 @@ setGeneric(
 )
 
 # Events =======================================================================
+## Coerce ----------------------------------------------------------------------
+#' Coerce to Events
+#'
+#' @param from from An object to be coerced.
+#' @param calendar A [`TimeScale-class`] object specifying the source calendar
+#'  (see [calendar()]).
+#' @param iteration A length-one [`numeric`] vector specifying the index of the
+#'  iteration column.
+#' @param ... Currently not used.
+#' @return
+#'  An [`EventsMCMC-class`] object.
+#' @example inst/examples/ex-events.R
+#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
+#' @family event tools
+#' @docType methods
+#' @aliases as_events-method
+setGeneric(
+  name = "as_events",
+  def = function(from, ...) standardGeneric("as_events"),
+  valueClass = "EventsMCMC"
+)
+
 ## Tempo -----------------------------------------------------------------------
 #' Tempo Plot
 #'
@@ -379,12 +229,12 @@ setGeneric(
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
 #'  for (in years).
-#' @param resolution A length-one [`numeric`] vector specifying the temporal
-#'  resolution (in years) at which densities are to be estimated.
-#'  If `NULL` (the default), equally spaced points will be used (according to
-#'  `options("ArchaeoPhases.grid")`).
+#' @param grid A length-one [`numeric`] vector specifying the number of equally
+#'  spaced points of the temporal grid.
 #' @param x A [`CumulativeEvents-class`] object or an [`EventsMCMC-class`]
 #'  object.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number
 #'  or a probability (the default)?
@@ -446,11 +296,11 @@ setGeneric(
 #'  estimate for (in years).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
 #'  for (in years).
-#' @param resolution A length-one [`numeric`] vector specifying the temporal
-#'  resolution (in years) at which densities are to be estimated.
-#'  If `NULL` (the default), equally spaced points will be used (according to
-#'  `options("ArchaeoPhases.grid")`).
+#' @param grid A length-one [`numeric`] vector specifying the number of equally
+#'  spaced points of the temporal grid.
 #' @param x An [`ActivityEvents-class`] object.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x,
@@ -484,54 +334,6 @@ setGeneric(
   valueClass = "ActivityEvents"
 )
 
-## ROC -------------------------------------------------------------------------
-#' Rate of Change
-#'
-#' @param object An [`EventsMCMC-class`], a [`CumulativeEvents-class`] or an
-#'  [`ActivityEvents-class`] object.
-#' @param from A length-one [`numeric`] vector giving the earliest date to
-#'  estimate for (in years).
-#' @param to A length-one [`numeric`] vector giving the latest date to estimate
-#'  for (in years).
-#' @param resolution A length-one [`numeric`] vector specifying the temporal
-#'  resolution (in years) at which densities are to be estimated.
-#'  If `NULL` (the default), equally spaced points will be used (according to
-#'  `options("ArchaeoPhases.grid")`).
-#' @param x A [`RateOfChange-class`] object.
-#' @param main A [`character`] string giving a main title for the plot.
-#' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ann A [`logical`] scalar: should the default annotation (title and x,
-#'  y and z axis labels) appear on the plot?
-#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
-#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
-#'  plot?
-#' @param panel.first An an `expression` to be evaluated after the plot axes are
-#'  set up but before any plotting takes place. This can be useful for drawing
-#'  background grids.
-#' @param panel.last An `expression` to be evaluated after plotting has taken
-#'  place but before the axes, title and box are added.
-#' @param ... Other [graphical parameters][graphics::par] may also be passed as
-#'  arguments to this function.
-#' @return
-#'  * `roc()` returns an [`RateOfChange-class`] object.
-#'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'    displayed (invisibly returns `x`).
-#' @example inst/examples/ex-tempo.R
-#' @author N. Frerebeau
-#' @family event tools
-#' @docType methods
-#' @name roc
-#' @rdname roc
-NULL
-
-#' @rdname roc
-#' @aliases roc-method
-setGeneric(
-  name = "roc",
-  def = function(object, ...) standardGeneric("roc"),
-  valueClass = "RateOfChange"
-)
-
 ## Occurrence ------------------------------------------------------------------
 #' Occurrence Plot
 #'
@@ -540,6 +342,8 @@ setGeneric(
 #' @param object An [`EventsMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param x An [`OccurrenceEvents-class`] object.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x,
@@ -572,16 +376,34 @@ setGeneric(
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family event tools
 #' @docType methods
-#' @name occurrence
-#' @rdname occurrence
-NULL
-
-#' @rdname occurrence
 #' @aliases occurrence-method
 setGeneric(
   name = "occurrence",
   def = function(object, ...) standardGeneric("occurrence"),
   valueClass = "OccurrenceEvents"
+)
+
+## Time Scale ------------------------------------------------------------------
+#' Elapsed Time Scale
+#'
+#' @param object An object (typically an [`MCMC-class`] object).
+#' @param origin An [`integer`] giving the position of the column corresponding
+#'  to the event from which elapsed time is calculated.
+#' @param ... Currently not used.
+#' @return
+#'  Returns an object of the same class as `object` with an elapsed
+#' @return
+#'  An object of the same sort as `object` with a new time scale.
+#' @note
+#'  There is no year \eqn{0} in BCE/CE scale.
+#' @example inst/examples/ex-elapse.R
+#' @author N. Frerebeau
+#' @family event tools
+#' @docType methods
+#' @aliases elapse-method
+setGeneric(
+  name = "elapse",
+  def = function(object, ...) standardGeneric("elapse")
 )
 
 # Interval =====================================================================
@@ -590,10 +412,10 @@ setGeneric(
 #'
 #' Computes the shortest credible interval of the output of the MCMC algorithm
 #' for a single parameter.
-#' @param object A [`numeric`] vector or an [`MCMC-class`] object containing the
-#'  output of the MCMC algorithm for the parameter.
+#' @param x An [`MCMC-class`] object containing the output of the MCMC algorithm.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @param ... Currently not used.
 #' @details
 #'  A \eqn{(100 \times level)}{(100 * level)} % credible interval is an interval
@@ -608,23 +430,24 @@ setGeneric(
 #' @return
 #'  Returns a [`list`] of `numeric` [`matrix`].
 #' @example inst/examples/ex-interval.R
+#' @seealso [arkhe::interval_credible()]
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family statistics
 #' @docType methods
-#' @rdname credible
-#' @aliases credible-method
+#' @aliases interval_credible-method
 setGeneric(
-  name = "credible",
-  def = function(object, ...) standardGeneric("credible")
+  name = "interval_credible",
+  def = getGeneric("interval_credible", package = "arkhe")
 )
 
 ## HPDI ------------------------------------------------------------------------
 #' Bayesian HPD Regions
 #'
-#' @param object A [`numeric`] vector or an [`MCMC-class`] object containing the
-#'  output of the MCMC algorithm for the parameter.
+#' @param x An [`MCMC-class`] object containing the output of the MCMC algorithm.
+#' @param y Currently not used.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param CE A [`logical`] scalar: are the data expressed in BC/AD years?
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @param ... Extra arguments to be passed to [stats::density()].
 #' @return
 #'  Returns a [`list`] of `numeric` [`matrix`].
@@ -632,15 +455,14 @@ setGeneric(
 #'  Hyndman, R. J. (1996). Computing and graphing highest density regions.
 #'  *American Statistician*, 50: 120-126. \doi{10.2307/2684423}.
 #' @example inst/examples/ex-interval.R
-#' @seealso [stats::density()]
+#' @seealso [stats::density()], [arkhe::interval_hdr()]
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family statistics
 #' @docType methods
-#' @rdname hpdi
-#' @aliases hpdi-method
+#' @aliases interval_hdr-method
 setGeneric(
-  name = "hpdi",
-  def = function(object, ...) standardGeneric("hpdi")
+  name = "interval_hdr",
+  def = getGeneric("interval_hdr", package = "arkhe")
 )
 
 # Phase ========================================================================
@@ -650,50 +472,54 @@ setGeneric(
 #' Constructs the minimum and maximum for a group of events (phase).
 #' @param x An [`EventsMCMC-class`].
 #' @param groups A [`list`].
+#' @param calendar A [`TimeScale-class`] object specifying the source calendar
+#'  (see [calendar()]).
 #' @param ... Currently not used.
 #' @return
 #'  A [`PhasesMCMC-class`] object.
 #' @note
 #'  The default value of `start` or `end` corresponds to a CSV file exported
 #'  from [ChronoModel](https://chronomodel.com/).
-#' @example inst/examples/ex-phase.R
+#' @example inst/examples/ex-phases.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phase tools
 #' @docType methods
-#' @name phase
-#' @rdname phase
-NULL
-
-#' @rdname phase
-#' @aliases phase-method
+#' @aliases phases-method
 setGeneric(
-  name = "phase",
-  def = function(x, groups, ...) standardGeneric("phase"),
+  name = "phases",
+  def = function(x, groups, ...) standardGeneric("phases"),
   valueClass = "PhasesMCMC"
 )
 
-## Range -----------------------------------------------------------------------
-#' Phase Time Range
+## Coerce ----------------------------------------------------------------------
+#' Coerce to Phases
 #'
-#' Computes the shortest interval that satisfies
-#' \eqn{P(PhaseMin < IntervalInf < IntervalSup < PhaseMax | M) = level}
-#' for each phase.
-#' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
-#'  [`PhasesMCMC-class`] object.
-#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param from from An object to be coerced.
+#' @param start An [`integer`] vector specifying the index of the columns
+#'  corresponding to the beginning of the phases. If missing, every other column
+#'  is used starting from the first column (after deleting the `iteration`
+#'  column, if any).
+#' @param stop An [`integer`] vector specifying the index of the columns
+#'  corresponding to the end of the phases. If missing, every other column
+#'  is used starting from the second column (after deleting the `iteration`
+#'  column, if any).
+#' @param names A [`character`] vector giving the names of the phases.
+#' @param calendar A [`TimeScale-class`] object specifying the source calendar
+#'  (see [calendar()]).
+#' @param iteration A length-one [`numeric`] vector specifying the index of the
+#'  iteration column.
 #' @param ... Currently not used.
 #' @return
-#'  A [`data.frame`] containing the endpoints (in years BC/AD) of the shortest
-#'  time range (at a given `level`).
-#' @example inst/examples/ex-range.R
+#'  A [`PhasesMCMC-class`] object.
+#' @example inst/examples/ex-phases.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phase tools
 #' @docType methods
-#' @rdname boundaries
-#' @aliases boundaries-method
+#' @aliases as_phases-method
 setGeneric(
-  name = "boundaries",
-  def = function(x, y, ...) standardGeneric("boundaries")
+  name = "as_phases",
+  def = function(from, ...) standardGeneric("as_phases"),
+  valueClass = "PhasesMCMC"
 )
 
 ## Duration --------------------------------------------------------------------
@@ -702,60 +528,34 @@ setGeneric(
 #' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
 #'  [`PhasesMCMC-class`] object.
 #' @param ... Currently not used.
-#' @example inst/examples/ex-range.R
+#' @example inst/examples/ex-duration.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family phase tools
 #' @docType methods
-#' @rdname duration
 #' @aliases duration-method
 setGeneric(
   name = "duration",
   def = function(x, y, ...) standardGeneric("duration")
 )
 
-## Transition ------------------------------------------------------------------
-#' Transition Range Between Successive Phases
-#'
-#' Estimates the transition endpoints between two phases.
-#' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
-#'  [`PhasesMCMC-class`] object.
-#' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param ... Currently not used.
-#' @details
-#'  The transition is the shortest interval that satisfies
-#'  \eqn{P(IntervalInf < Phase1Max < Phase2Min < IntervalSup | M) = level}.
-#'
-#'  This assumes that the phases are in temporal order constraint.
-#' @return
-#'  A [`data.frame`] containing the endpoints (in years BC/AD) of the
-#'  transition interval for each pair of successive phases (at a given `level`).
-#' @example inst/examples/ex-range.R
-#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phase tools
-#' @docType methods
-#' @rdname transition
-#' @aliases transition-method
-setGeneric(
-  name = "transition",
-  def = function(x, y, ...) standardGeneric("transition")
-)
-
 # Plot =========================================================================
 #' Plot
 #'
 #' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @param density A [`logical`] scalar: should estimated density be plotted?
-#' @param boundaries A [`logical`] scalar: should phase time range be plotted
+#' @param range A [`logical`] scalar: should phase time range be plotted
 #'  (see [boundaries()])?
 #' @param interval A [`character`] string specifying the confidence interval to
-#'  be drawn. It must be one of "`credible`" (credible interval) or "`hpdi`"
+#'  be drawn. It must be one of "`credible`" (credible interval) or "`hdr`"
 #'  (highest posterior density interval). Any unambiguous substring can be
 #'  given. If `NULL` (the default) no interval is computed.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
-#' @param range A [`character`] string specifying the additional time range to
-#'  be displayed. It must be one of "`hiatus`" or "`transition`". If `NULL` (the
-#'  default), no additional time ranges are displayed.
+#' @param succession A [`character`] string specifying the additional time range
+#'  to be displayed. It must be one of "`hiatus`" or "`transition`".
+#'  If `NULL` (the default), no additional time ranges are displayed.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x,
@@ -782,23 +582,29 @@ setGeneric(
 #' @aliases plot-method
 NULL
 
-#' Multiple Plots
+# Time Ranges ==================================================================
+## Boundaries ------------------------------------------------------------------
+#' Phase Time Range
 #'
-#' @param ... Any object of the same class.
+#' Computes the shortest interval that satisfies
+#' \eqn{P(PhaseMin < IntervalInf < IntervalSup < PhaseMax | M) = level}
+#' for each phase.
+#' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
+#'  [`PhasesMCMC-class`] object.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param ... Currently not used.
 #' @return
-#'   `multiplot()` is called it for its side-effects: it results in a graphic
-#'   being displayed.
-#' @author N. Frerebeau
-#' @family plot methods
+#'  The endpoints of the shortest time range (at a given `level`).
+#' @example inst/examples/ex-range.R
+#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
+#' @family time ranges
 #' @docType methods
-#' @aliases multiplot-method
+#' @aliases boundaries-method
 setGeneric(
-  name = "multiplot",
-  def = function(...) standardGeneric("multiplot"),
-  signature = "..."
+  name = "boundaries",
+  def = function(x, y, ...) standardGeneric("boundaries")
 )
 
-# Test =========================================================================
 ## Hiatus ----------------------------------------------------------------------
 #' Hiatus Between Two Dates
 #'
@@ -815,17 +621,46 @@ setGeneric(
 #'  satisfies
 #'  \eqn{P(Phase1Max < IntervalInf < IntervalSup < Phase2Min | M) = level}
 #'  (this assumes that the phases are in temporal order constraint).
+#' @return
+#'  The endpoints of the hiatus between successive events/phases
+#'  (at a given `level`).
 #' @example inst/examples/ex-test.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family tests
+#' @family time ranges
 #' @docType methods
-#' @rdname hiatus
 #' @aliases hiatus-method
 setGeneric(
   name = "hiatus",
   def = function(x, y, ...) standardGeneric("hiatus")
 )
 
+## Transition ------------------------------------------------------------------
+#' Transition Range Between Successive Phases
+#'
+#' Estimates the transition endpoints between two phases.
+#' @param x,y A [`numeric`] vector. If `y` is missing, `x` must be an
+#'  [`PhasesMCMC-class`] object.
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param ... Currently not used.
+#' @details
+#'  The transition is the shortest interval that satisfies
+#'  \eqn{P(IntervalInf < Phase1Max < Phase2Min < IntervalSup | M) = level}.
+#'
+#'  This assumes that the phases are in temporal order constraint.
+#' @return
+#'  The endpoints of the transition interval for each pair of successive phases
+#'  (at a given `level`).
+#' @example inst/examples/ex-range.R
+#' @author A. Philippe, M.-A. Vibet, N. Frerebeau
+#' @family time ranges
+#' @docType methods
+#' @aliases transition-method
+setGeneric(
+  name = "transition",
+  def = function(x, y, ...) standardGeneric("transition")
+)
+
+# Test =========================================================================
 ## Anteriority -----------------------------------------------------------------
 #' Bayesian Test for Anteriority/Posteriority
 #'
@@ -845,35 +680,10 @@ setGeneric(
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
 #' @family tests
 #' @docType methods
-#' @rdname older
 #' @aliases older-method
 setGeneric(
   name = "older",
   def = function(x, y, ...) standardGeneric("older")
-)
-
-## Apportion -------------------------------------------------------------------
-#' Apportioned Probabilities
-#'
-#' @param object An [`EventsMCMC-class`] object.
-#' @param from A [`numeric`] vector. If `to` is missing, must be a [`list`] (or
-#'  a [`data.frame`]) with `numeric` components (columns) `from` and `to`.
-#' @param to A [`numeric`] vector. If missing, an attempt is made to interpret
-#'  `from` in a suitable way.
-#' @param groups A [`factor`] vector in the sense that `as.factor(groups)`
-#'  defines the grouping. If `from` is a `list` (or a `data.frame`), `groups`
-#'  can be a length-one vector giving the index of the grouping component
-#'  (column) of `from`.
-#' @param ... Currently not used.
-#' @return A [`numeric`] [`matrix`] of probabilities.
-#' @author N. Frerebeau, A. Philippe
-#' @family tests
-#' @docType methods
-#' @rdname apportion
-#' @aliases apportion-method
-setGeneric(
-  name = "apportion",
-  def = function(object, from, to, ...) standardGeneric("apportion")
 )
 
 # Read =========================================================================
@@ -881,9 +691,9 @@ setGeneric(
 #'
 #' Reads MCMC output.
 #' @inheritParams utils::read.table
-#' @param BP A [`logical`] scalar: should the data be converted from BP to
-#'  CE? This should not be `TRUE` unless you change the default settings in
-#'  'OxCal' or 'ChronoModel'.
+#' @param calendar A [`TimeScale-class`] object specifying the calendar
+#'  (see [chronos::calendar()]). It should be [CE()] unless you change the
+#'  default settings in 'OxCal'.
 #' @return
 #'  An [`EventsMCMC-class`] object.
 #' @references
@@ -894,7 +704,6 @@ setGeneric(
 #' @author T. S. Dye, N. Frerebeau
 #' @family read methods
 #' @docType methods
-#' @rdname read_oxcal
 #' @aliases read_oxcal-method
 setGeneric(
   name = "read_oxcal",
@@ -909,6 +718,9 @@ setGeneric(
 #' @param bin_width The bin width specified for the
 #'  [BCal](https://bcal.shef.ac.uk/) calibration. Defaults to the BCal
 #'  default of 1.
+#' @param calendar A [`TimeScale-class`] object specifying the calendar
+#'  (see [chronos::calendar()]). It should be [BP()] unless you change the
+#'  default settings in 'BCal'.
 #' @return
 #'  An [`EventsMCMC-class`] object.
 #' @references
@@ -920,7 +732,6 @@ setGeneric(
 #' @author T. S. Dye, N. Frerebeau
 #' @family read methods
 #' @docType methods
-#' @rdname read_bcal
 #' @aliases read_bcal-method
 setGeneric(
   name = "read_bcal",
@@ -932,9 +743,9 @@ setGeneric(
 #'
 #' Reads MCMC output.
 #' @inheritParams utils::read.table
-#' @param BP A [`logical`] scalar: should the data be converted from BP to
-#'  CE? This should not be `TRUE` unless you change the default settings in
-#'  'OxCal' or 'ChronoModel'.
+#' @param calendar A [`TimeScale-class`] object specifying the calendar
+#'  (see [chronos::calendar()]). It should be [CE()] unless you change the
+#'  default settings in 'ChronoModel'.
 #' @return
 #'  An [`EventsMCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @references
@@ -965,12 +776,12 @@ setGeneric(
   def = function(file, ...) standardGeneric("read_chronomodel_phases")
 )
 
-#' @rdname read_chronomodel
-#' @aliases read_chronomodel_model-method
-setGeneric(
-  name = "read_chronomodel_model",
-  def = function(file, ...) standardGeneric("read_chronomodel_model")
-)
+# @rdname read_chronomodel
+# @aliases read_chronomodel_model-method
+# setGeneric(
+#   name = "read_chronomodel_model",
+#   def = function(file, ...) standardGeneric("read_chronomodel_model")
+# )
 
 #' Check for an Original MCMC File
 #'
@@ -1019,7 +830,6 @@ setGeneric(
 #' @author T. S. Dye, N. Frerebeau
 #' @family statistics
 #' @docType methods
-#' @rdname sensitivity
 #' @aliases sensitivity-method
 setGeneric(
   name = "sensitivity",
@@ -1033,6 +843,8 @@ setGeneric(
 #' multiple parameters. Results are given in calendar years (BC/AD).
 #' @param object An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
 #' @return
 #'  A [`data.frame`] where the rows correspond to the chains of interest and
 #'  columns to the following statistics:
@@ -1044,10 +856,10 @@ setGeneric(
 #'   \item{median}{Median of the MCMC chain.}
 #'   \item{q3}{Third quantile of the MCMC chain.}
 #'   \item{max}{Maximum value of the MCMC chain.}
-#'   \item{lower}{Lower boundary of the [credible interval][credible()] of the
-#'    MCMC chain at `level`.}
-#'   \item{upper}{Upper boundary of the [credible interval][credible()] of the
-#'    MCMC chain at `level`.}
+#'   \item{lower}{Lower boundary of the [credible interval][interval_credible()]
+#'    of the MCMC chain at `level`.}
+#'   \item{upper}{Upper boundary of the [credible interval][interval_credible()]
+#'    of the MCMC chain at `level`.}
 #'  }
 #' @example inst/examples/ex-summary.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

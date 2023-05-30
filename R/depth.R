@@ -31,7 +31,6 @@ setMethod(
     .AgeDepthModel(
       depth = depth,
       model = curve,
-      calendar = get_calendar(object),
       hash = get_hash(object)
     )
   }
@@ -62,9 +61,8 @@ setMethod(
 
     .EventsMCMC(
       t(a),
-      events = event_names,
+      labels = event_names,
       depth = newdata,
-      calendar = get_calendar(object),
       hash = get_hash(object)
     )
   }

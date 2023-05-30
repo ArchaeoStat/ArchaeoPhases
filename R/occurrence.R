@@ -9,24 +9,20 @@ setMethod(
   f = "occurrence",
   signature = "EventsMCMC",
   definition = function(object, level = 0.95) {
-    ## Calendar scale
-    desc <- is_BP(object) || is_b2k(object)
-
     ## Sort rows
-    sorted <- apply(X = object, MARGIN = 1, FUN = sort, decreasing = desc)
-    sorted <- as_events(t(sorted))
+    sorted <- apply(X = object, MARGIN = 1, FUN = sort, decreasing = FALSE)
+    sorted <- as_events(t(sorted), calendar = NULL)
     ord <- seq_len(ncol(object))
 
     ## Compute interval
-    inter <- credible(sorted, level = level)
+    inter <- interval_credible(sorted, level = level, calendar = NULL)
     inter <- do.call(rbind, inter)
 
     .OccurrenceEvents(
       events = ord,
       start = inter[, "start"],
-      stop = inter[, "stop"],
+      end = inter[, "end"],
       level = level,
-      calendar = get_calendar(object),
       hash = get_hash(object)
     )
   }

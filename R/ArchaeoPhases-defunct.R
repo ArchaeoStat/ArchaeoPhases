@@ -67,7 +67,7 @@ marginal_plot <- function(...) {
 #' @name ArchaeoPhases-defunct
 #' @export
 MarginalProba <- function(...) {
-  .Defunct("test_older", package = "ArchaeoPhases")
+  .Defunct("older", package = "ArchaeoPhases")
 }
 
 #' @name ArchaeoPhases-defunct
@@ -115,13 +115,13 @@ multi_dates_plot <- function(...) {
 #' @name ArchaeoPhases-defunct
 #' @export
 MultiHPD <- function(...) {
-  .Defunct("hpdi", package = "ArchaeoPhases")
+  .Defunct("interval_hdr", package = "ArchaeoPhases")
 }
 
 #' @name ArchaeoPhases-defunct
 #' @export
 multi_hpd <- function(...) {
-  .Defunct("hpdi", package = "ArchaeoPhases")
+  .Defunct("interval_hdr", package = "ArchaeoPhases")
 }
 
 #' @name ArchaeoPhases-defunct

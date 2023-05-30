@@ -5,14 +5,15 @@ NULL
 # MCMC =========================================================================
 #' @export
 #' @method plot MCMC
-plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
+plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+                      density = TRUE, interval = NULL, level = 0.95,
                       decreasing = TRUE,
                       main = NULL, sub = NULL,
                       ann = graphics::par("ann"), axes = TRUE,
                       frame.plot = FALSE,
                       panel.first = NULL, panel.last = NULL, ...) {
   ## Get data
-  n_events <- dim(x)[2L]
+  n_events <- NCOL(x)
 
   ## Graphical parameters
   col <- list(...)$col %||% c("grey")
@@ -29,7 +30,6 @@ plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
 
   ## Set plotting coordinates
   xlim <- range(x)
-  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
   ylim <- c(1, n_events + 1.5)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -43,10 +43,14 @@ plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
   fill <- fill[k]
 
   ## Plot
-  ages <- rev(seq_len(n_events))
+  mcmc <- rev(seq_len(n_events))
   if (density) {
-    for (i in ages) {
-      d <- stats::density(x[, i, drop = TRUE], n = getOption("ArchaeoPhases.grid"), ...)
+    for (i in mcmc) {
+      d <- stats::density(
+        x = x[, i, drop = TRUE],
+        n = getOption("ArchaeoPhases.grid"),
+        ...
+      )
 
       years <- d$x
       dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 1.5
@@ -61,20 +65,20 @@ plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
     }
   }
   if (!is.null(interval) & !is.null(level)) {
-    interval <- match.arg(interval, choices = c("credible", "hpdi"))
-    fun <- switch (interval, credible = credible, hpdi = hpdi)
-    inter <- fun(x, level = level)
-    for (i in ages) {
+    interval <- match.arg(interval, choices = c("credible", "hdr"))
+    fun <- switch(interval, credible = interval_credible, hdr = interval_hdr)
+    inter <- fun(x, level = level, calendar = NULL)
+    for (i in mcmc) {
       h <- inter[[i]]
       graphics::segments(
-        x0 = h[, "start"], x1 = h[, "stop"],
+        x0 = h[, "start"], x1 = h[, "end"],
         y0 = i, y1 = i,
         col = if (density) "black" else col[i],
         lty = lty, lwd = lwd,
         lend = 1
       )
       graphics::segments(
-        x0 = c(h[, "start"], h[, "stop"]), x1 = c(h[, "start"], h[, "stop"]),
+        x0 = c(h[, "start"], h[, "end"]), x1 = c(h[, "start"], h[, "end"]),
         y0 = i, y1 = i + tcl * graphics::strheight("M") * -1,
         col = if (density) "black" else col[i],
         lty = lty, lwd = lwd,
@@ -88,8 +92,9 @@ plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
 
   ## Construct Axis
   if (axes) {
-    graphics::axis(side = 1)
-    graphics::mtext(names(x)[ages], side = 2, at = ages, las = 2, padj = 0)
+    rd <- chronos::as_fixed(as.numeric(x))
+    chronos::axis_year(x = rd, side = 1, format = TRUE, calendar = calendar)
+    graphics::mtext(names(x)[mcmc], side = 2, at = mcmc, las = 2, padj = 0)
   }
 
   ## Plot frame
@@ -99,7 +104,7 @@ plot.MCMC <- function(x, density = TRUE, interval = NULL, level = 0.95,
 
   ## Add annotation
   if (ann) {
-    xlab <- time_axis_label(x)
+    xlab <- chronos::format(calendar)
     ylab <- NULL
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -116,7 +121,8 @@ setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 # PhasesMCMC ===================================================================
 #' @export
 #' @method plot PhasesMCMC
-plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
+plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+                            density = TRUE, range = TRUE, succession = NULL,
                             level = 0.95, decreasing = TRUE,
                             main = NULL, sub = NULL,
                             ann = graphics::par("ann"), axes = TRUE,
@@ -140,7 +146,6 @@ plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
 
   ## Set plotting coordinates
   xlim <- range(x)
-  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
   ylim <- c(1, n_phases + 1)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -155,10 +160,29 @@ plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
 
   ## Plot
   ages <- rev(seq_len(n_phases))
-  if (density) {
-    ## Density
+
+  ## Succession
+  if (!is.null(level) && !is.null(succession)) {
+    if (n_phases != 2)
+      stop("Time ranges can only be displayed with two phases.", call. = FALSE)
+
+    succession <- match.arg(succession, choices = c("transition", "hiatus"),
+                            several.ok = FALSE)
+    fun <- switch(succession, hiatus = hiatus, transition = transition)
+    hia <- as.data.frame(fun(x, level = level), calendar = NULL)
+
+    graphics::rect(
+      xleft = hia$start, xright = hia$end,
+      ybottom = min(ylim), ytop = max(ylim),
+      border = "black",
+      lty = 3
+    )
+  }
+
+  ## Density
+  if (isTRUE(density)) {
     for (i in ages) {
-      p <- x[, i, ]
+      p <- x[, i, , drop = TRUE]
       for (j in c(1, 2)) {
         d <- stats::density(p[, j], n = getOption("ArchaeoPhases.grid"), ...)
 
@@ -171,48 +195,32 @@ plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
         yi <- c(0, dens[k], 0) + i
 
         graphics::polygon(xi, yi, border = NA, col = fill[i])
-        graphics::lines(xi, yi, lty = "solid", col = "black")
+        graphics::lines(xi, yi, lty = j, col = "black")
       }
     }
   }
 
-  if (!is.null(level)) {
-    ## Time range
-    if (boundaries) {
-      bound <- boundaries(x, level = level)
-      for (i in ages) {
-        h <- bound[i, ]
-        graphics::segments(
-          x0 = h[, "start"], x1 = h[, "stop"],
-          y0 = i, y1 = i,
-          col = "black",
-          lty = lty, lwd = lwd,
-          lend = 1
-        )
-        graphics::segments(
-          x0 = c(h[, "start"], h[, "stop"]), x1 = c(h[, "start"], h[, "stop"]),
-          y0 = i, y1 = i + tcl * graphics::strheight("M") * -1,
-          col = "black",
-          lty = lty, lwd = lwd,
-          lend = 1
-        )
-      }
-    }
-
-    ## Succession
-    if (!is.null(range)) {
-      if (n_phases != 2)
-        stop("Time ranges can only be displayed with two phases.", call. = FALSE)
-
-      range <- match.arg(range, choices = c("transition", "hiatus"), several.ok = FALSE)
-      fun <- switch(range, hiatus = hiatus, transition = transition)
-      hia <- as.data.frame(fun(x, level = level))
-
-      graphics::rect(
-        xleft = hia$start, xright = hia$stop,
-        ybottom = min(ylim), ytop = max(ylim),
-        border = "black",
-        lty = "dashed"
+  ## Time range
+  if (!is.null(level) && isTRUE(range)) {
+    bound <- boundaries(x, level = level)
+    bound <- as.data.frame(bound, calendar = NULL)
+    for (i in ages) {
+      h <- bound[i, , drop = FALSE]
+      graphics::segments(
+        x0 = h[, "start"], x1 = h[, "end"],
+        y0 = i, y1 = i,
+        col = "black",
+        lty = 1,
+        lwd = lwd,
+        lend = 1
+      )
+      graphics::segments(
+        x0 = c(h[, "start"], h[, "end"]), x1 = c(h[, "start"], h[, "end"]),
+        y0 = i, y1 = i + tcl * graphics::strheight("M") * -1,
+        col = "black",
+        lty = 1,
+        lwd = lwd,
+        lend = 1
       )
     }
   }
@@ -222,7 +230,8 @@ plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
 
   ## Construct Axis
   if (axes) {
-    graphics::axis(side = 1)
+    rd <- chronos::as_fixed(as.numeric(x))
+    chronos::axis_year(x = rd, side = 1, format = TRUE, calendar = calendar)
     graphics::mtext(names(x)[ages], side = 2, at = ages, las = 2, padj = 0)
   }
 
@@ -233,7 +242,7 @@ plot.PhasesMCMC <- function(x, density = TRUE, boundaries = TRUE, range = NULL,
 
   ## Add annotation
   if (ann) {
-    xlab <- time_axis_label(x)
+    xlab <- chronos::format(calendar)
     ylab <- NULL
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -249,25 +258,23 @@ setMethod("plot", c(x = "PhasesMCMC", y = "missing"), plot.PhasesMCMC)
 # TempoEvents ==================================================================
 #' @export
 #' @method plot CumulativeEvents
-plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, legend = TRUE,
+plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+                                  credible = TRUE, gauss = TRUE, legend = TRUE,
                                   col.tempo = "#004488", lty.tempo = "solid", lwd.tempo = 1,
                                   col.credible = "#BB5566", lty.credible = "dashed", lwd.credible = 1,
                                   col.gauss = "#DDAA33", lty.gauss = "dotted", lwd.gauss = 1,
                                   main = NULL, sub = NULL, ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
-  ## Get data
-  years <- x@years
-
   ## Open new window
   grDevices::dev.hold()
   on.exit(grDevices::dev.flush(), add = TRUE)
   graphics::plot.new()
 
   ## Set plotting coordinates
+  years <- x@time
   xlim <- range(years)
-  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
-  ylim <- range(x@estimate, x@credible, x@gauss)
+  ylim <- range(x)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
   ## Evaluate pre-plot expressions
@@ -276,7 +283,7 @@ plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, legend = TRU
   ## Plot
   graphics::lines(
     x = years,
-    y = x@estimate,
+    y = x[, 1],
     type = "l",
     col = col.tempo,
     lty = lty.tempo,
@@ -287,12 +294,12 @@ plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, legend = TRU
   credible <- credible & nrow(x@credible) > 0
   if (credible) {
     plot_y_ribbon(x = years, ymin = x@credible[, 1], ymax = x@credible[, 2],
-                border = col.credible, lty = lty.credible, lwd = lwd.credible)
+                  border = col.credible, lty = lty.credible, lwd = lwd.credible)
   }
   gauss <- gauss & nrow(x@gauss) > 0
   if (gauss) {
     plot_y_ribbon(x = years, ymin = x@gauss[, 1], ymax = x@gauss[, 2],
-                border = col.gauss, lty = lty.gauss, lwd = lwd.gauss)
+                  border = col.gauss, lty = lty.gauss, lwd = lwd.gauss)
   }
 
   ## Legend
@@ -312,7 +319,7 @@ plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, legend = TRU
 
   ## Construct Axis
   if (axes) {
-    graphics::axis(side = 1)
+    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -323,7 +330,7 @@ plot.CumulativeEvents <- function(x, credible = TRUE, gauss = TRUE, legend = TRU
 
   ## Add annotation
   if (ann) {
-    xlab <- time_axis_label(x)
+    xlab <- chronos::format(calendar)
     ylab <- "Cumulative events"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -339,13 +346,11 @@ setMethod("plot", c(x = "CumulativeEvents", y = "missing"), plot.CumulativeEvent
 # ActivityEvents ===============================================================
 #' @export
 #' @method plot ActivityEvents
-plot.ActivityEvents <- function(x, main = NULL, sub = NULL,
+plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+                                main = NULL, sub = NULL,
                                 ann = graphics::par("ann"),
                                 axes = TRUE, frame.plot = axes,
                                 panel.first = NULL, panel.last = NULL, ...) {
-  ## Get data
-  years <- x@years
-
   ## Graphical parameters
   border <- list(...)$border %||% c("black")
   col <- list(...)$col %||% c("grey70")
@@ -358,31 +363,34 @@ plot.ActivityEvents <- function(x, main = NULL, sub = NULL,
   graphics::plot.new()
 
   ## Set plotting coordinates
+  years <- x@time
   xlim <- range(years)
-  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
-  ylim <- range(x@estimate)
+  ylim <- range(x)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
   ## Evaluate pre-plot expressions
   panel.first
 
   ## Plot
-  plot_y_ribbon(
-    x = years,
-    ymin = rep(0, length(years)),
-    ymax = x@estimate,
-    border = border,
-    col = col,
-    lty = lty,
-    lwd = lwd
-  )
+  seq_series <- seq_len(NCOL(x))
+  for (i in seq_series) {
+    plot_y_ribbon(
+      x = years,
+      ymin = rep(0, length(years)),
+      ymax = x[, i],
+      border = border,
+      col = col,
+      lty = lty,
+      lwd = lwd
+    )
+  }
 
   ## Evaluate post-plot and pre-axis expressions
   panel.last
 
   ## Construct Axis
   if (axes) {
-    graphics::axis(side = 1)
+    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -393,7 +401,7 @@ plot.ActivityEvents <- function(x, main = NULL, sub = NULL,
 
   ## Add annotation
   if (ann) {
-    xlab <- time_axis_label(x)
+    xlab <- chronos::format(calendar)
     ylab <- "Activity"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -406,79 +414,11 @@ plot.ActivityEvents <- function(x, main = NULL, sub = NULL,
 #' @aliases plot,ActivityEvents,missing-method
 setMethod("plot", c(x = "ActivityEvents", y = "missing"), plot.ActivityEvents)
 
-# RateOfChange =================================================================
-#' @export
-#' @method plot RateOfChange
-plot.RateOfChange <- function(x, main = NULL, sub = NULL,
-                              ann = graphics::par("ann"),
-                              axes = TRUE, frame.plot = axes,
-                              panel.first = NULL, panel.last = NULL, ...) {
-  ## Get data
-  years <- x@years
-
-  ## Graphical parameters
-  col <- list(...)$col %||% c("black")
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
-  lty <- list(...)$lty %||% graphics::par("lty")
-
-  ## Open new window
-  grDevices::dev.hold()
-  on.exit(grDevices::dev.flush(), add = TRUE)
-  graphics::plot.new()
-
-  ## Set plotting coordinates
-  xlim <- range(years)
-  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
-  ylim <- range(x@estimate)
-  graphics::plot.window(xlim = xlim, ylim = ylim)
-
-  ## Evaluate pre-plot expressions
-  panel.first
-
-  ## Plot
-  graphics::lines(
-    x = years,
-    y = x@estimate,
-    type = "l",
-    col = col,
-    lty = lty,
-    lwd = lwd
-  )
-  graphics::abline(h = 0, col = "grey20", lty = "dashed", lwd = 1)
-
-  ## Evaluate post-plot and pre-axis expressions
-  panel.last
-
-  ## Construct Axis
-  if (axes) {
-    graphics::axis(side = 1)
-    graphics::axis(side = 2, las = 1)
-  }
-
-  ## Plot frame
-  if (frame.plot) {
-    graphics::box()
-  }
-
-  ## Add annotation
-  if (ann) {
-    xlab <- time_axis_label(x)
-    ylab <- "Rate of change"
-    graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
-  }
-
-  invisible(x)
-}
-
-#' @export
-#' @rdname roc
-#' @aliases plot,RateOfChange,missing-method
-setMethod("plot", c(x = "RateOfChange", y = "missing"), plot.RateOfChange)
-
 # OccurrenceEvents =============================================================
 #' @export
 #' @method plot OccurrenceEvents
-plot.OccurrenceEvents <- function(x, main = NULL, sub = NULL,
+plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+                                  main = NULL, sub = NULL,
                                   ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
@@ -498,8 +438,8 @@ plot.OccurrenceEvents <- function(x, main = NULL, sub = NULL,
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(x@start, x@stop)
-  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  years <- chronos::as_fixed(c(x@start, x@end))
+  xlim <- range(years)
   ylim <- range(x@events)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -507,10 +447,10 @@ plot.OccurrenceEvents <- function(x, main = NULL, sub = NULL,
   panel.first
 
   ## Plot
-  graphics::segments(x0 = x@start,  x1 = x@stop,
+  graphics::segments(x0 = x@start,  x1 = x@end,
                      y0 = x@events, y1 = x@events,
                      col = col, lty = lty, lwd = lwd)
-  graphics::points(x = c(x@start, x@stop),
+  graphics::points(x = c(x@start, x@end),
                    y = c(x@events, x@events),
                    pch = pch, col = col, cex = cex)
 
@@ -519,7 +459,7 @@ plot.OccurrenceEvents <- function(x, main = NULL, sub = NULL,
 
   ## Construct Axis
   if (axes) {
-    graphics::axis(side = 1)
+    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, at = seq_len(n_events), labels = x@events, las = 1)
   }
 
@@ -530,7 +470,7 @@ plot.OccurrenceEvents <- function(x, main = NULL, sub = NULL,
 
   ## Add annotation
   if (ann) {
-    xlab <- time_axis_label(x)
+    xlab <- chronos::format(calendar)
     ylab <- "Occurrence"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -547,6 +487,7 @@ setMethod("plot", c(x = "OccurrenceEvents", y = "missing"), plot.OccurrenceEvent
 #' @export
 #' @method plot AgeDepthModel
 plot.AgeDepthModel <- function(x, level = 0.95,
+                               calendar = getOption("ArchaeoPhases.calendar"),
                                main = NULL, sub = NULL,
                                ann = graphics::par("ann"),
                                axes = TRUE, frame.plot = axes,
@@ -555,7 +496,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
   depth <- x@depth
   n <- length(depth)
   data <- predict(x)
-  data <- summary(data, level = level)
+  data <- summary(data, level = level, calendar = NULL)
 
   ## Graphical parameters
   border <- list(...)$border %||% c("grey70")
@@ -570,8 +511,8 @@ plot.AgeDepthModel <- function(x, level = 0.95,
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(data$median, data$start, data$stop)
-  xlim <- if (is_CE(x)) c(min(xlim), max(xlim)) else c(max(xlim), min(xlim))
+  years <- chronos::as_fixed(c(data$median, data$start, data$end))
+  xlim <- range(years)
   ylim <- sort(range(depth), decreasing = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -581,7 +522,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
   ## Plot
   plot_x_ribbon(
     xmin = data$start,
-    xmax = data$stop,
+    xmax = data$end,
     y = depth,
     border = border,
     col = col
@@ -603,7 +544,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Construct Axis
   if (axes) {
-    graphics::axis(side = 1)
+    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -614,7 +555,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Add annotation
   if (ann) {
-    xlab <- time_axis_label(x)
+    xlab <- chronos::format(calendar)
     ylab <- "Depth"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -628,13 +569,6 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 setMethod("plot", c(x = "AgeDepthModel", y = "missing"), plot.AgeDepthModel)
 
 # Helpers ======================================================================
-time_axis_label <- function(x) {
-  if (is_CE(x)) return("Year CE")
-  if (is_BP(x)) return("Year cal. BP")
-  if (is_b2k(x)) return("Year b2k")
-  if (x@calendar == "elapsed") return("Elapsed origin")
-  stop("Unknown calendar scale.", call. = FALSE)
-}
 plot_x_ribbon <- function(xmin, xmax, y, ...) {
   graphics::polygon(x = c(xmin, rev(xmax)), y = c(y, rev(y)), ...)
 }

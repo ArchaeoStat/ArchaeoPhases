@@ -20,6 +20,7 @@ bury(object, depth, ...)
 \S4method{plot}{AgeDepthModel,missing}(
   x,
   level = 0.95,
+  calendar = getOption("ArchaeoPhases.calendar"),
   main = NULL,
   sub = NULL,
   ann = graphics::par("ann"),
@@ -45,6 +46,9 @@ predicted. If \code{missing}, the original data points are used.}
 \item{x}{An \code{\linkS4class{AgeDepthModel}} object.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
+
+\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
+(see \code{\link[=calendar]{calendar()}}).}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
@@ -88,7 +92,7 @@ the posterior distribution of the age function for each desired depth.
 \examples{
 ## Coerce to MCMC
 eve <- matrix(rnorm(6000, (1:6)^2), ncol = 6, byrow = TRUE)
-eve <- as_events(eve, calendar = "CE")
+eve <- as_events(eve, calendar = CE())
 
 ## Compute an age-depth curve
 age <- bury(eve, depth = 1:6)

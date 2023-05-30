@@ -8,24 +8,17 @@
 \alias{read_chronomodel_events-method}
 \alias{read_chronomodel_phases}
 \alias{read_chronomodel_phases-method}
-\alias{read_chronomodel_model}
-\alias{read_chronomodel_model-method}
 \alias{read_chronomodel_events,character-method}
 \alias{read_chronomodel_phases,character-method}
-\alias{read_chronomodel_model,character-method}
 \title{Read ChronoModel Output}
 \usage{
 read_chronomodel_events(file, ...)
 
 read_chronomodel_phases(file, ...)
 
-read_chronomodel_model(file, ...)
+\S4method{read_chronomodel_events}{character}(file, calendar = CE(), sep = ",", dec = ".")
 
-\S4method{read_chronomodel_events}{character}(file, BP = FALSE, sep = ",", dec = ".")
-
-\S4method{read_chronomodel_phases}{character}(file, BP = FALSE, sep = ",", dec = ".")
-
-\S4method{read_chronomodel_model}{character}(file)
+\S4method{read_chronomodel_phases}{character}(file, calendar = CE(), sep = ",", dec = ".")
 }
 \arguments{
 \item{file}{the name of the file which the data are to be read from.
@@ -51,9 +44,9 @@ read_chronomodel_model(file, ...)
 
 \item{...}{Further arguments to be passed to \code{read.table}.}
 
-\item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
-CE? This should not be \code{TRUE} unless you change the default settings in
-'OxCal' or 'ChronoModel'.}
+\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the calendar
+(see \code{\link[chronos:calendar]{chronos::calendar()}}). It should be \code{\link[=CE]{CE()}} unless you change the
+default settings in 'ChronoModel'.}
 
 \item{sep}{the field separator character.  Values on each line of the
     file are separated by this character.  If \code{sep = ""} (the
@@ -69,17 +62,17 @@ An \code{\linkS4class{EventsMCMC}} or a \code{\linkS4class{PhasesMCMC}} object.
 Reads MCMC output.
 }
 \examples{
-\dontrun{
-## Import ChronoModel Output
-path <- "chronomodel/ksarakil"
+if (requireNamespace("ArchaeoData", quietly = TRUE)) {
+  ## Import ChronoModel Output
+  path <- "chronomodel/ksarakil"
 
-## Events
-path_events <- system.file(path, "Chain_all_Events.csv", package = "fasti")
-(chrono_events <- read_chronomodel_events(path_events))
+  ## Events
+  path_events <- system.file(path, "Chain_all_Events.csv", package = "ArchaeoData")
+  (chrono_events <- read_chronomodel_events(path_events))
 
-## Phases
-path_phases <- system.file(path, "Chain_all_Phases.csv", package = "fasti")
-(chrono_phases <- read_chronomodel_phases(path_phases))
+  ## Phases
+  path_phases <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+  (chrono_phases <- read_chronomodel_phases(path_phases))
 }
 }
 \references{
@@ -92,8 +85,6 @@ URL: \url{https://www.chronomodel.fr}.
 
 Other read methods: 
 \code{\link{check}},
-\code{\link{coda}},
-\code{\link{coerce}()},
 \code{\link{read_bcal}()},
 \code{\link{read_oxcal}()}
 }

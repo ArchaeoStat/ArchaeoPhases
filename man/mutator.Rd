@@ -5,34 +5,12 @@
 \alias{mutator}
 \alias{get}
 \alias{set}
-\alias{get_calendar}
-\alias{get_calendar-method}
-\alias{get_hash}
-\alias{get_hash-method}
 \alias{names,MCMC-method}
 \alias{names<-,MCMC-method}
 \alias{names,PhasesMCMC-method}
 \alias{names<-,PhasesMCMC-method}
-\alias{get_calendar,MCMC-method}
-\alias{get_calendar,PhasesMCMC-method}
-\alias{get_calendar,CumulativeEvents-method}
-\alias{get_calendar,ActivityEvents-method}
-\alias{get_calendar,OccurrenceEvents-method}
-\alias{get_calendar,RateOfChange-method}
-\alias{get_calendar,AgeDepthModel-method}
-\alias{get_hash,MCMC-method}
-\alias{get_hash,PhasesMCMC-method}
-\alias{get_hash,CumulativeEvents-method}
-\alias{get_hash,ActivityEvents-method}
-\alias{get_hash,OccurrenceEvents-method}
-\alias{get_hash,RateOfChange-method}
-\alias{get_hash,AgeDepthModel-method}
 \title{Get or Set Parts of an Object}
 \usage{
-get_calendar(x)
-
-get_hash(x)
-
 \S4method{names}{MCMC}(x)
 
 \S4method{names}{MCMC}(x) <- value
@@ -40,34 +18,6 @@ get_hash(x)
 \S4method{names}{PhasesMCMC}(x)
 
 \S4method{names}{PhasesMCMC}(x) <- value
-
-\S4method{get_calendar}{MCMC}(x)
-
-\S4method{get_calendar}{PhasesMCMC}(x)
-
-\S4method{get_calendar}{CumulativeEvents}(x)
-
-\S4method{get_calendar}{ActivityEvents}(x)
-
-\S4method{get_calendar}{OccurrenceEvents}(x)
-
-\S4method{get_calendar}{RateOfChange}(x)
-
-\S4method{get_calendar}{AgeDepthModel}(x)
-
-\S4method{get_hash}{MCMC}(x)
-
-\S4method{get_hash}{PhasesMCMC}(x)
-
-\S4method{get_hash}{CumulativeEvents}(x)
-
-\S4method{get_hash}{ActivityEvents}(x)
-
-\S4method{get_hash}{OccurrenceEvents}(x)
-
-\S4method{get_hash}{RateOfChange}(x)
-
-\S4method{get_hash}{AgeDepthModel}(x)
 }
 \arguments{
 \item{x}{An object from which to get or set element(s).}
@@ -82,6 +32,7 @@ Getters and setters to extract or replace parts of an object.
 }
 \seealso{
 Other mutators: 
+\code{\link{as_coda}()},
 \code{\link{bind}},
 \code{\link{sort.list}()},
 \code{\link{sort}()},

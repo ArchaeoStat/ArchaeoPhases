@@ -33,7 +33,7 @@ to different model parameters.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, calendar = "CE", iteration = 1)
+eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 
 ## Returns 0's
 sensitivity(eve, eve)
@@ -42,8 +42,8 @@ sensitivity(eve, eve)
 \code{\link[=summary]{summary()}}
 
 Other statistics: 
-\code{\link{credible}()},
-\code{\link{hpdi}()},
+\code{\link{interval_credible}()},
+\code{\link{interval_hdr}()},
 \code{\link{summary}()}
 }
 \author{

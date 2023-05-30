@@ -1,8 +1,9 @@
 \dontrun{
 ## Import OxCal Output
-path_output <- system.file("oxcal/ksarakil/MCMC_Sample.csv", package = "fasti")
-url_output <- paste0("https://raw.githubusercontent.com/tesselle/fasti/master/",
+path_output <- system.file("oxcal/ksarakil/MCMC_Sample.csv", package = "ArchaeoData")
+url_output <- paste0("https://raw.githubusercontent.com/ArchaeoStat/ArchaeoData/master/",
                      "inst/oxcal/ksarakil/MCMC_Sample.csv")
+
 oxcal <- read_oxcal(path_output)
 
 ## Check md5 sum

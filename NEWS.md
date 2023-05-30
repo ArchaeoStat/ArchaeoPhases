@@ -2,10 +2,9 @@
 
 ## New classes and methods
 * Add `bind()` to bind multiple `MCMC` objects.
-* Add `roc()` to compute the rate of change from a tempo/activity plot (returns a `RateOfChange` object).
 
 ## Enhancements
-* Support for CE, BP and b2k time scales.
+* Support for any calendar, thanks to [**chronos**](https://packages.tesselle.org/chronos/).
 
 ## Bug fixes & changes
 * Use `stats::density()` instead of `hdrcde::hdr()` for HDPI estimation.
@@ -18,15 +17,15 @@
 |:----|:----|
 | `AgeDepth()` | `bury()` |
 | `CreateMinMaxGroup()` | `phase(<MCMC>)`, `as_phases(<matrix>)` |
-| `CredibleInterval()`, `credible_interval()` | `credible(<numeric>, <numeric>)` |
+| `CredibleInterval()`, `credible_interval()` | `interval_credible(<numeric>, <numeric>)` |
 | `DatesHiatus()`, `dates_hiatus()` | `hiatus(<numeric>, <numeric>)` |
 | `estimate_range()` | `sensitivity(<MCMC>)` |
 | `MarginalPlot()`, `marginal_plot()` | `plot(<MCMC>)` |
-| `MarginalProba()` | `test_older(<numeric>, <numeric>)` |
+| `MarginalProba()` | `older(<numeric>, <numeric>)` |
 | `MarginalStatistics()`, `marginal_statistics()`, `multi_marginal_statistics()` | `summary(<MCMC>)` |
-| `MultiCredibleInterval()`, `multi_credible_interval()` | `credible(<MCMC>)` |
+| `MultiCredibleInterval()`, `multi_credible_interval()` | `interval_credible(<MCMC>)` |
 | `MultiDatesPlot()`, `multi_dates_plot()` | `plot(<MCMC>)` |
-| `MultiHPD()`, `multi_hpd()` | `hpdi(<MCMC>)` |
+| `MultiHPD()`, `multi_hpd()` | `interval_hdr(<MCMC>)` |
 | `MultiMarginalPlot()`, `multi_marginal_plot()` | `plot(<MCMC>)` |
 | `MultiPhasePlot()` | `plot(<PhasesMCMC>)` |
 | `MultiPhaseTimeRange()` | `boundaries(<PhasesMCMC>)` |

@@ -8,7 +8,7 @@ NULL
 setMethod(
   f = "names",
   signature = "MCMC",
-  definition = function(x) x@events
+  definition = function(x) x@labels
 )
 
 #' @export
@@ -18,7 +18,8 @@ setMethod(
   f = "names<-",
   signature = "MCMC",
   definition = function(x, value) {
-    x@events <- value
+    x@labels <- value
+    colnames(x) <- value
     methods::validObject(x)
     x
   }
@@ -30,7 +31,7 @@ setMethod(
 setMethod(
   f = "names",
   signature = "PhasesMCMC",
-  definition = function(x) x@phases
+  definition = function(x) x@labels
 )
 
 #' @export
@@ -40,135 +41,12 @@ setMethod(
   f = "names<-",
   signature = "PhasesMCMC",
   definition = function(x, value) {
-    x@phases <- value
+    x@labels <- value
+    colnames(x) <- value
     methods::validObject(x)
     x
   }
 )
 
 # Getters ======================================================================
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,MCMC-method
-setMethod(
-  f = "get_calendar",
-  signature = "MCMC",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,PhasesMCMC-method
-setMethod(
-  f = "get_calendar",
-  signature = "PhasesMCMC",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,CumulativeEvents-method
-setMethod(
-  f = "get_calendar",
-  signature = "CumulativeEvents",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,ActivityEvents-method
-setMethod(
-  f = "get_calendar",
-  signature = "ActivityEvents",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,OccurrenceEvents-method
-setMethod(
-  f = "get_calendar",
-  signature = "OccurrenceEvents",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,RateOfChange-method
-setMethod(
-  f = "get_calendar",
-  signature = "RateOfChange",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_calendar,AgeDepthModel-method
-setMethod(
-  f = "get_calendar",
-  signature = "AgeDepthModel",
-  definition = function(x) x@calendar
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,MCMC-method
-setMethod(
-  f = "get_hash",
-  signature = "MCMC",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,PhasesMCMC-method
-setMethod(
-  f = "get_hash",
-  signature = "PhasesMCMC",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,CumulativeEvents-method
-setMethod(
-  f = "get_hash",
-  signature = "CumulativeEvents",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,ActivityEvents-method
-setMethod(
-  f = "get_hash",
-  signature = "ActivityEvents",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,OccurrenceEvents-method
-setMethod(
-  f = "get_hash",
-  signature = "OccurrenceEvents",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,RateOfChange-method
-setMethod(
-  f = "get_hash",
-  signature = "RateOfChange",
-  definition = function(x) x@hash
-)
-
-#' @export
-#' @rdname mutator
-#' @aliases get_hash,AgeDepthModel-method
-setMethod(
-  f = "get_hash",
-  signature = "AgeDepthModel",
-  definition = function(x) x@hash
-)
+get_hash <- function(x) x@hash

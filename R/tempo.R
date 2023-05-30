@@ -29,14 +29,9 @@ setMethod(
   definition = function(object, level = 0.95, count = FALSE,
                         credible = TRUE, gauss = TRUE,
                         from = min(object), to = max(object),
-                        resolution = NULL) {
-
-    n_events <- ncol(object)
-    n_grid <- getOption("ArchaeoPhases.grid")
-    if (is.null(resolution)) resolution <- ((to - from) / (n_grid - 1))
-
+                        grid = getOption("ArchaeoPhases.grid")) {
     ## Empirical cumulative distribution
-    data_seq <- seq(from = from, to = to, by = resolution)
+    data_seq <- seq(from = from, to = to, length.out = grid)
     ecd_fun <- apply(X = object, MARGIN = 1, FUN = ecdf2, simplify = FALSE)
     ecd <- lapply(X = ecd_fun, FUN = function(f, x) f(x), x = data_seq)
 
@@ -45,14 +40,8 @@ setMethod(
     dim(distr) <- c(length(data_seq), nrow(object))
 
     ## Probability
-    if (count) {
-      distr <- distr * n_events
-    }
-
-    ## Calendar scale
-    if (is_BP(object)) {
-      distr <- apply(X = distr, MARGIN = 2, function(x) max(x) - x)
-    }
+    n_events <- ncol(object)
+    if (count) distr <- distr * n_events
 
     ## Transpose (column-wise computation is faster than row-wise)
     distr <- t(distr)
@@ -62,12 +51,12 @@ setMethod(
 
     ## Credible interval
     qu <- ga <- matrix(data = 0, nrow = 0, ncol = 2)
-    if (credible) {
-      qu <- apply(X = distr, MARGIN = 2, FUN = credible,
+    if (isTRUE(credible)) {
+      qu <- apply(X = distr, MARGIN = 2, FUN = arkhe::interval_credible,
                   level = level, simplify = FALSE)
       qu <- do.call(rbind, qu)
     }
-    if (gauss) {
+    if (isTRUE(gauss)) {
       ## Standard deviation
       ec <- apply(X = distr, MARGIN = 2, FUN = stats::sd)
 
@@ -78,15 +67,14 @@ setMethod(
       ga[ga <= 0] <- 0
     }
 
+    ts <- chronos::series(moy, time = chronos::as_fixed(data_seq))
     .CumulativeEvents(
-      years = data_seq,
-      estimate = moy,
+      ts,
       credible = qu[, -3],
       gauss = ga,
       level = level,
       counts = count,
       events = n_events,
-      calendar = get_calendar(object),
       hash = get_hash(object)
     )
   }

@@ -1,14 +1,13 @@
 # CLASSES DEFINITION AND INITIALIZATION
+#' @include reexport.R
 NULL
 
 # MCMC =========================================================================
 #' MCMC
 #'
 #' An S4 class to represent the output of a MCMC algorithm.
-#' @slot events A [`character`] vector specifying the name of the events.
+#' @slot labels A [`character`] vector specifying the name of the events.
 #' @slot depth A [`numeric`] vector giving the sample depth.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Subset:
@@ -27,9 +26,9 @@ NULL
 .MCMC <- setClass(
   Class = "MCMC",
   slots = c(
-    events = "character",
+    labels = "character",
     depth = "numeric",
-    calendar = "character",
+    iteration = "integer",
     hash = "character"
   ),
   contains = "matrix"
@@ -40,7 +39,7 @@ NULL
 #'
 #' S4 classes to represent a collection of events.
 #' @note
-#'  These classes inherit from [`MCMC-class`].
+#'  This class inherits from [`MCMC-class`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class
@@ -65,9 +64,7 @@ NULL
 #' MCMC Phases
 #'
 #' S4 classes to represent a collection of phases.
-#' @slot phases A [`character`] vector specifying the name of the phases.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
+#' @slot labels A [`character`] vector specifying the name of the phases.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -82,7 +79,7 @@ NULL
 #'   `i`. `i` is a length-one [`numeric`] or [`character`] vector.}
 #'  }
 #' @note
-#'  Theses classes inherit from [`array`].
+#'  This class inherits from [`array`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class
@@ -91,8 +88,8 @@ NULL
 .PhasesMCMC <- setClass(
   Class = "PhasesMCMC",
   slots = c(
-    phases = "character",
-    calendar = "character",
+    labels = "character",
+    iteration = "integer",
     hash = "character"
   ),
   contains = "array"
@@ -102,11 +99,9 @@ NULL
 #' Cumulative Events
 #'
 #' An S4 class to represent time ranges.
-#' @slot start,stop A `numeric` [`matrix`] giving the lower and upper
+#' @slot start,end A `numeric` [`matrix`] giving the lower and upper
 #'  boundaries.
-#' @slot names A [`character`] vector specifying the name of the events/phases.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
+#' @slot labels A [`character`] vector specifying the name of the events/phases.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @author N. Frerebeau
@@ -118,9 +113,8 @@ NULL
   Class = "TimeRange",
   slots = c(
     start = "matrix",
-    stop = "matrix",
-    names = "matrix",
-    calendar = "character",
+    end = "matrix",
+    labels = "matrix",
     hash = "character"
   )
 )
@@ -129,10 +123,6 @@ NULL
 #' Cumulative Events
 #'
 #' An S4 class to store the result of a [`tempo`] plot.
-#' @slot years A [`numeric`] vector giving the time points at which the
-#'  cumulative distribution is estimated.
-#' @slot estimate A [`numeric`] vector giving the estimation of the cumulative
-#'  distribution.
 #' @slot lower A [`numeric`] vector giving the lower boundaries of the
 #'  credibility interval.
 #' @slot upper A [`numeric`] vector giving the upper boundaries of the
@@ -143,8 +133,6 @@ NULL
 #' @slot counts A [`logical`] scalar.
 #' @slot events An [`integer`] scalar giving the number of events included in
 #'  the tempo plot.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -152,6 +140,8 @@ NULL
 #'  \describe{
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
+#' @note
+#'  This class inherits from [`TimeSeries-class`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class
@@ -160,28 +150,20 @@ NULL
 .CumulativeEvents <- setClass(
   Class = "CumulativeEvents",
   slots = c(
-    years = "numeric",
-    estimate = "numeric",
     credible = "matrix",
     gauss = "matrix",
     level = "numeric",
     counts = "logical",
     events = "integer",
-    calendar = "character",
     hash = "character"
-  )
+  ),
+  contains = "TimeSeries"
 )
 
 # Activity =====================================================================
 #' Activity
 #'
 #' An S4 class to store the result of an [`activity`] plot.
-#' @slot years A [`numeric`] vector giving the time points at which the
-#'  distribution is estimated.
-#' @slot estimate A [`numeric`] vector giving the estimation of the
-#'  distribution.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -189,6 +171,8 @@ NULL
 #'  \describe{
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
+#' @note
+#'  This class inherits from [`TimeSeries-class`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class
@@ -197,11 +181,9 @@ NULL
 .ActivityEvents <- setClass(
   Class = "ActivityEvents",
   slots = c(
-    years = "numeric",
-    estimate = "numeric",
-    calendar = "character",
     hash = "character"
-  )
+  ),
+  contains = "TimeSeries"
 )
 
 # Occurrence ===================================================================
@@ -211,11 +193,9 @@ NULL
 #' @slot events An [`integer`] vector giving the occurrence.
 #' @slot start A [`numeric`] vector giving the lower boundaries of the
 #'  credibility interval.
-#' @slot stop A [`numeric`] vector giving the upper boundaries of the
+#' @slot end A [`numeric`] vector giving the upper boundaries of the
 #'  credibility interval.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -233,41 +213,8 @@ NULL
   slots = c(
     events = "integer",
     start = "numeric",
-    stop = "numeric",
+    end = "numeric",
     level = "numeric",
-    calendar = "character",
-    hash = "character"
-  )
-)
-
-# Rate of Change ===============================================================
-#' Rate of Change
-#'
-#' An S4 class to store the result of a [`rate of change`][`roc`] estimation.
-#' @slot years A [`numeric`] vector giving the time points at which the
-#'  rate fo change is estimated.
-#' @slot estimate A [`numeric`] vector giving the estimation of the
-#'  rate of change.
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
-#' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
-#'  original data file.
-#' @section Coerce:
-#'  In the code snippets below, `x` is an `RateOfChange` object.
-#'  \describe{
-#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
-#'  }
-#' @author N. Frerebeau
-#' @family classes
-#' @docType class
-#' @aliases RateOfChange-class
-#' @keywords internal
-.RateOfChange <- setClass(
-  Class = "RateOfChange",
-  slots = c(
-    years = "numeric",
-    estimate = "numeric",
-    calendar = "character",
     hash = "character"
   )
 )
@@ -279,8 +226,6 @@ NULL
 #' @slot depth A [`numeric`] vector giving the depth of the samples.
 #' @slot model A [`list`] of local polynomial regressions
 #'  (see [stats::loess()]).
-#' @slot calendar A [`character`] string specifying the chronological scale
-#'  (either "`CE`", "`BP`" or "`b2k`").
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @author N. Frerebeau
@@ -293,7 +238,6 @@ NULL
   slots = c(
     depth = "numeric",
     model = "list",
-    calendar = "character",
     hash = "character"
   )
 )

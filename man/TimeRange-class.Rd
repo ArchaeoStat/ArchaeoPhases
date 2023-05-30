@@ -11,13 +11,10 @@ An S4 class to represent time ranges.
 \section{Slots}{
 
 \describe{
-\item{\code{start,stop}}{A \code{numeric} \code{\link{matrix}} giving the lower and upper
+\item{\code{start,end}}{A \code{numeric} \code{\link{matrix}} giving the lower and upper
 boundaries.}
 
-\item{\code{names}}{A \code{\link{character}} vector specifying the name of the events/phases.}
-
-\item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
-(either "\code{CE}", "\code{BP}" or "\code{b2k}").}
+\item{\code{labels}}{A \code{\link{character}} vector specifying the name of the events/phases.}
 
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
@@ -32,8 +29,7 @@ Other classes:
 \code{\link{EventsMCMC-class}},
 \code{\link{MCMC-class}},
 \code{\link{OccurrenceEvents-class}},
-\code{\link{PhasesMCMC-class}},
-\code{\link{RateOfChange-class}}
+\code{\link{PhasesMCMC-class}}
 }
 \author{
 N. Frerebeau

@@ -8,13 +8,14 @@ NULL
 setMethod(
   f = "summary",
   signature = "MCMC",
-  definition = function(object, level = 0.95) {
+  definition = function(object, level = 0.95,
+                        calendar = getOption("ArchaeoPhases.calendar")) {
     x <- apply(
       X = object,
       MARGIN = 2,
       FUN = stats_marginal,
       level = level,
-      CE = !(is_BP(object) || is_b2k(object))
+      calendar = calendar
     )
     as.data.frame(t(x))
   }
@@ -26,7 +27,8 @@ setMethod(
 setMethod(
   f = "summary",
   signature = "PhasesMCMC",
-  definition = function(object, level = 0.95) {
+  definition = function(object, level = 0.95,
+                        calendar = getOption("ArchaeoPhases.calendar")) {
     pha <- as.list(object)
     k <- seq_along(pha)
 
@@ -39,7 +41,7 @@ setMethod(
         MARGIN = 2,
         FUN = stats_marginal,
         level = level,
-        CE = is_CE(object)
+        calendar = calendar
       )
       colnames(tmp) <- c("start", "end", "duration")
 
@@ -69,8 +71,9 @@ setMethod(
 #' @noRd
 stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
                            quantiles = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1),
-                           credible = TRUE, level = 0.95, CE = TRUE,
-                           digits = getOption("ArchaeoPhases.precision")) {
+                           credible = TRUE, level = 0.95,
+                           digits = getOption("ArchaeoPhases.precision"),
+                           calendar = getOption("ArchaeoPhases.calendar")) {
   ## Defaults
   moy <- mod <- quant <- ec <- ci <- NA_real_
 
@@ -84,11 +87,16 @@ stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
 
   ## Dispersion
   if (sd) ec <- stats::sd(x)
-  if (credible) ci <- credible(x, level = level, CE = CE)[, c("start", "stop")]
+  if (credible) {
+    ci <- arkhe::interval_credible(x, level = level)
+    ci <- ci[, c("start", "end")]
+  }
 
   ## Results
   tmp <- c(mad = mod, mean = moy, sd = ec, quant, ci)
   tmp <- Filter(Negate(is.na), tmp)
+
+  if (!is.null(calendar)) tmp <- chronos::as_year(tmp, calendar = calendar)
   if (!is.null(digits)) tmp <- round(tmp, digits = digits)
   tmp
 }

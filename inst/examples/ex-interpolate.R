@@ -1,5 +1,5 @@
-## Coerce to MCMC
-eve <- as_events(events, calendar = "CE", iteration = 1)
+## Coerce to events
+eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Interpolate between two events

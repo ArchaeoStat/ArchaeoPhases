@@ -11,17 +11,14 @@ S4 classes to represent a collection of phases.
 \section{Slots}{
 
 \describe{
-\item{\code{phases}}{A \code{\link{character}} vector specifying the name of the phases.}
-
-\item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
-(either "\code{CE}", "\code{BP}" or "\code{b2k}").}
+\item{\code{labels}}{A \code{\link{character}} vector specifying the name of the phases.}
 
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
 }}
 
 \note{
-Theses classes inherit from \code{\link{array}}.
+This class inherits from \code{\link{array}}.
 }
 \section{Coerce}{
 
@@ -49,7 +46,6 @@ Other classes:
 \code{\link{EventsMCMC-class}},
 \code{\link{MCMC-class}},
 \code{\link{OccurrenceEvents-class}},
-\code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
 }
 \author{

@@ -10,7 +10,6 @@
 \alias{is_original,CumulativeEvents-method}
 \alias{is_original,ActivityEvents-method}
 \alias{is_original,OccurrenceEvents-method}
-\alias{is_original,RateOfChange-method}
 \title{Check for an Original MCMC File}
 \usage{
 is_original(object, ...)
@@ -24,8 +23,6 @@ is_original(object, ...)
 \S4method{is_original}{ActivityEvents}(object, file, download = FALSE)
 
 \S4method{is_original}{OccurrenceEvents}(object, file, download = FALSE)
-
-\S4method{is_original}{RateOfChange}(object, file, download = FALSE)
 }
 \arguments{
 \item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
@@ -47,9 +44,10 @@ an object.
 \examples{
 \dontrun{
 ## Import OxCal Output
-path_output <- system.file("oxcal/ksarakil/MCMC_Sample.csv", package = "fasti")
-url_output <- paste0("https://raw.githubusercontent.com/tesselle/fasti/master/",
+path_output <- system.file("oxcal/ksarakil/MCMC_Sample.csv", package = "ArchaeoData")
+url_output <- paste0("https://raw.githubusercontent.com/ArchaeoStat/ArchaeoData/master/",
                      "inst/oxcal/ksarakil/MCMC_Sample.csv")
+
 oxcal <- read_oxcal(path_output)
 
 ## Check md5 sum
@@ -62,8 +60,6 @@ is_original(oxcal, url_output, download = TRUE) # Same as remote file? TRUE
 \code{\link[digest:digest]{digest::digest()}}
 
 Other read methods: 
-\code{\link{coda}},
-\code{\link{coerce}()},
 \code{\link{read_bcal}()},
 \code{\link{read_chronomodel}},
 \code{\link{read_oxcal}()}

@@ -12,6 +12,7 @@ tempo(object, ...)
 
 \S4method{plot}{CumulativeEvents,missing}(
   x,
+  calendar = getOption("ArchaeoPhases.calendar"),
   credible = TRUE,
   gauss = TRUE,
   legend = TRUE,
@@ -42,7 +43,7 @@ tempo(object, ...)
   gauss = TRUE,
   from = min(object),
   to = max(object),
-  resolution = NULL
+  grid = getOption("ArchaeoPhases.grid")
 )
 }
 \arguments{
@@ -53,6 +54,9 @@ arguments to this function.}
 
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object or an \code{\linkS4class{EventsMCMC}}
 object.}
+
+\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
+(see \code{\link[=calendar]{calendar()}}).}
 
 \item{credible}{A \code{\link{logical}} scalar: should the credible interval be
 computed/displayed?}
@@ -99,10 +103,8 @@ estimate for (in years).}
 \item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
 for (in years).}
 
-\item{resolution}{A length-one \code{\link{numeric}} vector specifying the temporal
-resolution (in years) at which densities are to be estimated.
-If \code{NULL} (the default), equally spaced points will be used (according to
-\code{options("ArchaeoPhases.grid")}).}
+\item{grid}{A length-one \code{\link{numeric}} vector specifying the number of equally
+spaced points of the temporal grid.}
 }
 \value{
 \itemize{
@@ -126,7 +128,7 @@ the plot is horizontal. When change is instantaneous, the plot is vertical.
 }
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, calendar = "CE", iteration = 1)
+eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Tempo plot
@@ -147,8 +149,9 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
-\code{\link{occurrence}()},
-\code{\link{roc}()}
+\code{\link{as_events}()},
+\code{\link{elapse}()},
+\code{\link{occurrence}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

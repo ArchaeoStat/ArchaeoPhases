@@ -44,5 +44,7 @@
 "_PACKAGE"
 
 #' @import arkhe
-#' @importFrom methods as new setGeneric setMethod setValidity .valueClassTest
+#' @import chronos
+#' @importFrom methods as getGeneric new setGeneric setMethod setValidity
+#' .valueClassTest
 NULL

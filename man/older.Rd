@@ -44,7 +44,7 @@ probability of the assumption: "event \code{x} is older than event \code{y}").
 }}
 \examples{
 ## Coerce to MCMC
-eve <- as_events(events, calendar = "CE", iteration = 1)
+eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 eve <- eve[1:10000, ]
 
 ## Test for anteriority
@@ -53,11 +53,6 @@ older(eve)
 ## Test for hiatus
 hia <- hiatus(eve)
 as.data.frame(hia)
-}
-\seealso{
-Other tests: 
-\code{\link{apportion}()},
-\code{\link{hiatus}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

@@ -1,14 +1,14 @@
 # COERCE
-#' @include AllClasses.R AllGenerics.R
+#' @include AllGenerics.R
 NULL
 
 # To data.frame ================================================================
 #' @method as.data.frame CumulativeEvents
 #' @export
-as.data.frame.CumulativeEvents <- function(x, ...) {
+as.data.frame.CumulativeEvents <- function(x, ..., calendar = NULL) {
   tmp <- data.frame(
-    years = x@years,
-    estimate = x@estimate
+    years = chronos::time(x@years, calendar = calendar),
+    estimate = x[, 1, drop = TRUE]
   )
   if (nrow(x@credible) > 0) {
     tmp$credible_start <- x@credible[, 1]
@@ -29,46 +29,41 @@ as.data.frame.CumulativeEvents <- function(x, ...) {
 
 #' @method as.data.frame ActivityEvents
 #' @export
-as.data.frame.ActivityEvents <- function(x, ...) {
+as.data.frame.ActivityEvents <- function(x, ..., calendar = NULL) {
   data.frame(
-    years = x@years,
-    estimate = x@estimate
+    years = chronos::time(x@years, calendar = calendar),
+    estimate = x[, 1, drop = TRUE]
   )
 }
 
 #' @method as.data.frame OccurrenceEvents
 #' @export
-as.data.frame.OccurrenceEvents <- function(x, ...) {
+as.data.frame.OccurrenceEvents <- function(x, ..., calendar = NULL) {
   data.frame(
     events = x@events,
-    start = x@start,
-    stop = x@stop
-  )
-}
-
-#' @method as.data.frame RateOfChange
-#' @export
-as.data.frame.RateOfChange <- function(x, ...) {
-  data.frame(
-    years = x@years,
-    estimate = x@estimate
+    start = chronos::time(x@start, calendar = calendar),
+    end = chronos::time(x@end, calendar = calendar)
   )
 }
 
 #' @method as.data.frame TimeRange
 #' @export
-as.data.frame.TimeRange <- function(x, ...) {
+as.data.frame.TimeRange <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
 
   ok <- !is.na(x@start)
   start <- x@start[ok]
-  stop <- x@stop[ok]
+  end <- x@end[ok]
+  duration <- abs(end - start)
 
-  data.frame(
-    start = start,
-    stop = stop,
-    duration = abs(stop - start),
-    row.names = x@names[ok]
-  )
+  ## Change calendar
+  if (!is.null(calendar)) {
+    start <- chronos::as_year(start, calendar = calendar)
+    end <- chronos::as_year(end, calendar = calendar)
+    duration <- chronos::as_year(duration, calendar = calendar)
+  }
+
+  data.frame(start = start, end = end, duration = duration,
+             row.names = x@labels[ok])
 }
 
 # To list ======================================================================
@@ -81,14 +76,14 @@ as.list.PhasesMCMC <- function(x, ...) {
 
   k <- seq_len(n)
   for (i in k) {
-    tmp[[i]] <- x[, i, ]
+    tmp[[i]] <- x[, i, , drop = TRUE]
   }
   tmp
 }
 
 # To coda ======================================================================
 #' @export
-#' @rdname coda
+#' @rdname as_coda
 #' @aliases as_coda,MCMC-method
 setMethod(
   f = "as_coda",
@@ -102,93 +97,9 @@ setMethod(
 
     for (i in 1:chains){
       index <- seq(from = L * (i - 1) + 1, to = L * i, by = 1)
-      obj[[i]] <- coda::mcmc(from[index, ], start = 1, end = L)
+      obj[[i]] <- coda::mcmc(from[index, , drop = TRUE], start = 1, end = L)
     }
 
     coda::mcmc.list(obj)
-  }
-)
-
-# To EventsMCMC ================================================================
-#' @export
-#' @rdname coerce
-#' @aliases as_events,matrix-method
-setMethod(
-  f = "as_events",
-  signature = "matrix",
-  definition = function(from, calendar = c("BP", "CE", "b2k"),
-                        iteration = NULL) {
-    ## Validation
-    calendar <- match.arg(calendar, several.ok = FALSE)
-
-    ## Remove the iteration column
-    if (!is.null(iteration)) from <- from[, -iteration]
-
-    ## Event names
-    event_names <- colnames(from)
-    if (is.null(event_names)) event_names <- paste0("E", seq_len(ncol(from)))
-
-    .EventsMCMC(from, events = event_names, calendar = calendar)
-  }
-)
-
-#' @export
-#' @rdname coerce
-#' @aliases as_events,data.frame-method
-setMethod(
-  f = "as_events",
-  signature = "data.frame",
-  definition = function(from, calendar = c("BP", "CE", "b2k"),
-                        iteration = NULL) {
-    from <- data.matrix(from)
-    methods::callGeneric(from = from, calendar = calendar,
-                         iteration = iteration)
-  }
-)
-
-# To PhasesMCMC ================================================================
-#' @export
-#' @rdname coerce
-#' @aliases as_phases,matrix-method
-setMethod(
-  f = "as_phases",
-  signature = c(from = "matrix"),
-  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, names = NULL,
-                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
-    ## Validation
-    arkhe::assert_length(stop, length(start))
-    calendar <- match.arg(calendar, several.ok = FALSE)
-
-    ## Remove the iteration column
-    if (!is.null(iteration)) from <- from[, -iteration]
-
-    pha <- if (is.null(names)) paste0("P", seq_along(start)) else names
-    arr <- array(data = NA_real_, dim = c(nrow(from), length(start), 2),
-                 dimnames = list(NULL, pha, c("begin", "end")))
-
-    arr[, , 1] <- from[, start]
-    arr[, , 2] <- from[, stop]
-
-    .PhasesMCMC(
-      arr,
-      phases = pha,
-      calendar = calendar
-    )
-  }
-)
-
-#' @export
-#' @rdname coerce
-#' @aliases as_phases,data.frame-method
-setMethod(
-  f = "as_phases",
-  signature = c(from = "data.frame"),
-  definition = function(from, start = seq(from = 1, to = ncol(from), by = 2),
-                        stop = start + 1, names = NULL,
-                        calendar = c("BP", "CE", "b2k"), iteration = NULL) {
-    from <- data.matrix(from)
-    methods::callGeneric(from, start = start, stop = stop, names = names,
-                         calendar = calendar, iteration = iteration)
   }
 )

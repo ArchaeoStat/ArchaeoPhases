@@ -10,21 +10,22 @@ NULL
 setMethod(
   f = "[",
   signature = c(x = "MCMC"),
-  function(x, i, j, ..., drop = TRUE) {
+  function(x, i, j, ..., drop = FALSE) {
     z <- methods::callNextMethod()
+    if (isTRUE(drop)) return(z)
 
-    if (is.null(dim(z))) {
-      return(z)
-    }
-
-    eve <- x@events
+    lab <- x@labels
+    itr <- x@iteration
     dep <- x@depth
+    if (!missing(i)) {
+      itr <- itr[i]
+    }
     if (!missing(j)) {
-      if (is.character(j)) j <- match(j, eve)
-      eve <- eve[j]
+      if (is.character(j)) j <- match(j, lab)
+      lab <- lab[j]
       dep <- dep[j]
     }
-    methods::initialize(x, z, events = eve, depth = dep)
+    methods::initialize(x, z, labels = lab, depth = dep, iteration = itr)
   }
 )
 
@@ -34,83 +35,15 @@ setMethod(
 setMethod(
   f = "[",
   signature = c(x = "PhasesMCMC"),
-  function(x, i, j, ..., drop = TRUE) {
+  function(x, i, j, ..., drop = FALSE) {
     z <- methods::callNextMethod()
+    if (isTRUE(drop)) return(z)
 
-    if (is.null(dim(z)) | length(dim(z)) == 2) {
-      return(z)
-    }
-
-    pha <- x@phases
+    lab <- x@labels
     if (!missing(j)) {
-      if (is.character(j)) j <- match(j, pha)
-      pha <- pha[j]
+      if (is.character(j)) j <- match(j, lab)
+      lab <- lab[j]
     }
-    methods::initialize(x, z, phases = pha)
-  }
-)
-
-## [[ --------------------------------------------------------------------------
-#' @export
-#' @rdname subset
-#' @aliases [[,MCMC,numeric,missing-method
-setMethod(
-  f = "[[",
-  signature = c(x = "MCMC", i = "numeric", j = "missing"),
-  definition = function(x, i) {
-    x[, i, drop = FALSE]
-  }
-)
-
-#' @export
-#' @rdname subset
-#' @aliases [[,PhasesMCMC,numeric,missing-method
-setMethod(
-  f = "[[",
-  signature = c(x = "PhasesMCMC", i = "numeric", j = "missing"),
-  definition = function(x, i) {
-    z <- x@phases[[i]]
-    tmp <- x[, i, , drop = FALSE]
-    methods::initialize(x, tmp, phases = z)
-  }
-)
-
-#' @export
-#' @rdname subset
-#' @aliases [[,PhasesMCMC,character,missing-method
-setMethod(
-  f = "[[",
-  signature = c(x = "PhasesMCMC", i = "character", j = "missing"),
-  definition = function(x, i) {
-    k <- which(x@phases == i)
-    methods::callGeneric(x = x, i = k)
-  }
-)
-
-# Replace ======================================================================
-## [<- -------------------------------------------------------------------------
-#' @export
-#' @rdname subset
-#' @aliases [<-,MCMC-method
-setMethod(
-  f = "[<-",
-  signature = c(x = "MCMC"),
-  function(x, i, j, ..., value) {
-    z <- methods::callNextMethod()
-    methods::validObject(z)
-    z
-  }
-)
-
-#' @export
-#' @rdname subset
-#' @aliases [<-,PhasesMCMC-method
-setMethod(
-  f = "[<-",
-  signature = c(x = "PhasesMCMC"),
-  function(x, i, j, ..., value) {
-    z <- methods::callNextMethod()
-    methods::validObject(z)
-    z
+    methods::initialize(x, z, labels = lab)
   }
 )

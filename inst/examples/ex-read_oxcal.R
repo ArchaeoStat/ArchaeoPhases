@@ -1,5 +1,7 @@
-\dontrun{
-## Import OxCal Output
-path_output <- system.file("oxcal/ksarakil/MCMC_Sample.csv", package = "fasti")
-(oxcal <- read_oxcal(path_output))
+if (requireNamespace("ArchaeoData", quietly = TRUE)) {
+  ## Import OxCal Output
+  path <- "oxcal/ksarakil/"
+
+  path_output <- system.file(path, "MCMC_Sample.csv", package = "ArchaeoData")
+  (oxcal <- read_oxcal(path_output))
 }

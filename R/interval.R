@@ -1,106 +1,52 @@
 # INTERVAL ESTIMATION
-#' @include AllClasses.R AllGenerics.R
+#' @include AllGenerics.R
 NULL
 
 # CI ===========================================================================
 #' @export
-#' @rdname credible
-#' @aliases credible,numeric-method
+#' @rdname interval_credible
+#' @aliases interval_credible,MCMC-method
 setMethod(
-  f = "credible",
-  signature = "numeric",
-  definition = function(object, level = 0.95, CE = TRUE) {
-    ## Order the sample
-    sorted <- sort(object, method = "radix") # Faster sorting with radix method
-
-    ## Sample size
-    N <- length(object)
-
-    ## Number of data to be outside of the interval
-    outside <- as.integer(N * (1 - level))
-    inf <- seq(from = 1L, to = outside + 1L, by = 1L)
-    sup <- seq(from = N - outside, to = N, by = 1L)
-
-    ## Look for the shortest interval
-    a <- sorted[sup]
-    b <- sorted[inf]
-    ind <- which.min(a - b)
-
-    ## Reverse boundaries if BP or b2k scale
-    x <- ifelse(CE, b[[ind]], a[[ind]])
-    y <- ifelse(CE, a[[ind]], b[[ind]])
-
-    cbind(start = x, stop = y, p = level)
-  }
-)
-
-#' @export
-#' @rdname credible
-#' @aliases credible,MCMC-method
-setMethod(
-  f = "credible",
-  signature = "MCMC",
-  definition = function(object, level = 0.95) {
-    CE <- !(is_BP(object) || is_b2k(object))
-    cred <- apply(X = object, MARGIN = 2, FUN = credible,
-                  level = level, CE = CE, simplify = FALSE)
-
-    names(cred) <- names(object)
-    attr(cred, "calendar") <- get_calendar(object)
-    cred
+  f = "interval_credible",
+  signature = c(x = "MCMC"),
+  definition = function(x, level = 0.95, calendar = getOption("ArchaeoPhases.calendar")) {
+    cred <- apply(X = x, MARGIN = 2, FUN = arkhe::interval_credible,
+                  level = level, simplify = FALSE)
+    names(cred) <- names(x)
+    if (is.null(calendar)) return(cred)
+    lapply(
+      X = cred,
+      FUN = function(x, calendar) {
+        x[, 1] <- chronos::as_year(x[, 1], calendar = calendar)
+        x[, 2] <- chronos::as_year(x[, 2], calendar = calendar)
+        x
+      },
+      calendar = calendar
+    )
   }
 )
 
 # HPDI =========================================================================
 #' @export
-#' @rdname hpdi
-#' @aliases hpdi,numeric-method
+#' @rdname interval_hdr
+#' @aliases interval_hdr,MCMC,missing-method
 setMethod(
-  f = "hpdi",
-  signature = "numeric",
-  definition = function(object, level = 0.95, CE = TRUE, ...) {
-    ## Compute density
-    d <- stats::density(object, ..., n = getOption("ArchaeoPhases.grid"))
-    x <- d$x
-    y <- d$y / sum(d$y)
-
-    ## Order the sample (faster sorting with radix method)
-    sorted <- sort(y, decreasing = TRUE, method = "radix")
-    i <- min(which(cumsum(sorted) >= sum(y) * level))
-    h <- sorted[[i]]
-    idx <- which(y >= h)
-
-    gap <- which(diff(idx) > 1)
-    inf <- idx[c(1, gap + 1)]
-    sup <- idx[c(gap, length(idx))]
-
-    int <- mapply(FUN = seq, from = inf, to = sup,
-                  SIMPLIFY = FALSE, USE.NAMES = FALSE)
-    p <- vapply(X = int, FUN = function(i, y) { sum(y[i]) },
-                FUN.VALUE = numeric(1), y = y)
-
-    ## Reverse boundaries if BP scale
-    a <- if (CE) x[inf] else x[sup]
-    b <- if (CE) x[sup] else x[inf]
-
-    cbind(start = a, stop = b, p = round(p, digits = 2))
-  }
-)
-
-#' @export
-#' @rdname hpdi
-#' @aliases hpdi,MCMC-method
-setMethod(
-  f = "hpdi",
-  signature = "MCMC",
-  definition = function(object, level = 0.95, ...) {
-    CE <- !(is_BP(object) || is_b2k(object))
-    hpd <- apply(X = object, MARGIN = 2, FUN = hpdi, level = level,
-                 CE = CE, ..., simplify = FALSE)
-
-    names(hpd) <- names(object)
-    attr(hpd, "calendar") <- get_calendar(object)
-    hpd
+  f = "interval_hdr",
+  signature = c(x = "MCMC", y = "missing"),
+  definition = function(x, level = 0.95, calendar = getOption("ArchaeoPhases.calendar"), ...) {
+    hpd <- apply(X = x, MARGIN = 2, FUN = arkhe::interval_hdr,
+                 level = level, ..., simplify = FALSE)
+    names(hpd) <- names(x)
+    if (is.null(calendar)) return(hpd)
+    lapply(
+      X = hpd,
+      FUN = function(x, calendar) {
+        x[, 1] <- chronos::as_year(x[, 1], calendar = calendar)
+        x[, 2] <- chronos::as_year(x[, 2], calendar = calendar)
+        x
+      },
+      calendar = calendar
+    )
   }
 )
 

@@ -9,7 +9,7 @@
 \usage{
 read_oxcal(file, ...)
 
-\S4method{read_oxcal}{character}(file, BP = FALSE)
+\S4method{read_oxcal}{character}(file, calendar = CE())
 }
 \arguments{
 \item{file}{the name of the file which the data are to be read from.
@@ -35,9 +35,9 @@ read_oxcal(file, ...)
 
 \item{...}{Further arguments to be passed to \code{read.table}.}
 
-\item{BP}{A \code{\link{logical}} scalar: should the data be converted from BP to
-CE? This should not be \code{TRUE} unless you change the default settings in
-'OxCal' or 'ChronoModel'.}
+\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the calendar
+(see \code{\link[chronos:calendar]{chronos::calendar()}}). It should be \code{\link[=CE]{CE()}} unless you change the
+default settings in 'OxCal'.}
 }
 \value{
 An \code{\linkS4class{EventsMCMC}} object.
@@ -46,10 +46,12 @@ An \code{\linkS4class{EventsMCMC}} object.
 Reads MCMC output.
 }
 \examples{
-\dontrun{
-## Import OxCal Output
-path_output <- system.file("oxcal/ksarakil/MCMC_Sample.csv", package = "fasti")
-(oxcal <- read_oxcal(path_output))
+if (requireNamespace("ArchaeoData", quietly = TRUE)) {
+  ## Import OxCal Output
+  path <- "oxcal/ksarakil/"
+
+  path_output <- system.file(path, "MCMC_Sample.csv", package = "ArchaeoData")
+  (oxcal <- read_oxcal(path_output))
 }
 }
 \references{
@@ -61,8 +63,6 @@ Bronk Ramsey, C. (2009). Bayesian Analysis of Radiocarbon Dates.
 
 Other read methods: 
 \code{\link{check}},
-\code{\link{coda}},
-\code{\link{coerce}()},
 \code{\link{read_bcal}()},
 \code{\link{read_chronomodel}}
 }

@@ -9,10 +9,10 @@ setMethod(
   f = "activity",
   signature = "EventsMCMC",
   definition = function(object, from = min(object), to = max(object),
-                        resolution = NULL) {
+                        grid = getOption("ArchaeoPhases.grid")) {
     ## Tempo
     tmp <- tempo(object, level = 0.95, count = FALSE, credible = FALSE,
-                 gauss = FALSE, from = from, to = to, resolution = resolution)
+                 gauss = FALSE, from = from, to = to, grid = grid)
     ## Activity
     methods::callGeneric(object = tmp)
   }
@@ -30,21 +30,19 @@ setMethod(
       stop("Tempo must be computed as probabilities.", call. = FALSE)
     }
 
-    a <- object@estimate
-    b <- object@years
+    years <- chronos::time(object)
+    est <- apply(
+      X = object,
+      MARGIN = 2,
+      FUN = function(a, b) {
+        diff(a) / diff(b)
+      },
+      b = years
+    )
 
-    x <- b[-1]
-    y <- diff(a) / diff(b)
-
-    ## Calendar scale
-    if (is_BP(object)) {
-      y <- max(y) - y
-    }
-
+    ts <- chronos::series(est, time = chronos::as_fixed(years[-1]))
     .ActivityEvents(
-      years = x,
-      estimate = y,
-      calendar = get_calendar(object),
+      ts,
       hash = get_hash(object)
     )
   }

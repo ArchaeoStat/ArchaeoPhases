@@ -11,12 +11,9 @@ An S4 class to represent the output of a MCMC algorithm.
 \section{Slots}{
 
 \describe{
-\item{\code{events}}{A \code{\link{character}} vector specifying the name of the events.}
+\item{\code{labels}}{A \code{\link{character}} vector specifying the name of the events.}
 
 \item{\code{depth}}{A \code{\link{numeric}} vector giving the sample depth.}
-
-\item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
-(either "\code{CE}", "\code{BP}" or "\code{b2k}").}
 
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
@@ -43,7 +40,6 @@ Other classes:
 \code{\link{EventsMCMC-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
-\code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
 }
 \author{

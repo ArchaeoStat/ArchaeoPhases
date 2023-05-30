@@ -30,7 +30,8 @@ BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
 Depends: 
     R (>= 3.5.0)
 Imports: 
-    arkhe (>= 1.1.0),
+    arkhe (>= 1.2.0),
+    chronos,
     graphics,
     grDevices,
     methods,
@@ -38,46 +39,19 @@ Imports:
     tools,
     utils
 Suggests: 
+    ArchaeoData,
     coda,
-    fasti,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
     vdiffr (>= 1.0.0)
-VignetteBuilder: 
-    knitr
-Additional_repositories: https://tesselle.r-universe.dev
+VignetteBuilder: knitr
+Additional_repositories: https://archaeostat.r-universe.dev
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Collate: 
-    'AllClasses.R'
-    'AllGenerics.R'
-    'ArchaeoPhases-defunct.R'
-    'ArchaeoPhases-deprecated.R'
-    'ArchaeoPhases-package.R'
-    'activity.R'
-    'bind.R'
-    'calendar.R'
-    'coerce.R'
-    'data.R'
-    'depth.R'
-    'interval.R'
-    'multiplot.R'
-    'mutators.R'
-    'occurrence.R'
-    'phases.R'
-    'plot.R'
-    'read.R'
-    'roc.R'
-    'sensitivity.R'
-    'show.R'
-    'subset.R'
-    'summary.R'
-    'tempo.R'
-    'test.R'
-    'utilities.R'
-    'validate.R'
-    'zzz.R'
+Collate: 'reexport.R' 'AllClasses.R' 'AllGenerics.R' 'ArchaeoPhases-defunct.R' 'ArchaeoPhases-deprecated.R' 'ArchaeoPhases-internal.R' 'ArchaeoPhases-package.R' 'activity.R'
+                   'bind.R' 'boundaries.R' 'coerce.R' 'data.R' 'depth.R' 'duration.R' 'elapse.R' 'events.R' 'hiatus.R' 'interpolate.R' 'interval.R' 'mutators.R' 'occurrence.R'
+                   'phases.R' 'plot.R' 'read.R' 'sensitivity.R' 'show.R' 'sort.R' 'subset.R' 'summary.R' 'tempo.R' 'test.R' 'transition.R' 'validate.R' 'zzz.R'

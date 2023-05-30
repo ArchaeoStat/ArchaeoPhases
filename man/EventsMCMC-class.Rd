@@ -9,7 +9,7 @@
 S4 classes to represent a collection of events.
 }
 \note{
-These classes inherit from \code{\linkS4class{MCMC}}.
+This class inherits from \code{\linkS4class{MCMC}}.
 }
 \seealso{
 Other classes: 
@@ -20,7 +20,6 @@ Other classes:
 \code{\link{MCMC-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
-\code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
 }
 \author{

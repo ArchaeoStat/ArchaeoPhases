@@ -16,9 +16,6 @@ An S4 class to represents an age-depth model.
 \item{\code{model}}{A \code{\link{list}} of local polynomial regressions
 (see \code{\link[stats:loess]{stats::loess()}}).}
 
-\item{\code{calendar}}{A \code{\link{character}} string specifying the chronological scale
-(either "\code{CE}", "\code{BP}" or "\code{b2k}").}
-
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
 }}
@@ -32,7 +29,6 @@ Other classes:
 \code{\link{MCMC-class}},
 \code{\link{OccurrenceEvents-class}},
 \code{\link{PhasesMCMC-class}},
-\code{\link{RateOfChange-class}},
 \code{\link{TimeRange-class}}
 }
 \author{
