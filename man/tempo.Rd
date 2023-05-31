@@ -77,8 +77,8 @@ colors.}
 
 \item{sub}{A \code{\link{character}} string giving a subtitle for the plot.}
 
-\item{ann}{A \code{\link{logical}} scalar: should the default annotation (title and x,
-y and z axis labels) appear on the plot?}
+\item{ann}{A \code{\link{logical}} scalar: should the default annotation (title and x
+and y axis labels) appear on the plot?}
 
 \item{axes}{A \code{\link{logical}} scalar: should axes be drawn on the plot?}
 

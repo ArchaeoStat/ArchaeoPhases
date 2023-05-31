@@ -127,8 +127,8 @@ NULL
 #'  (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ann A [`logical`] scalar: should the default annotation (title and x,
-#'  y and z axis labels) appear on the plot?
+#' @param ann A [`logical`] scalar: should the default annotation (title and x
+#'  and y axis labels) appear on the plot?
 #' @param axes A [`logical`] scalar: should axes be drawn on the plot?
 #' @param frame.plot A [`logical`] scalar: should a box be drawn around the
 #'  plot?
@@ -249,8 +249,8 @@ setGeneric(
 #' @param lwd.tempo,lwd.credible,lwd.gauss The line widths.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ann A [`logical`] scalar: should the default annotation (title and x,
-#'  y and z axis labels) appear on the plot?
+#' @param ann A [`logical`] scalar: should the default annotation (title and x
+#'  and y axis labels) appear on the plot?
 #' @param axes A [`logical`] scalar: should axes be drawn on the plot?
 #' @param frame.plot A [`logical`] scalar: should a box be drawn around the
 #'  plot?
@@ -303,8 +303,8 @@ setGeneric(
 #'  (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ann A [`logical`] scalar: should the default annotation (title and x,
-#'  y and z axis labels) appear on the plot?
+#' @param ann A [`logical`] scalar: should the default annotation (title and x
+#'  and y axis labels) appear on the plot?
 #' @param axes A [`logical`] scalar: should axes be drawn on the plot?
 #' @param frame.plot A [`logical`] scalar: should a box be drawn around the
 #'  plot?
@@ -346,8 +346,8 @@ setGeneric(
 #'  (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ann A [`logical`] scalar: should the default annotation (title and x,
-#'  y and z axis labels) appear on the plot?
+#' @param ann A [`logical`] scalar: should the default annotation (title and x
+#'  and y axis labels) appear on the plot?
 #' @param axes A [`logical`] scalar: should axes be drawn on the plot?
 #' @param frame.plot A [`logical`] scalar: should a box be drawn around the
 #'  plot?
@@ -471,9 +471,8 @@ setGeneric(
 #'
 #' Constructs the minimum and maximum for a group of events (phase).
 #' @param x An [`EventsMCMC-class`].
-#' @param groups A [`list`].
-#' @param calendar A [`TimeScale-class`] object specifying the source calendar
-#'  (see [calendar()]).
+#' @param groups A [`list`] of (named) vector of names or indexes of columns in
+#'  `x` (see [phases()]).
 #' @param ... Currently not used.
 #' @return
 #'  A [`PhasesMCMC-class`] object.
@@ -558,8 +557,8 @@ setGeneric(
 #'  If `NULL` (the default), no additional time ranges are displayed.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ann A [`logical`] scalar: should the default annotation (title and x,
-#'  y and z axis labels) appear on the plot?
+#' @param ann A [`logical`] scalar: should the default annotation (title and x
+#'  and y axis labels) appear on the plot?
 #' @param axes A [`logical`] scalar: should axes be drawn on the plot?
 #' @param frame.plot A [`logical`] scalar: should a box be drawn around the
 #'  plot?
@@ -868,3 +867,201 @@ setGeneric(
 #' @name summary
 #' @rdname summary
 NULL
+
+# Interval Analysis ============================================================
+## Allen Interval Algebra ------------------------------------------------------
+#' Allen Relation Between Definite Intervals
+#'
+#' @param x,y A [`numeric`] vector giving the lower and upper boundaries of the
+#'  time intervals, respectively. If `y` is missing, an attempt is made to
+#'  interpret `x` in a suitable way (see [grDevices::xy.coords()]).
+#' @param ... Currently not used.
+#' @details
+#' \tabular{lrlr}{
+#'  **Relation** \tab     \tab     \tab  **Converse** \cr
+#'  precedes     \tab (p) \tab (P) \tab   preceded by \cr
+#'  meets        \tab (m) \tab (M) \tab        met by \cr
+#'  overlaps     \tab (o) \tab (O) \tab overlapped by \cr
+#'  finished by  \tab (F) \tab (f) \tab      finishes \cr
+#'  contains     \tab (D) \tab (d) \tab        during \cr
+#'  starts       \tab (s) \tab (S) \tab    started by \cr
+#'  equals       \tab (e) \tab     \tab               \cr
+#' }
+#' @return
+#'  A [`character`] matrix specifying the Allen relations.
+#' @references
+#'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
+#'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
+#'
+#'  Alspaugh, T. (2019). Allen's Interval Algebra.
+#'  URL: \url{https://thomasalspaugh.org/pub/fnd/allen.html}.
+#' @example inst/examples/ex-allen.R
+#' @author N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_relation-method
+setGeneric(
+  name = "allen_relation",
+  def = function(x, y, ...) standardGeneric("allen_relation")
+)
+
+#' Complement of an Allen Relation
+#'
+#' @param x A [`character`] vector or matrix of Allen relations (typically
+#'  returned by [allen_relation()]).
+#' @param ... Currently not used.
+#' @return
+#'  A [`character`] vector or matrix (same as `x`).
+#' @references
+#'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
+#'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
+#' @example inst/examples/ex-allen.R
+#' @author N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_complement-method
+setGeneric(
+  name = "allen_complement",
+  def = function(x, ...) standardGeneric("allen_complement")
+)
+
+#' Converse of an Allen Relation
+#'
+#' @param x A [`character`] vector or matrix of Allen relations (typically
+#'  returned by [allen_relation()]).
+#' @param ... Currently not used.
+#' @return
+#'  A [`character`] vector or matrix (same as `x`).
+#' @references
+#'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
+#'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
+#' @example inst/examples/ex-allen.R
+#' @author N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_converse-method
+setGeneric(
+  name = "allen_converse",
+  def = function(x, ...) standardGeneric("allen_converse")
+)
+
+#' Composition of Allen Relations
+#'
+#' @param x,y A [`character`] vector of Allen relations.
+#' @param ... Currently not used.
+#' @return
+#'  A [`character`] vector.
+#' @references
+#'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
+#'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
+#' @example inst/examples/ex-allen.R
+#' @author N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_composition-method
+setGeneric(
+  name = "allen_composition",
+  def = function(x, y, ...) standardGeneric("allen_composition")
+)
+
+#' Intersection of Allen Relations
+#'
+#' @param x,y A [`character`] vector of Allen relations.
+#' @param ... Currently not used.
+#' @return
+#'  A [`character`] vector.
+#' @references
+#'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
+#'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
+#' @example inst/examples/ex-allen.R
+#' @author N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_intersect-method
+setGeneric(
+  name = "allen_intersect",
+  def = function(x, y, ...) standardGeneric("allen_intersect")
+)
+
+#' Union of Allen Relations
+#'
+#' @param x,y A [`character`] vector of Allen relations.
+#' @param ... Currently not used.
+#' @return
+#'  A [`character`] vector.
+#' @references
+#'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
+#'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
+#' @example inst/examples/ex-allen.R
+#' @author N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_union-method
+setGeneric(
+  name = "allen_union",
+  def = function(x, y, ...) standardGeneric("allen_union")
+)
+
+#' Observe the Relation Between two Phases
+#'
+#' Plots an empirical Nökel lattice.
+#' @param x An [`EventsMCMC-class`] or a [`PhasesMCMC-class`] object containing
+#'  the output of the MCMC algorithm.
+#' @param groups A [`list`] of (named) vector of names or indexes of columns in
+#'  `x` (see [phases()]).
+#' @param converse A [`logical`] scalar: should converse relations be observed?
+#' @param ... Further arguments to be passed to internal methods.
+#' @return
+#'  `allen_observe()` is called it for its side-effects: it results in a graphic
+#'  being displayed (invisibly returns `x`).
+#' @example inst/examples/ex-allen-observe.R
+#' @author T. S. Dye, N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_observe-method
+setGeneric(
+  name = "allen_observe",
+  def = function(x, groups, ...) standardGeneric("allen_observe")
+)
+
+#' Observed Frequency of an Allen Set
+#'
+#' Creates a matrix of observed frequencies of a given Allen set among two or
+#' more groups of chains from the MCMC output of a Bayesian calibration.
+#' @param x An [`EventsMCMC-class`] or a [`PhasesMCMC-class`] object containing
+#'  the output of the MCMC algorithm.
+#' @param groups A [`list`] of (named) vector of names or indexes of columns in
+#'  `x` (see [phases()]).
+#' @param set A [`character`] string representation of an Allen set.
+#' @param ... Currently not used.
+#' @return
+#'  A square [`matrix`] of observed frequencies.
+#' @example inst/examples/ex-allen-observe.R
+#' @author T. S. Dye, N. Frerebeau
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_observe-method
+setGeneric(
+name = "allen_observe_frequency",
+def = function(x, groups, ...) standardGeneric("allen_observe_frequency")
+)
+
+#' Joint Concurrence of Two or More Observed Intervals
+#'
+#' Estimates the age of an undated context based on the known depositional
+#' history of associated artifacts.
+#' @param x An [`EventsMCMC-class`] object containing
+#'  the output of the MCMC algorithm.
+#' @param groups A [`list`] of (named) vector of names or indexes of columns in
+#'  `x` (see [phases()]).
+#' @param ... Currently not used.
+#' @return
+#'  A [`PhasesMCMC-class`] object.
+#' @author T. S. Dye
+#' @family Allen's intervals
+#' @docType methods
+#' @aliases allen_joint_concurrency-method
+setGeneric(
+  name = "allen_joint_concurrency",
+  def = function(x, groups, ...) standardGeneric("allen_joint_concurrency")
+)

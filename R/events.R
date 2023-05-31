@@ -23,12 +23,14 @@ setMethod(
 
     if (!is.null(calendar)) {
       ## Coerce to vector
+      dn <- dimnames(from)
       d <- dim(from)
       dim(from) <- NULL
 
       ## Convert to rata die
       from <- chronos::fixed(from, calendar = calendar)
       dim(from) <- d
+      dimnames(from) <- dn
     }
 
     ## Return an MCM object

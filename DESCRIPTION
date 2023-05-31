@@ -65,6 +65,8 @@ Collate:
     'ArchaeoPhases-internal.R'
     'ArchaeoPhases-package.R'
     'activity.R'
+    'allen-mcmc.R'
+    'allen-relations.R'
     'bind.R'
     'boundaries.R'
     'coerce.R'

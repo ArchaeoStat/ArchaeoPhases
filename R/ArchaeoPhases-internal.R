@@ -80,3 +80,24 @@ make_hash <- function(file, download = TRUE) {
   }
   unname(file_hash)
 }
+
+#' Map Alpha to a Variable
+#'
+#' @param x A [`numeric`] vector.
+#' @param level An [`integer`] specifying the number of alpha levels.
+#' @return A [`numeric`] vector.
+#' @keywords internal
+#' @noRd
+map_alpha <- function(x, levels = 5) {
+  if (arkhe::is_constant(x, na.rm = TRUE)) return(rep(1, length(x)))
+
+  ## Define categories
+  brk <- seq(min(x) - 0.1, max(x) + 0.1, length.out = levels)
+
+  ## Define number of alpha groups needed to fill these
+  cats <- nlevels(cut(x, breaks = brk))
+
+  ## Map
+  map <- cut(x, breaks = brk, labels = seq(0.3, 1, len = cats))
+  as.numeric(as.character(map))
+}

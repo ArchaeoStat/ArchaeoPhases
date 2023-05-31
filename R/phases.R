@@ -9,9 +9,9 @@ NULL
 setMethod(
   f = "phases",
   signature = c(x = "EventsMCMC", groups = "missing"),
-  definition = function(x, calendar) {
+  definition = function(x) {
     groups <- list(seq_len(ncol(x)))
-    methods::callGeneric(x = x, groups = groups, calendar = calendar)
+    methods::callGeneric(x = x, groups = groups)
   }
 )
 
@@ -21,7 +21,7 @@ setMethod(
 setMethod(
   f = "phases",
   signature = c(x = "EventsMCMC", groups = "list"),
-  definition = function(x, groups, calendar) {
+  definition = function(x, groups) {
     m <- NROW(x)
     n <- length(groups) # Number of phases
     k <- seq_len(n)
@@ -78,12 +78,14 @@ setMethod(
 
     if (!is.null(calendar)) {
       ## Coerce to vector
+      dn <- dimnames(arr)
       d <- dim(arr)
       dim(arr) <- NULL
 
       ## Convert to rata die
       arr <- chronos::fixed(arr, calendar = calendar)
       dim(arr) <- d
+      dimnames(arr) <- dn
     }
 
     dimnames(arr) <- list(NULL, pha, c("start", "end"))

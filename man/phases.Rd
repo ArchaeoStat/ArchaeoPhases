@@ -10,19 +10,17 @@
 \usage{
 phases(x, groups, ...)
 
-\S4method{phases}{EventsMCMC,missing}(x, calendar)
+\S4method{phases}{EventsMCMC,missing}(x)
 
-\S4method{phases}{EventsMCMC,list}(x, groups, calendar)
+\S4method{phases}{EventsMCMC,list}(x, groups)
 }
 \arguments{
 \item{x}{An \code{\linkS4class{EventsMCMC}}.}
 
-\item{groups}{A \code{\link{list}}.}
+\item{groups}{A \code{\link{list}} of (named) vector of names or indexes of columns in
+\code{x} (see \code{\link[=phases]{phases()}}).}
 
 \item{...}{Currently not used.}
-
-\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the source calendar
-(see \code{\link[=calendar]{calendar()}}).}
 }
 \value{
 A \code{\linkS4class{PhasesMCMC}} object.

@@ -18,6 +18,7 @@ setMethod(
     itr <- x@iteration
     dep <- x@depth
     if (!missing(i)) {
+      if (is.character(i)) i <- match(i, lab)
       itr <- itr[i]
     }
     if (!missing(j)) {
