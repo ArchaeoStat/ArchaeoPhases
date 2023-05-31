@@ -14,6 +14,9 @@ A minimal reproducible example (AKA a reprex).
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
+**Test output**
+Output of `tinytest::test_package("ArchaeoPhases")`
+
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
