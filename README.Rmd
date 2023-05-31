@@ -37,7 +37,7 @@ knitr::opts_chunk$set(
 
 Statistical analysis of archaeological dates and groups of dates. **ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC) simulations from [ChronoModel](https://chronomodel.com) [@lanos2020], [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) [@bronkramsey2009] or [BCal](https://bcal.shef.ac.uk) [@buck1999]. This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
 
-**Version 2.0 of ArchaeoPhases introduces a complete rewrite of the package: all functions have been renamed (see `news(Version >= "2.0", package = "ArchaeoPhases")`).**
+**ArchaeoPhases v2.0 brings a comprehensive package rewrite, resulting in the renaming of nearly all functions. For more information, please refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
 
 ```{r citation, echo=FALSE, comment=''}
 cite <- utils::citation("ArchaeoPhases")
@@ -75,7 +75,7 @@ These examples use data available through the [**ArchaeoData**](https://github.c
 install.packages("ArchaeoData", repos = "https://archaeostat.r-universe.dev")
 ```
 
-```{r packages-load}
+```{r packages-load, message=FALSE}
 ## Load package
 library(ArchaeoPhases)
 ```
