@@ -25,9 +25,24 @@ reference:
 - title: Tests
   contents:
   - has_concept("tests")
+- title: Allen's Interval Algebra
+  contents:
+  - has_concept("Allen's intervals")
 - title: Getters and Setters
   contents:
   - has_concept("mutators")
 - title: Datasets
   contents:
   - has_concept("datasets")
+
+navbar:
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: Import MCMC Samples
+        href: articles/import.html
+      - text: Allen's interval algebra
+        href: articles/allen.html
+      - text: Bibliography
+        href: articles/bibliography.html

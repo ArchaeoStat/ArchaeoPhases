@@ -10,14 +10,17 @@ output:
 bibliography: bibliography.bib
 vignette: >
   %\VignetteIndexEntry{Allen's Interval Algebra}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
-```{r, echo=FALSE}
-options(max.print = 20)
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
 ```
-
 
 **ArchaeoPhases** provides facilities to compute Allen's interval algebra. This vignette provides an overview of the algebra and illustrates how it might be used analytically and empirically, given MCMC output from a Bayesian calibration.
 

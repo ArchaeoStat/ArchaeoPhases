@@ -3,9 +3,6 @@
 ## New classes and methods
 * Add `bind()` to bind multiple `MCMC` objects.
 
-## Enhancements
-* Support for any calendar, thanks to [**chronos**](https://packages.tesselle.org/chronos/).
-
 ## Bug fixes & changes
 * Use `stats::density()` instead of `hdrcde::hdr()` for HDPI estimation.
 
@@ -16,32 +13,32 @@
 | ArchaeoPhases 1.x | ArchaeoPhases 2.0 |
 |:----|:----|
 | `AgeDepth()` | `bury()` |
-| `CreateMinMaxGroup()` | `phase(<MCMC>)`, `as_phases(<matrix>)` |
-| `CredibleInterval()`, `credible_interval()` | `interval_credible(<numeric>, <numeric>)` |
-| `DatesHiatus()`, `dates_hiatus()` | `hiatus(<numeric>, <numeric>)` |
-| `estimate_range()` | `sensitivity(<MCMC>)` |
-| `MarginalPlot()`, `marginal_plot()` | `plot(<MCMC>)` |
-| `MarginalProba()` | `older(<numeric>, <numeric>)` |
-| `MarginalStatistics()`, `marginal_statistics()`, `multi_marginal_statistics()` | `summary(<MCMC>)` |
-| `MultiCredibleInterval()`, `multi_credible_interval()` | `interval_credible(<MCMC>)` |
-| `MultiDatesPlot()`, `multi_dates_plot()` | `plot(<MCMC>)` |
-| `MultiHPD()`, `multi_hpd()` | `interval_hdr(<MCMC>)` |
-| `MultiMarginalPlot()`, `multi_marginal_plot()` | `plot(<MCMC>)` |
-| `MultiPhasePlot()` | `plot(<PhasesMCMC>)` |
-| `MultiPhaseTimeRange()` | `boundaries(<PhasesMCMC>)` |
-| `MultiPhasesGap()` | `hiatus(<PhasesMCMC>)` |
-| `MultiPhasesTransition()` | `transition(<PhasesMCMC>)` |
-| `MultiSuccessionPlot()` | `plot(<PhasesMCMC>)` |
-| `OccurrencePlot()`, `occurrence_plot()` | `occurrence(<MCMC>)` + `plot(<OccurrenceEvents>)` |
-| `PhaseDurationPlot()` | `duration(<PhasesMCMC>)` + `plot(<MCMC>)` |
-| `PhasePlot()` | `plot(<PhasesMCMC>)` |
-| `PhaseStatistics()` | `summary(<PhasesMCMC>)` |
-| `PhaseTimeRange()` | `boundaries(<numeric>, <numeric>)` |
-| `PhasesGap()`, `phases_gap()` | `hiatus(<numeric>, <numeric>)` |
-| `PhasesTransition()` | `transition(<numeric>, <numeric>)` |
-| `SuccessionPlot()` | `plot(<PhasesMCMC>)` |
-| `TempoActivityPlot()`, `tempo_activity_plot()` | `activity(<MCMC>)` + `plot(<ActivityEvents>)` |
-| `TempoPlot()`, `tempo_plot()` | `tempo(<MCMC>)` + `plot(<CumulativeEvents>)` |
+| `CreateMinMaxGroup()` | `phase()`, `as_phases()` |
+| `CredibleInterval()`, `credible_interval()` | `interval_credible()` |
+| `DatesHiatus()`, `dates_hiatus()` | `hiatus()` |
+| `estimate_range()` | `sensitivity()` |
+| `MarginalPlot()`, `marginal_plot()` | `plot()` |
+| `MarginalProba()` | `older()` |
+| `MarginalStatistics()`, `marginal_statistics()`, `multi_marginal_statistics()` | `summary()` |
+| `MultiCredibleInterval()`, `multi_credible_interval()` | `interval_credible()` |
+| `MultiDatesPlot()`, `multi_dates_plot()` | `plot()` |
+| `MultiHPD()`, `multi_hpd()` | `interval_hdr()` |
+| `MultiMarginalPlot()`, `multi_marginal_plot()` | `plot()` |
+| `MultiPhasePlot()` | `plot()` |
+| `MultiPhaseTimeRange()` | `boundaries()` |
+| `MultiPhasesGap()` | `hiatus()` |
+| `MultiPhasesTransition()` | `transition()` |
+| `MultiSuccessionPlot()` | `plot()` |
+| `OccurrencePlot()`, `occurrence_plot()` | `occurrence()` + `plot()` |
+| `PhaseDurationPlot()` | `duration()` + `plot()` |
+| `PhasePlot()` | `plot()` |
+| `PhaseStatistics()` | `summary()` |
+| `PhaseTimeRange()` | `boundaries()` |
+| `PhasesGap()`, `phases_gap()` | `hiatus()` |
+| `PhasesTransition()` | `transition()` |
+| `SuccessionPlot()` | `plot()` |
+| `TempoActivityPlot()`, `tempo_activity_plot()` | `activity()` + `plot()` |
+| `TempoPlot()`, `tempo_plot()` | `tempo()` + `plot()` |
 | `undated_sample()` | `interpolate()` |
 
 # ArchaeoPhases 1.6
