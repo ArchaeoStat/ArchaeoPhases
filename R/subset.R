@@ -14,15 +14,19 @@ setMethod(
     z <- methods::callNextMethod()
     if (isTRUE(drop)) return(z)
 
+    if (is.null(dim(z))) z <- matrix(z, ncol = 1)
+
     lab <- x@labels
     itr <- x@iteration
     dep <- x@depth
     if (!missing(i)) {
       if (is.character(i)) i <- match(i, lab)
+      rownames(z) <- rownames(x)[i]
       itr <- itr[i]
     }
     if (!missing(j)) {
       if (is.character(j)) j <- match(j, lab)
+      colnames(z) <- colnames(x)[j]
       lab <- lab[j]
       dep <- dep[j]
     }
@@ -43,6 +47,7 @@ setMethod(
     lab <- x@labels
     if (!missing(j)) {
       if (is.character(j)) j <- match(j, lab)
+      colnames(z) <- colnames(x)[j]
       lab <- lab[j]
     }
     methods::initialize(x, z, labels = lab)

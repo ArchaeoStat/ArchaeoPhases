@@ -1040,7 +1040,7 @@ setGeneric(
 #' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @docType methods
-#' @aliases allen_observe-method
+#' @aliases allen_observe_frequency-method
 setGeneric(
 name = "allen_observe_frequency",
 def = function(x, groups, ...) standardGeneric("allen_observe_frequency")

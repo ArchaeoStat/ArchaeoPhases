@@ -145,8 +145,8 @@ allen_illustrate_relations <- function(relations = "basic") {
 #' @family Allen's intervals
 #' @author T. S. Dye
 #' @export
-allen_analyze <- function(x, y, title, ...) {
-  allen_plot(allen_analyze_relations(x, y, title), ...)
+allen_analyze <- function(x, y, ...) {
+  allen_plot(allen_analyze_relations(x, y), ...)
 }
 
 #' Data for an Analytic Graphic
@@ -159,7 +159,7 @@ allen_analyze <- function(x, y, title, ...) {
 #' @family Allen's intervals
 #' @keywords internal
 #' @noRd
-allen_analyze_relations <- function(x, y, title) {
+allen_analyze_relations <- function(x, y) {
   comp <- allen_composition(x, y)
   merge(
     x = allen_count(comp),

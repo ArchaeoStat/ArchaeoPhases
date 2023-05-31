@@ -4,7 +4,7 @@
 \alias{allen_analyze}
 \title{Analyze Composite Allen Relations}
 \usage{
-allen_analyze(x, y, title, ...)
+allen_analyze(x, y, ...)
 }
 \arguments{
 \item{x, y}{A \code{\link{character}} string denoting an Allen relation.}

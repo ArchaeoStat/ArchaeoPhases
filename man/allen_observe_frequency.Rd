@@ -3,7 +3,7 @@
 \docType{methods}
 \name{allen_observe_frequency}
 \alias{allen_observe_frequency}
-\alias{allen_observe-method}
+\alias{allen_observe_frequency-method}
 \alias{allen_observe_frequency,PhasesMCMC,missing-method}
 \alias{allen_observe_frequency,EventsMCMC,list-method}
 \title{Observed Frequency of an Allen Set}
