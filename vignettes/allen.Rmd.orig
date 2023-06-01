@@ -1,7 +1,7 @@
 ---
 title: "Allen's interval algebra"
 author: "T. S. Dye"
-date: "2023-06-01"
+date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     number_sections: yes
@@ -14,20 +14,25 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "./figures/",
+  out.width = "100%"
+)
+```
 
 **ArchaeoPhases** provides facilities to compute Allen's interval algebra. This vignette provides an overview of the algebra and illustrates how it might be used analytically and empirically, given MCMC output from a Bayesian calibration.
 
-
-```r
+```{r packages}
 ## Load ArchaeoPhases
 library(ArchaeoPhases)
 ```
 
 This vignette uses data available through the [**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package which is available in a [separate repository](https://archaeostat.r-universe.dev). **ArchaeoData** provides MCMC outputs from ChronoModel, OxCal and BCal.
 
-
-```r
+```{r ArchaeoData, eval=FALSE}
 ## Install data package
 install.packages("ArchaeoData", repos = "https://archaeostat.r-universe.dev")
 ```
@@ -51,16 +56,20 @@ It is conventional to express an Allen relation with a notation that indicates t
 
 It is often useful to visualize the basic Allen relations as a Nökel lattice. In a Nökel lattice, the immediate neighbors of a relation differ from it in the placement of a single interval end-point.
 
-
-```r
+```{r basic_relations, fig.width=5, fig.height=5, out.width='50%', fig.align='center'}
 ## Plot the basic Allen relations
 par(mar = c(1, 1, 4, 1))
 allen_illustrate("basic") 
 ```
 
-<img src="./figures/basic_relations-1.png" alt="plot of chunk basic_relations" width="50%" style="display: block; margin: auto;" />
+```{r, eval=FALSE, echo=FALSE}
+relations <- c("concurrent", "distinct", "stratigraphic", "branching", 
+               "transformation", "reticulation", "sequence", "branch", 
+               "transform", "reticulate")
 
-
+par(mfrow = c(5, 2), mar = c(1, 1, 4, 1))
+for (i in relations) allen_illustrate(i) 
+```
 
 # Analytic Inquiry with the Algebra
 
@@ -68,8 +77,7 @@ Interval algebra is carried out with a composition function that returns the rel
 
 In this example, the composition function deduces that the interval represented by a context inferior to a reference context precedes the interval represented by a context superior to the reference context.
 
-
-```r
+```{r analyze_stratigraphy, fig.width=7, fig.height=7, out.width='50%', fig.align='center'}
 ## Plot lattice for two contexts on the same line of a Harris matrix
 par(mar = c(1, 1, 4, 1))
 allen_analyze(
@@ -79,25 +87,19 @@ allen_analyze(
 ) 
 ```
 
-<img src="./figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy" width="50%" style="display: block; margin: auto;" />
-
 The same lattice can be created with a convenience function.
 
-
-```r
+```{r illustrate_stratigraphy, fig.width=5, fig.height=5, out.width='50%', fig.align='center'}
 ## Illustrate composite relations in a stratigraphic sequence
 par(mar = c(1, 1, 4, 1))
 allen_illustrate("sequence") 
 ```
 
-<img src="./figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy" width="50%" style="display: block; margin: auto;" />
-
 # Empirical Inquiry with the Algebra
 
 Empirical inquiry with Allen's interval algebra compares intervals estimated by Bayesian calibration of age determinations from Anglo-Saxon female burials.
 
-
-```r
+```{r dataset, fig.width=8, fig.height=7, out.width='100%', fig.align='center'}
 ## Load the Anglo Saxon burials dataset
 path <- system.file("burials.csv", package = "ArchaeoData")
 burials <- read.table(path, header = TRUE, sep = ",", dec = ".",
@@ -109,8 +111,7 @@ burials <- as_events(burials, calendar = CE())
 
 First, we check for the expected result of the identity relation by comparing an interval with itself.
 
-
-```r
+```{r identity_relation, fig.width=5, fig.height=5, out.width='50%', fig.align='center'}
 ## Identify the burials with bead BE1-Dghnt
 be1_dghnt <- c(
   "UB-4503 (Lec148)", "UB-4506 (Lec172/2)", "UB-6038 (CasD183)", 
@@ -127,13 +128,10 @@ par(mar = c(1, 1, 4, 1))
 allen_observe(be1_dghnt_phase) 
 ```
 
-<img src="./figures/identity_relation-1.png" alt="plot of chunk identity_relation" width="50%" style="display: block; margin: auto;" />
-
 Next we compare the depositional histories of two bead types recovered from well-dated Anglo Saxon female burials in England.
 Note that the Allen relation and its converse are calculated.
 
-
-```r
+```{r relation_and_converse, fig.width=10, fig.height=5, out.width='100%', fig.align='center'}
 ## Identify the burials with bead BE1-CylRound
 be1_cylround <- c(
   "UB-4965 (ApD117)", "UB-4735 (Ber022)", "UB-4739 (Ber134/1)", 
@@ -150,27 +148,16 @@ be1_phase <- phases(burials, groups = chains)
 ## Plot phase
 par(mar = c(4, 6, 1, 1))
 plot(be1_phase)
-```
-
-<img src="./figures/relation_and_converse-1.png" alt="plot of chunk relation_and_converse" width="100%" style="display: block; margin: auto;" />
-
-```r
 
 ## Plot relations
 par(mar = c(1, 1, 4, 1))
 allen_observe(be1_phase, converse = TRUE)
 ```
 
-<img src="./figures/relation_and_converse-2.png" alt="plot of chunk relation_and_converse" width="100%" style="display: block; margin: auto;" />
-
 It can be useful to observe the frequency with which two intervals are related according to the relations in an Allen set. For instance, we might be interested in which of our two beads might be the trunk from which the other branched. This can be done by observing the frequency with which each bead type is related as *row(oFD)col* to the other bead. The following code shows that BE1-CylRound is the better trunk candidate.
 
-
-```r
+```{r observe_frequency}
 allen_observe_frequency(be1_phase, set = "oFD")
-#>              BE1-Dghnt BE1-CylRound
-#> BE1-Dghnt           NA            0
-#> BE1-CylRound    0.9962           NA
 ```
 
 # References
