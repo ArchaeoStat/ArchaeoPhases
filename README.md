@@ -44,7 +44,7 @@ This package provides functions for the study of rhythms of the long
 term from the posterior distribution of a series of dates (tempo and
 activity plot). It also allows the estimation and visualization of time
 ranges from the posterior distribution of groups of dates
-(e.g. duration, transition and hiatus between successive phases).
+(e.g. duration, transition and hiatus between successive phases).
 
 **ArchaeoPhases v2.0 brings a comprehensive package rewrite, resulting
 in the renaming of nearly all functions. For more information, please

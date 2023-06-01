@@ -7,21 +7,25 @@ NULL
 #' @method plot MCMC
 plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                       density = TRUE, interval = NULL, level = 0.95,
-                      decreasing = TRUE,
+                      sort = TRUE, decreasing = TRUE,
                       main = NULL, sub = NULL,
                       ann = graphics::par("ann"), axes = TRUE,
                       frame.plot = FALSE,
-                      panel.first = NULL, panel.last = NULL, ...) {
+                      panel.first = NULL, panel.last = NULL,
+                      col.density = "grey", col.interval = "#77AADD", ...) {
   ## Get data
   n_events <- NCOL(x)
 
   ## Graphical parameters
-  col <- list(...)$col %||% c("grey")
   lty <- list(...)$lty %||% graphics::par("lty")
   lwd <- list(...)$lwd %||% graphics::par("lwd")
   tcl <- list(...)$tcl %||% graphics::par("tcl")
-  if (length(col) != n_events) col <- rep(col, length.out = n_events)
-  fill <- grDevices::adjustcolor(col, alpha.f = 0.5)
+  if (length(col.density) != n_events)
+    col.density <- rep(col.density, length.out = n_events)
+  if (length(col.interval) != n_events)
+    col.interval <- rep(col.interval, length.out = n_events)
+  fill.density <- grDevices::adjustcolor(col.density, alpha.f = 0.5)
+  fill.interval <- grDevices::adjustcolor(col.interval, alpha.f = 0.5)
 
   ## Open new window
   grDevices::dev.hold()
@@ -37,10 +41,24 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   panel.first
 
   ## Reorder data
-  k <- sort.list(x, decreasing = decreasing)
-  x <- x[, k, drop = FALSE]
-  col <- col[k]
-  fill <- fill[k]
+  if (sort) {
+    k <- sort.list(x, decreasing = decreasing)
+    x <- x[, k, drop = FALSE]
+    col.density <- col.density[k]
+    fill.density <- fill.density[k]
+  }
+
+  ## Compute interval
+  interval_draw <- FALSE
+  if (!density & is.null(interval)) {
+    interval <- "credible"
+  }
+  if (!is.null(interval) & !is.null(level)) {
+    interval <- match.arg(interval, choices = c("credible", "hdr"))
+    fun <- switch(interval, credible = interval_credible, hdr = interval_hdr)
+    int <- fun(x, level = level, calendar = NULL)
+    interval_draw <- TRUE
+  }
 
   ## Plot
   mcmc <- rev(seq_len(n_events))
@@ -54,35 +72,41 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
       years <- d$x
       dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 1.5
-      k <- which(dens > 0) # Keep only density > 0
-      lb <- if (min(k) > 1) min(k) - 1 else min(k)
-      ub <- if (max(k) < length(years)) max(k) + 1 else max(k)
-      xi <- c(years[lb], years[k], years[ub])
-      yi <- c(0, dens[k], 0) + i
+      d0 <- which(dens > 0) # Keep only density > 0
+      lb <- if (min(d0) > 1) min(d0) - 1 else min(d0)
+      ub <- if (max(d0) < length(years)) max(d0) + 1 else max(d0)
+      xi <- c(years[lb], years[d0], years[ub])
+      yi <- c(0, dens[d0], 0) + i
 
-      graphics::polygon(xi, yi, border = NA, col = fill[i])
+      graphics::polygon(xi, yi, border = NA, col = fill.density[i])
       graphics::lines(xi, yi, lty = "solid", col = "black")
+
+      if (interval_draw) {
+        h <- int[[i]]
+        for (j in seq_len(nrow(h))) {
+          is_in_h <- xi >= h[j, "start"] & xi <= h[j, "end"]
+          graphics::polygon(
+            x = c(utils::head(xi[is_in_h], 1), xi[is_in_h], utils::tail(xi[is_in_h], 1)),
+            y = c(i, yi[is_in_h], i),
+            border = NA, col = fill.interval[i]
+          )
+        }
+      }
     }
   }
-  if (!is.null(interval) & !is.null(level)) {
-    interval <- match.arg(interval, choices = c("credible", "hdr"))
-    fun <- switch(interval, credible = interval_credible, hdr = interval_hdr)
-    inter <- fun(x, level = level, calendar = NULL)
+  if (interval_draw) {
     for (i in mcmc) {
-      h <- inter[[i]]
+      h <- int[[i]]
       graphics::segments(
-        x0 = h[, "start"], x1 = h[, "end"],
-        y0 = i, y1 = i,
-        col = if (density) "black" else col[i],
-        lty = lty, lwd = lwd,
-        lend = 1
+        x0 = h[, "start"], x1 = h[, "end"], y0 = i, y1 = i,
+        col = if (density) "black" else col.interval[i],
+        lty = lty, lwd = lwd, lend = 1
       )
       graphics::segments(
         x0 = c(h[, "start"], h[, "end"]), x1 = c(h[, "start"], h[, "end"]),
         y0 = i, y1 = i + tcl * graphics::strheight("M") * -1,
-        col = if (density) "black" else col[i],
-        lty = lty, lwd = lwd,
-        lend = 1
+        col = if (density) "black" else col.interval[i],
+        lty = lty, lwd = lwd, lend = 1
       )
     }
   }
@@ -113,8 +137,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 }
 
 #' @export
-#' @describeIn plot Plots of credible intervals or HPD regions of a series of
-#' events.
+#' @rdname plot_events
 #' @aliases plot,MCMC,missing-method
 setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 
@@ -123,21 +146,26 @@ setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 #' @method plot PhasesMCMC
 plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                             density = TRUE, range = TRUE, succession = NULL,
-                            level = 0.95, decreasing = TRUE,
-                            main = NULL, sub = NULL,
+                            level = 0.95, sort = TRUE, decreasing = TRUE,
+                            legend = TRUE, main = NULL, sub = NULL,
                             ann = graphics::par("ann"), axes = TRUE,
                             frame.plot = FALSE,
-                            panel.first = NULL, panel.last = NULL, ...) {
+                            panel.first = NULL, panel.last = NULL,
+                            col.density = "grey", col.range = "black",
+                            col.succession = c("#77AADD", "#EE8866"), ...) {
   ## Get data
   n_phases <- dim(x)[2L]
 
   ## Graphical parameters
-  col <- list(...)$col %||% c("grey")
-  lty <- list(...)$lty %||% graphics::par("lty")
   lwd <- list(...)$lwd %||% graphics::par("lwd")
   tcl <- list(...)$tcl %||% graphics::par("tcl")
-  if (length(col) != n_phases) col <- rep(col, length.out = n_phases)
-  fill <- grDevices::adjustcolor(col, alpha.f = 0.5)
+  if (length(col.density) != n_phases)
+    col.density <- rep(col.density, length.out = n_phases)
+  if (length(col.range) != n_phases)
+    col.range <- rep(col.range, length.out = n_phases)
+  col.succession <- rep(col.succession, length.out = 2)
+  fill.density <- grDevices::adjustcolor(col.density, alpha.f = 0.5)
+  fill.succession <- grDevices::adjustcolor(col.succession, alpha.f = 0.5)
 
   ## Open new window
   grDevices::dev.hold()
@@ -153,34 +181,38 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   panel.first
 
   ## Reorder data
-  k <- sort.list(x, decreasing = decreasing)
-  x <- x[, k, , drop = FALSE]
-  col <- col[k]
-  fill <- fill[k]
+  if (sort) {
+    k <- sort.list(x, decreasing = decreasing)
+    x <- x[, k, , drop = FALSE]
+    col.density <- col.density[k]
+    fill.density <- fill.density[k]
+  }
 
   ## Plot
   ages <- rev(seq_len(n_phases))
 
   ## Succession
-  if (!is.null(level) && !is.null(succession)) {
+  if (!is.null(succession) && !is.null(level)) {
     if (n_phases != 2)
       stop("Time ranges can only be displayed with two phases.", call. = FALSE)
 
     succession <- match.arg(succession, choices = c("transition", "hiatus"),
-                            several.ok = FALSE)
-    fun <- switch(succession, hiatus = hiatus, transition = transition)
-    hia <- as.data.frame(fun(x, level = level), calendar = NULL)
+                            several.ok = TRUE)
+    for (s in seq_along(succession)) {
+      fun <- match.fun(succession[[s]])
+      hia <- as.data.frame(fun(x, level = level), calendar = NULL)
 
-    graphics::rect(
-      xleft = hia$start, xright = hia$end,
-      ybottom = min(ylim), ytop = max(ylim),
-      border = "black",
-      lty = 3
-    )
+      graphics::rect(
+        xleft = hia$start, xright = hia$end,
+        ybottom = min(ylim), ytop = max(ylim),
+        border = "white",
+        col = fill.succession[[s]]
+      )
+    }
   }
 
   ## Density
-  if (isTRUE(density)) {
+  if (density) {
     for (i in ages) {
       p <- x[, i, , drop = TRUE]
       for (j in c(1, 2)) {
@@ -188,20 +220,20 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
         years <- d$x
         dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 0.9
-        k <- which(dens > 0) # Keep only density > 0
-        lb <- if (min(k) > 1) min(k) - 1 else min(k)
-        ub <- if (max(k) < length(years)) max(k) + 1 else max(k)
-        xi <- c(years[lb], years[k], years[ub])
-        yi <- c(0, dens[k], 0) + i
+        d0 <- which(dens > 0) # Keep only density > 0
+        lb <- if (min(d0) > 1) min(d0) - 1 else min(d0)
+        ub <- if (max(d0) < length(years)) max(d0) + 1 else max(d0)
+        xi <- c(years[lb], years[d0], years[ub])
+        yi <- c(0, dens[d0], 0) + i
 
-        graphics::polygon(xi, yi, border = NA, col = fill[i])
+        graphics::polygon(xi, yi, border = NA, col = fill.density[i])
         graphics::lines(xi, yi, lty = j, col = "black")
       }
     }
   }
 
   ## Time range
-  if (!is.null(level) && isTRUE(range)) {
+  if (isTRUE(range) && !is.null(level)) {
     bound <- boundaries(x, level = level)
     bound <- as.data.frame(bound, calendar = NULL)
     for (i in ages) {
@@ -209,7 +241,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
       graphics::segments(
         x0 = h[, "start"], x1 = h[, "end"],
         y0 = i, y1 = i,
-        col = "black",
+        col = col.range[i],
         lty = 1,
         lwd = lwd,
         lend = 1
@@ -217,12 +249,23 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
       graphics::segments(
         x0 = c(h[, "start"], h[, "end"]), x1 = c(h[, "start"], h[, "end"]),
         y0 = i, y1 = i + tcl * graphics::strheight("M") * -1,
-        col = "black",
+        col = col.range[i],
         lty = 1,
         lwd = lwd,
         lend = 1
       )
     }
+  }
+
+  ## Legend
+  if (legend) {
+    lab <- c(density, density)
+    graphics::legend(
+      x = ifelse(decreasing, "topright", "topleft"),
+      legend = c("Phase start", "Phase end")[lab],
+      lty = c(1, 2)[lab],
+      bty = "n"
+    )
   }
 
   ## Evaluate post-plot and pre-axis expressions
@@ -251,7 +294,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 }
 
 #' @export
-#' @describeIn plot Plots the characteristics of a group of events (phase).
+#' @rdname plot_phases
 #' @aliases plot,PhasesMCMC,missing-method
 setMethod("plot", c(x = "PhasesMCMC", y = "missing"), plot.PhasesMCMC)
 
@@ -259,13 +302,15 @@ setMethod("plot", c(x = "PhasesMCMC", y = "missing"), plot.PhasesMCMC)
 #' @export
 #' @method plot CumulativeEvents
 plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
-                                  credible = TRUE, gauss = TRUE, legend = TRUE,
-                                  col.tempo = "#004488", lty.tempo = "solid", lwd.tempo = 1,
-                                  col.credible = "#BB5566", lty.credible = "dashed", lwd.credible = 1,
-                                  col.gauss = "#DDAA33", lty.gauss = "dotted", lwd.gauss = 1,
+                                  interval = c("credible", "gauss"),
+                                  col.tempo = "#004488", col.interval = "grey",
                                   main = NULL, sub = NULL, ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
+  ## Graphical parameters
+  lty <- list(...)$lty %||% graphics::par("lty")
+  lwd <- list(...)$lwd %||% graphics::par("lwd")
+
   ## Open new window
   grDevices::dev.hold()
   on.exit(grDevices::dev.flush(), add = TRUE)
@@ -281,38 +326,16 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
   panel.first
 
   ## Plot
-  graphics::lines(
-    x = years,
-    y = x[, 1],
-    type = "l",
-    col = col.tempo,
-    lty = lty.tempo,
-    lwd = lwd.tempo
-  )
-
-  ## Intervals
-  credible <- credible & nrow(x@credible) > 0
-  if (credible) {
+  interval <- match.arg(interval, several.ok = FALSE)
+  if (interval == "credible" && nrow(x@credible) > 0) {
     plot_y_ribbon(x = years, ymin = x@credible[, 1], ymax = x@credible[, 2],
-                  border = col.credible, lty = lty.credible, lwd = lwd.credible)
+                  col = col.interval, border = NA)
   }
-  gauss <- gauss & nrow(x@gauss) > 0
-  if (gauss) {
+  if (interval == "gauss" && nrow(x@gauss) > 0) {
     plot_y_ribbon(x = years, ymin = x@gauss[, 1], ymax = x@gauss[, 2],
-                  border = col.gauss, lty = lty.gauss, lwd = lwd.gauss)
+                  col = col.interval, border = NA)
   }
-
-  ## Legend
-  if (legend) {
-    lab <- c(TRUE, credible, gauss)
-    graphics::legend(
-      x = "topleft",
-      legend = c("Bayes estimate", "Credible interval", "Gauss interval")[lab],
-      col = c(col.tempo, col.credible, col.gauss)[lab],
-      lty = c(lty.tempo, lty.credible, lty.gauss)[lab],
-      lwd = c(lwd.tempo, lwd.credible, lwd.gauss)[lab]
-    )
-  }
+  graphics::lines(x = years, y = x[, 1], col = col.tempo, lty = lty, lwd = lwd)
 
   ## Evaluate post-plot and pre-axis expressions
   panel.last

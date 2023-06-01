@@ -13,18 +13,9 @@ tempo(object, ...)
 \S4method{plot}{CumulativeEvents,missing}(
   x,
   calendar = getOption("ArchaeoPhases.calendar"),
-  credible = TRUE,
-  gauss = TRUE,
-  legend = TRUE,
+  interval = c("credible", "gauss"),
   col.tempo = "#004488",
-  lty.tempo = "solid",
-  lwd.tempo = 1,
-  col.credible = "#BB5566",
-  lty.credible = "dashed",
-  lwd.credible = 1,
-  col.gauss = "#DDAA33",
-  lty.gauss = "dotted",
-  lwd.gauss = 1,
+  col.interval = "grey",
   main = NULL,
   sub = NULL,
   ann = graphics::par("ann"),
@@ -58,20 +49,12 @@ object.}
 \item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
 (see \code{\link[=calendar]{calendar()}}).}
 
-\item{credible}{A \code{\link{logical}} scalar: should the credible interval be
-computed/displayed?}
+\item{interval}{A \code{\link{character}} string specifying the confidence interval to
+be drawn. It must be one of "\code{credible}" (credible interval) or "\code{gauss}"
+(Gaussian approximation of the credible interval). Any unambiguous substring
+can be given.}
 
-\item{gauss}{A \code{\link{logical}} scalar: should the Gaussian approximation of the
-credible interval be computed/displayed?}
-
-\item{legend}{A \code{\link{logical}} scalar: should a legend be displayed?}
-
-\item{col.tempo, col.credible, col.gauss}{A specification for the plotting
-colors.}
-
-\item{lty.tempo, lty.credible, lty.gauss}{The line types to be used.}
-
-\item{lwd.tempo, lwd.credible, lwd.gauss}{The line widths.}
+\item{col.tempo, col.interval}{A specification for the plotting colors.}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
@@ -96,6 +79,12 @@ place but before the axes, title and box are added.}
 
 \item{count}{A \code{\link{logical}} scalar: should the counting process be a number
 or a probability (the default)?}
+
+\item{credible}{A \code{\link{logical}} scalar: should the credible interval be
+computed/displayed?}
+
+\item{gauss}{A \code{\link{logical}} scalar: should the Gaussian approximation of the
+credible interval be computed/displayed?}
 
 \item{from}{A length-one \code{\link{numeric}} vector giving the earliest date to
 estimate for (in years).}

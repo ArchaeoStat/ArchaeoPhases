@@ -235,6 +235,10 @@ setGeneric(
 #'  object.
 #' @param calendar A [`TimeScale-class`] object specifying the target calendar
 #'  (see [calendar()]).
+#' @param interval A [`character`] string specifying the confidence interval to
+#'  be drawn. It must be one of "`credible`" (credible interval) or "`gauss`"
+#'  (Gaussian approximation of the credible interval). Any unambiguous substring
+#'  can be given.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param count A [`logical`] scalar: should the counting process be a number
 #'  or a probability (the default)?
@@ -242,11 +246,7 @@ setGeneric(
 #'  computed/displayed?
 #' @param gauss A [`logical`] scalar: should the Gaussian approximation of the
 #'  credible interval be computed/displayed?
-#' @param legend A [`logical`] scalar: should a legend be displayed?
-#' @param col.tempo,col.credible,col.gauss A specification for the plotting
-#'  colors.
-#' @param lty.tempo,lty.credible,lty.gauss The line types to be used.
-#' @param lwd.tempo,lwd.credible,lwd.gauss The line widths.
+#' @param col.tempo,col.interval A specification for the plotting colors.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x
@@ -538,23 +538,21 @@ setGeneric(
 )
 
 # Plot =========================================================================
-#' Plot
+#' Plot Events
 #'
-#' @param x An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
+#' Plots credible intervals or HPD regions of a series of events.
+#' @param x An [`MCMC-class`] object.
 #' @param calendar A [`TimeScale-class`] object specifying the target calendar
 #'  (see [calendar()]).
 #' @param density A [`logical`] scalar: should estimated density be plotted?
-#' @param range A [`logical`] scalar: should phase time range be plotted
-#'  (see [boundaries()])?
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`credible`" (credible interval) or "`hdr`"
 #'  (highest posterior density interval). Any unambiguous substring can be
 #'  given. If `NULL` (the default) no interval is computed.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param sort A [`logical`] scalar: should the data be sorted?
 #' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
-#' @param succession A [`character`] string specifying the additional time range
-#'  to be displayed. It must be one of "`hiatus`" or "`transition`".
-#'  If `NULL` (the default), no additional time ranges are displayed.
+#'  Only used if `sort` is `TRUE`.
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x
@@ -567,6 +565,7 @@ setGeneric(
 #'  background grids.
 #' @param panel.last An `expression` to be evaluated after plotting has taken
 #'  place but before the axes, title and box are added.
+#' @param col.density,col.interval A specification for the plotting colors.
 #' @param ... Extra parameters to be passed to [stats::density()].
 #' @return
 #'   `plot()` is called it for its side-effects: it results in a graphic being
@@ -576,9 +575,52 @@ setGeneric(
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
 #' @family plot methods
 #' @docType methods
-#' @name plot
-#' @rdname plot
-#' @aliases plot-method
+#' @name plot_events
+#' @rdname plot_events
+NULL
+
+#' Plot Phases
+#'
+#' Plots the characteristics of a group of events (phase).
+#' @param x A [`PhasesMCMC-class`] object.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
+#' @param density A [`logical`] scalar: should estimated density be plotted?
+#' @param range A [`logical`] scalar: should phase time range be plotted
+#'  (see [boundaries()])?
+#' @param level A length-one [`numeric`] vector giving the confidence level.
+#' @param sort A [`logical`] scalar: should the data be sorted?
+#' @param decreasing A [`logical`] scalar: should the sort order be decreasing?
+#'  Only used if `sort` is `TRUE`.
+#' @param succession A [`character`] string specifying the additional time range
+#'  to be displayed. It must be one of "`hiatus`" or "`transition`".
+#'  If `NULL` (the default), no additional time ranges are displayed.
+#' @param legend A [`logical`] scalar: should a legend be displayed?
+#' @param main A [`character`] string giving a main title for the plot.
+#' @param sub A [`character`] string giving a subtitle for the plot.
+#' @param ann A [`logical`] scalar: should the default annotation (title and x
+#'  and y axis labels) appear on the plot?
+#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
+#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
+#'  plot?
+#' @param panel.first An an `expression` to be evaluated after the plot axes are
+#'  set up but before any plotting takes place. This can be useful for drawing
+#'  background grids.
+#' @param panel.last An `expression` to be evaluated after plotting has taken
+#'  place but before the axes, title and box are added.
+#' @param col.density,col.range,col.succession A specification for the plotting
+#'  colors.
+#' @param ... Extra parameters to be passed to [stats::density()].
+#' @return
+#'   `plot()` is called it for its side-effects: it results in a graphic being
+#'   displayed (invisibly returns `x`).
+#' @example inst/examples/ex-summary.R
+#' @seealso [`stats::density()`]
+#' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
+#' @family plot methods
+#' @docType methods
+#' @name plot_phases
+#' @rdname plot_phases
 NULL
 
 # Time Ranges ==================================================================

@@ -11,14 +11,12 @@ if (at_home()) {
 
   # Tempo plot =================================================================
   tmp <- tempo(eve)
-  plot_tempo <- function() plot(tmp, credible = TRUE, gauss = TRUE)
-  expect_snapshot_plot(plot_tempo, "plot_tempo")
 
-  plot_tempo_gauss <- function() plot(tmp, credible = FALSE, gauss = TRUE)
-  expect_snapshot_plot(plot_tempo_gauss, "plot_tempo_gauss")
-
-  plot_tempo_cred <- function() plot(tmp, credible = TRUE, gauss = TRUE)
+  plot_tempo_cred <- function() plot(tmp, interval = "credible")
   expect_snapshot_plot(plot_tempo_cred, "plot_tempo_cred")
+
+  plot_tempo_gauss <- function() plot(tmp, interval = "gauss")
+  expect_snapshot_plot(plot_tempo_gauss, "plot_tempo_gauss")
 
   # Activity plot ==============================================================
   tmp <- activity(eve)

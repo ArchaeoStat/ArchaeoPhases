@@ -122,11 +122,11 @@ bound <- boundaries(chrono_phases, level = 0.95)
 as.data.frame(bound)
 ```
 
-```{r phases-plot, fig.height=3.5}
+```{r phases-plot, fig.height=4}
 plot(chrono_phases)
 ```
 
-```{r succession-plot, fig.height=3.5}
+```{r succession-plot, fig.height=4}
 plot(chrono_phases[, c("UP", "EPI"), ], succession = "hiatus")
 plot(chrono_phases[, c("UP", "EPI"), ], succession = "transition")
 ```
