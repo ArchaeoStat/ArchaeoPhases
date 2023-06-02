@@ -47,6 +47,6 @@
 
 #' @import arkhe
 #' @import chronos
-#' @importFrom methods as getGeneric new setGeneric setMethod setValidity
+#' @importFrom methods as cbind2 getGeneric new setGeneric setMethod setValidity
 #' .valueClassTest
 NULL

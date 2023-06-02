@@ -1,6 +1,6 @@
 if (requireNamespace("ArchaeoData", quietly = TRUE)) {
   ## Load the Anglo Saxon burials dataset
-  path <- system.file("burials.csv", package = "ArchaeoData")
+  path <- system.file("oxcal/burials.csv", package = "ArchaeoData")
   burials <- read.table(path, header = TRUE, sep = ",", dec = ".",
                         check.names = FALSE)
 
