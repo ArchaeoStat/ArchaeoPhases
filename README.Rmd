@@ -1,0 +1,134 @@
+---
+output: github_document
+bibliography: vignettes/bibliography.bib
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.align = "center",
+  fig.path = "man/figures/README-",
+  fig.width = 7,
+  out.width = NULL
+)
+```
+
+# ArchaeoPhases
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
+[![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
+
+[![r-universe](https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases)](https://ArchaeoStat.r-universe.dev){.pkgdown-devel}
+[![CRAN Version](http://www.r-pkg.org/badges/version/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
+[![CRAN checks](https://badges.cranchecks.info/worst/ArchaeoPhases.svg)](https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html){.pkgdown-release}
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
+
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
+[![DOI JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
+<!-- badges: end -->
+
+## Overview
+
+Statistical analysis of archaeological dates and groups of dates. **ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC) simulations from [ChronoModel](https://chronomodel.com) [@lanos2020], [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) [@bronkramsey2009] or [BCal](https://bcal.shef.ac.uk) [@buck1999]. This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).
+
+**ArchaeoPhases v2.0 brings a comprehensive package rewrite, resulting in the renaming of nearly all functions. For more information, please refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
+
+```{r citation, echo=FALSE, comment=''}
+cite <- utils::citation("ArchaeoPhases")
+print(cite, bibtex = FALSE)
+```
+
+## Installation
+
+You can install the released version of **ArchaeoPhases** from [CRAN](https://CRAN.R-project.org) with:
+
+```{r cran-installation, eval=FALSE}
+install.packages("ArchaeoPhases")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+```{r gh-installation, eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("ArchaeoStat/ArchaeoPhases")
+```
+
+You can install the 1.x releases from the CRAN archives:
+
+```{r archive-installation, eval=FALSE}
+# install.packages("remotes")
+remotes::install_version("ArchaeoPhases", version = "1.8")
+```
+
+## Usage
+
+These examples use data available through the [**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package which is available in a [separate repository](https://archaeostat.r-universe.dev). **ArchaeoData** provides MCMC outputs from ChronoModel, OxCal and BCal.
+
+```{r fasti, eval=FALSE}
+## Install data package
+install.packages("ArchaeoData", repos = "https://archaeostat.r-universe.dev")
+```
+
+```{r packages-load, message=FALSE}
+## Load package
+library(ArchaeoPhases)
+```
+
+Import a CSV file containing a sample from the posterior distribution:
+
+```{r read-chronomodel}
+## Read output from ChronoModel
+path <- "chronomodel/ksarakil/"
+
+## Events
+path_event <- system.file(path, "Chain_all_Events.csv", package = "ArchaeoData")
+(chrono_events <- read_chronomodel_events(path_event))
+
+## Phases
+path_phase <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+(chrono_phases <- read_chronomodel_phases(path_phase))
+```
+
+### Analysis of a series of dates
+
+```{r events-plot, fig.width=5, fig.align='default', fig.height=5, out.width='50%', fig.show='hold'}
+## Plot the first event
+plot(chrono_events[, 1], interval = "hdr")
+
+## Plot all events
+plot(chrono_events)
+```
+
+```{r tempo-plot, fig.width=5, fig.align='default', fig.height=5, out.width='50%', fig.show='hold'}
+## Tempo plot
+tp <- tempo(chrono_events, level = 0.95)
+plot(tp)
+
+## Activity plot
+ac <- activity(chrono_events)
+plot(ac)
+```
+
+### Analysis of a group of dates (phase)
+
+```{r phases-boundaries}
+bound <- boundaries(chrono_phases, level = 0.95)
+as.data.frame(bound)
+```
+
+```{r phases-plot, fig.height=4}
+plot(chrono_phases)
+```
+
+```{r succession-plot, fig.height=4}
+plot(chrono_phases[, c("UP", "EPI"), ], succession = "hiatus")
+plot(chrono_phases[, c("UP", "EPI"), ], succession = "transition")
+```
+
+## References

@@ -1,30 +1,94 @@
-Package: ArchaeoPhases
 Type: Package
-Title: Post-Processing of the Markov Chain Simulated by 'ChronoModel',
-        'Oxcal' or 'BCal'
-Version: 1.8
-Date: 2022-06-10
-Author: Anne Philippe [aut, cre],
-    Marie-Anne Vibet [aut],
-    Thomas S. Dye [ctb]
+Package: ArchaeoPhases
+Title: Post-Processing of Markov Chain Monte Carlo Simulations for
+    Chronological Modelling
+Version: 2.0.0.9000
 Authors@R: c(
-              person("Anne", "Philippe", role = c("aut", "cre"), email = "anne.philippe@univ-nantes.fr"),
-              person("Marie-Anne", "Vibet", role = c("aut")),
-              person("Thomas S.", "Dye", role = c("ctb"))
-              )
+    person("Anne", "Philippe", , "anne.philippe@univ-nantes.fr", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-5331-5087")),
+    person("Marie-Anne", "Vibet", role = "aut",
+           comment = c(ORCID = "0000-0003-4003-3141")),
+    person("Thomas S.", "Dye", role = "ctb",
+           comment = c(ORCID = "0000-0001-8116-782X")),
+    person("Nicolas", "Frerebeau", , "nicolas.frerebeau@u-bordeaux-montaigne.fr", role = "aut",
+           comment = c(ORCID = "0000-0001-5759-4944"))
+  )
 Maintainer: Anne Philippe <anne.philippe@univ-nantes.fr>
-Description: Provides a list of functions for the statistical analysis of archaeological dates and groups of dates. It is based on the post-processing of the Markov Chains whose stationary distribution is the posterior distribution of a series of dates. Such output can be simulated by different applications as for instance 'ChronoModel' (see <https://chronomodel.com/>), 'Oxcal' (see <https://c14.arch.ox.ac.uk/oxcal.html>) or 'BCal' (see <https://bcal.shef.ac.uk/>). The only requirement is to have a csv file containing a sample from the posterior distribution.  Note that this package interacts with data available through the 'ArchaeoPhases.dataset' package which is available in a separate repository.  The size of the 'ArchaeoPhases.dataset' package is approximately 4 MB.
-License: GPL-3
-Depends: R (>= 3.5.0), coda, hdrcde
-Imports: stats, utils, graphics, grDevices, shiny,
-        readr, toOrdinal, ggplot2, ggalt, reshape2, dplyr,
-        digest, gplots, magrittr, ggraph, gtools 
-Suggests: knitr, rmarkdown, testthat (>= 2.1.0), ArchaeoPhases.dataset
-        (>= 0.1.0)
-VignetteBuilder: knitr
+Description: Statistical analysis of archaeological dates and groups of
+    dates. This package allows to post-process Markov Chain Monte Carlo
+    (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>,
+    'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal'
+    <https://bcal.shef.ac.uk/>. It provides functions for the study of
+    rhythms of the long term from the posterior distribution of a series
+    of dates (tempo and activity plot). It also allows the estimation and
+    visualization of time ranges from the posterior distribution of groups
+    of dates (e.g. duration, transition and hiatus between successive
+    phases) as described in Philippe and Vibet (2020)
+    <doi:10.18637/jss.v093.c01>.
+License: GPL (>= 3)
+URL: https://archaeostat.github.io/archaeophases/
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
-NeedsCompilation: no
+Depends: 
+    R (>= 3.5.0)
+Imports: 
+    arkhe (>= 1.2.0),
+    chronos,
+    graphics,
+    grDevices,
+    methods,
+    stats,
+    tools,
+    utils
+Suggests: 
+    ArchaeoData,
+    coda,
+    knitr,
+    rmarkdown,
+    rsvg,
+    svglite,
+    tinysnapshot,
+    tinytest
+VignetteBuilder: 
+    knitr
+Additional_repositories: https://archaeostat.r-universe.dev
 Encoding: UTF-8
 LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Collate: 
+    'reexport.R'
+    'AllClasses.R'
+    'AllGenerics.R'
+    'ArchaeoPhases-defunct.R'
+    'ArchaeoPhases-deprecated.R'
+    'ArchaeoPhases-internal.R'
+    'ArchaeoPhases-package.R'
+    'activity.R'
+    'allen-mcmc.R'
+    'allen-relations.R'
+    'bind.R'
+    'boundaries.R'
+    'coerce.R'
+    'data.R'
+    'depth.R'
+    'duration.R'
+    'elapse.R'
+    'events.R'
+    'hiatus.R'
+    'interpolate.R'
+    'interval.R'
+    'mutators.R'
+    'occurrence.R'
+    'phases.R'
+    'plot.R'
+    'read.R'
+    'sensitivity.R'
+    'show.R'
+    'sort.R'
+    'subset.R'
+    'summary.R'
+    'tempo.R'
+    'test.R'
+    'transition.R'
+    'validate.R'
+    'zzz.R'
