@@ -26,7 +26,7 @@ Description: Statistical analysis of archaeological dates and groups of
     phases) as described in Philippe and Vibet (2020)
     <doi:10.18637/jss.v093.c01>.
 License: GPL (>= 3)
-URL: https://github.com/ArchaeoStat/ArchaeoPhases
+URL: https://archaeostat.github.io/archaeophases/
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
 Depends: 
     R (>= 3.5.0)
@@ -51,7 +51,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Additional_repositories: https://archaeostat.r-universe.dev
-Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

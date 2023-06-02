@@ -37,7 +37,7 @@ should be displayed (defaults to \code{\link[=interactive]{interactive()}}).
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/ArchaeoStat/ArchaeoPhases}
+  \item \url{https://archaeostat.github.io/archaeophases/}
   \item Report bugs at \url{https://github.com/ArchaeoStat/ArchaeoPhases/issues}
 }
 
