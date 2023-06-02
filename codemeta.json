@@ -207,7 +207,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1705.66KB",
+  "fileSize": "2154.568KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -241,6 +241,7 @@
     },
     {
       "@type": "SoftwareSourceCode",
+      "datePublished": "2023",
       "author": [
         {
           "@type": "Person",
@@ -254,7 +255,7 @@
         },
         {
           "@type": "Person",
-          "givenName": ["Thomas", "S."],
+          "givenName": "Thomas S.",
           "familyName": "Dye"
         },
         {
@@ -264,13 +265,14 @@
         }
       ],
       "name": "{{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}}",
-      "url": "https://ArchaeoStat.github.io/ArchaeoPhases",
+      "url": "https://archaeostat.github.io/archaeophases",
       "description": "R package version 2.0.0.9000"
     }
   ],
+  "relatedLink": ["https://archaeostat.github.io/archaeophases/", "https://CRAN.R-project.org/package=ArchaeoPhases"],
   "releaseNotes": "https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/NEWS.md",
   "readme": "https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/README.md",
   "contIntegration": ["https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases"],
   "developmentStatus": "https://www.repostatus.org/#active",
-  "relatedLink": "https://CRAN.R-project.org/package=ArchaeoPhases"
+  "keywords": ["archaeology", "bayesian-statistics", "geochronology", "markov-chain", "r-package", "radiocarbon-dates"]
 }

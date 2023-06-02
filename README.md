@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
+[![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg?token=RVSFB6UI4T)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
 [![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
 <a href="https://ArchaeoStat.r-universe.dev" class="pkgdown-devel"><img
@@ -57,11 +57,11 @@ refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
       Snippets_, *93*(1). doi:10.18637/jss.v093.c01
       <https://doi.org/10.18637/jss.v093.c01>.
 
-      Philippe A, Vibet M, Dye TS, Frerebeau N (2023). _ArchaeoPhases:
+      Philippe A, Vibet M, Dye T, Frerebeau N (2023). _ArchaeoPhases:
       Post-Processing of Markov Chain Monte Carlo Simulations for
       Chronological Modelling_. Université de Nantes, Nantes, France. R
       package version 2.0.0,
-      <https://ArchaeoStat.github.io/ArchaeoPhases>.
+      <https://archaeostat.github.io/archaeophases>.
 
 ## Installation
 
