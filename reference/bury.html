@@ -129,7 +129,7 @@ predicted. If <code>missing</code>, the original data points are used.</p></dd>
 
 <dt>calendar</dt>
 <dd><p>A <code>TimeScale</code> object specifying the target calendar
-(see <code><a href="https://packages.tesselle.org/chronos/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
+(see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
 
 
 <dt>main</dt>
@@ -210,7 +210,7 @@ Wax Lipid. <em>The Holocene</em>, 30(7): 1063-1074. <a href="https://doi.org/10.
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Coerce to MCMC</span></span></span>
 <span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">6000</span>, <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">6</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Compute an age-depth curve</span></span></span>
 <span class="r-in"><span><span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">bury</span><span class="op">(</span><span class="va">eve</span>, depth <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span></span>
@@ -221,11 +221,11 @@ Wax Lipid. <em>The Holocene</em>, 30(7): 1063-1074. <a href="https://doi.org/10.
 <span class="r-in"><span><span class="va">new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">age</span>, newdata <span class="op">=</span> <span class="fl">1.5</span><span class="op">:</span><span class="fl">5.5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">new</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   mad mean sd min q1 median q3 max start end</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   2    3  2   1  2      3  3   5     1   4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   3    3  2   0  2      3  3   5     1   4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   7    7  2   5  6      7  7   9     6   8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3  13   13  2  11 12     13 13  15    12  14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  21   21  2  19 20     21 21  23    20  22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  31   31  2  29 30     31 31  33    29  32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  21   21  2  19 20     21 21  22    20  22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  31   31  2  28 30     31 31  33    29  32</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="bury-2.png" alt="" width="700" height="433"></span>

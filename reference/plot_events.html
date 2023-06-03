@@ -102,7 +102,7 @@
 
 <dt>calendar</dt>
 <dd><p>A <code>TimeScale</code> object specifying the target calendar
-(see <code><a href="https://packages.tesselle.org/chronos/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
+(see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
 
 
 <dt>density</dt>
@@ -191,16 +191,16 @@ displayed (invisibly returns <code>x</code>).</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Coerce to MCMC</span></span></span>
-<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Summary</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      mad  mean  sd   min    q1 median    q3  max start   end</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E1  -900  -638 272 -1349  -889   -658  -386   -5 -1046  -202</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E2 -1766 -1785 100 -2000 -1857  -1785 -1719 -971 -1981 -1611</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E3  -702  -656  92 -1229  -717   -672  -611  -67  -803  -450</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E4 -1241 -1236  87 -1864 -1289  -1235 -1181 -719 -1401 -1064</span>
-<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mad mean   sd  min   q1 median   q3  max start  end</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E1 2850 2588 1680 3299 2839   2608 2338 1957  2998 2154</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E2 3716 3737 1852 3950 3807   3735 3671 2923  3933 3561</span>
@@ -208,9 +208,9 @@ displayed (invisibly returns <code>x</code>).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> E4 3191 3186 1863 3814 3239   3187 3131 2669  3351 3016</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Plot events</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_events-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"hdr"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"hdr"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_events-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, interval <span class="op">=</span> <span class="st">"hdr"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_events-3.png" alt="" width="700" height="433"></span>
@@ -219,7 +219,7 @@ displayed (invisibly returns <code>x</code>).</p>
 <span class="r-in"><span><span class="va">pha</span> <span class="op">&lt;-</span> <span class="fu"><a href="phases.html">phases</a></span><span class="op">(</span><span class="va">eve</span>, groups <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>, A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Summary</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">pha</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">pha</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $B</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            mad  mean  sd   min    q1 median    q3   max start   end</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> start    -1766 -1785 100 -2000 -1857  -1785 -1719 -1223 -1981 -1611</span>
@@ -232,7 +232,7 @@ displayed (invisibly returns <code>x</code>).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> end      -690 -521 169 -1050 -670   -537 -384   -5  -776 -214</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> duration  278  253 138     1  151    249  345  880     1  487</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">pha</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/chronos/reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="summary.html">summary</a></span><span class="op">(</span><span class="va">pha</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $B</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           mad mean   sd  min   q1 median   q3  max start  end</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> start    3718 3737 1852 3950 3807   3735 3671 3173  3933 3561</span>
