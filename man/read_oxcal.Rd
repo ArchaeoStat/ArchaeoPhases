@@ -36,7 +36,7 @@ read_oxcal(file, ...)
 \item{...}{Further arguments to be passed to \code{read.table}.}
 
 \item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the calendar
-(see \code{\link[chronos:calendar]{chronos::calendar()}}). It should be \code{\link[=CE]{CE()}} unless you change the
+(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[=CE]{CE()}} unless you change the
 default settings in 'OxCal'.}
 }
 \value{

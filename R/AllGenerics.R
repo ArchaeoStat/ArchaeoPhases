@@ -733,7 +733,7 @@ setGeneric(
 #' Reads MCMC output.
 #' @inheritParams utils::read.table
 #' @param calendar A [`TimeScale-class`] object specifying the calendar
-#'  (see [chronos::calendar()]). It should be [CE()] unless you change the
+#'  (see [aion::calendar()]). It should be [CE()] unless you change the
 #'  default settings in 'OxCal'.
 #' @return
 #'  An [`EventsMCMC-class`] object.
@@ -760,7 +760,7 @@ setGeneric(
 #'  [BCal](https://bcal.shef.ac.uk/) calibration. Defaults to the BCal
 #'  default of 1.
 #' @param calendar A [`TimeScale-class`] object specifying the calendar
-#'  (see [chronos::calendar()]). It should be [BP()] unless you change the
+#'  (see [aion::calendar()]). It should be [BP()] unless you change the
 #'  default settings in 'BCal'.
 #' @return
 #'  An [`EventsMCMC-class`] object.
@@ -785,7 +785,7 @@ setGeneric(
 #' Reads MCMC output.
 #' @inheritParams utils::read.table
 #' @param calendar A [`TimeScale-class`] object specifying the calendar
-#'  (see [chronos::calendar()]). It should be [CE()] unless you change the
+#'  (see [aion::calendar()]). It should be [CE()] unless you change the
 #'  default settings in 'ChronoModel'.
 #' @return
 #'  An [`EventsMCMC-class`] or a [`PhasesMCMC-class`] object.

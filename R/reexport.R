@@ -1,41 +1,41 @@
 # REEXPORT
 
-#' @importFrom chronos calendar
+#' @importFrom aion calendar
 #' @export
-chronos::calendar
+aion::calendar
 
-#' @importFrom chronos BP
+#' @importFrom aion BP
 #' @export
-chronos::BP
+aion::BP
 
-#' @importFrom chronos b2k
+#' @importFrom aion b2k
 #' @export
-chronos::b2k
+aion::b2k
 
-#' @importFrom chronos BC
+#' @importFrom aion BC
 #' @export
-chronos::BC
+aion::BC
 
-#' @importFrom chronos BCE
+#' @importFrom aion BCE
 #' @export
-chronos::BCE
+aion::BCE
 
-#' @importFrom chronos AD
+#' @importFrom aion AD
 #' @export
-chronos::AD
+aion::AD
 
-#' @importFrom chronos CE
+#' @importFrom aion CE
 #' @export
-chronos::CE
+aion::CE
 
-#' @importFrom chronos start
+#' @importFrom aion start
 #' @export
-chronos::start
+aion::start
 
-#' @importFrom chronos end
+#' @importFrom aion end
 #' @export
-chronos::start
+aion::start
 
-#' @importFrom chronos time
+#' @importFrom aion time
 #' @export
-chronos::time
+aion::time

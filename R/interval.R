@@ -17,8 +17,8 @@ setMethod(
     lapply(
       X = cred,
       FUN = function(x, calendar) {
-        x[, 1] <- chronos::as_year(x[, 1], calendar = calendar)
-        x[, 2] <- chronos::as_year(x[, 2], calendar = calendar)
+        x[, 1] <- aion::as_year(x[, 1], calendar = calendar)
+        x[, 2] <- aion::as_year(x[, 2], calendar = calendar)
         x
       },
       calendar = calendar
@@ -41,8 +41,8 @@ setMethod(
     lapply(
       X = hpd,
       FUN = function(x, calendar) {
-        x[, 1] <- chronos::as_year(x[, 1], calendar = calendar)
-        x[, 2] <- chronos::as_year(x[, 2], calendar = calendar)
+        x[, 1] <- aion::as_year(x[, 1], calendar = calendar)
+        x[, 2] <- aion::as_year(x[, 2], calendar = calendar)
         x
       },
       calendar = calendar

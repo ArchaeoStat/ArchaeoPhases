@@ -116,8 +116,8 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Construct Axis
   if (axes) {
-    rd <- chronos::as_fixed(as.numeric(x))
-    chronos::axis_year(x = rd, side = 1, format = TRUE, calendar = calendar)
+    rd <- aion::as_fixed(as.numeric(x))
+    aion::axis_year(x = rd, side = 1, format = TRUE, calendar = calendar)
     graphics::mtext(names(x)[mcmc], side = 2, at = mcmc, las = 2, padj = 0)
   }
 
@@ -128,7 +128,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Add annotation
   if (ann) {
-    xlab <- chronos::format(calendar)
+    xlab <- aion::format(calendar)
     ylab <- NULL
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -273,8 +273,8 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Construct Axis
   if (axes) {
-    rd <- chronos::as_fixed(as.numeric(x))
-    chronos::axis_year(x = rd, side = 1, format = TRUE, calendar = calendar)
+    rd <- aion::as_fixed(as.numeric(x))
+    aion::axis_year(x = rd, side = 1, format = TRUE, calendar = calendar)
     graphics::mtext(names(x)[ages], side = 2, at = ages, las = 2, padj = 0)
   }
 
@@ -285,7 +285,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Add annotation
   if (ann) {
-    xlab <- chronos::format(calendar)
+    xlab <- aion::format(calendar)
     ylab <- NULL
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -342,7 +342,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Construct Axis
   if (axes) {
-    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -353,7 +353,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Add annotation
   if (ann) {
-    xlab <- chronos::format(calendar)
+    xlab <- aion::format(calendar)
     ylab <- "Cumulative events"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -413,7 +413,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
 
   ## Construct Axis
   if (axes) {
-    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -424,7 +424,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
 
   ## Add annotation
   if (ann) {
-    xlab <- chronos::format(calendar)
+    xlab <- aion::format(calendar)
     ylab <- "Activity"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -461,7 +461,7 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
   graphics::plot.new()
 
   ## Set plotting coordinates
-  years <- chronos::as_fixed(c(x@start, x@end))
+  years <- aion::as_fixed(c(x@start, x@end))
   xlim <- range(years)
   ylim <- range(x@events)
   graphics::plot.window(xlim = xlim, ylim = ylim)
@@ -482,7 +482,7 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Construct Axis
   if (axes) {
-    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, at = seq_len(n_events), labels = x@events, las = 1)
   }
 
@@ -493,7 +493,7 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Add annotation
   if (ann) {
-    xlab <- chronos::format(calendar)
+    xlab <- aion::format(calendar)
     ylab <- "Occurrence"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -534,7 +534,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
   graphics::plot.new()
 
   ## Set plotting coordinates
-  years <- chronos::as_fixed(c(data$median, data$start, data$end))
+  years <- aion::as_fixed(c(data$median, data$start, data$end))
   xlim <- range(years)
   ylim <- sort(range(depth), decreasing = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim)
@@ -567,7 +567,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Construct Axis
   if (axes) {
-    chronos::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::axis_year(x = years, side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -578,7 +578,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Add annotation
   if (ann) {
-    xlab <- chronos::format(calendar)
+    xlab <- aion::format(calendar)
     ylab <- "Depth"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }

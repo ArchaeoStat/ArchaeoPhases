@@ -98,7 +98,7 @@ setMethod(
     data <- unlist(data)
 
     ## Convert to rata die
-    data <- chronos::fixed(data, calendar = calendar)
+    data <- aion::fixed(data, calendar = calendar)
     dim(data) <- d
 
     ## Return an MCM object
@@ -156,7 +156,7 @@ setMethod(
     data <- unlist(data)
 
     ## Convert to rata die
-    data <- chronos::fixed(data, calendar = calendar)
+    data <- aion::fixed(data, calendar = calendar)
     dim(data) <- d
 
     ## Return an MCM object
@@ -203,7 +203,7 @@ setMethod(
     data <- unlist(data)
 
     ## Convert to rata die
-    data <- chronos::fixed(data, calendar = calendar)
+    data <- aion::fixed(data, calendar = calendar)
     dim(data) <- d
 
     ## Return an MCM object

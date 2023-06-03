@@ -172,8 +172,8 @@
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "chronos",
-      "name": "chronos"
+      "identifier": "aion",
+      "name": "aion"
     },
     "4": {
       "@type": "SoftwareApplication",
@@ -207,7 +207,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2154.568KB",
+  "fileSize": "2154.36KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",

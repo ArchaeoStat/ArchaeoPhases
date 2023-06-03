@@ -67,7 +67,7 @@ setMethod(
       ga[ga <= 0] <- 0
     }
 
-    ts <- chronos::series(moy, time = chronos::as_fixed(data_seq))
+    ts <- aion::series(moy, time = aion::as_fixed(data_seq))
     .CumulativeEvents(
       ts,
       credible = qu[, -3],

@@ -30,7 +30,7 @@ setMethod(
       stop("Tempo must be computed as probabilities.", call. = FALSE)
     }
 
-    years <- chronos::time(object)
+    years <- aion::time(object)
     est <- apply(
       X = object,
       MARGIN = 2,
@@ -40,7 +40,7 @@ setMethod(
       b = years
     )
 
-    ts <- chronos::series(est, time = chronos::as_fixed(years[-1]))
+    ts <- aion::series(est, time = aion::as_fixed(years[-1]))
     .ActivityEvents(
       ts,
       hash = get_hash(object)

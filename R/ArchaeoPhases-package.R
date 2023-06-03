@@ -46,7 +46,7 @@
 "_PACKAGE"
 
 #' @import arkhe
-#' @import chronos
+#' @import aion
 #' @importFrom methods as cbind2 getGeneric new setGeneric setMethod setValidity
 #' .valueClassTest
 NULL

@@ -40,7 +40,7 @@ read_bcal(file, ...)
 default of 1.}
 
 \item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the calendar
-(see \code{\link[chronos:calendar]{chronos::calendar()}}). It should be \code{\link[=BP]{BP()}} unless you change the
+(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[=BP]{BP()}} unless you change the
 default settings in 'BCal'.}
 }
 \value{

@@ -19,6 +19,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{chronos}{\code{\link[chronos:gregorian]{AD}}, \code{\link[chronos:gregorian]{BC}}, \code{\link[chronos:gregorian]{BCE}}, \code{\link[chronos:gregorian]{BP}}, \code{\link[chronos:gregorian]{CE}}, \code{\link[chronos:gregorian]{b2k}}, \code{\link[chronos]{calendar}}, \code{\link[chronos]{start}}, \code{\link[chronos]{start}}, \code{\link[chronos]{time}}}
+  \item{aion}{\code{\link[aion:gregorian]{AD}}, \code{\link[aion:gregorian]{b2k}}, \code{\link[aion:gregorian]{BC}}, \code{\link[aion:gregorian]{BCE}}, \code{\link[aion:gregorian]{BP}}, \code{\link[aion]{calendar}}, \code{\link[aion:gregorian]{CE}}, \code{\link[aion]{start}}, \code{\link[aion]{start}}, \code{\link[aion]{time}}}
 }}
 

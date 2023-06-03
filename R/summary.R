@@ -96,7 +96,7 @@ stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
   tmp <- c(mad = mod, mean = moy, sd = ec, quant, ci)
   tmp <- Filter(Negate(is.na), tmp)
 
-  if (!is.null(calendar)) tmp <- chronos::as_year(tmp, calendar = calendar)
+  if (!is.null(calendar)) tmp <- aion::as_year(tmp, calendar = calendar)
   if (!is.null(digits)) tmp <- round(tmp, digits = digits)
   tmp
 }

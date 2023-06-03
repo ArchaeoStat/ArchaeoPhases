@@ -83,7 +83,7 @@ setMethod(
       dim(arr) <- NULL
 
       ## Convert to rata die
-      arr <- chronos::fixed(arr, calendar = calendar)
+      arr <- aion::fixed(arr, calendar = calendar)
       dim(arr) <- d
       dimnames(arr) <- dn
     }

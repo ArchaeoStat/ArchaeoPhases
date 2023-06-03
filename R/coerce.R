@@ -7,7 +7,7 @@ NULL
 #' @export
 as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   tmp <- data.frame(
-    years = chronos::time(x@years, calendar = calendar),
+    years = aion::time(x@years, calendar = calendar),
     estimate = x[, 1, drop = TRUE]
   )
   if (nrow(x@credible) > 0) {
@@ -31,7 +31,7 @@ as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("Archaeo
 #' @export
 as.data.frame.ActivityEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   data.frame(
-    years = chronos::time(x@years, calendar = calendar),
+    years = aion::time(x@years, calendar = calendar),
     estimate = x[, 1, drop = TRUE]
   )
 }
@@ -41,8 +41,8 @@ as.data.frame.ActivityEvents <- function(x, ..., calendar = getOption("ArchaeoPh
 as.data.frame.OccurrenceEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   data.frame(
     events = x@events,
-    start = chronos::time(x@start, calendar = calendar),
-    end = chronos::time(x@end, calendar = calendar)
+    start = aion::time(x@start, calendar = calendar),
+    end = aion::time(x@end, calendar = calendar)
   )
 }
 
@@ -57,9 +57,9 @@ as.data.frame.TimeRange <- function(x, ..., calendar = getOption("ArchaeoPhases.
 
   ## Change calendar
   if (!is.null(calendar)) {
-    start <- chronos::as_year(start, calendar = calendar)
-    end <- chronos::as_year(end, calendar = calendar)
-    duration <- chronos::as_year(duration, calendar = calendar)
+    start <- aion::as_year(start, calendar = calendar)
+    end <- aion::as_year(end, calendar = calendar)
+    duration <- aion::as_year(duration, calendar = calendar)
   }
 
   data.frame(start = start, end = end, duration = duration,

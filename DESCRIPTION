@@ -32,7 +32,7 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     arkhe (>= 1.2.0),
-    chronos,
+    aion,
     graphics,
     grDevices,
     methods,
