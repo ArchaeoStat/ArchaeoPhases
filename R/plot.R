@@ -46,6 +46,8 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
     x <- x[, k, drop = FALSE]
     col.density <- col.density[k]
     fill.density <- fill.density[k]
+    col.interval <- col.interval[k]
+    fill.interval <- fill.interval[k]
   }
 
   ## Compute interval
@@ -79,7 +81,6 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
       yi <- c(0, dens[d0], 0) + i
 
       graphics::polygon(xi, yi, border = NA, col = fill.density[i])
-      graphics::lines(xi, yi, lty = "solid", col = "black")
 
       if (interval_draw) {
         h <- int[[i]]
@@ -92,6 +93,8 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
           )
         }
       }
+
+      graphics::lines(xi, yi, lty = "solid", col = "black")
     }
   }
   if (interval_draw) {
@@ -317,7 +320,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
   graphics::plot.new()
 
   ## Set plotting coordinates
-  years <- x@time
+  years <- aion::time(x, calendar = NULL)
   xlim <- range(years)
   ylim <- range(x)
   graphics::plot.window(xlim = xlim, ylim = ylim)
@@ -376,7 +379,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
                                 panel.first = NULL, panel.last = NULL, ...) {
   ## Graphical parameters
   border <- list(...)$border %||% c("black")
-  col <- list(...)$col %||% c("grey70")
+  col <- list(...)$col %||% c("grey")
   lwd <- list(...)$lwd %||% graphics::par("lwd")
   lty <- list(...)$lty %||% graphics::par("lty")
 
@@ -386,7 +389,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
   graphics::plot.new()
 
   ## Set plotting coordinates
-  years <- x@time
+  years <- aion::time(x, calendar = NULL)
   xlim <- range(years)
   ylim <- range(x)
   graphics::plot.window(xlim = xlim, ylim = ylim)
