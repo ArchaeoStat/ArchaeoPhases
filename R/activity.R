@@ -30,7 +30,7 @@ setMethod(
       stop("Tempo must be computed as probabilities.", call. = FALSE)
     }
 
-    years <- aion::time(object)
+    years <- aion::time(object, calendar = NULL)
     est <- apply(
       X = object,
       MARGIN = 2,

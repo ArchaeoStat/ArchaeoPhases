@@ -7,7 +7,7 @@ NULL
 #' @export
 as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   tmp <- data.frame(
-    years = aion::time(x@years, calendar = calendar),
+    time = aion::time(x, calendar = calendar),
     estimate = x[, 1, drop = TRUE]
   )
   if (nrow(x@credible) > 0) {
@@ -30,10 +30,7 @@ as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("Archaeo
 #' @method as.data.frame ActivityEvents
 #' @export
 as.data.frame.ActivityEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
-  data.frame(
-    years = aion::time(x@years, calendar = calendar),
-    estimate = x[, 1, drop = TRUE]
-  )
+  methods::callNextMethod() # Method for 'TimeSeries'
 }
 
 #' @method as.data.frame OccurrenceEvents
@@ -41,8 +38,8 @@ as.data.frame.ActivityEvents <- function(x, ..., calendar = getOption("ArchaeoPh
 as.data.frame.OccurrenceEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   data.frame(
     events = x@events,
-    start = aion::time(x@start, calendar = calendar),
-    end = aion::time(x@end, calendar = calendar)
+    start = aion::as_year(x@start, calendar = calendar),
+    end = aion::as_year(x@end, calendar = calendar)
   )
 }
 

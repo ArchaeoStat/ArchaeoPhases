@@ -39,3 +39,11 @@ aion::start
 #' @importFrom aion time
 #' @export
 aion::time
+
+#' @importFrom aion year_axis
+#' @export
+aion::year_axis
+
+#' @importFrom aion year_grid
+#' @export
+aion::year_grid
