@@ -13,6 +13,9 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                       frame.plot = FALSE,
                       panel.first = NULL, panel.last = NULL,
                       col.density = "grey", col.interval = "#77AADD", ...) {
+  ## Save calendar for further use (e.g. year_axis() or year_grid())
+  options(aion.last_calendar = calendar)
+
   ## Get data
   n_events <- NCOL(x)
 
@@ -136,9 +139,6 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options("aion.last_calendar" = calendar)
-
   invisible(x)
 }
 
@@ -159,6 +159,9 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                             panel.first = NULL, panel.last = NULL,
                             col.density = "grey", col.range = "black",
                             col.succession = c("#77AADD", "#EE8866"), ...) {
+  ## Save calendar for further use (e.g. year_axis() or year_grid())
+  options(aion.last_calendar = calendar)
+
   ## Get data
   n_phases <- dim(x)[2L]
 
@@ -296,9 +299,6 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options("aion.last_calendar" = calendar)
-
   invisible(x)
 }
 
@@ -316,6 +316,9 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
                                   main = NULL, sub = NULL, ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
+  ## Save calendar for further use (e.g. year_axis() or year_grid())
+  options(aion.last_calendar = calendar)
+
   ## Graphical parameters
   lty <- list(...)$lty %||% graphics::par("lty")
   lwd <- list(...)$lwd %||% graphics::par("lwd")
@@ -367,9 +370,6 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options("aion.last_calendar" = calendar)
-
   invisible(x)
 }
 
@@ -386,6 +386,9 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
                                 ann = graphics::par("ann"),
                                 axes = TRUE, frame.plot = axes,
                                 panel.first = NULL, panel.last = NULL, ...) {
+  ## Save calendar for further use (e.g. year_axis() or year_grid())
+  options(aion.last_calendar = calendar)
+
   ## Graphical parameters
   border <- list(...)$border %||% c("black")
   col <- list(...)$col %||% c("grey")
@@ -441,9 +444,6 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options("aion.last_calendar" = calendar)
-
   invisible(x)
 }
 
@@ -460,6 +460,9 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
                                   ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
+  ## Save calendar for further use (e.g. year_axis() or year_grid())
+  options(aion.last_calendar = calendar)
+
   ## Get data
   n_events <- length(x@events)
 
@@ -513,9 +516,6 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options("aion.last_calendar" = calendar)
-
   invisible(x)
 }
 
@@ -533,6 +533,9 @@ plot.AgeDepthModel <- function(x, level = 0.95,
                                ann = graphics::par("ann"),
                                axes = TRUE, frame.plot = axes,
                                panel.first = NULL, panel.last = NULL, ...) {
+  ## Save calendar for further use (e.g. year_axis() or year_grid())
+  options(aion.last_calendar = calendar)
+
   ## Get data
   depth <- x@depth
   n <- length(depth)
@@ -600,9 +603,6 @@ plot.AgeDepthModel <- function(x, level = 0.95,
     ylab <- "Depth"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
-
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options("aion.last_calendar" = calendar)
 
   invisible(x)
 }

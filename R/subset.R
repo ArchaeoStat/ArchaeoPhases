@@ -12,15 +12,15 @@ setMethod(
   signature = c(x = "MCMC"),
   function(x, i, j, ..., drop = FALSE) {
     z <- methods::callNextMethod()
-    if (isTRUE(drop)) return(z)
 
+    if (isTRUE(drop)) return(z)
     if (is.null(dim(z))) z <- matrix(z, ncol = 1)
 
     lab <- x@labels
     itr <- x@iteration
     dep <- x@depth
     if (!missing(i)) {
-      if (is.character(i)) i <- match(i, lab)
+      if (is.character(i)) i <- match(i, rownames(x))
       rownames(z) <- rownames(x)[i]
       itr <- itr[i]
     }
