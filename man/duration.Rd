@@ -33,7 +33,6 @@ summary(dur)
 }
 \seealso{
 Other phase tools: 
-\code{\link{as_phases}()},
 \code{\link{phases}()}
 }
 \author{

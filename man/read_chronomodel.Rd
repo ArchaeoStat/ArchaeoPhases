@@ -84,6 +84,9 @@ URL: \url{https://www.chronomodel.fr}.
 \code{\link[utils:read.table]{utils::read.table()}}
 
 Other read methods: 
+\code{\link{as_coda}()},
+\code{\link{as_events}()},
+\code{\link{as_phases}()},
 \code{\link{check}},
 \code{\link{read_bcal}()},
 \code{\link{read_oxcal}()}

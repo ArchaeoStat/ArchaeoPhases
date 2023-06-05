@@ -3,7 +3,23 @@
 NULL
 
 # Coerce =======================================================================
-#' Coda
+#' Coerce to a Data Frame
+#'
+#' @param x An object.
+#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#'  (see [calendar()]).
+#' @param ... Further parameters to be passed to [data.frame()].
+#' @return
+#'  A [`data.frame`] with an extra `time` column giving the (decimal) years at
+#'  which the time series was sampled.
+#' @author N. Frerebeau
+#' @docType methods
+#' @family mutators
+#' @name data.frame
+#' @rdname data.frame
+NULL
+
+#' Coerce to Coda
 #'
 #' Extracts parallel chains from an [`MCMC-class`] object to create an
 #' `mcmc.list` object for use with \pkg{coda} diagnostic tools.
@@ -16,7 +32,7 @@ NULL
 #' @example inst/examples/ex-coda.R
 #' @seealso [coda::mcmc()], [coda::mcmc.list()]
 #' @author A. Philippe, M.-A. Vibet
-#' @family mutators
+#' @family read methods
 #' @docType methods
 #' @aliases as_coda-method
 setGeneric(
@@ -26,20 +42,34 @@ setGeneric(
 
 # Tools ========================================================================
 ## Mutators --------------------------------------------------------------------
-#' Get or Set Parts of an Object
-#'
-#' Getters and setters to extract or replace parts of an object.
-#' @param x An object from which to get or set element(s).
-#' @param value A possible value for the element(s) of `x`.
-#' @return
-#'  An object of the same sort as `x` with the new values assigned.
+# Get or Set Parts of an Object
+#
+# Getters and setters to extract or replace parts of an object.
+# @param x An object from which to get or set element(s).
+# @param value A possible value for the element(s) of `x`.
+# @return
+#  An object of the same sort as `x` with the new values assigned.
 # @example inst/examples/ex-mutator.R
+# @author N. Frerebeau
+# @docType methods
+# @family mutators
+# @name mutators
+# @rdname mutators
+# @aliases get set
+NULL
+
+#' The Names of an Object
+#'
+#' Get or set the names of an object.
+#' @param x An object from which to get or set names.
+#' @param value A possible value for the names of `x`.
+#' @return
+#'  An object of the same sort as `x` with the new names assigned.
 #' @author N. Frerebeau
 #' @docType methods
 #' @family mutators
-#' @name mutator
-#' @rdname mutator
-#' @aliases get set
+#' @name names
+#' @rdname names
 NULL
 
 ## Subset ----------------------------------------------------------------------
@@ -209,7 +239,7 @@ setGeneric(
 #'  An [`EventsMCMC-class`] object.
 #' @example inst/examples/ex-events.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family event tools
+#' @family read methods
 #' @docType methods
 #' @aliases as_events-method
 setGeneric(
@@ -467,7 +497,7 @@ setGeneric(
 
 # Phase ========================================================================
 ## Build -----------------------------------------------------------------------
-#' Phases
+#' Compute Phases
 #'
 #' Constructs the minimum and maximum for a group of events (phase).
 #' @param x An [`EventsMCMC-class`].
@@ -512,7 +542,7 @@ setGeneric(
 #'  A [`PhasesMCMC-class`] object.
 #' @example inst/examples/ex-phases.R
 #' @author A. Philippe, M.-A. Vibet, N. Frerebeau
-#' @family phase tools
+#' @family read methods
 #' @docType methods
 #' @aliases as_phases-method
 setGeneric(
@@ -938,7 +968,7 @@ NULL
 #'  Alspaugh, T. (2019). Allen's Interval Algebra.
 #'  URL: \url{https://thomasalspaugh.org/pub/fnd/allen.html}.
 #' @example inst/examples/ex-allen.R
-#' @author N. Frerebeau
+#' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @docType methods
 #' @aliases allen_relation-method
@@ -958,7 +988,7 @@ setGeneric(
 #'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
 #'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
 #' @example inst/examples/ex-allen.R
-#' @author N. Frerebeau
+#' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @docType methods
 #' @aliases allen_complement-method
@@ -978,7 +1008,7 @@ setGeneric(
 #'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
 #'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
 #' @example inst/examples/ex-allen.R
-#' @author N. Frerebeau
+#' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @docType methods
 #' @aliases allen_converse-method
@@ -997,7 +1027,7 @@ setGeneric(
 #'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
 #'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
 #' @example inst/examples/ex-allen.R
-#' @author N. Frerebeau
+#' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @docType methods
 #' @aliases allen_composition-method
@@ -1016,7 +1046,7 @@ setGeneric(
 #'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
 #'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
 #' @example inst/examples/ex-allen.R
-#' @author N. Frerebeau
+#' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @docType methods
 #' @aliases allen_intersect-method
@@ -1035,7 +1065,7 @@ setGeneric(
 #'  Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals.
 #'  *Communications of the ACM*, 26(11): 832-843. \doi{10.1145/182.358434}.
 #' @example inst/examples/ex-allen.R
-#' @author N. Frerebeau
+#' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @docType methods
 #' @aliases allen_union-method

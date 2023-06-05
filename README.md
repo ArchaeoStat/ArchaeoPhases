@@ -60,7 +60,7 @@ refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
       Philippe A, Vibet M, Dye T, Frerebeau N (2023). _ArchaeoPhases:
       Post-Processing of Markov Chain Monte Carlo Simulations for
       Chronological Modelling_. Université de Nantes, Nantes, France. R
-      package version 2.0.0,
+      package version 2.0.0.9000,
       <https://archaeostat.github.io/archaeophases>.
 
 ## Installation
@@ -87,6 +87,9 @@ remotes::install_version("ArchaeoPhases", version = "1.8")
 ```
 
 ## Usage
+
+**ArchaeoPhases** v2.0 uses **aion** for internal date representation.
+Look at `vignette("aion")` before you start.
 
 These examples use data available through the
 [**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package

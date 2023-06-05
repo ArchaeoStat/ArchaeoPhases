@@ -3,8 +3,8 @@
 NULL
 
 # To data.frame ================================================================
-#' @method as.data.frame CumulativeEvents
 #' @export
+#' @method as.data.frame CumulativeEvents
 as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   tmp <- data.frame(
     time = aion::time(x, calendar = calendar),
@@ -27,14 +27,24 @@ as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("Archaeo
   tmp
 }
 
-#' @method as.data.frame ActivityEvents
 #' @export
+#' @rdname data.frame
+#' @aliases as.data.frame,CumulativeEvents-method
+setMethod("as.data.frame", "CumulativeEvents", as.data.frame.CumulativeEvents)
+
+#' @export
+#' @method as.data.frame ActivityEvents
 as.data.frame.ActivityEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   methods::callNextMethod() # Method for 'TimeSeries'
 }
 
-#' @method as.data.frame OccurrenceEvents
 #' @export
+#' @rdname data.frame
+#' @aliases as.data.frame,ActivityEvents-method
+setMethod("as.data.frame", "ActivityEvents", as.data.frame.ActivityEvents)
+
+#' @export
+#' @method as.data.frame OccurrenceEvents
 as.data.frame.OccurrenceEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   data.frame(
     events = x@events,
@@ -43,8 +53,13 @@ as.data.frame.OccurrenceEvents <- function(x, ..., calendar = getOption("Archaeo
   )
 }
 
-#' @method as.data.frame TimeRange
 #' @export
+#' @rdname data.frame
+#' @aliases as.data.frame,OccurrenceEvents-method
+setMethod("as.data.frame", "OccurrenceEvents", as.data.frame.OccurrenceEvents)
+
+#' @export
+#' @method as.data.frame TimeRange
 as.data.frame.TimeRange <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
 
   ok <- !is.na(x@start)
@@ -62,6 +77,11 @@ as.data.frame.TimeRange <- function(x, ..., calendar = getOption("ArchaeoPhases.
   data.frame(start = start, end = end, duration = duration,
              row.names = x@labels[ok])
 }
+
+#' @export
+#' @rdname data.frame
+#' @aliases as.data.frame,TimeRange-method
+setMethod("as.data.frame", "TimeRange", as.data.frame.TimeRange)
 
 # To list ======================================================================
 #' @method as.list PhasesMCMC

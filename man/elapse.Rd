@@ -41,7 +41,6 @@ plot(eve_elapse)
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
-\code{\link{as_events}()},
 \code{\link{occurrence}()},
 \code{\link{tempo}()}
 }

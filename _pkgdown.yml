@@ -28,7 +28,7 @@ reference:
 - title: Allen's Interval Algebra
   contents:
   - has_concept("Allen's intervals")
-- title: Getters and Setters
+- title: Tools
   contents:
   - has_concept("mutators")
 - title: Datasets

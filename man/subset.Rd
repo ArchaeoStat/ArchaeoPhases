@@ -47,9 +47,9 @@ pha[, 1, , drop = FALSE] # Select the first phase
 }
 \seealso{
 Other mutators: 
-\code{\link{as_coda}()},
 \code{\link{bind}},
-\code{\link{mutator}},
+\code{\link{data.frame}},
+\code{\link{names}()},
 \code{\link{sort.list}()},
 \code{\link{sort}()}
 }

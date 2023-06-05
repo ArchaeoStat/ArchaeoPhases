@@ -65,6 +65,9 @@ radiocarbon calibration tool. \emph{Internet Archaeology}, 7.
 \code{\link[utils:read.table]{utils::read.table()}}
 
 Other read methods: 
+\code{\link{as_coda}()},
+\code{\link{as_events}()},
+\code{\link{as_phases}()},
 \code{\link{check}},
 \code{\link{read_chronomodel}},
 \code{\link{read_oxcal}()}

@@ -68,6 +68,6 @@ Other Allen's intervals:
 \code{\link{allen_relation}()}
 }
 \author{
-N. Frerebeau
+T. S. Dye, N. Frerebeau
 }
 \concept{Allen's intervals}

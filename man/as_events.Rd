@@ -49,13 +49,15 @@ plot(eve, calendar = BP(), interval = "hdr", level = 0.68)
 plot(eve, density = FALSE, interval = "credible", lwd = 3, tcl = 0)
 }
 \seealso{
-Other event tools: 
-\code{\link{activity}()},
-\code{\link{elapse}()},
-\code{\link{occurrence}()},
-\code{\link{tempo}()}
+Other read methods: 
+\code{\link{as_coda}()},
+\code{\link{as_phases}()},
+\code{\link{check}},
+\code{\link{read_bcal}()},
+\code{\link{read_chronomodel}},
+\code{\link{read_oxcal}()}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau
 }
-\concept{event tools}
+\concept{read methods}

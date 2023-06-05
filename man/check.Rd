@@ -60,6 +60,9 @@ is_original(oxcal, url_output, download = TRUE) # Same as remote file? TRUE
 \code{\link[digest:digest]{digest::digest()}}
 
 Other read methods: 
+\code{\link{as_coda}()},
+\code{\link{as_events}()},
+\code{\link{as_phases}()},
 \code{\link{read_bcal}()},
 \code{\link{read_chronomodel}},
 \code{\link{read_oxcal}()}

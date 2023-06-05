@@ -5,7 +5,7 @@
 \alias{as_coda}
 \alias{as_coda-method}
 \alias{as_coda,MCMC-method}
-\title{Coda}
+\title{Coerce to Coda}
 \usage{
 as_coda(from, ...)
 
@@ -51,14 +51,15 @@ if (requireNamespace("coda", quietly = TRUE)) {
 \seealso{
 \code{\link[coda:mcmc]{coda::mcmc()}}, \code{\link[coda:mcmc.list]{coda::mcmc.list()}}
 
-Other mutators: 
-\code{\link{bind}},
-\code{\link{mutator}},
-\code{\link{sort.list}()},
-\code{\link{sort}()},
-\code{\link{subset}()}
+Other read methods: 
+\code{\link{as_events}()},
+\code{\link{as_phases}()},
+\code{\link{check}},
+\code{\link{read_bcal}()},
+\code{\link{read_chronomodel}},
+\code{\link{read_oxcal}()}
 }
 \author{
 A. Philippe, M.-A. Vibet
 }
-\concept{mutators}
+\concept{read methods}

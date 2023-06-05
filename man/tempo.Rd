@@ -138,7 +138,6 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
-\code{\link{as_events}()},
 \code{\link{elapse}()},
 \code{\link{occurrence}()}
 }

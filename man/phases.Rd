@@ -6,7 +6,7 @@
 \alias{phases-method}
 \alias{phases,EventsMCMC,missing-method}
 \alias{phases,EventsMCMC,list-method}
-\title{Phases}
+\title{Compute Phases}
 \usage{
 phases(x, groups, ...)
 
@@ -55,7 +55,6 @@ summary(pha2, calendar = CE())
 }
 \seealso{
 Other phase tools: 
-\code{\link{as_phases}()},
 \code{\link{duration}()}
 }
 \author{

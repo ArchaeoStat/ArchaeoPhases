@@ -3,7 +3,7 @@
 NULL
 
 #' @export
-#' @rdname mutator
+#' @rdname names
 #' @aliases names,MCMC-method
 setMethod(
   f = "names",
@@ -12,7 +12,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname names
 #' @aliases names<-,MCMC-method
 setMethod(
   f = "names<-",
@@ -26,7 +26,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname names
 #' @aliases names,PhasesMCMC-method
 setMethod(
   f = "names",
@@ -35,7 +35,7 @@ setMethod(
 )
 
 #' @export
-#' @rdname mutator
+#' @rdname names
 #' @aliases names<-,PhasesMCMC-method
 setMethod(
   f = "names<-",

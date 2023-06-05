@@ -92,7 +92,6 @@ plot(occ)
 \seealso{
 Other event tools: 
 \code{\link{activity}()},
-\code{\link{as_events}()},
 \code{\link{elapse}()},
 \code{\link{tempo}()}
 }

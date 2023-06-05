@@ -1,5 +1,5 @@
 ---
-title: "Allen's interval algebra"
+title: "Allen's Interval algebra"
 author: "T. S. Dye"
 date: "2023-06-01"
 output:
