@@ -136,6 +136,9 @@
     <loc>https://ArchaeoStat.github.io/ArchaeoPhases/reference/check.html</loc>
   </url>
   <url>
+    <loc>https://ArchaeoStat.github.io/ArchaeoPhases/reference/data.frame.html</loc>
+  </url>
+  <url>
     <loc>https://ArchaeoStat.github.io/ArchaeoPhases/reference/duration.html</loc>
   </url>
   <url>
@@ -163,7 +166,7 @@
     <loc>https://ArchaeoStat.github.io/ArchaeoPhases/reference/mcmc_phases.html</loc>
   </url>
   <url>
-    <loc>https://ArchaeoStat.github.io/ArchaeoPhases/reference/mutator.html</loc>
+    <loc>https://ArchaeoStat.github.io/ArchaeoPhases/reference/names.html</loc>
   </url>
   <url>
     <loc>https://ArchaeoStat.github.io/ArchaeoPhases/reference/occurrence.html</loc>
