@@ -164,6 +164,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Get data
   n_phases <- dim(x)[2L]
+  n_bound <- dim(x)[3L]
 
   ## Graphical parameters
   lwd <- list(...)$lwd %||% graphics::par("lwd")
@@ -190,7 +191,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   panel.first
 
   ## Reorder data
-  if (sort) {
+  if (sort && n_bound > 1) {
     k <- sort.list(x, decreasing = decreasing)
     x <- x[, k, , drop = FALSE]
     col.density <- col.density[k]
@@ -222,10 +223,10 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Density
   if (density) {
-    for (i in ages) {
-      p <- x[, i, , drop = TRUE]
-      for (j in c(1, 2)) {
-        d <- stats::density(p[, j], n = getOption("ArchaeoPhases.grid"), ...)
+    for (j in ages) {
+      for (k in seq_len(n_bound)) {
+        p <- x[, j, k, drop = TRUE]
+        d <- stats::density(p, n = getOption("ArchaeoPhases.grid"), ...)
 
         years <- d$x
         dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 0.9
@@ -233,16 +234,16 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
         lb <- if (min(d0) > 1) min(d0) - 1 else min(d0)
         ub <- if (max(d0) < length(years)) max(d0) + 1 else max(d0)
         xi <- c(years[lb], years[d0], years[ub])
-        yi <- c(0, dens[d0], 0) + i
+        yi <- c(0, dens[d0], 0) + j
 
-        graphics::polygon(xi, yi, border = NA, col = fill.density[i])
-        graphics::lines(xi, yi, lty = j, col = "black")
+        graphics::polygon(xi, yi, border = NA, col = fill.density[j])
+        graphics::lines(xi, yi, lty = k, col = "black")
       }
     }
   }
 
   ## Time range
-  if (isTRUE(range) && !is.null(level)) {
+  if (isTRUE(range) && !is.null(level) && n_bound > 1) {
     bound <- boundaries(x, level = level)
     bound <- as.data.frame(bound, calendar = NULL)
     for (i in ages) {
@@ -347,7 +348,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
     plot_y_ribbon(x = years, ymin = x@gauss[, 1], ymax = x@gauss[, 2],
                   col = col.interval, border = NA)
   }
-  graphics::lines(x = years, y = x[, 1], col = col.tempo, lty = lty, lwd = lwd)
+  graphics::lines(x = years, y = x[, 1, 1], col = col.tempo, lty = lty, lwd = lwd)
 
   ## Evaluate post-plot and pre-axis expressions
   panel.last
@@ -415,7 +416,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
     plot_y_ribbon(
       x = years,
       ymin = rep(0, length(years)),
-      ymax = x[, i],
+      ymax = x[, i, 1, drop = TRUE],
       border = border,
       col = col,
       lty = lty,

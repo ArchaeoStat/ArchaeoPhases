@@ -78,7 +78,7 @@ NULL
 #' Operators acting on objects to extract or replace parts.
 #' @param x An object from which to extract element(s) or in which to replace
 #'  element(s).
-#' @param i,j Indices specifying elements to extract or replace.
+#' @param i,j,k Indices specifying elements to extract or replace.
 #' @param drop A [`logical`] scalar: should the result be coerced to
 #'  the lowest possible dimension? This only works for extracting elements,
 #'  not for the replacement.

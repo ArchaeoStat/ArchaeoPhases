@@ -165,6 +165,7 @@ as.data.frame(bound)
 ```
 
 ``` r
+## Plot all phases
 plot(chrono_phases)
 ```
 

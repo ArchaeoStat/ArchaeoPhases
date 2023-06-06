@@ -8,7 +8,7 @@ NULL
 as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
   tmp <- data.frame(
     time = aion::time(x, calendar = calendar),
-    estimate = x[, 1, drop = TRUE]
+    estimate = x[, 1, 1, drop = TRUE]
   )
   if (nrow(x@credible) > 0) {
     tmp$credible_start <- x@credible[, 1]

@@ -9,13 +9,13 @@
 \usage{
 \S4method{[}{MCMC}(x, i, j, ..., drop = FALSE)
 
-\S4method{[}{PhasesMCMC}(x, i, j, ..., drop = FALSE)
+\S4method{[}{PhasesMCMC}(x, i, j, k, drop = FALSE)
 }
 \arguments{
 \item{x}{An object from which to extract element(s) or in which to replace
 element(s).}
 
-\item{i, j}{Indices specifying elements to extract or replace.}
+\item{i, j, k}{Indices specifying elements to extract or replace.}
 
 \item{...}{Currently not used.}
 

@@ -67,6 +67,11 @@ NULL
 #' @slot labels A [`character`] vector specifying the name of the phases.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
+#' @details
+#'  A phase object is an\eqn{n x m x 2}{n \times m \times 2} array, with
+#'  \eqn{n} being the number of iterations, \eqn{m} being the number of phases
+#'  and with the 2 columns of the third dimension containing the boundaries of
+#'  the phases.
 #' @section Coerce:
 #'  In the code snippets below, `x` is a `PhasesMCMC` object.
 #'  \describe{
@@ -104,6 +109,11 @@ NULL
 #' @slot labels A [`character`] vector specifying the name of the events/phases.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
+#' @section Coerce:
+#'  In the code snippets below, `x` is a `CumulativeEvents` object.
+#'  \describe{
+#'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
+#'  }
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class

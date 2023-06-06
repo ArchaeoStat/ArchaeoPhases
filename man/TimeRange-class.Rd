@@ -20,6 +20,14 @@ boundaries.}
 original data file.}
 }}
 
+\section{Coerce}{
+
+In the code snippets below, \code{x} is a \code{CumulativeEvents} object.
+\describe{
+\item{\code{as.data.frame(x)}}{Coerces to a \code{\link{data.frame}}.}
+}
+}
+
 \seealso{
 Other classes: 
 \code{\link{ActivityEvents-class}},

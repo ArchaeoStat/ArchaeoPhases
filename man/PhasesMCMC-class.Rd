@@ -8,6 +8,12 @@
 \description{
 S4 classes to represent a collection of phases.
 }
+\details{
+A phase object is an\eqn{n x m x 2}{n \times m \times 2} array, with
+\eqn{n} being the number of iterations, \eqn{m} being the number of phases
+and with the 2 columns of the third dimension containing the boundaries of
+the phases.
+}
 \section{Slots}{
 
 \describe{

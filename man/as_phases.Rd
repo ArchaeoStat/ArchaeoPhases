@@ -77,6 +77,14 @@ summary(pha1, calendar = CE())
 ## Compute min-max range by group
 pha2 <- phases(eve, groups = list(phase_1 = c(1, 3), phase_2 = c(2, 4)))
 summary(pha2, calendar = CE())
+
+
+zz <- pha@.Data
+head(zz)
+
+head(zz[, 1, ])
+
+head(pha)
 }
 \seealso{
 Other read methods: 

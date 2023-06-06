@@ -53,12 +53,11 @@ setValidity(
     counts <- object@counts
     hash <- object@hash
     n <- length(years)
-    g <- getOption("ArchaeoPhases.grid")
 
     cnd <- list(
-      arkhe::validate(arkhe::assert_dimensions(object, c(n, 1))),
-      # arkhe::validate(arkhe::assert_dimensions(credible, c(g, 2))),
-      # arkhe::validate(arkhe::assert_dimensions(gauss, c(g, 2))),
+      arkhe::validate(arkhe::assert_dimensions(object, c(n, 1, 1))),
+      # arkhe::validate(arkhe::assert_dimensions(credible, c(n, 2))),
+      # arkhe::validate(arkhe::assert_dimensions(gauss, c(n, 2))),
       arkhe::validate(arkhe::assert_length(level, 1)),
       arkhe::validate(arkhe::assert_length(counts, 1)),
       arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
