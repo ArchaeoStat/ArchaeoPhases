@@ -121,7 +121,7 @@
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  Philippe A, Vibet M, Dye T, Frerebeau <span class="fu">N</span> (<span class="dv">2023</span>). _ArchaeoPhases<span class="sc">:</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  Post<span class="sc">-</span>Processing of Markov Chain Monte Carlo Simulations <span class="cf">for</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  Chronological Modelling_. Université de Nantes, Nantes, France. R</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  package version <span class="dv">2</span>.<span class="fl">0.0</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  package version <span class="dv">2</span>.<span class="dv">0</span>.<span class="fl">0.9000</span>,</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>archaeostat.github.io<span class="sc">/</span>archaeophases<span class="sc">&gt;</span>.</span></code></pre></div>
 </div>
 <div class="section level2">
@@ -142,6 +142,7 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
+<p><strong>ArchaeoPhases</strong> v2.0 uses <strong>aion</strong> for internal date representation. Look at <code>vignette("aion")</code> before you start.</p>
 <p>These examples use data available through the <a href="https://github.com/ArchaeoStat/ArchaeoData" class="external-link"><strong>ArchaeoData</strong></a> package which is available in a <a href="https://archaeostat.r-universe.dev" class="external-link">separate repository</a>. <strong>ArchaeoData</strong> provides MCMC outputs from ChronoModel, OxCal and BCal.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Install data package</span></span>
@@ -199,7 +200,8 @@
 <span><span class="co">#&gt; Ahmarian -42168.47 -37433.31 4736.161</span></span>
 <span><span class="co">#&gt; IUP      -43240.37 -41161.00 2080.371</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Plot all phases</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-phases-plot-1.png" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span><span class="op">)</span></span></code></pre></div>
