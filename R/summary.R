@@ -29,11 +29,12 @@ setMethod(
   signature = "PhasesMCMC",
   definition = function(object, level = 0.95,
                         calendar = getOption("ArchaeoPhases.calendar")) {
-    pha <- as.list(object)
-    k <- seq_along(pha)
+    m <- dim(object)[2L]
+    pha <- vector(mode = "list", length = m)
+    names(pha) <- dimnames(object)[[2L]]
 
-    for (i in k) {
-      tmp <- pha[[i]]
+    for (j in seq_len(m)) {
+      tmp <- object[, j, , drop = TRUE]
       tmp <- cbind(tmp, tmp[, 2] - tmp[, 1])
 
       tmp <- apply(
@@ -45,7 +46,7 @@ setMethod(
       )
       colnames(tmp) <- c("start", "end", "duration")
 
-      pha[[i]] <- as.data.frame(t(tmp))
+      pha[[j]] <- as.data.frame(t(tmp))
     }
 
     pha

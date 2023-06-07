@@ -72,11 +72,6 @@ NULL
 #'  \eqn{n} being the number of iterations, \eqn{m} being the number of phases
 #'  and with the 2 columns of the third dimension containing the boundaries of
 #'  the phases.
-#' @section Coerce:
-#'  In the code snippets below, `x` is a `PhasesMCMC` object.
-#'  \describe{
-#'   \item{`as.list(x)`}{Coerces to a [`list`].}
-#'  }
 #' @section Subset:
 #'  In the code snippets below, `x` is a `PhasesMCMC` object.
 #'  \describe{

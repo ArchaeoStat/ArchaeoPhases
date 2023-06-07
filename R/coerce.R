@@ -83,21 +83,6 @@ as.data.frame.TimeRange <- function(x, ..., calendar = getOption("ArchaeoPhases.
 #' @aliases as.data.frame,TimeRange-method
 setMethod("as.data.frame", "TimeRange", as.data.frame.TimeRange)
 
-# To list ======================================================================
-#' @method as.list PhasesMCMC
-#' @export
-as.list.PhasesMCMC <- function(x, ...) {
-  n <- ncol(x)
-  tmp <- vector(mode = "list", length = n)
-  names(tmp) <- names(x)
-
-  k <- seq_len(n)
-  for (i in k) {
-    tmp[[i]] <- x[, i, , drop = TRUE]
-  }
-  tmp
-}
-
 # To coda ======================================================================
 #' @export
 #' @rdname as_coda

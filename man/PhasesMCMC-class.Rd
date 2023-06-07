@@ -26,14 +26,6 @@ original data file.}
 \note{
 This class inherits from \code{\link{array}}.
 }
-\section{Coerce}{
-
-In the code snippets below, \code{x} is a \code{PhasesMCMC} object.
-\describe{
-\item{\code{as.list(x)}}{Coerces to a \code{\link{list}}.}
-}
-}
-
 \section{Subset}{
 
 In the code snippets below, \code{x} is a \code{PhasesMCMC} object.

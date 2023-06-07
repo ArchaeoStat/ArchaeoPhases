@@ -29,9 +29,11 @@ setValidity(
     # Get data
     labels <- object@labels
     hash <- object@hash
+    n <- nrow(object)
     p <- ncol(object)
 
     cnd <- list(
+      arkhe::validate(arkhe::assert_dimensions(object, c(n, p, 2))),
       arkhe::validate(arkhe::assert_length(labels, p)),
       arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
     )
