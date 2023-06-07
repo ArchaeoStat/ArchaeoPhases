@@ -13,8 +13,8 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                       frame.plot = FALSE,
                       panel.first = NULL, panel.last = NULL,
                       col.density = "grey", col.interval = "#77AADD", ...) {
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options(aion.last_calendar = calendar)
+  ## Save calendar for further use, year_axis()
+  options(aion.last_calendar = NULL) # rata die
 
   ## Get data
   n_events <- NCOL(x)
@@ -122,8 +122,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Construct Axis
   if (axes) {
-    rd <- aion::as_fixed(as.numeric(x))
-    aion::year_axis(x = rd, side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
     graphics::mtext(names(x)[mcmc], side = 2, at = mcmc, las = 2, padj = 0)
   }
 
@@ -134,7 +133,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Add annotation
   if (ann) {
-    xlab <- aion::format(calendar)
+    xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
     ylab <- NULL
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -159,8 +158,8 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                             panel.first = NULL, panel.last = NULL,
                             col.density = "grey", col.range = "black",
                             col.succession = c("#77AADD", "#EE8866"), ...) {
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options(aion.last_calendar = calendar)
+  ## Save calendar for further use, e.g. year_axis()
+  options(aion.last_calendar = NULL)
 
   ## Get data
   n_phases <- dim(x)[2L]
@@ -283,8 +282,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Construct Axis
   if (axes) {
-    rd <- aion::as_fixed(as.numeric(x))
-    aion::year_axis(x = rd, side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
     graphics::mtext(names(x)[ages], side = 2, at = ages, las = 2, padj = 0)
   }
 
@@ -295,7 +293,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Add annotation
   if (ann) {
-    xlab <- aion::format(calendar)
+    xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
     ylab <- NULL
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -317,8 +315,8 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
                                   main = NULL, sub = NULL, ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options(aion.last_calendar = calendar)
+  ## Save calendar for further use, year_axis()
+  options(aion.last_calendar = NULL) # rata die
 
   ## Graphical parameters
   lty <- list(...)$lty %||% graphics::par("lty")
@@ -355,7 +353,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -366,7 +364,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Add annotation
   if (ann) {
-    xlab <- aion::format(calendar)
+    xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
     ylab <- "Cumulative events"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -387,8 +385,8 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
                                 ann = graphics::par("ann"),
                                 axes = TRUE, frame.plot = axes,
                                 panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options(aion.last_calendar = calendar)
+  ## Save calendar for further use, year_axis()
+  options(aion.last_calendar = NULL) # rata die
 
   ## Graphical parameters
   border <- list(...)$border %||% c("black")
@@ -429,7 +427,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -440,7 +438,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
 
   ## Add annotation
   if (ann) {
-    xlab <- aion::format(calendar)
+    xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
     ylab <- "Activity"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -461,8 +459,8 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
                                   ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options(aion.last_calendar = calendar)
+  ## Save calendar for further use, year_axis()
+  options(aion.last_calendar = NULL) # rata die
 
   ## Get data
   n_events <- length(x@events)
@@ -501,7 +499,7 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, at = seq_len(n_events), labels = x@events, las = 1)
   }
 
@@ -512,7 +510,7 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Add annotation
   if (ann) {
-    xlab <- aion::format(calendar)
+    xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
     ylab <- "Occurrence"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
@@ -534,8 +532,8 @@ plot.AgeDepthModel <- function(x, level = 0.95,
                                ann = graphics::par("ann"),
                                axes = TRUE, frame.plot = axes,
                                panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use (e.g. year_axis() or year_grid())
-  options(aion.last_calendar = calendar)
+  ## Save calendar for further use, year_axis()
+  options(aion.last_calendar = NULL) # rata die
 
   ## Get data
   depth <- x@depth
@@ -589,7 +587,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(x = years, side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -600,7 +598,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Add annotation
   if (ann) {
-    xlab <- aion::format(calendar)
+    xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
     ylab <- "Depth"
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }

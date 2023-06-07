@@ -13,7 +13,6 @@
 \alias{start}
 \alias{time}
 \alias{year_axis}
-\alias{year_grid}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -21,6 +20,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{aion}{\code{\link[aion:gregorian]{AD}}, \code{\link[aion:gregorian]{BC}}, \code{\link[aion:gregorian]{BCE}}, \code{\link[aion:gregorian]{BP}}, \code{\link[aion:gregorian]{CE}}, \code{\link[aion:gregorian]{b2k}}, \code{\link[aion]{calendar}}, \code{\link[aion]{start}}, \code{\link[aion]{start}}, \code{\link[aion]{time}}, \code{\link[aion]{year_axis}}, \code{\link[aion]{year_grid}}}
+  \item{aion}{\code{\link[aion:gregorian]{AD}}, \code{\link[aion:gregorian]{BC}}, \code{\link[aion:gregorian]{BCE}}, \code{\link[aion:gregorian]{BP}}, \code{\link[aion:gregorian]{CE}}, \code{\link[aion:gregorian]{b2k}}, \code{\link[aion]{calendar}}, \code{\link[aion]{start}}, \code{\link[aion]{start}}, \code{\link[aion]{time}}, \code{\link[aion]{year_axis}}}
 }}
 
