@@ -211,12 +211,17 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
       fun <- match.fun(succession[[s]])
       hia <- as.data.frame(fun(x, level = level), calendar = NULL)
 
-      graphics::rect(
-        xleft = hia$start, xright = hia$end,
-        ybottom = min(ylim), ytop = max(ylim),
-        border = "white",
-        col = fill.succession[[s]]
-      )
+      if (NROW(hia) > 0 ) {
+        graphics::rect(
+          xleft = hia$start, xright = hia$end,
+          ybottom = min(ylim), ytop = max(ylim),
+          border = "white",
+          col = fill.succession[[s]]
+        )
+      } else {
+        msg <- "Could not find a %s between these two phases."
+        warning(sprintf(msg, succession), call. = FALSE)
+      }
     }
   }
 

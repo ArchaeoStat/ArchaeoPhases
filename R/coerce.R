@@ -68,7 +68,7 @@ as.data.frame.TimeRange <- function(x, ..., calendar = getOption("ArchaeoPhases.
   duration <- abs(end - start)
 
   ## Change calendar
-  if (!is.null(calendar)) {
+  if (!is.null(calendar) && length(ok) > 0) {
     start <- aion::as_year(start, calendar = calendar)
     end <- aion::as_year(end, calendar = calendar)
     duration <- aion::as_year(duration, calendar = calendar)
