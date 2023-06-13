@@ -113,7 +113,7 @@ Reviews}, 229: 106121. \doi{10.1016/j.quascirev.2019.106121}.
 
 Ghosh, S., Sanyal, P., Roy, S., Bhushan, R., Sati, S. P., Philippe, A. &
 Juyal, N. (2020). Early Holocene Indian Summer Monsoon and Its Impact on
-Vegetation in the Central Himalaya: Insight from ΔD and δ13C Values of Leaf
+Vegetation in the Central Himalaya: Insight from dD and d13C Values of Leaf
 Wax Lipid. \emph{The Holocene}, 30(7): 1063-1074. \doi{10.1177/0959683620908639}.
 }
 \seealso{
