@@ -48,13 +48,12 @@ setValidity(
   Class = "CumulativeEvents",
   method = function(object) {
     # Get data
-    years <- object@time
     credible <- object@credible
     gauss <- object@gauss
     level <- object@level
     counts <- object@counts
     hash <- object@hash
-    n <- length(years)
+    n <- nrow(object)
 
     cnd <- list(
       arkhe::validate(arkhe::assert_dimensions(object, c(n, 1, 1))),
