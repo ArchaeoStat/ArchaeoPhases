@@ -38,6 +38,7 @@ should be displayed (defaults to \code{\link[=interactive]{interactive()}}).
 Useful links:
 \itemize{
   \item \url{https://archaeostat.github.io/archaeophases/}
+  \item \url{https://github.com/ArchaeoStat/ArchaeoPhases}
   \item Report bugs at \url{https://github.com/ArchaeoStat/ArchaeoPhases/issues}
 }
 
