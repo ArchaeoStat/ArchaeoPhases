@@ -20,5 +20,6 @@ bibentry(
   organization = "Université de Nantes",
   address      = "Nantes, France",
   note         = sprintf("R package version %s", meta$Version),
+  doi          = "10.5281/zenodo.8087121",
   url          = "https://ArchaeoStat.github.io/ArchaeoPhases/"
 )

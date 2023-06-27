@@ -15,6 +15,7 @@ Statistical analysis of archaeological dates and groups of dates. This package a
 \strong{Type:} \tab Package \cr
 \strong{Version:} \tab 2.0 \cr
 \strong{License:} \tab GPL-3 \cr
+\strong{Zenodo:} \tab \doi{10.5281/zenodo.8087121} \cr
 \strong{JSS:} \tab \doi{10.18637/jss.v093.c01} \cr
 }
 }

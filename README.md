@@ -29,6 +29,7 @@ alt="CRAN Downloads" /></a>
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8087121.svg)](https://doi.org/10.5281/zenodo.8087121)
 [![DOI
 JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
 <!-- badges: end -->
@@ -59,8 +60,10 @@ refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
 
       Philippe A, Vibet M, Dye T, Frerebeau N (2023). _ArchaeoPhases:
       Post-Processing of Markov Chain Monte Carlo Simulations for
-      Chronological Modelling_. Université de Nantes, Nantes, France. R
-      package version 2.0, <https://ArchaeoStat.github.io/ArchaeoPhases/>.
+      Chronological Modelling_. Université de Nantes, Nantes, France.
+      doi:10.5281/zenodo.8087121 <https://doi.org/10.5281/zenodo.8087121>,
+      R package version 2.0,
+      <https://ArchaeoStat.github.io/ArchaeoPhases/>.
 
 ## Installation
 
