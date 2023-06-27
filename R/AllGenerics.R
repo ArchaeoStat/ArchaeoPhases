@@ -822,7 +822,7 @@ setGeneric(
 #' @references
 #'  Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
 #'  Chronological Modeling of Archaeological Data using Bayesian Statistics.
-#'  URL: <https://www.chronomodel.fr>.
+#'  URL: <https://chronomodel.com/>.
 #' @example inst/examples/ex-read_chronomodel.R
 #' @seealso [utils::read.table()]
 #' @author T. S. Dye, N. Frerebeau

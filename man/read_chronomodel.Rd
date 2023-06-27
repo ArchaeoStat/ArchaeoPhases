@@ -78,7 +78,7 @@ if (requireNamespace("ArchaeoData", quietly = TRUE)) {
 \references{
 Lanos, Ph., Philippe, A. & Dufresne, Ph. (2015). Chronomodel:
 Chronological Modeling of Archaeological Data using Bayesian Statistics.
-URL: \url{https://www.chronomodel.fr}.
+URL: \url{https://chronomodel.com/}.
 }
 \seealso{
 \code{\link[utils:read.table]{utils::read.table()}}
