@@ -53,10 +53,10 @@
 <text x='266.89' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='34.89px' lengthAdjust='spacingAndGlyphs'>-1000</text>
 <text x='363.14' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='27.25px' lengthAdjust='spacingAndGlyphs'>-500</text>
 <text x='459.39' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='59.04' y='187.47' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='15.22px' lengthAdjust='spacingAndGlyphs'>E2</text>
-<text x='59.04' y='263.91' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='15.22px' lengthAdjust='spacingAndGlyphs'>E4</text>
-<text x='59.04' y='340.36' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='15.22px' lengthAdjust='spacingAndGlyphs'>E3</text>
-<text x='59.04' y='416.80' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='15.22px' lengthAdjust='spacingAndGlyphs'>E1</text>
+<text x='59.04' y='187.47' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='8.24px' lengthAdjust='spacingAndGlyphs'>B</text>
+<text x='59.04' y='263.91' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='9.24px' lengthAdjust='spacingAndGlyphs'>D</text>
+<text x='59.04' y='340.36' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='8.38px' lengthAdjust='spacingAndGlyphs'>C</text>
+<text x='59.04' y='416.80' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>A</text>
 <text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='116.19px' lengthAdjust='spacingAndGlyphs'>Gregorian years CE</text>
 </g>
 </svg>
