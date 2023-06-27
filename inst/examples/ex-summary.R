@@ -18,6 +18,6 @@ summary(pha, calendar = CE())
 summary(pha, calendar = BP())
 
 ## Plot phases
-plot(pha)
+plot(pha, calendar = BP())
 plot(pha, succession = "hiatus")
 plot(pha, succession = "transition")

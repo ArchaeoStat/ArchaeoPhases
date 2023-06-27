@@ -205,9 +205,9 @@ Bayesian Radiocarbon Calibration Tool.” *Internet Archaeology* 7.
 
 <div id="ref-lanos2020" class="csl-entry">
 
-Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. *Chronomodel:
+Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. “Chronomodel:
 Chronological Modeling of Archaeological Data Using Bayesian
-Statistics*. CNRS. <https://chronomodel.com>.
+Statistics.” CNRS. <https://chronomodel.com>.
 
 </div>
 

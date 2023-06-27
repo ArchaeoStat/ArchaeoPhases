@@ -123,8 +123,8 @@ eve <- eve[1:10000, ]
 ## Tempo plot
 tmp <- tempo(eve)
 plot(tmp)
-plot(tmp, credible = TRUE, gauss = FALSE, panel.first = grid())
-plot(tmp, credible = FALSE, gauss = TRUE, panel.first = grid())
+plot(tmp, interval = "credible", panel.first = grid())
+plot(tmp, interval = "gauss", panel.first = grid())
 
 ## Activity plot
 act <- activity(tmp)

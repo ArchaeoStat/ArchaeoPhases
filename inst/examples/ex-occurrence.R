@@ -4,4 +4,4 @@ eve <- eve[1:10000, ]
 
 ## Occurrence plot
 occ <- occurrence(eve)
-plot(occ)
+plot(occ, panel.first = graphics::grid())

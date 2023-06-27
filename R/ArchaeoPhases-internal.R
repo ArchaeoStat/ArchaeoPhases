@@ -101,3 +101,34 @@ map_alpha <- function(x, levels = 5) {
   map <- cut(x, breaks = brk, labels = seq(0.3, 1, len = cats))
   as.numeric(as.character(map))
 }
+
+get_par <- function(params, x, n = 0) {
+  p <- params[[x]] %||% graphics::par()[[x]]
+  if (n > 0) p <- rep(p, length.out = n)
+  p
+}
+
+#' Compute x Limits
+#'
+#' Computes x limits for a time series according to a given calendar.
+#' This ensures that the x axis is always in chronological order.
+#' @param x A [`TimeSeries-class`] object.
+#' @param calendar A [`TimeScale-class`] object.
+#' @return A length-two [`numeric`] vector.
+#' @keywords internal
+#' @noRd
+xlim <- function(x, calendar) {
+  if (methods::is(x, "TimeSeries"))
+    x <- aion::time(x, calendar = NULL)
+
+  x <-  range(x)
+  if (is.null(calendar)) return(x)
+  aion::as_year(x, calendar = calendar)
+}
+
+plot_x_ribbon <- function(xmin, xmax, y, ...) {
+  graphics::polygon(x = c(xmin, rev(xmax)), y = c(y, rev(y)), ...)
+}
+plot_y_ribbon <- function(x, ymin, ymax, ...) {
+  graphics::polygon(x = c(x, rev(x)), y = c(ymin, rev(ymax)), ...)
+}

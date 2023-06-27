@@ -13,16 +13,14 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                       frame.plot = FALSE,
                       panel.first = NULL, panel.last = NULL,
                       col.density = "grey", col.interval = "#77AADD", ...) {
-  ## Save calendar for further use, year_axis()
-  options(aion.last_calendar = NULL) # rata die
-
   ## Get data
   n_events <- NCOL(x)
 
   ## Graphical parameters
-  lty <- list(...)$lty %||% graphics::par("lty")
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
-  tcl <- list(...)$tcl %||% graphics::par("tcl")
+  dots <- list(...)
+  lty <- get_par(dots, "lty")
+  lwd <- get_par(dots, "lwd")
+  tcl <- get_par(dots, "tcl")
   if (length(col.density) != n_events)
     col.density <- rep(col.density, length.out = n_events)
   if (length(col.interval) != n_events)
@@ -36,7 +34,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(x)
+  xlim <- xlim(x, calendar = calendar)
   ylim <- c(1, n_events + 1.5)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -44,6 +42,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   panel.first
 
   ## Reorder data
+  k <- seq_len(n_events)
   if (sort) {
     k <- sort.list(x, decreasing = decreasing)
     x <- x[, k, drop = FALSE]
@@ -61,7 +60,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   if (!is.null(interval) & !is.null(level)) {
     interval <- match.arg(interval, choices = c("credible", "hdr"))
     fun <- switch(interval, credible = interval_credible, hdr = interval_hdr)
-    int <- fun(x, level = level, calendar = NULL)
+    int <- fun(x, level = level, calendar = calendar)
     interval_draw <- TRUE
   }
 
@@ -75,7 +74,7 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
         ...
       )
 
-      years <- d$x
+      years <- aion::as_year(d$x, calendar = calendar)
       dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 1.5
       d0 <- which(dens > 0) # Keep only density > 0
       lb <- if (min(d0) > 1) min(d0) - 1 else min(d0)
@@ -83,14 +82,18 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
       xi <- c(years[lb], years[d0], years[ub])
       yi <- c(0, dens[d0], 0) + i
 
-      graphics::polygon(xi, yi, border = NA, col = fill.density[i])
+      graphics::polygon(x = xi, y = yi,
+                        border = NA, col = fill.density[i])
 
       if (interval_draw) {
         h <- int[[i]]
         for (j in seq_len(nrow(h))) {
-          is_in_h <- xi >= h[j, "start"] & xi <= h[j, "end"]
+          is_in_h <- xi >= min(h[j, c("start", "end")]) &
+            xi <= max(h[j, c("start", "end")])
+
           graphics::polygon(
-            x = c(utils::head(xi[is_in_h], 1), xi[is_in_h], utils::tail(xi[is_in_h], 1)),
+            x = c(utils::head(xi[is_in_h], 1), xi[is_in_h],
+                  utils::tail(xi[is_in_h], 1)),
             y = c(i, yi[is_in_h], i),
             border = NA, col = fill.interval[i]
           )
@@ -122,7 +125,8 @@ plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar,
+                    current_calendar = calendar)
     graphics::mtext(names(x)[mcmc], side = 2, at = mcmc, las = 2, padj = 0)
   }
 
@@ -158,16 +162,14 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
                             panel.first = NULL, panel.last = NULL,
                             col.density = "grey", col.range = "black",
                             col.succession = c("#77AADD", "#EE8866"), ...) {
-  ## Save calendar for further use, e.g. year_axis()
-  options(aion.last_calendar = NULL)
-
   ## Get data
   n_phases <- dim(x)[2L]
   n_bound <- dim(x)[3L]
 
   ## Graphical parameters
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
-  tcl <- list(...)$tcl %||% graphics::par("tcl")
+  dots <- list(...)
+  lwd <- get_par(dots, "lwd")
+  tcl <- get_par(dots, "tcl")
   if (length(col.density) != n_phases)
     col.density <- rep(col.density, length.out = n_phases)
   if (length(col.range) != n_phases)
@@ -182,7 +184,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   graphics::plot.new()
 
   ## Set plotting coordinates
-  xlim <- range(x)
+  xlim <- xlim(x, calendar = calendar)
   ylim <- c(1, n_phases + 1)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -190,6 +192,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   panel.first
 
   ## Reorder data
+  k <- seq_len(n_phases)
   if (sort && n_bound > 1) {
     k <- sort.list(x, decreasing = decreasing)
     x <- x[, k, , drop = FALSE]
@@ -207,9 +210,10 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
     succession <- match.arg(succession, choices = c("transition", "hiatus"),
                             several.ok = TRUE)
+
     for (s in seq_along(succession)) {
       fun <- match.fun(succession[[s]])
-      hia <- as.data.frame(fun(x, level = level), calendar = NULL)
+      hia <- as.data.frame(fun(x, level = level), calendar = calendar)
 
       if (NROW(hia) > 0 ) {
         graphics::rect(
@@ -232,7 +236,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
         p <- x[, j, k, drop = TRUE]
         d <- stats::density(p, n = getOption("ArchaeoPhases.grid"), ...)
 
-        years <- d$x
+        years <- aion::as_year(d$x, calendar = calendar)
         dens <- (d$y - min(d$y)) / max(d$y - min(d$y)) * 0.9
         d0 <- which(dens > 0) # Keep only density > 0
         lb <- if (min(d0) > 1) min(d0) - 1 else min(d0)
@@ -249,7 +253,7 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
   ## Time range
   if (isTRUE(range) && !is.null(level) && n_bound > 1) {
     bound <- boundaries(x, level = level)
-    bound <- as.data.frame(bound, calendar = NULL)
+    bound <- as.data.frame(bound, calendar = calendar)
     for (i in ages) {
       h <- bound[i, , drop = FALSE]
       graphics::segments(
@@ -287,7 +291,8 @@ plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar,
+                    current_calendar = calendar)
     graphics::mtext(names(x)[ages], side = 2, at = ages, las = 2, padj = 0)
   }
 
@@ -320,12 +325,10 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
                                   main = NULL, sub = NULL, ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use, year_axis()
-  options(aion.last_calendar = NULL) # rata die
-
   ## Graphical parameters
-  lty <- list(...)$lty %||% graphics::par("lty")
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
+  dots <- list(...)
+  lty <- get_par(dots, "lty")
+  lwd <- get_par(dots, "lwd")
 
   ## Open new window
   grDevices::dev.hold()
@@ -333,8 +336,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
   graphics::plot.new()
 
   ## Set plotting coordinates
-  years <- aion::time(x, calendar = NULL)
-  xlim <- range(years)
+  xlim <- xlim(x, calendar = calendar)
   ylim <- range(x)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -342,6 +344,7 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
   panel.first
 
   ## Plot
+  years <- aion::time(x, calendar = calendar)
   interval <- match.arg(interval, several.ok = FALSE)
   if (interval == "credible" && nrow(x@credible) > 0) {
     plot_y_ribbon(x = years, ymin = x@credible[, 1], ymax = x@credible[, 2],
@@ -358,7 +361,8 @@ plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar,
+                    current_calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -390,14 +394,12 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
                                 ann = graphics::par("ann"),
                                 axes = TRUE, frame.plot = axes,
                                 panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use, year_axis()
-  options(aion.last_calendar = NULL) # rata die
-
   ## Graphical parameters
-  border <- list(...)$border %||% c("black")
-  col <- list(...)$col %||% c("grey")
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
-  lty <- list(...)$lty %||% graphics::par("lty")
+  dots <- list(...)
+  border <- dots$border %||% c("black")
+  col <- dots$col %||% c("grey")
+  lty <- get_par(dots, "lty")
+  lwd <- get_par(dots, "lwd")
 
   ## Open new window
   grDevices::dev.hold()
@@ -405,8 +407,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
   graphics::plot.new()
 
   ## Set plotting coordinates
-  years <- aion::time(x, calendar = NULL)
-  xlim <- range(years)
+  xlim <- xlim(x, calendar = calendar)
   ylim <- range(x)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -414,6 +415,7 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
   panel.first
 
   ## Plot
+  years <- aion::time(x, calendar = calendar)
   seq_series <- seq_len(NCOL(x))
   for (i in seq_series) {
     plot_y_ribbon(
@@ -432,7 +434,8 @@ plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar,
+                    current_calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -464,18 +467,16 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
                                   ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
                                   panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use, year_axis()
-  options(aion.last_calendar = NULL) # rata die
-
   ## Get data
   n_events <- length(x@events)
 
   ## Graphical parameters
-  col <- list(...)$col %||% graphics::par("col")
-  lty <- list(...)$lty %||% graphics::par("lty")
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
-  pch <- list(...)$pch %||% 16
-  cex <- list(...)$cex %||% graphics::par("cex")
+  dots <- list(...)
+  col <- get_par(dots, "col")
+  lty <- get_par(dots, "lty")
+  lwd <- get_par(dots, "lwd")
+  cex <- get_par(dots, "cex")
+  pch <- dots$pch %||% 16
 
   ## Open new window
   grDevices::dev.hold()
@@ -484,7 +485,7 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Set plotting coordinates
   years <- aion::as_fixed(c(x@start, x@end))
-  xlim <- range(years)
+  xlim <- xlim(years, calendar = calendar)
   ylim <- range(x@events)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -492,10 +493,12 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
   panel.first
 
   ## Plot
-  graphics::segments(x0 = x@start,  x1 = x@end,
+  x_start <- aion::as_year(x@start, calendar = calendar)
+  x_end <- aion::as_year(x@end, calendar = calendar)
+  graphics::segments(x0 = x_start,  x1 = x_end,
                      y0 = x@events, y1 = x@events,
                      col = col, lty = lty, lwd = lwd)
-  graphics::points(x = c(x@start, x@end),
+  graphics::points(x = c(x_start, x_end),
                    y = c(x@events, x@events),
                    pch = pch, col = col, cex = cex)
 
@@ -504,7 +507,8 @@ plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calenda
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar,
+                    current_calendar = calendar)
     graphics::axis(side = 2, at = seq_len(n_events), labels = x@events, las = 1)
   }
 
@@ -537,9 +541,6 @@ plot.AgeDepthModel <- function(x, level = 0.95,
                                ann = graphics::par("ann"),
                                axes = TRUE, frame.plot = axes,
                                panel.first = NULL, panel.last = NULL, ...) {
-  ## Save calendar for further use, year_axis()
-  options(aion.last_calendar = NULL) # rata die
-
   ## Get data
   depth <- x@depth
   n <- length(depth)
@@ -547,11 +548,12 @@ plot.AgeDepthModel <- function(x, level = 0.95,
   data <- summary(data, level = level, calendar = NULL)
 
   ## Graphical parameters
-  border <- list(...)$border %||% c("grey70")
-  col <- list(...)$col %||% c("grey70")
-  lwd <- list(...)$lwd %||% graphics::par("lwd")
-  lty <- list(...)$lty %||% graphics::par("lty")
-  pch <- list(...)$pch %||% 16
+  dots <- list(...)
+  border <- dots$border %||% c("grey70")
+  col <- dots$col %||% c("grey70")
+  lty <- get_par(dots, "lty")
+  lwd <- get_par(dots, "lwd")
+  pch <- dots$pch %||% 16
 
   ## Open new window
   grDevices::dev.hold()
@@ -560,7 +562,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Set plotting coordinates
   years <- aion::as_fixed(c(data$median, data$start, data$end))
-  xlim <- range(years)
+  xlim <- xlim(years, calendar = calendar)
   ylim <- sort(range(depth), decreasing = TRUE)
   graphics::plot.window(xlim = xlim, ylim = ylim)
 
@@ -569,20 +571,20 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Plot
   plot_x_ribbon(
-    xmin = data$start,
-    xmax = data$end,
+    xmin = aion::as_year(data$start, calendar = calendar),
+    xmax = aion::as_year(data$end, calendar = calendar),
     y = depth,
     border = border,
     col = col
   )
   graphics::lines(
-    x = data$median,
+    x = aion::as_year(data$median, calendar = calendar),
     y = depth,
     lty = lty,
     lwd = lwd
   )
   graphics::points(
-    x = data$median,
+    x = aion::as_year(data$median, calendar = calendar),
     y = depth,
     pch = pch
   )
@@ -592,7 +594,8 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 
   ## Construct Axis
   if (axes) {
-    aion::year_axis(side = 1, format = TRUE, calendar = calendar)
+    aion::year_axis(side = 1, format = TRUE, calendar = calendar,
+                    current_calendar = calendar)
     graphics::axis(side = 2, las = 1)
   }
 
@@ -615,11 +618,3 @@ plot.AgeDepthModel <- function(x, level = 0.95,
 #' @rdname bury
 #' @aliases plot,AgeDepthModel,missing-method
 setMethod("plot", c(x = "AgeDepthModel", y = "missing"), plot.AgeDepthModel)
-
-# Helpers ======================================================================
-plot_x_ribbon <- function(xmin, xmax, y, ...) {
-  graphics::polygon(x = c(xmin, rev(xmax)), y = c(y, rev(y)), ...)
-}
-plot_y_ribbon <- function(x, ymin, ymax, ...) {
-  graphics::polygon(x = c(x, rev(x)), y = c(ymin, rev(ymax)), ...)
-}
