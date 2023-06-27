@@ -1,0 +1,44 @@
+{
+    "title": "ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling",
+    "description": "<p>Statistical analysis of archaeological dates and groups of dates. This package allows to post-process Markov Chain Monte Carlo (MCMC) simulations from 'ChronoModel' &lt;https://chronomodel.com/&gt;, 'Oxcal' &lt;https://c14.arch.ox.ac.uk/oxcal.html&gt; or 'BCal' &lt;https://bcal.shef.ac.uk/&gt;. It provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases) as described in Philippe and Vibet (2020) &lt;doi:10.18637/jss.v093.c01&gt;.</p>",
+    "creators": [
+        {
+            "orcid": "0000-0002-5331-5087",
+            "affiliation": "Universit\u00e9 de Nantes"
+            "name": "Philippe, Anne",
+        },
+        {
+            "orcid": "0000-0003-4003-3141",
+            "name": "Vibet, Marie-Anne",
+        },
+        {
+            "orcid": "0000-0001-5759-4944",
+            "affiliation": "Universit\u00e9 Bordeaux Montaigne",
+            "name": "Frerebeau, Nicolas"
+        }
+    ],
+    "contributors": [
+        {
+            "orcid": "0000-0001-8116-782X",
+            "affiliation": "University of Hawai'i at Manoa",
+            "type": "Other",
+            "name": "Dye, Thomas S."
+        }
+    ],
+    "journal_title": "Journal of Statistical Software, Code Snippets",
+    "language": "eng",
+    "journal_pages": "1-25",
+    "journal_volume": "93",
+    "journal_issue": "1",
+    "keywords": [
+        "archaeology",
+        "geochronology",
+        "radiocarbon dates",
+        "bayesian statistics",
+        "markov chain",
+        "r package"
+    ],
+    "upload_type": "software",
+    "license": "GPL-3.0+",
+    "access_right": "open"
+}
