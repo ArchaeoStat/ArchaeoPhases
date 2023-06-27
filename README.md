@@ -60,8 +60,7 @@ refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
       Philippe A, Vibet M, Dye T, Frerebeau N (2023). _ArchaeoPhases:
       Post-Processing of Markov Chain Monte Carlo Simulations for
       Chronological Modelling_. Université de Nantes, Nantes, France. R
-      package version 2.0.0.9000,
-      <https://archaeostat.github.io/archaeophases>.
+      package version 2.0, <https://ArchaeoStat.github.io/ArchaeoPhases/>.
 
 ## Installation
 

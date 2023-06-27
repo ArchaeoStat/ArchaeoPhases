@@ -1,8 +1,4 @@
-# ArchaeoPhases 2.0.0.9000
-
-## New classes and methods
-* Add `bind()` to bind multiple `MCMC` objects.
-
+# ArchaeoPhases 2.0
 ## Bug fixes & changes
 * Use `stats::density()` instead of `hdrcde::hdr()` for HDPI estimation.
 

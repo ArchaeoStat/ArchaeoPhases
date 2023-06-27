@@ -4,10 +4,11 @@
   "identifier": "ArchaeoPhases",
   "description": "Statistical analysis of archaeological dates and groups of dates. This package allows to post-process Markov Chain Monte Carlo (MCMC) simulations from 'ChronoModel' <https://chronomodel.com/>, 'Oxcal' <https://c14.arch.ox.ac.uk/oxcal.html> or 'BCal' <https://bcal.shef.ac.uk/>. It provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases) as described in Philippe and Vibet (2020) <doi:10.18637/jss.v093.c01>.",
   "name": "ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for\n    Chronological Modelling",
+  "relatedLink": ["https://ArchaeoStat.github.io/ArchaeoPhases/", "https://CRAN.R-project.org/package=ArchaeoPhases"],
   "codeRepository": "https://github.com/ArchaeoStat/ArchaeoPhases",
   "issueTracker": "https://github.com/ArchaeoStat/ArchaeoPhases/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "2.0.0.9000",
+  "version": "2.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -173,7 +174,14 @@
     "3": {
       "@type": "SoftwareApplication",
       "identifier": "aion",
-      "name": "aion"
+      "name": "aion",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=aion"
     },
     "4": {
       "@type": "SoftwareApplication",
@@ -207,7 +215,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2154.36KB",
+  "fileSize": "2191.91KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -265,12 +273,10 @@
         }
       ],
       "name": "{{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}}",
-      "url": "https://archaeostat.github.io/archaeophases",
-      "description": "R package version 2.0.0.9000"
+      "url": "https://ArchaeoStat.github.io/ArchaeoPhases/",
+      "description": "R package version 2.0"
     }
   ],
-  "relatedLink": ["https://archaeostat.github.io/archaeophases/", "https://CRAN.R-project.org/package=ArchaeoPhases"],
-  "releaseNotes": "https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/NEWS.md",
   "readme": "https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/README.md",
   "contIntegration": ["https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases"],
   "developmentStatus": "https://www.repostatus.org/#active",
