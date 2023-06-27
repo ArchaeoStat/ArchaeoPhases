@@ -1,7 +1,7 @@
 ---
 title: "Introduction to ArchaeoPhases"
 author: "A. Philippe, M.-A. Vibet"
-date: "2023-06-01"
+date: "2023-06-27"
 output:
   rmarkdown::html_vignette:
     number_sections: yes
@@ -84,7 +84,13 @@ Indeed, the MCMC samples should have no autocorrelation and should have reached 
 coda::autocorr.plot(coda_events[[1]])
 ```
 
-<img src="./figures/coda-autocor-1.png" alt="plot of chunk coda-autocor" width="100%" /><img src="./figures/coda-autocor-2.png" alt="plot of chunk coda-autocor" width="100%" />
+<div class="figure">
+<img src="./figures/coda-autocor-1.png" alt="plot of chunk coda-autocor" width="100%" />
+<p class="caption">plot of chunk coda-autocor</p>
+</div><div class="figure">
+<img src="./figures/coda-autocor-2.png" alt="plot of chunk coda-autocor" width="100%" />
+<p class="caption">plot of chunk coda-autocor</p>
+</div>
 
 The autocorrelation plots show that each of these three chains are not significant. That means that we actually generated a non correlated sample, which was the aim the MCMC process.
 
@@ -95,7 +101,10 @@ We can also check whether the chains reached equilibrium. For example, let's con
 plot(coda_events[, 1, ], trace = TRUE, density = FALSE)
 ```
 
+<div class="figure">
 <img src="./figures/coda-plot-1.png" alt="plot of chunk coda-plot" width="100%" />
+<p class="caption">plot of chunk coda-plot</p>
+</div>
 
 The plot shows that the three chains corresponding to the first date reached the same stationary process.
 
@@ -174,7 +183,10 @@ ChronoModel generated correct samples of the posterior distribution. Now gatheri
 plot(chrono_events)
 ```
 
+<div class="figure">
 <img src="./figures/event-plot-1.png" alt="plot of chunk event-plot" width="100%" />
+<p class="caption">plot of chunk event-plot</p>
+</div>
 
 ## Tempo Plot
 The tempo plot has been introduced by @dye2016. See @philippe2020 for more statistical details.
@@ -188,7 +200,10 @@ tp <- tempo(chrono_events, level = 0.95, count = FALSE)
 plot(tp)
 ```
 
+<div class="figure">
 <img src="./figures/tempo-plot-1.png" alt="plot of chunk tempo-plot" width="100%" />
+<p class="caption">plot of chunk tempo-plot</p>
+</div>
 
 From these graphs, we can see that the highest part of the sampled activity is dated between -45 000 to -35 000 but two dates are younger, at about -32 000 and -28 000.
 
@@ -202,7 +217,10 @@ ac <- activity(tp)
 plot(ac)
 ```
 
+<div class="figure">
 <img src="./figures/activity-plot-1.png" alt="plot of chunk activity-plot" width="100%" />
+<p class="caption">plot of chunk activity-plot</p>
+</div>
 
 ## Occurrence Plot
 The Occurrence plot calculates the calendar date $t$ corresponding to the smallest date such that the number of events observed before $t$ is equal to $k$, for $k = [(1, 16)]$. The Occurrence plot draws the credible intervals or the highest posterior density (HPD) region of those dates associated to a desired level of confidence.
@@ -214,7 +232,10 @@ oc <- occurrence(chrono_events, level = 0.95)
 plot(oc)
 ```
 
+<div class="figure">
 <img src="./figures/occurrence-plot-1.png" alt="plot of chunk occurrence-plot" width="100%" />
+<p class="caption">plot of chunk occurrence-plot</p>
+</div>
 
 # Analysis of groups of dates
 ## Groups of dates
@@ -253,7 +274,10 @@ The time range interval of the group of dates is a way to summarize the estimati
 plot(chrono_groups, level = 0.95)
 ```
 
+<div class="figure">
 <img src="./figures/phases-plot-1.png" alt="plot of chunk phases-plot" width="100%" />
+<p class="caption">plot of chunk phases-plot</p>
+</div>
 
 ## Succession of groups
 
@@ -298,6 +322,9 @@ At a confidence level of 95%, there is no gap between the succession of phases *
 plot(chrono_groups[, c("UP", "EPI"), ], succession = "hiatus", level = 0.95)
 ```
 
+<div class="figure">
 <img src="./figures/succession-plot-1.png" alt="plot of chunk succession-plot" width="100%" />
+<p class="caption">plot of chunk succession-plot</p>
+</div>
 
 # References

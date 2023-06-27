@@ -1,7 +1,7 @@
 ---
-title: "Allen's Interval algebra"
+title: "Allen's interval algebra"
 author: "T. S. Dye"
-date: "2023-06-01"
+date: "2023-06-27"
 output:
   rmarkdown::html_vignette:
     number_sections: yes
@@ -58,7 +58,10 @@ par(mar = c(1, 1, 4, 1))
 allen_illustrate("basic") 
 ```
 
-<img src="./figures/basic_relations-1.png" alt="plot of chunk basic_relations" width="50%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="./figures/basic_relations-1.png" alt="plot of chunk basic_relations" width="50%" />
+<p class="caption">plot of chunk basic_relations</p>
+</div>
 
 
 
@@ -79,7 +82,10 @@ allen_analyze(
 ) 
 ```
 
-<img src="./figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy" width="50%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="./figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy" width="50%" />
+<p class="caption">plot of chunk analyze_stratigraphy</p>
+</div>
 
 The same lattice can be created with a convenience function.
 
@@ -90,7 +96,10 @@ par(mar = c(1, 1, 4, 1))
 allen_illustrate("sequence") 
 ```
 
-<img src="./figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy" width="50%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="./figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy" width="50%" />
+<p class="caption">plot of chunk illustrate_stratigraphy</p>
+</div>
 
 # Empirical Inquiry with the Algebra
 
@@ -102,9 +111,12 @@ Empirical inquiry with Allen's interval algebra compares intervals estimated by 
 path <- system.file("burials.csv", package = "ArchaeoData")
 burials <- read.table(path, header = TRUE, sep = ",", dec = ".",
                       check.names = FALSE)
+#> Warning in file(file, "rt"): file("") accepte seulement open = "w+" et open = "w+b" : utilisation du premier
+#> Error in read.table(path, header = TRUE, sep = ",", dec = ".", check.names = FALSE): pas de lignes disponibles dans l'entrée
 
 ## Coerce to event
 burials <- as_events(burials, calendar = CE())
+#> Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'from' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'as_events' : objet 'burials' introuvable
 ```
 
 First, we check for the expected result of the identity relation by comparing an interval with itself.
@@ -121,13 +133,13 @@ be1_dghnt <- c(
 ## Build phases
 chains <- list("BE1-Dghnt" = be1_dghnt)
 be1_dghnt_phase <- phases(burials, groups = chains)
+#> Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'phases' : objet 'burials' introuvable
 
 ## Plot
 par(mar = c(1, 1, 4, 1))
 allen_observe(be1_dghnt_phase) 
+#> Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'allen_observe' : objet 'be1_dghnt_phase' introuvable
 ```
-
-<img src="./figures/identity_relation-1.png" alt="plot of chunk identity_relation" width="50%" style="display: block; margin: auto;" />
 
 Next we compare the depositional histories of two bead types recovered from well-dated Anglo Saxon female burials in England.
 Note that the Allen relation and its converse are calculated.
@@ -146,31 +158,25 @@ be1_cylround <- c(
 ## Build phases
 chains <- list("BE1-Dghnt" = be1_dghnt, "BE1-CylRound" = be1_cylround)
 be1_phase <- phases(burials, groups = chains)
+#> Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'phases' : objet 'burials' introuvable
 
 ## Plot phase
 par(mar = c(4, 6, 1, 1))
 plot(be1_phase)
-```
-
-<img src="./figures/relation_and_converse-1.png" alt="plot of chunk relation_and_converse" width="100%" style="display: block; margin: auto;" />
-
-```r
+#> Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'plot' : objet 'be1_phase' introuvable
 
 ## Plot relations
 par(mar = c(1, 1, 4, 1))
 allen_observe(be1_phase, converse = TRUE)
+#> Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'allen_observe' : objet 'be1_phase' introuvable
 ```
-
-<img src="./figures/relation_and_converse-2.png" alt="plot of chunk relation_and_converse" width="100%" style="display: block; margin: auto;" />
 
 It can be useful to observe the frequency with which two intervals are related according to the relations in an Allen set. For instance, we might be interested in which of our two beads might be the trunk from which the other branched. This can be done by observing the frequency with which each bead type is related as *row(oFD)col* to the other bead. The following code shows that BE1-CylRound is the better trunk candidate.
 
 
 ```r
 allen_observe_frequency(be1_phase, set = "oFD")
-#>              BE1-Dghnt BE1-CylRound
-#> BE1-Dghnt           NA            0
-#> BE1-CylRound    0.9962           NA
+#> Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'allen_observe_frequency' : objet 'be1_phase' introuvable
 ```
 
 # References

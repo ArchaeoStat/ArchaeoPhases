@@ -1,7 +1,7 @@
 ---
 title: "Import MCMC Samples"
 author: "A. Philippe, M.-A. Vibet and N. Frerebeau"
-date: "2023-06-01"
+date: "2023-06-27"
 output:
   rmarkdown::html_vignette:
     number_sections: yes
@@ -47,7 +47,10 @@ chrono_events <- read_chronomodel_events(output_events)
 plot(chrono_events)
 ```
 
+<div class="figure">
 <img src="./figures/read-chronomodel-events-1.png" alt="plot of chunk read-chronomodel-events" width="100%" />
+<p class="caption">plot of chunk read-chronomodel-events</p>
+</div>
 
 
 ```r
@@ -60,7 +63,10 @@ chrono_phases <- read_chronomodel_phases(output_phases)
 plot(chrono_phases)
 ```
 
+<div class="figure">
 <img src="./figures/read-chronomodel-phases-1.png" alt="plot of chunk read-chronomodel-phases" width="100%" />
+<p class="caption">plot of chunk read-chronomodel-phases</p>
+</div>
 
 # Oxcal
 
@@ -77,7 +83,10 @@ oxcal_mcmc <- read_oxcal(output_oxcal)
 plot(oxcal_mcmc)
 ```
 
+<div class="figure">
 <img src="./figures/read-oxcal-1.png" alt="plot of chunk read-oxcal" width="100%" />
+<p class="caption">plot of chunk read-oxcal</p>
+</div>
 
 The phase boundaries cannot be extracted automatically from Oxcal output. Use `as_phases()` to get the phase boundaries:
 
@@ -93,7 +102,10 @@ oxcal_phases <- as_phases(oxcal_mcmc,
 plot(oxcal_phases)
 ```
 
+<div class="figure">
 <img src="./figures/oxcal-phases-1.png" alt="plot of chunk oxcal-phases" width="100%" />
+<p class="caption">plot of chunk oxcal-phases</p>
+</div>
 
 # BCal
 
@@ -122,4 +134,7 @@ bcal_phases <- as_phases(
 plot(bcal_phases)
 ```
 
+<div class="figure">
 <img src="./figures/bcal-phases-1.png" alt="plot of chunk bcal-phases" width="100%" />
+<p class="caption">plot of chunk bcal-phases</p>
+</div>
