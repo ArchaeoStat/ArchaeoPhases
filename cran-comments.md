@@ -1,15 +1,19 @@
 ## Test environments
-* local OS X install, R 3.6.3
-* Pop!_OS (Ubuntu 18.04), R 3.6.3
-* win-builder (devel and release)
+* Local R installation: R 4.3.0
+* Ubuntu (on GitHub Actions): R devel, release, oldrel
+* Windows (on GitHub Actions and win-builder): R devel, release, oldrel
+* MacOS (on GitHub Actions): R release
 
 ## R CMD check results
 
-❯ checking package dependencies ... NOTE
-  Package suggested but not available for checking: ‘ArchaeoPhases.dataset’
+0 errors | 0 warnings | 2 notes
 
-0 errors ✔ | 0 warnings ✔ | 1 note ✖
+* Some links in the documentation point to articles behind paywalls that may return a 403 error.
+* Suggested package 'ArchaeoData' is available through our repository on R-universe (https://archaeostat.r-universe.dev). This data package is too large to be submitted to CRAN.
 
-This note refers to a 'drat' repository, ArchaeoPhases.dataset, that we created to hold large data sets previously distributed with the ArchaeoPhases package but that exceed current CRAN guidelines for package size.
+## revdepcheck results
 
-* This is a revised release.
+We checked 2 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
