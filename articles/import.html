@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ArchaeoPhases</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">A. Philippe,
 M.-A. Vibet and N. Frerebeau</h4>
             
-            <h4 data-toc-skip class="date">2023-06-01</h4>
+            <h4 data-toc-skip class="date">2023-06-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/HEAD/vignettes/import.Rmd" class="external-link"><code>vignettes/import.Rmd</code></a></small>
       <div class="hidden name"><code>import.Rmd</code></div>
@@ -126,7 +126,11 @@ each group of dates if at least one group is created.</p>
 <span></span>
 <span><span class="co">## Plot events</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/read-chronomodel-events-1.png" alt="plot of chunk read-chronomodel-events" width="100%"></p>
+<div class="figure">
+<img src="figures/read-chronomodel-events-1.png" alt="plot of chunk read-chronomodel-events" width="100%"><p class="caption">
+plot of chunk read-chronomodel-events
+</p>
+</div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Read phases from ChronoModel</span></span>
 <span><span class="va">output_phases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"chronomodel/ksarakil/Chain_all_Phases.csv"</span>,</span>
@@ -135,7 +139,11 @@ each group of dates if at least one group is created.</p>
 <span></span>
 <span><span class="co">## Plot phases</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/read-chronomodel-phases-1.png" alt="plot of chunk read-chronomodel-phases" width="100%"></p>
+<div class="figure">
+<img src="figures/read-chronomodel-phases-1.png" alt="plot of chunk read-chronomodel-phases" width="100%"><p class="caption">
+plot of chunk read-chronomodel-phases
+</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="oxcal">Oxcal<a class="anchor" aria-label="anchor" href="#oxcal"></a>
@@ -150,7 +158,11 @@ parameters (dates, start and end of phases).</p>
 <span></span>
 <span><span class="co">## Plot events</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oxcal_mcmc</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/read-oxcal-1.png" alt="plot of chunk read-oxcal" width="100%"></p>
+<div class="figure">
+<img src="figures/read-oxcal-1.png" alt="plot of chunk read-oxcal" width="100%"><p class="caption">
+plot of chunk read-oxcal
+</p>
+</div>
 <p>The phase boundaries cannot be extracted automatically from Oxcal
 output. Use <code><a href="../reference/as_phases.html">as_phases()</a></code> to get the phase boundaries:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -162,7 +174,11 @@ output. Use <code><a href="../reference/as_phases.html">as_phases()</a></code> t
 <span></span>
 <span><span class="co">## Plot phase boundaries</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oxcal_phases</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/oxcal-phases-1.png" alt="plot of chunk oxcal-phases" width="100%"></p>
+<div class="figure">
+<img src="figures/oxcal-phases-1.png" alt="plot of chunk oxcal-phases" width="100%"><p class="caption">
+plot of chunk oxcal-phases
+</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="bcal">BCal<a class="anchor" aria-label="anchor" href="#bcal"></a>
@@ -186,7 +202,11 @@ output. Use <code><a href="../reference/as_phases.html">as_phases()</a></code> t
 <span></span>
 <span><span class="co">## Plot group boundaries</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bcal_phases</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/bcal-phases-1.png" alt="plot of chunk bcal-phases" width="100%"></p>
+<div class="figure">
+<img src="figures/bcal-phases-1.png" alt="plot of chunk bcal-phases" width="100%"><p class="caption">
+plot of chunk bcal-phases
+</p>
+</div>
 </div>
   </div>
 

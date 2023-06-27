@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Allen's Interval algebra • ArchaeoPhases</title>
+<title>Allen's interval algebra • ArchaeoPhases</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Allen's Interval algebra">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Allen's interval algebra">
 <meta property="og:description" content="ArchaeoPhases">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ArchaeoPhases</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -87,10 +87,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Allen’s Interval algebra</h1>
+      <h1 data-toc-skip>Allen’s interval algebra</h1>
                         <h4 data-toc-skip class="author">T. S. Dye</h4>
             
-            <h4 data-toc-skip class="date">2023-06-01</h4>
+            <h4 data-toc-skip class="date">2023-06-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/HEAD/vignettes/allen.Rmd" class="external-link"><code>vignettes/allen.Rmd</code></a></small>
       <div class="hidden name"><code>allen.Rmd</code></div>
@@ -196,7 +196,11 @@ differ from it in the placement of a single interval end-point.</p>
 <code class="sourceCode R"><span><span class="co">## Plot the basic Allen relations</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/allen_illustrate.html">allen_illustrate</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="figures/basic_relations-1.png" alt="plot of chunk basic_relations" width="50%" style="display: block; margin: auto;"></p>
+<div class="figure" style="text-align: center">
+<img src="figures/basic_relations-1.png" alt="plot of chunk basic_relations" width="50%"><p class="caption">
+plot of chunk basic_relations
+</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="analytic-inquiry-with-the-algebra">Analytic Inquiry with the Algebra<a class="anchor" aria-label="anchor" href="#analytic-inquiry-with-the-algebra"></a>
@@ -218,13 +222,21 @@ interval represented by a context superior to the reference context.</p>
 <span>  y <span class="op">=</span> <span class="st">"m"</span>, </span>
 <span>  main <span class="op">=</span> <span class="st">"Composite relation of two contexts on the same line"</span></span>
 <span><span class="op">)</span> </span></code></pre></div>
-<p><img src="figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy" width="50%" style="display: block; margin: auto;"></p>
+<div class="figure" style="text-align: center">
+<img src="figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy" width="50%"><p class="caption">
+plot of chunk analyze_stratigraphy
+</p>
+</div>
 <p>The same lattice can be created with a convenience function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Illustrate composite relations in a stratigraphic sequence</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/allen_illustrate.html">allen_illustrate</a></span><span class="op">(</span><span class="st">"sequence"</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy" width="50%" style="display: block; margin: auto;"></p>
+<div class="figure" style="text-align: center">
+<img src="figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy" width="50%"><p class="caption">
+plot of chunk illustrate_stratigraphy
+</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="empirical-inquiry-with-the-algebra">Empirical Inquiry with the Algebra<a class="anchor" aria-label="anchor" href="#empirical-inquiry-with-the-algebra"></a>
@@ -237,9 +249,12 @@ female burials.</p>
 <span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"burials.csv"</span>, package <span class="op">=</span> <span class="st">"ArchaeoData"</span><span class="op">)</span></span>
 <span><span class="va">burials</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">path</span>, header <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">","</span>, dec <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>                      check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in file(file, "rt"): file("") accepte seulement open = "w+" et open = "w+b" : utilisation du premier</span></span>
+<span><span class="co">#&gt; Error in read.table(path, header = TRUE, sep = ",", dec = ".", check.names = FALSE): pas de lignes disponibles dans l'entrée</span></span>
 <span></span>
 <span><span class="co">## Coerce to event</span></span>
-<span><span class="va">burials</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_events.html">as_events</a></span><span class="op">(</span><span class="va">burials</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">burials</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_events.html">as_events</a></span><span class="op">(</span><span class="va">burials</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'from' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'as_events' : objet 'burials' introuvable</span></span></code></pre></div>
 <p>First, we check for the expected result of the identity relation by
 comparing an interval with itself.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -253,11 +268,12 @@ comparing an interval with itself.</p>
 <span><span class="co">## Build phases</span></span>
 <span><span class="va">chains</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"BE1-Dghnt"</span> <span class="op">=</span> <span class="va">be1_dghnt</span><span class="op">)</span></span>
 <span><span class="va">be1_dghnt_phase</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/phases.html">phases</a></span><span class="op">(</span><span class="va">burials</span>, groups <span class="op">=</span> <span class="va">chains</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'phases' : objet 'burials' introuvable</span></span>
 <span></span>
 <span><span class="co">## Plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/allen_observe.html">allen_observe</a></span><span class="op">(</span><span class="va">be1_dghnt_phase</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="figures/identity_relation-1.png" alt="plot of chunk identity_relation" width="50%" style="display: block; margin: auto;"></p>
+<span><span class="fu"><a href="../reference/allen_observe.html">allen_observe</a></span><span class="op">(</span><span class="va">be1_dghnt_phase</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'allen_observe' : objet 'be1_dghnt_phase' introuvable</span></span></code></pre></div>
 <p>Next we compare the depositional histories of two bead types
 recovered from well-dated Anglo Saxon female burials in England. Note
 that the Allen relation and its converse are calculated.</p>
@@ -274,17 +290,17 @@ that the Allen relation and its converse are calculated.</p>
 <span><span class="co">## Build phases</span></span>
 <span><span class="va">chains</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"BE1-Dghnt"</span> <span class="op">=</span> <span class="va">be1_dghnt</span>, <span class="st">"BE1-CylRound"</span> <span class="op">=</span> <span class="va">be1_cylround</span><span class="op">)</span></span>
 <span><span class="va">be1_phase</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/phases.html">phases</a></span><span class="op">(</span><span class="va">burials</span>, groups <span class="op">=</span> <span class="va">chains</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'phases' : objet 'burials' introuvable</span></span>
 <span></span>
 <span><span class="co">## Plot phase</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">be1_phase</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/relation_and_converse-1.png" alt="plot of chunk relation_and_converse" width="100%" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">be1_phase</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'plot' : objet 'be1_phase' introuvable</span></span>
+<span></span>
 <span><span class="co">## Plot relations</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/allen_observe.html">allen_observe</a></span><span class="op">(</span><span class="va">be1_phase</span>, converse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/relation_and_converse-2.png" alt="plot of chunk relation_and_converse" width="100%" style="display: block; margin: auto;"></p>
+<span><span class="fu"><a href="../reference/allen_observe.html">allen_observe</a></span><span class="op">(</span><span class="va">be1_phase</span>, converse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'allen_observe' : objet 'be1_phase' introuvable</span></span></code></pre></div>
 <p>It can be useful to observe the frequency with which two intervals
 are related according to the relations in an Allen set. For instance, we
 might be interested in which of our two beads might be the trunk from
@@ -292,11 +308,9 @@ which the other branched. This can be done by observing the frequency
 with which each bead type is related as <em>row(oFD)col</em> to the
 other bead. The following code shows that BE1-CylRound is the better
 trunk candidate.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/allen_observe_frequency.html">allen_observe_frequency</a></span><span class="op">(</span><span class="va">be1_phase</span>, set <span class="op">=</span> <span class="st">"oFD"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;              BE1-Dghnt BE1-CylRound</span></span>
-<span><span class="co">#&gt; BE1-Dghnt           NA            0</span></span>
-<span><span class="co">#&gt; BE1-CylRound    0.9962           NA</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'allen_observe_frequency' : objet 'be1_phase' introuvable</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ArchaeoPhases</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">A. Philippe,
 M.-A. Vibet</h4>
             
-            <h4 data-toc-skip class="date">2023-06-01</h4>
+            <h4 data-toc-skip class="date">2023-06-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/HEAD/vignettes/ArchaeoPhases.Rmd" class="external-link"><code>vignettes/ArchaeoPhases.Rmd</code></a></small>
       <div class="hidden name"><code>ArchaeoPhases.Rmd</code></div>
@@ -170,7 +170,16 @@ have reached their equilibrium (that is the posterior density of the
 parameter under investigation).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">coda</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/autocorr.plot.html" class="external-link">autocorr.plot</a></span><span class="op">(</span><span class="va">coda_events</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/coda-autocor-1.png" alt="plot of chunk coda-autocor" width="100%"><img src="figures/coda-autocor-2.png" alt="plot of chunk coda-autocor" width="100%"></p>
+<div class="figure">
+<img src="figures/coda-autocor-1.png" alt="plot of chunk coda-autocor" width="100%"><p class="caption">
+plot of chunk coda-autocor
+</p>
+</div>
+<div class="figure">
+<img src="figures/coda-autocor-2.png" alt="plot of chunk coda-autocor" width="100%"><p class="caption">
+plot of chunk coda-autocor
+</p>
+</div>
 <p>The autocorrelation plots show that each of these three chains are
 not significant. That means that we actually generated a non correlated
 sample, which was the aim the MCMC process.</p>
@@ -178,7 +187,11 @@ sample, which was the aim the MCMC process.</p>
 example, let’s consider the first date of the dataset.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">coda_events</span><span class="op">[</span>, <span class="fl">1</span>, <span class="op">]</span>, trace <span class="op">=</span> <span class="cn">TRUE</span>, density <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/coda-plot-1.png" alt="plot of chunk coda-plot" width="100%"></p>
+<div class="figure">
+<img src="figures/coda-plot-1.png" alt="plot of chunk coda-plot" width="100%"><p class="caption">
+plot of chunk coda-plot
+</p>
+</div>
 <p>The plot shows that the three chains corresponding to the first date
 reached the same stationary process.</p>
 <p>We can test the Gelman-Rubin criterion. The expected value to confirm
@@ -252,7 +265,11 @@ each parameter.</p>
 </h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/event-plot-1.png" alt="plot of chunk event-plot" width="100%"></p>
+<div class="figure">
+<img src="figures/event-plot-1.png" alt="plot of chunk event-plot" width="100%"><p class="caption">
+plot of chunk event-plot
+</p>
+</div>
 <div class="section level3">
 <h3 id="tempo-plot">Tempo Plot<a class="anchor" aria-label="anchor" href="#tempo-plot"></a>
 </h3>
@@ -270,7 +287,11 @@ instantaneous, the plot is vertical.</p>
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tempo.html">tempo</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span>, count <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/tempo-plot-1.png" alt="plot of chunk tempo-plot" width="100%"></p>
+<div class="figure">
+<img src="figures/tempo-plot-1.png" alt="plot of chunk tempo-plot" width="100%"><p class="caption">
+plot of chunk tempo-plot
+</p>
+</div>
 <p>From these graphs, we can see that the highest part of the sampled
 activity is dated between -45 000 to -35 000 but two dates are younger,
 at about -32 000 and -28 000.</p>
@@ -284,7 +305,11 @@ the Tempo plot. It is an other way to see changes over time.</p>
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">ac</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/activity.html">activity</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/activity-plot-1.png" alt="plot of chunk activity-plot" width="100%"></p>
+<div class="figure">
+<img src="figures/activity-plot-1.png" alt="plot of chunk activity-plot" width="100%"><p class="caption">
+plot of chunk activity-plot
+</p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="occurrence-plot">Occurrence Plot<a class="anchor" aria-label="anchor" href="#occurrence-plot"></a>
@@ -298,7 +323,11 @@ a desired level of confidence.</p>
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">oc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/occurrence.html">occurrence</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oc</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/occurrence-plot-1.png" alt="plot of chunk occurrence-plot" width="100%"></p>
+<div class="figure">
+<img src="figures/occurrence-plot-1.png" alt="plot of chunk occurrence-plot" width="100%"><p class="caption">
+plot of chunk occurrence-plot
+</p>
+</div>
 </div>
 </div>
 <div class="section level2">
@@ -335,7 +364,11 @@ the estimation of its minimum, the estimation of its maximum and their
 uncertainties at the same time.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/phases-plot-1.png" alt="plot of chunk phases-plot" width="100%"></p>
+<div class="figure">
+<img src="figures/phases-plot-1.png" alt="plot of chunk phases-plot" width="100%"><p class="caption">
+plot of chunk phases-plot
+</p>
+</div>
 </div>
 <div class="section level3">
 <h3 id="succession-of-groups">Succession of groups<a class="anchor" aria-label="anchor" href="#succession-of-groups"></a>
@@ -390,7 +423,11 @@ exists one of 203 years between phase <em>UP</em> and phase
 <em>EPI</em>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
-<p><img src="figures/succession-plot-1.png" alt="plot of chunk succession-plot" width="100%"></p>
+<div class="figure">
+<img src="figures/succession-plot-1.png" alt="plot of chunk succession-plot" width="100%"><p class="caption">
+plot of chunk succession-plot
+</p>
+</div>
 </div>
 </div>
 </div>
