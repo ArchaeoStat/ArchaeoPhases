@@ -90,7 +90,7 @@
       <h1 data-toc-skip>Allen’s interval algebra</h1>
                         <h4 data-toc-skip class="author">T. S. Dye</h4>
             
-            <h4 data-toc-skip class="date">2023-06-27</h4>
+            <h4 data-toc-skip class="date">2023-12-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/HEAD/vignettes/allen.Rmd" class="external-link"><code>vignettes/allen.Rmd</code></a></small>
       <div class="hidden name"><code>allen.Rmd</code></div>
@@ -195,7 +195,7 @@ differ from it in the placement of a single interval end-point.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Plot the basic Allen relations</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/allen_illustrate.html">allen_illustrate</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="fu"><a href="../reference/allen_illustrate.html">allen_illustrate</a></span><span class="op">(</span><span class="st">"basic"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="figures/basic_relations-1.png" alt="plot of chunk basic_relations" width="50%"><p class="caption">
 plot of chunk basic_relations
@@ -218,10 +218,10 @@ interval represented by a context superior to the reference context.</p>
 <code class="sourceCode R"><span><span class="co">## Plot lattice for two contexts on the same line of a Harris matrix</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/allen_analyze.html">allen_analyze</a></span><span class="op">(</span></span>
-<span>  x <span class="op">=</span> <span class="st">"m"</span>, </span>
-<span>  y <span class="op">=</span> <span class="st">"m"</span>, </span>
+<span>  x <span class="op">=</span> <span class="st">"m"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"m"</span>,</span>
 <span>  main <span class="op">=</span> <span class="st">"Composite relation of two contexts on the same line"</span></span>
-<span><span class="op">)</span> </span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy" width="50%"><p class="caption">
 plot of chunk analyze_stratigraphy
@@ -231,7 +231,7 @@ plot of chunk analyze_stratigraphy
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Illustrate composite relations in a stratigraphic sequence</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/allen_illustrate.html">allen_illustrate</a></span><span class="op">(</span><span class="st">"sequence"</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="fu"><a href="../reference/allen_illustrate.html">allen_illustrate</a></span><span class="op">(</span><span class="st">"sequence"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy" width="50%"><p class="caption">
 plot of chunk illustrate_stratigraphy
@@ -260,8 +260,8 @@ comparing an interval with itself.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Identify the burials with bead BE1-Dghnt</span></span>
 <span><span class="va">be1_dghnt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"UB-4503 (Lec148)"</span>, <span class="st">"UB-4506 (Lec172/2)"</span>, <span class="st">"UB-6038 (CasD183)"</span>, </span>
-<span>  <span class="st">"UB-4512 (EH091)"</span>, <span class="st">"UB-4501 (Lec014)"</span>, <span class="st">"UB-4507 (Lec187)"</span>, </span>
+<span>  <span class="st">"UB-4503 (Lec148)"</span>, <span class="st">"UB-4506 (Lec172/2)"</span>, <span class="st">"UB-6038 (CasD183)"</span>,</span>
+<span>  <span class="st">"UB-4512 (EH091)"</span>, <span class="st">"UB-4501 (Lec014)"</span>, <span class="st">"UB-4507 (Lec187)"</span>,</span>
 <span>  <span class="st">"UB-4502 (Lec138)"</span>, <span class="st">"UB-4042 (But1674)"</span>, <span class="st">"SUERC-39100 (ERL G266)"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -272,7 +272,7 @@ comparing an interval with itself.</p>
 <span></span>
 <span><span class="co">## Plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/allen_observe.html">allen_observe</a></span><span class="op">(</span><span class="va">be1_dghnt_phase</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="../reference/allen_observe.html">allen_observe</a></span><span class="op">(</span><span class="va">be1_dghnt_phase</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in h(simpleError(msg, call)): erreur d'ï¿½valuation de l'argument 'x' lors de la sï¿½lection d'une mï¿½thode pour la fonction 'allen_observe' : objet 'be1_dghnt_phase' introuvable</span></span></code></pre></div>
 <p>Next we compare the depositional histories of two bead types
 recovered from well-dated Anglo Saxon female burials in England. Note
@@ -280,10 +280,10 @@ that the Allen relation and its converse are calculated.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Identify the burials with bead BE1-CylRound</span></span>
 <span><span class="va">be1_cylround</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"UB-4965 (ApD117)"</span>, <span class="st">"UB-4735 (Ber022)"</span>, <span class="st">"UB-4739 (Ber134/1)"</span>, </span>
-<span>  <span class="st">"UB-6473 (BuD250)"</span>, <span class="st">"UB-6476 (BuD339)"</span>, <span class="st">"UB-4729 (MH068)"</span>, </span>
-<span>  <span class="st">"UB-4835 (ApD134)"</span>, <span class="st">"UB-4708 (EH083)"</span>, <span class="st">"UB-4733 (MH095)"</span>, </span>
-<span>  <span class="st">"UB-4888 (MelSG089)"</span>, <span class="st">"UB-4963 (SPTip208)"</span>, <span class="st">"UB-4890 (MelSG075)"</span>, </span>
+<span>  <span class="st">"UB-4965 (ApD117)"</span>, <span class="st">"UB-4735 (Ber022)"</span>, <span class="st">"UB-4739 (Ber134/1)"</span>,</span>
+<span>  <span class="st">"UB-6473 (BuD250)"</span>, <span class="st">"UB-6476 (BuD339)"</span>, <span class="st">"UB-4729 (MH068)"</span>,</span>
+<span>  <span class="st">"UB-4835 (ApD134)"</span>, <span class="st">"UB-4708 (EH083)"</span>, <span class="st">"UB-4733 (MH095)"</span>,</span>
+<span>  <span class="st">"UB-4888 (MelSG089)"</span>, <span class="st">"UB-4963 (SPTip208)"</span>, <span class="st">"UB-4890 (MelSG075)"</span>,</span>
 <span>  <span class="st">"UB-4732 (MH094)"</span>, <span class="st">"SUERC-51539 (ERL G353)"</span>, <span class="st">"SUERC-51551 (ERL G193)"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
