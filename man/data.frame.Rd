@@ -36,8 +36,8 @@ Coerce to a Data Frame
 Other mutators: 
 \code{\link{bind}},
 \code{\link{names}()},
-\code{\link{sort.list}()},
 \code{\link{sort}()},
+\code{\link{sort.list}()},
 \code{\link{subset}()}
 }
 \author{

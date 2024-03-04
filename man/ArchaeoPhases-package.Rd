@@ -3,7 +3,6 @@
 \docType{package}
 \name{ArchaeoPhases-package}
 \alias{ArchaeoPhases-package}
-\alias{_PACKAGE}
 \alias{ArchaeoPhases}
 \title{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}
 \description{

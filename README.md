@@ -9,7 +9,8 @@
 [![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg?token=RVSFB6UI4T)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
 [![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
-<a href="https://ArchaeoStat.r-universe.dev" class="pkgdown-devel"><img
+<a href="https://ArchaeoStat.r-universe.dev/ArchaeoPhases"
+class="pkgdown-devel"><img
 src="https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases"
 alt="r-universe" /></a>
 <a href="https://cran.r-project.org/package=ArchaeoPhases"

@@ -90,8 +90,8 @@ Other Allen's intervals:
 \code{\link{allen_intersect}()},
 \code{\link{allen_joint_concurrency}()},
 \code{\link{allen_observe}()},
-\code{\link{allen_relation_code}()},
 \code{\link{allen_relation}()},
+\code{\link{allen_relation_code}()},
 \code{\link{allen_union}()}
 }
 \author{

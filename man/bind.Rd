@@ -37,8 +37,8 @@ pha[, 1, , drop = FALSE] # Select the first phase
 Other mutators: 
 \code{\link{data.frame}},
 \code{\link{names}()},
-\code{\link{sort.list}()},
 \code{\link{sort}()},
+\code{\link{sort.list}()},
 \code{\link{subset}()}
 }
 \author{

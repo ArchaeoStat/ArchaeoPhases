@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 [![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg?token=RVSFB6UI4T)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
 [![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
-[![r-universe](https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases)](https://ArchaeoStat.r-universe.dev){.pkgdown-devel}
+[![r-universe](https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases)](https://ArchaeoStat.r-universe.dev/ArchaeoPhases){.pkgdown-devel}
 [![CRAN Version](http://www.r-pkg.org/badges/version/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
 [![CRAN checks](https://badges.cranchecks.info/worst/ArchaeoPhases.svg)](https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html){.pkgdown-release}
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}

@@ -32,8 +32,8 @@ Get or set the names of an object.
 Other mutators: 
 \code{\link{bind}},
 \code{\link{data.frame}},
-\code{\link{sort.list}()},
 \code{\link{sort}()},
+\code{\link{sort.list}()},
 \code{\link{subset}()}
 }
 \author{

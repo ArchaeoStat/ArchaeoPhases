@@ -50,8 +50,8 @@ Other mutators:
 \code{\link{bind}},
 \code{\link{data.frame}},
 \code{\link{names}()},
-\code{\link{sort.list}()},
-\code{\link{sort}()}
+\code{\link{sort}()},
+\code{\link{sort.list}()}
 }
 \author{
 N. Frerebeau

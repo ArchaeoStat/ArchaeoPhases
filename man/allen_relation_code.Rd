@@ -52,8 +52,8 @@ Other Allen's intervals:
 \code{\link{allen_illustrate}()},
 \code{\link{allen_intersect}()},
 \code{\link{allen_joint_concurrency}()},
-\code{\link{allen_observe_frequency}()},
 \code{\link{allen_observe}()},
+\code{\link{allen_observe_frequency}()},
 \code{\link{allen_relation}()},
 \code{\link{allen_union}()}
 }

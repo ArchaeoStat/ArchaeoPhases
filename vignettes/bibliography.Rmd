@@ -1,6 +1,6 @@
 ---
 title: "Bibliography"
-subtitle: "Comprehensive list of references cited in the package"
+subtitle: "Comprehensive list of references cited in ArchaeoPhases"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: bibliography.bib
