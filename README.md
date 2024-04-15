@@ -13,18 +13,6 @@
 class="pkgdown-devel"><img
 src="https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases"
 alt="r-universe" /></a>
-<a href="https://cran.r-project.org/package=ArchaeoPhases"
-class="pkgdown-release"><img
-src="http://www.r-pkg.org/badges/version/ArchaeoPhases"
-alt="CRAN Version" /></a> <a
-href="https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html"
-class="pkgdown-release"><img
-src="https://badges.cranchecks.info/worst/ArchaeoPhases.svg"
-alt="CRAN checks" /></a>
-<a href="https://cran.r-project.org/package=ArchaeoPhases"
-class="pkgdown-release"><img
-src="http://cranlogs.r-pkg.org/badges/ArchaeoPhases"
-alt="CRAN Downloads" /></a>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively

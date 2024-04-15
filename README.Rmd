@@ -24,9 +24,6 @@ knitr::opts_chunk$set(
 [![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
 [![r-universe](https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases)](https://ArchaeoStat.r-universe.dev/ArchaeoPhases){.pkgdown-devel}
-[![CRAN Version](http://www.r-pkg.org/badges/version/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
-[![CRAN checks](https://badges.cranchecks.info/worst/ArchaeoPhases.svg)](https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html){.pkgdown-release}
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 

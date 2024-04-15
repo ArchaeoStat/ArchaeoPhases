@@ -42,7 +42,7 @@ NULL
 #'  Difference between Anagenetic and Cladogenetic Evolution". In *Mapping Our
 #'  Ancestors: Phylogenetic Approaches in Anthropology and Prehistory*,
 #'  edited by Lipo, C. P., O'Brien, M. J., Couard, M., and Shennan,
-#'  S. J. New York: Routledge. \doi{/10.4324/9780203786376}.
+#'  S. J. New York: Routledge. \doi{10.4324/9780203786376}.
 #'
 #'  Viola, T. (2020). *Peirce on the Uses of History*. De Gruyter.
 #'  \doi{10.1515/9783110651560}. See chapter 3, "Historicity as Process",
