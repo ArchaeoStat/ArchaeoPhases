@@ -146,7 +146,7 @@ NULL
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
 #' @note
-#'  This class inherits from [`TimeSeries-class`].
+#'  This class inherits from [`aion::TimeSeries-class`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class
@@ -177,7 +177,7 @@ NULL
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
 #' @note
-#'  This class inherits from [`TimeSeries-class`].
+#'  This class inherits from [`aion::TimeSeries-class`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class

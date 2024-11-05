@@ -12,35 +12,17 @@ read_bcal(file, ...)
 \S4method{read_bcal}{character}(file, bin_width = 1, calendar = BP())
 }
 \arguments{
-\item{file}{the name of the file which the data are to be read from.
-    Each row of the table appears as one line of the file.  If it does
-    not contain an \emph{absolute} path, the file name is
-    \emph{relative} to the current working directory,
-    \code{\link{getwd}()}. Tilde-expansion is performed where supported.
-    This can be a compressed file (see \code{\link{file}}).
+\item{file}{A \code{\link{character}} string giving the name of the CSV file which the
+data are to be read from.}
 
-    Alternatively, \code{file} can be a readable text-mode
-    \link{connection} (which will be opened for reading if
-    necessary, and if so \code{\link{close}}d (and hence destroyed) at
-    the end of the function call).  (If \code{\link{stdin}()} is used,
-    the prompts for lines may be somewhat confusing.  Terminate input
-    with a blank line or an EOF signal, \code{Ctrl-D} on Unix and
-    \code{Ctrl-Z} on Windows.  Any pushback on \code{stdin()} will be
-    cleared before return.)
-
-    \code{file} can also be a complete URL.  (For the supported URL
-    schemes, see the \sQuote{URLs} section of the help for
-    \code{\link{url}}.)
-  }
-
-\item{...}{Further arguments to be passed to \code{read.table}.}
+\item{...}{Currently not used.}
 
 \item{bin_width}{The bin width specified for the
 \href{https://bcal.shef.ac.uk/}{BCal} calibration. Defaults to the BCal
 default of 1.}
 
-\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the calendar
-(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[=BP]{BP()}} unless you change the
+\item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the calendar
+(see \code{\link[=calendar]{calendar()}}). It should be \code{\link[=BP]{BP()}} unless you change the
 default settings in 'BCal'.}
 }
 \value{

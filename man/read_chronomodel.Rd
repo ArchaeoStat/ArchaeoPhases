@@ -21,39 +21,20 @@ read_chronomodel_phases(file, ...)
 \S4method{read_chronomodel_phases}{character}(file, calendar = CE(), sep = ",", dec = ".")
 }
 \arguments{
-\item{file}{the name of the file which the data are to be read from.
-    Each row of the table appears as one line of the file.  If it does
-    not contain an \emph{absolute} path, the file name is
-    \emph{relative} to the current working directory,
-    \code{\link{getwd}()}. Tilde-expansion is performed where supported.
-    This can be a compressed file (see \code{\link{file}}).
+\item{file}{A \code{\link{character}} string giving the name of the CSV file which the
+data are to be read from.}
 
-    Alternatively, \code{file} can be a readable text-mode
-    \link{connection} (which will be opened for reading if
-    necessary, and if so \code{\link{close}}d (and hence destroyed) at
-    the end of the function call).  (If \code{\link{stdin}()} is used,
-    the prompts for lines may be somewhat confusing.  Terminate input
-    with a blank line or an EOF signal, \code{Ctrl-D} on Unix and
-    \code{Ctrl-Z} on Windows.  Any pushback on \code{stdin()} will be
-    cleared before return.)
+\item{...}{Currently not used.}
 
-    \code{file} can also be a complete URL.  (For the supported URL
-    schemes, see the \sQuote{URLs} section of the help for
-    \code{\link{url}}.)
-  }
-
-\item{...}{Further arguments to be passed to \code{read.table}.}
-
-\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the calendar
-(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[=CE]{CE()}} unless you change the
+\item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the calendar
+(see \code{\link[=calendar]{calendar()}}). It should be \code{\link[=CE]{CE()}} unless you change the
 default settings in 'ChronoModel'.}
 
-\item{sep}{the field separator character.  Values on each line of the
-    file are separated by this character.  If \code{sep = ""} (the
-    default for \code{read.table}) the separator is \sQuote{white space},
-    that is one or more spaces, tabs, newlines or carriage returns.}
+\item{sep}{A \code{\link{character}} string specifying the field separator character
+(see \code{\link[utils:read.table]{utils::read.table()}}).}
 
-\item{dec}{the character used in the file for decimal points.}
+\item{dec}{A \code{\link{character}} string specifying the character used in the file
+for decimal points (see \code{\link[utils:read.table]{utils::read.table()}}).}
 }
 \value{
 An \code{\linkS4class{EventsMCMC}} or a \code{\linkS4class{PhasesMCMC}} object.

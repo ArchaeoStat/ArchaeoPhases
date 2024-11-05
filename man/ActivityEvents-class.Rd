@@ -16,7 +16,7 @@ original data file.}
 }}
 
 \note{
-This class inherits from \code{\linkS4class{TimeSeries}}.
+This class inherits from \code{\link[aion:TimeSeries-class]{aion::TimeSeries}}.
 }
 \section{Coerce}{
 

@@ -25,8 +25,8 @@ interval_hdr(x, y, ...)
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
-\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
-(see \code{\link[=calendar]{calendar()}}).}
+\item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
+calendar (see \code{\link[=calendar]{calendar()}}).}
 }
 \value{
 Returns a \code{\link{list}} of \code{numeric} \code{\link{matrix}}.

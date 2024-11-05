@@ -46,8 +46,8 @@ arguments to this function.}
 \item{x}{A \code{\linkS4class{CumulativeEvents}} object or an \code{\linkS4class{EventsMCMC}}
 object.}
 
-\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
-(see \code{\link[=calendar]{calendar()}}).}
+\item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
+calendar (see \code{\link[=calendar]{calendar()}}).}
 
 \item{interval}{A \code{\link{character}} string specifying the confidence interval to
 be drawn. It must be one of "\code{credible}" (credible interval) or "\code{gauss}"

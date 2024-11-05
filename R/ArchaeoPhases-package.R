@@ -10,8 +10,8 @@
 #'
 #' @section Package options:
 #'  `ArchaeoPhases` uses the following [options()] to configure behaviour:
-#'  * `ArchaeoPhases.calendar`: a [`TimeScale-class`] object (default calendar
-#'    for printing).
+#'  * `ArchaeoPhases.calendar`: a [`aion::TimeScale-class`] object (default
+#'    calendar for printing).
 #'  * `ArchaeoPhases.grid`: a [`numeric`] value specifying the number of equally
 #'    spaced points at which densities are to be estimated (defaults to
 #'    \eqn{512}). Should be a power of \eqn{2}.

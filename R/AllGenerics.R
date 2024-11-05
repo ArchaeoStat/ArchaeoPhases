@@ -6,8 +6,8 @@ NULL
 #' Coerce to a Data Frame
 #'
 #' @param x An object.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param ... Further parameters to be passed to [data.frame()].
 #' @return
 #'  A [`data.frame`] with an extra `time` column giving the (decimal) years at
@@ -153,8 +153,8 @@ NULL
 #' @param newdata A [`numeric`] vector giving the depths at which ages will be
 #'  predicted. If `missing`, the original data points are used.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x
@@ -230,8 +230,8 @@ setGeneric(
 #' Coerce to Events
 #'
 #' @param from from An object to be coerced.
-#' @param calendar A [`TimeScale-class`] object specifying the source calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the source
+#'  calendar (see [calendar()]).
 #' @param iteration A length-one [`numeric`] vector specifying the index of the
 #'  iteration column.
 #' @param ... Currently not used.
@@ -263,8 +263,8 @@ setGeneric(
 #'  spaced points of the temporal grid.
 #' @param x A [`CumulativeEvents-class`] object or an [`EventsMCMC-class`]
 #'  object.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`credible`" (credible interval) or "`gauss`"
 #'  (Gaussian approximation of the credible interval). Any unambiguous substring
@@ -329,8 +329,8 @@ setGeneric(
 #' @param grid A length-one [`numeric`] vector specifying the number of equally
 #'  spaced points of the temporal grid.
 #' @param x An [`ActivityEvents-class`] object.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x
@@ -372,8 +372,8 @@ setGeneric(
 #' @param object An [`EventsMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
 #' @param x An [`OccurrenceEvents-class`] object.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param main A [`character`] string giving a main title for the plot.
 #' @param sub A [`character`] string giving a subtitle for the plot.
 #' @param ann A [`logical`] scalar: should the default annotation (title and x
@@ -444,8 +444,8 @@ setGeneric(
 #' for a single parameter.
 #' @param x An [`MCMC-class`] object containing the output of the MCMC algorithm.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param ... Currently not used.
 #' @details
 #'  A \eqn{(100 \times level)}{(100 * level)} % credible interval is an interval
@@ -476,8 +476,8 @@ setGeneric(
 #' @param x An [`MCMC-class`] object containing the output of the MCMC algorithm.
 #' @param y Currently not used.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param ... Extra arguments to be passed to [stats::density()].
 #' @return
 #'  Returns a [`list`] of `numeric` [`matrix`].
@@ -533,8 +533,8 @@ setGeneric(
 #'  is used starting from the second column (after deleting the `iteration`
 #'  column, if any).
 #' @param names A [`character`] vector giving the names of the phases.
-#' @param calendar A [`TimeScale-class`] object specifying the source calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the source
+#'  calendar (see [calendar()]).
 #' @param iteration A length-one [`numeric`] vector specifying the index of the
 #'  iteration column.
 #' @param ... Currently not used.
@@ -572,8 +572,8 @@ setGeneric(
 #'
 #' Plots credible intervals or HPD regions of a series of events.
 #' @param x An [`MCMC-class`] object.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param density A [`logical`] scalar: should estimated density be plotted?
 #' @param interval A [`character`] string specifying the confidence interval to
 #'  be drawn. It must be one of "`credible`" (credible interval) or "`hdr`"
@@ -613,8 +613,8 @@ NULL
 #'
 #' Plots the characteristics of a group of events (phase).
 #' @param x A [`PhasesMCMC-class`] object.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
-#'  (see [calendar()]).
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target
+#'  calendar (see [calendar()]).
 #' @param density A [`logical`] scalar: should estimated density be plotted?
 #' @param range A [`logical`] scalar: should phase time range be plotted
 #'  (see [boundaries()])?
@@ -761,10 +761,12 @@ setGeneric(
 #' Read OxCal Output
 #'
 #' Reads MCMC output.
-#' @inheritParams utils::read.table
-#' @param calendar A [`TimeScale-class`] object specifying the calendar
-#'  (see [aion::calendar()]). It should be [CE()] unless you change the
+#' @param file A [`character`] string giving the name of the CSV file which the
+#'  data are to be read from.
+#' @param calendar A [`aion::TimeScale-class`] object specifying the calendar
+#'  (see [calendar()]). It should be [CE()] unless you change the
 #'  default settings in 'OxCal'.
+#' @param ... Currently not used.
 #' @return
 #'  An [`EventsMCMC-class`] object.
 #' @references
@@ -785,13 +787,15 @@ setGeneric(
 #' Read BCal Output
 #'
 #' Reads MCMC output.
-#' @inheritParams utils::read.table
+#' @param file A [`character`] string giving the name of the CSV file which the
+#'  data are to be read from.
 #' @param bin_width The bin width specified for the
 #'  [BCal](https://bcal.shef.ac.uk/) calibration. Defaults to the BCal
 #'  default of 1.
-#' @param calendar A [`TimeScale-class`] object specifying the calendar
-#'  (see [aion::calendar()]). It should be [BP()] unless you change the
+#' @param calendar A [`aion::TimeScale-class`] object specifying the calendar
+#'  (see [calendar()]). It should be [BP()] unless you change the
 #'  default settings in 'BCal'.
+#' @param ... Currently not used.
 #' @return
 #'  An [`EventsMCMC-class`] object.
 #' @references
@@ -813,10 +817,16 @@ setGeneric(
 #' Read ChronoModel Output
 #'
 #' Reads MCMC output.
-#' @inheritParams utils::read.table
-#' @param calendar A [`TimeScale-class`] object specifying the calendar
-#'  (see [aion::calendar()]). It should be [CE()] unless you change the
+#' @param file A [`character`] string giving the name of the CSV file which the
+#'  data are to be read from.
+#' @param calendar A [`aion::TimeScale-class`] object specifying the calendar
+#'  (see [calendar()]). It should be [CE()] unless you change the
 #'  default settings in 'ChronoModel'.
+#' @param sep A [`character`] string specifying the field separator character
+#'  (see [utils::read.table()]).
+#' @param dec A [`character`] string specifying the character used in the file
+#'  for decimal points (see [utils::read.table()]).
+#' @param ... Currently not used.
 #' @return
 #'  An [`EventsMCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @references
@@ -914,7 +924,7 @@ setGeneric(
 #' multiple parameters. Results are given in calendar years (BC/AD).
 #' @param object An [`MCMC-class`] or a [`PhasesMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param calendar A [`TimeScale-class`] object specifying the target calendar
+#' @param calendar A [`aion::TimeScale-class`] object specifying the target calendar
 #'  (see [calendar()]).
 #' @return
 #'  A [`data.frame`] where the rows correspond to the chains of interest and

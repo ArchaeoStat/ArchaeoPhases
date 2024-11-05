@@ -19,8 +19,8 @@ as_events(from, ...)
 
 \item{...}{Currently not used.}
 
-\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the source calendar
-(see \code{\link[=calendar]{calendar()}}).}
+\item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the source
+calendar (see \code{\link[=calendar]{calendar()}}).}
 
 \item{iteration}{A length-one \code{\link{numeric}} vector specifying the index of the
 iteration column.}

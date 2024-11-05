@@ -36,8 +36,8 @@ arguments to this function, particularly, \code{border}, \code{col}, \code{lwd},
 
 \item{x}{An \code{\linkS4class{OccurrenceEvents}} object.}
 
-\item{calendar}{A \code{\linkS4class{TimeScale}} object specifying the target calendar
-(see \code{\link[=calendar]{calendar()}}).}
+\item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
+calendar (see \code{\link[=calendar]{calendar()}}).}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
