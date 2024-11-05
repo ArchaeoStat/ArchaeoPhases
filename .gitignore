@@ -29,8 +29,8 @@ rsconnect/
 inst/doc
 
 # Temporary files created by devtools
-CRAN-RELEASE
-doc
+CRAN-SUBMISSION
+docs
 Meta
 
 # MacOS files

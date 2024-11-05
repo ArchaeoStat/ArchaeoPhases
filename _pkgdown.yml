@@ -1,4 +1,10 @@
 url: https://ArchaeoStat.github.io/ArchaeoPhases
+development:
+  mode: auto
+
+template:
+  bootstrap: 5
+  light-switch: true
 
 reference:
 - title: Data input/output
@@ -46,3 +52,6 @@ navbar:
         href: articles/allen.html
       - text: Bibliography
         href: articles/bibliography.html
+
+search:
+  exclude: ['CODE_OF_CONDUCT.html','CONTRIBUTING.html','LICENSE.html','authors.html','news/index.html']
