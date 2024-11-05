@@ -41,7 +41,7 @@
 | `TempoPlot()`, `tempo_plot()` | `tempo()` + `plot()` |
 | `undated_sample()` | `interpolate()` |
 
-# ArchaeoPhases 1.6
+# ArchaeoPhases 1.6.0
 
 ## New functions
 * New functions for Allen's interval algebra: `allen_analyze()`, `allen_joint_concurrency()`, `allen_observe_frequency()`, `allen_illustrate()`, `allen_observe()`.
@@ -50,7 +50,7 @@
 * Fixed a bug that failed to export the `reproduce()` function.
 * Added a vignette on object reproducibility.
 
-# ArchaeoPhases 1.5
+# ArchaeoPhases 1.5.0
 
 ## New functions
 * New read functions for MCMC data: `read_bcal()`, `read_oxcal()`, `read_chronomodel()`.
@@ -71,7 +71,7 @@
 * Fixed a bug in `MultiHPD()` that ignored the `roundingOfValue` parameter.
 * Fixed a bug in `MarginalStatistics()` that triggered an error if the function was passed a constant MCMC chain.
 
-# ArchaeoPhases 1.4
+# ArchaeoPhases 1.4.0
 
 ## Bugfixes & changes
 * Includes an update of the `TempoPlot()`: optimization of the credible intervals as already done in `OccurrencePlot()`.
@@ -80,7 +80,7 @@
 * Includes an update of the function `MarginalStatistics()` and adds a new function : `MultiMarginalMarginalStatistics()`.
 * Includes an update of the shiny web application (called by function `app_ArchaeoPhases()`) that did not work in the previous version.
 
-# ArchaeoPhases 1.3
+# ArchaeoPhases 1.3.0
 
 ## New functions
 * Includes a new function : `OccurrencePlot()`.
@@ -92,13 +92,13 @@
 * Includes an update of the vignette that describes the main functions of the package.
 * Includes an update of the shiny web application (called by function `app_ArchaeoPhases()`).
 
-# ArchaeoPhases 1.2
+# ArchaeoPhases 1.2.0
 
 ## Bugfixes & changes
 * Includes an update of the vignette that describes the main functions of the package.
 * Includes an update of the shiny web application (called by function `app_ArchaeoPhases()`).
 
-# ArchaeoPhases 1.1
+# ArchaeoPhases 1.1.0
 
 ## Bugfixes & changes
 * Includes a vignette that describes the main functions of the package.
@@ -109,7 +109,7 @@
 * Includes an update of all graphic functions: it is now possible to export all graphics and to choose the colors associated to the characteristics of groups of dates.
 * Includes an update of the shiny web application (called by function `app_ArchaeoPhases()`).
 
-# ArchaeoPhases 1.0
+# ArchaeoPhases 1.0.0
 
 * Initial release.
 * Includes all functions of **RChronoModel** and their updates.
