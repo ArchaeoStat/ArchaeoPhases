@@ -92,7 +92,7 @@ remotes::install_version("ArchaeoPhases", version = "1.8")
 ## Usage
 
 **ArchaeoPhases** v2.0 uses **aion** for internal date representation.
-Look at `vignette("aion")` before you start.
+Look at `vignette("aion", package = "aion")` before you start.
 
 These examples use data available through the
 [**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package
@@ -191,6 +191,25 @@ plot(chrono_phases[, c("UP", "EPI"), ], succession = "transition")
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
 
+<div id="ref-allen1983" class="csl-entry">
+
+Allen, James F. 1983. “Maintaining Knowledge about Temporal Intervals.”
+*Communications of the ACM* 26 (11): 832–43.
+<https://doi.org/10.1145/182.358434>.
+
+</div>
+
+<div id="ref-bosch2015" class="csl-entry">
+
+Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, Tamsin C.
+O’Connell, Beatrice Demarchi, Sheila M. Taylor, Laura Niven, Johannes
+van der Plicht, and Jean-Jacques Hublin. 2015. “New Chronology for Ksâr
+‘Akil (Lebanon) Supports Levantine Route of Modern Human Dispersal into
+Europe.” *Proceedings of the National Academy of Sciences* 112 (25):
+7683–88. <https://doi.org/10.1073/pnas.1501529112>.
+
+</div>
+
 <div id="ref-bronkramsey2009" class="csl-entry">
 
 Bronk Ramsey, Christopher. 2009. “Bayesian Analysis of Radiocarbon
@@ -207,11 +226,97 @@ Bayesian Radiocarbon Calibration Tool.” *Internet Archaeology* 7.
 
 </div>
 
+<div id="ref-dye2016" class="csl-entry">
+
+Dye, Thomas S. 2016. “Long-Term Rhythms in the Development of Hawaiian
+Social Stratification.” *Journal of Archaeological Science* 71 (July):
+1–9. <https://doi.org/10.1016/j.jas.2016.05.006>.
+
+</div>
+
+<div id="ref-dye2023" class="csl-entry">
+
+Dye, Thomas S., Caitlin E. Buck, Robert J. DiNapoli, and Anne Philippe.
+2023. “Bayesian Chronology Construction and Substance Time.” *Journal of
+Archaeological Science* 153: 105765.
+https://doi.org/<https://doi.org/10.1016/j.jas.2023.105765>.
+
+</div>
+
+<div id="ref-ghosh2020" class="csl-entry">
+
+Ghosh, Sambit, Prasanta Sanyal, Sohom Roy, Ravi Bhushan, Sp Sati, Anne
+Philippe, and Navin Juyal. 2020. “Early Holocene Indian Summer Monsoon
+and Its Impact on Vegetation in the Central Himalaya: Insight from
+<span class="nocase">dD</span> and d <sup>13</sup> C Values of Leaf Wax
+Lipid.” *The Holocene* 30 (7): 1063–74.
+<https://doi.org/10.1177/0959683620908639>.
+
+</div>
+
+<div id="ref-harris1997" class="csl-entry">
+
+Harris, Edward C. 1997. *Principles of Archaeological Stratigraphy*.
+Seconde édition. London: Academic Press.
+
+</div>
+
+<div id="ref-hyndman1996" class="csl-entry">
+
+Hyndman, Rob J. 1996. “Computing and Graphing Highest Density Regions.”
+*The American Statistician* 50 (2): 120.
+<https://doi.org/10.2307/2684423>.
+
+</div>
+
+<div id="ref-jha2020" class="csl-entry">
+
+Jha, Deepak Kumar, Prasanta Sanyal, and Anne Philippe. 2020.
+“Multi-Proxy Evidence of Late Quaternary Climate and Vegetational
+History of North-Central India: Implication for the Paleolithic to
+Neolithic Phases.” *Quaternary Science Reviews* 229 (February): 106121.
+<https://doi.org/10.1016/j.quascirev.2019.106121>.
+
+</div>
+
 <div id="ref-lanos2020" class="csl-entry">
 
 Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. “Chronomodel:
 Chronological Modeling of Archaeological Data Using Bayesian
 Statistics.” CNRS. <https://chronomodel.com>.
+
+</div>
+
+<div id="ref-lyman2017" class="csl-entry">
+
+Lyman, R. Lee, and Michael J. O’Brien. 2017. “Sedation and Cladistics:
+The Difference Between Anagenetic and Cladogenetic Evolution.” In
+*Mapping Our Ancestors: Phylogenetic Approaches in Anthropology and
+Prehistory*, edited by Carl P. Lipo, Michael J. O’Brien, Mark Couard,
+and Stephen J. Shennan. New York: Routledge.
+<https://doi.org/10.4324/9780203786376>.
+
+</div>
+
+<div id="ref-philippe2020" class="csl-entry">
+
+Philippe, Anne, and Marie-Anne Vibet. 2020. “Analysis of Archaeological
+Phases Using the R Package ArchaeoPhases.” *Journal of Statistical
+Software* 93. <https://doi.org/10.18637/jss.v093.c01>.
+
+</div>
+
+<div id="ref-robert2010" class="csl-entry">
+
+Robert, Christian P., and George Casella. 2010. *Introducing Monte Carlo
+Methods with R*. Use R! New York: Springer.
+
+</div>
+
+<div id="ref-viola2020" class="csl-entry">
+
+Viola, Tullio. 2020. *Peirce on the Uses of History*. De Gruyter.
+<https://doi.org/10.1515/9783110651560>.
 
 </div>
 

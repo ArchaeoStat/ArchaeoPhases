@@ -1,11 +1,10 @@
 ---
-title: "Allen's interval algebra"
+title: "Allen's Interval Algebra"
 author: "T. S. Dye"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     number_sections: yes
-    fig_caption: yes
     toc: true
 bibliography: bibliography.bib
 vignette: >
@@ -56,19 +55,19 @@ It is conventional to express an Allen relation with a notation that indicates t
 
 It is often useful to visualize the basic Allen relations as a Nökel lattice. In a Nökel lattice, the immediate neighbors of a relation differ from it in the placement of a single interval end-point.
 
-```{r basic_relations, fig.width=5, fig.height=5, out.width='50%', fig.align='center'}
+```{r basic_relations, fig.width=7, fig.height=7, fig.align='center'}
 ## Plot the basic Allen relations
 par(mar = c(1, 1, 4, 1))
-allen_illustrate("basic") 
+allen_illustrate("basic")
 ```
 
-```{r, eval=FALSE, echo=FALSE}
-relations <- c("concurrent", "distinct", "stratigraphic", "branching", 
-               "transformation", "reticulation", "sequence", "branch", 
+```{r, eval=FALSE, echo=FALSE, fig.width=7, fig.height=7}
+relations <- c("concurrent", "distinct", "stratigraphic", "branching",
+               "transformation", "reticulation", "sequence", "branch",
                "transform", "reticulate")
 
 par(mfrow = c(5, 2), mar = c(1, 1, 4, 1))
-for (i in relations) allen_illustrate(i) 
+for (i in relations) allen_illustrate(i)
 ```
 
 # Analytic Inquiry with the Algebra
@@ -77,22 +76,22 @@ Interval algebra is carried out with a composition function that returns the rel
 
 In this example, the composition function deduces that the interval represented by a context inferior to a reference context precedes the interval represented by a context superior to the reference context.
 
-```{r analyze_stratigraphy, fig.width=7, fig.height=7, out.width='50%', fig.align='center'}
+```{r analyze_stratigraphy, fig.width=7, fig.height=7, fig.align='center'}
 ## Plot lattice for two contexts on the same line of a Harris matrix
 par(mar = c(1, 1, 4, 1))
 allen_analyze(
-  x = "m", 
-  y = "m", 
+  x = "m",
+  y = "m",
   main = "Composite relation of two contexts on the same line"
-) 
+)
 ```
 
 The same lattice can be created with a convenience function.
 
-```{r illustrate_stratigraphy, fig.width=5, fig.height=5, out.width='50%', fig.align='center'}
+```{r illustrate_stratigraphy, fig.width=5, fig.height=5, fig.align='center'}
 ## Illustrate composite relations in a stratigraphic sequence
 par(mar = c(1, 1, 4, 1))
-allen_illustrate("sequence") 
+allen_illustrate("sequence")
 ```
 
 # Empirical Inquiry with the Algebra
@@ -101,7 +100,7 @@ Empirical inquiry with Allen's interval algebra compares intervals estimated by 
 
 ```{r dataset, fig.width=8, fig.height=7, out.width='100%', fig.align='center'}
 ## Load the Anglo Saxon burials dataset
-path <- system.file("burials.csv", package = "ArchaeoData")
+path <- system.file("oxcal", "burials.csv", package = "ArchaeoData")
 burials <- read.table(path, header = TRUE, sep = ",", dec = ".",
                       check.names = FALSE)
 
@@ -111,11 +110,11 @@ burials <- as_events(burials, calendar = CE())
 
 First, we check for the expected result of the identity relation by comparing an interval with itself.
 
-```{r identity_relation, fig.width=5, fig.height=5, out.width='50%', fig.align='center'}
+```{r identity_relation, fig.width=7, fig.height=7, fig.align='center'}
 ## Identify the burials with bead BE1-Dghnt
 be1_dghnt <- c(
-  "UB-4503 (Lec148)", "UB-4506 (Lec172/2)", "UB-6038 (CasD183)", 
-  "UB-4512 (EH091)", "UB-4501 (Lec014)", "UB-4507 (Lec187)", 
+  "UB-4503 (Lec148)", "UB-4506 (Lec172/2)", "UB-6038 (CasD183)",
+  "UB-4512 (EH091)", "UB-4501 (Lec014)", "UB-4507 (Lec187)",
   "UB-4502 (Lec138)", "UB-4042 (But1674)", "SUERC-39100 (ERL G266)"
 )
 
@@ -125,7 +124,7 @@ be1_dghnt_phase <- phases(burials, groups = chains)
 
 ## Plot
 par(mar = c(1, 1, 4, 1))
-allen_observe(be1_dghnt_phase) 
+allen_observe(be1_dghnt_phase)
 ```
 
 Next we compare the depositional histories of two bead types recovered from well-dated Anglo Saxon female burials in England.
@@ -134,10 +133,10 @@ Note that the Allen relation and its converse are calculated.
 ```{r relation_and_converse, fig.width=10, fig.height=5, out.width='100%', fig.align='center'}
 ## Identify the burials with bead BE1-CylRound
 be1_cylround <- c(
-  "UB-4965 (ApD117)", "UB-4735 (Ber022)", "UB-4739 (Ber134/1)", 
-  "UB-6473 (BuD250)", "UB-6476 (BuD339)", "UB-4729 (MH068)", 
-  "UB-4835 (ApD134)", "UB-4708 (EH083)", "UB-4733 (MH095)", 
-  "UB-4888 (MelSG089)", "UB-4963 (SPTip208)", "UB-4890 (MelSG075)", 
+  "UB-4965 (ApD117)", "UB-4735 (Ber022)", "UB-4739 (Ber134/1)",
+  "UB-6473 (BuD250)", "UB-6476 (BuD339)", "UB-4729 (MH068)",
+  "UB-4835 (ApD134)", "UB-4708 (EH083)", "UB-4733 (MH095)",
+  "UB-4888 (MelSG089)", "UB-4963 (SPTip208)", "UB-4890 (MelSG075)",
   "UB-4732 (MH094)", "SUERC-51539 (ERL G353)", "SUERC-51551 (ERL G193)"
 )
 

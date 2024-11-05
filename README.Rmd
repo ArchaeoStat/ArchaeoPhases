@@ -1,6 +1,7 @@
 ---
 output: github_document
 bibliography: vignettes/bibliography.bib
+nocite: '@*'
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -69,7 +70,7 @@ remotes::install_version("ArchaeoPhases", version = "1.8")
 
 ## Usage
 
-**ArchaeoPhases** v2.0 uses **aion** for internal date representation. Look at `vignette("aion")` before you start.
+**ArchaeoPhases** v2.0 uses **aion** for internal date representation. Look at `vignette("aion", package = "aion")` before you start.
 
 These examples use data available through the [**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package which is available in a [separate repository](https://archaeostat.r-universe.dev). **ArchaeoData** provides MCMC outputs from ChronoModel, OxCal and BCal.
 
