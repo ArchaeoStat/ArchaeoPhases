@@ -63,7 +63,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read OxCal Output</h1>
-    <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/v2.0/R/AllGenerics.R" class="external-link"><code>R/AllGenerics.R</code></a>, <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/v2.0/R/read.R" class="external-link"><code>R/read.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/R/AllGenerics.R" class="external-link"><code>R/AllGenerics.R</code></a>, <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/R/read.R" class="external-link"><code>R/read.R</code></a></small>
     <div class="hidden name"><code>read_oxcal.Rd</code></div>
     </div>
 
@@ -83,32 +83,17 @@
 
 
 <dl><dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
-<dd><p>the name of the file which the data are to be read from.
-    Each row of the table appears as one line of the file.  If it does
-    not contain an <em>absolute</em> path, the file name is
-    <em>relative</em> to the current working directory,
-    <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a>()</code>. Tilde-expansion is performed where supported.
-    This can be a compressed file (see <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">file</a></code>).</p>
-<p>Alternatively, <code>file</code> can be a readable text-mode
-    <a href="https://rdrr.io/r/base/connections.html" class="external-link">connection</a> (which will be opened for reading if
-    necessary, and if so <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">close</a></code>d (and hence destroyed) at
-    the end of the function call).  (If <code><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stdin</a>()</code> is used,
-    the prompts for lines may be somewhat confusing.  Terminate input
-    with a blank line or an EOF signal, <code>Ctrl-D</code> on Unix and
-    <code>Ctrl-Z</code> on Windows.  Any pushback on <code><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stdin()</a></code> will be
-    cleared before return.)</p>
-<p><code>file</code> can also be a complete URL.  (For the supported URL
-    schemes, see the ‘URLs’ section of the help for
-    <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">url</a></code>.)</p></dd>
+<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string giving the name of the CSV file which the
+data are to be read from.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Further arguments to be passed to <code>read.table</code>.</p></dd>
+<dd><p>Currently not used.</p></dd>
 
 
 <dt id="arg-calendar">calendar<a class="anchor" aria-label="anchor" href="#arg-calendar"></a></dt>
-<dd><p>A <code>TimeScale</code> object specifying the calendar
-(see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">aion::calendar()</a></code>). It should be <code><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE()</a></code> unless you change the
+<dd><p>A <code><a href="https://packages.tesselle.org/aion/reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the calendar
+(see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>). It should be <code><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE()</a></code> unless you change the
 default settings in 'OxCal'.</p></dd>
 
 </dl></div>
