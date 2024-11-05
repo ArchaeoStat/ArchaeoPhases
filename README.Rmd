@@ -21,9 +21,12 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg?token=RVSFB6UI4T)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
-[![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
+[![Dependencies](https://tinyverse.netlify.app/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
 [![r-universe](https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases)](https://ArchaeoStat.r-universe.dev/ArchaeoPhases){.pkgdown-devel}
+[![CRAN Version](https://www.r-pkg.org/badges/version/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
+[![CRAN checks](https://badges.cranchecks.info/worst/ArchaeoPhases.svg)](https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html){.pkgdown-release}
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases){.pkgdown-release}
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 

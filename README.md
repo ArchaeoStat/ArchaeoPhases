@@ -7,12 +7,24 @@
 
 [![R-CMD-check](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg?token=RVSFB6UI4T)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
-[![Dependencies](https://tinyverse.netlify.com/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
+[![Dependencies](https://tinyverse.netlify.app/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
 <a href="https://ArchaeoStat.r-universe.dev/ArchaeoPhases"
 class="pkgdown-devel"><img
 src="https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases"
 alt="r-universe" /></a>
+<a href="https://cran.r-project.org/package=ArchaeoPhases"
+class="pkgdown-release"><img
+src="https://www.r-pkg.org/badges/version/ArchaeoPhases"
+alt="CRAN Version" /></a> <a
+href="https://cran.r-project.org/web/checks/check_results_ArchaeoPhases.html"
+class="pkgdown-release"><img
+src="https://badges.cranchecks.info/worst/ArchaeoPhases.svg"
+alt="CRAN checks" /></a>
+<a href="https://cran.r-project.org/package=ArchaeoPhases"
+class="pkgdown-release"><img
+src="https://cranlogs.r-pkg.org/badges/ArchaeoPhases"
+alt="CRAN Downloads" /></a>
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -176,7 +188,8 @@ plot(chrono_phases[, c("UP", "EPI"), ], succession = "transition")
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-bronkramsey2009" class="csl-entry">
 
