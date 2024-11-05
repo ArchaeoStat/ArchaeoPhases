@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/branch/master/graph/badge.svg?token=RVSFB6UI4T)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
+[![codecov](https://codecov.io/gh/ArchaeoStat/ArchaeoPhases/graph/badge.svg)](https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases)
 [![Dependencies](https://tinyverse.netlify.app/badge/ArchaeoPhases)](https://cran.r-project.org/package=ArchaeoPhases)
 
 <a href="https://ArchaeoStat.r-universe.dev/ArchaeoPhases"
