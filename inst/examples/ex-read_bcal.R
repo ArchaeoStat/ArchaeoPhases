@@ -1,5 +1,7 @@
 if (requireNamespace("ArchaeoData", quietly = TRUE)) {
+  ## Construct the path to the data
+  path_output <- system.file("bcal", "fishpond.csv", package = "ArchaeoData")
+
   ## Import BCal Output
-  path_output <- system.file("bcal/fishpond.csv", package = "ArchaeoData")
   (bcal <- read_bcal(path_output))
 }
