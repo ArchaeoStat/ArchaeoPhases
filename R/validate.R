@@ -14,7 +14,7 @@ setValidity(
 
     cnd <- list(
       arkhe::validate(arkhe::assert_length(labels, p)),
-      arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
+      arkhe::validate(arkhe::assert_length(hash, 1, allow_empty = TRUE))
     )
 
     # Return cnd, if any
@@ -33,9 +33,9 @@ setValidity(
     p <- ncol(object)
 
     cnd <- list(
-      arkhe::validate(arkhe::assert_dimensions(object, c(n, p, 2))),
+      arkhe::validate(arkhe::assert_dim(object, c(n, p, 2))),
       arkhe::validate(arkhe::assert_length(labels, p)),
-      arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
+      arkhe::validate(arkhe::assert_length(hash, 1, allow_empty = TRUE))
     )
 
     # Return cnd, if any
@@ -56,12 +56,12 @@ setValidity(
     n <- nrow(object)
 
     cnd <- list(
-      arkhe::validate(arkhe::assert_dimensions(object, c(n, 1, 1))),
-      # arkhe::validate(arkhe::assert_dimensions(credible, c(n, 2))),
-      # arkhe::validate(arkhe::assert_dimensions(gauss, c(n, 2))),
+      arkhe::validate(arkhe::assert_dim(object, c(n, 1, 1))),
+      # arkhe::validate(arkhe::assert_dim(credible, c(n, 2))),
+      # arkhe::validate(arkhe::assert_dim(gauss, c(n, 2))),
       arkhe::validate(arkhe::assert_length(level, 1)),
       arkhe::validate(arkhe::assert_length(counts, 1)),
-      arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
+      arkhe::validate(arkhe::assert_length(hash, 1, allow_empty = TRUE))
     )
 
     # Return cnd, if any
@@ -77,7 +77,7 @@ setValidity(
     hash <- object@hash
 
     cnd <- list(
-      arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
+      arkhe::validate(arkhe::assert_length(hash, 1, allow_empty = TRUE))
     )
 
     # Return cnd, if any
@@ -101,7 +101,7 @@ setValidity(
       arkhe::validate(arkhe::assert_length(start, n)),
       arkhe::validate(arkhe::assert_length(end, n)),
       arkhe::validate(arkhe::assert_length(level, 1)),
-      arkhe::validate(arkhe::assert_length(hash, 1, empty = TRUE))
+      arkhe::validate(arkhe::assert_length(hash, 1, allow_empty = TRUE))
     )
 
     # Return cnd, if any
