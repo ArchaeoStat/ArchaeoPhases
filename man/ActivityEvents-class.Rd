@@ -6,7 +6,7 @@
 \alias{.ActivityEvents}
 \title{Activity}
 \description{
-An S4 class to store the result of an \code{\link{activity}} plot.
+An S4 class to store the result of an \link[=activity]{activity} plot.
 }
 \section{Slots}{
 

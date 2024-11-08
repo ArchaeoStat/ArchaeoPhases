@@ -87,10 +87,10 @@ computed/displayed?}
 credible interval be computed/displayed?}
 
 \item{from}{A length-one \code{\link{numeric}} vector giving the earliest date to
-estimate for (in years).}
+estimate for (expressed in \emph{\link[aion:RataDie-class]{rata die}}).}
 
 \item{to}{A length-one \code{\link{numeric}} vector giving the latest date to estimate
-for (in years).}
+for (expressed in \emph{\link[aion:RataDie-class]{rata die}}).}
 
 \item{grid}{A length-one \code{\link{numeric}} vector specifying the number of equally
 spaced points of the temporal grid.}

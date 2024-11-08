@@ -11,6 +11,9 @@ An S4 class to represent the output of a MCMC algorithm.
 \section{Slots}{
 
 \describe{
+\item{\code{.Data}}{A \code{\link{numeric}} \code{matrix} giving the MCMC samples expressed in
+\emph{\link[aion:RataDie-class]{rata die}}.}
+
 \item{\code{labels}}{A \code{\link{character}} vector specifying the name of the events.}
 
 \item{\code{depth}}{A \code{\link{numeric}} vector giving the sample depth.}

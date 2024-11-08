@@ -4,7 +4,7 @@
 \name{TimeRange-class}
 \alias{TimeRange-class}
 \alias{.TimeRange}
-\title{Cumulative Events}
+\title{Time Range}
 \description{
 An S4 class to represent time ranges.
 }
@@ -12,7 +12,7 @@ An S4 class to represent time ranges.
 
 \describe{
 \item{\code{start,end}}{A \code{numeric} \code{\link{matrix}} giving the lower and upper
-boundaries.}
+boundaries expressed in \emph{\link[aion:RataDie-class]{rata die}}.}
 
 \item{\code{labels}}{A \code{\link{character}} vector specifying the name of the events/phases.}
 

@@ -256,9 +256,9 @@ setGeneric(
 #' occurrence of events.
 #' @param object An [`EventsMCMC-class`] object.
 #' @param from A length-one [`numeric`] vector giving the earliest date to
-#'  estimate for (in years).
+#'  estimate for (expressed in *[rata die][aion::RataDie-class]*).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
-#'  for (in years).
+#'  for (expressed in *[rata die][aion::RataDie-class]*).
 #' @param grid A length-one [`numeric`] vector specifying the number of equally
 #'  spaced points of the temporal grid.
 #' @param x A [`CumulativeEvents-class`] object or an [`EventsMCMC-class`]
@@ -323,9 +323,9 @@ setGeneric(
 #' Plots the first derivative of the [`tempo`] plot Bayesian estimate.
 #' @param object An [`EventsMCMC-class`] or a [`CumulativeEvents-class`] object.
 #' @param from A length-one [`numeric`] vector giving the earliest date to
-#'  estimate for (in years).
+#'  estimate for (expressed in *[rata die][aion::RataDie-class]*).
 #' @param to A length-one [`numeric`] vector giving the latest date to estimate
-#'  for (in years).
+#'  for (expressed in *[rata die][aion::RataDie-class]*.
 #' @param grid A length-one [`numeric`] vector specifying the number of equally
 #'  spaced points of the temporal grid.
 #' @param x An [`ActivityEvents-class`] object.

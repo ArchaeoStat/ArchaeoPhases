@@ -6,6 +6,8 @@ NULL
 #' MCMC
 #'
 #' An S4 class to represent the output of a MCMC algorithm.
+#' @slot .Data A [`numeric`] `matrix` giving the MCMC samples expressed in
+#'  *[rata die][aion::RataDie-class]*.
 #' @slot labels A [`character`] vector specifying the name of the events.
 #' @slot depth A [`numeric`] vector giving the sample depth.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
@@ -37,7 +39,7 @@ NULL
 ## Events ----------------------------------------------------------------------
 #' MCMC Events
 #'
-#' S4 classes to represent a collection of events.
+#' An S4 class to represent a collection of events.
 #' @note
 #'  This class inherits from [`MCMC-class`].
 #' @author N. Frerebeau
@@ -63,7 +65,7 @@ NULL
 ## Phases ----------------------------------------------------------------------
 #' MCMC Phases
 #'
-#' S4 classes to represent a collection of phases.
+#' An S4 class to represent a collection of phases.
 #' @slot labels A [`character`] vector specifying the name of the phases.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
@@ -71,7 +73,7 @@ NULL
 #'  A phase object is an\eqn{n x m x 2}{n \times m \times 2} array, with
 #'  \eqn{n} being the number of iterations, \eqn{m} being the number of phases
 #'  and with the 2 columns of the third dimension containing the boundaries of
-#'  the phases.
+#'  the phases expressed in *[rata die][aion::RataDie-class]*.
 #' @section Subset:
 #'  In the code snippets below, `x` is a `PhasesMCMC` object.
 #'  \describe{
@@ -96,11 +98,11 @@ NULL
 )
 
 # Time Range ===================================================================
-#' Cumulative Events
+#' Time Range
 #'
 #' An S4 class to represent time ranges.
 #' @slot start,end A `numeric` [`matrix`] giving the lower and upper
-#'  boundaries.
+#'  boundaries expressed in *[rata die][aion::RataDie-class]*.
 #' @slot labels A [`character`] vector specifying the name of the events/phases.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
@@ -127,11 +129,11 @@ NULL
 # Tempo ========================================================================
 #' Cumulative Events
 #'
-#' An S4 class to store the result of a [`tempo`] plot.
+#' An S4 class to store the result of a [tempo][tempo()] plot.
 #' @slot lower A [`numeric`] vector giving the lower boundaries of the
-#'  credibility interval.
+#'  credibility interval expressed in *[rata die][aion::RataDie-class]*.
 #' @slot upper A [`numeric`] vector giving the upper boundaries of the
-#'  credibility interval.
+#'  credibility interval expressed in *[rata die][aion::RataDie-class]*.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot gauss A [`logical`] scalar indicating if the Gaussian approximation of
 #'  the credible interval was used.
@@ -168,7 +170,7 @@ NULL
 # Activity =====================================================================
 #' Activity
 #'
-#' An S4 class to store the result of an [`activity`] plot.
+#' An S4 class to store the result of an [activity][activity()] plot.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
@@ -194,12 +196,12 @@ NULL
 # Occurrence ===================================================================
 #' Occurrence
 #'
-#' An S4 class to store the result of an [`occurrence`] plot.
+#' An S4 class to store the result of an [occurrence][occurrence()] plot.
 #' @slot events An [`integer`] vector giving the occurrence.
 #' @slot start A [`numeric`] vector giving the lower boundaries of the
-#'  credibility interval.
+#'  credibility interval expressed in *[rata die][aion::RataDie-class]*.
 #' @slot end A [`numeric`] vector giving the upper boundaries of the
-#'  credibility interval.
+#'  credibility interval expressed in *[rata die][aion::RataDie-class]*.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.

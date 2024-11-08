@@ -113,18 +113,18 @@ library(ArchaeoPhases)
 Import a CSV file containing a sample from the posterior distribution:
 
 ``` r
-## Read output from ChronoModel
-path <- "chronomodel/ksarakil/"
-
-## Events
+## Construct the paths to the data
+path <- file.path("chronomodel", "ksarakil")
 path_event <- system.file(path, "Chain_all_Events.csv", package = "ArchaeoData")
+path_phase <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+
+## Read events from ChronoModel
 (chrono_events <- read_chronomodel_events(path_event))
 #> <EventsMCMC>
 #> - Number of events: 16
 #> - Number of MCMC samples: 30000
 
-## Phases
-path_phase <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+## Read phases from ChronoModel
 (chrono_phases <- read_chronomodel_phases(path_phase))
 #> <PhasesMCMC>
 #> - Number of phases: 4

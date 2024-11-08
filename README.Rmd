@@ -74,7 +74,7 @@ remotes::install_version("ArchaeoPhases", version = "1.8")
 
 These examples use data available through the [**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package which is available in a [separate repository](https://archaeostat.r-universe.dev). **ArchaeoData** provides MCMC outputs from ChronoModel, OxCal and BCal.
 
-```{r fasti, eval=FALSE}
+```{r ArchaeoData, eval=FALSE}
 ## Install data package
 install.packages("ArchaeoData", repos = "https://archaeostat.r-universe.dev")
 ```
@@ -87,15 +87,15 @@ library(ArchaeoPhases)
 Import a CSV file containing a sample from the posterior distribution:
 
 ```{r read-chronomodel}
-## Read output from ChronoModel
-path <- "chronomodel/ksarakil/"
-
-## Events
+## Construct the paths to the data
+path <- file.path("chronomodel", "ksarakil")
 path_event <- system.file(path, "Chain_all_Events.csv", package = "ArchaeoData")
+path_phase <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+
+## Read events from ChronoModel
 (chrono_events <- read_chronomodel_events(path_event))
 
-## Phases
-path_phase <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+## Read phases from ChronoModel
 (chrono_phases <- read_chronomodel_phases(path_phase))
 ```
 

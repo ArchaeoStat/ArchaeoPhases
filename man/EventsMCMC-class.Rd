@@ -6,7 +6,7 @@
 \alias{.EventsMCMC}
 \title{MCMC Events}
 \description{
-S4 classes to represent a collection of events.
+An S4 class to represent a collection of events.
 }
 \note{
 This class inherits from \code{\linkS4class{MCMC}}.

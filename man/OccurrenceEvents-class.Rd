@@ -6,7 +6,7 @@
 \alias{.OccurrenceEvents}
 \title{Occurrence}
 \description{
-An S4 class to store the result of an \code{\link{occurrence}} plot.
+An S4 class to store the result of an \link[=occurrence]{occurrence} plot.
 }
 \section{Slots}{
 
@@ -14,10 +14,10 @@ An S4 class to store the result of an \code{\link{occurrence}} plot.
 \item{\code{events}}{An \code{\link{integer}} vector giving the occurrence.}
 
 \item{\code{start}}{A \code{\link{numeric}} vector giving the lower boundaries of the
-credibility interval.}
+credibility interval expressed in \emph{\link[aion:RataDie-class]{rata die}}.}
 
 \item{\code{end}}{A \code{\link{numeric}} vector giving the upper boundaries of the
-credibility interval.}
+credibility interval expressed in \emph{\link[aion:RataDie-class]{rata die}}.}
 
 \item{\code{level}}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
