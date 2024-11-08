@@ -119,18 +119,18 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ArchaeoStat.github.io/ArchaeoPhases/">ArchaeoPhases</a></span><span class="op">)</span></span></code></pre></div>
 <p>Import a CSV file containing a sample from the posterior distribution:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Read output from ChronoModel</span></span>
-<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="st">"chronomodel/ksarakil/"</span></span>
-<span></span>
-<span><span class="co">## Events</span></span>
+<code class="sourceCode R"><span><span class="co">## Construct the paths to the data</span></span>
+<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"chronomodel"</span>, <span class="st">"ksarakil"</span><span class="op">)</span></span>
 <span><span class="va">path_event</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"Chain_all_Events.csv"</span>, package <span class="op">=</span> <span class="st">"ArchaeoData"</span><span class="op">)</span></span>
+<span><span class="va">path_phase</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"Chain_all_Phases.csv"</span>, package <span class="op">=</span> <span class="st">"ArchaeoData"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Read events from ChronoModel</span></span>
 <span><span class="op">(</span><span class="va">chrono_events</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_chronomodel.html">read_chronomodel_events</a></span><span class="op">(</span><span class="va">path_event</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;EventsMCMC&gt;</span></span>
 <span><span class="co">#&gt; - Number of events: 16</span></span>
 <span><span class="co">#&gt; - Number of MCMC samples: 30000</span></span>
 <span></span>
-<span><span class="co">## Phases</span></span>
-<span><span class="va">path_phase</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"Chain_all_Phases.csv"</span>, package <span class="op">=</span> <span class="st">"ArchaeoData"</span><span class="op">)</span></span>
+<span><span class="co">## Read phases from ChronoModel</span></span>
 <span><span class="op">(</span><span class="va">chrono_phases</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_chronomodel.html">read_chronomodel_phases</a></span><span class="op">(</span><span class="va">path_phase</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;PhasesMCMC&gt;</span></span>
 <span><span class="co">#&gt; - Number of phases: 4</span></span>
