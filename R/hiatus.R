@@ -29,7 +29,7 @@ setMethod(
     if (length(dd) < 1) return(no_hiatus)
 
     i <- which(d == max(dd))
-    endpoints <- p[, i]
+    endpoints <- p[, i[[1L]]]
 
     if (p[2, i] == p[1, i]) return(no_hiatus)
 
