@@ -3,6 +3,14 @@
 * Fix package anchors for all Rd `\link{}`.
 
 # ArchaeoPhases 2.0.0
+
+**ArchaeoPhases v2.0 brings a comprehensive package rewrite.** You can install the 1.x releases from the CRAN archives:
+
+``` r
+# install.packages("remotes")
+remotes::install_version("ArchaeoPhases", version = "1.8")
+```
+
 ## Bug fixes & changes
 * Use `stats::density()` instead of `hdrcde::hdr()` for HDPI estimation.
 
