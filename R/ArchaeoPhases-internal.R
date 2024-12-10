@@ -1,9 +1,5 @@
 # HELPERS
 
-`%||%` <- function(x, y) {
-  if (!is.null(x)) x else y
-}
-
 # periode <- Vectorize(
 #   function(epsilon, p1, p2, level) {
 #     # Computes the 'level'th quantile of the minimum of the events included in the phase

@@ -1,3 +1,6 @@
+Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
+options(ArchaeoPhases.calendar = calendar("CE"))
+
 # Occurrence plot ==============================================================
 eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 eve <- eve[1:1000, ]
