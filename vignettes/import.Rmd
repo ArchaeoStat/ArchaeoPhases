@@ -1,7 +1,7 @@
 ---
 title: "Import MCMC Samples"
 author: "A. Philippe, M.-A. Vibet and N. Frerebeau"
-date: "2024-11-05"
+date: "2024-12-12"
 output:
   rmarkdown::html_vignette:
     number_sections: yes
@@ -98,10 +98,11 @@ The phase boundaries cannot be extracted automatically from Oxcal output. Use `a
 
 ``` r
 ## Get phases boundaries from OxCal
-oxcal_phases <- as_phases(oxcal_mcmc,
-                          start = c(2, 5, 19, 24),
-                          stop = c(4, 18, 23, 26),
-                          names = c("IUP", "Ahmarian", "UP", "EPI"))
+oxcal_phases <- phases(
+  x = oxcal_mcmc,
+  groups = list(IUP = c(2, 4), Ahmarian = c(5, 18),
+                UP = c(19, 23), EPI = c(24, 26))
+)
 
 ## Plot phase boundaries
 plot(oxcal_phases)
@@ -131,11 +132,9 @@ The group boundaries cannot be extracted automatically from BCal output. Use `as
 
 ``` r
 ## Get groups boundaries from BCal
-bcal_phases <- as_phases(
-  bcal_mcmc,
-  start = c(6, 9),
-  stop = c(1, 7),
-  names = c("Layer II", "Layer III")
+bcal_phases <- phases(
+  x = bcal_mcmc,
+  groups = list(`Layer II` = c(6, 1), `Layer III` = c(9, 7))
 )
 
 ## Plot group boundaries
