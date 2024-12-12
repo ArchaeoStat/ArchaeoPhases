@@ -361,7 +361,7 @@ setMethod(
     end <- apply(X = x, MARGIN = 1, FUN = get_joint_end, groups = groups)
 
     res <- cbind(start = start, end = end)
-    as_phases(res)
+    as_phases(res, calendar = NULL)
   }
 )
 

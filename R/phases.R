@@ -55,7 +55,7 @@ setMethod(
 setMethod(
   f = "as_phases",
   signature = c(from = "matrix"),
-  definition = function(from, calendar = NULL,
+  definition = function(from, calendar = getOption("ArchaeoPhases.calendar"),
                         start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, iteration = NULL) {
     ## Validation
@@ -77,15 +77,20 @@ setMethod(
     arr[, , 2] <- from[, stop, drop = TRUE]
 
     if (!is.null(calendar)) {
-      ## Coerce to vector
-      dn <- dimnames(arr)
-      d <- dim(arr)
-      dim(arr) <- NULL
+      if (methods::is(from, "EventsMCMC")) {
+        msg <- "%s is already expressed in rata die: %s is ignored."
+        warning(sprintf(msg, sQuote("from"), sQuote("calendar")), call. = FALSE)
+      } else {
+        ## Coerce to vector
+        dn <- dimnames(arr)
+        d <- dim(arr)
+        dim(arr) <- NULL
 
-      ## Convert to rata die
-      arr <- aion::fixed(arr, calendar = calendar)
-      dim(arr) <- d
-      dimnames(arr) <- dn
+        ## Convert to rata die
+        arr <- aion::fixed(arr, calendar = calendar)
+        dim(arr) <- d
+        dimnames(arr) <- dn
+      }
     }
 
     dimnames(arr) <- list(NULL, pha, c("start", "end"))
@@ -104,7 +109,7 @@ setMethod(
 setMethod(
   f = "as_phases",
   signature = c(from = "data.frame"),
-  definition = function(from, calendar,
+  definition = function(from, calendar = getOption("ArchaeoPhases.calendar"),
                         start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, iteration = NULL) {
     from <- data.matrix(from)

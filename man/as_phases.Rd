@@ -12,7 +12,7 @@ as_phases(from, ...)
 
 \S4method{as_phases}{matrix}(
   from,
-  calendar = NULL,
+  calendar = getOption("ArchaeoPhases.calendar"),
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
   names = NULL,
@@ -21,7 +21,7 @@ as_phases(from, ...)
 
 \S4method{as_phases}{data.frame}(
   from,
-  calendar,
+  calendar = getOption("ArchaeoPhases.calendar"),
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
   names = NULL,
@@ -59,7 +59,7 @@ Coerce to Phases
 }
 \examples{
 ## Coerce to phases
-(pha <- as_phases(mcmc_phases, start = c(1, 3), calendar = CE(), iteration = 1))
+(pha <- as_phases(mcmc_phases, calendar = CE(), start = c(1, 3), iteration = 1))
 summary(pha, calendar = CE())
 
 ## Plot phases
@@ -77,14 +77,6 @@ summary(pha1, calendar = CE())
 ## Compute min-max range by group
 pha2 <- phases(eve, groups = list(phase_1 = c(1, 3), phase_2 = c(2, 4)))
 summary(pha2, calendar = CE())
-
-
-zz <- pha@.Data
-head(zz)
-
-head(zz[, 1, ])
-
-head(pha)
 }
 \seealso{
 Other read methods: 
