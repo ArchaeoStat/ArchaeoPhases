@@ -100,7 +100,7 @@ from <a href="https://chronomodel.com/" class="external-link">ChronoModel</a>.</
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Coerce to phases</span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">pha</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_phases.html">as_phases</a></span><span class="op">(</span><span class="va">mcmc_phases</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">pha</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_phases.html">as_phases</a></span><span class="op">(</span><span class="va">mcmc_phases</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PhasesMCMC&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Number of phases: 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Number of MCMC samples: 30000</span>
@@ -157,44 +157,6 @@ from <a href="https://chronomodel.com/" class="external-link">ChronoModel</a>.</
 <span class="r-out co"><span class="r-pr">#&gt;</span> end      -1240 -1235  87 -1833 -1289  -1235 -1181  -719 -1404 -1067</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> duration   561   551 132     5   464    552   639  1157   297   806</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">zz</span> <span class="op">&lt;-</span> <span class="va">pha</span><span class="op">@</span><span class="va">.Data</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">zz</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> , , start</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             P1        P2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -319045.0 -625448.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -273570.0 -629970.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -335555.9 -604871.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -319169.8 -609557.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -323497.0 -706432.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6,] -355422.6 -677593.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> , , end</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             P1        P2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -267769.1 -399848.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -270327.0 -435810.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -231655.0 -431449.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -255757.0 -448294.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -300265.5 -478087.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6,] -263102.0 -444912.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">zz</span><span class="op">[</span>, <span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          start       end</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -319045.0 -267769.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -273570.0 -270327.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -335555.9 -231655.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -319169.8 -255757.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -323497.0 -300265.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6,] -355422.6 -263102.0</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pha</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PhasesMCMC&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Number of phases: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Number of MCMC samples: 6</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
