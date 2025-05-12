@@ -23,7 +23,7 @@
 \item{...}{Further parameters to be passed to \code{\link[=data.frame]{data.frame()}}.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[=calendar]{calendar()}}).}
+calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
 }
 \value{
 A \code{\link{data.frame}} with an extra \code{time} column giving the (decimal) years at

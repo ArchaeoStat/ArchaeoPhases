@@ -1,6 +1,4 @@
 # CLASSES DEFINITION AND INITIALIZATION
-#' @include reexport.R
-NULL
 
 # MCMC =========================================================================
 #' MCMC

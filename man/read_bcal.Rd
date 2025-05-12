@@ -22,7 +22,7 @@ data are to be read from.}
 default of 1.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the calendar
-(see \code{\link[=calendar]{calendar()}}). It should be \code{\link[=BP]{BP()}} unless you change the
+(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[aion:gregorian]{aion::BP()}} unless you change the
 default settings in 'BCal'.}
 }
 \value{

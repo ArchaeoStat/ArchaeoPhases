@@ -34,7 +34,7 @@ as_phases(from, ...)
 \item{...}{Currently not used.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the source
-calendar (see \code{\link[=calendar]{calendar()}}).}
+calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
 
 \item{start}{An \code{\link{integer}} vector specifying the index of the columns
 corresponding to the beginning of the phases. If missing, every other column

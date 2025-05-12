@@ -30,7 +30,7 @@
 \item{x}{An \code{\linkS4class{MCMC}} object.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[=calendar]{calendar()}}).}
+calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
 
 \item{density}{A \code{\link{logical}} scalar: should estimated density be plotted?}
 

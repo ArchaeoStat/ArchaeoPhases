@@ -47,7 +47,7 @@ arguments to this function.}
 object.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[=calendar]{calendar()}}).}
+calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
 
 \item{interval}{A \code{\link{character}} string specifying the confidence interval to
 be drawn. It must be one of "\code{credible}" (credible interval) or "\code{gauss}"

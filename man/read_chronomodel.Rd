@@ -27,7 +27,7 @@ data are to be read from.}
 \item{...}{Currently not used.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the calendar
-(see \code{\link[=calendar]{calendar()}}). It should be \code{\link[=CE]{CE()}} unless you change the
+(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[aion:gregorian]{aion::CE()}} unless you change the
 default settings in 'ChronoModel'.}
 
 \item{sep}{A \code{\link{character}} string specifying the field separator character

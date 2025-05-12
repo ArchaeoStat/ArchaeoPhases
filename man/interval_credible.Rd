@@ -19,7 +19,7 @@ interval_credible(x, ...)
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[=calendar]{calendar()}}).}
+calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
 }
 \value{
 Returns a \code{\link{list}} of \code{numeric} \code{\link{matrix}}.

@@ -17,7 +17,7 @@
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target calendar
-(see \code{\link[=calendar]{calendar()}}).}
+(see \code{\link[aion:calendar]{aion::calendar()}}).}
 }
 \value{
 A \code{\link{data.frame}} where the rows correspond to the chains of interest and
