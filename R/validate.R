@@ -90,16 +90,13 @@ setValidity(
   Class = "OccurrenceEvents",
   method = function(object) {
     # Get data
+    n <- length(object@.Id)
     events <- object@events
-    start <- object@start
-    end <- object@end
     level <- object@level
     hash <- object@hash
-    n <- length(events)
 
     cnd <- list(
-      arkhe::validate(arkhe::assert_length(start, n)),
-      arkhe::validate(arkhe::assert_length(end, n)),
+      arkhe::validate(arkhe::assert_length(events, n)),
       arkhe::validate(arkhe::assert_length(level, 1)),
       arkhe::validate(arkhe::assert_length(hash, 1, allow_empty = TRUE))
     )

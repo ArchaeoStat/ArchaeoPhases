@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='504.00pt' height='504.00pt' viewBox='0 0 504.00 504.00'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='504.00pt' height='504.00pt' viewBox='0 0 504.00 504.00'>
+<g class='svglite'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -11,6 +12,10 @@
     }
     .svglite text {
       white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
     }
   ]]></style>
 </defs>
@@ -28,18 +33,10 @@
   </clipPath>
 </defs>
 <g clip-path='url(#cpNTkuMDR8NDczLjc2fDU5LjA0fDQzMC41Ng==)'>
-<line x1='74.40' y1='416.80' x2='152.00' y2='416.80' style='stroke-width: 0.75;' />
-<line x1='198.03' y1='302.13' x2='273.01' y2='302.13' style='stroke-width: 0.75;' />
-<line x1='275.35' y1='187.47' x2='401.12' y2='187.47' style='stroke-width: 0.75;' />
-<line x1='335.03' y1='72.80' x2='458.40' y2='72.80' style='stroke-width: 0.75;' />
-<circle cx='74.40' cy='416.80' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
-<circle cx='198.03' cy='302.13' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
-<circle cx='275.35' cy='187.47' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
-<circle cx='335.03' cy='72.80' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
-<circle cx='152.00' cy='416.80' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
-<circle cx='273.01' cy='302.13' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
-<circle cx='401.12' cy='187.47' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
-<circle cx='458.40' cy='72.80' r='2.70' style='stroke-width: 0.75; stroke: none; fill: #000000;' />
+<line x1='74.40' y1='416.80' x2='152.00' y2='416.80' style='stroke-width: 0.75; stroke-linecap: butt;' />
+<line x1='198.03' y1='302.13' x2='273.01' y2='302.13' style='stroke-width: 0.75; stroke-linecap: butt;' />
+<line x1='275.35' y1='187.47' x2='401.12' y2='187.47' style='stroke-width: 0.75; stroke-linecap: butt;' />
+<line x1='335.03' y1='72.80' x2='458.40' y2='72.80' style='stroke-width: 0.75; stroke-linecap: butt;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHw1MDQuMDA=)'>
 <line x1='66.81' y1='430.56' x2='397.53' y2='430.56' style='stroke-width: 0.75;' />
@@ -51,17 +48,12 @@
 <text x='177.05' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='30.69px' lengthAdjust='spacingAndGlyphs'>-1500</text>
 <text x='287.29' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='30.69px' lengthAdjust='spacingAndGlyphs'>-1000</text>
 <text x='397.53' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='24.02px' lengthAdjust='spacingAndGlyphs'>-500</text>
-<line x1='59.04' y1='416.80' x2='59.04' y2='72.80' style='stroke-width: 0.75;' />
-<line x1='59.04' y1='416.80' x2='51.84' y2='416.80' style='stroke-width: 0.75;' />
-<line x1='59.04' y1='302.13' x2='51.84' y2='302.13' style='stroke-width: 0.75;' />
-<line x1='59.04' y1='187.47' x2='51.84' y2='187.47' style='stroke-width: 0.75;' />
-<line x1='59.04' y1='72.80' x2='51.84' y2='72.80' style='stroke-width: 0.75;' />
 <text x='44.64' y='420.93' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
 <text x='44.64' y='306.26' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
 <text x='44.64' y='191.60' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
 <text x='44.64' y='76.93' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>4</text>
 <polygon points='59.04,430.56 473.76,430.56 473.76,59.04 59.04,59.04 ' style='stroke-width: 0.75;' />
-<text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='112.07px' lengthAdjust='spacingAndGlyphs'>Gregorian years è. c.</text>
-<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='62.04px' lengthAdjust='spacingAndGlyphs'>Occurrence</text>
+<text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='106.03px' lengthAdjust='spacingAndGlyphs'>Gregorian years CE</text>
+</g>
 </g>
 </svg>

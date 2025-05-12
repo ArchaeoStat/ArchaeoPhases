@@ -48,8 +48,8 @@ setMethod("as.data.frame", "ActivityEvents", as.data.frame.ActivityEvents)
 as.data.frame.OccurrenceEvents <- function(x, ..., calendar = get_calendar()) {
   data.frame(
     events = x@events,
-    start = aion::as_year(x@start, calendar = calendar),
-    end = aion::as_year(x@end, calendar = calendar)
+    start = aion::start(x, calendar = calendar),
+    end = aion::end(x, calendar = calendar)
   )
 }
 
@@ -61,21 +61,13 @@ setMethod("as.data.frame", "OccurrenceEvents", as.data.frame.OccurrenceEvents)
 #' @export
 #' @method as.data.frame TimeRange
 as.data.frame.TimeRange <- function(x, ..., calendar = get_calendar()) {
-
-  ok <- !is.na(x@start)
-  start <- x@start[ok]
-  end <- x@end[ok]
-  duration <- abs(end - start)
-
-  ## Change calendar
-  if (!is.null(calendar) && length(ok) > 0) {
-    start <- aion::as_year(start, calendar = calendar)
-    end <- aion::as_year(end, calendar = calendar)
-    duration <- aion::as_year(duration, calendar = calendar)
-  }
-
-  data.frame(start = start, end = end, duration = duration,
-             row.names = x@labels[ok])
+  ## Build a data frame
+  data.frame(
+    label = labels(x),
+    start = aion::start(x, calendar = calendar),
+    end = aion::end(x, calendar = calendar),
+    duration = aion::span(x, calendar = calendar)
+  )
 }
 
 #' @export

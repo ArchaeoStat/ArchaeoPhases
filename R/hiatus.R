@@ -66,11 +66,20 @@ setMethod(
         event[i, j] <- paste(z[i], z[j], sep = "-")
       }
     }
+    event <- as.character(event)
+    start <- as.numeric(start)
+    stop <- as.numeric(stop)
+
+    ## Remove wrong results
+    keep <- which(start <= stop)
+    event <- event[keep]
+    start <- start[keep]
+    stop <- stop[keep]
 
     .TimeRange(
-      start = start,
-      end = stop,
-      labels = event,
+      .Id = as.character(event),
+      .Start = aion::as_fixed(start),
+      .End = aion::as_fixed(stop),
       hash = get_hash(x)
     )
   }
@@ -100,11 +109,20 @@ setMethod(
         phase[i, j] <- paste(z[i], z[j], sep = "-")
       }
     }
+    phase <- as.character(phase)
+    start <- as.numeric(start)
+    stop <- as.numeric(stop)
+
+    ## Remove wrong results
+    keep <- which(start <= stop)
+    phase <- phase[keep]
+    start <- start[keep]
+    stop <- stop[keep]
 
     .TimeRange(
-      start = start,
-      end = stop,
-      labels = phase,
+      .Id = as.character(phase),
+      .Start = aion::as_fixed(start),
+      .End = aion::as_fixed(stop),
       hash = get_hash(x)
     )
   }

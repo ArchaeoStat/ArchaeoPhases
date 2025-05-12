@@ -13,23 +13,29 @@ An S4 class to store the result of an \link[=occurrence]{occurrence} plot.
 \describe{
 \item{\code{events}}{An \code{\link{integer}} vector giving the occurrence.}
 
-\item{\code{start}}{A \code{\link{numeric}} vector giving the lower boundaries of the
-credibility interval expressed in \emph{\link[aion:RataDie-class]{rata die}}.}
-
-\item{\code{end}}{A \code{\link{numeric}} vector giving the upper boundaries of the
-credibility interval expressed in \emph{\link[aion:RataDie-class]{rata die}}.}
-
 \item{\code{level}}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{\code{hash}}{A \code{\link{character}} string giving the 32-byte MD5 hash of the
 original data file.}
 }}
 
+\note{
+This class inherits from \code{\link[aion:TimeIntervals-class]{aion::TimeIntervals}}.
+}
 \section{Coerce}{
 
 In the code snippets below, \code{x} is an \code{OccurrenceEvents} object.
 \describe{
 \item{\code{as.data.frame(x)}}{Coerces to a \code{\link{data.frame}}.}
+}
+}
+
+\section{Plot}{
+
+In the code snippets below, \code{x} is a \code{OccurrenceEvents} object.
+\describe{
+\item{\code{plot(x)}}{Results in a graphic being displayed
+(invisibly returns \code{x}).}
 }
 }
 

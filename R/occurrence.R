@@ -19,9 +19,10 @@ setMethod(
     inter <- do.call(rbind, inter)
 
     .OccurrenceEvents(
+      .Id = as.character(ord),
+      .Start = aion::as_fixed(inter[, "start"]),
+      .End = aion::as_fixed(inter[, "end"]),
       events = ord,
-      start = inter[, "start"],
-      end = inter[, "end"],
       level = level,
       hash = get_hash(object)
     )

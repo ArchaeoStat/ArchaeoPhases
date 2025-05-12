@@ -67,9 +67,9 @@ setMethod(
     diag(end) <- result[, 2]
 
     .TimeRange(
-      start = start,
-      end = end,
-      labels = pha,
+      .Id = z,
+      .Start = aion::as_fixed(result[, 1]),
+      .End = aion::as_fixed(result[, 2]),
       hash = get_hash(x)
     )
   }

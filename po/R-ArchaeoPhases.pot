@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ArchaeoPhases 2.0.0.9000\n"
-"POT-Creation-Date: 2025-05-12 16:43+0200\n"
+"POT-Creation-Date: 2025-05-12 18:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,11 +50,7 @@ msgstr ""
 msgid "Activity"
 msgstr ""
 
-#: plot.R:523
-msgid "Occurrence"
-msgstr ""
-
-#: plot.R:610
+#: plot.R:537
 msgid "Depth"
 msgstr ""
 

@@ -1,5 +1,11 @@
 # CLASSES DEFINITION AND INITIALIZATION
 
+# Import classes ===============================================================
+#' @importClassesFrom aion RataDie
+#' @importClassesFrom aion TimeSeries
+#' @importClassesFrom aion TimeIntervals
+NULL
+
 # MCMC =========================================================================
 #' MCMC
 #'
@@ -99,16 +105,21 @@
 #' Time Range
 #'
 #' An S4 class to represent time ranges.
-#' @slot start,end A `numeric` [`matrix`] giving the lower and upper
-#'  boundaries expressed in *[rata die][aion::RataDie-class]*.
-#' @slot labels A [`character`] vector specifying the name of the events/phases.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
 #' @section Coerce:
-#'  In the code snippets below, `x` is a `CumulativeEvents` object.
+#'  In the code snippets below, `x` is a `TimeRange` object.
 #'  \describe{
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
+#' @section Plot:
+#'  In the code snippets below, `x` is a `TimeRange` object.
+#'  \describe{
+#'   \item{`plot(x)`}{Results in a graphic being displayed
+#'   (invisibly returns `x`).}
+#'  }
+#' @note
+#'  This class inherits from [`aion::TimeIntervals-class`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class
@@ -117,11 +128,9 @@
 .TimeRange <- setClass(
   Class = "TimeRange",
   slots = c(
-    start = "matrix",
-    end = "matrix",
-    labels = "matrix",
     hash = "character"
-  )
+  ),
+  contains = "TimeIntervals"
 )
 
 # Tempo ========================================================================
@@ -196,10 +205,6 @@
 #'
 #' An S4 class to store the result of an [occurrence][occurrence()] plot.
 #' @slot events An [`integer`] vector giving the occurrence.
-#' @slot start A [`numeric`] vector giving the lower boundaries of the
-#'  credibility interval expressed in *[rata die][aion::RataDie-class]*.
-#' @slot end A [`numeric`] vector giving the upper boundaries of the
-#'  credibility interval expressed in *[rata die][aion::RataDie-class]*.
 #' @slot level A length-one [`numeric`] vector giving the confidence level.
 #' @slot hash A [`character`] string giving the 32-byte MD5 hash of the
 #'  original data file.
@@ -208,6 +213,14 @@
 #'  \describe{
 #'   \item{`as.data.frame(x)`}{Coerces to a [`data.frame`].}
 #'  }
+#' @section Plot:
+#'  In the code snippets below, `x` is a `OccurrenceEvents` object.
+#'  \describe{
+#'   \item{`plot(x)`}{Results in a graphic being displayed
+#'   (invisibly returns `x`).}
+#'  }
+#' @note
+#'  This class inherits from [`aion::TimeIntervals-class`].
 #' @author N. Frerebeau
 #' @family classes
 #' @docType class
@@ -217,11 +230,10 @@
   Class = "OccurrenceEvents",
   slots = c(
     events = "integer",
-    start = "numeric",
-    end = "numeric",
     level = "numeric",
     hash = "character"
-  )
+  ),
+  contains = "TimeIntervals"
 )
 
 # Age-Depth Model ==============================================================

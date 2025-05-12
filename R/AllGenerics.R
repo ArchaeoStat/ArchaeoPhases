@@ -371,24 +371,7 @@ setGeneric(
 #' events of a specified kind occurred.
 #' @param object An [`EventsMCMC-class`] object.
 #' @param level A length-one [`numeric`] vector giving the confidence level.
-#' @param x An [`OccurrenceEvents-class`] object.
-#' @param calendar A [`aion::TimeScale-class`] object specifying the target
-#'  calendar (see [calendar()]).
-#' @param main A [`character`] string giving a main title for the plot.
-#' @param sub A [`character`] string giving a subtitle for the plot.
-#' @param ann A [`logical`] scalar: should the default annotation (title and x
-#'  and y axis labels) appear on the plot?
-#' @param axes A [`logical`] scalar: should axes be drawn on the plot?
-#' @param frame.plot A [`logical`] scalar: should a box be drawn around the
-#'  plot?
-#' @param panel.first An an `expression` to be evaluated after the plot axes are
-#'  set up but before any plotting takes place. This can be useful for drawing
-#'  background grids.
-#' @param panel.last An `expression` to be evaluated after plotting has taken
-#'  place but before the axes, title and box are added.
-#' @param ... Other [graphical parameters][graphics::par] may also be passed as
-#'  arguments to this function, particularly, `border`, `col`, `lwd`, `lty` or
-#'  `pch`.
+#' @param ... Currently not used.
 #' @details
 #'  If we have \eqn{k} events, then we can estimate the calendar date \eqn{t}
 #'  corresponding to the smallest date such that the number of events observed
@@ -398,9 +381,7 @@ setGeneric(
 #'  interval or the highest posterior density (HPD) region for a given `level`
 #'  of confidence.
 #' @return
-#'  * `occurrence()` returns an [`OccurrenceEvents-class`] object.
-#'  * `plot()` is called it for its side-effects: it results in a graphic being
-#'    displayed (invisibly returns `x`).
+#'  An [`OccurrenceEvents-class`] object.
 #' @return An [`OccurrenceEvents-class`] object.
 #' @example inst/examples/ex-occurrence.R
 #' @author A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau
