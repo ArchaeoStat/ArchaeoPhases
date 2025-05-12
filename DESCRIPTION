@@ -49,6 +49,7 @@ Imports:
 Suggests: 
     ArchaeoData,
     coda,
+    fontquiver,
     knitr,
     rmarkdown,
     rsvg,

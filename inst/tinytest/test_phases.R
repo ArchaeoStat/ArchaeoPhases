@@ -12,11 +12,7 @@ expect_identical(names(pha2), colnames(pha2))
 # Plot =========================================================================
 if (at_home()) {
   using("tinysnapshot")
-  options(tinysnapshot_device = "svglite")
-  options(tinysnapshot_height = 7) # inches
-  options(tinysnapshot_width = 7)
-  options(tinysnapshot_tol = 1000) # pixels
-  options(tinysnapshot_os = "Linux")
+  source("helpers.R")
 
   ## Phases --------------------------------------------------------------------
   plot_phase_decr <- function() plot(pha1, decreasing = TRUE)

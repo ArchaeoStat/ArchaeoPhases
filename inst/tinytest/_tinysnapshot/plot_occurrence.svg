@@ -47,21 +47,21 @@
 <line x1='177.05' y1='430.56' x2='177.05' y2='437.76' style='stroke-width: 0.75;' />
 <line x1='287.29' y1='430.56' x2='287.29' y2='437.76' style='stroke-width: 0.75;' />
 <line x1='397.53' y1='430.56' x2='397.53' y2='437.76' style='stroke-width: 0.75;' />
-<text x='66.81' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='34.89px' lengthAdjust='spacingAndGlyphs'>-2000</text>
-<text x='177.05' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='34.89px' lengthAdjust='spacingAndGlyphs'>-1500</text>
-<text x='287.29' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='34.89px' lengthAdjust='spacingAndGlyphs'>-1000</text>
-<text x='397.53' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='27.25px' lengthAdjust='spacingAndGlyphs'>-500</text>
+<text x='66.81' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='30.69px' lengthAdjust='spacingAndGlyphs'>-2000</text>
+<text x='177.05' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='30.69px' lengthAdjust='spacingAndGlyphs'>-1500</text>
+<text x='287.29' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='30.69px' lengthAdjust='spacingAndGlyphs'>-1000</text>
+<text x='397.53' y='456.48' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='24.02px' lengthAdjust='spacingAndGlyphs'>-500</text>
 <line x1='59.04' y1='416.80' x2='59.04' y2='72.80' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='416.80' x2='51.84' y2='416.80' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='302.13' x2='51.84' y2='302.13' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='187.47' x2='51.84' y2='187.47' style='stroke-width: 0.75;' />
 <line x1='59.04' y1='72.80' x2='51.84' y2='72.80' style='stroke-width: 0.75;' />
-<text x='44.64' y='421.17' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='44.64' y='306.51' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='44.64' y='191.84' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='44.64' y='77.17' text-anchor='end' style='font-size: 12.00px; font-family: "Arial";' textLength='7.64px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='44.64' y='420.93' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='44.64' y='306.26' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='44.64' y='191.60' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='44.64' y='76.93' text-anchor='end' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>4</text>
 <polygon points='59.04,430.56 473.76,430.56 473.76,59.04 59.04,59.04 ' style='stroke-width: 0.75;' />
-<text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='116.19px' lengthAdjust='spacingAndGlyphs'>Gregorian years CE</text>
-<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Arial";' textLength='68.64px' lengthAdjust='spacingAndGlyphs'>Occurrence</text>
+<text x='266.40' y='485.28' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='112.07px' lengthAdjust='spacingAndGlyphs'>Gregorian years è. c.</text>
+<text transform='translate(12.96,244.80) rotate(-90)' text-anchor='middle' style='font-size: 12.00px; font-family: "Liberation Sans";' textLength='62.04px' lengthAdjust='spacingAndGlyphs'>Occurrence</text>
 </g>
 </svg>
