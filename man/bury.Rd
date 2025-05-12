@@ -20,7 +20,7 @@ bury(object, depth, ...)
 \S4method{plot}{AgeDepthModel,missing}(
   x,
   level = 0.95,
-  calendar = getOption("ArchaeoPhases.calendar"),
+  calendar = get_calendar(),
   main = NULL,
   sub = NULL,
   ann = graphics::par("ann"),

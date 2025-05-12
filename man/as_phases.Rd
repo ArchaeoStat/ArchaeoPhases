@@ -12,7 +12,7 @@ as_phases(from, ...)
 
 \S4method{as_phases}{matrix}(
   from,
-  calendar = getOption("ArchaeoPhases.calendar"),
+  calendar = get_calendar(),
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
   names = NULL,
@@ -21,7 +21,7 @@ as_phases(from, ...)
 
 \S4method{as_phases}{data.frame}(
   from,
-  calendar = getOption("ArchaeoPhases.calendar"),
+  calendar = get_calendar(),
   start = seq(from = 1, to = ncol(from), by = 2),
   stop = start + 1,
   names = NULL,

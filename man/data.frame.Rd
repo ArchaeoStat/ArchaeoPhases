@@ -9,13 +9,13 @@
 \alias{as.data.frame,TimeRange-method}
 \title{Coerce to a Data Frame}
 \usage{
-\S4method{as.data.frame}{CumulativeEvents}(x, ..., calendar = getOption("ArchaeoPhases.calendar"))
+\S4method{as.data.frame}{CumulativeEvents}(x, ..., calendar = get_calendar())
 
-\S4method{as.data.frame}{ActivityEvents}(x, ..., calendar = getOption("ArchaeoPhases.calendar"))
+\S4method{as.data.frame}{ActivityEvents}(x, ..., calendar = get_calendar())
 
-\S4method{as.data.frame}{OccurrenceEvents}(x, ..., calendar = getOption("ArchaeoPhases.calendar"))
+\S4method{as.data.frame}{OccurrenceEvents}(x, ..., calendar = get_calendar())
 
-\S4method{as.data.frame}{TimeRange}(x, ..., calendar = getOption("ArchaeoPhases.calendar"))
+\S4method{as.data.frame}{TimeRange}(x, ..., calendar = get_calendar())
 }
 \arguments{
 \item{x}{An object.}

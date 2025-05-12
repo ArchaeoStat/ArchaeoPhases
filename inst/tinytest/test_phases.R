@@ -1,5 +1,4 @@
-Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
-options(ArchaeoPhases.calendar = calendar("CE"))
+Sys.setenv(LANGUAGE = "en") # Force locale
 
 # Build ========================================================================
 eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)

@@ -9,7 +9,7 @@ NULL
 setMethod(
   f = "interval_credible",
   signature = c(x = "MCMC"),
-  definition = function(x, level = 0.95, calendar = getOption("ArchaeoPhases.calendar")) {
+  definition = function(x, level = 0.95, calendar = get_calendar()) {
     cred <- apply(X = x, MARGIN = 2, FUN = arkhe::interval_credible,
                   level = level, simplify = FALSE)
     names(cred) <- names(x)
@@ -33,7 +33,7 @@ setMethod(
 setMethod(
   f = "interval_hdr",
   signature = c(x = "MCMC", y = "missing"),
-  definition = function(x, level = 0.95, calendar = getOption("ArchaeoPhases.calendar"), ...) {
+  definition = function(x, level = 0.95, calendar = get_calendar(), ...) {
     hpd <- apply(X = x, MARGIN = 2, FUN = arkhe::interval_hdr,
                  level = level, ..., simplify = FALSE)
     names(hpd) <- names(x)

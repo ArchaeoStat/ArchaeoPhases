@@ -7,9 +7,9 @@
 \alias{summary,PhasesMCMC-method}
 \title{Marginal Summary Statistics for Multiple MCMC Chains}
 \usage{
-\S4method{summary}{MCMC}(object, level = 0.95, calendar = getOption("ArchaeoPhases.calendar"))
+\S4method{summary}{MCMC}(object, level = 0.95, calendar = get_calendar())
 
-\S4method{summary}{PhasesMCMC}(object, level = 0.95, calendar = getOption("ArchaeoPhases.calendar"))
+\S4method{summary}{PhasesMCMC}(object, level = 0.95, calendar = get_calendar())
 }
 \arguments{
 \item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}

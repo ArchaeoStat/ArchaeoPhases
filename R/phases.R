@@ -55,7 +55,7 @@ setMethod(
 setMethod(
   f = "as_phases",
   signature = c(from = "matrix"),
-  definition = function(from, calendar = getOption("ArchaeoPhases.calendar"),
+  definition = function(from, calendar = get_calendar(),
                         start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, iteration = NULL) {
     ## Validation
@@ -109,7 +109,7 @@ setMethod(
 setMethod(
   f = "as_phases",
   signature = c(from = "data.frame"),
-  definition = function(from, calendar = getOption("ArchaeoPhases.calendar"),
+  definition = function(from, calendar = get_calendar(),
                         start = seq(from = 1, to = ncol(from), by = 2),
                         stop = start + 1, names = NULL, iteration = NULL) {
     from <- data.matrix(from)

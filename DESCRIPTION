@@ -30,10 +30,10 @@ URL: https://ArchaeoStat.github.io/ArchaeoPhases/,
     https://github.com/ArchaeoStat/ArchaeoPhases
 BugReports: https://github.com/ArchaeoStat/ArchaeoPhases/issues
 Depends: 
-    R (>= 3.5)
+    R (>= 3.5),
+    aion (>= 1.5.0)
 Imports: 
-    arkhe (>= 1.9.0),
-    aion (>= 1.3.0),
+    arkhe (>= 1.11.0),
     graphics,
     grDevices,
     methods,

@@ -20,10 +20,8 @@ Statistical analysis of archaeological dates and groups of dates. This package a
 }
 \section{Package options}{
 
-\code{ArchaeoPhases} uses the following \code{\link[=options]{options()}} to configure behaviour:
+\pkg{ArchaeoPhases} uses the following \code{\link[=options]{options()}} to configure behaviour:
 \itemize{
-\item \code{ArchaeoPhases.calendar}: a \code{\link[aion:TimeScale-class]{aion::TimeScale}} object (default
-calendar for printing).
 \item \code{ArchaeoPhases.grid}: a \code{\link{numeric}} value specifying the number of equally
 spaced points at which densities are to be estimated (defaults to
 \eqn{512}). Should be a power of \eqn{2}.

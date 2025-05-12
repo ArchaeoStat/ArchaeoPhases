@@ -9,11 +9,7 @@
 \usage{
 interval_credible(x, ...)
 
-\S4method{interval_credible}{MCMC}(
-  x,
-  level = 0.95,
-  calendar = getOption("ArchaeoPhases.calendar")
-)
+\S4method{interval_credible}{MCMC}(x, level = 0.95, calendar = get_calendar())
 }
 \arguments{
 \item{x}{An \code{\linkS4class{MCMC}} object containing the output of the MCMC algorithm.}

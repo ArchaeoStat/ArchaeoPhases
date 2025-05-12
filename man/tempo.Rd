@@ -12,7 +12,7 @@ tempo(object, ...)
 
 \S4method{plot}{CumulativeEvents,missing}(
   x,
-  calendar = getOption("ArchaeoPhases.calendar"),
+  calendar = get_calendar(),
   interval = c("credible", "gauss"),
   col.tempo = "#004488",
   col.interval = "grey",

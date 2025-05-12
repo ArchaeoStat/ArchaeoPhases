@@ -22,7 +22,7 @@ activity(object, ...)
 
 \S4method{plot}{ActivityEvents,missing}(
   x,
-  calendar = getOption("ArchaeoPhases.calendar"),
+  calendar = get_calendar(),
   main = NULL,
   sub = NULL,
   ann = graphics::par("ann"),

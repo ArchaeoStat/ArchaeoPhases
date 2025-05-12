@@ -9,7 +9,7 @@ setMethod(
   f = "summary",
   signature = "MCMC",
   definition = function(object, level = 0.95,
-                        calendar = getOption("ArchaeoPhases.calendar")) {
+                        calendar = get_calendar()) {
     x <- apply(
       X = object,
       MARGIN = 2,
@@ -28,7 +28,7 @@ setMethod(
   f = "summary",
   signature = "PhasesMCMC",
   definition = function(object, level = 0.95,
-                        calendar = getOption("ArchaeoPhases.calendar")) {
+                        calendar = get_calendar()) {
     m <- dim(object)[2L]
     pha <- vector(mode = "list", length = m)
     names(pha) <- dimnames(object)[[2L]]
@@ -74,7 +74,7 @@ stats_marginal <- function(x, mean = TRUE, sd = TRUE, map = TRUE,
                            quantiles = TRUE, probs = c(0, 0.25, 0.5, 0.75, 1),
                            credible = TRUE, level = 0.95,
                            digits = getOption("ArchaeoPhases.precision"),
-                           calendar = getOption("ArchaeoPhases.calendar")) {
+                           calendar = get_calendar()) {
   ## Defaults
   moy <- mod <- quant <- ec <- ci <- NA_real_
 

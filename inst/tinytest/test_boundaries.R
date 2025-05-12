@@ -1,5 +1,4 @@
-Sys.setlocale("LC_MESSAGES", 'en_GB.UTF-8') # Force locale
-options(ArchaeoPhases.calendar = calendar("CE"))
+Sys.setenv(LANGUAGE = "en") # Force locale
 
 # Transition bewteen phases ====================================================
 pha <- as_phases(mcmc_phases, start = c(1, 3), calendar = CE(), iteration = 1)

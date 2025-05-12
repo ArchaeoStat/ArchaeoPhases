@@ -1,7 +1,6 @@
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.ArchaeoPhases <- list(
-    ArchaeoPhases.calendar = aion::CE(),
     ArchaeoPhases.grid = 512,
     ArchaeoPhases.precision = 0,
     ArchaeoPhases.progress = interactive()

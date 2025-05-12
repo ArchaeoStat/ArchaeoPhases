@@ -5,7 +5,7 @@ NULL
 # MCMC =========================================================================
 #' @export
 #' @method plot MCMC
-plot.MCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+plot.MCMC <- function(x, calendar = get_calendar(),
                       density = TRUE, interval = NULL, level = 0.95,
                       sort = TRUE, decreasing = TRUE,
                       main = NULL, sub = NULL,
@@ -153,7 +153,7 @@ setMethod("plot", c(x = "MCMC", y = "missing"), plot.MCMC)
 # PhasesMCMC ===================================================================
 #' @export
 #' @method plot PhasesMCMC
-plot.PhasesMCMC <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+plot.PhasesMCMC <- function(x, calendar = get_calendar(),
                             density = TRUE, range = TRUE, succession = NULL,
                             level = 0.95, sort = TRUE, decreasing = TRUE,
                             legend = TRUE, main = NULL, sub = NULL,
@@ -319,7 +319,7 @@ setMethod("plot", c(x = "PhasesMCMC", y = "missing"), plot.PhasesMCMC)
 # TempoEvents ==================================================================
 #' @export
 #' @method plot CumulativeEvents
-plot.CumulativeEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+plot.CumulativeEvents <- function(x, calendar = get_calendar(),
                                   interval = c("credible", "gauss"),
                                   col.tempo = "#004488", col.interval = "grey",
                                   main = NULL, sub = NULL, ann = graphics::par("ann"),
@@ -389,7 +389,7 @@ setMethod("plot", c(x = "CumulativeEvents", y = "missing"), plot.CumulativeEvent
 # ActivityEvents ===============================================================
 #' @export
 #' @method plot ActivityEvents
-plot.ActivityEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+plot.ActivityEvents <- function(x, calendar = get_calendar(),
                                 main = NULL, sub = NULL,
                                 ann = graphics::par("ann"),
                                 axes = TRUE, frame.plot = axes,
@@ -462,7 +462,7 @@ setMethod("plot", c(x = "ActivityEvents", y = "missing"), plot.ActivityEvents)
 # OccurrenceEvents =============================================================
 #' @export
 #' @method plot OccurrenceEvents
-plot.OccurrenceEvents <- function(x, calendar = getOption("ArchaeoPhases.calendar"),
+plot.OccurrenceEvents <- function(x, calendar = get_calendar(),
                                   main = NULL, sub = NULL,
                                   ann = graphics::par("ann"),
                                   axes = TRUE, frame.plot = axes,
@@ -536,7 +536,7 @@ setMethod("plot", c(x = "OccurrenceEvents", y = "missing"), plot.OccurrenceEvent
 #' @export
 #' @method plot AgeDepthModel
 plot.AgeDepthModel <- function(x, level = 0.95,
-                               calendar = getOption("ArchaeoPhases.calendar"),
+                               calendar = get_calendar(),
                                main = NULL, sub = NULL,
                                ann = graphics::par("ann"),
                                axes = TRUE, frame.plot = axes,

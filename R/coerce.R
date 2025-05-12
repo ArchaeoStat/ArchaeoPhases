@@ -5,7 +5,7 @@ NULL
 # To data.frame ================================================================
 #' @export
 #' @method as.data.frame CumulativeEvents
-as.data.frame.CumulativeEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
+as.data.frame.CumulativeEvents <- function(x, ..., calendar = get_calendar()) {
   tmp <- data.frame(
     time = aion::time(x, calendar = calendar),
     estimate = x[, 1, 1, drop = TRUE]
@@ -34,7 +34,7 @@ setMethod("as.data.frame", "CumulativeEvents", as.data.frame.CumulativeEvents)
 
 #' @export
 #' @method as.data.frame ActivityEvents
-as.data.frame.ActivityEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
+as.data.frame.ActivityEvents <- function(x, ..., calendar = get_calendar()) {
   methods::callNextMethod() # Method for 'TimeSeries'
 }
 
@@ -45,7 +45,7 @@ setMethod("as.data.frame", "ActivityEvents", as.data.frame.ActivityEvents)
 
 #' @export
 #' @method as.data.frame OccurrenceEvents
-as.data.frame.OccurrenceEvents <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
+as.data.frame.OccurrenceEvents <- function(x, ..., calendar = get_calendar()) {
   data.frame(
     events = x@events,
     start = aion::as_year(x@start, calendar = calendar),
@@ -60,7 +60,7 @@ setMethod("as.data.frame", "OccurrenceEvents", as.data.frame.OccurrenceEvents)
 
 #' @export
 #' @method as.data.frame TimeRange
-as.data.frame.TimeRange <- function(x, ..., calendar = getOption("ArchaeoPhases.calendar")) {
+as.data.frame.TimeRange <- function(x, ..., calendar = get_calendar()) {
 
   ok <- !is.na(x@start)
   start <- x@start[ok]
@@ -92,7 +92,7 @@ setMethod(
   signature = "MCMC",
   definition = function(from, chains = 1) {
     ## Validation
-    arkhe::needs("coda")
+    arkhe::assert_package("coda")
 
     L <- nrow(from) / chains
     obj <- vector(mode = "list", length = chains)

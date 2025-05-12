@@ -8,7 +8,7 @@
 \usage{
 \S4method{plot}{MCMC,missing}(
   x,
-  calendar = getOption("ArchaeoPhases.calendar"),
+  calendar = get_calendar(),
   density = TRUE,
   interval = NULL,
   level = 0.95,
