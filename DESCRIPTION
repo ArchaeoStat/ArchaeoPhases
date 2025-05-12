@@ -8,10 +8,16 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-5331-5087")),
     person("Marie-Anne", "Vibet", role = "aut",
            comment = c(ORCID = "0000-0003-4003-3141")),
+    person("Nicolas", "Frerebeau", , "nicolas.frerebeau@u-bordeaux-montaigne.fr", role = "aut",
+           comment = c(ORCID = "0000-0001-5759-4944")),
     person("Thomas S.", "Dye", role = "ctb",
            comment = c(ORCID = "0000-0001-8116-782X")),
-    person("Nicolas", "Frerebeau", , "nicolas.frerebeau@u-bordeaux-montaigne.fr", role = "aut",
-           comment = c(ORCID = "0000-0001-5759-4944"))
+    person("Nantes Université", role = "fnd",
+           comment = c(ROR = "03gnr7b55")),
+    person("Université Bordeaux Montaigne", role = "fnd",
+           comment = c(ROR = "03pbgwk21")),
+    person("CNRS", role = "fnd",
+           comment = c(ROR = "02feahw73"))
   )
 Maintainer: Anne Philippe <anne.philippe@univ-nantes.fr>
 Description: Statistical analysis of archaeological dates and groups of
@@ -55,7 +61,7 @@ Additional_repositories: https://archaeostat.r-universe.dev
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.2.9000
 Collate: 
     'reexport.R'
     'AllClasses.R'

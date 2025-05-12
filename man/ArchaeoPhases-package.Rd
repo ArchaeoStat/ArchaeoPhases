@@ -10,13 +10,18 @@ Statistical analysis of archaeological dates and groups of dates. This package a
 }
 \details{
 \tabular{ll}{
-\strong{Package:} \tab ArchaeoPhases \cr
-\strong{Type:} \tab Package \cr
-\strong{Version:} \tab 2.0.0 \cr
-\strong{License:} \tab GPL-3 \cr
-\strong{Zenodo:} \tab \doi{10.5281/zenodo.8087121} \cr
-\strong{JSS:} \tab \doi{10.18637/jss.v093.c01} \cr
+\strong{Version} \tab 2.0.0 \cr
+\strong{License} \tab GPL-3 \cr
+\strong{CRAN DOI} \tab \doi{10.32614/CRAN.package.ArchaeoPhases} \cr
+\strong{Zenodo DOI} \tab \doi{10.5281/zenodo.8087121} \cr
+\strong{JSS DOI} \tab \doi{10.18637/jss.v093.c01} \cr
 }
+
+Laboratoire de Mathématiques Jean Leray (UMR 6629)\cr
+2, rue de la Houssinière\cr
+BP 92208\cr
+F-44322 Nantes Cedex 3\cr
+France
 }
 \section{Package options}{
 
@@ -42,24 +47,21 @@ Useful links:
 
 }
 \author{
-\strong{Full list of authors and contributors} (alphabetic order)
+\strong{Maintainer}: Anne Philippe \email{anne.philippe@univ-nantes.fr} (\href{https://orcid.org/0000-0002-5331-5087}{ORCID})
 
-\tabular{ll}{
-Thomas S. Dye \tab \emph{University of Hawai'i at Manoa, USA} \cr
-Nicolas Frerebeau \tab \emph{Université Bordeaux Montaigne, France} \cr
-Anne Philippe \tab \emph{Université de Nantes, France} \cr
-Marie-Anne Vibet \tab \emph{Université de Nantes, France} \cr
+Authors:
+\itemize{
+  \item Marie-Anne Vibet (\href{https://orcid.org/0000-0003-4003-3141}{ORCID})
+  \item Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
 }
 
-\strong{Package maintainer}
+Other contributors:
+\itemize{
+  \item Thomas S. Dye (\href{https://orcid.org/0000-0001-8116-782X}{ORCID}) [contributor]
+  \item Nantes Université (\href{https://ror.org/03gnr7b55}{ROR}) [funder]
+  \item Université Bordeaux Montaigne (\href{https://ror.org/03pbgwk21}{ROR}) [funder]
+  \item CNRS (\href{https://ror.org/02feahw73}{ROR}) [funder]
+}
 
-Anne Philippe\cr
-\email{anne.philippe@univ-nantes.fr}
-
-Laboratoire de Mathématiques Jean Leray (UMR 6629)\cr
-2, rue de la Houssinière\cr
-BP 92208\cr
-F-44322 Nantes Cedex 3\cr
-France
 }
 \keyword{internal}
