@@ -1,10 +1,16 @@
 # ArchaeoPhases 2.0.0.9000
+## Enhancements
+* Translate into French.
+
+## Bug fixes & changes
+* Add default calendar to `as_phases()`.
+
 ## Internals
-* Fix package anchors for all Rd `\link{}`.
+* Use [`aion::TimeIntervals-class`] for time ranges representation.
 
 # ArchaeoPhases 2.0.0
 
-**ArchaeoPhases v2.0 brings a comprehensive package rewrite.** You can install the 1.x releases from the CRAN archives:
+**ArchaeoPhases** v2.0 brings a comprehensive package rewrite. You can install the 1.x releases from the CRAN archives:
 
 ``` r
 # install.packages("remotes")
@@ -13,6 +19,9 @@ remotes::install_version("ArchaeoPhases", version = "1.8")
 
 ## Bug fixes & changes
 * Use `stats::density()` instead of `hdrcde::hdr()` for HDPI estimation.
+
+## Internals
+* Use **aion** for internal date representation.
 
 ## Breaking changes
 * Full rewrite in S4 (see below).

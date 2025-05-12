@@ -103,12 +103,12 @@ repository](https://archaeostat.r-universe.dev). **ArchaeoData**
 provides MCMC outputs from ChronoModel, OxCal and BCal.
 
 ``` r
-## Install data package
+## Install the data package
 install.packages("ArchaeoData", repos = "https://archaeostat.r-universe.dev")
 ```
 
 ``` r
-## Load package
+## Load
 library(ArchaeoPhases)
 ```
 
@@ -162,11 +162,11 @@ plot(ac)
 ``` r
 bound <- boundaries(chrono_phases, level = 0.95)
 as.data.frame(bound)
-#>              start       end duration
-#> EPI      -28978.53 -26969.82 2009.709
-#> UP       -38570.37 -29368.75 9202.620
-#> Ahmarian -42168.47 -37433.31 4736.161
-#> IUP      -43240.37 -41161.00 2080.371
+#>      label     start       end duration
+#> 1      EPI -28978.53 -26969.82 2008.712
+#> 2       UP -38570.37 -29368.75 9201.622
+#> 3 Ahmarian -42168.47 -37433.31 4735.159
+#> 4      IUP -43240.37 -41161.00 2079.372
 ```
 
 ``` r
