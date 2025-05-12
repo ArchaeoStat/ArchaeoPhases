@@ -46,14 +46,17 @@ URL: \url{https://thomasalspaugh.org/pub/fnd/allen.html}.
 \seealso{
 Other Allen's intervals: 
 \code{\link{allen_analyze}()},
+\code{\link{allen_analyze_relations}()},
 \code{\link{allen_complement}()},
 \code{\link{allen_composition}()},
 \code{\link{allen_converse}()},
 \code{\link{allen_illustrate}()},
+\code{\link{allen_illustrate_relations}()},
 \code{\link{allen_intersect}()},
 \code{\link{allen_joint_concurrency}()},
 \code{\link{allen_observe}()},
 \code{\link{allen_observe_frequency}()},
+\code{\link{allen_plot}()},
 \code{\link{allen_relation}()},
 \code{\link{allen_union}()}
 }

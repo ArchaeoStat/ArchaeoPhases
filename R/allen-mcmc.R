@@ -103,7 +103,6 @@ allen_illustrate <- function(relations = "basic", ...) {
 #' @author T. S. Dye
 #' @family Allen's intervals
 #' @keywords internal
-#' @noRd
 allen_illustrate_relations <- function(relations = "basic") {
   result <- switch(
     relations,
@@ -158,7 +157,6 @@ allen_analyze <- function(x, y, ...) {
 #' @author T. S. Dye
 #' @family Allen's intervals
 #' @keywords internal
-#' @noRd
 allen_analyze_relations <- function(x, y) {
   comp <- allen_composition(x, y)
   merge(
@@ -286,7 +284,6 @@ setMethod(
 #'  A `list` of `data.frame` to be passed to [allen_plot()].
 #' @author T. S. Dye, N. Frerebeau
 #' @keywords internal
-#' @noRd
 allen_relate_intervals <- function(mcmc, converse = TRUE) {
   n_phases <- NCOL(mcmc)
   n_iter <- NROW(mcmc)
@@ -382,7 +379,6 @@ setMethod(
 #' @author T. S. Dye, N. Frerebeau
 #' @family Allen's intervals
 #' @keywords internal
-#' @noRd
 allen_plot <- function(x, main = NULL, sub = NULL,
                        ann = graphics::par("ann"), ...) {
   ## Graphical parameters
@@ -437,7 +433,6 @@ allen_plot <- function(x, main = NULL, sub = NULL,
 #' @return A [`data.frame`] with two columns: "`code`" and "`result`".
 #' @author N. Frerebeau
 #' @keywords internal
-#' @noRd
 allen_count <- function(x, count = TRUE) {
   set <- allen_string_to_set(x, factor = TRUE)
   tbl <- table(set, dnn = list("code"))
@@ -451,7 +446,6 @@ allen_count <- function(x, count = TRUE) {
 #' @return A [`data.frame`].
 #' @author N. Frerebeau
 #' @keywords internal
-#' @noRd
 allen_table <- function(...) {
   data.frame(
     code = allen_relation_code(),
