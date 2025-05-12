@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 # Transition bewteen phases ====================================================
 pha <- as_phases(mcmc_phases, start = c(1, 3), calendar = CE(), iteration = 1)
 pha <- pha[1:10000, , ]

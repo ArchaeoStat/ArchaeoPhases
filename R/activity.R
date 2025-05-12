@@ -27,7 +27,7 @@ setMethod(
   definition = function(object) {
     ## Validation
     if (object@counts) {
-      stop("Tempo must be computed as probabilities.", call. = FALSE)
+      stop(tr_("Tempo must be computed as probabilities."), call. = FALSE)
     }
 
     years <- aion::time(object, calendar = NULL)

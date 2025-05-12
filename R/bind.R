@@ -14,7 +14,7 @@ setMethod(
 
     eve <- c(names(x), names(y))
     if (any(duplicated(eve))) {
-      warning("Duplicated event names!", call. = FALSE)
+      warning(tr_("Duplicated event names!"), call. = FALSE)
     }
 
     .MCMC(

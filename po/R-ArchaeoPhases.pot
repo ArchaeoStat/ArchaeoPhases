@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ArchaeoPhases 2.0.0.9000\n"
+"POT-Creation-Date: 2025-05-12 16:43+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: activity.R:30
+msgid "Tempo must be computed as probabilities."
+msgstr ""
+
+#: allen-relations.R:61
+msgid "%s is older than %s."
+msgstr ""
+
+#: bind.R:17
+msgid "Duplicated event names!"
+msgstr ""
+
+#: phases.R:81
+msgid "%s is already expressed in rata die: %s is ignored."
+msgstr ""
+
+#: plot.R:209
+msgid "Time ranges can only be displayed with two phases."
+msgstr ""
+
+#: plot.R:226
+msgid "Could not find a %s between these two phases."
+msgstr ""
+
+#: plot.R:283
+msgid "Phase start"
+msgstr ""
+
+#: plot.R:283
+msgid "Phase end"
+msgstr ""
+
+#: plot.R:377
+msgid "Cumulative events"
+msgstr ""
+
+#: plot.R:450
+msgid "Activity"
+msgstr ""
+
+#: plot.R:523
+msgid "Occurrence"
+msgstr ""
+
+#: plot.R:610
+msgid "Depth"
+msgstr ""
+
+#: read.R:94 read.R:144 read.R:199 read.R:240
+msgid "Duplicated names!"
+msgstr ""
+
+#: show.R:12
+msgid "- Number of events: %d"
+msgstr ""
+
+#: show.R:13 show.R:27
+msgid "- Number of MCMC samples: %s"
+msgstr ""
+
+#: show.R:26
+msgid "- Number of phases: %d"
+msgstr ""

@@ -78,7 +78,7 @@ setMethod(
 
     if (!is.null(calendar)) {
       if (methods::is(from, "EventsMCMC")) {
-        msg <- "%s is already expressed in rata die: %s is ignored."
+        msg <- tr_("%s is already expressed in rata die: %s is ignored.")
         warning(sprintf(msg, sQuote("from"), sQuote("calendar")), call. = FALSE)
       } else {
         ## Coerce to vector

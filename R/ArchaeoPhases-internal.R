@@ -1,5 +1,10 @@
 # HELPERS
 
+## https://michaelchirico.github.io/potools/articles/developers.html
+tr_ <- function(...) {
+  enc2utf8(gettext(paste0(...), domain = "R-aion"))
+}
+
 # periode <- Vectorize(
 #   function(epsilon, p1, p2, level) {
 #     # Computes the 'level'th quantile of the minimum of the events included in the phase

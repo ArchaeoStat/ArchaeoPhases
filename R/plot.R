@@ -206,7 +206,7 @@ plot.PhasesMCMC <- function(x, calendar = get_calendar(),
   ## Succession
   if (!is.null(succession) && !is.null(level)) {
     if (n_phases != 2)
-      stop("Time ranges can only be displayed with two phases.", call. = FALSE)
+      stop(tr_("Time ranges can only be displayed with two phases."), call. = FALSE)
 
     succession <- match.arg(succession, choices = c("transition", "hiatus"),
                             several.ok = TRUE)
@@ -223,7 +223,7 @@ plot.PhasesMCMC <- function(x, calendar = get_calendar(),
           col = fill.succession[[s]]
         )
       } else {
-        msg <- "Could not find a %s between these two phases."
+        msg <- tr_("Could not find a %s between these two phases.")
         warning(sprintf(msg, succession), call. = FALSE)
       }
     }
@@ -280,7 +280,7 @@ plot.PhasesMCMC <- function(x, calendar = get_calendar(),
     lab <- c(density, density)
     graphics::legend(
       x = ifelse(decreasing, "topright", "topleft"),
-      legend = c("Phase start", "Phase end")[lab],
+      legend = c(tr_("Phase start"), tr_("Phase end"))[lab],
       lty = c(1, 2)[lab],
       bty = "n"
     )
@@ -374,7 +374,7 @@ plot.CumulativeEvents <- function(x, calendar = get_calendar(),
   ## Add annotation
   if (ann) {
     xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
-    ylab <- "Cumulative events"
+    ylab <- tr_("Cumulative events")
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
@@ -447,7 +447,7 @@ plot.ActivityEvents <- function(x, calendar = get_calendar(),
   ## Add annotation
   if (ann) {
     xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
-    ylab <- "Activity"
+    ylab <- tr_("Activity")
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
@@ -520,7 +520,7 @@ plot.OccurrenceEvents <- function(x, calendar = get_calendar(),
   ## Add annotation
   if (ann) {
     xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
-    ylab <- "Occurrence"
+    ylab <- tr_("Occurrence")
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
@@ -607,7 +607,7 @@ plot.AgeDepthModel <- function(x, level = 0.95,
   ## Add annotation
   if (ann) {
     xlab <- if (is.null(calendar)) expression(italic("rata die")) else aion::format(calendar)
-    ylab <- "Depth"
+    ylab <- tr_("Depth")
     graphics::title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 

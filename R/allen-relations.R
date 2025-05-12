@@ -58,7 +58,7 @@ setMethod(
     n <- length(x)
     arkhe::assert_length(y, n)
     if (any(x > y)) {
-      msg <- sprintf("%s is older than %s.", sQuote("x"), sQuote("y"))
+      msg <- sprintf(tr_("%s is older than %s."), sQuote("x"), sQuote("y"))
       stop(msg, call. = FALSE)
     }
 

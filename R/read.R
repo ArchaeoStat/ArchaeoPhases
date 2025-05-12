@@ -91,7 +91,7 @@ setMethod(
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
     if (any(duplicated(date_names)))
-      warning("Duplicated names!", call. = FALSE)
+      warning(tr_("Duplicated names!"), call. = FALSE)
 
     ## Coerce to vector
     d <- dim(data)
@@ -141,7 +141,7 @@ setMethod(
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
     if (any(duplicated(date_names)))
-      warning("Duplicated names!", call. = FALSE)
+      warning(tr_("Duplicated names!"), call. = FALSE)
 
     ## BCal used to add an empty row at the end, check if empty and remove
     if (anyNA(data[nrow(data), ]))
@@ -196,7 +196,7 @@ setMethod(
     date_names <- colnames(data)
     colnames(data) <- make.names(date_names)
     if (any(duplicated(date_names)))
-      warning("Duplicated names!", call. = FALSE)
+      warning(tr_("Duplicated names!"), call. = FALSE)
 
     ## Coerce to vector
     d <- dim(data)
@@ -237,7 +237,7 @@ setMethod(
     date_names <- colnames(data)[-1]
     colnames(data) <- make.names(date_names)
     if (any(duplicated(date_names)))
-      warning("Duplicated names!", call. = FALSE)
+      warning(tr_("Duplicated names!"), call. = FALSE)
 
     ## Return an MCMC object
     ## Get phase names

@@ -1,0 +1,76 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ArchaeoPhases 2.0.0.9000\n"
+"POT-Creation-Date: 2025-05-12 16:43+0200\n"
+"PO-Revision-Date: 2025-05-12 16:43+0200\n"
+"Last-Translator: nfrerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>\n"
+"Language-Team: French"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: activity.R:30
+msgid "Tempo must be computed as probabilities."
+msgstr "Le tempo doit être calculé sous forme de probabilités."
+
+#: allen-relations.R:61
+msgid "%s is older than %s."
+msgstr "%s est plus ancien que %s."
+
+#: bind.R:17
+msgid "Duplicated event names!"
+msgstr "Noms d'événements dupliqués !"
+
+#: phases.R:81
+msgid "%s is already expressed in rata die: %s is ignored."
+msgstr "%s est déjà exprimé en rata die : %s est ignoré."
+
+#: plot.R:209
+msgid "Time ranges can only be displayed with two phases."
+msgstr "Les plages de temps ne peuvent être affichées qu'avec deux phases."
+
+#: plot.R:226
+msgid "Could not find a %s between these two phases."
+msgstr "Impossible de trouver un %s entre ces deux phases."
+
+#: plot.R:283
+msgid "Phase start"
+msgstr "Début de la phase"
+
+#: plot.R:283
+msgid "Phase end"
+msgstr "Fin de la phase"
+
+#: plot.R:377
+msgid "Cumulative events"
+msgstr "Événements cumulés"
+
+#: plot.R:450
+msgid "Activity"
+msgstr "Activité"
+
+#: plot.R:523
+msgid "Occurrence"
+msgstr "Occurrence"
+
+#: plot.R:610
+msgid "Depth"
+msgstr "Profondeur"
+
+#: read.R:94 read.R:144 read.R:199 read.R:240
+msgid "Duplicated names!"
+msgstr "Noms dupliqués !"
+
+#: show.R:12
+msgid "- Number of events: %d"
+msgstr "- Nombre d'événements : %d"
+
+#: show.R:13 show.R:27
+msgid "- Number of MCMC samples: %s"
+msgstr "- Nombre d'échantillons MCMC : %s"
+
+#: show.R:26
+msgid "- Number of phases: %d"
+msgstr "- Nombre de phases : %d"

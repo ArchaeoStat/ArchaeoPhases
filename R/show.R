@@ -9,8 +9,8 @@ setMethod(
   definition = function(object) {
     cat(
       sprintf("<%s>", class(object)),
-      sprintf("- Number of events: %d", ncol(object)),
-      sprintf("- Number of MCMC samples: %s", nrow(object)),
+      sprintf(tr_("- Number of events: %d"), ncol(object)),
+      sprintf(tr_("- Number of MCMC samples: %s"), nrow(object)),
       sep = "\n"
     )
   }
@@ -23,8 +23,8 @@ setMethod(
   definition = function(object) {
     cat(
       sprintf("<%s>", class(object)),
-      sprintf("- Number of phases: %d", ncol(object)),
-      sprintf("- Number of MCMC samples: %s", nrow(object)),
+      sprintf(tr_("- Number of phases: %d"), ncol(object)),
+      sprintf(tr_("- Number of MCMC samples: %s"), nrow(object)),
       sep = "\n"
     )
   }

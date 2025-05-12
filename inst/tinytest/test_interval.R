@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 # Credible interval ============================================================
 eve <- as_events(mcmc_events, calendar = CE(), iteration = 1)
 eve <- eve[1:10000, ]

@@ -1,3 +1,5 @@
+Sys.setenv(LANGUAGE = "en") # Force locale
+
 if (requireNamespace("ArchaeoData", quietly = TRUE)) {
   ## ChronoModel ===============================================================
   chrono_path <- file.path("chronomodel", "ksarakil")
