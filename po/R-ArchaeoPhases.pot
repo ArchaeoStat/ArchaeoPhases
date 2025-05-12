@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ArchaeoPhases 2.0.0.9000\n"
-"POT-Creation-Date: 2025-05-12 18:46+0200\n"
+"POT-Creation-Date: 2025-05-12 18:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,4 +68,16 @@ msgstr ""
 
 #: show.R:26
 msgid "- Number of phases: %d"
+msgstr ""
+
+#: zzz.R:15
+msgid "Breaking changes!"
+msgstr ""
+
+#: zzz.R:16
+msgid "ArchaeoPhases v2.0 is the result of a complete code rewrite."
+msgstr ""
+
+#: zzz.R:17
+msgid "For further details, please consult the changelog."
 msgstr ""

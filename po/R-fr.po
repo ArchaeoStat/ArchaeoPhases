@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ArchaeoPhases 2.0.0.9000\n"
-"POT-Creation-Date: 2025-05-12 18:46+0200\n"
+"POT-Creation-Date: 2025-05-12 18:54+0200\n"
 "PO-Revision-Date: 2025-05-12 16:43+0200\n"
 "Last-Translator: nfrerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>\n"
-"Language-Team: FrenchLanguage: fr\n"
-"Language: \n"
+"Language-Team: French\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -70,3 +70,15 @@ msgstr "- Nombre d'échantillons MCMC : %s"
 #: show.R:26
 msgid "- Number of phases: %d"
 msgstr "- Nombre de phases : %d"
+
+#: zzz.R:15
+msgid "Breaking changes!"
+msgstr "Rupture de compatibilité !"
+
+#: zzz.R:16
+msgid "ArchaeoPhases v2.0 is the result of a complete code rewrite."
+msgstr "ArchaeoPhases v2.0 est le fruit d'une réécriture complète."
+
+#: zzz.R:17
+msgid "For further details, please consult the changelog."
+msgstr "Pour plus de détails, consultez le journal des modifications."
