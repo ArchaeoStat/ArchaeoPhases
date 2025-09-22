@@ -10,7 +10,7 @@ Statistical analysis of archaeological dates and groups of dates. This package a
 }
 \details{
 \tabular{ll}{
-\strong{Version} \tab 2.0.0 \cr
+\strong{Version} \tab 2.0.1 \cr
 \strong{License} \tab GPL-3 \cr
 \strong{CRAN DOI} \tab \doi{10.32614/CRAN.package.ArchaeoPhases} \cr
 \strong{Zenodo DOI} \tab \doi{10.5281/zenodo.8087121} \cr

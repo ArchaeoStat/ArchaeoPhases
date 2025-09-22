@@ -1,6 +1,6 @@
 #' @details
 #'  \tabular{ll}{
-#'   **Version** \tab 2.0.0 \cr
+#'   **Version** \tab 2.0.1 \cr
 #'   **License** \tab GPL-3 \cr
 #'   **CRAN DOI** \tab \doi{10.32614/CRAN.package.ArchaeoPhases} \cr
 #'   **Zenodo DOI** \tab \doi{10.5281/zenodo.8087121} \cr

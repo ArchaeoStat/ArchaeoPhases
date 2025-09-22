@@ -59,11 +59,11 @@ refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
       Snippets_, *93*(1). doi:10.18637/jss.v093.c01
       <https://doi.org/10.18637/jss.v093.c01>.
 
-      Philippe A, Vibet M, Dye T, Frerebeau N (2023). _ArchaeoPhases:
+      Philippe A, Vibet M, Frerebeau N, Dye T (2025). _ArchaeoPhases:
       Post-Processing of Markov Chain Monte Carlo Simulations for
       Chronological Modelling_. Université de Nantes, Nantes, France.
       doi:10.5281/zenodo.8087121 <https://doi.org/10.5281/zenodo.8087121>,
-      R package version 2.0,
+      R package version 2.1.0,
       <https://ArchaeoStat.github.io/ArchaeoPhases/>.
 
 ## Installation

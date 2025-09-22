@@ -14,9 +14,9 @@ bibentry(
 bibentry(
   bibtype      = "Manual",
   author       = c(person("Anne", "Philippe"), person("Marie-Anne", "Vibet"),
-                   person("Thomas S.", "Dye"), person("Nicolas", "Frerebeau")),
+                   person("Nicolas", "Frerebeau"), person("Thomas S.", "Dye")),
   title        = "{{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}}",
-  year         = "2023",
+  year         = "2025",
   organization = "Université de Nantes",
   address      = "Nantes, France",
   note         = sprintf("R package version %s", meta$Version),

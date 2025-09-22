@@ -2,7 +2,7 @@ Type: Package
 Package: ArchaeoPhases
 Title: Post-Processing of Markov Chain Monte Carlo Simulations for
     Chronological Modelling
-Version: 2.0.0.9000
+Version: 2.1.0
 Authors@R: c(
     person("Anne", "Philippe", , "anne.philippe@univ-nantes.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-5331-5087")),
@@ -62,7 +62,7 @@ Additional_repositories: https://archaeostat.r-universe.dev
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2.9000
+RoxygenNote: 7.3.3
 X-schema.org-applicationCategory: Archaeological Science
 X-schema.org-keywords: markov-chain, bayesian-statistics, geochronology,
     radiocarbon-dates, archaeology, archaeological-science, r-package

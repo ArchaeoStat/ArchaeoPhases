@@ -1,4 +1,4 @@
-# ArchaeoPhases 2.0.0.9000
+# ArchaeoPhases 2.1.0
 ## Enhancements
 * Translate into French.
 
@@ -6,7 +6,7 @@
 * Add default calendar to `as_phases()`.
 
 ## Internals
-* Use [`aion::TimeIntervals-class`] for time ranges representation.
+* Use `aion::TimeIntervals-class` for time ranges representation.
 
 # ArchaeoPhases 2.0.0
 
