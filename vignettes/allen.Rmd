@@ -1,7 +1,7 @@
 ---
 title: "Allen's Interval Algebra"
 author: "T. S. Dye"
-date: "2025-05-12"
+date: "2025-09-22"
 output:
   rmarkdown::html_vignette:
     number_sections: yes
@@ -58,7 +58,7 @@ allen_illustrate("basic")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="./figures/basic_relations-1.png" alt="plot of chunk basic_relations" width="100%" />
+<img src="./figures/basic_relations-1.png" alt="plot of chunk basic_relations"  />
 <p class="caption">plot of chunk basic_relations</p>
 </div>
 
@@ -82,7 +82,7 @@ allen_analyze(
 ```
 
 <div class="figure" style="text-align: center">
-<img src="./figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy" width="100%" />
+<img src="./figures/analyze_stratigraphy-1.png" alt="plot of chunk analyze_stratigraphy"  />
 <p class="caption">plot of chunk analyze_stratigraphy</p>
 </div>
 
@@ -96,7 +96,7 @@ allen_illustrate("sequence")
 ```
 
 <div class="figure" style="text-align: center">
-<img src="./figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy" width="100%" />
+<img src="./figures/illustrate_stratigraphy-1.png" alt="plot of chunk illustrate_stratigraphy"  />
 <p class="caption">plot of chunk illustrate_stratigraphy</p>
 </div>
 
@@ -136,7 +136,7 @@ allen_observe(be1_dghnt_phase)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="./figures/identity_relation-1.png" alt="plot of chunk identity_relation" width="100%" />
+<img src="./figures/identity_relation-1.png" alt="plot of chunk identity_relation"  />
 <p class="caption">plot of chunk identity_relation</p>
 </div>
 
@@ -164,19 +164,19 @@ plot(be1_phase)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="./figures/relation_and_converse-1.png" alt="plot of chunk relation_and_converse" width="100%" />
-<p class="caption">plot of chunk relation_and_converse</p>
+<img src="./figures/phases-1.png" alt="plot of chunk phases" width="100%" />
+<p class="caption">plot of chunk phases</p>
 </div>
 
-``` r
 
+``` r
 ## Plot relations
 par(mar = c(1, 1, 4, 1))
 allen_observe(be1_phase, converse = TRUE)
 ```
 
 <div class="figure" style="text-align: center">
-<img src="./figures/relation_and_converse-2.png" alt="plot of chunk relation_and_converse" width="100%" />
+<img src="./figures/relation_and_converse-1.png" alt="plot of chunk relation_and_converse" width="100%" />
 <p class="caption">plot of chunk relation_and_converse</p>
 </div>
 
