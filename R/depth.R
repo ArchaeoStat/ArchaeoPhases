@@ -8,7 +8,7 @@ NULL
 setMethod(
   f = "bury",
   signature = c("EventsMCMC", "numeric"),
-  definition = function(object, depth) {
+  definition = function(object, depth, span = 0.75, degree = 2) {
     ## Validation
     arkhe::assert_length(depth, ncol(object))
     arkhe::assert_unique(depth)
@@ -22,7 +22,7 @@ setMethod(
       MARGIN = 1,
       FUN = function(x, depth) {
         dt <- data.frame(y = x, x = depth)
-        stats::loess(y ~ x, data = dt, degree = 1)
+        stats::loess(y ~ x, data = dt, span = span, degree = degree)
       },
       depth = depth,
       simplify = FALSE

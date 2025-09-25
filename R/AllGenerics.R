@@ -149,6 +149,10 @@ NULL
 #' known depth of each dated samples.
 #' @param object An [`EventsMCMC-class`] object.
 #' @param x An [`AgeDepthModel-class`] object.
+#' @param span A length-one [`numeric`] vector giving the regression parameter
+#'  (see [stats::loess()]).
+#' @param degree A length-one [`numeric`] vector giving the degree of the
+#'  polynomials to be used (see [stats::loess()]).
 #' @param depth A [`numeric`] vector giving of the depths of the dated samples.
 #' @param newdata A [`numeric`] vector giving the depths at which ages will be
 #'  predicted. If `missing`, the original data points are used.

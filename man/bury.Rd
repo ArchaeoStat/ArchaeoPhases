@@ -13,7 +13,7 @@
 \usage{
 bury(object, depth, ...)
 
-\S4method{bury}{EventsMCMC,numeric}(object, depth)
+\S4method{bury}{EventsMCMC,numeric}(object, depth, span = 0.75, degree = 2)
 
 \S4method{predict}{AgeDepthModel}(object, newdata)
 
@@ -39,6 +39,12 @@ bury(object, depth, ...)
 \item{...}{Other \link[graphics:par]{graphical parameters} may also be passed as
 arguments to this function, particularly, \code{border}, \code{col}, \code{lwd}, \code{lty} or
 \code{pch}.}
+
+\item{span}{A length-one \code{\link{numeric}} vector giving the regression parameter
+(see \code{\link[stats:loess]{stats::loess()}}).}
+
+\item{degree}{A length-one \code{\link{numeric}} vector giving the degree of the
+polynomials to be used (see \code{\link[stats:loess]{stats::loess()}}).}
 
 \item{newdata}{A \code{\link{numeric}} vector giving the depths at which ages will be
 predicted. If \code{missing}, the original data points are used.}

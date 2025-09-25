@@ -1,6 +1,7 @@
 # ArchaeoPhases 2.1.0
 ## Enhancements
 * Translate into French.
+* `bury()` gained new `span` and `degree` arguments.
 
 ## Bug fixes & changes
 * Add default calendar to `as_phases()`.
