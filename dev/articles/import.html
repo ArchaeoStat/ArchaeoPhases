@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ArchaeoPhases</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,7 @@
                         <h4 data-toc-skip class="author">A. Philippe,
 M.-A. Vibet and N. Frerebeau</h4>
             
-            <h4 data-toc-skip class="date">2024-12-12</h4>
+            <h4 data-toc-skip class="date">2025-09-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/vignettes/import.Rmd" class="external-link"><code>vignettes/import.Rmd</code></a></small>
       <div class="d-none name"><code>import.Rmd</code></div>
@@ -107,9 +107,9 @@ each group of dates if at least one group is created.</p>
 <span><span class="va">chrono_events</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_chronomodel.html">read_chronomodel_events</a></span><span class="op">(</span><span class="va">output_events</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Plot events</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="figures%2Fread-chronomodel-events-1.png" alt="plot of chunk read-chronomodel-events" width="100%"><p class="caption">
+<img src="figures/read-chronomodel-events-1.png" alt="plot of chunk read-chronomodel-events" width="100%"><p class="caption">
 plot of chunk read-chronomodel-events
 </p>
 </div>
@@ -122,9 +122,9 @@ plot of chunk read-chronomodel-events
 <span><span class="va">chrono_phases</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_chronomodel.html">read_chronomodel_phases</a></span><span class="op">(</span><span class="va">output_phases</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Plot phases</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="figures%2Fread-chronomodel-phases-1.png" alt="plot of chunk read-chronomodel-phases" width="100%"><p class="caption">
+<img src="figures/read-chronomodel-phases-1.png" alt="plot of chunk read-chronomodel-phases" width="100%"><p class="caption">
 plot of chunk read-chronomodel-phases
 </p>
 </div>
@@ -143,9 +143,9 @@ parameters (dates, start and end of phases).</p>
 <span><span class="va">oxcal_mcmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_oxcal.html">read_oxcal</a></span><span class="op">(</span><span class="va">output_oxcal</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Plot events</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oxcal_mcmc</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oxcal_mcmc</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="figures%2Fread-oxcal-1.png" alt="plot of chunk read-oxcal" width="100%"><p class="caption">
+<img src="figures/read-oxcal-1.png" alt="plot of chunk read-oxcal" width="100%"><p class="caption">
 plot of chunk read-oxcal
 </p>
 </div>
@@ -160,9 +160,9 @@ output. Use <code><a href="../reference/as_phases.html">as_phases()</a></code> t
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Plot phase boundaries</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oxcal_phases</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oxcal_phases</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="figures%2Foxcal-phases-1.png" alt="plot of chunk oxcal-phases" width="100%"><p class="caption">
+<img src="figures/oxcal-phases-1.png" alt="plot of chunk oxcal-phases" width="100%"><p class="caption">
 plot of chunk oxcal-phases
 </p>
 </div>
@@ -189,9 +189,9 @@ output. Use <code><a href="../reference/as_phases.html">as_phases()</a></code> t
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Plot group boundaries</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bcal_phases</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bcal_phases</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="figures%2Fbcal-phases-1.png" alt="plot of chunk bcal-phases" width="100%"><p class="caption">
+<img src="figures/bcal-phases-1.png" alt="plot of chunk bcal-phases" width="100%"><p class="caption">
 plot of chunk bcal-phases
 </p>
 </div>
@@ -203,11 +203,11 @@ plot of chunk bcal-phases
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau.</p>
+  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau, Nantes Université, Université Bordeaux Montaigne, CNRS.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

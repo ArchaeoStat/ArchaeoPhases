@@ -9,7 +9,7 @@ for a single parameter."><meta name="robots" content="noindex"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ArchaeoPhases</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,11 +58,7 @@ for a single parameter.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">interval_credible</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'MCMC'</span></span>
-<span><span class="fu">interval_credible</span><span class="op">(</span></span>
-<span>  <span class="va">x</span>,</span>
-<span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  calendar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"ArchaeoPhases.calendar"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">interval_credible</span><span class="op">(</span><span class="va">x</span>, level <span class="op">=</span> <span class="fl">0.95</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/get_calendar.html" class="external-link">get_calendar</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -83,7 +79,7 @@ for a single parameter.</p>
 
 <dt id="arg-calendar">calendar<a class="anchor" aria-label="anchor" href="#arg-calendar"></a></dt>
 <dd><p>A <code><a href="https://packages.tesselle.org/aion/reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the target
-calendar (see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
+calendar (see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">aion::calendar()</a></code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -198,11 +194,11 @@ posterior distribution that contains 95% of the values.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau.</p>
+  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau, Nantes Université, Université Bordeaux Montaigne, CNRS.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

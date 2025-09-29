@@ -11,7 +11,7 @@ occurrence of events."><meta name="robots" content="noindex"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ArchaeoPhases</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,9 +61,9 @@ occurrence of events.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tempo</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'CumulativeEvents,missing'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  calendar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"ArchaeoPhases.calendar"</span><span class="op">)</span>,</span>
+<span>  calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/get_calendar.html" class="external-link">get_calendar</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"credible"</span>, <span class="st">"gauss"</span><span class="op">)</span>,</span>
 <span>  col.tempo <span class="op">=</span> <span class="st">"#004488"</span>,</span>
 <span>  col.interval <span class="op">=</span> <span class="st">"grey"</span>,</span>
@@ -110,7 +110,7 @@ object.</p></dd>
 
 <dt id="arg-calendar">calendar<a class="anchor" aria-label="anchor" href="#arg-calendar"></a></dt>
 <dd><p>A <code><a href="https://packages.tesselle.org/aion/reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the target
-calendar (see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
+calendar (see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">aion::calendar()</a></code>).</p></dd>
 
 
 <dt id="arg-interval">interval<a class="anchor" aria-label="anchor" href="#arg-interval"></a></dt>
@@ -195,7 +195,7 @@ spaced points of the temporal grid.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
 
 <ul><li><p><code>tempo()</code> returns an <code><a href="CumulativeEvents-class.html">CumulativeEvents</a></code> object.</p></li>
-<li><p><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> is called it for its side-effects: it results in a graphic being
+<li><p><code><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot()</a></code> is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns <code>x</code>).</p></li>
 </ul></div>
     <div class="section level2">
@@ -234,14 +234,14 @@ stratification. <em>Journal of Archaeological Science</em>, 71: 1-9.
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Tempo plot</span></span></span>
 <span class="r-in"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu">tempo</span><span class="op">(</span><span class="va">eve</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="tempo-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"gauss"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"gauss"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="tempo-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Activity plot</span></span></span>
 <span class="r-in"><span><span class="va">act</span> <span class="op">&lt;-</span> <span class="fu"><a href="activity.html">activity</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">act</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">act</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="tempo-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -250,11 +250,11 @@ stratification. <em>Journal of Archaeological Science</em>, 71: 1-9.
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau.</p>
+  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau, Nantes Université, Université Bordeaux Montaigne, CNRS.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

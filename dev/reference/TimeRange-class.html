@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ArchaeoPhases</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,27 +55,32 @@
     <h2 id="slots">Slots<a class="anchor" aria-label="anchor" href="#slots"></a></h2>
 
 
-<dl><dt><code>start,end</code></dt>
-<dd><p>A <code>numeric</code> <code><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></code> giving the lower and upper
-boundaries expressed in <em><a href="https://packages.tesselle.org/aion/reference/RataDie-class.html" class="external-link">rata die</a></em>.</p></dd>
-
-
-<dt><code>labels</code></dt>
-<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector specifying the name of the events/phases.</p></dd>
-
-
-<dt><code>hash</code></dt>
+<dl><dt><code>hash</code></dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string giving the 32-byte MD5 hash of the
 original data file.</p></dd>
 
 
 </dl></div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>This class inherits from <code><a href="https://packages.tesselle.org/aion/reference/TimeIntervals-class.html" class="external-link">aion::TimeIntervals</a></code>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="coerce">Coerce<a class="anchor" aria-label="anchor" href="#coerce"></a></h2>
 
 
-<p>In the code snippets below, <code>x</code> is a <code>CumulativeEvents</code> object.</p><dl><dt><code>as.data.frame(x)</code></dt>
+<p>In the code snippets below, <code>x</code> is a <code>TimeRange</code> object.</p><dl><dt><code>as.data.frame(x)</code></dt>
 <dd><p>Coerces to a <code><a href="data.frame.html">data.frame</a></code>.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a></h2>
+
+
+<p>In the code snippets below, <code>x</code> is a <code>TimeRange</code> object.</p><dl><dt><code>plot(x)</code></dt>
+<dd><p>Results in a graphic being displayed
+(invisibly returns <code>x</code>).</p></dd>
 
 
 </dl></div>
@@ -101,11 +106,11 @@ original data file.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau.</p>
+  <p>Developed by Anne Philippe, Marie-Anne Vibet, Nicolas Frerebeau, Nantes Université, Université Bordeaux Montaigne, CNRS.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
