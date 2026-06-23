@@ -41,12 +41,12 @@ Statistical analysis of archaeological dates and groups of dates.
 **ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC)
 simulations from [ChronoModel](https://chronomodel.com) (Lanos et al.
 2020), [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) (Bronk Ramsey 2009)
-or [BCal](https://bcal.shef.ac.uk) (Buck, Christen, and James 1999).
-This package provides functions for the study of rhythms of the long
-term from the posterior distribution of a series of dates (tempo and
-activity plot). It also allows the estimation and visualization of time
-ranges from the posterior distribution of groups of dates
-(e.g. duration, transition and hiatus between successive phases).
+or [BCal](https://bcal.shef.ac.uk) (Buck et al. 1999). This package
+provides functions for the study of rhythms of the long term from the
+posterior distribution of a series of dates (tempo and activity plot).
+It also allows the estimation and visualization of time ranges from the
+posterior distribution of groups of dates (e.g. duration, transition and
+hiatus between successive phases).
 
 **ArchaeoPhases v2.0 brings a comprehensive package rewrite, resulting
 in the renaming of nearly all functions. For more information, please
@@ -59,11 +59,11 @@ refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
       Snippets_, *93*(1). doi:10.18637/jss.v093.c01
       <https://doi.org/10.18637/jss.v093.c01>.
 
-      Philippe A, Vibet M, Frerebeau N, Dye T (2025). _ArchaeoPhases:
+      Philippe A, Vibet M, Frerebeau N, Dye T (2026). _ArchaeoPhases:
       Post-Processing of Markov Chain Monte Carlo Simulations for
       Chronological Modelling_. Université de Nantes, Nantes, France.
-      doi:10.5281/zenodo.8087121 <https://doi.org/10.5281/zenodo.8087121>,
-      R package version 2.1.0,
+      doi:10.5281/zenodo.8087121 <https://doi.org/10.5281/zenodo.8087121>.
+      R package version 2.1.1,
       <https://ArchaeoStat.github.io/ArchaeoPhases/>.
 
 ## Installation
@@ -143,7 +143,7 @@ plot(chrono_events[, 1], interval = "hdr")
 plot(chrono_events)
 ```
 
-<img src="man/figures/README-events-plot-1.png" width="50%" /><img src="man/figures/README-events-plot-2.png" width="50%" />
+<img src="man/figures/README-events-plot-1.png" alt="" width="50%" /><img src="man/figures/README-events-plot-2.png" alt="" width="50%" />
 
 ``` r
 ## Tempo plot
@@ -155,7 +155,7 @@ ac <- activity(chrono_events)
 plot(ac)
 ```
 
-<img src="man/figures/README-tempo-plot-1.png" width="50%" /><img src="man/figures/README-tempo-plot-2.png" width="50%" />
+<img src="man/figures/README-tempo-plot-1.png" alt="" width="50%" /><img src="man/figures/README-tempo-plot-2.png" alt="" width="50%" />
 
 ### Analysis of a group of dates (phase)
 
@@ -174,19 +174,19 @@ as.data.frame(bound)
 plot(chrono_phases)
 ```
 
-<img src="man/figures/README-phases-plot-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-phases-plot-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` r
 plot(chrono_phases[, c("UP", "EPI"), ], succession = "hiatus")
 ```
 
-<img src="man/figures/README-succession-plot-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-succession-plot-1.png" alt="" style="display: block; margin: auto;" />
 
 ``` r
 plot(chrono_phases[, c("UP", "EPI"), ], succession = "transition")
 ```
 
-<img src="man/figures/README-succession-plot-2.png" style="display: block; margin: auto;" />
+<img src="man/figures/README-succession-plot-2.png" alt="" style="display: block; margin: auto;" />
 
 ## Translation
 
@@ -204,8 +204,7 @@ Languages currently available are English (`en`) and French (`fr`).
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-allen1983" class="csl-entry">
 
@@ -217,12 +216,11 @@ Allen, James F. 1983. “Maintaining Knowledge about Temporal Intervals.”
 
 <div id="ref-bosch2015" class="csl-entry">
 
-Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, Tamsin C.
-O’Connell, Beatrice Demarchi, Sheila M. Taylor, Laura Niven, Johannes
-van der Plicht, and Jean-Jacques Hublin. 2015. “New Chronology for Ksâr
-‘Akil (Lebanon) Supports Levantine Route of Modern Human Dispersal into
-Europe.” *Proceedings of the National Academy of Sciences* 112 (25):
-7683–88. <https://doi.org/10.1073/pnas.1501529112>.
+Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, et al.
+2015. “New Chronology for Ksâr ‘Akil (Lebanon) Supports Levantine Route
+of Modern Human Dispersal into Europe.” *Proceedings of the National
+Academy of Sciences* 112 (25): 7683–88.
+<https://doi.org/10.1073/pnas.1501529112>.
 
 </div>
 
@@ -261,19 +259,18 @@ https://doi.org/<https://doi.org/10.1016/j.jas.2023.105765>.
 
 <div id="ref-ghosh2020" class="csl-entry">
 
-Ghosh, Sambit, Prasanta Sanyal, Sohom Roy, Ravi Bhushan, Sp Sati, Anne
-Philippe, and Navin Juyal. 2020. “Early Holocene Indian Summer Monsoon
-and Its Impact on Vegetation in the Central Himalaya: Insight from
-<span class="nocase">dD</span> and d <sup>13</sup> C Values of Leaf Wax
-Lipid.” *The Holocene* 30 (7): 1063–74.
-<https://doi.org/10.1177/0959683620908639>.
+Ghosh, Sambit, Prasanta Sanyal, Sohom Roy, et al. 2020. “Early Holocene
+Indian Summer Monsoon and Its Impact on Vegetation in the Central
+Himalaya: Insight from <span class="nocase">dD</span> and d
+<sup>13</sup> C Values of Leaf Wax Lipid.” *The Holocene* 30 (7):
+1063–74. <https://doi.org/10.1177/0959683620908639>.
 
 </div>
 
 <div id="ref-harris1997" class="csl-entry">
 
 Harris, Edward C. 1997. *Principles of Archaeological Stratigraphy*.
-Seconde édition. London: Academic Press.
+Seconde édition. Academic Press.
 
 </div>
 
@@ -297,9 +294,9 @@ Neolithic Phases.” *Quaternary Science Reviews* 229 (February): 106121.
 
 <div id="ref-lanos2020" class="csl-entry">
 
-Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. “Chronomodel:
+Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. *Chronomodel:
 Chronological Modeling of Archaeological Data Using Bayesian
-Statistics.” CNRS. <https://chronomodel.com>.
+Statistics*. CNRS, released. <https://chronomodel.com>.
 
 </div>
 
@@ -309,7 +306,7 @@ Lyman, R. Lee, and Michael J. O’Brien. 2017. “Sedation and Cladistics:
 The Difference Between Anagenetic and Cladogenetic Evolution.” In
 *Mapping Our Ancestors: Phylogenetic Approaches in Anthropology and
 Prehistory*, edited by Carl P. Lipo, Michael J. O’Brien, Mark Couard,
-and Stephen J. Shennan. New York: Routledge.
+and Stephen J. Shennan. Routledge.
 <https://doi.org/10.4324/9780203786376>.
 
 </div>
@@ -325,7 +322,7 @@ Software* 93. <https://doi.org/10.18637/jss.v093.c01>.
 <div id="ref-robert2010" class="csl-entry">
 
 Robert, Christian P., and George Casella. 2010. *Introducing Monte Carlo
-Methods with R*. Use R! New York: Springer.
+Methods with R*. Use R! Springer.
 
 </div>
 

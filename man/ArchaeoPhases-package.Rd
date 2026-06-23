@@ -10,7 +10,7 @@ Statistical analysis of archaeological dates and groups of dates. This package a
 }
 \details{
 \tabular{ll}{
-\strong{Version} \tab 2.0.1 \cr
+\strong{Version} \tab 2.1.1 \cr
 \strong{License} \tab GPL-3 \cr
 \strong{CRAN DOI} \tab \doi{10.32614/CRAN.package.ArchaeoPhases} \cr
 \strong{Zenodo DOI} \tab \doi{10.5281/zenodo.8087121} \cr
@@ -47,13 +47,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
+\strong{Maintainer}: Anne Philippe \email{anne.philippe@univ-nantes.fr} (\href{https://orcid.org/0000-0002-5331-5087}{ORCID})
 
 Authors:
 \itemize{
-  \item Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
   \item Anne Philippe \email{anne.philippe@univ-nantes.fr} (\href{https://orcid.org/0000-0002-5331-5087}{ORCID})
   \item Marie-Anne Vibet (\href{https://orcid.org/0000-0003-4003-3141}{ORCID})
+  \item Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
 }
 
 Other contributors:

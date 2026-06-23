@@ -1,4 +1,7 @@
-# ArchaeoPhases 2.1.0.9000
+# ArchaeoPhases 2.1.1
+## Bugfixes & changes
+* Add `as.matrix()` for `MCMC` class.
+* Add `as.array()` for `PhasesMCMC` class.
 
 # ArchaeoPhases 2.1.0
 ## Enhancements

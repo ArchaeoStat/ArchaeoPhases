@@ -1,5 +1,5 @@
 ## Test environments
-* Local R installation: R 4.5.1
+* Local R installation: R release
 * Ubuntu (on GitHub Actions): R devel, release, oldrel
 * Windows (on GitHub Actions and win-builder): R devel, release, oldrel
 * MacOS (on GitHub Actions): R release

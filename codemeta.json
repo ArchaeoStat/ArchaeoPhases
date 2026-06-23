@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/ArchaeoStat/ArchaeoPhases",
   "issueTracker": "https://github.com/ArchaeoStat/ArchaeoPhases/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "2.0",
+  "version": "2.1.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.0 (2023-04-21)",
+  "runtimePlatform": "R version 4.6.0 (2026-04-24)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -51,6 +51,20 @@
       "@id": "https://orcid.org/0000-0001-8116-782X"
     }
   ],
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "Nantes Université"
+    },
+    {
+      "@type": "Organization",
+      "name": "Université Bordeaux Montaigne"
+    },
+    {
+      "@type": "Organization",
+      "name": "CNRS"
+    }
+  ],
   "maintainer": [
     {
       "@type": "Person",
@@ -77,6 +91,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=coda"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "fontquiver",
+      "name": "fontquiver",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=fontquiver"
     },
     {
       "@type": "SoftwareApplication",
@@ -156,25 +182,13 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 3.5.0"
+      "version": ">= 3.5"
     },
     "2": {
       "@type": "SoftwareApplication",
-      "identifier": "arkhe",
-      "name": "arkhe",
-      "version": ">= 1.2.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=arkhe"
-    },
-    "3": {
-      "@type": "SoftwareApplication",
       "identifier": "aion",
       "name": "aion",
+      "version": ">= 1.7.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -182,6 +196,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=aion"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "arkhe",
+      "name": "arkhe",
+      "version": ">= 1.11.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=arkhe"
     },
     "4": {
       "@type": "SoftwareApplication",
@@ -215,7 +242,9 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2191.91KB",
+  "applicationCategory": "ArchaeologicalScience",
+  "keywords": ["markov-chain", "bayesian-statistics", "geochronology", "radiocarbon-dates", "archaeology", "archaeological-science", "r-package"],
+  "fileSize": "2512.018KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -249,7 +278,7 @@
     },
     {
       "@type": "SoftwareSourceCode",
-      "datePublished": "2023",
+      "datePublished": "2026",
       "author": [
         {
           "@type": "Person",
@@ -263,22 +292,25 @@
         },
         {
           "@type": "Person",
-          "givenName": "Thomas S.",
-          "familyName": "Dye"
+          "givenName": "Nicolas",
+          "familyName": "Frerebeau"
         },
         {
           "@type": "Person",
-          "givenName": "Nicolas",
-          "familyName": "Frerebeau"
+          "givenName": "Thomas S.",
+          "familyName": "Dye"
         }
       ],
       "name": "{{ArchaeoPhases: Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling}}",
+      "identifier": "10.5281/zenodo.8087121",
       "url": "https://ArchaeoStat.github.io/ArchaeoPhases/",
-      "description": "R package version 2.0"
+      "description": "R package version 2.1.1",
+      "@id": "https://doi.org/10.5281/zenodo.8087121",
+      "sameAs": "https://doi.org/10.5281/zenodo.8087121"
     }
   ],
+  "releaseNotes": "https://github.com/ArchaeoStat/ArchaeoPhases/blob/main/NEWS.md",
   "readme": "https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/README.md",
   "contIntegration": ["https://github.com/ArchaeoStat/ArchaeoPhases/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ArchaeoStat/ArchaeoPhases"],
-  "developmentStatus": "https://www.repostatus.org/#active",
-  "keywords": ["archaeology", "bayesian-statistics", "geochronology", "markov-chain", "r-package", "radiocarbon-dates"]
+  "developmentStatus": "https://www.repostatus.org/#active"
 }
