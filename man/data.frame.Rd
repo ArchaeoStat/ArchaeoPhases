@@ -18,7 +18,7 @@
 \S4method{as.data.frame}{TimeRange}(x, ..., calendar = get_calendar())
 }
 \arguments{
-\item{x}{An object.}
+\item{x}{An \R object.}
 
 \item{...}{Further parameters to be passed to \code{\link[=data.frame]{data.frame()}}.}
 
@@ -32,15 +32,7 @@ which the time series was sampled.
 \description{
 Coerce to a Data Frame
 }
-\seealso{
-Other mutators: 
-\code{\link{bind}},
-\code{\link{names}()},
-\code{\link{sort}()},
-\code{\link{sort.list}()},
-\code{\link{subset}()}
-}
 \author{
 N. Frerebeau
 }
-\concept{mutators}
+\concept{coercion methods}

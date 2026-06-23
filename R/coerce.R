@@ -75,6 +75,29 @@ as.data.frame.TimeRange <- function(x, ..., calendar = get_calendar()) {
 #' @aliases as.data.frame,TimeRange-method
 setMethod("as.data.frame", "TimeRange", as.data.frame.TimeRange)
 
+# To matrix ====================================================================
+#' @export
+#' @method as.matrix MCMC
+as.matrix.MCMC <- function(x, ...) {
+  methods::as(x, "matrix")
+}
+
+#' @export
+#' @rdname as.array
+#' @aliases as.matrix,MCMC-method
+setMethod("as.matrix", "MCMC", as.matrix.MCMC)
+
+#' @export
+#' @method as.array PhasesMCMC
+as.array.PhasesMCMC <- function(x, ...) {
+  methods::as(x, "array")
+}
+
+#' @export
+#' @rdname as.array
+#' @aliases as.array,PhasesMCMC-method
+setMethod("as.array", "PhasesMCMC", as.array.PhasesMCMC)
+
 # To coda ======================================================================
 #' @export
 #' @rdname as_coda

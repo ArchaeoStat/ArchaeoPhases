@@ -5,7 +5,7 @@ NULL
 # Coerce =======================================================================
 #' Coerce to a Data Frame
 #'
-#' @param x An object.
+#' @param x An \R object.
 #' @param calendar A [`aion::TimeScale-class`] object specifying the target
 #'  calendar (see [calendar()]).
 #' @param ... Further parameters to be passed to [data.frame()].
@@ -14,9 +14,29 @@ NULL
 #'  which the time series was sampled.
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family coercion methods
 #' @name data.frame
 #' @rdname data.frame
+NULL
+
+#' Coerce to an Array
+#'
+#' @param x An \R object.
+#' @param ... Currently not used.
+#' @return
+#'  An [`array`] or a [`matrix`].
+#' @note
+#'  June 2026: aperm.default() now copy attributes, this change how apply()
+#'  works on classed objects. The simplest "fix" is to add an aperm() S3 method
+#'  for the class which drops attributes as aperm.default() previously did.
+#'  Alternatively, one could also consider providing as.matrix()/as.array()
+#'  methods which change to standard matrix/array.
+#' @author N. Frerebeau
+#' @docType methods
+# @family coercion methods
+#' @keywords internal
+#' @name as.array
+#' @rdname as.array
 NULL
 
 #' Coerce to Coda
@@ -89,7 +109,7 @@ NULL
 #' @example inst/examples/ex-subset.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family subsetting methods
 #' @name subset
 #' @rdname subset
 NULL
@@ -103,7 +123,7 @@ NULL
 #' @example inst/examples/ex-subset.R
 #' @author N. Frerebeau
 #' @docType methods
-#' @family mutators
+#' @family subsetting methods
 #' @name bind
 #' @rdname bind
 NULL

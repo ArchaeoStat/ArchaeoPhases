@@ -34,14 +34,10 @@ pha[1:1000, , ]          # Select the first 1000 iterations
 pha[, 1, , drop = FALSE] # Select the first phase
 }
 \seealso{
-Other mutators: 
-\code{\link{data.frame}},
-\code{\link{names}()},
-\code{\link{sort}()},
-\code{\link{sort.list}()},
-\code{\link{subset}()}
+Other subsetting methods:
+\code{\link{subset}}
 }
 \author{
 N. Frerebeau
 }
-\concept{mutators}
+\concept{subsetting methods}

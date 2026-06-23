@@ -29,12 +29,9 @@ An object of the same sort as \code{x} with the new names assigned.
 Get or set the names of an object.
 }
 \seealso{
-Other mutators: 
-\code{\link{bind}},
-\code{\link{data.frame}},
-\code{\link{sort}()},
-\code{\link{sort.list}()},
-\code{\link{subset}()}
+Other mutators:
+\code{\link[=sort]{sort()}},
+\code{\link[=sort.list]{sort.list()}}
 }
 \author{
 N. Frerebeau

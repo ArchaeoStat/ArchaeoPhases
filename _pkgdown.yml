@@ -34,6 +34,12 @@ reference:
 - title: Allen's Interval Algebra
   contents:
   - has_concept("Allen's intervals")
+- title: Coerce
+  contents:
+  - has_concept("coercion methods")
+- title: Subset
+  contents:
+  - has_concept("subsetting methods")
 - title: Tools
   contents:
   - has_concept("mutators")

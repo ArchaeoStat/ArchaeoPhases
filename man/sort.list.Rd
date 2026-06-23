@@ -40,12 +40,9 @@ pha[1:1000, , ]          # Select the first 1000 iterations
 pha[, 1, , drop = FALSE] # Select the first phase
 }
 \seealso{
-Other mutators: 
-\code{\link{bind}},
-\code{\link{data.frame}},
-\code{\link{names}()},
-\code{\link{sort}()},
-\code{\link{subset}()}
+Other mutators:
+\code{\link{names}},
+\code{\link[=sort]{sort()}}
 }
 \author{
 N. Frerebeau
