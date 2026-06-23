@@ -9,10 +9,10 @@
 \S4method{cbind2}{MCMC,MCMC}(x, y)
 }
 \arguments{
-\item{x, y}{An \code{\linkS4class{MCMC}} object.}
+\item{x, y}{An \code{\link[=MCMC-class]{MCMC}} object.}
 }
 \value{
-An \code{\linkS4class{MCMC}} object.
+An \code{\link[=MCMC-class]{MCMC}} object.
 }
 \description{
 Combine two MCMC Objects

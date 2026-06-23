@@ -42,8 +42,8 @@ inter <- interpolate(eve, e1 = 2, e2 = 3)
 plot(inter, level = 0.95, interval = "credible")
 }
 \seealso{
-Other age-depth modeling tools: 
-\code{\link{bury}()}
+Other age-depth modeling tools:
+\code{\link[=bury]{bury()}}
 }
 \author{
 N. Frerebeau

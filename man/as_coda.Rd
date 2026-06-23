@@ -23,7 +23,7 @@ as_coda(from, ...)
 An \code{\link[coda:mcmc.list]{coda::mcmc.list}} object.
 }
 \description{
-Extracts parallel chains from an \code{\linkS4class{MCMC}} object to create an
+Extracts parallel chains from an \code{\link[=MCMC-class]{MCMC}} object to create an
 \code{mcmc.list} object for use with \pkg{coda} diagnostic tools.
 }
 \examples{
@@ -51,13 +51,13 @@ if (requireNamespace("coda", quietly = TRUE)) {
 \seealso{
 \code{\link[coda:mcmc]{coda::mcmc()}}, \code{\link[coda:mcmc.list]{coda::mcmc.list()}}
 
-Other read methods: 
-\code{\link{as_events}()},
-\code{\link{as_phases}()},
+Other read methods:
+\code{\link[=as_events]{as_events()}},
+\code{\link[=as_phases]{as_phases()}},
 \code{\link{check}},
-\code{\link{read_bcal}()},
+\code{\link[=read_bcal]{read_bcal()}},
 \code{\link{read_chronomodel}},
-\code{\link{read_oxcal}()}
+\code{\link[=read_oxcal]{read_oxcal()}}
 }
 \author{
 A. Philippe, M.-A. Vibet

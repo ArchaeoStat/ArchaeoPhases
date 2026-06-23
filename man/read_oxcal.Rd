@@ -18,11 +18,11 @@ data are to be read from.}
 \item{...}{Currently not used.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the calendar
-(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[aion:gregorian]{aion::CE()}} unless you change the
+(see \code{\link[aion:calendar]{calendar()}}). It should be \code{\link[aion:CE]{CE()}} unless you change the
 default settings in 'OxCal'.}
 }
 \value{
-An \code{\linkS4class{EventsMCMC}} object.
+An \code{\link[=EventsMCMC-class]{EventsMCMC}} object.
 }
 \description{
 Reads MCMC output.
@@ -44,12 +44,12 @@ Bronk Ramsey, C. (2009). Bayesian Analysis of Radiocarbon Dates.
 \seealso{
 \code{\link[utils:read.table]{utils::read.table()}}
 
-Other read methods: 
-\code{\link{as_coda}()},
-\code{\link{as_events}()},
-\code{\link{as_phases}()},
+Other read methods:
+\code{\link[=as_coda]{as_coda()}},
+\code{\link[=as_events]{as_events()}},
+\code{\link[=as_phases]{as_phases()}},
 \code{\link{check}},
-\code{\link{read_bcal}()},
+\code{\link[=read_bcal]{read_bcal()}},
 \code{\link{read_chronomodel}}
 }
 \author{

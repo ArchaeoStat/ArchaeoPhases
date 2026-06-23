@@ -38,16 +38,16 @@ tempo(object, ...)
 )
 }
 \arguments{
-\item{object}{An \code{\linkS4class{EventsMCMC}} object.}
+\item{object}{An \code{\link[=EventsMCMC-class]{EventsMCMC}} object.}
 
 \item{...}{Other \link[graphics:par]{graphical parameters} may also be passed as
 arguments to this function.}
 
-\item{x}{A \code{\linkS4class{CumulativeEvents}} object or an \code{\linkS4class{EventsMCMC}}
+\item{x}{A \code{\link[=CumulativeEvents-class]{CumulativeEvents}} object or an \code{\link[=EventsMCMC-class]{EventsMCMC}}
 object.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
+calendar (see \code{\link[aion:calendar]{calendar()}}).}
 
 \item{interval}{A \code{\link{character}} string specifying the confidence interval to
 be drawn. It must be one of "\code{credible}" (credible interval) or "\code{gauss}"
@@ -97,7 +97,7 @@ spaced points of the temporal grid.}
 }
 \value{
 \itemize{
-\item \code{tempo()} returns an \code{\linkS4class{CumulativeEvents}} object.
+\item \code{tempo()} returns an \code{\link[=CumulativeEvents-class]{CumulativeEvents}} object.
 \item \code{plot()} is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns \code{x}).
 }
@@ -135,10 +135,10 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 \doi{10.1016/j.jas.2016.05.006}.
 }
 \seealso{
-Other event tools: 
-\code{\link{activity}()},
-\code{\link{elapse}()},
-\code{\link{occurrence}()}
+Other event tools:
+\code{\link[=activity]{activity()}},
+\code{\link[=elapse]{elapse()}},
+\code{\link[=occurrence]{occurrence()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

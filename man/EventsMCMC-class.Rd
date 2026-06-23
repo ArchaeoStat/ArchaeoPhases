@@ -9,10 +9,10 @@
 An S4 class to represent a collection of events.
 }
 \note{
-This class inherits from \code{\linkS4class{MCMC}}.
+This class inherits from \code{\link[=MCMC-class]{MCMC}}.
 }
 \seealso{
-Other classes: 
+Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},

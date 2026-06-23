@@ -7,7 +7,7 @@
 allen_relate_intervals(mcmc, converse = TRUE)
 }
 \arguments{
-\item{mcmc}{An \code{\linkS4class{EventsMCMC}} object containing the output of the
+\item{mcmc}{An \code{\link[=EventsMCMC-class]{EventsMCMC}} object containing the output of the
 MCMC algorithm.}
 
 \item{converse}{A \code{\link{logical}} scalar: should converse relations be observed?}

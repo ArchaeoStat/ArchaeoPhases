@@ -22,11 +22,11 @@ data are to be read from.}
 default of 1.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the calendar
-(see \code{\link[aion:calendar]{aion::calendar()}}). It should be \code{\link[aion:gregorian]{aion::BP()}} unless you change the
+(see \code{\link[aion:calendar]{calendar()}}). It should be \code{\link[aion:BP]{BP()}} unless you change the
 default settings in 'BCal'.}
 }
 \value{
-An \code{\linkS4class{EventsMCMC}} object.
+An \code{\link[=EventsMCMC-class]{EventsMCMC}} object.
 }
 \description{
 Reads MCMC output.
@@ -48,13 +48,13 @@ radiocarbon calibration tool. \emph{Internet Archaeology}, 7.
 \seealso{
 \code{\link[utils:read.table]{utils::read.table()}}
 
-Other read methods: 
-\code{\link{as_coda}()},
-\code{\link{as_events}()},
-\code{\link{as_phases}()},
+Other read methods:
+\code{\link[=as_coda]{as_coda()}},
+\code{\link[=as_events]{as_events()}},
+\code{\link[=as_phases]{as_phases()}},
 \code{\link{check}},
 \code{\link{read_chronomodel}},
-\code{\link{read_oxcal}()}
+\code{\link[=read_oxcal]{read_oxcal()}}
 }
 \author{
 T. S. Dye, N. Frerebeau

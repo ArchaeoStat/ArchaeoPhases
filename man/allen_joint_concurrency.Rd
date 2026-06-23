@@ -12,7 +12,7 @@ allen_joint_concurrency(x, groups, ...)
 \S4method{allen_joint_concurrency}{EventsMCMC,list}(x, groups, ...)
 }
 \arguments{
-\item{x}{An \code{\linkS4class{EventsMCMC}} object containing
+\item{x}{An \code{\link[=EventsMCMC-class]{EventsMCMC}} object containing
 the output of the MCMC algorithm.}
 
 \item{groups}{A \code{\link{list}} of (named) vector of names or indexes of columns in
@@ -21,28 +21,28 @@ the output of the MCMC algorithm.}
 \item{...}{Currently not used.}
 }
 \value{
-A \code{\linkS4class{PhasesMCMC}} object.
+A \code{\link[=PhasesMCMC-class]{PhasesMCMC}} object.
 }
 \description{
 Estimates the age of an undated context based on the known depositional
 history of associated artifacts.
 }
 \seealso{
-Other Allen's intervals: 
-\code{\link{allen_analyze}()},
-\code{\link{allen_analyze_relations}()},
-\code{\link{allen_complement}()},
-\code{\link{allen_composition}()},
-\code{\link{allen_converse}()},
-\code{\link{allen_illustrate}()},
-\code{\link{allen_illustrate_relations}()},
-\code{\link{allen_intersect}()},
-\code{\link{allen_observe}()},
-\code{\link{allen_observe_frequency}()},
-\code{\link{allen_plot}()},
-\code{\link{allen_relation}()},
-\code{\link{allen_relation_code}()},
-\code{\link{allen_union}()}
+Other Allen's intervals:
+\code{\link[=allen_analyze]{allen_analyze()}},
+\code{\link[=allen_analyze_relations]{allen_analyze_relations()}},
+\code{\link[=allen_complement]{allen_complement()}},
+\code{\link[=allen_composition]{allen_composition()}},
+\code{\link[=allen_converse]{allen_converse()}},
+\code{\link[=allen_illustrate]{allen_illustrate()}},
+\code{\link[=allen_illustrate_relations]{allen_illustrate_relations()}},
+\code{\link[=allen_intersect]{allen_intersect()}},
+\code{\link[=allen_observe]{allen_observe()}},
+\code{\link[=allen_observe_frequency]{allen_observe_frequency()}},
+\code{\link[=allen_plot]{allen_plot()}},
+\code{\link[=allen_relation]{allen_relation()}},
+\code{\link[=allen_relation_code]{allen_relation_code()}},
+\code{\link[=allen_union]{allen_union()}}
 }
 \author{
 T. S. Dye

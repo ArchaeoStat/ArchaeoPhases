@@ -12,16 +12,16 @@ occurrence(object, ...)
 \S4method{occurrence}{EventsMCMC}(object, level = 0.95)
 }
 \arguments{
-\item{object}{An \code{\linkS4class{EventsMCMC}} object.}
+\item{object}{An \code{\link[=EventsMCMC-class]{EventsMCMC}} object.}
 
 \item{...}{Currently not used.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 }
 \value{
-An \code{\linkS4class{OccurrenceEvents}} object.
+An \code{\link[=OccurrenceEvents-class]{OccurrenceEvents}} object.
 
-An \code{\linkS4class{OccurrenceEvents}} object.
+An \code{\link[=OccurrenceEvents-class]{OccurrenceEvents}} object.
 }
 \description{
 A statistical graphic designed for the archaeological study of when
@@ -46,10 +46,10 @@ occ <- occurrence(eve)
 plot(occ, panel.first = graphics::grid())
 }
 \seealso{
-Other event tools: 
-\code{\link{activity}()},
-\code{\link{elapse}()},
-\code{\link{tempo}()}
+Other event tools:
+\code{\link[=activity]{activity()}},
+\code{\link[=elapse]{elapse()}},
+\code{\link[=tempo]{tempo()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

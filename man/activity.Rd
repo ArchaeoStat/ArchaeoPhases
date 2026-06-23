@@ -34,7 +34,7 @@ activity(object, ...)
 )
 }
 \arguments{
-\item{object}{An \code{\linkS4class{EventsMCMC}} or a \code{\linkS4class{CumulativeEvents}} object.}
+\item{object}{An \code{\link[=EventsMCMC-class]{EventsMCMC}} or a \code{\link[=CumulativeEvents-class]{CumulativeEvents}} object.}
 
 \item{...}{Other \link[graphics:par]{graphical parameters} may also be passed as
 arguments to this function, particularly, \code{border}, \code{col}, \code{lwd} or \code{lty}.}
@@ -48,10 +48,10 @@ for (expressed in \emph{\link[aion:RataDie-class]{rata die}}.}
 \item{grid}{A length-one \code{\link{numeric}} vector specifying the number of equally
 spaced points of the temporal grid.}
 
-\item{x}{An \code{\linkS4class{ActivityEvents}} object.}
+\item{x}{An \code{\link[=ActivityEvents-class]{ActivityEvents}} object.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
+calendar (see \code{\link[aion:calendar]{calendar()}}).}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
@@ -74,7 +74,7 @@ place but before the axes, title and box are added.}
 }
 \value{
 \itemize{
-\item \code{activity()} returns an \code{\linkS4class{ActivityEvents}} object.
+\item \code{activity()} returns an \code{\link[=ActivityEvents-class]{ActivityEvents}} object.
 \item \code{plot()} is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns \code{x}).
 }
@@ -102,10 +102,10 @@ stratification. \emph{Journal of Archaeological Science}, 71: 1-9.
 \doi{10.1016/j.jas.2016.05.006}.
 }
 \seealso{
-Other event tools: 
-\code{\link{elapse}()},
-\code{\link{occurrence}()},
-\code{\link{tempo}()}
+Other event tools:
+\code{\link[=elapse]{elapse()}},
+\code{\link[=occurrence]{occurrence()}},
+\code{\link[=tempo]{tempo()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

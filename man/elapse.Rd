@@ -12,7 +12,7 @@ elapse(object, ...)
 \S4method{elapse}{MCMC}(object, origin = 1)
 }
 \arguments{
-\item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
+\item{object}{An object (typically an \code{\link[=MCMC-class]{MCMC}} object).}
 
 \item{...}{Currently not used.}
 
@@ -39,10 +39,10 @@ eve_elapse <- elapse(eve, origin = 4)
 plot(eve_elapse)
 }
 \seealso{
-Other event tools: 
-\code{\link{activity}()},
-\code{\link{occurrence}()},
-\code{\link{tempo}()}
+Other event tools:
+\code{\link[=activity]{activity()}},
+\code{\link[=occurrence]{occurrence()}},
+\code{\link[=tempo]{tempo()}}
 }
 \author{
 N. Frerebeau

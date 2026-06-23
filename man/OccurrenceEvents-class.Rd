@@ -6,7 +6,7 @@
 \alias{.OccurrenceEvents}
 \title{Occurrence}
 \description{
-An S4 class to store the result of an \link[=occurrence]{occurrence} plot.
+An S4 class to store the result of an \link{occurrence} plot.
 }
 \section{Slots}{
 
@@ -40,7 +40,7 @@ In the code snippets below, \code{x} is a \code{OccurrenceEvents} object.
 }
 
 \seealso{
-Other classes: 
+Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},

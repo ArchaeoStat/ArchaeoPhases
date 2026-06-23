@@ -6,7 +6,7 @@
 \alias{.CumulativeEvents}
 \title{Cumulative Events}
 \description{
-An S4 class to store the result of a \link[=tempo]{tempo} plot.
+An S4 class to store the result of a \link{tempo} plot.
 }
 \section{Slots}{
 
@@ -43,7 +43,7 @@ In the code snippets below, \code{x} is a \code{CumulativeEvents} object.
 }
 
 \seealso{
-Other classes: 
+Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{AgeDepthModel-class}},
 \code{\link{DurationsMCMC-class}},

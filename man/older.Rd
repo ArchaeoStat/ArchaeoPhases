@@ -17,7 +17,7 @@ older(x, y, ...)
 }
 \arguments{
 \item{x}{A \code{\link{numeric}} vector giving the output of the MCMC algorithm for the
-first parameter, or an \code{\linkS4class{EventsMCMC}} object.}
+first parameter, or an \code{\link[=EventsMCMC-class]{EventsMCMC}} object.}
 
 \item{y}{A \code{\link{numeric}} vector giving the output of the MCMC algorithm for the
 second parameter.}

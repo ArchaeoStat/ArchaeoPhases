@@ -12,7 +12,7 @@ sensitivity(...)
 \S4method{sensitivity}{EventsMCMC}(..., positions = NULL, level = 0.95)
 }
 \arguments{
-\item{...}{Any \code{\linkS4class{EventsMCMC}} object.}
+\item{...}{Any \code{\link[=EventsMCMC-class]{EventsMCMC}} object.}
 
 \item{positions}{A \code{\link{numeric}} vector specifying the positions of the columns
 corresponding to the MCMC chains of interest, or a \code{\link{character}} vector of
@@ -41,10 +41,10 @@ sensitivity(eve, eve)
 \seealso{
 \code{\link[=summary]{summary()}}
 
-Other statistics: 
-\code{\link{interval_credible}()},
-\code{\link{interval_hdr}()},
-\code{\link{summary}()}
+Other statistics:
+\code{\link[=interval_credible]{interval_credible()}},
+\code{\link[=interval_hdr]{interval_hdr()}},
+\code{\link[=summary]{summary()}}
 }
 \author{
 T. S. Dye, N. Frerebeau

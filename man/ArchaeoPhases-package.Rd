@@ -47,12 +47,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Anne Philippe \email{anne.philippe@univ-nantes.fr} (\href{https://orcid.org/0000-0002-5331-5087}{ORCID})
+\strong{Maintainer}: Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
 
 Authors:
 \itemize{
-  \item Marie-Anne Vibet (\href{https://orcid.org/0000-0003-4003-3141}{ORCID})
   \item Nicolas Frerebeau \email{nicolas.frerebeau@u-bordeaux-montaigne.fr} (\href{https://orcid.org/0000-0001-5759-4944}{ORCID})
+  \item Anne Philippe \email{anne.philippe@univ-nantes.fr} (\href{https://orcid.org/0000-0002-5331-5087}{ORCID})
+  \item Marie-Anne Vibet (\href{https://orcid.org/0000-0003-4003-3141}{ORCID})
 }
 
 Other contributors:

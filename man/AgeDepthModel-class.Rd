@@ -21,7 +21,7 @@ original data file.}
 }}
 
 \seealso{
-Other classes: 
+Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{DurationsMCMC-class}},

@@ -20,13 +20,13 @@ as_events(from, ...)
 \item{...}{Currently not used.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the source
-calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
+calendar (see \code{\link[aion:calendar]{calendar()}}).}
 
 \item{iteration}{A length-one \code{\link{numeric}} vector specifying the index of the
 iteration column.}
 }
 \value{
-An \code{\linkS4class{EventsMCMC}} object.
+An \code{\link[=EventsMCMC-class]{EventsMCMC}} object.
 }
 \description{
 Coerce to Events
@@ -49,13 +49,13 @@ plot(eve, calendar = BP(), interval = "hdr", level = 0.68)
 plot(eve, density = FALSE, interval = "credible", lwd = 3, tcl = 0)
 }
 \seealso{
-Other read methods: 
-\code{\link{as_coda}()},
-\code{\link{as_phases}()},
+Other read methods:
+\code{\link[=as_coda]{as_coda()}},
+\code{\link[=as_phases]{as_phases()}},
 \code{\link{check}},
-\code{\link{read_bcal}()},
+\code{\link[=read_bcal]{read_bcal()}},
 \code{\link{read_chronomodel}},
-\code{\link{read_oxcal}()}
+\code{\link[=read_oxcal]{read_oxcal()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

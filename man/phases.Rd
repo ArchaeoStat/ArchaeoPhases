@@ -15,7 +15,7 @@ phases(x, groups, ...)
 \S4method{phases}{EventsMCMC,list}(x, groups)
 }
 \arguments{
-\item{x}{An \code{\linkS4class{EventsMCMC}}.}
+\item{x}{An \code{\link[=EventsMCMC-class]{EventsMCMC}}.}
 
 \item{groups}{A \code{\link{list}} of (named) vector of names or indexes of columns in
 \code{x} (see \code{\link[=phases]{phases()}}).}
@@ -23,7 +23,7 @@ phases(x, groups, ...)
 \item{...}{Currently not used.}
 }
 \value{
-A \code{\linkS4class{PhasesMCMC}} object.
+A \code{\link[=PhasesMCMC-class]{PhasesMCMC}} object.
 }
 \description{
 Constructs the minimum and maximum for a group of events (phase).
@@ -54,8 +54,8 @@ pha2 <- phases(eve, groups = list(phase_1 = c(1, 3), phase_2 = c(2, 4)))
 summary(pha2, calendar = CE())
 }
 \seealso{
-Other phase tools: 
-\code{\link{duration}()}
+Other phase tools:
+\code{\link[=duration]{duration()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

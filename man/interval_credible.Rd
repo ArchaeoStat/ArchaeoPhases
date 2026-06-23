@@ -12,14 +12,14 @@ interval_credible(x, ...)
 \S4method{interval_credible}{MCMC}(x, level = 0.95, calendar = get_calendar())
 }
 \arguments{
-\item{x}{An \code{\linkS4class{MCMC}} object containing the output of the MCMC algorithm.}
+\item{x}{An \code{\link[=MCMC-class]{MCMC}} object containing the output of the MCMC algorithm.}
 
 \item{...}{Currently not used.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
+calendar (see \code{\link[aion:calendar]{calendar()}}).}
 }
 \value{
 Returns a \code{\link{list}} of \code{numeric} \code{\link{matrix}}.
@@ -55,10 +55,10 @@ interval_hdr(eve, level = 0.95, calendar = BP()) # HPD interval
 \seealso{
 \code{\link[arkhe:interval_credible]{arkhe::interval_credible()}}
 
-Other statistics: 
-\code{\link{interval_hdr}()},
-\code{\link{sensitivity}()},
-\code{\link{summary}()}
+Other statistics:
+\code{\link[=interval_hdr]{interval_hdr()}},
+\code{\link[=sensitivity]{sensitivity()}},
+\code{\link[=summary]{summary()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

@@ -12,12 +12,12 @@
 \S4method{summary}{PhasesMCMC}(object, level = 0.95, calendar = get_calendar())
 }
 \arguments{
-\item{object}{An \code{\linkS4class{MCMC}} or a \code{\linkS4class{PhasesMCMC}} object.}
+\item{object}{An \code{\link[=MCMC-class]{MCMC}} or a \code{\link[=PhasesMCMC-class]{PhasesMCMC}} object.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target calendar
-(see \code{\link[aion:calendar]{aion::calendar()}}).}
+(see \code{\link[aion:calendar]{calendar()}}).}
 }
 \value{
 A \code{\link{data.frame}} where the rows correspond to the chains of interest and
@@ -66,10 +66,10 @@ plot(pha, succession = "hiatus")
 plot(pha, succession = "transition")
 }
 \seealso{
-Other statistics: 
-\code{\link{interval_credible}()},
-\code{\link{interval_hdr}()},
-\code{\link{sensitivity}()}
+Other statistics:
+\code{\link[=interval_credible]{interval_credible()}},
+\code{\link[=interval_hdr]{interval_hdr()}},
+\code{\link[=sensitivity]{sensitivity()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

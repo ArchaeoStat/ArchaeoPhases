@@ -16,7 +16,7 @@ boundaries(x, y, ...)
 }
 \arguments{
 \item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an
-\code{\linkS4class{PhasesMCMC}} object.}
+\code{\link[=PhasesMCMC-class]{PhasesMCMC}} object.}
 
 \item{...}{Currently not used.}
 
@@ -35,7 +35,7 @@ for each phase.
 \item \code{boundaries(x = numeric, y = numeric)}: Returns a length-two \code{\link{numeric}} vector
 (terminal times).
 
-\item \code{boundaries(x = PhasesMCMC, y = missing)}: Returns a \code{\linkS4class{TimeRange}} object.
+\item \code{boundaries(x = PhasesMCMC, y = missing)}: Returns a \code{\link[=TimeRange-class]{TimeRange}} object.
 
 }}
 \examples{
@@ -59,9 +59,9 @@ hia <- hiatus(pha)
 as.data.frame(hia)
 }
 \seealso{
-Other time ranges: 
-\code{\link{hiatus}()},
-\code{\link{transition}()}
+Other time ranges:
+\code{\link[=hiatus]{hiatus()}},
+\code{\link[=transition]{transition()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

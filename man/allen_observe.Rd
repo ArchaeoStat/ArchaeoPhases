@@ -15,7 +15,7 @@ allen_observe(x, groups, ...)
 \S4method{allen_observe}{EventsMCMC,list}(x, groups, converse = TRUE, ...)
 }
 \arguments{
-\item{x}{An \code{\linkS4class{EventsMCMC}} or a \code{\linkS4class{PhasesMCMC}} object containing
+\item{x}{An \code{\link[=EventsMCMC-class]{EventsMCMC}} or a \code{\link[=PhasesMCMC-class]{PhasesMCMC}} object containing
 the output of the MCMC algorithm.}
 
 \item{groups}{A \code{\link{list}} of (named) vector of names or indexes of columns in
@@ -81,21 +81,21 @@ if (requireNamespace("ArchaeoData", quietly = TRUE)) {
 }
 }
 \seealso{
-Other Allen's intervals: 
-\code{\link{allen_analyze}()},
-\code{\link{allen_analyze_relations}()},
-\code{\link{allen_complement}()},
-\code{\link{allen_composition}()},
-\code{\link{allen_converse}()},
-\code{\link{allen_illustrate}()},
-\code{\link{allen_illustrate_relations}()},
-\code{\link{allen_intersect}()},
-\code{\link{allen_joint_concurrency}()},
-\code{\link{allen_observe_frequency}()},
-\code{\link{allen_plot}()},
-\code{\link{allen_relation}()},
-\code{\link{allen_relation_code}()},
-\code{\link{allen_union}()}
+Other Allen's intervals:
+\code{\link[=allen_analyze]{allen_analyze()}},
+\code{\link[=allen_analyze_relations]{allen_analyze_relations()}},
+\code{\link[=allen_complement]{allen_complement()}},
+\code{\link[=allen_composition]{allen_composition()}},
+\code{\link[=allen_converse]{allen_converse()}},
+\code{\link[=allen_illustrate]{allen_illustrate()}},
+\code{\link[=allen_illustrate_relations]{allen_illustrate_relations()}},
+\code{\link[=allen_intersect]{allen_intersect()}},
+\code{\link[=allen_joint_concurrency]{allen_joint_concurrency()}},
+\code{\link[=allen_observe_frequency]{allen_observe_frequency()}},
+\code{\link[=allen_plot]{allen_plot()}},
+\code{\link[=allen_relation]{allen_relation()}},
+\code{\link[=allen_relation_code]{allen_relation_code()}},
+\code{\link[=allen_union]{allen_union()}}
 }
 \author{
 T. S. Dye, N. Frerebeau

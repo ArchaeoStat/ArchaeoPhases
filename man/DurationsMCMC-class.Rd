@@ -9,10 +9,10 @@
 S4 classes to represent the output of a MCMC algorithm.
 }
 \note{
-This class inherits from \code{\linkS4class{MCMC}}.
+This class inherits from \code{\link[=MCMC-class]{MCMC}}.
 }
 \seealso{
-Other classes: 
+Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},

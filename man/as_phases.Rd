@@ -34,7 +34,7 @@ as_phases(from, ...)
 \item{...}{Currently not used.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the source
-calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
+calendar (see \code{\link[aion:calendar]{calendar()}}).}
 
 \item{start}{An \code{\link{integer}} vector specifying the index of the columns
 corresponding to the beginning of the phases. If missing, every other column
@@ -52,7 +52,7 @@ column, if any).}
 iteration column.}
 }
 \value{
-A \code{\linkS4class{PhasesMCMC}} object.
+A \code{\link[=PhasesMCMC-class]{PhasesMCMC}} object.
 }
 \description{
 Coerce to Phases
@@ -79,13 +79,13 @@ pha2 <- phases(eve, groups = list(phase_1 = c(1, 3), phase_2 = c(2, 4)))
 summary(pha2, calendar = CE())
 }
 \seealso{
-Other read methods: 
-\code{\link{as_coda}()},
-\code{\link{as_events}()},
+Other read methods:
+\code{\link[=as_coda]{as_coda()}},
+\code{\link[=as_events]{as_events()}},
 \code{\link{check}},
-\code{\link{read_bcal}()},
+\code{\link[=read_bcal]{read_bcal()}},
 \code{\link{read_chronomodel}},
-\code{\link{read_oxcal}()}
+\code{\link[=read_oxcal]{read_oxcal()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

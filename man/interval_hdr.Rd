@@ -12,7 +12,7 @@ interval_hdr(x, y, ...)
 \S4method{interval_hdr}{MCMC,missing}(x, level = 0.95, calendar = get_calendar(), ...)
 }
 \arguments{
-\item{x}{An \code{\linkS4class{MCMC}} object containing the output of the MCMC algorithm.}
+\item{x}{An \code{\link[=MCMC-class]{MCMC}} object containing the output of the MCMC algorithm.}
 
 \item{y}{Currently not used.}
 
@@ -21,7 +21,7 @@ interval_hdr(x, y, ...)
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
+calendar (see \code{\link[aion:calendar]{calendar()}}).}
 }
 \value{
 Returns a \code{\link{list}} of \code{numeric} \code{\link{matrix}}.
@@ -49,10 +49,10 @@ Hyndman, R. J. (1996). Computing and graphing highest density regions.
 \seealso{
 \code{\link[stats:density]{stats::density()}}, \code{\link[arkhe:interval_hdr]{arkhe::interval_hdr()}}
 
-Other statistics: 
-\code{\link{interval_credible}()},
-\code{\link{sensitivity}()},
-\code{\link{summary}()}
+Other statistics:
+\code{\link[=interval_credible]{interval_credible()}},
+\code{\link[=sensitivity]{sensitivity()}},
+\code{\link[=summary]{summary()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, T. S. Dye, N. Frerebeau

@@ -16,7 +16,7 @@ transition(x, y, ...)
 }
 \arguments{
 \item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an
-\code{\linkS4class{PhasesMCMC}} object.}
+\code{\link[=PhasesMCMC-class]{PhasesMCMC}} object.}
 
 \item{...}{Currently not used.}
 
@@ -40,7 +40,7 @@ This assumes that the phases are in temporal order constraint.
 \item \code{transition(x = numeric, y = numeric)}: Returns a length-two \code{\link{numeric}} vector
 (terminal times of the transition interval).
 
-\item \code{transition(x = PhasesMCMC, y = missing)}: Returns a \code{\linkS4class{TimeRange}} object.
+\item \code{transition(x = PhasesMCMC, y = missing)}: Returns a \code{\link[=TimeRange-class]{TimeRange}} object.
 
 }}
 \examples{
@@ -64,9 +64,9 @@ hia <- hiatus(pha)
 as.data.frame(hia)
 }
 \seealso{
-Other time ranges: 
-\code{\link{boundaries}()},
-\code{\link{hiatus}()}
+Other time ranges:
+\code{\link[=boundaries]{boundaries()}},
+\code{\link[=hiatus]{hiatus()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

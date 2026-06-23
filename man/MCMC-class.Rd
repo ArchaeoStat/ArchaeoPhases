@@ -35,7 +35,7 @@ In the code snippets below, \code{x} is a \code{MCMC} object.
 }
 
 \seealso{
-Other classes: 
+Other classes:
 \code{\link{ActivityEvents-class}},
 \code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},

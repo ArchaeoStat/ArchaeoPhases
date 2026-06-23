@@ -6,7 +6,7 @@
 \alias{.ActivityEvents}
 \title{Activity}
 \description{
-An S4 class to store the result of an \link[=activity]{activity} plot.
+An S4 class to store the result of an \link{activity} plot.
 }
 \section{Slots}{
 
@@ -27,7 +27,7 @@ In the code snippets below, \code{x} is an \code{ActivityEvents} object.
 }
 
 \seealso{
-Other classes: 
+Other classes:
 \code{\link{AgeDepthModel-class}},
 \code{\link{CumulativeEvents-class}},
 \code{\link{DurationsMCMC-class}},

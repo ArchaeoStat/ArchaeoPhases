@@ -12,7 +12,7 @@
 \S4method{sort}{PhasesMCMC}(x, decreasing = FALSE)
 }
 \arguments{
-\item{x}{An \code{\linkS4class{MCMC}} object.}
+\item{x}{An \code{\link[=MCMC-class]{MCMC}} object.}
 
 \item{decreasing}{A \code{\link{logical}} scalar: should the sort order be decreasing?}
 }

@@ -32,7 +32,7 @@ bury(object, depth, ...)
 )
 }
 \arguments{
-\item{object}{An \code{\linkS4class{EventsMCMC}} object.}
+\item{object}{An \code{\link[=EventsMCMC-class]{EventsMCMC}} object.}
 
 \item{depth}{A \code{\link{numeric}} vector giving of the depths of the dated samples.}
 
@@ -49,12 +49,12 @@ polynomials to be used (see \code{\link[stats:loess]{stats::loess()}}).}
 \item{newdata}{A \code{\link{numeric}} vector giving the depths at which ages will be
 predicted. If \code{missing}, the original data points are used.}
 
-\item{x}{An \code{\linkS4class{AgeDepthModel}} object.}
+\item{x}{An \code{\link[=AgeDepthModel-class]{AgeDepthModel}} object.}
 
 \item{level}{A length-one \code{\link{numeric}} vector giving the confidence level.}
 
 \item{calendar}{A \code{\link[aion:TimeScale-class]{aion::TimeScale}} object specifying the target
-calendar (see \code{\link[aion:calendar]{aion::calendar()}}).}
+calendar (see \code{\link[aion:calendar]{calendar()}}).}
 
 \item{main}{A \code{\link{character}} string giving a main title for the plot.}
 
@@ -77,8 +77,8 @@ place but before the axes, title and box are added.}
 }
 \value{
 \itemize{
-\item \code{bury()} returns an \code{\linkS4class{AgeDepthModel}} object.
-\item \code{predict()} returns an \code{\linkS4class{EventsMCMC}} object.
+\item \code{bury()} returns an \code{\link[=AgeDepthModel-class]{AgeDepthModel}} object.
+\item \code{predict()} returns an \code{\link[=EventsMCMC-class]{EventsMCMC}} object.
 \item \code{plot()} is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns \code{x}).
 }
@@ -123,8 +123,8 @@ Vegetation in the Central Himalaya: Insight from dD and d13C Values of Leaf
 Wax Lipid. \emph{The Holocene}, 30(7): 1063-1074. \doi{10.1177/0959683620908639}.
 }
 \seealso{
-Other age-depth modeling tools: 
-\code{\link{interpolate}()}
+Other age-depth modeling tools:
+\code{\link[=interpolate]{interpolate()}}
 }
 \author{
 A. Philippe

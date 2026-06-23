@@ -21,7 +21,7 @@ mcmc_events
 A data set containing information on the ages of four dated events.
 }
 \seealso{
-Other datasets: 
+Other datasets:
 \code{\link{mcmc_phases}}
 }
 \concept{datasets}

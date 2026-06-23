@@ -16,7 +16,7 @@ duration(x, y, ...)
 }
 \arguments{
 \item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an
-\code{\linkS4class{PhasesMCMC}} object.}
+\code{\link[=PhasesMCMC-class]{PhasesMCMC}} object.}
 
 \item{...}{Currently not used.}
 }
@@ -32,8 +32,8 @@ dur <- duration(pha)
 summary(dur)
 }
 \seealso{
-Other phase tools: 
-\code{\link{phases}()}
+Other phase tools:
+\code{\link[=phases]{phases()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

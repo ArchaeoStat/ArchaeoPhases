@@ -25,7 +25,7 @@ is_original(object, ...)
 \S4method{is_original}{OccurrenceEvents}(object, file, download = FALSE)
 }
 \arguments{
-\item{object}{An object (typically an \code{\linkS4class{MCMC}} object).}
+\item{object}{An object (typically an \code{\link[=MCMC-class]{MCMC}} object).}
 
 \item{...}{Currently not used.}
 
@@ -59,13 +59,13 @@ is_original(oxcal, url_output, download = TRUE) # Same as remote file? TRUE
 \seealso{
 \code{\link[digest:digest]{digest::digest()}}
 
-Other read methods: 
-\code{\link{as_coda}()},
-\code{\link{as_events}()},
-\code{\link{as_phases}()},
-\code{\link{read_bcal}()},
+Other read methods:
+\code{\link[=as_coda]{as_coda()}},
+\code{\link[=as_events]{as_events()}},
+\code{\link[=as_phases]{as_phases()}},
+\code{\link[=read_bcal]{read_bcal()}},
 \code{\link{read_chronomodel}},
-\code{\link{read_oxcal}()}
+\code{\link[=read_oxcal]{read_oxcal()}}
 }
 \author{
 T. S. Dye, N. Frerebeau

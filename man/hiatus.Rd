@@ -20,7 +20,7 @@ hiatus(x, y, ...)
 }
 \arguments{
 \item{x, y}{A \code{\link{numeric}} vector. If \code{y} is missing, \code{x} must be an
-\code{\linkS4class{PhasesMCMC}} or an \code{\linkS4class{EventsMCMC}} object.}
+\code{\link[=PhasesMCMC-class]{PhasesMCMC}} or an \code{\link[=EventsMCMC-class]{EventsMCMC}} object.}
 
 \item{...}{Currently not used.}
 
@@ -47,9 +47,9 @@ satisfies
 \item \code{hiatus(x = numeric, y = numeric)}: Returns a length-three \code{\link{numeric}} vector (terminal times
 and hiatus duration, if any).
 
-\item \code{hiatus(x = EventsMCMC, y = missing)}: Returns a \code{\linkS4class{TimeRange}} object.
+\item \code{hiatus(x = EventsMCMC, y = missing)}: Returns a \code{\link[=TimeRange-class]{TimeRange}} object.
 
-\item \code{hiatus(x = PhasesMCMC, y = missing)}: Returns a \code{\linkS4class{TimeRange}} object.
+\item \code{hiatus(x = PhasesMCMC, y = missing)}: Returns a \code{\link[=TimeRange-class]{TimeRange}} object.
 
 }}
 \examples{
@@ -65,9 +65,9 @@ hia <- hiatus(eve)
 as.data.frame(hia)
 }
 \seealso{
-Other time ranges: 
-\code{\link{boundaries}()},
-\code{\link{transition}()}
+Other time ranges:
+\code{\link[=boundaries]{boundaries()}},
+\code{\link[=transition]{transition()}}
 }
 \author{
 A. Philippe, M.-A. Vibet, N. Frerebeau

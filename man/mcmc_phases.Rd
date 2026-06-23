@@ -21,7 +21,7 @@ mcmc_phases
 A data set containing information on the start and end dates of two phases.
 }
 \seealso{
-Other datasets: 
+Other datasets:
 \code{\link{mcmc_events}}
 }
 \concept{datasets}
