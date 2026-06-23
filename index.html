@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling • ArchaeoPhases</title>
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Post-Processing of Markov Chain Monte Carlo Simulations for Chronological Modelling">
 <meta name="description" content="Statistical analysis of archaeological dates and groups of dates. This package allows to post-process Markov Chain Monte Carlo (MCMC) simulations from ChronoModel &lt;https://chronomodel.com/&gt;, Oxcal &lt;https://c14.arch.ox.ac.uk/oxcal.html&gt; or BCal &lt;https://bcal.shef.ac.uk/&gt;. It provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases) as described in Philippe and Vibet (2020) &lt;doi:10.18637/jss.v093.c01&gt;.">
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ArchaeoPhases</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>Statistical analysis of archaeological dates and groups of dates. <strong>ArchaeoPhases</strong> allows to post-process Markov Chain Monte Carlo (MCMC) simulations from <a href="https://chronomodel.com" class="external-link">ChronoModel</a> (Lanos et al. 2020), <a href="https://c14.arch.ox.ac.uk/oxcal.html" class="external-link">Oxcal</a> (Bronk Ramsey 2009) or <a href="https://bcal.shef.ac.uk" class="external-link">BCal</a> (Buck, Christen, and James 1999). This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).</p>
+<p>Statistical analysis of archaeological dates and groups of dates. <strong>ArchaeoPhases</strong> allows to post-process Markov Chain Monte Carlo (MCMC) simulations from <a href="https://chronomodel.com" class="external-link">ChronoModel</a> (Lanos et al. 2020), <a href="https://c14.arch.ox.ac.uk/oxcal.html" class="external-link">Oxcal</a> (Bronk Ramsey 2009) or <a href="https://bcal.shef.ac.uk" class="external-link">BCal</a> (Buck et al. 1999). This package provides functions for the study of rhythms of the long term from the posterior distribution of a series of dates (tempo and activity plot). It also allows the estimation and visualization of time ranges from the posterior distribution of groups of dates (e.g. duration, transition and hiatus between successive phases).</p>
 <p><strong>ArchaeoPhases v2.0 brings a comprehensive package rewrite, resulting in the renaming of nearly all functions. For more information, please refer to <code>news(Version &gt;= "2.0", package = "ArchaeoPhases")</code>.</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>To cite ArchaeoPhases <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
@@ -83,11 +83,11 @@
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  Snippets_, <span class="sc">*</span><span class="dv">93</span><span class="sc">*</span>(<span class="dv">1</span>). doi<span class="sc">:</span><span class="fl">10.18637</span><span class="sc">/</span>jss.v093.c01</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>doi.org<span class="sc">/</span><span class="fl">10.18637</span><span class="sc">/</span>jss.v093.c01<span class="sc">&gt;</span>.</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  Philippe A, Vibet M, Frerebeau N, Dye <span class="fu">T</span> (<span class="dv">2025</span>). _ArchaeoPhases<span class="sc">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  Philippe A, Vibet M, Frerebeau N, Dye <span class="fu">T</span> (<span class="dv">2026</span>). _ArchaeoPhases<span class="sc">:</span></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  Post<span class="sc">-</span>Processing of Markov Chain Monte Carlo Simulations <span class="cf">for</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  Chronological Modelling_. Université de Nantes, Nantes, France.</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  doi<span class="sc">:</span><span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.8087121</span> <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>doi.org<span class="sc">/</span><span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.8087121</span><span class="sc">&gt;</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  R package version <span class="dv">2</span>.<span class="fl">1.0</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  doi<span class="sc">:</span><span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.8087121</span> <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>doi.org<span class="sc">/</span><span class="fl">10.5281</span><span class="sc">/</span>zenodo<span class="fl">.8087121</span><span class="sc">&gt;</span>.</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  R package version <span class="dv">2</span>.<span class="fl">1.1</span>,</span>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>ArchaeoStat.github.io<span class="sc">/</span>ArchaeoPhases<span class="sc">/</span><span class="er">&gt;</span>.</span></code></pre></div>
 </div>
 <div class="section level2">
@@ -108,7 +108,7 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p><strong>ArchaeoPhases</strong> v2.0 uses <a href="https://packages.tesselle.org/aion/" class="external-link"><strong>aion</strong></a> for internal date representation. Look at <code><a href="https://packages.tesselle.org/aion/articles/aion.html" class="external-link">vignette("aion", package = "aion")</a></code> before you start.</p>
+<p><strong>ArchaeoPhases</strong> v2.0 uses <a href="https://packages.tesselle.org/aion/" class="external-link"><strong>aion</strong></a> for internal date representation. Look at <code><a href="https://packages.tesselle.org/aion//articles/aion.html" class="external-link">vignette("aion", package = "aion")</a></code> before you start.</p>
 <p>These examples use data available through the <a href="https://github.com/ArchaeoStat/ArchaeoData" class="external-link"><strong>ArchaeoData</strong></a> package which is available in a <a href="https://archaeostat.r-universe.dev" class="external-link">separate repository</a>. <strong>ArchaeoData</strong> provides MCMC outputs from ChronoModel, OxCal and BCal.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Install the data package</span></span>
@@ -139,27 +139,27 @@
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Plot the first event</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, interval <span class="op">=</span> <span class="st">"hdr"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, interval <span class="op">=</span> <span class="st">"hdr"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Plot all events</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-events-plot-1.png" width="50%"><img src="reference/figures/README-events-plot-2.png" width="50%"></p>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-events-plot-1.png" alt="" width="50%"><img src="reference/figures/README-events-plot-2.png" alt="" width="50%"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tempo plot</span></span>
 <span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tempo.html">tempo</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Activity plot</span></span>
 <span><span class="va">ac</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/activity.html">activity</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-tempo-plot-1.png" width="50%"><img src="reference/figures/README-tempo-plot-2.png" width="50%"></p>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-tempo-plot-1.png" alt="" width="50%"><img src="reference/figures/README-tempo-plot-2.png" alt="" width="50%"></p>
 </div>
 <div class="section level3">
 <h3 id="analysis-of-a-group-of-dates-phase">Analysis of a group of dates (phase)<a class="anchor" aria-label="anchor" href="#analysis-of-a-group-of-dates-phase"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bound</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/boundaries.html">boundaries</a></span><span class="op">(</span><span class="va">chrono_phases</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      label     start       end duration</span></span>
 <span><span class="co">#&gt; 1      EPI -28978.53 -26969.82 2008.712</span></span>
 <span><span class="co">#&gt; 2       UP -38570.37 -29368.75 9201.622</span></span>
@@ -167,14 +167,14 @@
 <span><span class="co">#&gt; 4      IUP -43240.37 -41161.00 2079.372</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Plot all phases</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-phases-plot-1.png" style="display: block; margin: auto;"></p>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-phases-plot-1.png" alt="" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-succession-plot-1.png" style="display: block; margin: auto;"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-succession-plot-1.png" alt="" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"transition"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-succession-plot-2.png" style="display: block; margin: auto;"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"transition"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-succession-plot-2.png" alt="" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -188,12 +188,12 @@
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-allen1983" class="csl-entry">
 Allen, James F. 1983. “Maintaining Knowledge about Temporal Intervals.” <em>Communications of the ACM</em> 26 (11): 832–43. <a href="https://doi.org/10.1145/182.358434" class="external-link uri">https://doi.org/10.1145/182.358434</a>.
 </div>
 <div id="ref-bosch2015" class="csl-entry">
-Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, Tamsin C. O’Connell, Beatrice Demarchi, Sheila M. Taylor, Laura Niven, Johannes van der Plicht, and Jean-Jacques Hublin. 2015. “New Chronology for Ksâr ’Akil (Lebanon) Supports Levantine Route of Modern Human Dispersal into Europe.” <em>Proceedings of the National Academy of Sciences</em> 112 (25): 7683–88. <a href="https://doi.org/10.1073/pnas.1501529112" class="external-link uri">https://doi.org/10.1073/pnas.1501529112</a>.
+Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, et al. 2015. “New Chronology for Ksâr ‘Akil (Lebanon) Supports Levantine Route of Modern Human Dispersal into Europe.” <em>Proceedings of the National Academy of Sciences</em> 112 (25): 7683–88. <a href="https://doi.org/10.1073/pnas.1501529112" class="external-link uri">https://doi.org/10.1073/pnas.1501529112</a>.
 </div>
 <div id="ref-bronkramsey2009" class="csl-entry">
 Bronk Ramsey, Christopher. 2009. “Bayesian Analysis of Radiocarbon Dates.” <em>Radiocarbon</em> 51 (1): 337–60. <a href="https://doi.org/10.1017/S0033822200033865" class="external-link uri">https://doi.org/10.1017/S0033822200033865</a>.
@@ -208,10 +208,10 @@ Dye, Thomas S. 2016. “Long-Term Rhythms in the Development of Hawaiian Social 
 Dye, Thomas S., Caitlin E. Buck, Robert J. DiNapoli, and Anne Philippe. 2023. “Bayesian Chronology Construction and Substance Time.” <em>Journal of Archaeological Science</em> 153: 105765. <a href="https://doi.org/" class="external-link uri">https://doi.org/</a><a href="https://doi.org/10.1016/j.jas.2023.105765" class="external-link uri">https://doi.org/10.1016/j.jas.2023.105765</a>.
 </div>
 <div id="ref-ghosh2020" class="csl-entry">
-Ghosh, Sambit, Prasanta Sanyal, Sohom Roy, Ravi Bhushan, Sp Sati, Anne Philippe, and Navin Juyal. 2020. “Early Holocene Indian Summer Monsoon and Its Impact on Vegetation in the Central Himalaya: Insight from <span class="nocase">dD</span> and d <sup>13</sup> C Values of Leaf Wax Lipid.” <em>The Holocene</em> 30 (7): 1063–74. <a href="https://doi.org/10.1177/0959683620908639" class="external-link uri">https://doi.org/10.1177/0959683620908639</a>.
+Ghosh, Sambit, Prasanta Sanyal, Sohom Roy, et al. 2020. “Early Holocene Indian Summer Monsoon and Its Impact on Vegetation in the Central Himalaya: Insight from <span class="nocase">dD</span> and d <sup>13</sup> C Values of Leaf Wax Lipid.” <em>The Holocene</em> 30 (7): 1063–74. <a href="https://doi.org/10.1177/0959683620908639" class="external-link uri">https://doi.org/10.1177/0959683620908639</a>.
 </div>
 <div id="ref-harris1997" class="csl-entry">
-Harris, Edward C. 1997. <em>Principles of Archaeological Stratigraphy</em>. Seconde édition. London: Academic Press.
+Harris, Edward C. 1997. <em>Principles of Archaeological Stratigraphy</em>. Seconde édition. Academic Press.
 </div>
 <div id="ref-hyndman1996" class="csl-entry">
 Hyndman, Rob J. 1996. “Computing and Graphing Highest Density Regions.” <em>The American Statistician</em> 50 (2): 120. <a href="https://doi.org/10.2307/2684423" class="external-link uri">https://doi.org/10.2307/2684423</a>.
@@ -220,16 +220,16 @@ Hyndman, Rob J. 1996. “Computing and Graphing Highest Density Regions.” <em>
 Jha, Deepak Kumar, Prasanta Sanyal, and Anne Philippe. 2020. “Multi-Proxy Evidence of Late Quaternary Climate and Vegetational History of North-Central India: Implication for the Paleolithic to Neolithic Phases.” <em>Quaternary Science Reviews</em> 229 (February): 106121. <a href="https://doi.org/10.1016/j.quascirev.2019.106121" class="external-link uri">https://doi.org/10.1016/j.quascirev.2019.106121</a>.
 </div>
 <div id="ref-lanos2020" class="csl-entry">
-Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. “Chronomodel: Chronological Modeling of Archaeological Data Using Bayesian Statistics.” CNRS. <a href="https://chronomodel.com" class="external-link uri">https://chronomodel.com</a>.
+Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. <em>Chronomodel: Chronological Modeling of Archaeological Data Using Bayesian Statistics</em>. CNRS, released. <a href="https://chronomodel.com" class="external-link uri">https://chronomodel.com</a>.
 </div>
 <div id="ref-lyman2017" class="csl-entry">
-Lyman, R. Lee, and Michael J. O’Brien. 2017. “Sedation and Cladistics: The Difference Between Anagenetic and Cladogenetic Evolution.” In <em>Mapping Our Ancestors: Phylogenetic Approaches in Anthropology and Prehistory</em>, edited by Carl P. Lipo, Michael J. O’Brien, Mark Couard, and Stephen J. Shennan. New York: Routledge. <a href="https://doi.org/10.4324/9780203786376" class="external-link uri">https://doi.org/10.4324/9780203786376</a>.
+Lyman, R. Lee, and Michael J. O’Brien. 2017. “Sedation and Cladistics: The Difference Between Anagenetic and Cladogenetic Evolution.” In <em>Mapping Our Ancestors: Phylogenetic Approaches in Anthropology and Prehistory</em>, edited by Carl P. Lipo, Michael J. O’Brien, Mark Couard, and Stephen J. Shennan. Routledge. <a href="https://doi.org/10.4324/9780203786376" class="external-link uri">https://doi.org/10.4324/9780203786376</a>.
 </div>
 <div id="ref-philippe2020" class="csl-entry">
 Philippe, Anne, and Marie-Anne Vibet. 2020. “Analysis of Archaeological Phases Using the R Package ArchaeoPhases.” <em>Journal of Statistical Software</em> 93. <a href="https://doi.org/10.18637/jss.v093.c01" class="external-link uri">https://doi.org/10.18637/jss.v093.c01</a>.
 </div>
 <div id="ref-robert2010" class="csl-entry">
-Robert, Christian P., and George Casella. 2010. <em>Introducing Monte Carlo Methods with R</em>. Use R! New York: Springer.
+Robert, Christian P., and George Casella. 2010. <em>Introducing Monte Carlo Methods with R</em>. Use R! Springer.
 </div>
 <div id="ref-viola2020" class="csl-entry">
 Viola, Tullio. 2020. <em>Peirce on the Uses of History</em>. De Gruyter. <a href="https://doi.org/10.1515/9783110651560" class="external-link uri">https://doi.org/10.1515/9783110651560</a>.
@@ -293,7 +293,7 @@ Viola, Tullio. 2020. <em>Peirce on the Uses of History</em>. De Gruyter. <a href
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

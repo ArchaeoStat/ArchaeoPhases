@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Introduction to ArchaeoPhases • ArchaeoPhases</title>
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to ArchaeoPhases">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ArchaeoPhases</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,9 +71,9 @@
                         <h4 data-toc-skip class="author">A. Philippe,
 M.-A. Vibet</h4>
             
-            <h4 data-toc-skip class="date">2025-09-22</h4>
+            <h4 data-toc-skip class="date">2026-06-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/v2.1.0/vignettes/ArchaeoPhases.Rmd" class="external-link"><code>vignettes/ArchaeoPhases.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/vignettes/ArchaeoPhases.Rmd" class="external-link"><code>vignettes/ArchaeoPhases.Rmd</code></a></small>
       <div class="d-none name"><code>ArchaeoPhases.Rmd</code></div>
     </div>
 
@@ -87,9 +87,9 @@ statistical analysis of archaeological dates and groups of dates. It is
 based on the post-processing of the Markov Chains whose stationary
 distribution is the posterior distribution of a series of dates. Such
 MCMC output can be simulated by different applications as for instance
-<a href="https://chronomodel.com/" class="external-link">ChronoModel</a> <span class="citation">(Lanos et al. 2020)</span>, <a href="https://c14.arch.ox.ac.uk/oxcal.html" class="external-link">Oxcal</a> <span class="citation">(Bronk Ramsey 2009)</span> or <a href="https://bcal.shef.ac.uk/" class="external-link">BCal</a> <span class="citation">(Buck,
-Christen, and James 1999)</span>. The only requirement is to have a CSV
-file containing a sample from the posterior distribution.</p>
+<a href="https://chronomodel.com/" class="external-link">ChronoModel</a> <span class="citation">(Lanos et al. 2020)</span>, <a href="https://c14.arch.ox.ac.uk/oxcal.html" class="external-link">Oxcal</a> <span class="citation">(Bronk Ramsey 2009)</span> or <a href="https://bcal.shef.ac.uk/" class="external-link">BCal</a> <span class="citation">(Buck et
+al. 1999)</span>. The only requirement is to have a CSV file containing
+a sample from the posterior distribution.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Load packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ArchaeoStat.github.io/ArchaeoPhases/">ArchaeoPhases</a></span><span class="op">)</span></span>
@@ -166,7 +166,7 @@ sample, which was the aim the MCMC process.</p>
 <p>We can also check whether the chains reached equilibrium. For
 example, let’s consider the first date of the dataset.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">coda_events</span><span class="op">[</span>, <span class="fl">1</span>, <span class="op">]</span>, trace <span class="op">=</span> <span class="cn">TRUE</span>, density <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">coda_events</span><span class="op">[</span>, <span class="fl">1</span>, <span class="op">]</span>, trace <span class="op">=</span> <span class="cn">TRUE</span>, density <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/coda-plot-1.png" alt="plot of chunk coda-plot" width="100%"><p class="caption">
 plot of chunk coda-plot
@@ -244,7 +244,7 @@ each parameter.</p>
 <h2 id="analysis-of-a-series-of-dates">Analysis of a series of dates<a class="anchor" aria-label="anchor" href="#analysis-of-a-series-of-dates"></a>
 </h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/event-plot-1.png" alt="plot of chunk event-plot" width="100%"><p class="caption">
 plot of chunk event-plot
@@ -266,7 +266,7 @@ instantaneous, the plot is vertical.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tempo.html">tempo</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span>, count <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/tempo-plot-1.png" alt="plot of chunk tempo-plot" width="100%"><p class="caption">
 plot of chunk tempo-plot
@@ -284,7 +284,7 @@ the Tempo plot. It is an other way to see changes over time.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">ac</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/activity.html">activity</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/activity-plot-1.png" alt="plot of chunk activity-plot" width="100%"><p class="caption">
 plot of chunk activity-plot
@@ -302,14 +302,14 @@ observed before
 is equal to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
 for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>16</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">k = [(1, 16)]</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>16</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">k = [(1, 16)]</annotation></semantics></math>.
 The Occurrence plot draws the credible intervals or the highest
 posterior density (HPD) region of those dates associated to a desired
 level of confidence.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">oc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/occurrence.html">occurrence</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oc</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oc</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/occurrence-plot-1.png" alt="plot of chunk occurrence-plot" width="100%"><p class="caption">
 plot of chunk occurrence-plot
@@ -340,7 +340,7 @@ level <span class="citation">(Philippe and Vibet 2020)</span>.</p>
 groups of dates of Ksar Akil data at a given confidence level.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bound</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/boundaries.html">boundaries</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      label     start       end duration</span></span>
 <span><span class="co">#&gt; 1      EPI -28978.53 -26969.82 2008.712</span></span>
 <span><span class="co">#&gt; 2       UP -38570.37 -29368.75 9201.622</span></span>
@@ -350,7 +350,7 @@ groups of dates of Ksar Akil data at a given confidence level.</p>
 the estimation of its minimum, the estimation of its maximum and their
 uncertainties at the same time.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/phases-plot-1.png" alt="plot of chunk phases-plot" width="100%"><p class="caption">
 plot of chunk phases-plot
@@ -378,7 +378,7 @@ time range calculated between the end of the oldest group of dates and
 the start of the youngest group of dates.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">trans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/transition.html">transition</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">trans</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">trans</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          label     start       end  duration</span></span>
 <span><span class="co">#&gt; 1       UP-EPI -31479.79 -26905.04  4574.757</span></span>
 <span><span class="co">#&gt; 2 Ahmarian-EPI -39138.82 -27122.05 12016.769</span></span>
@@ -398,7 +398,7 @@ dates and the start of the successive one with fixed posterior
 probability.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hiatus.html">hiatus</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">hia</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">hia</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          label     start       end   duration</span></span>
 <span><span class="co">#&gt; 1       UP-EPI -29188.56 -28961.79   226.7663</span></span>
 <span><span class="co">#&gt; 2 Ahmarian-EPI -37368.33 -28884.37  8483.9637</span></span>
@@ -409,7 +409,7 @@ of phases <em>IUP</em>, <em>Ahmarian</em> and <em>UP</em>, but there
 exists one of 203 years between phase <em>UP</em> and phase
 <em>EPI</em>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/succession-plot-1.png" alt="plot of chunk succession-plot" width="100%"><p class="caption">
 plot of chunk succession-plot
@@ -421,15 +421,13 @@ plot of chunk succession-plot
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-bosch2015" class="csl-entry">
-Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, Tamsin C.
-O’Connell, Beatrice Demarchi, Sheila M. Taylor, Laura Niven, Johannes
-van der Plicht, and Jean-Jacques Hublin. 2015. <span>“New Chronology for
-<span>Ksâr</span> ‘<span>Akil</span> (<span>Lebanon</span>) Supports
-<span>Levantine</span> Route of Modern Human Dispersal into
-<span>Europe</span>.”</span> <em>Proceedings of the National Academy of
-Sciences</em> 112 (25): 7683–88. <a href="https://doi.org/10.1073/pnas.1501529112" class="external-link">https://doi.org/10.1073/pnas.1501529112</a>.
+Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, et al.
+2015. <span>“New Chronology for <span>Ksâr</span> ‘<span>Akil</span>
+(<span>Lebanon</span>) Supports <span>Levantine</span> Route of Modern
+Human Dispersal into <span>Europe</span>.”</span> <em>Proceedings of the
+National Academy of Sciences</em> 112 (25): 7683–88. <a href="https://doi.org/10.1073/pnas.1501529112" class="external-link">https://doi.org/10.1073/pnas.1501529112</a>.
 </div>
 <div id="ref-bronkramsey2009" class="csl-entry">
 Bronk Ramsey, Christopher. 2009. <span>“Bayesian <span>Analysis</span>
@@ -448,9 +446,8 @@ Archaeological Science</em> 71 (July): 1–9. <a href="https://doi.org/10.1016/j
 </div>
 <div id="ref-lanos2020" class="csl-entry">
 Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020.
-<span>“Chronomodel: <span>Chronological</span> Modeling of
-Archaeological Data Using Bayesian Statistics.”</span>
-<span>CNRS</span>. <a href="https://chronomodel.com" class="external-link">https://chronomodel.com</a>.
+<em>Chronomodel: <span>Chronological</span> Modeling of Archaeological
+Data Using Bayesian Statistics</em>. <span>CNRS</span>, released. <a href="https://chronomodel.com" class="external-link">https://chronomodel.com</a>.
 </div>
 <div id="ref-philippe2020" class="csl-entry">
 Philippe, Anne, and Marie-Anne Vibet. 2020. <span>“Analysis of
@@ -461,7 +458,7 @@ ArchaeoPhases</span>.”</span> <em>Journal of Statistical Software</em>
 <div id="ref-robert2010" class="csl-entry">
 Robert, Christian P., and George Casella. 2010. <em>Introducing
 <span>Monte Carlo</span> Methods with <span>R</span></em>. Use
-<span>R</span>! <span>New York</span>: <span>Springer</span>.
+<span>R</span>! <span>Springer</span>.
 </div>
 </div>
 </div>
@@ -476,7 +473,7 @@ Robert, Christian P., and George Casella. 2010. <em>Introducing
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
