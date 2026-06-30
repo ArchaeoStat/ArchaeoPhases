@@ -12,7 +12,7 @@ An S4 class to represent time ranges.
 ## Note
 
 This class inherits from
-[`aion::TimeIntervals`](https://packages.tesselle.org/aion//reference/TimeIntervals-class.html).
+[`aion::TimeIntervals`](https://packages.tesselle.org/aion/reference/TimeIntervals-class.html).
 
 ## Coerce
 

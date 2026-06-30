@@ -41,9 +41,9 @@ as_phases(
 - calendar:
 
   A
-  [`aion::TimeScale`](https://packages.tesselle.org/aion//reference/TimeScale-class.html)
+  [`aion::TimeScale`](https://packages.tesselle.org/aion/reference/TimeScale-class.html)
   object specifying the source calendar (see
-  [`calendar()`](https://packages.tesselle.org/aion//reference/calendar.html)).
+  [`calendar()`](https://packages.tesselle.org/aion/reference/calendar.html)).
 
 - start:
 

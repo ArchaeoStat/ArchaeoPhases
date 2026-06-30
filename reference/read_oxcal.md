@@ -25,11 +25,11 @@ read_oxcal(file, calendar = CE())
 - calendar:
 
   A
-  [`aion::TimeScale`](https://packages.tesselle.org/aion//reference/TimeScale-class.html)
+  [`aion::TimeScale`](https://packages.tesselle.org/aion/reference/TimeScale-class.html)
   object specifying the calendar (see
-  [`calendar()`](https://packages.tesselle.org/aion//reference/calendar.html)).
+  [`calendar()`](https://packages.tesselle.org/aion/reference/calendar.html)).
   It should be
-  [`CE()`](https://packages.tesselle.org/aion//reference/gregorian.html)
+  [`CE()`](https://packages.tesselle.org/aion/reference/gregorian.html)
   unless you change the default settings in 'OxCal'.
 
 ## Value

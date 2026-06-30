@@ -10,13 +10,13 @@ plot.
 
   A [`numeric`](https://rdrr.io/r/base/numeric.html) vector giving the
   lower boundaries of the credibility interval expressed in *[rata
-  die](https://packages.tesselle.org/aion//reference/RataDie-class.html)*.
+  die](https://packages.tesselle.org/aion/reference/RataDie-class.html)*.
 
 - `upper`:
 
   A [`numeric`](https://rdrr.io/r/base/numeric.html) vector giving the
   upper boundaries of the credibility interval expressed in *[rata
-  die](https://packages.tesselle.org/aion//reference/RataDie-class.html)*.
+  die](https://packages.tesselle.org/aion/reference/RataDie-class.html)*.
 
 - `level`:
 
@@ -45,7 +45,7 @@ plot.
 ## Note
 
 This class inherits from
-[`aion::TimeSeries`](https://packages.tesselle.org/aion//reference/TimeSeries-class.html).
+[`aion::TimeSeries`](https://packages.tesselle.org/aion/reference/TimeSeries-class.html).
 
 ## Coerce
 

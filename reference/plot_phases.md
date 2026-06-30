@@ -41,9 +41,9 @@ plot(
 - calendar:
 
   A
-  [`aion::TimeScale`](https://packages.tesselle.org/aion//reference/TimeScale-class.html)
+  [`aion::TimeScale`](https://packages.tesselle.org/aion/reference/TimeScale-class.html)
   object specifying the target calendar (see
-  [`calendar()`](https://packages.tesselle.org/aion//reference/calendar.html)).
+  [`calendar()`](https://packages.tesselle.org/aion/reference/calendar.html)).
 
 - density:
 
@@ -130,7 +130,7 @@ plot(
 
 ## Value
 
-[`plot()`](https://packages.tesselle.org/aion//reference/plot.html) is
+[`plot()`](https://packages.tesselle.org/aion/reference/plot.html) is
 called it for its side-effects: it results in a graphic being displayed
 (invisibly returns `x`).
 

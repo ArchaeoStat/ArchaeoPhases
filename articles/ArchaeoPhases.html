@@ -166,7 +166,7 @@ sample, which was the aim the MCMC process.</p>
 <p>We can also check whether the chains reached equilibrium. For
 example, let’s consider the first date of the dataset.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">coda_events</span><span class="op">[</span>, <span class="fl">1</span>, <span class="op">]</span>, trace <span class="op">=</span> <span class="cn">TRUE</span>, density <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">coda_events</span><span class="op">[</span>, <span class="fl">1</span>, <span class="op">]</span>, trace <span class="op">=</span> <span class="cn">TRUE</span>, density <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/coda-plot-1.png" alt="plot of chunk coda-plot" width="100%"><p class="caption">
 plot of chunk coda-plot
@@ -244,7 +244,7 @@ each parameter.</p>
 <h2 id="analysis-of-a-series-of-dates">Analysis of a series of dates<a class="anchor" aria-label="anchor" href="#analysis-of-a-series-of-dates"></a>
 </h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/event-plot-1.png" alt="plot of chunk event-plot" width="100%"><p class="caption">
 plot of chunk event-plot
@@ -266,7 +266,7 @@ instantaneous, the plot is vertical.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tempo.html">tempo</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span>, count <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/tempo-plot-1.png" alt="plot of chunk tempo-plot" width="100%"><p class="caption">
 plot of chunk tempo-plot
@@ -284,7 +284,7 @@ the Tempo plot. It is an other way to see changes over time.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">ac</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/activity.html">activity</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/activity-plot-1.png" alt="plot of chunk activity-plot" width="100%"><p class="caption">
 plot of chunk activity-plot
@@ -309,7 +309,7 @@ level of confidence.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Warning: this may take a few seconds</span></span>
 <span><span class="va">oc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/occurrence.html">occurrence</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oc</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oc</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/occurrence-plot-1.png" alt="plot of chunk occurrence-plot" width="100%"><p class="caption">
 plot of chunk occurrence-plot
@@ -340,7 +340,7 @@ level <span class="citation">(Philippe and Vibet 2020)</span>.</p>
 groups of dates of Ksar Akil data at a given confidence level.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bound</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/boundaries.html">boundaries</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      label     start       end duration</span></span>
 <span><span class="co">#&gt; 1      EPI -28978.53 -26969.82 2008.712</span></span>
 <span><span class="co">#&gt; 2       UP -38570.37 -29368.75 9201.622</span></span>
@@ -350,7 +350,7 @@ groups of dates of Ksar Akil data at a given confidence level.</p>
 the estimation of its minimum, the estimation of its maximum and their
 uncertainties at the same time.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/phases-plot-1.png" alt="plot of chunk phases-plot" width="100%"><p class="caption">
 plot of chunk phases-plot
@@ -378,7 +378,7 @@ time range calculated between the end of the oldest group of dates and
 the start of the youngest group of dates.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">trans</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/transition.html">transition</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">trans</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">trans</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          label     start       end  duration</span></span>
 <span><span class="co">#&gt; 1       UP-EPI -31479.79 -26905.04  4574.757</span></span>
 <span><span class="co">#&gt; 2 Ahmarian-EPI -39138.82 -27122.05 12016.769</span></span>
@@ -398,7 +398,7 @@ dates and the start of the successive one with fixed posterior
 probability.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hia</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/hiatus.html">hiatus</a></span><span class="op">(</span><span class="va">chrono_groups</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">hia</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">hia</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          label     start       end   duration</span></span>
 <span><span class="co">#&gt; 1       UP-EPI -29188.56 -28961.79   226.7663</span></span>
 <span><span class="co">#&gt; 2 Ahmarian-EPI -37368.33 -28884.37  8483.9637</span></span>
@@ -409,7 +409,7 @@ of phases <em>IUP</em>, <em>Ahmarian</em> and <em>UP</em>, but there
 exists one of 203 years between phase <em>UP</em> and phase
 <em>EPI</em>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_groups</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="figures/succession-plot-1.png" alt="plot of chunk succession-plot" width="100%"><p class="caption">
 plot of chunk succession-plot

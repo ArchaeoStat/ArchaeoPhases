@@ -66,9 +66,9 @@
 <span><span class="fu">activity</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'ActivityEvents,missing'</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/get_calendar.html" class="external-link">get_calendar</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/get_calendar.html" class="external-link">get_calendar</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  main <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sub <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ann <span class="op">=</span> <span class="fu">graphics</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"ann"</span><span class="op">)</span>,</span>
@@ -95,12 +95,12 @@ arguments to this function, particularly, <code>border</code>, <code>col</code>,
 
 <dt id="arg-from">from<a class="anchor" aria-label="anchor" href="#arg-from"></a></dt>
 <dd><p>A length-one <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code> vector giving the earliest date to
-estimate for (expressed in <em><a href="https://packages.tesselle.org/aion//reference/RataDie-class.html" class="external-link">rata die</a></em>).</p></dd>
+estimate for (expressed in <em><a href="https://packages.tesselle.org/aion/reference/RataDie-class.html" class="external-link">rata die</a></em>).</p></dd>
 
 
 <dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
 <dd><p>A length-one <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code> vector giving the latest date to estimate
-for (expressed in <em><a href="https://packages.tesselle.org/aion//reference/RataDie-class.html" class="external-link">rata die</a></em>.</p></dd>
+for (expressed in <em><a href="https://packages.tesselle.org/aion/reference/RataDie-class.html" class="external-link">rata die</a></em>.</p></dd>
 
 
 <dt id="arg-grid">grid<a class="anchor" aria-label="anchor" href="#arg-grid"></a></dt>
@@ -113,8 +113,8 @@ spaced points of the temporal grid.</p></dd>
 
 
 <dt id="arg-calendar">calendar<a class="anchor" aria-label="anchor" href="#arg-calendar"></a></dt>
-<dd><p>A <code><a href="https://packages.tesselle.org/aion//reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the target
-calendar (see <code><a href="https://packages.tesselle.org/aion//reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
+<dd><p>A <code><a href="https://packages.tesselle.org/aion/reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the target
+calendar (see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
 
 
 <dt id="arg-main">main<a class="anchor" aria-label="anchor" href="#arg-main"></a></dt>
@@ -154,7 +154,7 @@ place but before the axes, title and box are added.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
 
 <ul><li><p><code>activity()</code> returns an <code><a href="ActivityEvents-class.html">ActivityEvents</a></code> object.</p></li>
-<li><p><code><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot()</a></code> is called it for its side-effects: it results in a graphic being
+<li><p><code><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot()</a></code> is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns <code>x</code>).</p></li>
 </ul></div>
     <div class="section level2">
@@ -179,19 +179,19 @@ stratification. <em>Journal of Archaeological Science</em>, 71: 1-9.
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Coerce to MCMC</span></span></span>
-<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="va">eve</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span>, <span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Tempo plot</span></span></span>
 <span class="r-in"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="tempo.html">tempo</a></span><span class="op">(</span><span class="va">eve</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="activity-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"gauss"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tmp</span>, interval <span class="op">=</span> <span class="st">"gauss"</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="activity-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Activity plot</span></span></span>
 <span class="r-in"><span><span class="va">act</span> <span class="op">&lt;-</span> <span class="fu">activity</span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">act</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">act</span>, panel.first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="activity-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

@@ -14,7 +14,7 @@ plot.
 ## Note
 
 This class inherits from
-[`aion::TimeSeries`](https://packages.tesselle.org/aion//reference/TimeSeries-class.html).
+[`aion::TimeSeries`](https://packages.tesselle.org/aion/reference/TimeSeries-class.html).
 
 ## Coerce
 

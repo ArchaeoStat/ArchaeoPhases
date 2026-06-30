@@ -32,9 +32,9 @@ interval_credible(x, level = 0.95, calendar = get_calendar())
 - calendar:
 
   A
-  [`aion::TimeScale`](https://packages.tesselle.org/aion//reference/TimeScale-class.html)
+  [`aion::TimeScale`](https://packages.tesselle.org/aion/reference/TimeScale-class.html)
   object specifying the target calendar (see
-  [`calendar()`](https://packages.tesselle.org/aion//reference/calendar.html)).
+  [`calendar()`](https://packages.tesselle.org/aion/reference/calendar.html)).
 
 ## Value
 

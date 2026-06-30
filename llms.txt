@@ -79,7 +79,7 @@ remotes::install_version("ArchaeoPhases", version = "1.8")
 **ArchaeoPhases** v2.0 uses
 [**aion**](https://packages.tesselle.org/aion/) for internal date
 representation. Look at
-[`vignette("aion", package = "aion")`](https://packages.tesselle.org/aion//articles/aion.html)
+[`vignette("aion", package = "aion")`](https://packages.tesselle.org/aion/articles/aion.html)
 before you start.
 
 These examples use data available through the

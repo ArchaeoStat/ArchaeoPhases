@@ -8,7 +8,7 @@ A phase object is an\\n x m x 2\\ array, with \\n\\ being the number of
 iterations, \\m\\ being the number of phases and with the 2 columns of
 the third dimension containing the boundaries of the phases expressed in
 *[rata
-die](https://packages.tesselle.org/aion//reference/RataDie-class.html)*.
+die](https://packages.tesselle.org/aion/reference/RataDie-class.html)*.
 
 ## Slots
 

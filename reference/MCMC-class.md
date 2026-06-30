@@ -8,7 +8,7 @@ An S4 class to represent the output of a MCMC algorithm.
 
   A [`numeric`](https://rdrr.io/r/base/numeric.html) `matrix` giving the
   MCMC samples expressed in *[rata
-  die](https://packages.tesselle.org/aion//reference/RataDie-class.html)*.
+  die](https://packages.tesselle.org/aion/reference/RataDie-class.html)*.
 
 - `labels`:
 

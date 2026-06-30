@@ -55,13 +55,13 @@ plot(
 
   A length-one [`numeric`](https://rdrr.io/r/base/numeric.html) vector
   giving the earliest date to estimate for (expressed in *[rata
-  die](https://packages.tesselle.org/aion//reference/RataDie-class.html)*).
+  die](https://packages.tesselle.org/aion/reference/RataDie-class.html)*).
 
 - to:
 
   A length-one [`numeric`](https://rdrr.io/r/base/numeric.html) vector
   giving the latest date to estimate for (expressed in *[rata
-  die](https://packages.tesselle.org/aion//reference/RataDie-class.html)*.
+  die](https://packages.tesselle.org/aion/reference/RataDie-class.html)*.
 
 - grid:
 
@@ -77,9 +77,9 @@ plot(
 - calendar:
 
   A
-  [`aion::TimeScale`](https://packages.tesselle.org/aion//reference/TimeScale-class.html)
+  [`aion::TimeScale`](https://packages.tesselle.org/aion/reference/TimeScale-class.html)
   object specifying the target calendar (see
-  [`calendar()`](https://packages.tesselle.org/aion//reference/calendar.html)).
+  [`calendar()`](https://packages.tesselle.org/aion/reference/calendar.html)).
 
 - main:
 
@@ -123,7 +123,7 @@ plot(
   [`ActivityEvents`](https://ArchaeoStat.github.io/ArchaeoPhases/reference/ActivityEvents-class.md)
   object.
 
-- [`plot()`](https://packages.tesselle.org/aion//reference/plot.html) is
+- [`plot()`](https://packages.tesselle.org/aion/reference/plot.html) is
   called it for its side-effects: it results in a graphic being
   displayed (invisibly returns `x`).
 

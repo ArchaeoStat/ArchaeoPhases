@@ -109,7 +109,7 @@ for each phase.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Coerce to events</span></span></span>
-<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="va">eve</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10000</span>, <span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Compute min-max range by group</span></span></span>
@@ -117,20 +117,20 @@ for each phase.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Compute phase ranges</span></span></span>
 <span class="r-in"><span><span class="va">bou</span> <span class="op">&lt;-</span> <span class="fu">boundaries</span><span class="op">(</span><span class="va">pha</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bou</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bou</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   label     start        end duration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     A -1046.091  -202.1504 843.9401</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     B -1972.281 -1078.0925 894.1889</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Compute phase transition</span></span></span>
 <span class="r-in"><span><span class="va">tra</span> <span class="op">&lt;-</span> <span class="fu"><a href="transition.html">transition</a></span><span class="op">(</span><span class="va">pha</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">tra</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">tra</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   label    start       end duration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   B-A -1409.47 -501.6004 907.8698</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Compute phase hiatus</span></span></span>
 <span class="r-in"><span><span class="va">hia</span> <span class="op">&lt;-</span> <span class="fu"><a href="hiatus.html">hiatus</a></span><span class="op">(</span><span class="va">pha</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">hia</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">hia</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   label     start       end duration</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1   B-A -1062.599 -1046.091 16.50864</span>
 </code></pre></div>

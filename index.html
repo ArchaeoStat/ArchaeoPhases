@@ -108,7 +108,7 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p><strong>ArchaeoPhases</strong> v2.0 uses <a href="https://packages.tesselle.org/aion/" class="external-link"><strong>aion</strong></a> for internal date representation. Look at <code><a href="https://packages.tesselle.org/aion//articles/aion.html" class="external-link">vignette("aion", package = "aion")</a></code> before you start.</p>
+<p><strong>ArchaeoPhases</strong> v2.0 uses <a href="https://packages.tesselle.org/aion/" class="external-link"><strong>aion</strong></a> for internal date representation. Look at <code><a href="https://packages.tesselle.org/aion/articles/aion.html" class="external-link">vignette("aion", package = "aion")</a></code> before you start.</p>
 <p>These examples use data available through the <a href="https://github.com/ArchaeoStat/ArchaeoData" class="external-link"><strong>ArchaeoData</strong></a> package which is available in a <a href="https://archaeostat.r-universe.dev" class="external-link">separate repository</a>. <strong>ArchaeoData</strong> provides MCMC outputs from ChronoModel, OxCal and BCal.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Install the data package</span></span>
@@ -139,19 +139,19 @@
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Plot the first event</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, interval <span class="op">=</span> <span class="st">"hdr"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, interval <span class="op">=</span> <span class="st">"hdr"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Plot all events</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-events-plot-1.png" alt="" width="50%"><img src="reference/figures/README-events-plot-2.png" alt="" width="50%"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tempo plot</span></span>
 <span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tempo.html">tempo</a></span><span class="op">(</span><span class="va">chrono_events</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tp</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Activity plot</span></span>
 <span><span class="va">ac</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/activity.html">activity</a></span><span class="op">(</span><span class="va">chrono_events</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ac</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-tempo-plot-1.png" alt="" width="50%"><img src="reference/figures/README-tempo-plot-2.png" alt="" width="50%"></p>
 </div>
 <div class="section level3">
@@ -159,7 +159,7 @@
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bound</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/boundaries.html">boundaries</a></span><span class="op">(</span><span class="va">chrono_phases</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      label     start       end duration</span></span>
 <span><span class="co">#&gt; 1      EPI -28978.53 -26969.82 2008.712</span></span>
 <span><span class="co">#&gt; 2       UP -38570.37 -29368.75 9201.622</span></span>
@@ -167,13 +167,13 @@
 <span><span class="co">#&gt; 4      IUP -43240.37 -41161.00 2079.372</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Plot all phases</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-phases-plot-1.png" alt="" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"hiatus"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-succession-plot-1.png" alt="" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"transition"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">chrono_phases</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UP"</span>, <span class="st">"EPI"</span><span class="op">)</span>, <span class="op">]</span>, succession <span class="op">=</span> <span class="st">"transition"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-succession-plot-2.png" alt="" style="display: block; margin: auto;"></p>
 </div>
 </div>

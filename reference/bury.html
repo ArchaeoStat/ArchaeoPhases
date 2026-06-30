@@ -64,10 +64,10 @@ known depth of each dated samples.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">newdata</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for class 'AgeDepthModel,missing'</span></span>
-<span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  level <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/get_calendar.html" class="external-link">get_calendar</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/get_calendar.html" class="external-link">get_calendar</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  main <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sub <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ann <span class="op">=</span> <span class="fu">graphics</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"ann"</span><span class="op">)</span>,</span>
@@ -121,8 +121,8 @@ predicted. If <code>missing</code>, the original data points are used.</p></dd>
 
 
 <dt id="arg-calendar">calendar<a class="anchor" aria-label="anchor" href="#arg-calendar"></a></dt>
-<dd><p>A <code><a href="https://packages.tesselle.org/aion//reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the target
-calendar (see <code><a href="https://packages.tesselle.org/aion//reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
+<dd><p>A <code><a href="https://packages.tesselle.org/aion/reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the target
+calendar (see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
 
 
 <dt id="arg-main">main<a class="anchor" aria-label="anchor" href="#arg-main"></a></dt>
@@ -163,7 +163,7 @@ place but before the axes, title and box are added.</p></dd>
 
 <ul><li><p><code>bury()</code> returns an <code><a href="AgeDepthModel-class.html">AgeDepthModel</a></code> object.</p></li>
 <li><p><code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> returns an <code><a href="EventsMCMC-class.html">EventsMCMC</a></code> object.</p></li>
-<li><p><code><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot()</a></code> is called it for its side-effects: it results in a graphic being
+<li><p><code><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot()</a></code> is called it for its side-effects: it results in a graphic being
 displayed (invisibly returns <code>x</code>).</p></li>
 </ul></div>
     <div class="section level2">
@@ -202,11 +202,11 @@ Wax Lipid. <em>The Holocene</em>, 30(7): 1063-1074. <a href="https://doi.org/10.
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Coerce to MCMC</span></span></span>
 <span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">6000</span>, <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">6</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu"><a href="as_events.html">as_events</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Compute an age-depth curve</span></span></span>
 <span class="r-in"><span><span class="va">age</span> <span class="op">&lt;-</span> <span class="fu">bury</span><span class="op">(</span><span class="va">eve</span>, depth <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="bury-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Predict new values</span></span></span>
@@ -219,9 +219,9 @@ Wax Lipid. <em>The Holocene</em>, 30(7): 1063-1074. <a href="https://doi.org/10.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  20   20  2  18 20     20 21  23    19  22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  30   30  2  27 30     30 31  33    29  32</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="bury-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">new</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">new</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="bury-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

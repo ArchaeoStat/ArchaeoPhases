@@ -81,9 +81,9 @@ plot(
 - calendar:
 
   A
-  [`aion::TimeScale`](https://packages.tesselle.org/aion//reference/TimeScale-class.html)
+  [`aion::TimeScale`](https://packages.tesselle.org/aion/reference/TimeScale-class.html)
   object specifying the target calendar (see
-  [`calendar()`](https://packages.tesselle.org/aion//reference/calendar.html)).
+  [`calendar()`](https://packages.tesselle.org/aion/reference/calendar.html)).
 
 - main:
 
@@ -131,7 +131,7 @@ plot(
   [`EventsMCMC`](https://ArchaeoStat.github.io/ArchaeoPhases/reference/EventsMCMC-class.md)
   object.
 
-- [`plot()`](https://packages.tesselle.org/aion//reference/plot.html) is
+- [`plot()`](https://packages.tesselle.org/aion/reference/plot.html) is
   called it for its side-effects: it results in a graphic being
   displayed (invisibly returns `x`).
 

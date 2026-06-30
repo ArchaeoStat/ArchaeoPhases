@@ -74,8 +74,8 @@
 
 
 <dt id="arg-calendar">calendar<a class="anchor" aria-label="anchor" href="#arg-calendar"></a></dt>
-<dd><p>A <code><a href="https://packages.tesselle.org/aion//reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the source
-calendar (see <code><a href="https://packages.tesselle.org/aion//reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
+<dd><p>A <code><a href="https://packages.tesselle.org/aion/reference/TimeScale-class.html" class="external-link">aion::TimeScale</a></code> object specifying the source
+calendar (see <code><a href="https://packages.tesselle.org/aion/reference/calendar.html" class="external-link">calendar()</a></code>).</p></dd>
 
 
 <dt id="arg-iteration">iteration<a class="anchor" aria-label="anchor" href="#arg-iteration"></a></dt>
@@ -105,24 +105,24 @@ iteration column.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Coerce to events</span></span></span>
-<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu">as_events</span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eve</span> <span class="op">&lt;-</span> <span class="fu">as_events</span><span class="op">(</span><span class="va">mcmc_events</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, iteration <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Plot first event</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, interval <span class="op">=</span> <span class="st">"hdr"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, interval <span class="op">=</span> <span class="st">"hdr"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="as_events-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Colorfull plot</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, col.density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#4477AA"</span>, <span class="st">"#EE6677"</span>, <span class="st">"#228833"</span>, <span class="st">"#CCBB44"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, col.density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#4477AA"</span>, <span class="st">"#EE6677"</span>, <span class="st">"#228833"</span>, <span class="st">"#CCBB44"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="as_events-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Plot events</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">CE</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="as_events-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion//reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"hdr"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, calendar <span class="op">=</span> <span class="fu"><a href="https://packages.tesselle.org/aion/reference/gregorian.html" class="external-link">BP</a></span><span class="op">(</span><span class="op">)</span>, interval <span class="op">=</span> <span class="st">"hdr"</span>, level <span class="op">=</span> <span class="fl">0.68</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="as_events-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Plot only 95% credible interval</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion//reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, density <span class="op">=</span> <span class="cn">FALSE</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, lwd <span class="op">=</span> <span class="fl">3</span>, tcl <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://packages.tesselle.org/aion/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">eve</span>, density <span class="op">=</span> <span class="cn">FALSE</span>, interval <span class="op">=</span> <span class="st">"credible"</span>, lwd <span class="op">=</span> <span class="fl">3</span>, tcl <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="as_events-5.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
