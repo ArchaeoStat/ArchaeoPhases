@@ -32,7 +32,7 @@ setMethod(
 
     years <- aion::time(object, calendar = NULL)
     est <- apply(
-      X = object,
+      X = as.matrix(object),
       MARGIN = 2,
       FUN = function(a, b) {
         diff(a) / diff(b)
