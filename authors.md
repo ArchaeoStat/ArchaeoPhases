@@ -26,7 +26,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/ArchaeoStat/ArchaeoPhases/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/ArchaeoStat/ArchaeoPhases/blob/v2.1.1/inst/CITATION)
 
 Philippe A, Vibet M (2020). “Analysis of Archaeological Phases Using the
 R Package ArchaeoPhases.” *Journal of Statistical Software, Code

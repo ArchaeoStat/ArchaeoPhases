@@ -2,6 +2,8 @@
 
 ## ArchaeoPhases 2.1.1
 
+CRAN release: 2026-07-01
+
 ### Bugfixes & changes
 
 - Add [`as.matrix()`](https://rdrr.io/r/base/matrix.html) for `MCMC`
