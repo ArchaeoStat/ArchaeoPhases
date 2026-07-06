@@ -1,0 +1,262 @@
+# ArchaeoPhases
+
+[![r-universe](https://ArchaeoStat.r-universe.dev/badges/ArchaeoPhases)](https://ArchaeoStat.r-universe.dev/ArchaeoPhases)
+
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8087121.svg)](https://doi.org/10.5281/zenodo.8087121)
+[![DOI
+JSS](https://img.shields.io/badge/JSS-10.18637/jss.v093.c01-brightgreen)](https://doi.org/10.18637/jss.v093.c01)
+
+## Overview
+
+Statistical analysis of archaeological dates and groups of dates.
+**ArchaeoPhases** allows to post-process Markov Chain Monte Carlo (MCMC)
+simulations from [ChronoModel](https://chronomodel.com) (Lanos et al.
+2020), [Oxcal](https://c14.arch.ox.ac.uk/oxcal.html) (Bronk Ramsey 2009)
+or [BCal](https://bcal.shef.ac.uk) (Buck et al. 1999). This package
+provides functions for the study of rhythms of the long term from the
+posterior distribution of a series of dates (tempo and activity plot).
+It also allows the estimation and visualization of time ranges from the
+posterior distribution of groups of dates (e.g. duration, transition and
+hiatus between successive phases).
+
+**ArchaeoPhases v2.0 brings a comprehensive package rewrite, resulting
+in the renaming of nearly all functions. For more information, please
+refer to `news(Version >= "2.0", package = "ArchaeoPhases")`.**
+
+``` R
+To cite ArchaeoPhases in publications use:
+
+  Philippe A, Vibet M (2020). "Analysis of Archaeological Phases Using
+  the R Package ArchaeoPhases." _Journal of Statistical Software, Code
+  Snippets_, *93*(1). doi:10.18637/jss.v093.c01
+  <https://doi.org/10.18637/jss.v093.c01>.
+
+  Philippe A, Vibet M, Frerebeau N, Dye T (2026). _ArchaeoPhases:
+  Post-Processing of Markov Chain Monte Carlo Simulations for
+  Chronological Modelling_. Université de Nantes, Nantes, France.
+  doi:10.5281/zenodo.8087121 <https://doi.org/10.5281/zenodo.8087121>.
+  R package version 2.1.1,
+  <https://ArchaeoStat.github.io/ArchaeoPhases/>.
+```
+
+## Installation
+
+You can install the released version of **ArchaeoPhases** from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+
+install.packages("ArchaeoPhases")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+
+# install.packages("remotes")
+remotes::install_github("ArchaeoStat/ArchaeoPhases")
+```
+
+You can install the 1.x releases from the CRAN archives:
+
+``` r
+
+# install.packages("remotes")
+remotes::install_version("ArchaeoPhases", version = "1.8")
+```
+
+## Usage
+
+**ArchaeoPhases** v2.0 uses
+[**aion**](https://packages.tesselle.org/aion/) for internal date
+representation. Look at
+[`vignette("aion", package = "aion")`](https://packages.tesselle.org/aion/articles/aion.html)
+before you start.
+
+These examples use data available through the
+[**ArchaeoData**](https://github.com/ArchaeoStat/ArchaeoData) package
+which is available in a [separate
+repository](https://archaeostat.r-universe.dev). **ArchaeoData**
+provides MCMC outputs from ChronoModel, OxCal and BCal.
+
+``` r
+
+## Install the data package
+install.packages("ArchaeoData", repos = "https://archaeostat.r-universe.dev")
+```
+
+``` r
+
+## Load
+library(ArchaeoPhases)
+```
+
+Import a CSV file containing a sample from the posterior distribution:
+
+``` r
+
+## Construct the paths to the data
+path <- file.path("chronomodel", "ksarakil")
+path_event <- system.file(path, "Chain_all_Events.csv", package = "ArchaeoData")
+path_phase <- system.file(path, "Chain_all_Phases.csv", package = "ArchaeoData")
+
+## Read events from ChronoModel
+(chrono_events <- read_chronomodel_events(path_event))
+#> <EventsMCMC>
+#> - Number of events: 16
+#> - Number of MCMC samples: 30000
+
+## Read phases from ChronoModel
+(chrono_phases <- read_chronomodel_phases(path_phase))
+#> <PhasesMCMC>
+#> - Number of phases: 4
+#> - Number of MCMC samples: 30000
+```
+
+### Analysis of a series of dates
+
+``` r
+
+## Plot the first event
+plot(chrono_events[, 1], interval = "hdr")
+
+## Plot all events
+plot(chrono_events)
+```
+
+![](reference/figures/README-events-plot-1.png)![](reference/figures/README-events-plot-2.png)
+
+``` r
+
+## Tempo plot
+tp <- tempo(chrono_events, level = 0.95)
+plot(tp)
+
+## Activity plot
+ac <- activity(chrono_events)
+plot(ac)
+```
+
+![](reference/figures/README-tempo-plot-1.png)![](reference/figures/README-tempo-plot-2.png)
+
+### Analysis of a group of dates (phase)
+
+``` r
+
+bound <- boundaries(chrono_phases, level = 0.95)
+as.data.frame(bound)
+#>      label     start       end duration
+#> 1      EPI -28978.53 -26969.82 2008.712
+#> 2       UP -38570.37 -29368.75 9201.622
+#> 3 Ahmarian -42168.47 -37433.31 4735.159
+#> 4      IUP -43240.37 -41161.00 2079.372
+```
+
+``` r
+
+## Plot all phases
+plot(chrono_phases)
+```
+
+![](reference/figures/README-phases-plot-1.png)
+
+``` r
+
+plot(chrono_phases[, c("UP", "EPI"), ], succession = "hiatus")
+```
+
+![](reference/figures/README-succession-plot-1.png)
+
+``` r
+
+plot(chrono_phases[, c("UP", "EPI"), ], succession = "transition")
+```
+
+![](reference/figures/README-succession-plot-2.png)
+
+## Translation
+
+This package provides translations of user-facing communications, like
+messages, warnings and errors, and graphical elements (axis labels). The
+preferred language is by default taken from the locale. This can be
+overridden by setting of the environment variable `LANGUAGE` (you only
+need to do this once per session):
+
+``` r
+
+Sys.setenv(LANGUAGE = "<language code>")
+```
+
+Languages currently available are English (`en`) and French (`fr`).
+
+## References
+
+Allen, James F. 1983. “Maintaining Knowledge about Temporal Intervals.”
+*Communications of the ACM* 26 (11): 832–43.
+<https://doi.org/10.1145/182.358434>.
+
+Bosch, Marjolein D., Marcello A. Mannino, Amy L. Prendergast, et al.
+2015. “New Chronology for Ksâr ‘Akil (Lebanon) Supports Levantine Route
+of Modern Human Dispersal into Europe.” *Proceedings of the National
+Academy of Sciences* 112 (25): 7683–88.
+<https://doi.org/10.1073/pnas.1501529112>.
+
+Bronk Ramsey, Christopher. 2009. “Bayesian Analysis of Radiocarbon
+Dates.” *Radiocarbon* 51 (1): 337–60.
+<https://doi.org/10.1017/S0033822200033865>.
+
+Buck, C. E., J. A. Christen, and G. E. James. 1999. “BCal: An on-Line
+Bayesian Radiocarbon Calibration Tool.” *Internet Archaeology* 7.
+<https://doi.org/10.11141/ia.7.1>.
+
+Dye, Thomas S. 2016. “Long-Term Rhythms in the Development of Hawaiian
+Social Stratification.” *Journal of Archaeological Science* 71 (July):
+1–9. <https://doi.org/10.1016/j.jas.2016.05.006>.
+
+Dye, Thomas S., Caitlin E. Buck, Robert J. DiNapoli, and Anne Philippe.
+2023. “Bayesian Chronology Construction and Substance Time.” *Journal of
+Archaeological Science* 153: 105765.
+<https://doi.org/><https://doi.org/10.1016/j.jas.2023.105765>.
+
+Ghosh, Sambit, Prasanta Sanyal, Sohom Roy, et al. 2020. “Early Holocene
+Indian Summer Monsoon and Its Impact on Vegetation in the Central
+Himalaya: Insight from dD and d ¹³ C Values of Leaf Wax Lipid.” *The
+Holocene* 30 (7): 1063–74. <https://doi.org/10.1177/0959683620908639>.
+
+Harris, Edward C. 1997. *Principles of Archaeological Stratigraphy*.
+Seconde édition. Academic Press.
+
+Hyndman, Rob J. 1996. “Computing and Graphing Highest Density Regions.”
+*The American Statistician* 50 (2): 120.
+<https://doi.org/10.2307/2684423>.
+
+Jha, Deepak Kumar, Prasanta Sanyal, and Anne Philippe. 2020.
+“Multi-Proxy Evidence of Late Quaternary Climate and Vegetational
+History of North-Central India: Implication for the Paleolithic to
+Neolithic Phases.” *Quaternary Science Reviews* 229 (February): 106121.
+<https://doi.org/10.1016/j.quascirev.2019.106121>.
+
+Lanos, Ph., A. Philippe, H. Lanos, and Ph. Dufresne. 2020. *Chronomodel:
+Chronological Modeling of Archaeological Data Using Bayesian
+Statistics*. CNRS, released. <https://chronomodel.com>.
+
+Lyman, R. Lee, and Michael J. O’Brien. 2017. “Sedation and Cladistics:
+The Difference Between Anagenetic and Cladogenetic Evolution.” In
+*Mapping Our Ancestors: Phylogenetic Approaches in Anthropology and
+Prehistory*, edited by Carl P. Lipo, Michael J. O’Brien, Mark Couard,
+and Stephen J. Shennan. Routledge.
+<https://doi.org/10.4324/9780203786376>.
+
+Philippe, Anne, and Marie-Anne Vibet. 2020. “Analysis of Archaeological
+Phases Using the R Package ArchaeoPhases.” *Journal of Statistical
+Software* 93. <https://doi.org/10.18637/jss.v093.c01>.
+
+Robert, Christian P., and George Casella. 2010. *Introducing Monte Carlo
+Methods with R*. Use R! Springer.
+
+Viola, Tullio. 2020. *Peirce on the Uses of History*. De Gruyter.
+<https://doi.org/10.1515/9783110651560>.
